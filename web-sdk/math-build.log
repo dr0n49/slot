@@ -1,0 +1,109 @@
+
+Creating books...
+
+Creating books for jacks_or_better in base
+Batch 1 of 1
+Started thread 0
+Started thread 1
+Started thread 2
+Started thread 3
+Started thread 4
+Started thread 5
+Started thread 6
+Started thread 7
+Started thread 8
+Started thread 9
+Thread 3 finished with 0.94 RTP. [baseGame: 0.94, freeGame: 0.0]
+Thread 8 finished with 1.013 RTP. [baseGame: 1.013, freeGame: 0.0]
+Thread 9 finished with 1.009 RTP. [baseGame: 1.009, freeGame: 0.0]
+Thread 2 finished with 0.956 RTP. [baseGame: 0.956, freeGame: 0.0]
+Thread 5 finished with 0.888 RTP. [baseGame: 0.888, freeGame: 0.0]
+Thread 4 finished with 0.948 RTP. [baseGame: 0.948, freeGame: 0.0]
+Thread 1 finished with 0.935 RTP. [baseGame: 0.935, freeGame: 0.0]
+Thread 7 finished with 1.004 RTP. [baseGame: 1.004, freeGame: 0.0]
+Thread 6 finished with 0.95 RTP. [baseGame: 0.95, freeGame: 0.0]
+Thread 0 finished with 0.945 RTP. [baseGame: 0.945, freeGame: 0.0]
+All threads are online.
+Finished joining threads.
+Saving books for  jacks_or_better in base
+Saving force files for jacks_or_better in base
+Saving LUTs for jacks_or_better in base
+Wrote verification file: /Users/andriinorenko/slot/math-sdk/games/jacks_or_better/library/configs/books_base.verification.json
+
+Creating books for jacks_or_better in bonus_job
+Batch 1 of 1
+Started thread 0
+Started thread 1
+Started thread 2
+Started thread 3
+Started thread 4
+Started thread 5
+Started thread 6
+Started thread 7
+Started thread 8
+Started thread 9
+Thread 0 finished with 1.203 RTP. [baseGame: 1.203, freeGame: 0.0]
+Thread 1 finished with 0.968 RTP. [baseGame: 0.968, freeGame: 0.0]
+Thread 2 finished with 1.112 RTP. [baseGame: 1.112, freeGame: 0.0]
+Thread 3 finished with 1.148 RTP. [baseGame: 1.148, freeGame: 0.0]
+Thread 4 finished with 1.134 RTP. [baseGame: 1.134, freeGame: 0.0]
+Thread 5 finished with 1.141 RTP. [baseGame: 1.141, freeGame: 0.0]
+Thread 6 finished with 0.989 RTP. [baseGame: 0.989, freeGame: 0.0]
+Thread 9 finished with 0.933 RTP. [baseGame: 0.933, freeGame: 0.0]
+Thread 8 finished with 0.941 RTP. [baseGame: 0.941, freeGame: 0.0]
+Thread 7 finished with 0.959 RTP. [baseGame: 0.959, freeGame: 0.0]
+All threads are online.
+Finished joining threads.
+Saving books for  jacks_or_better in bonus_job
+Saving force files for jacks_or_better in bonus_job
+Saving LUTs for jacks_or_better in bonus_job
+Wrote verification file: /Users/andriinorenko/slot/math-sdk/games/jacks_or_better/library/configs/books_bonus_job.verification.json
+
+Creating books for jacks_or_better in bonus_flush
+Batch 1 of 1
+Started thread 0
+Started thread 1
+Started thread 2
+Started thread 3
+Started thread 4
+Started thread 5
+Started thread 6
+Started thread 7
+Thread 0 finished with 0.7 RTP. [baseGame: 0.7, freeGame: 0.0]
+Started thread 8
+Started thread 9
+Thread 1 finished with 0.812 RTP. [baseGame: 0.812, freeGame: 0.0]
+Thread 2 finished with 0.72 RTP. [baseGame: 0.72, freeGame: 0.0]
+Thread 3 finished with 0.935 RTP. [baseGame: 0.935, freeGame: 0.0]
+Thread 4 finished with 0.989 RTP. [baseGame: 0.989, freeGame: 0.0]
+Thread 5 finished with 0.973 RTP. [baseGame: 0.973, freeGame: 0.0]
+Thread 6 finished with 0.968 RTP. [baseGame: 0.968, freeGame: 0.0]
+Thread 7 finished with 0.963 RTP. [baseGame: 0.963, freeGame: 0.0]
+Thread 8 finished with 0.882 RTP. [baseGame: 0.882, freeGame: 0.0]
+Thread 9 finished with 0.817 RTP. [baseGame: 0.817, freeGame: 0.0]
+All threads are online.
+Finished joining threads.
+Saving books for  jacks_or_better in bonus_flush
+Saving force files for jacks_or_better in bonus_flush
+Saving LUTs for jacks_or_better in bonus_flush
+Wrote verification file: /Users/andriinorenko/slot/math-sdk/games/jacks_or_better/library/configs/books_bonus_flush.verification.json
+
+Finished creating books in 970.0716581344604 seconds.
+
+Computing exact category masses from strategy + inclusion-exclusion...
+  rtp_numer=19165244903220  rtp_denom=19933230517200
+  hit_numer=9068976660744  royal=496195464
+  [base] rows=2598960 cost=1
+    RTP  96.1472094886%
+    hit  45.496773%
+    max-win 1 in 40,172.13
+  [bonus_job] tilt alpha=-0.179106
+  [bonus_job] rows=1182760 cost=2
+    RTP  96.1472094886%
+    hit  100.000000%
+    max-win 1 in 55,448.88
+  [bonus_flush] tilt alpha=+0.102498
+  [bonus_flush] rows=63990 cost=10
+    RTP  96.1472094886%
+    hit  100.000000%
+    max-win 1 in 615.65

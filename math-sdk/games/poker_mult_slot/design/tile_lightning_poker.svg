@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- фон главного элемента -->
+    <radialGradient id="iconBg" cx="50%" cy="38%" r="80%">
+      <stop offset="0%" stop-color="#132033"/>
+      <stop offset="60%" stop-color="#0d1626"/>
+      <stop offset="100%" stop-color="#0a111d"/>
+    </radialGradient>
+    <!-- градиент нижней панели (цвет легко заменить) -->
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3d"/>
+      <stop offset="55%" stop-color="#8f8f93"/>
+      <stop offset="100%" stop-color="#6d6d71"/>
+    </linearGradient>
+    <!-- болт: свечение -->
+    <linearGradient id="boltGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#7fd4ff"/>
+      <stop offset="100%" stop-color="#2f9fd8"/>
+    </linearGradient>
+    <linearGradient id="boltCore" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c9ecff"/>
+    </linearGradient>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="tinyGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- фон тайла -->
+  <rect width="1024" height="1024" fill="#1b2433"/>
+
+  <!-- ===== главный элемент (верхний квадрат) ===== -->
+  <g>
+    <rect x="185" y="72" width="568" height="500" rx="10" fill="url(#iconBg)"/>
+    <!-- рамка квадрата -->
+    <rect x="185" y="72" width="568" height="500" rx="10" fill="none" stroke="#243247" stroke-width="2"/>
+
+    <!-- дальние фоновые болты (тонкие, приглушённые) -->
+    <g stroke="#3d5a86" stroke-width="2.5" fill="none" opacity="0.55" stroke-linecap="round" filter="url(#tinyGlow)">
+      <path d="M232 120 L268 210 L240 292 L286 380 L258 468"/>
+      <path d="M700 96 L664 178 L700 262 L668 356 L694 448 L662 512"/>
+    </g>
+
+    <!-- свечение главного болта -->
+    <path d="M512 108 L474 208 L516 208 L430 372 L486 372 L412 548 L520 420 L472 420 L548 260 L502 260 Z"
+          fill="url(#boltGlow)" opacity="0.75" filter="url(#softGlow)" transform="translate(0,6)"/>
+    <!-- корпус болта -->
+    <path d="M512 108 L474 208 L516 208 L430 372 L486 372 L412 548 L520 420 L472 420 L548 260 L502 260 Z"
+          fill="url(#boltCore)" stroke="#5fb8ef" stroke-width="3"/>
+    <!-- искры -->
+    <g fill="#bfe4ff">
+      <circle cx="438" cy="150" r="4" opacity="0.9"/>
+      <circle cx="596" cy="196" r="3" opacity="0.7"/>
+      <circle cx="398" cy="330" r="3.5" opacity="0.8"/>
+      <circle cx="604" cy="392" r="4" opacity="0.85"/>
+      <circle cx="470" cy="500" r="3" opacity="0.6"/>
+    </g>
+    <!-- нижняя подсветка квадрата -->
+    <rect x="185" y="536" width="568" height="36" fill="url(#boltGlow)" opacity="0.18" filter="url(#softGlow)"/>
+  </g>
+
+  <!-- ===== нижняя панель с названием ===== -->
+  <rect x="0" y="586" width="1024" height="344" fill="url(#panelGrad)"/>
+  <!-- блик сверху панели -->
+  <rect x="0" y="586" width="1024" height="10" fill="#ffffff" opacity="0.18"/>
+
+  <text x="512" y="700" text-anchor="middle"
+        font-family="'Exo 2', 'Arial Black', Arial, sans-serif"
+        font-size="150" font-weight="900" letter-spacing="2"
+        fill="#ffffff">LIGHTNING</text>
+  <text x="512" y="856" text-anchor="middle"
+        font-family="'Exo 2', 'Arial Black', Arial, sans-serif"
+        font-size="150" font-weight="900" letter-spacing="6"
+        fill="#ffffff">POKER</text>
+
+  <text x="512" y="946" text-anchor="middle"
+        font-family="'Chakra Petch', Arial, sans-serif"
+        font-size="52" font-weight="600" letter-spacing="14"
+        fill="#f5f5f5">RUBY GAMES</text>
+</svg>

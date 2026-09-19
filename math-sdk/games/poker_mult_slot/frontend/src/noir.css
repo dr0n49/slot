@@ -1,0 +1,1891 @@
+/*
+ * NOIR layer — loaded after index.css, overrides the old candy/storm skin.
+ *
+ * Direction: dark street / gothic noir in the spirit of Hacksaw's Deal With Death
+ * (heavy ink outlines, hard offset shadows, bone + blood red + antique gold on
+ * near-black), tuned to the black-and-white tattoo card pack.
+ *
+ *   Pirata One : gothic display (hand names, section titles, WIN label)
+ *   Barrio     : hand-cut tattoo lettering (big-win words, wordmark)
+ *   Oswald     : everything readable (numbers, buttons, captions) — via the
+ *                legacy "Exo 2" / "Chakra Petch" family names in index.css
+ *
+ * Fonts are self-hosted: Stake's CSP blocks third-party font CSS.
+ * NB: all game UI lives inside a scaled design stage (1200×675 landscape,
+ * 675×1200 portrait). Sizes here are design px; real-viewport @media queries
+ * from index.css do NOT describe the stage, so phone layout is keyed on
+ * .game-stage[data-orient="portrait"].
+ */
+
+@font-face {
+  font-family: "Pirata One";
+  src: url("./fonts/pirata-one-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barrio";
+  src: url("./fonts/barrio-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #0a0607;
+  --char-1: #1d1416;
+  --char-2: #120b0d;
+  --bone: #f1e6cc;
+  --bone-dim: #b7a98a;
+  --blood: #c8102e;
+  --blood-hi: #ff3b4e;
+  --blood-deep: #7d0a1a;
+  --gold: #e2b04a;
+  --gold-hi: #ffd97a;
+  --gold-dk: #8f6318;
+
+  --f-display: "Pirata One", "Palatino Linotype", Georgia, serif;
+  --f-tattoo: "Barrio", "Pirata One", Georgia, serif;
+  --f-ui: "Chakra Petch", "Oswald", system-ui, sans-serif;
+
+  /* legacy tokens still referenced by index.css */
+  --bg: #070405;
+  --cyan: var(--gold);
+  --gold-dim: var(--gold-dk);
+  --win-ring: var(--gold);
+}
+
+html,
+body,
+#root {
+  background: var(--ink);
+  color: var(--bone);
+}
+body {
+  background: var(--ink);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Backdrop — papel-picado bunting over a crimson lattice (SVG)
+   ══════════════════════════════════════════════════════════════════ */
+.storm-photo,
+.boot-sky {
+  filter: none;
+  object-position: 50% 0;
+}
+/* The art is already dark; the vignette only seats the board and HUD. */
+.cosmic-vignette {
+  background:
+    radial-gradient(ellipse 78% 68% at 50% 48%, transparent 40%, rgba(6, 2, 3, 0.62) 100%),
+    linear-gradient(180deg, transparent 0%, transparent 70%, rgba(0, 0, 0, 0.4));
+}
+/* Warm blood-red pool behind the board so it reads as the light source. */
+.cosmic-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 34% 58% at 50% 46%, rgba(200, 16, 46, 0.3), transparent 72%);
+}
+.game-stage[data-orient="portrait"] .cosmic-bg::after {
+  background: radial-gradient(ellipse 75% 34% at 50% 44%, rgba(200, 16, 46, 0.3), transparent 72%);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Board frame — riveted iron plate, bone inlay, hard offset shadow
+   ══════════════════════════════════════════════════════════════════ */
+.card-stage-wrap {
+  --rivet: radial-gradient(circle, var(--bone) 0 2.2px, var(--ink) 2.8px 4.4px, transparent 4.8px);
+  padding: 0.62rem;
+  border-radius: 0.7rem;
+  border: 3px solid var(--ink);
+  background:
+    var(--rivet) left 3px top 3px / 11px 11px no-repeat,
+    var(--rivet) right 3px top 3px / 11px 11px no-repeat,
+    var(--rivet) left 3px bottom 3px / 11px 11px no-repeat,
+    var(--rivet) right 3px bottom 3px / 11px 11px no-repeat,
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, #2b1b1e 0%, #150d0f 55%, #0d0708 100%);
+  box-shadow:
+    0 0 0 2px var(--bone-dim),
+    0 0 0 5px var(--ink),
+    7px 9px 0 5px rgba(0, 0, 0, 0.55),
+    0 0 46px rgba(200, 16, 46, 0.28);
+}
+
+.playfield-board {
+  padding: 0.42rem;
+  border-radius: 0.42rem;
+  border: 2px solid var(--ink);
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(200, 16, 46, 0.2), transparent 62%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.028) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, #171012 0%, #0b0607 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(241, 230, 204, 0.28),
+    inset 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Less dead air above/below the cards → bigger cards at the same window size. */
+.game-stage[data-orient="landscape"] .card-grid {
+  --reel-pad-y: 9px;
+}
+.game-stage[data-orient="landscape"] .card-stage-wrap {
+  padding: 0.5rem;
+}
+
+/* Breathing room so the plate + its hard shadow never kiss the screen edge. */
+.game-stage[data-orient="landscape"] .game-main {
+  padding-top: 0.6rem !important;
+  padding-bottom: 1.45rem !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Cards — bone stock, ink outline, hard shadow underneath
+   ══════════════════════════════════════════════════════════════════ */
+.reel-symbol {
+  border-radius: 5px;
+}
+/* Paper tint + printed outline as one cheap overlay (no blend modes: the
+   strips translate every frame and phones must stay smooth). */
+.reel-symbol.card-tile::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 5px;
+  background: rgba(150, 104, 40, 0.13);
+  box-shadow: inset 0 0 0 1.5px rgba(10, 6, 7, 0.92);
+  pointer-events: none;
+}
+
+/* Scatter ("BONUS") card: gold rim instead of the pale candy one. */
+.bonus-card {
+  border: 2px solid var(--gold);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.bonus-ribbon {
+  bottom: 5px;
+  padding: 1px 0;
+  font-family: var(--f-ui);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  background: linear-gradient(90deg, transparent, var(--gold) 14%, var(--gold-hi) 50%, var(--gold) 86%, transparent);
+  box-shadow: 0 1px 0 rgba(10, 6, 7, 0.8);
+}
+
+/* Multiplier tag stamped on the card: blood-red label, bone lettering. */
+.bonus-ribbon-mult {
+  left: 50%;
+  right: auto;
+  bottom: 6px;
+  transform: translateX(-50%);
+  min-width: 70%;
+  padding: 1px 4px 0;
+  border-radius: 2px;
+  font-family: var(--f-ui);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--bone);
+  background: linear-gradient(180deg, var(--blood-hi), var(--blood) 55%, var(--blood-deep));
+  box-shadow:
+    0 0 0 1.5px var(--ink),
+    0 2px 0 1.5px var(--ink);
+  text-shadow: 0 1px 0 var(--ink);
+}
+.game-stage[data-orient="portrait"] .bonus-ribbon-mult {
+  font-size: 17px;
+}
+.game-stage[data-orient="portrait"] .bonus-ribbon {
+  font-size: 10px;
+}
+@keyframes noir-mult-pop {
+  0% {
+    transform: translateX(-50%) scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-50%) scale(1.18);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+.bonus-ribbon-mult {
+  animation: noir-mult-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Win presentation
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Let the red halo breathe past the reel column edges (clip only the bottom pad). */
+.card-grid.is-win-reveal .reel-col,
+.playfield-board[data-celebrating="1"] .reel-col {
+  overflow: visible;
+  clip-path: inset(-14px -14px var(--reel-pad-y) -14px);
+}
+
+/* Winners: blood-red ink halo that keeps pulsing while the line is shown. */
+.card-win.is-win {
+  z-index: 8;
+  filter: drop-shadow(0 0 4px rgba(255, 59, 78, 0.95)) drop-shadow(0 0 9px rgba(200, 16, 46, 0.35));
+  animation:
+    card-win-lift-soft 0.4s cubic-bezier(0.28, 1.2, 0.4, 1) both,
+    noir-win-pulse 1.05s ease-in-out 0.4s infinite;
+}
+@keyframes noir-win-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(255, 59, 78, 0.95)) drop-shadow(0 0 9px rgba(200, 16, 46, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgba(255, 110, 120, 1)) drop-shadow(0 0 16px rgba(200, 16, 46, 0.55));
+  }
+}
+.card-win.is-win::after {
+  /* keep the bone tint/outline on winners too */
+  content: "" !important;
+  display: block !important;
+}
+
+/* Everything that did NOT pay sinks into the dark so the line reads at once. */
+.card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+  animation: noir-dim-in 0.32s ease-out both;
+}
+@keyframes noir-dim-in {
+  from {
+    opacity: 1;
+    filter: none;
+  }
+  to {
+    opacity: 0.4;
+    filter: grayscale(0.85) brightness(0.55);
+  }
+}
+
+/* Cash punch on the paying cluster: bone numerals, ink outline, blood shadow. */
+.field-win-punch {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6.4vw, 4rem);
+  letter-spacing: 0.02em;
+  color: var(--bone);
+  -webkit-text-stroke: 6px var(--ink);
+  paint-order: stroke fill;
+  text-shadow:
+    3px 4px 0 var(--blood),
+    5px 7px 0 var(--ink),
+    0 0 28px rgba(255, 59, 78, 0.55);
+}
+.game-stage[data-orient="portrait"] .field-win-punch {
+  font-size: 3.1rem;
+}
+
+/* Sparks → red/bone shards. */
+.win-spark {
+  width: 0.34rem;
+  height: 0.7rem;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, var(--bone), var(--blood-hi) 60%, var(--blood-deep));
+  box-shadow: none;
+  filter: drop-shadow(0 0 4px rgba(255, 59, 78, 0.9));
+}
+.win-sparks-big .win-spark {
+  width: 0.46rem;
+  height: 0.95rem;
+}
+
+/* Miss: no cartoon sway — a quick cold dip is enough feedback. */
+@keyframes miss-sway {
+  0%,
+  100% {
+    filter: none;
+  }
+  40% {
+    filter: brightness(0.86);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HUD
+   ══════════════════════════════════════════════════════════════════ */
+.hud-bar {
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, #1b1315 0%, #0b0708 100%);
+  border-top: 3px solid var(--blood);
+  box-shadow:
+    0 -3px 0 var(--ink),
+    0 -16px 34px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(241, 230, 204, 0.16);
+}
+
+.hud-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hud-stake {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Meters — flat, single-layer text (no shadow/stroke stacking, so nothing reads as doubled) */
+.hud-meter-label,
+.buy-bonus-stake-caption {
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+.hud-meter-value {
+  font-family: var(--f-ui);
+  font-weight: 600;
+  font-size: 1.55rem;
+  letter-spacing: 0.03em;
+  color: var(--bone);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Buttons: ink plates with a bone hairline and a hard drop */
+.hud-chip-btn,
+.hud-icon-btn,
+.hud-sq-btn {
+  color: var(--bone);
+  background: linear-gradient(180deg, #2e2023, #150d0f);
+  border: 2px solid var(--ink);
+  box-shadow:
+    0 0 0 1.5px var(--bone-dim),
+    0 3px 0 1.5px var(--ink);
+}
+.hud-chip-btn:not(:disabled):hover,
+.hud-icon-btn:not(:disabled):hover,
+.hud-sq-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 4px 0 1.5px var(--ink),
+    0 0 14px rgba(226, 176, 74, 0.35);
+}
+.hud-chip-btn:not(:disabled):active,
+.hud-icon-btn:not(:disabled):active,
+.hud-sq-btn:not(:disabled):active {
+  transform: translateY(2px);
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 1px 0 1.5px var(--ink);
+}
+.hud-sq-btn {
+  height: 3.1rem;
+  width: 3.1rem;
+  border-radius: 0.55rem;
+}
+.hud-sq-btn.is-on,
+.hud-icon-btn.is-on {
+  color: var(--bone);
+  background: linear-gradient(180deg, var(--blood-hi), var(--blood) 55%, var(--blood-deep));
+  border-color: var(--ink);
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 3px 0 1.5px var(--ink),
+    0 0 16px rgba(255, 59, 78, 0.55);
+}
+.hud-bet-col .hud-icon-btn {
+  height: 1.5rem;
+  width: 1.7rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(180deg, #2e2023, #150d0f);
+  border: 2px solid var(--ink);
+  color: var(--bone);
+}
+.hud-chip-btn {
+  height: 1.9rem;
+  width: 1.9rem;
+  border-radius: 0.4rem;
+}
+
+/* BONUS (buy) — the money button, so it gets the blood-red plaque */
+.hud-bonus-btn {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 1.05rem;
+  border-radius: 0.5rem;
+  color: var(--gold-hi);
+  background: linear-gradient(180deg, #e01b3a, var(--blood) 50%, var(--blood-deep));
+  border: 2px solid var(--ink);
+  box-shadow:
+    0 0 0 1.5px var(--gold-dk),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 3px 0 1.5px var(--ink);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.hud-bonus-btn:not(:disabled):hover {
+  filter: brightness(1.12);
+}
+
+.hud-vol-pop {
+  background: linear-gradient(180deg, #2e2023, #150d0f);
+  border: 2px solid var(--ink);
+  box-shadow:
+    0 0 0 1.5px var(--bone-dim),
+    0 8px 22px rgba(0, 0, 0, 0.6);
+}
+.hud-vol-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--blood-hi) var(--hud-vol), #4a3a3d var(--hud-vol));
+}
+.hud-vol-slider::-moz-range-progress {
+  background: var(--blood-hi);
+}
+.hud-vol-slider::-webkit-slider-thumb,
+.hud-vol-slider::-moz-range-thumb {
+  background: var(--bone);
+}
+
+/* SPIN — a blood-red seal with a bone ring; breathes while idle */
+.respin-btn {
+  color: var(--bone);
+  background:
+    radial-gradient(circle at 36% 28%, #ff5566 0, var(--blood) 42%, var(--blood-deep) 100%);
+  border: 5px solid var(--ink);
+  box-shadow:
+    0 0 0 3px var(--bone),
+    0 0 0 6px var(--ink),
+    0 7px 0 6px #000,
+    0 0 26px rgba(200, 16, 46, 0.55);
+  animation: noir-spin-breathe 2.6s ease-in-out infinite;
+}
+.respin-btn:not(:disabled):hover {
+  background: radial-gradient(circle at 36% 28%, #ff6677 0, #d8142f 42%, var(--blood-deep) 100%);
+  border-color: var(--ink);
+  box-shadow:
+    0 0 0 3px var(--gold-hi),
+    0 0 0 6px var(--ink),
+    0 7px 0 6px #000,
+    0 0 34px rgba(255, 59, 78, 0.75);
+}
+.respin-btn:disabled {
+  animation: none;
+  filter: saturate(0.5) brightness(0.8);
+}
+.hud-spin:not(:disabled):active {
+  transform: translateX(-50%) translateY(4px) scale(0.98);
+}
+.spin-arrow {
+  color: var(--bone);
+  filter: drop-shadow(0 2px 0 rgba(10, 6, 7, 0.7));
+}
+.hud-spin:not(:disabled):hover .spin-arrow {
+  color: var(--gold-hi);
+}
+@keyframes noir-spin-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px var(--bone),
+      0 0 0 6px var(--ink),
+      0 7px 0 6px #000,
+      0 0 18px rgba(200, 16, 46, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px var(--bone),
+      0 0 0 6px var(--ink),
+      0 7px 0 6px #000,
+      0 0 34px rgba(255, 59, 78, 0.75);
+  }
+}
+.auto-count-badge {
+  background: var(--ink);
+  color: var(--gold-hi);
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 2px var(--bone);
+  font-family: var(--f-ui);
+}
+
+/* WIN readout (landscape HUD centre + portrait under-board) */
+.hud-win-label {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-hi);
+  text-shadow: none;
+}
+.hud-win-amount {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--bone);
+  text-shadow: none;
+}
+.win-plaque {
+  font-family: var(--f-tattoo);
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--bone);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-stroke: 4px var(--ink);
+  paint-order: stroke fill;
+  filter: none;
+  text-shadow:
+    2px 3px 0 var(--blood),
+    0 0 20px rgba(255, 59, 78, 0.5);
+}
+.hud-win .win-plaque {
+  font-size: 2.3rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Landscape side plaques (paylines / hand pays)
+   ══════════════════════════════════════════════════════════════════ */
+.side-panel {
+  --mq: 13px;            /* width of the red marquee band around the plaque */
+  --mq-pitch: 24px;      /* distance between two big bulbs */
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  width: 15.5rem;
+  padding: 0.85rem 0.9rem 0.95rem;
+  transform: translateY(-54%);
+  border-radius: 0.45rem;
+  /* thin dashed gold inner line (the "wire" the bulbs sit around) */
+  border: 2px dashed var(--gold);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, rgba(30, 20, 23, 0.97), rgba(10, 6, 8, 0.97));
+  /* red band + ink outline + hard shadow, all drawn OUTSIDE the plaque */
+  box-shadow:
+    0 0 0 var(--mq) var(--blood),
+    0 0 0 calc(var(--mq) + 3px) var(--ink),
+    calc(var(--mq) + 8px) calc(var(--mq) + 10px) 0 3px rgba(0, 0, 0, 0.5),
+    0 0 34px calc(var(--mq) + 6px) rgba(200, 16, 46, 0.28);
+  pointer-events: none;
+}
+/* Bulb garland (SidePanels.tsx → MarqueeRing): big gold bulbs alternate with small red ones on the
+   red band. Each bulb has a dim base and a bright "lit" layer whose opacity is chased around the
+   loop by a per-bulb phase (--p): two comets run clockwise, lit bulbs flare with a halo. */
+.mq-ring {
+  --mq-dur: 2.6s;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mq-bulb {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #f3d56c 0 22%, #d4a52a 62%, #9c6f17 100%);
+  box-shadow: 0 0 0 1.6px #4a0a14;
+}
+.mq-bulb.is-sm {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: radial-gradient(circle at 40% 34%, #ff6d6d 0, #c8102e 68%, #86091c 100%);
+  box-shadow: 0 0 0 1.2px #4a0a14;
+}
+.mq-bulb::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 36%, #fffef2 0 24%, #ffe863 60%, #ffc61f 100%);
+  box-shadow:
+    0 0 5px 2px rgba(255, 220, 70, 0.9),
+    0 0 14px 5px rgba(255, 176, 30, 0.42);
+  opacity: 0;
+  animation: noir-chase var(--mq-dur) linear infinite;
+  animation-delay: calc((var(--p) - 1) * var(--mq-dur));
+}
+.mq-bulb.is-sm::after {
+  box-shadow: 0 0 4px 1.5px rgba(255, 210, 60, 0.85);
+}
+@keyframes noir-chase {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  9% { opacity: 1; }
+  30% { opacity: 0; }
+  100% { opacity: 0; }
+}
+html.lite-fx .mq-bulb::after {
+  animation: none;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mq-bulb::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+.side-panel-left {
+  left: 3.1rem;
+}
+.side-panel-right {
+  right: 3.6rem;
+}
+.game-stage[data-orient="portrait"] .side-panel {
+  display: none;
+}
+.side-panel-title {
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--blood);
+  font-family: var(--f-display);
+  font-size: 1.45rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--bone);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.side-hands {
+  display: flex;
+  flex-direction: column;
+}
+.side-hand {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.28rem 0;
+}
+.side-hand + .side-hand {
+  border-top: 1px solid rgba(241, 230, 204, 0.1);
+}
+.side-hand-name {
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--bone-dim);
+  white-space: nowrap;
+}
+.side-hand-dots {
+  border-bottom: 2px dotted rgba(241, 230, 204, 0.22);
+  transform: translateY(-0.2rem);
+}
+.side-hand-pay {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold-hi);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.side-hand.is-top .side-hand-name {
+  color: var(--blood-hi);
+}
+.side-hand.is-top .side-hand-pay {
+  color: var(--bone);
+}
+.side-lines {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem 0.4rem;
+  justify-items: center;
+}
+.side-line-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  width: 2.6rem;
+}
+.side-line-grid span {
+  aspect-ratio: 1;
+  border-radius: 1px;
+  background: rgba(241, 230, 204, 0.13);
+}
+.side-line-grid span.is-on {
+  background: var(--blood-hi);
+  box-shadow: 0 0 6px rgba(255, 59, 78, 0.75);
+}
+
+/* Landscape HUD: a touch smaller, and the spin button sits high enough that its
+   outer ring + hard shadow (about 13 px below the disc) never touches the screen edge. */
+.game-stage[data-orient="landscape"] .hud-inner {
+  padding-top: 0.7rem;
+  padding-bottom: 0.9rem;
+}
+.game-stage[data-orient="landscape"] .hud-spin-slot {
+  width: 92px;
+  height: 3.4rem;
+}
+.game-stage[data-orient="landscape"] .hud-spin {
+  width: 86px;
+  height: 86px;
+  bottom: 0.95rem;
+}
+.game-stage[data-orient="landscape"] .hud-sq-btn {
+  height: 2.7rem;
+  width: 2.7rem;
+}
+.game-stage[data-orient="landscape"] .hud-meter-value {
+  font-size: 1.3rem;
+}
+.game-stage[data-orient="landscape"] .hud-bonus-btn {
+  font-size: 0.82rem;
+  padding: 0.42rem 0.85rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PORTRAIT / PHONE — design space is 675 px wide, so every px here is
+   ~0.58 real px on a 390 px phone. Sizes are chosen so the real result is
+   thumb-friendly: buttons ≈ 44 px, spin ≈ 87 px, numbers ≥ 14 px.
+
+   Row A (menu):  [info] · BONUS · [sound]
+   Row B (read):  BALANCE · SPIN (spans B+C) · BET
+   Row C (touch): [−][+]  ·  SPIN  ·  [turbo][auto]
+   ══════════════════════════════════════════════════════════════════ */
+.game-stage[data-orient="portrait"] .hud-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    "info bonus snd"
+    "bal  spin  stk"
+    "bet  spin  fx";
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 22px 18px 18px;
+}
+.game-stage[data-orient="portrait"] .hud-left,
+.game-stage[data-orient="portrait"] .hud-right,
+.game-stage[data-orient="portrait"] .hud-tools,
+.game-stage[data-orient="portrait"] .hud-stake {
+  display: contents;
+}
+.game-stage[data-orient="portrait"] .hud-left > .hud-meter {
+  grid-area: bal;
+  justify-self: start;
+  align-self: end;
+}
+.game-stage[data-orient="portrait"] .hud-tools > .hud-bonus-btn {
+  grid-area: bonus;
+  justify-self: center;
+}
+.game-stage[data-orient="portrait"] .hud-stake > .hud-meter {
+  grid-area: stk;
+  justify-self: end;
+  align-self: end;
+}
+.game-stage[data-orient="portrait"] .hud-stake > .hud-bet-col {
+  grid-area: bet;
+  justify-self: start;
+}
+.game-stage[data-orient="portrait"] .hud-spin-slot {
+  grid-area: spin;
+  width: 150px;
+  height: 150px;
+}
+.game-stage[data-orient="portrait"] .hud-fx-row {
+  grid-area: fx;
+  justify-self: end;
+  gap: 10px;
+}
+
+/* info + sound: on the HUD, flanking the BONUS button */
+.game-stage[data-orient="portrait"] .hud-tools > .hud-chip-btn {
+  grid-area: info;
+  justify-self: end;
+}
+.game-stage[data-orient="portrait"] .hud-sound-wrap {
+  grid-area: snd;
+  justify-self: start;
+  position: relative;
+}
+.game-stage[data-orient="portrait"] .hud-chip-btn {
+  height: 66px;
+  width: 66px;
+  border-radius: 12px;
+}
+/* volume pop opens UPWARD from the HUD, centred on the button, kept on-screen */
+.game-stage[data-orient="portrait"] .hud-vol-pop {
+  top: auto;
+  bottom: calc(100% + 12px);
+  left: auto;
+  right: 0;
+  transform: none;
+  padding: 10px 20px 10px 14px;
+  gap: 14px;
+}
+.game-stage[data-orient="portrait"] .hud-vol-slider {
+  width: 190px;
+  height: 28px;
+}
+.game-stage[data-orient="portrait"] .hud-vol-num {
+  font-size: 22px;
+}
+
+.game-stage[data-orient="portrait"] .respin-btn {
+  height: 150px;
+  width: 150px;
+}
+.game-stage[data-orient="portrait"] .hud-spin {
+  bottom: 0;
+}
+.game-stage[data-orient="portrait"] .hud-meter-label {
+  font-size: 22px;
+}
+.game-stage[data-orient="portrait"] .hud-meter-value {
+  font-size: 34px;
+  margin-top: 2px;
+}
+.game-stage[data-orient="portrait"] .hud-sq-btn {
+  height: 80px;
+  width: 80px;
+  border-radius: 14px;
+}
+.game-stage[data-orient="portrait"] .hud-bet-col {
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn {
+  height: 80px;
+  width: 80px;
+  border-radius: 14px;
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn svg {
+  height: 32px;
+  width: 32px;
+}
+.game-stage[data-orient="portrait"] .hud-bonus-btn {
+  height: 66px;
+  padding: 0 24px;
+  font-size: 32px;
+  border-radius: 12px;
+}
+
+/* WIN plate under the board: a proper tattoo banner, always readable */
+.game-stage[data-orient="portrait"] .stage-win {
+  margin-top: 12px;
+}
+.game-stage[data-orient="portrait"] .stage-win .win-plaque {
+  font-size: 3rem;
+}
+.game-stage[data-orient="portrait"] .stage-win .hud-win-label {
+  font-size: 1.7rem;
+  color: var(--gold-hi);
+}
+.game-stage[data-orient="portrait"] .stage-win .hud-win-amount {
+  font-size: 3rem;
+  color: var(--bone);
+  text-shadow:
+    2px 3px 0 var(--blood-deep),
+    0 0 18px rgba(255, 59, 78, 0.4);
+}
+.game-stage[data-orient="portrait"] .game-top-spacer {
+  height: 2rem !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Bonus rail (free spins): ink plates instead of clouds / candy
+   ══════════════════════════════════════════════════════════════════ */
+.bank-cloud {
+  filter: drop-shadow(5px 6px 0 rgba(0, 0, 0, 0.55));
+}
+.bank-cloud-live {
+  filter: drop-shadow(5px 6px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(255, 59, 78, 0.55));
+}
+.bank-cloud-img {
+  aspect-ratio: 200 / 120;
+}
+.bank-cloud-value {
+  transform: none;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--gold-hi);
+  filter: none;
+  text-shadow: 0 3px 0 var(--ink);
+}
+.bank-cloud-empty .bank-cloud-value {
+  color: var(--bone-dim);
+}
+.bank-cloud-empty .bank-cloud-img {
+  opacity: 0.8;
+}
+.game-stage[data-orient="portrait"] .bank-cloud-value {
+  transform: none;
+}
+
+.spins-plaque {
+  border: 3px solid var(--ink);
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #2e2023, #150d0f);
+  box-shadow:
+    0 0 0 2px var(--bone-dim),
+    0 0 0 5px var(--ink),
+    5px 7px 0 5px rgba(0, 0, 0, 0.55);
+}
+.spins-plaque-inner {
+  border-radius: 0.3rem;
+  border: 0;
+  background: none;
+  box-shadow: inset 0 0 0 1.5px rgba(241, 230, 204, 0.25);
+}
+.spins-caption {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--bone);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.spins-remaining {
+  font-family: var(--f-ui);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--gold-hi);
+  filter: none;
+  text-shadow:
+    3px 4px 0 var(--blood-deep),
+    0 0 18px rgba(255, 59, 78, 0.4);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Modals & panels — the cream/candy plates become ink + bone
+   ══════════════════════════════════════════════════════════════════ */
+.confirm-panel,
+.menu-panel-card,
+.buy-bonus-sheet {
+  color: var(--bone);
+  border: 3px solid var(--ink);
+  border-radius: 0.7rem;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
+    radial-gradient(ellipse 90% 40% at 50% -6%, rgba(200, 16, 46, 0.22), transparent 62%),
+    linear-gradient(180deg, #24181b, #120b0d);
+  box-shadow:
+    0 0 0 2px var(--bone-dim),
+    0 0 0 5px var(--ink),
+    8px 10px 0 5px rgba(0, 0, 0, 0.5);
+}
+.buy-bonus-sheet::before {
+  display: none;
+}
+.confirm-panel p:first-child,
+.menu-panel-card h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--bone) !important;
+  text-shadow: 0 2px 0 var(--ink);
+}
+.confirm-panel p + p {
+  color: var(--bone-dim) !important;
+}
+.menu-panel-card [class*="text-[#"] {
+  color: var(--bone-dim);
+}
+.confirm-btn-cancel,
+.confirm-btn-confirm,
+.menu-info-btn,
+.menu-close-btn,
+.buy-bonus-close,
+.buy-bonus-stake-step,
+.buy-bonus-stake-pill,
+.ante-candy-btn {
+  border: 2px solid var(--ink);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 0 0 1.5px var(--bone-dim),
+    0 3px 0 1.5px var(--ink);
+}
+.confirm-btn-cancel,
+.menu-info-btn,
+.menu-close-btn,
+.buy-bonus-stake-step,
+.buy-bonus-stake-pill,
+.ante-candy-btn {
+  color: var(--bone);
+  background: linear-gradient(180deg, #2e2023, #150d0f);
+}
+.confirm-btn-cancel:hover,
+.menu-info-btn:hover,
+.menu-panel-card .menu-info-btn:hover,
+.menu-close-btn:hover {
+  background: linear-gradient(180deg, #3d2a2e, #1c1113);
+}
+.confirm-btn-confirm,
+.buy-bonus-close {
+  color: var(--bone);
+  background: linear-gradient(180deg, #e01b3a, var(--blood) 50%, var(--blood-deep));
+  text-shadow: 0 2px 0 var(--ink);
+}
+.confirm-btn-cancel,
+.confirm-btn-confirm {
+  font-family: var(--f-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.1em !important;
+  border-radius: 0.5rem !important;
+}
+.menu-panel-card .menu-info-btn,
+.menu-panel-card .menu-close-btn {
+  color: var(--bone);
+}
+
+.buy-bonus-sheet h2,
+.buy-bonus-title {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--bone);
+  -webkit-text-stroke: 5px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 2px 3px 0 var(--blood);
+}
+.bonus-buy-tile,
+.ante-candy {
+  border: 3px solid var(--ink);
+  border-radius: 0.55rem;
+  background: none;
+  box-shadow:
+    0 0 0 1.5px var(--bone-dim),
+    0 4px 0 1.5px var(--ink);
+}
+.bonus-buy-tile-inner,
+.ante-candy-btn {
+  border-radius: 0.3rem;
+  border: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 16, 46, 0.22), transparent 62%),
+    linear-gradient(180deg, #24181b, #120b0d);
+  box-shadow: inset 0 0 0 1.5px rgba(241, 230, 204, 0.22);
+}
+.bonus-buy-tile:not(:disabled):hover .bonus-buy-tile-inner {
+  box-shadow:
+    inset 0 0 0 1.5px var(--gold),
+    0 0 18px rgba(226, 176, 74, 0.3);
+}
+.bonus-buy-tile-title {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--bone);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.bonus-buy-tile-price {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  color: var(--gold-hi);
+  text-shadow:
+    2px 3px 0 var(--blood-deep),
+    0 0 14px rgba(255, 59, 78, 0.3);
+}
+.bonus-buy-tile-blurb {
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--bone-dim);
+}
+.ante-candy-label {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--bone);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.ante-candy-price {
+  color: var(--gold-hi);
+}
+.ante-candy-btn {
+  border: 2px solid var(--ink);
+  box-shadow: none;
+}
+.buy-bonus-stake-pill {
+  color: var(--bone);
+}
+.buy-btn-red,
+.buy-btn-green,
+.buy-btn-storm {
+  background: linear-gradient(180deg, #e01b3a, var(--blood) 50%, var(--blood-deep));
+  color: var(--bone);
+  border: 2px solid var(--ink);
+  box-shadow:
+    0 0 0 1.5px var(--gold-dk),
+    0 3px 0 1.5px var(--ink);
+}
+
+/* Autoplay picker */
+.fixed [role="dialog"].relative.w-full.max-w-\[280px\] {
+  background: linear-gradient(180deg, #24181b, #120b0d);
+  border: 3px solid var(--ink);
+  border-radius: 0.6rem;
+  box-shadow:
+    0 0 0 2px var(--bone-dim),
+    0 0 0 5px var(--ink),
+    6px 8px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Game Info (menu-panel-card) content */
+.menu-panel-card .info-h,
+.info-h {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  color: var(--blood-hi);
+  text-shadow: 0 2px 0 var(--ink);
+}
+.menu-panel-card .space-y-5,
+.menu-panel-card p {
+  color: var(--bone-dim);
+}
+.menu-panel-card .info-line-label,
+.info-line-label {
+  color: var(--bone-dim);
+}
+.menu-panel-card .info-hand-name,
+.info-hand-name {
+  color: var(--bone);
+  font-family: var(--f-ui);
+  font-size: 0.75rem;
+}
+.menu-panel-card .info-hand-pay,
+.info-hand-pay {
+  color: var(--gold-hi);
+  font-family: var(--f-ui);
+}
+.menu-panel-card .info-hand-row {
+  border-bottom: 1px dotted rgba(241, 230, 204, 0.2);
+}
+.menu-panel-card .info-formula,
+.menu-panel-card .modes-table,
+.menu-panel-card .paytable-box,
+.menu-panel-card .info-kicker {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(241, 230, 204, 0.22);
+  border-radius: 0.4rem;
+}
+.menu-panel-card .info-formula-eq {
+  color: var(--gold-hi);
+}
+.menu-panel-card .info-chip-x {
+  color: var(--blood-hi);
+  text-shadow: 0 1px 0 var(--ink);
+}
+.menu-panel-card .info-line-grid span {
+  background: rgba(241, 230, 204, 0.13);
+}
+.menu-panel-card .info-line-grid span.is-on {
+  background: var(--blood-hi);
+  box-shadow: 0 0 6px rgba(255, 59, 78, 0.75);
+}
+.menu-panel-card .modes-head {
+  color: var(--blood-hi);
+  background: rgba(200, 16, 46, 0.14);
+}
+.menu-panel-card .modes-row {
+  border-bottom-color: rgba(241, 230, 204, 0.14);
+}
+.menu-panel-card .modes-name {
+  color: var(--bone);
+}
+.menu-panel-card .info-disclaimer {
+  background: rgba(200, 16, 46, 0.1);
+  border: 1px solid rgba(255, 59, 78, 0.3);
+  color: var(--bone-dim);
+}
+.info-mini-card {
+  background: var(--bone);
+  border: 1.5px solid var(--ink);
+}
+.info-mini-card.is-red {
+  color: var(--blood);
+}
+.info-mini-card.is-black {
+  color: var(--ink);
+}
+.info-mini-card.is-glow {
+  box-shadow:
+    0 0 0 1.5px var(--blood-hi),
+    0 0 8px rgba(255, 59, 78, 0.6);
+}
+.menu-panel-card .menu-slider,
+.menu-slider {
+  background: linear-gradient(90deg, var(--blood-deep), var(--blood-hi));
+}
+.menu-panel-card .menu-slider::-moz-range-track {
+  background: linear-gradient(90deg, var(--blood-deep), var(--blood-hi));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Boot splash
+   ══════════════════════════════════════════════════════════════════ */
+.boot-splash {
+  background: var(--ink);
+}
+.boot-vignette {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 46%, rgba(125, 10, 26, 0.25), transparent 70%),
+    radial-gradient(ellipse 100% 85% at 50% 45%, transparent 58%, rgba(4, 2, 3, 0.5) 100%);
+}
+.boot-wordmark {
+  margin-top: 2.6rem;
+  gap: 0;
+  filter: drop-shadow(6px 8px 0 rgba(0, 0, 0, 0.6));
+}
+.boot-wordmark-cloudy {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  font-size: 5.6rem;
+  letter-spacing: 0.06em;
+  text-indent: 0;
+  line-height: 0.95;
+  color: var(--bone);
+  -webkit-text-stroke: 10px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 4px 6px 0 var(--blood);
+}
+.boot-wordmark-poker {
+  margin-top: 0.15rem;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 3.4rem;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  line-height: 1;
+  color: var(--gold-hi);
+  -webkit-text-stroke: 6px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 4px 0 var(--blood-deep);
+}
+.game-stage[data-orient="portrait"] .boot-wordmark {
+  margin-top: 5.5rem;
+}
+.game-stage[data-orient="portrait"] .boot-wordmark-cloudy {
+  font-size: 6.6rem;
+}
+.game-stage[data-orient="portrait"] .boot-wordmark-poker {
+  font-size: 3.6rem;
+}
+
+.boot-card {
+  border: 3px solid var(--ink);
+  border-radius: 0.6em;
+  background: none;
+  box-shadow:
+    0 0 0 0.1em var(--bone-dim),
+    0 0 0 0.3em var(--ink),
+    0.4em 0.55em 0 0.3em rgba(0, 0, 0, 0.55);
+}
+.boot-card-inner {
+  border: 0;
+  border-radius: 0.4em;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 16, 46, 0.24), transparent 62%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, #24181b, #120b0d);
+  box-shadow: inset 0 0 0 0.1em rgba(241, 230, 204, 0.22);
+}
+.boot-card-title {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.5em;
+  line-height: 1.1;
+  text-wrap: balance;
+  letter-spacing: 0.04em;
+  color: var(--bone);
+  text-shadow: 0 0.1em 0 var(--ink);
+}
+.boot-card-caption {
+  max-width: 100%;
+  padding-inline: 0.2em;
+  border-radius: 0.3em;
+  background: linear-gradient(180deg, rgba(200, 16, 46, 0.5), rgba(125, 10, 26, 0.5));
+  box-shadow: inset 0 0 0 1px rgba(255, 90, 100, 0.5);
+  font-family: var(--f-ui);
+  font-weight: 600;
+  font-size: 0.72em;
+  color: var(--bone);
+}
+.boot-icon-cloud {
+  filter: drop-shadow(0.15em 0.2em 0 rgba(0, 0, 0, 0.6));
+}
+.boot-icon-cloud-x {
+  transform: none;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 1.5em;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--gold-hi);
+  filter: none;
+  text-shadow: 0 0.09em 0 var(--ink);
+}
+.boot-icon-ace-img {
+  box-shadow: 0 0 0 0.09em var(--ink);
+}
+.boot-icon-ace-ribbon {
+  background: var(--blood);
+  color: var(--bone);
+  font-family: var(--f-ui);
+  border-radius: 0.2em;
+  box-shadow: 0 0 0 0.08em var(--ink);
+}
+.boot-maxwin {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  font-size: 1.85em;
+  letter-spacing: 0.04em;
+  filter: drop-shadow(0.08em 0.1em 0 rgba(0, 0, 0, 0.6));
+}
+.boot-maxwin-line {
+  color: var(--gold-hi);
+  text-shadow: 0.05em 0.07em 0 var(--blood-deep);
+}
+.boot-maxwin-line::before {
+  display: none;
+}
+.game-stage[data-orient="portrait"] .boot-card {
+  font-size: 17px;
+}
+.game-stage[data-orient="portrait"] .boot-cards {
+  gap: 1.4rem;
+}
+.loading-bar {
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(241, 230, 204, 0.12);
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 0 0 3.5px var(--bone-dim);
+}
+.loading-bar-fill {
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--blood-deep), var(--blood-hi));
+  box-shadow: 0 0 12px rgba(255, 59, 78, 0.7);
+}
+.loading-bar-fill::after {
+  background: radial-gradient(circle at 35% 30%, #fff, #ffb0b8 60%, rgba(255, 59, 78, 0.35));
+  box-shadow:
+    0 0 10px rgba(255, 120, 130, 0.95),
+    0 0 22px rgba(255, 59, 78, 0.6);
+}
+.loading-pct {
+  color: var(--bone-dim);
+  font-size: 15px !important;
+  text-shadow: none;
+}
+.boot-bottom {
+  width: min(94%, 40rem);
+}
+.boot-bottom .loading-bar {
+  width: min(100%, 20rem);
+}
+.boot-continue {
+  width: 100%;
+  white-space: nowrap;
+  font-family: var(--f-display);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  color: var(--bone);
+  text-shadow:
+    0 3px 0 var(--ink),
+    0 0 18px rgba(255, 59, 78, 0.6);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Celebrations — BIG WIN ladder, bonus trigger, totals
+   ══════════════════════════════════════════════════════════════════ */
+.bigwin-scrim {
+  background:
+    radial-gradient(ellipse 60% 52% at 50% 46%, rgba(160, 12, 34, 0.5), rgba(5, 2, 3, 0.9) 100%);
+  backdrop-filter: blur(3px);
+}
+.bigwin-overlay[data-anticipate="1"] .bigwin-scrim {
+  background: rgba(5, 2, 3, 0.9);
+}
+.cele-overlay-dim,
+.fs-intro-overlay,
+.total-scrim {
+  background: rgba(5, 2, 3, 0.82);
+}
+
+/* Slow-turning ink rays behind the word */
+.bigwin-overlay .cele-float::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 46%;
+  width: 1500px;
+  height: 1500px;
+  margin: -750px 0 0 -750px;
+  pointer-events: none;
+  background: repeating-conic-gradient(from 0deg, rgba(200, 16, 46, 0.34) 0 6deg, transparent 6deg 18deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0, transparent 52%);
+  mask-image: radial-gradient(circle, #000 0, transparent 52%);
+  animation: noir-rays 26s linear infinite;
+}
+@keyframes noir-rays {
+  to {
+    transform: rotate(360deg);
+  }
+}
+html.lite-fx .bigwin-overlay .cele-float::before {
+  animation: none;
+}
+
+.cele-word {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+.cele-word-depth {
+  color: var(--ink);
+  transform: translate(5px, 9px);
+  -webkit-text-stroke: 12px var(--ink);
+}
+.cele-word-face {
+  color: var(--bone);
+  -webkit-text-stroke: 12px var(--ink);
+  paint-order: stroke fill;
+  text-shadow:
+    0 5px 0 var(--blood),
+    0 9px 0 var(--blood-deep),
+    0 16px 26px rgba(0, 0, 0, 0.7);
+}
+.cele-word-super .cele-word-face {
+  color: var(--gold-hi);
+}
+.bigwin-overlay[data-tier="sensational"] .cele-word-face,
+.bigwin-overlay[data-tier="max"] .cele-word-face {
+  color: var(--gold-hi);
+  text-shadow:
+    0 5px 0 var(--blood-hi),
+    0 10px 0 var(--blood-deep),
+    0 0 44px rgba(255, 59, 78, 0.7),
+    0 18px 30px rgba(0, 0, 0, 0.75);
+}
+.cele-word-nice {
+  font-size: 5.6rem;
+}
+.cele-word-super {
+  font-size: 5.8rem;
+}
+.cele-word-sensational {
+  font-size: 4.1rem;
+  letter-spacing: 0.02em;
+}
+.cele-word-max {
+  font-size: 5.4rem;
+}
+.cele-word-congrats {
+  font-size: 2.6rem;
+  letter-spacing: 0.03em;
+}
+.game-stage[data-orient="portrait"] .cele-word-nice {
+  font-size: 5rem;
+}
+.game-stage[data-orient="portrait"] .cele-word-super {
+  font-size: 5rem;
+}
+.game-stage[data-orient="portrait"] .cele-word-sensational {
+  font-size: 3.3rem;
+}
+.game-stage[data-orient="portrait"] .cele-word-max {
+  font-size: 4.6rem;
+}
+.game-stage[data-orient="portrait"] .cele-word-congrats {
+  font-size: 2.1rem;
+}
+
+.cele-star {
+  width: 2rem;
+  height: 2rem;
+  filter: drop-shadow(0 0 10px rgba(255, 59, 78, 0.8));
+}
+.cele-spark-dot {
+  background: var(--blood-hi);
+  box-shadow: 0 0 8px rgba(255, 59, 78, 0.9);
+}
+.cele-splat {
+  width: 21rem;
+  margin-top: 0.4rem;
+}
+.cele-splat-img {
+  filter: drop-shadow(6px 8px 0 rgba(0, 0, 0, 0.55));
+}
+.cele-splat-num {
+  transform: none;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 3rem;
+}
+.cele-splat-num-gold {
+  color: var(--gold-hi);
+  text-shadow: 0 3px 0 var(--ink);
+}
+.cele-splat-num-ivory {
+  color: var(--bone);
+  text-shadow: 0 3px 0 var(--ink);
+}
+.cele-splat-num-hero {
+  font-size: 4.6rem;
+}
+.cele-sub,
+.cele-hint {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--bone-dim);
+}
+.cele-sub {
+  font-size: 1.3rem;
+}
+.cele-caption {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 0.16em;
+  color: var(--gold-hi);
+  text-shadow: 0 3px 0 var(--ink);
+}
+.cele-hint {
+  font-size: 1.15rem;
+}
+.fs-cloud {
+  filter: drop-shadow(7px 9px 0 rgba(0, 0, 0, 0.55));
+}
+.fs-cloud-num {
+  transform: none;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 4.2rem;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--gold-hi);
+  filter: none;
+  text-shadow:
+    3px 4px 0 var(--blood-deep),
+    0 0 20px rgba(255, 59, 78, 0.45);
+}
+.fs-intro-title {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  font-size: 4.4rem;
+  letter-spacing: 0.04em;
+  color: var(--bone);
+  -webkit-text-stroke: 10px var(--ink);
+  paint-order: stroke fill;
+  text-shadow:
+    0 5px 0 var(--blood),
+    0 9px 0 var(--blood-deep),
+    0 0 40px rgba(255, 59, 78, 0.6);
+}
+.fs-intro-count {
+  font-family: var(--f-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.16em;
+  color: var(--gold-hi);
+  text-shadow: 0 3px 0 var(--ink);
+}
+.total-win-label {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 3.6rem;
+  letter-spacing: 0.1em;
+  color: var(--bone);
+  text-shadow:
+    0 4px 0 var(--blood),
+    0 8px 0 var(--ink),
+    0 0 30px rgba(255, 59, 78, 0.5);
+}
+.total-win-amount {
+  font-family: var(--f-tattoo);
+  font-weight: 400;
+  font-size: 6.6rem;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--gold-hi);
+  -webkit-text-stroke: 12px var(--ink);
+  paint-order: stroke fill;
+  filter: none;
+  text-shadow:
+    0 6px 0 var(--blood),
+    0 11px 0 var(--blood-deep),
+    0 0 40px rgba(255, 59, 78, 0.55);
+}
+.game-stage[data-orient="portrait"] .total-win-amount {
+  font-size: 4.6rem;
+}
+.total-win-cta {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.16em;
+  color: var(--bone);
+  text-shadow: 0 3px 0 var(--ink);
+}
+
+/* Payline: same gold-on-ink geometry, hotter glow so it reads on the dark board */
+.gold-beam-path,
+.gold-beam-layer.is-soft .gold-beam-path,
+.gold-beam-layer.is-mid .gold-beam-path,
+.gold-beam-layer.is-big .gold-beam-path {
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 2px rgba(255, 235, 170, 0.9)) drop-shadow(0 0 7px rgba(255, 59, 78, 0.85));
+}
+.game-stage[data-orient="portrait"] .gold-beam-path {
+  filter: drop-shadow(0 0 3px rgba(255, 59, 78, 0.8));
+}
+
+.menu-panel-card h3 {
+  font-size: 1.7rem;
+  letter-spacing: 0.08em;
+}
+
+/* Phone: buy-bonus sheet text sized for the 0.58× stage scale */
+.game-stage[data-orient="portrait"] .buy-bonus-title {
+  font-size: 2.3rem !important;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-title {
+  font-size: 1.7rem;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-price {
+  font-size: 2.9rem;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-blurb {
+  font-size: 1.15rem;
+  max-width: none;
+}
+.game-stage[data-orient="portrait"] .ante-candy-btn {
+  font-size: 1.25rem !important;
+  padding-top: 0.7rem !important;
+  padding-bottom: 0.7rem !important;
+}
+.game-stage[data-orient="portrait"] .ante-candy-label {
+  font-size: 1.6rem;
+}
+.game-stage[data-orient="portrait"] .ante-candy-price {
+  font-size: 1.3rem;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-stake-caption {
+  font-size: 1.5rem;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-stake-pill {
+  font-size: 2.2rem;
+  min-width: 10rem;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-stake-step {
+  width: 4.6rem;
+  height: 4.6rem;
+  font-size: 2rem;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-close {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+.game-stage[data-orient="portrait"] .confirm-panel p:first-child {
+  font-size: 2rem;
+}
+.game-stage[data-orient="portrait"] .confirm-btn-cancel,
+.game-stage[data-orient="portrait"] .confirm-btn-confirm {
+  font-size: 1.7rem !important;
+}
+.game-stage[data-orient="portrait"] .menu-panel-card {
+  font-size: 1.15rem;
+}
+
+.game-stage[data-orient="portrait"] .spins-caption {
+  font-size: 0.85rem;
+}
+.game-stage[data-orient="portrait"] .spins-plaque {
+  width: 7.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Bonus (joker) card — drop-in
+   The gold joker slams down into its cell from above, bounces once,
+   throws a gold flash + inner ring, then settles into the soft pulse.
+   The tile clips its contents, so the whole move happens inside the cell.
+   ══════════════════════════════════════════════════════════════════ */
+.reel-symbol.is-gold .card-face-img {
+  filter: none;
+}
+.reel-symbol.is-gold .bonus-card {
+  transform-origin: 50% 100%;
+  animation:
+    noir-bonus-drop 0.62s cubic-bezier(0.3, 0.7, 0.3, 1) both,
+    scatter-soft-pulse 2.4s ease-in-out 0.62s infinite;
+}
+@keyframes noir-bonus-drop {
+  0% {
+    transform: translateY(-115%) rotate(-5deg) scale(1.08);
+    opacity: 0;
+    filter: brightness(2.2);
+  }
+  12% {
+    opacity: 1;
+  }
+  52% {
+    transform: translateY(0) rotate(0deg) scale(1.03, 0.94);
+    filter: brightness(1.9) saturate(1.3);
+  }
+  68% {
+    transform: translateY(-9%) rotate(1.2deg) scale(0.99, 1.02);
+    filter: brightness(1.25);
+  }
+  84% {
+    transform: translateY(0) scale(1.01, 0.985);
+    filter: brightness(1.08);
+  }
+  100% {
+    transform: none;
+    filter: brightness(1);
+  }
+}
+.bonus-drop-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 245, 205, 0.95), rgba(255, 200, 80, 0.55) 45%, transparent 75%);
+  box-shadow: inset 0 0 0 3px var(--gold-hi);
+  opacity: 0;
+  animation: noir-bonus-flash 0.75s ease-out 0.28s both;
+}
+@keyframes noir-bonus-flash {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  22% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+html.lite-fx .reel-symbol.is-gold .bonus-card {
+  animation: scatter-soft-pulse 2.4s ease-in-out infinite;
+}
+html.lite-fx .bonus-drop-flash {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-symbol.is-gold .bonus-card {
+    animation: none;
+  }
+  .bonus-drop-flash {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Bonus anticipation — two jokers are down and a reel can still bring
+   the third. Remaining reels are held longer and burn "hot" until they
+   stop; the jokers already on the board charge up.
+   ══════════════════════════════════════════════════════════════════ */
+.reel-hot {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  border-radius: 3px;
+  opacity: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 59, 78, 0.34), transparent 24%, transparent 76%, rgba(255, 59, 78, 0.34)),
+    repeating-linear-gradient(180deg, transparent 0 15px, rgba(255, 217, 122, 0.2) 15px 19px);
+  background-size: 100% 100%, 100% 38px;
+  box-shadow:
+    inset 0 0 0 2px var(--gold-hi),
+    inset 0 0 26px 5px rgba(255, 59, 78, 0.8);
+  animation:
+    noir-hot-life var(--hot-dur) linear var(--hot-delay) both,
+    noir-hot-streak 0.32s linear var(--hot-delay) infinite,
+    noir-hot-pulse 0.42s ease-in-out var(--hot-delay) infinite alternate;
+}
+@keyframes noir-hot-life {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes noir-hot-streak {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 0, 0 38px;
+  }
+}
+@keyframes noir-hot-pulse {
+  from {
+    filter: brightness(0.85);
+  }
+  to {
+    filter: brightness(1.45);
+  }
+}
+/* Jokers already on the board hum while the last reels decide */
+.card-grid.is-hot .reel-symbol.is-gold .bonus-card {
+  animation: noir-joker-charge 0.36s ease-in-out infinite alternate;
+}
+@keyframes noir-joker-charge {
+  from {
+    filter: brightness(1);
+    box-shadow: inset 0 0 0 1px var(--ink), inset 0 0 10px 1px rgba(255, 217, 122, 0.35);
+  }
+  to {
+    filter: brightness(1.32) saturate(1.2);
+    box-shadow: inset 0 0 0 1px var(--ink), inset 0 0 22px 5px rgba(255, 217, 122, 0.85);
+  }
+}
+html.lite-fx .reel-hot {
+  animation:
+    noir-hot-life var(--hot-dur) linear var(--hot-delay) both,
+    noir-hot-streak 0.5s linear var(--hot-delay) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-hot {
+    animation: noir-hot-life var(--hot-dur) linear var(--hot-delay) both;
+  }
+  .card-grid.is-hot .reel-symbol.is-gold .bonus-card {
+    animation: none;
+  }
+}

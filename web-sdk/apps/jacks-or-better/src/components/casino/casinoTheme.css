@@ -1,0 +1,89 @@
+:root {
+	--casino-bg-top: #0a1f6e;
+	--casino-bg-bottom: #001240;
+	--casino-gold: #ffd54a;
+	--casino-gold-bright: #ffc107;
+	--casino-gold-dark: #b8860b;
+	--casino-paytable-bg: #000320;
+	--casino-red: #cc0000;
+	--casino-text-shadow: 0 2px 0 #000, 0 0 12px rgba(255, 213, 74, 0.35);
+	--casino-font-display: 'Arial Black', 'Impact', 'Haettenschweiler', sans-serif;
+	--casino-font-mono: 'Courier New', 'Lucida Console', monospace;
+}
+
+/* Sizing/transform lives in CasinoMachine.svelte (design-scale stage). */
+.casino-machine {
+	color: var(--casino-gold);
+	font-family: var(--casino-font-display);
+}
+
+.casino-gold-text {
+	color: var(--casino-gold);
+	text-transform: uppercase;
+	text-shadow: var(--casino-text-shadow);
+}
+
+.casino-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 30px;
+	padding: 3px 9px;
+	border: 2px solid #8b6914;
+	border-radius: 6px;
+	background: linear-gradient(180deg, #ffd700 0%, #daa520 48%, #b8860b 100%);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.45),
+		inset 0 -2px 0 rgba(0, 0, 0, 0.22),
+		0 2px 4px rgba(0, 0, 0, 0.4);
+	color: #111;
+	font-family: var(--casino-font-display);
+	font-size: 10px;
+	font-weight: 900;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	cursor: pointer;
+	white-space: nowrap;
+	transition:
+		filter 0.12s ease,
+		transform 0.08s ease,
+		box-shadow 0.12s ease;
+}
+
+.casino-btn:hover:not(:disabled) {
+	filter: brightness(1.07);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.5),
+		inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+		0 0 10px rgba(255, 213, 74, 0.45),
+		0 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.casino-btn:active:not(:disabled) {
+	transform: translateY(1px);
+}
+
+.casino-btn:disabled {
+	opacity: 0.42;
+	cursor: not-allowed;
+	filter: grayscale(0.2);
+}
+
+.casino-btn.denom {
+	min-width: 42px;
+	border-radius: 999px;
+	padding-inline: 11px;
+	font-size: 11px;
+	color: #7a1a00;
+}
+
+.casino-btn.denom:disabled {
+	opacity: 1;
+	filter: none;
+	cursor: default;
+}
+
+.casino-btn.deal {
+	min-width: 52px;
+	font-size: 11px;
+}

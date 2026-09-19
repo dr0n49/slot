@@ -1,0 +1,5494 @@
+@import "tailwindcss";
+
+/* Self-hosted (no Google Fonts CDN — Stake Engine static-asset policy).
+   Bundled via Vite so URLs stay relative under the CDN game prefix.
+   "Exo 2" / "Chakra Petch" are legacy family names used all over this file;
+   they now resolve to Oswald (heavy condensed grotesque — legible at phone
+   sizes, same voice as street-poster type). Hero lettering lives in noir.css. */
+@font-face {
+  font-family: "Exo 2";
+  src: url("./fonts/oswald-latin-500-normal.woff2") format("woff2");
+  font-weight: 100 549;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Exo 2";
+  src: url("./fonts/oswald-latin-600-normal.woff2") format("woff2");
+  font-weight: 550 699;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Exo 2";
+  src: url("./fonts/oswald-latin-700-normal.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  src: url("./fonts/oswald-latin-500-normal.woff2") format("woff2");
+  font-weight: 100 549;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Chakra Petch";
+  src: url("./fonts/oswald-latin-600-normal.woff2") format("woff2");
+  font-weight: 550 699;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Chakra Petch";
+  src: url("./fonts/oswald-latin-700-normal.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #070b14;
+  --panel: #0a0e17;
+  --cyan: #00f0ff;
+  --cyan-dim: #00b8c4;
+  --teal: #46ffd7;
+  --magenta: #ff3df0;
+  --gold: #f0c14b;
+  --gold-dim: #c9a227;
+  --danger: #ff3b6b;
+  --text: #e8f4ff;
+  --muted: #7a8ba3;
+  /* Legacy win-ring color token kept for paytable accents */
+  --win-ring: #f0c14b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  /* Kill iOS/Android double-tap zoom on controls */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #050814;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+button,
+a,
+input,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+.font-display {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+}
+
+/* Playing-card ranks — Exo 2’s Q is awkward; Chakra keeps a classic card Q */
+.font-card-rank {
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-weight: 700;
+  font-feature-settings: "ss01" 0;
+  letter-spacing: -0.02em;
+}
+
+.neon-ring {
+  box-shadow:
+    0 0 0 2px rgba(0, 240, 255, 0.35),
+    0 0 18px rgba(0, 240, 255, 0.45),
+    inset 0 0 18px rgba(0, 240, 255, 0.12);
+}
+
+.neon-border {
+  border: 1.5px solid rgba(0, 240, 255, 0.65);
+  box-shadow:
+    0 0 12px rgba(0, 240, 255, 0.35),
+    inset 0 0 10px rgba(0, 240, 255, 0.08);
+}
+
+.gold-label {
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-48px) scale(1.15);
+  }
+}
+
+.mult-float {
+  animation: float-up 1.4s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(0, 240, 255, 0.7);
+  }
+}
+
+.spin-pulse {
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+
+/* ——— Vertical reel strips (column scroll, no motion blur) ——— */
+.grid-cell {
+  /* Allow card art + soft-shadow to breathe; reel-col still clips the strip. */
+  overflow: visible;
+}
+
+.card-face-static {
+  position: absolute;
+  inset: 0;
+  /* Clip sheet bleed / scratches that sit past the printed frame. */
+  border-radius: 5px;
+  overflow: hidden;
+  transform: none;
+  background: transparent;
+}
+
+.reel-col {
+  /* Outer frame taller than the fall window — pads top+bottom. */
+  box-sizing: border-box;
+  width: var(--tile-w);
+  height: calc(var(--tile-h) * 5 + var(--grid-gap) * 4 + var(--reel-pad-y) * 2);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+/* Exact 5-card fall window, inset from both ends of .reel-col. */
+.reel-viewport {
+  position: absolute;
+  top: var(--reel-pad-y);
+  left: 0;
+  width: 100%;
+  height: calc(var(--tile-h) * 5 + var(--grid-gap) * 4);
+  overflow: hidden;
+}
+
+/* Win lift may rise into the top pad; keep bottom pad clipped so fillers stay hidden. */
+.card-grid.is-win-reveal .reel-viewport,
+.playfield-board[data-celebrating="1"] .reel-viewport {
+  overflow: visible;
+}
+
+.card-grid.is-win-reveal .reel-col,
+.playfield-board[data-celebrating="1"] .reel-col {
+  clip-path: inset(0 0 var(--reel-pad-y) 0);
+}
+
+.reel-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.reel-strip.is-spinning .card-face-img {
+  /* Sharp symbols while the strip translates — never blur / stretch. */
+  filter: none !important;
+  image-rendering: auto;
+}
+
+.reel-symbol {
+  position: relative;
+  width: var(--tile-w);
+  height: var(--tile-h);
+  flex-shrink: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Goldens: soft scatter pulse only AFTER the reel freezes. */
+.reel-symbol.is-gold .bonus-card {
+  animation: scatter-soft-pulse 2.4s ease-in-out infinite;
+}
+
+/* Legacy flip selectors kept inert so older rules don't fight the reel. */
+.card-deal .card-back-face,
+.card-deal-turbo .card-back-face,
+.card-deal .card-front-face,
+.card-deal-turbo .card-front-face {
+  animation: none !important;
+}
+
+.card-front-face,
+.card-back-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  overflow: visible;
+}
+
+.card-back-face {
+  display: none;
+}
+
+.card-front-face {
+  transform: none;
+  z-index: 2;
+}
+
+/* Block stray clicks on the board while a deal cascade is mid-flight. */
+.game-main.is-dealing .playfield-board {
+  pointer-events: none;
+}
+
+.hud-circle {
+  border-radius: 9999px;
+  background: radial-gradient(circle at 40% 30%, #1a2030, #0a0c12 70%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.hud-bar {
+  background: rgba(8, 10, 16, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -10px 36px rgba(0, 0, 0, 0.55);
+}
+
+/* Stay above bonus overlays so Total Win never vanishes behind them. */
+.hud-root {
+  z-index: 90;
+}
+
+/* Scrims are full-bleed under the HUD (z above). Do not inset bottom —
+   a fixed rem gap leaves a bright strip when HUD height ≠ that rem. */
+
+.hud-icon-btn {
+  display: flex;
+  height: 3.55rem;
+  width: 3.55rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: #f4f7fb;
+  background: radial-gradient(circle at 40% 30%, #222838, #0c0e14 72%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: transform 140ms ease-out, box-shadow 140ms ease-out;
+}
+.hud-icon-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+.hud-icon-btn:not(:disabled):active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+.hud-icon-btn.is-on {
+  color: var(--cyan);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.hud-bonus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: #141822;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  white-space: nowrap;
+  transition: transform 140ms ease-out, box-shadow 140ms ease-out;
+}
+.hud-bonus-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+.hud-bonus-btn:not(:disabled):active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
+.hud-meter-label {
+  color: #e4453a;
+  letter-spacing: 0.16em;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow:
+    0 1px 0 rgba(255, 252, 240, 0.55),
+    0 2px 4px rgba(20, 8, 40, 0.45);
+}
+.hud-meter-value {
+  margin-top: 0.12rem;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 1.28rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 0 rgba(20, 10, 40, 0.75),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.hud-win {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+.hud-win-copy {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+.hud-win-total {
+  opacity: 1;
+}
+.hud-win-label {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f0c14b;
+}
+.hud-win-amount {
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.hud-win .win-plaque {
+  font-size: 1.7rem;
+  filter:
+    drop-shadow(0 2px 0 rgba(24, 10, 44, 0.9))
+    drop-shadow(0 0 12px rgba(255, 196, 80, 0.35));
+}
+
+.hud-bet-col,
+.hud-fx-row {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.35rem;
+}
+.hud-bet-col {
+  flex-direction: column;
+  gap: 0.28rem;
+}
+.hud-bet-col .hud-icon-btn {
+  height: 1.18rem;
+  width: 1.28rem;
+  border-radius: 0.22rem;
+  background: #0a0a0a;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.hud-fx-row {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+}
+.hud-sq-btn {
+  display: flex;
+  height: 2.85rem;
+  width: 2.85rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  color: #fff;
+  background: #000;
+  border: 2.5px solid #fff;
+  box-shadow: none;
+  transition: transform 140ms ease-out, box-shadow 140ms ease-out, background 140ms ease-out;
+}
+.hud-sq-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+.hud-sq-btn:not(:disabled):active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+.hud-sq-btn.is-on {
+  background: #c41e3a;
+  border-color: #fff;
+  color: #fff;
+}
+
+.hud-chip-btn {
+  display: flex;
+  height: 1.42rem;
+  width: 1.42rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.26rem;
+  color: #fff;
+  background: #0a0a0a;
+  border: 2px solid #fff;
+  transition: transform 140ms ease-out, box-shadow 140ms ease-out;
+}
+.hud-chip-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.hud-chip-btn:not(:disabled):active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+.hud-chip-btn.is-muted {
+  color: #fff;
+}
+
+.hud-sound-wrap {
+  position: relative;
+}
+.hud-vol-pop {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 1.6rem);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.62rem 0.38rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(20, 22, 28, 0.96);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  white-space: nowrap;
+}
+.hud-vol-pop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.hud-vol-num {
+  min-width: 1.55rem;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.hud-vol-slider {
+  --hud-vol: 100%;
+  width: 5.8rem;
+  height: 16px;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+.hud-vol-slider::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #e4453a var(--hud-vol), #4a4d55 var(--hud-vol));
+}
+.hud-vol-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  margin-top: -5px;
+  border-radius: 999px;
+  background: #fff;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.hud-vol-slider::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: #4a4d55;
+}
+.hud-vol-slider::-moz-range-progress {
+  height: 3px;
+  border-radius: 999px;
+  background: #e4453a;
+}
+.hud-vol-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.hud-spin-slot {
+  position: relative;
+  width: 100px;
+  height: 3.85rem;
+  flex-shrink: 0;
+}
+.hud-spin {
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  margin: 0;
+  transform: translateX(-50%);
+}
+.hud-spin:not(:disabled):hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+.hud-spin:not(:disabled):active {
+  transform: translateX(-50%) scale(0.97);
+  transition-duration: 80ms;
+}
+.hud-spin:disabled {
+  transform: translateX(-50%) scale(0.97);
+}
+
+/* Hacksaw-style: big white cash punch centered on the paying cluster. */
+.field-win-punch {
+  position: absolute;
+  z-index: 28;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.85rem, 5.2vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.95),
+    0 2px 0 rgba(0, 0, 0, 0.85),
+    0 4px 14px rgba(0, 0, 0, 0.65),
+    0 0 22px rgba(255, 255, 255, 0.35);
+  animation: field-win-punch 0.42s cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+
+@keyframes field-win-punch {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.45);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.game-stage[data-orient="portrait"] .field-win-punch {
+  font-size: clamp(1.55rem, 7vw, 2.45rem);
+}
+
+@media (min-width: 640px) {
+  .hud-icon-btn {
+    height: 3.85rem;
+    width: 3.85rem;
+  }
+  .hud-bonus-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+  .hud-meter-label { font-size: 0.74rem; }
+  .hud-meter-value { font-size: 1.42rem; }
+  .hud-win .win-plaque { font-size: 2rem; }
+  .hud-win-amount { font-size: 2.15rem; }
+  .hud-spin-slot {
+    width: 100px;
+    height: 3.85rem;
+  }
+  .hud-bet-col .hud-icon-btn {
+    height: 1.22rem;
+    width: 1.32rem;
+  }
+  .hud-chip-btn {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .hud-sq-btn {
+    height: 3.05rem;
+    width: 3.05rem;
+    border-radius: 0.92rem;
+  }
+}
+
+.hud-buy-pill {
+  border-radius: 9999px;
+  padding: 0.55rem 1.1rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  background: #0a0c12;
+  border: 1.5px solid rgba(0, 240, 255, 0.85);
+  box-shadow:
+    0 0 10px rgba(0, 240, 255, 0.35),
+    inset 0 0 8px rgba(0, 240, 255, 0.08);
+}
+
+.respin-btn {
+  background: #000;
+  border: 7px solid #fff;
+  box-shadow: none;
+  color: #fff;
+  overflow: hidden;
+  transition: transform 140ms ease-out, color 0.16s ease, box-shadow 140ms ease-out;
+}
+
+/* Autoplay counter on the spin disc — red rounded square with the remaining count */
+.auto-count-badge {
+  display: grid;
+  place-items: center;
+  width: 58%;
+  height: 58%;
+  border-radius: 0.6rem;
+  background: #e23434;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.92),
+    0 4px 12px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.respin-btn:not(:disabled):hover {
+  background: #000;
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.spin-arrow {
+  color: #fff;
+  filter: none;
+  transform: none;
+  transition: color 0.16s ease;
+}
+.hud-spin:not(:disabled):hover .spin-arrow {
+  color: #e4453a;
+}
+
+.respin-bolt {
+  filter: drop-shadow(0 0 8px rgba(240, 193, 75, 0.9));
+}
+
+.card-stage-slot {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: visible;
+}
+.card-stage-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+/* Portrait-only WIN under the candy frame; landscape keeps it in the HUD. */
+.stage-win {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.45rem;
+  pointer-events: none;
+  text-align: center;
+}
+
+.total-win-above-hud {
+  bottom: calc(7.25rem + env(safe-area-inset-bottom, 0px));
+}
+
+.mult-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #041018;
+  background: linear-gradient(135deg, #00f0ff, #7cffe9);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.mult-pill-total {
+  background: linear-gradient(135deg, #f0c14b, #ffe08a);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  font-size: 1.55rem;
+  min-width: 3rem;
+}
+
+.sum-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.65rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #1a1200;
+  background: linear-gradient(145deg, #f0c14b, #c9a227);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 0 16px rgba(240, 193, 75, 0.7),
+    inset 0 0 8px rgba(255, 255, 255, 0.25);
+  animation: mult-pop 0.5s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: #1a1200;
+  background: linear-gradient(145deg, #f0c14b, #ffe08a);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  animation: mult-pop 0.5s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Bonus bank badge: keeps receiving × chips during free spins */
+.bank-badge-live {
+  animation:
+    mult-pop 0.5s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both,
+    bank-receive 1.4s 0.7s ease-in-out infinite;
+}
+
+@keyframes bank-receive {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  12% {
+    transform: scale(1.09);
+    filter: brightness(1.45);
+  }
+  30% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.bank-meter {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.45rem 1.1rem 0.55rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #b8ecf0, #00f0ff 40%, #7cffe9);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+  min-width: 7.5rem;
+}
+
+.bank-meter-live {
+  animation: bank-pulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 22px rgba(240, 193, 75, 0.55), 0 0 16px rgba(0, 240, 255, 0.45);
+}
+
+@keyframes bank-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* —— Storm / lightning during free spins —— */
+.storm-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.storm-glow {
+  position: absolute;
+  width: 55%;
+  height: 55%;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0;
+}
+
+.storm-glow-a {
+  left: -8%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.55), transparent 70%);
+  animation: storm-glow-pulse 2.8s ease-in-out infinite;
+}
+
+.storm-glow-b {
+  right: -6%;
+  top: 22%;
+  background: radial-gradient(circle, rgba(240, 193, 75, 0.4), transparent 70%);
+  animation: storm-glow-pulse 3.4s ease-in-out infinite 0.9s;
+}
+
+@keyframes storm-glow-pulse {
+  0%,
+  55%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.92);
+  }
+  62% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+  70% {
+    opacity: 0.25;
+  }
+}
+
+.storm-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 60% 20%, rgba(200, 255, 255, 0.4), transparent 45%),
+    radial-gradient(circle at 25% 40%, rgba(0, 240, 255, 0.28), transparent 40%);
+  mix-blend-mode: screen;
+  animation: storm-screen-flash 3.2s ease-in-out infinite;
+}
+
+@keyframes storm-screen-flash {
+  0%,
+  58%,
+  68%,
+  100% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  62% {
+    opacity: 0.12;
+  }
+  64% {
+    opacity: 0.55;
+  }
+}
+
+
+.storm-sparks {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 18% 30%, rgba(0, 240, 255, 0.9), transparent),
+    radial-gradient(1.5px 1.5px at 72% 22%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1.2px 1.2px at 40% 55%, rgba(240, 193, 75, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 85% 48%, rgba(0, 240, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 55% 18%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.2px 1.2px at 28% 70%, rgba(124, 255, 233, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 62% 62%, rgba(0, 240, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 8% 48%, rgba(255, 255, 255, 0.65), transparent);
+  animation: storm-spark-drift 2.4s linear infinite;
+  opacity: 0.75;
+}
+
+@keyframes storm-spark-drift {
+  0% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-18px);
+    opacity: 0.35;
+  }
+}
+
+.storm-energy {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 120%;
+  height: 45%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(0, 240, 255, 0.18), transparent 65%);
+  animation: storm-energy-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes storm-energy-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(-50%) scaleX(1.06);
+  }
+}
+
+.bonus-card {
+  background: transparent;
+  /* Scatter landed: soft pale rim — not the win frame. */
+  border: 1px solid rgba(255, 248, 220, 0.55);
+  box-shadow: none;
+}
+
+.bonus-card .card-face-img {
+  filter: sepia(0.12) saturate(1.05) brightness(1.02);
+}
+
+@keyframes gold-land {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.18) drop-shadow(0 0 6px rgba(255, 248, 220, 0.45));
+  }
+}
+
+/* Golden cards — soft land pulse only after reel freeze. */
+.reel-symbol.is-gold .bonus-card {
+  animation: scatter-soft-pulse 2.4s ease-in-out infinite;
+}
+
+.card-deal.is-gold .bonus-card,
+.card-deal-turbo.is-gold .bonus-card {
+  animation: none;
+}
+
+/* Soft pale pulse — anticipation, not a confirmed pay. */
+@keyframes scatter-soft-pulse {
+  0%,
+  100% {
+    box-shadow: none;
+    border-color: rgba(255, 248, 220, 0.45);
+  }
+  50% {
+    box-shadow: none;
+    border-color: rgba(255, 252, 235, 0.85);
+  }
+}
+
+/* Charged shimmer — quieter on scatters */
+.bonus-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.28) 46%, transparent 60%);
+  background-size: 240% 100%;
+  animation: charged-sweep 2.6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+@keyframes bonus-charge {
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px rgba(255, 245, 200, 0.3),
+      0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(255, 248, 220, 0.45),
+      0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes charged-sweep {
+  0% {
+    background-position: 130% 0;
+  }
+  55%,
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+.bonus-trigger-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  animation: screen-hit 0.45s ease-out;
+}
+
+.bonus-trigger-flash {
+  background: radial-gradient(circle at 50% 40%, rgba(240, 193, 75, 0.35), transparent 55%);
+  animation: flash-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes screen-hit {
+  0% {
+    transform: scale(1.04);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(0.99);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flash-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.paytable-box {
+  border: 1.5px dashed rgba(240, 193, 75, 0.75);
+  border-radius: 0.75rem;
+  padding: 1rem 1.1rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.paytable-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  padding: 0.28rem 0;
+  border-bottom: 1px dotted rgba(240, 193, 75, 0.2);
+}
+
+.paytable-row:last-child {
+  border-bottom: none;
+}
+
+.paytable-dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(240, 193, 75, 0.35);
+  margin: 0 0.4rem 0.35rem;
+  min-width: 1rem;
+}
+
+@keyframes mult-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ——— Cosmic neon backdrop ——— */
+.cosmic-bg {
+  z-index: 0;
+}
+
+.sky-parallax {
+  position: absolute;
+  inset: -6%;
+  will-change: transform;
+}
+
+.sky-parallax .storm-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.sky-parallax-far {
+  transform: scale(1.08);
+  opacity: 0.55;
+  animation: sky-drift-far 90s linear infinite;
+  filter: saturate(0.92) brightness(1.02);
+}
+
+.sky-parallax-mid {
+  transform: scale(1.12);
+  opacity: 0.7;
+  animation: sky-drift-mid 58s linear infinite;
+  mix-blend-mode: soft-light;
+}
+
+.sky-parallax-near {
+  transform: scale(1.18);
+  opacity: 0.38;
+  animation: sky-drift-near 36s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes sky-drift-far {
+  0% { transform: scale(1.08) translate3d(0, 0, 0); }
+  50% { transform: scale(1.08) translate3d(-2.2%, 1.1%, 0); }
+  100% { transform: scale(1.08) translate3d(0, 0, 0); }
+}
+
+@keyframes sky-drift-mid {
+  0% { transform: scale(1.12) translate3d(0, 0, 0); }
+  50% { transform: scale(1.12) translate3d(3.4%, -1.4%, 0); }
+  100% { transform: scale(1.12) translate3d(0, 0, 0); }
+}
+
+@keyframes sky-drift-near {
+  0% { transform: scale(1.18) translate3d(0, 0, 0); }
+  50% { transform: scale(1.18) translate3d(-4.5%, 2%, 0); }
+  100% { transform: scale(1.18) translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-parallax-far,
+  .sky-parallax-mid,
+  .sky-parallax-near {
+    animation: none;
+  }
+  .win-sparks,
+  .playfield-board.is-win-shake,
+  .card-grid.is-miss-pulse .grid-cell {
+    animation: none !important;
+  }
+}
+
+.storm-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.storm-photo-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 42% at 50% 36%, rgba(40, 8, 70, 0.1), transparent 58%),
+    linear-gradient(180deg, rgba(8, 2, 18, 0.38) 0%, rgba(8, 2, 18, 0.12) 38%, rgba(8, 2, 18, 0.46) 100%);
+}
+
+.storm-photo-wash-fs {
+  background:
+    radial-gradient(ellipse 60% 48% at 50% 34%, rgba(90, 20, 140, 0.22), transparent 58%),
+    linear-gradient(180deg, rgba(10, 2, 22, 0.44) 0%, rgba(10, 2, 22, 0.16) 40%, rgba(10, 2, 22, 0.58) 100%);
+}
+
+.cosmic-deep {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -10%, #0a1a2e 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 15% 70%, rgba(0, 80, 120, 0.35), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 90% 40%, rgba(0, 60, 100, 0.28), transparent 55%),
+    linear-gradient(180deg, #050814 0%, #070b14 40%, #03050c 100%);
+}
+
+.cosmic-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.cosmic-nebula-a {
+  width: 55vmax;
+  height: 40vmax;
+  left: -10%;
+  top: 5%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.28) 0%, rgba(0, 140, 200, 0.08) 45%, transparent 70%);
+  animation: cosmic-drift-a 28s ease-in-out infinite;
+}
+
+.cosmic-nebula-b {
+  width: 50vmax;
+  height: 45vmax;
+  right: -15%;
+  top: 20%;
+  background: radial-gradient(circle, rgba(80, 200, 255, 0.22) 0%, rgba(0, 100, 180, 0.06) 50%, transparent 70%);
+  animation: cosmic-drift-b 36s ease-in-out infinite;
+}
+
+.cosmic-nebula-c {
+  width: 70vmax;
+  height: 35vmax;
+  left: 20%;
+  bottom: 5%;
+  background: radial-gradient(circle, rgba(0, 220, 255, 0.14) 0%, transparent 65%);
+  animation: cosmic-drift-c 42s ease-in-out infinite;
+}
+
+@keyframes cosmic-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(6%, 4%) scale(1.08);
+    opacity: 0.7;
+  }
+}
+
+@keyframes cosmic-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.05);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-5%, -3%) scale(1);
+    opacity: 0.65;
+  }
+}
+
+@keyframes cosmic-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-4%, 3%);
+    opacity: 0.55;
+  }
+}
+
+.cosmic-stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+}
+
+.cosmic-stars-far {
+  opacity: 0.7;
+  background-image:
+    radial-gradient(1px 1px at 8% 12%, rgba(200, 240, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 22% 38%, rgba(0, 240, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 41% 18%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 58% 55%, rgba(180, 230, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 73% 28%, rgba(0, 240, 255, 0.65), transparent),
+    radial-gradient(1px 1px at 87% 62%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 15% 72%, rgba(0, 220, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 33% 88%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 66% 8%, rgba(200, 245, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 94% 42%, rgba(0, 240, 255, 0.55), transparent);
+  background-size: 100% 100%;
+  animation: cosmic-twinkle 4.5s ease-in-out infinite;
+}
+
+.cosmic-stars-near {
+  opacity: 0.9;
+  background-image:
+    radial-gradient(2px 2px at 12% 25%, rgba(0, 240, 255, 1), transparent),
+    radial-gradient(1.5px 1.5px at 48% 14%, #fff, transparent),
+    radial-gradient(2px 2px at 78% 48%, rgba(120, 230, 255, 1), transparent),
+    radial-gradient(1.5px 1.5px at 28% 58%, #fff, transparent),
+    radial-gradient(2px 2px at 62% 78%, rgba(0, 240, 255, 0.95), transparent),
+    radial-gradient(1.5px 1.5px at 91% 18%, #fff, transparent),
+    radial-gradient(2px 2px at 5% 48%, rgba(180, 240, 255, 0.9), transparent);
+  background-size: 100% 100%;
+  animation: cosmic-twinkle 3.2s ease-in-out infinite reverse;
+}
+
+@keyframes cosmic-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  40% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+}
+
+.cosmic-ring {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 720px;
+  height: 720px;
+  margin-left: -360px;
+  margin-top: -360px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  box-shadow:
+    0 0 40px rgba(0, 240, 255, 0.08),
+    inset 0 0 60px rgba(0, 240, 255, 0.04);
+  animation: cosmic-ring-pulse 10s ease-in-out infinite;
+}
+
+@keyframes cosmic-ring-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.04) rotate(8deg);
+    opacity: 0.85;
+  }
+}
+
+.cosmic-horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28%;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(0, 40, 70, 0.08) 60%, rgba(0, 20, 40, 0.2) 100%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(0, 240, 255, 0.14), transparent 70%);
+}
+
+.cosmic-grid {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -5%;
+  height: 38%;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(420px) rotateX(58deg);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 35%, #000 100%);
+  animation: cosmic-grid-scroll 18s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes cosmic-grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 48px;
+  }
+}
+
+.cosmic-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 58%, rgba(6, 6, 8, 0.55) 100%);
+}
+
+/* Triple rain plate — screen-blend punches sparse alpha streaks */
+.rain-video-stack {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.rain-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Avoid scale()+overflow clip — that drew a hard line above the HUD in bonus */
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.rain-video-under {
+  opacity: 0.95;
+  filter: brightness(3.2) contrast(1.85) saturate(1.25);
+}
+
+.rain-video-main {
+  opacity: 1;
+  filter: brightness(3.6) contrast(2) saturate(1.35);
+}
+
+.rain-video-main.rain-video-storm {
+  filter: brightness(4.0) contrast(2.1) saturate(1.4);
+}
+
+.rain-video-near {
+  opacity: 0.7;
+  filter: brightness(2.8) contrast(1.7) saturate(1.15) blur(0.35px);
+}
+
+/* CSS rain — phones cannot decode 3× VP9 WebM without OOM */
+.rain-css {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+.rain-css-sheet {
+  position: absolute;
+  inset: -40% 0 0 0;
+  background-image: repeating-linear-gradient(
+    188deg,
+    transparent 0 18px,
+    rgba(190, 235, 255, 0.14) 18px 19px,
+    transparent 19px 34px
+  );
+  background-size: 90px 140px;
+  animation: rain-css-fall 0.55s linear infinite;
+  opacity: 0.65;
+}
+.rain-css-sheet-b {
+  left: 12%;
+  background-size: 70px 110px;
+  animation-duration: 0.42s;
+  opacity: 0.4;
+}
+@keyframes rain-css-fall {
+  to {
+    transform: translateY(140px);
+  }
+}
+
+/* ——— Variant: warp storm field (no central orb — drifting nebulae instead) ——— */
+.warp-deep {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -20%, #081a2c 0%, transparent 55%),
+    radial-gradient(ellipse 70% 45% at 88% 85%, rgba(255, 61, 240, 0.04), transparent 60%),
+    radial-gradient(circle at 50% 46%, #06182a 0%, #04070f 48%, #02040a 100%);
+}
+
+/* Heavy rain: three parallax layers of slanted streaks (tile-based, transform loop) */
+.rain-layer {
+  position: absolute;
+  left: -15%;
+  right: -15%;
+  top: -40%;
+  height: 180%;
+  background-repeat: repeat;
+  will-change: transform;
+}
+
+/* Canvas rain: fine camera-style drizzle — slight defocus for photographic depth */
+.rain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(0.35px);
+}
+
+/* Autoplay counter chip (replaces the removed header line) */
+.auto-chip {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  z-index: 10;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  border: 1.5px solid rgba(0, 240, 255, 0.55);
+  background: rgba(8, 12, 22, 0.72);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+
+/* One-shot strike when a multiplier lands on a winning hand */
+.win-strike {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+  animation: win-hit 1.05s ease-out both;
+}
+
+/* Tiers 4–5: double flash, longer hit */
+.win-strike-double {
+  animation: win-hit-double 1.7s ease-out both;
+}
+
+@keyframes win-hit-double {
+  0% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 0.35;
+  }
+  36% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  62% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes win-hit {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  28% {
+    opacity: 0.45;
+  }
+  42% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.win-strike-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 10%,
+    rgba(210, 245, 255, 0.5),
+    rgba(120, 220, 255, 0.18) 40%,
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Win strike: an almost vertical channel (~18° tilt) running from above the screen
+   down to the bottom HUD; it stops at the menu line and never covers it */
+
+.win-ground {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 14%;
+  height: 22%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(0, 240, 255, 0.28), transparent 70%);
+}
+
+.warp-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36%;
+  background:
+    linear-gradient(180deg, transparent, rgba(0, 30, 55, 0.85)),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(0, 240, 255, 0.06) 40px,
+      rgba(0, 240, 255, 0.06) 41px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(0, 240, 255, 0.05) 28px,
+      rgba(0, 240, 255, 0.05) 29px
+    );
+  transform: perspective(500px) rotateX(52deg);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(180deg, transparent, #000 40%);
+  animation: warp-floor-run 12s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes warp-floor-run {
+  to {
+    background-position: 0 56px, 41px 0, 0 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rain-css-sheet,
+  .rain-css-sheet-b {
+    animation: none;
+  }
+
+  .cosmic-nebula-a,
+  .cosmic-nebula-b,
+  .cosmic-nebula-c,
+  .cosmic-stars-far,
+  .cosmic-stars-near,
+  .cosmic-ring,
+  .cosmic-grid,
+  .warp-streaks-a,
+  .warp-streaks-b,
+  .warp-scan,
+  .warp-floor,
+  .storm-glow-a,
+  .storm-glow-b,
+  .storm-flash,
+  .storm-sparks,
+  .storm-energy,
+  .intro-cta,
+  .intro-splash-glow,
+  .bonus-card,
+  .bonus-card::after,
+  .bank-strike,
+  .overlay-hitflash,
+  .overlay-sparks i,
+  .medallion,
+  .amount-hero,
+  .overlay-in {
+    animation: none;
+  }
+
+  .overlay-hitflash {
+    display: none;
+  }
+
+  /* Instant settle — no reel scroll */
+  .reel-strip,
+  .card-face-static,
+  .card-deal.card-flip,
+  .card-deal-turbo.card-flip {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .card-deal .card-back-face,
+  .card-deal-turbo .card-back-face {
+    display: none;
+  }
+
+  .card-deal .card-front-face,
+  .card-deal-turbo .card-front-face,
+  .card-deal.is-gold .bonus-card,
+  .card-deal-turbo.is-gold .bonus-card,
+  .reel-symbol.is-gold .bonus-card,
+  .result-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .card-win {
+    animation: none;
+  }
+
+  .win-trace-h,
+  .win-trace-d,
+  .pay-sweep,
+  .gold-beam,
+  .gold-beam-outline,
+  .gold-beam-path {
+    animation: none;
+    opacity: 0.9;
+    clip-path: none;
+    stroke-dashoffset: 0;
+  }
+
+  .pay-sweep-head,
+  .gold-beam-flow,
+  .gold-beam-marker {
+    animation: none;
+    display: none;
+  }
+
+  .gold-beam-path {
+    stroke-opacity: 1;
+  }
+
+  .card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+    animation: none;
+    opacity: 0.42;
+    filter: saturate(0.62) brightness(0.88);
+  }
+
+  .bank-badge-live {
+    animation: mult-pop 0.5s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .bank-fly {
+    display: none;
+  }
+
+  /* Night-storm ambience off under reduced motion; results stay calm */
+  .ember-field {
+    display: none;
+  }
+
+  .ember-field i,
+  .win-hit-ring,
+  .win-hit-spark,
+  .storm-spire-glow,
+  .storm-spire-seams,
+  .storm-spire.is-idle .storm-spire-glow,
+  .storm-spire.is-charged .storm-spire-glow,
+  .storm-spire.is-charged .storm-spire-seams,
+  .cele-spark-dot,
+  .boot-float-a,
+  .boot-float-b,
+  .boot-float-c,
+  .spin-pulse {
+    animation: none;
+  }
+
+  /* Traces settle statically via the earlier reduced-motion block */
+  .win-trace-h,
+  .win-trace-d,
+  .pay-sweep,
+  .gold-beam {
+    animation: none;
+  }
+}
+
+/* Phones: no looping video, rain sheets, or blur storms. Win-strike flash stays. */
+html.lite-fx .warp-floor,
+html.lite-fx .rain-css,
+html.lite-fx .storm-layer {
+  display: none;
+}
+
+/* Tab hidden: suspend all backdrop/storm animation work until it is visible again. */
+.cosmic-bg.bg-paused,
+.cosmic-bg.bg-paused * {
+  animation-play-state: paused !important;
+}
+
+/* ——— Intro splash (attract screen) ——— */
+.intro-splash {
+  background: #020612;
+}
+
+.intro-splash-glow {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 18%, rgba(0, 240, 255, 0.2), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 82%, rgba(240, 193, 75, 0.1), transparent 55%);
+  animation: intro-glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes intro-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Storm-styled menu volume slider — violet-cyan bed, gold thumb */
+.menu-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.55), rgba(124, 60, 220, 0.55));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.55);
+  outline: none;
+  cursor: pointer;
+}
+
+.menu-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff3c4, #f0c14b 62%, #c9a227);
+  border: 2px solid rgba(10, 6, 18, 0.85);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5), 0 0 9px rgba(240, 193, 75, 0.55);
+  cursor: pointer;
+}
+
+.menu-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff3c4, #f0c14b 62%, #c9a227);
+  border: 2px solid rgba(10, 6, 18, 0.85);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5), 0 0 9px rgba(240, 193, 75, 0.55);
+  cursor: pointer;
+}
+
+.menu-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.55), rgba(124, 60, 220, 0.55));
+}
+
+/* ——— Neon storm casino: shared FX layer ——— */
+
+/* Base-game idle lightning: one rare, subtle strike every few seconds */
+
+/* Neon card stage — the playfield as a lit stage, not a grey box */
+.card-stage {
+  position: relative;
+  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  background:
+    radial-gradient(ellipse 80% 70% at 50% -8%, rgba(0, 240, 255, 0.1), transparent 55%),
+    linear-gradient(180deg, rgba(6, 10, 22, 0.82), rgba(3, 6, 14, 0.78));
+  box-shadow:
+    0 0 36px rgba(0, 240, 255, 0.14),
+    0 20px 44px rgba(0, 0, 0, 0.55),
+    inset 0 0 46px rgba(0, 240, 255, 0.05);
+}
+
+.card-stage::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: -1px;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.85),
+    rgba(255, 61, 240, 0.4),
+    rgba(240, 193, 75, 0.7),
+    transparent
+  );
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.6));
+  pointer-events: none;
+}
+
+/* Playing-card stock — flat face, no halo */
+.card-face {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.card-face::after {
+  display: none;
+}
+
+.card-face-img,
+.card-back-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Full face visible — tiles match deck 444×624 (37:52). */
+  object-fit: fill;
+  object-position: center center;
+  border-radius: 5px;
+  pointer-events: none;
+  user-select: none;
+  image-rendering: auto;
+}
+
+/* Keep face colors as authored (ornate red/black suits). */
+.card-tile[data-suit-tone="red"] .card-face-img,
+.card-tile[data-suit-tone="black"] .card-face-img {
+  filter: none;
+}
+
+.card-index {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.card-index-br {
+  top: auto;
+  left: auto;
+  right: 4px;
+  bottom: 3px;
+  transform: rotate(180deg);
+}
+
+.card-rank-mark {
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: -0.04em;
+}
+
+.card-rank-mark.is-ten {
+  font-size: 8px;
+  letter-spacing: -0.08em;
+}
+
+.card-index-pip {
+  width: 10px;
+  height: 10px;
+  margin-top: -0.5px;
+  filter: drop-shadow(0 0.4px 0 rgba(0, 0, 0, 0.18));
+}
+
+.card-pip-center {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 7px;
+}
+
+.card-center-pip {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0.6px 0 rgba(0, 0, 0, 0.22));
+}
+
+.card-center-pip.is-ace {
+  width: 28px;
+  height: 28px;
+}
+
+.card-court-gem {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1.15px solid currentColor;
+  border-radius: 1.5px;
+  opacity: 0.22;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.card-pip-center.is-court {
+  padding-bottom: 9px;
+}
+
+.card-ink-red {
+  color: #c41e3a;
+}
+
+.card-ink-black {
+  color: #141820;
+}
+
+.card-ink-gold {
+  color: #f4e6a8;
+}
+
+.bonus-ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  z-index: 10;
+  font-family: "Chakra Petch", "Rajdhani", sans-serif;
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-align: center;
+  color: #1a1204;
+  background: linear-gradient(90deg, transparent, #d4b24a 18%, #f0c14b 50%, #d4b24a 82%, transparent);
+}
+
+.bonus-ribbon-mult {
+  letter-spacing: 0.06em;
+  font-size: 8px;
+  animation: mult-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Bonus Bank emblem strike when the bank grows */
+.bank-strike {
+  animation: bank-strike 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bank-strike {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  30% {
+    transform: scale(1.14);
+    filter: brightness(1.6) drop-shadow(0 0 14px rgba(240, 193, 75, 0.9));
+  }
+  60% {
+    transform: scale(0.98);
+    filter: brightness(1.1);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Primary CTA on the attract screen — gold metal, storm identity */
+.intro-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.05rem 3.4rem;
+  border-radius: 9999px;
+  font-family: "Chakra Petch", "Rajdhani", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.18em;
+  text-indent: 0.12em;
+  text-transform: none;
+  color: #2a1804;
+  background: linear-gradient(160deg, #ffe9ad 0%, #f0c14b 45%, #c9a227 100%);
+  border: 2px solid rgba(255, 244, 214, 0.7);
+  cursor: pointer;
+  animation: cta-breathe 2.2s ease-in-out infinite;
+  box-shadow:
+    0 0 24px rgba(240, 193, 75, 0.5),
+    0 0 64px rgba(240, 140, 40, 0.22),
+    inset 0 0 18px rgba(255, 255, 255, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.intro-cta-bolt {
+  color: #2a1804;
+  filter: drop-shadow(0 0 5px rgba(255, 244, 214, 0.7));
+}
+
+.intro-cta:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 36px rgba(240, 193, 75, 0.8),
+    0 0 90px rgba(240, 140, 40, 0.38),
+    inset 0 0 24px rgba(255, 255, 255, 0.5);
+}
+
+.intro-cta:active {
+  transform: scale(0.97);
+}
+
+@keyframes cta-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 22px rgba(240, 193, 75, 0.45),
+      0 0 58px rgba(240, 140, 40, 0.2),
+      inset 0 0 18px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 34px rgba(240, 193, 75, 0.75),
+      0 0 88px rgba(240, 140, 40, 0.34),
+      inset 0 0 24px rgba(255, 255, 255, 0.45);
+  }
+}
+
+/* Result overlays: thin gradient frame line + appear flash + spark trails */
+.overlay-frame::before {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: -1px;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.9),
+    rgba(255, 61, 240, 0.45),
+    rgba(240, 193, 75, 0.8),
+    transparent
+  );
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.55));
+  pointer-events: none;
+}
+
+.overlay-in {
+  animation:
+    overlay-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both,
+    overlay-breathe 2.6s ease-in-out 0.7s infinite;
+}
+
+@keyframes overlay-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gentle looping breathe on result overlay panels */
+@keyframes overlay-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+.overlay-hitflash {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 30%, rgba(200, 255, 255, 0.45), transparent 62%);
+  animation: hit-flash 0.6s ease-out both;
+  pointer-events: none;
+}
+
+@keyframes hit-flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.overlay-sparks {
+  position: absolute;
+  inset: -12% -6%;
+  pointer-events: none;
+}
+
+.overlay-sparks i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.9);
+  opacity: 0;
+  animation: spark-rise 2.6s ease-in infinite;
+}
+
+.overlay-sparks i:nth-child(1) { left: 12%; bottom: 18%; }
+.overlay-sparks i:nth-child(2) { left: 26%; bottom: 8%; background: var(--gold); box-shadow: 0 0 8px rgba(240, 193, 75, 0.9); animation-delay: 0.5s; animation-duration: 3.1s; }
+.overlay-sparks i:nth-child(3) { left: 44%; bottom: 22%; background: #fff; box-shadow: 0 0 8px rgba(255, 255, 255, 0.9); animation-delay: 1.1s; }
+.overlay-sparks i:nth-child(4) { left: 62%; bottom: 10%; background: var(--magenta); box-shadow: 0 0 8px rgba(255, 61, 240, 0.85); animation-delay: 0.2s; animation-duration: 2.9s; }
+.overlay-sparks i:nth-child(5) { left: 78%; bottom: 20%; background: var(--cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.9); animation-delay: 0.8s; animation-duration: 3.3s; }
+.overlay-sparks i:nth-child(6) { left: 90%; bottom: 6%; background: var(--gold); box-shadow: 0 0 8px rgba(240, 193, 75, 0.9); animation-delay: 1.5s; }
+
+@keyframes spark-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-64px) scale(1);
+  }
+}
+
+/* Lightning medallion above overlay headlines */
+.medallion {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  background: radial-gradient(circle at 50% 38%, rgba(255, 248, 214, 0.3), rgba(10, 14, 24, 0.95) 62%);
+  border: 2px solid rgba(240, 193, 75, 0.8);
+  box-shadow:
+    0 0 24px rgba(240, 193, 75, 0.5),
+    0 0 10px rgba(0, 240, 255, 0.3),
+    inset 0 0 16px rgba(0, 240, 255, 0.14);
+  animation: medallion-in 0.6s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.medallion svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  filter: drop-shadow(0 0 8px rgba(240, 193, 75, 0.9));
+}
+
+@keyframes medallion-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-14deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Win amount hero pop */
+.amount-hero {
+  animation: amount-in 0.55s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes amount-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hold the result text until the 25-cell deal has finished */
+.result-reveal {
+  animation: result-in 0.5s ease-out var(--result-delay, 1.4s) both;
+}
+
+@keyframes result-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Win glow — class is applied only after full deal + pause (JS gate).
+   Rich static gold: distinct from scatter soft-pulse. */
+.card-win {
+  z-index: 6;
+  position: relative;
+}
+
+.card-win .card-back-face {
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Win confirmed — no gold rim/outline on winning cards. */
+.card-win::after {
+  content: none;
+  display: none;
+}
+
+.card-grid[data-win-grade="soft"] .card-win::after,
+.card-grid[data-win-grade="mid"] .card-win::after,
+.card-grid[data-win-grade="big"] .card-win::after {
+  content: none;
+  display: none;
+}
+
+/* Scatter pulse stops when this cell is a confirmed win. */
+.card-win .bonus-card,
+.card-win .bonus-card.is-settled {
+  animation: none !important;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.card-win .bonus-card::after {
+  opacity: 0.35;
+  animation: none !important;
+}
+
+@keyframes card-win-glow-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Soft lift — starts with the gated win class (no deal-time delay). */
+.card-win.is-win {
+  animation: card-win-lift-soft 0.4s cubic-bezier(0.28, 1.2, 0.4, 1) both;
+}
+
+@keyframes card-win-glow-pulse {
+  0% {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.1);
+  }
+  100% {
+    filter: brightness(1.03);
+  }
+}
+
+@keyframes card-win-glow-in {
+  0% {
+    filter: brightness(1);
+  }
+  45% {
+    filter: brightness(1.08);
+  }
+  100% {
+    filter: brightness(1.03);
+  }
+}
+
+@keyframes card-win-lift-soft {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-4px) scale(1.035);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes card-win-pop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-10px) scale(1.1);
+  }
+  70% {
+    transform: translateY(-4px) scale(1.04);
+  }
+  100% {
+    transform: translateY(-5px) scale(1.03);
+  }
+}
+
+@keyframes card-win-lift {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  100% {
+    transform: translateY(-5px) scale(1.025);
+  }
+}
+
+@keyframes card-win-pulse-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.14);
+  }
+}
+
+@keyframes card-win-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.12);
+  }
+}
+
+/* Sparks / confetti burst over the grid for mid+ wins */
+.win-sparks {
+  position: absolute;
+  inset: -8%;
+  z-index: 24;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.win-spark {
+  --spark-i: 0;
+  --dx: 0rem;
+  --dy: -5rem;
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 1px;
+  background: linear-gradient(135deg, #fff8d0, #ffc93a 55%, #ff8a1a);
+  box-shadow: 0 0 6px rgba(255, 210, 90, 0.9);
+  opacity: 0;
+  animation: win-spark-fly 0.95s cubic-bezier(0.2, 0.85, 0.3, 1) calc(0.35s + (var(--spark-i) * 0.02s)) both;
+}
+
+.win-sparks-big .win-spark {
+  width: 0.55rem;
+  height: 0.55rem;
+  animation-duration: 1.15s;
+}
+
+.win-spark:nth-child(1) { --dx: 0.2rem; --dy: -6.5rem; }
+.win-spark:nth-child(2) { --dx: 4.2rem; --dy: -4.8rem; }
+.win-spark:nth-child(3) { --dx: 6.8rem; --dy: -1.2rem; }
+.win-spark:nth-child(4) { --dx: 6.2rem; --dy: 2.8rem; }
+.win-spark:nth-child(5) { --dx: 3.4rem; --dy: 5.6rem; }
+.win-spark:nth-child(6) { --dx: -0.3rem; --dy: 6.4rem; }
+.win-spark:nth-child(7) { --dx: -3.8rem; --dy: 5.2rem; }
+.win-spark:nth-child(8) { --dx: -6.5rem; --dy: 2.2rem; }
+.win-spark:nth-child(9) { --dx: -6.8rem; --dy: -1.6rem; }
+.win-spark:nth-child(10) { --dx: -4.5rem; --dy: -5rem; }
+.win-spark:nth-child(11) { --dx: 1.8rem; --dy: -7.2rem; }
+.win-spark:nth-child(12) { --dx: 5.5rem; --dy: -3.2rem; }
+.win-spark:nth-child(13) { --dx: 7.4rem; --dy: 0.8rem; }
+.win-spark:nth-child(14) { --dx: 5rem; --dy: 4.8rem; }
+.win-spark:nth-child(15) { --dx: 1.2rem; --dy: 7rem; }
+.win-spark:nth-child(16) { --dx: -2.4rem; --dy: 6.8rem; }
+.win-spark:nth-child(17) { --dx: -5.8rem; --dy: 4rem; }
+.win-spark:nth-child(18) { --dx: -7.2rem; --dy: 0.4rem; }
+.win-spark:nth-child(19) { --dx: -5.6rem; --dy: -3.6rem; }
+.win-spark:nth-child(20) { --dx: -2rem; --dy: -6.8rem; }
+.win-spark:nth-child(21) { --dx: 3rem; --dy: -6rem; }
+.win-spark:nth-child(22) { --dx: 7rem; --dy: -2.4rem; }
+
+@keyframes win-spark-fly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35) rotate(0deg);
+  }
+  16% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.15) rotate(200deg);
+  }
+}
+
+/* Big win — light screen shake on the board */
+.playfield-board.is-win-shake {
+  animation: win-board-shake 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes win-board-shake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-3px, 1px, 0);
+  }
+  40% {
+    transform: translate3d(4px, -2px, 0);
+  }
+  60% {
+    transform: translate3d(-2px, 2px, 0);
+  }
+  80% {
+    transform: translate3d(2px, -1px, 0);
+  }
+}
+
+/* Empty spin — gentle sway / fade so the board doesn't feel frozen */
+.card-grid.is-miss-pulse .grid-cell {
+  animation: miss-sway 0.85s ease-in-out both;
+}
+
+.card-grid.is-miss-pulse .grid-cell:nth-child(odd) {
+  animation-delay: 0.04s;
+}
+
+.card-grid.is-miss-pulse .grid-cell:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+@keyframes miss-sway {
+  0% {
+    transform: rotate(0deg);
+    filter: none;
+  }
+  35% {
+    transform: rotate(-1.2deg);
+    filter: saturate(0.85) brightness(0.94);
+  }
+  70% {
+    transform: rotate(1deg);
+    filter: saturate(0.88) brightness(0.96);
+  }
+  100% {
+    transform: rotate(0deg);
+    filter: none;
+  }
+}
+
+/* Free spins: a × spark flying from the chips into the bonus bank */
+.bank-fly {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  margin: 0 -1px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, var(--cyan) 55%, transparent 75%);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.9);
+  animation: bank-fly 0.9s 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+@keyframes bank-fly {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(12px) scale(0.4);
+  }
+}
+
+
+/* ——— Mobile / compact layout ——— */
+@media (max-width: 640px) {
+  .menu-panel {
+    max-height: min(48vh, 280px);
+    overflow-y: auto;
+  }
+  .hud-buy-pill {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.06em !important;
+  }
+  .gold-label {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.1em !important;
+  }
+}
+
+/* Portrait: same 76×96 design tiles on every phone. GameStage scale keeps
+   the ratio; HUD sits in document flow so 375×667 / 425×812 cannot bury it. */
+.game-stage[data-orient="portrait"] .game-top-spacer {
+  height: 3.5rem !important;
+}
+.game-stage[data-orient="portrait"] .hud-root {
+  z-index: 80;
+}
+.game-stage[data-orient="portrait"] .game-main {
+  gap: 0 !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.08rem !important;
+}
+.game-stage[data-orient="portrait"] .card-stage {
+  padding-top: 0.7rem !important;
+  padding-bottom: 0.55rem !important;
+}
+.game-stage[data-orient="portrait"] .card-stage-slot {
+  /* Portrait: 5×5 + frame float centered on the sky, not sitting on the HUD. */
+  align-items: center;
+  justify-content: center;
+}
+.game-stage[data-orient="portrait"] .card-stage-cluster {
+  position: relative;
+  transform-origin: center center;
+}
+.game-stage[data-orient="portrait"] .card-stage-wrap {
+  max-width: none !important;
+}
+/* Out of flow — WIN never changes cluster height / board scale. */
+.game-stage[data-orient="portrait"] .stage-win {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  margin-top: 0.4rem;
+  width: max-content;
+  max-width: calc(100vw - 1.5rem);
+  z-index: 5;
+}
+.game-stage[data-orient="portrait"] .stage-win .win-plaque {
+  font-size: 1.45rem;
+  filter:
+    drop-shadow(0 2px 0 rgba(24, 10, 44, 0.95))
+    drop-shadow(0 0 10px rgba(255, 196, 80, 0.55))
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+}
+/* No dark plaque on phones — gold/white type only over the sky. */
+.game-stage[data-orient="portrait"] .stage-win .hud-win-copy {
+  gap: 0.4rem;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.game-stage[data-orient="portrait"] .stage-win .hud-win-label {
+  font-size: 0.78rem;
+  color: #ffe08a;
+  text-shadow:
+    0 1px 0 rgba(20, 10, 40, 0.95),
+    0 0 8px rgba(0, 0, 0, 0.65);
+}
+.game-stage[data-orient="portrait"] .stage-win .hud-win-amount {
+  font-size: 1.45rem;
+  color: #fff;
+  text-shadow:
+    0 1px 0 rgba(20, 10, 40, 0.95),
+    0 2px 8px rgba(0, 0, 0, 0.7);
+}
+.game-stage[data-orient="portrait"] .hud-inner {
+  grid-template-columns: 1fr 1fr;
+}
+.game-stage[data-orient="portrait"] .hud-win {
+  display: none;
+}
+.game-stage[data-orient="portrait"] .playfield-board {
+  padding: 0.35rem;
+}
+.game-stage[data-orient="portrait"] .card-grid {
+  /* Exact 37:52 (was 76×108 ≈ 0.70 — letterboxed / cropped faces). */
+  --tile-w: 74px;
+  --tile-h: 104px;
+  --grid-gap: 6px;
+  --diag-len: 690px;
+  --diag-angle: 51.2deg;
+}
+
+/* Soften heavy FX on phone GPUs */
+.game-stage[data-orient="portrait"] .gold-beam-path {
+  filter: drop-shadow(0 0 2px rgba(255, 220, 100, 0.35));
+}
+.game-stage[data-orient="portrait"] .win-sparks {
+  opacity: 0.75;
+}
+.game-stage[data-orient="portrait"] .bonus-side-panel {
+  /* Full-width rail: cloud left, spins plaque top-right. */
+  top: 1.55rem !important;
+  bottom: auto !important;
+  left: 0.4rem !important;
+  right: 0.4rem !important;
+  width: auto !important;
+  transform: none;
+}
+.game-stage[data-orient="portrait"] .bonus-side-stack {
+  display: block;
+  position: relative;
+  gap: 0 !important;
+  min-height: 6.25rem;
+}
+.game-stage[data-orient="portrait"] .bank-cloud {
+  width: 8.75rem;
+}
+.game-stage[data-orient="portrait"] .bank-cloud-value {
+  font-size: 1.95rem;
+  transform: translate(0.05rem, 0.58rem);
+}
+.game-stage[data-orient="portrait"] .bank-cloud-value.is-digits-2 {
+  font-size: 1.6rem;
+}
+.game-stage[data-orient="portrait"] .bank-cloud-value.is-digits-3 {
+  font-size: 1.32rem;
+}
+.game-stage[data-orient="portrait"] .bank-cloud-value.is-digits-4 {
+  font-size: 1.02rem;
+}
+.game-stage[data-orient="portrait"] .spins-plaque {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6.5rem;
+}
+.game-stage[data-orient="portrait"] .spins-remaining {
+  font-size: 2.2rem;
+}
+.game-stage[data-orient="portrait"] .spins-caption {
+  font-size: 0.56rem;
+}
+.game-stage[data-orient="portrait"] .hud-bonus-btn {
+  font-size: 0.78rem;
+  padding: 0.4rem 0.72rem;
+  letter-spacing: 0.1em;
+}
+.game-stage[data-orient="portrait"] .hud-meter-value {
+  font-size: 1.15rem;
+}
+.game-stage[data-orient="portrait"] .hud-meter-label {
+  font-size: 0.62rem;
+}
+.game-stage[data-orient="landscape"] .game-main {
+  padding-bottom: 0.1rem !important;
+  padding-top: 0.2rem !important;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-overlay {
+  align-items: flex-end;
+  padding: 0.45rem 0.55rem 0.45rem !important;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-sheet {
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.7rem 0.7rem 0.85rem !important;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-sheet .metal-plaque p {
+  min-height: 0;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-title {
+  margin-bottom: 0.65rem !important;
+  font-size: 1.15rem !important;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-grid-main {
+  gap: 0.5rem;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile {
+  border-width: 3px;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-inner {
+  min-height: 0;
+  gap: 0.28rem;
+  padding: 0.55rem 0.55rem 0.5rem;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-title {
+  font-size: 0.68rem;
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-price {
+  font-size: clamp(1.25rem, 5.5vw, 1.55rem);
+}
+.game-stage[data-orient="portrait"] .bonus-buy-tile-blurb {
+  font-size: 0.52rem;
+  max-width: 18em;
+}
+.game-stage[data-orient="portrait"] .buy-bonus-grid-ante {
+  margin-top: 0.65rem;
+  gap: 0.5rem;
+}
+.game-stage[data-orient="portrait"] .ante-candy-btn {
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+  font-size: 0.7rem !important;
+}
+.game-stage[data-orient="portrait"] .total-win-above-hud {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+.game-stage[data-orient="portrait"] .menu-panel {
+  bottom: max(9.5rem, calc(env(safe-area-inset-bottom) + 8.5rem));
+  left: 0.75rem;
+  right: 0.75rem;
+  max-height: min(52%, 520px);
+}
+
+@media (max-width: 380px) {
+  .game-top-spacer { height: 2.5rem !important; }
+  .hud-buy-pill { letter-spacing: 0.06em !important; }
+}
+
+/* Ultra-short non-16:9 phones only. 400×225 / 800×450 / 1024×576 / 1200×675
+   are 16:9 and MUST ride the plain 1200×675 stage scale with no extra shrink. */
+@media (max-height: 380px) and (orientation: landscape) and (max-aspect-ratio: 15/10) {
+  .game-top-spacer { height: 1.25rem !important; }
+  .game-main { gap: 0 !important; padding-top: 0.1rem !important; padding-bottom: 0.08rem !important; }
+}
+
+/* ——— 5×5 card grid (Lightning Poker grid slot: 7 lines) ——— */
+
+/*
+ * Geometry contract with CardGrid.tsx: five vertical reels, each
+ * --tile-w wide and 5×(--tile-h)+4×(--grid-gap) tall (+ 2×--reel-pad-y),
+ * gap --grid-gap. Win traces use the same vars for cell centers.
+ */
+.card-grid {
+  /* Exact Gangsta face ratio 444×624 → 37:52. */
+  --tile-w: 55.5px;
+  --tile-h: 78px;
+  --grid-gap: 6px;
+  --reel-pad-y: 16px;
+  --stagger: 48ms;
+  --diag-len: 500px;
+  --diag-angle: 50.7deg;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--grid-gap);
+  justify-content: center;
+}
+
+.card-grid[data-turbo="1"] {
+  --stagger: 16ms;
+}
+
+.card-tile {
+  width: var(--tile-w);
+  height: var(--tile-h);
+  filter: none;
+}
+
+.card-grid-shell {
+  position: relative;
+  display: inline-block;
+}
+
+/* Gold payline trail — high-contrast gold + dark rim; draw after glow. */
+.gold-beam-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.gold-beam-outline,
+.gold-beam-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: gold-beam-draw var(--draw-dur, 0.3s) cubic-bezier(0.22, 1, 0.36, 1) var(--sweep-delay, 0.2s) forwards;
+}
+
+.gold-beam-path {
+  stroke-opacity: 0.88;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 248, 200, 0.7))
+    drop-shadow(0 0 3px rgba(255, 200, 60, 0.4));
+}
+
+.gold-beam-layer.is-soft .gold-beam-path {
+  stroke-opacity: 0.72;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 248, 200, 0.45))
+    drop-shadow(0 0 2.5px rgba(255, 200, 60, 0.28));
+}
+
+.gold-beam-layer.is-soft .gold-beam-outline {
+  stroke-opacity: 0.55;
+}
+
+.gold-beam-layer.is-mid .gold-beam-path {
+  stroke-opacity: 0.88;
+  filter:
+    drop-shadow(0 0 1.5px rgba(255, 248, 200, 0.75))
+    drop-shadow(0 0 4px rgba(255, 200, 60, 0.45));
+}
+
+.gold-beam-layer.is-big .gold-beam-path {
+  stroke-opacity: 0.95;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 252, 220, 0.95))
+    drop-shadow(0 0 6px rgba(255, 190, 50, 0.6));
+}
+
+@keyframes gold-beam-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.card-grid[data-turbo="1"] .gold-beam-outline,
+.card-grid[data-turbo="1"] .gold-beam-path {
+  animation-duration: 0.22s;
+}
+
+/* Spotlight: non-winners quiet so the paying line reads in one glance. */
+.card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+  animation: win-dim-in 0.28s ease-out both;
+}
+
+.card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) .bonus-card {
+  box-shadow: none;
+}
+.card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) .bonus-card::after {
+  opacity: 0;
+  animation: none !important;
+}
+
+@keyframes win-dim-in {
+  from {
+    opacity: 1;
+    filter: none;
+  }
+  to {
+    opacity: 0.58;
+    filter: saturate(0.7) brightness(0.86);
+  }
+}
+
+/* Legacy names kept so reduced-motion selectors stay valid */
+.win-trace-h,
+.win-trace-d,
+.pay-sweep {
+  display: none;
+}
+
+.win-trace-d0 {
+  transform: translate(-50%, -50%) rotate(var(--diag-angle));
+}
+
+.win-trace-d1 {
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--diag-angle)));
+}
+
+@keyframes trace-run {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes trace-in {
+  from {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 0.95;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes pay-sweep-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pay-sweep-head {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Glow well under a paying card — light leaking from the felt */
+/* Soften per-card wells so they don't read as beam "markers". */
+.win-well {
+  position: absolute;
+  inset: -8px -10px -14px;
+  z-index: 1;
+  border-radius: 18px;
+  background: radial-gradient(
+    ellipse 75% 62% at 50% 58%,
+    rgba(240, 193, 75, 0.14),
+    rgba(160, 90, 24, 0.06) 55%,
+    transparent 75%
+  );
+  filter: blur(3px);
+  opacity: 0;
+  animation: win-well-in 0.6s ease-out var(--result-delay, 1.4s) both;
+  pointer-events: none;
+}
+
+@keyframes win-well-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+}
+
+/* Hit burst kept in CSS but unused — sweep replaces the ring/spark stack. */
+.win-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  display: none;
+}
+
+.win-hit-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  border: 2px solid rgba(240, 193, 75, 0.92);
+  box-shadow: 0 0 18px rgba(240, 193, 75, 0.55);
+  opacity: 0;
+  transform: scale(0.6);
+  animation: win-hit-ring 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--hit-delay, 1.5s) both;
+}
+
+@keyframes win-hit-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+.win-hit-spark {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-left: -0.675rem;
+  display: grid;
+  place-items: center;
+  color: #ffe9a0;
+  filter: drop-shadow(0 0 7px rgba(240, 193, 75, 0.95));
+  opacity: 0;
+  transform: translateY(6px) scale(0.4);
+  animation: win-hit-spark 0.85s cubic-bezier(0.2, 1.4, 0.3, 1) var(--hit-delay, 1.5s) both;
+}
+
+.win-hit-pip {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes win-hit-spark {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.4) rotate(-30deg);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-7px) scale(1.15) rotate(0deg);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.7);
+  }
+}
+
+.game-stage[data-orient="portrait"] .card-rank-mark {
+  font-size: 14px;
+}
+
+.game-stage[data-orient="portrait"] .card-rank-mark.is-ten {
+  font-size: 10px;
+}
+
+.game-stage[data-orient="portrait"] .card-index-pip {
+  width: 12px;
+  height: 12px;
+}
+
+.game-stage[data-orient="portrait"] .card-center-pip {
+  width: 32px;
+  height: 32px;
+}
+
+.game-stage[data-orient="portrait"] .card-center-pip.is-ace {
+  width: 36px;
+  height: 36px;
+}
+
+.game-stage[data-orient="portrait"] .card-court-gem {
+
+  width: 28px;
+  height: 28px;
+}
+
+.game-stage[data-orient="portrait"] .bonus-ribbon {
+  font-size: 8px;
+  bottom: 6px;
+}
+
+.game-stage[data-orient="portrait"] .bonus-ribbon-mult {
+  font-size: 10px;
+}
+
+
+/* ——— Recovered / current-session layer (stage, sheets, celebrations) ——— */
+
+.game-stage-host {
+  position: fixed;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.game-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* Design-space vw/vh so 1024×576 and 1200×675 (both 16:9) compose identically.
+     Real viewport vw inside this scaled stage would double-scale at 1024. */
+  --dw: 12px;
+  --dh: 6.75px;
+}
+
+/* Candy-cane frame around the board — cream + amber stripes, poker palette.
+   The band is the wrap's own padded box: fit() measures wrap.offsetWidth/Height,
+   so the whole frame is always inside the stage and scales with --board-scale. */
+.card-stage-wrap {
+  padding: 0.45rem;
+  border-radius: 1.55rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(96, 60, 8, 0.16)),
+    repeating-linear-gradient(45deg, #fff6e0 0 0.42rem, #f0b429 0.42rem 0.84rem);
+  /* No outer glow — crisp candy rim only. */
+  box-shadow: 0 18px 40px rgba(24, 15, 4, 0.35);
+}
+
+.playfield-board {
+  position: relative;
+  padding: 0.45rem;
+  border-radius: 1.05rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(16, 8, 32, 0.9), rgba(8, 4, 18, 0.94));
+  border: 2.5px solid #fff8e8;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  /* Don't shave card corners / drop-shadows against the candy rim. */
+  overflow: visible;
+}
+
+.playfield-board[data-celebrating="1"] {
+  overflow: visible;
+}
+
+.gold-celebrate .bonus-card {
+  /* Trigger pop — still scatter language, not win-frame gold. */
+  border-color: rgba(255, 248, 220, 0.85);
+  box-shadow:
+    0 0 18px rgba(255, 245, 200, 0.55),
+    0 0 0 1px rgba(255, 250, 230, 0.7);
+}
+
+/* Beat .is-dim so 3/4/5 goldens always pop — soft, not payline gold. */
+.card-grid .grid-cell.gold-celebrate {
+  z-index: 24;
+  opacity: 1;
+  filter: none;
+  animation: gold-pop 1.15s cubic-bezier(0.22, 1.15, 0.36, 1) var(--gold-pop, 0ms) both;
+}
+
+@keyframes gold-pop {
+  0% { transform: scale(1); }
+  42% { transform: scale(1.12); filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 248, 220, 0.7)); }
+  100% { transform: scale(1.03); filter: brightness(1.06) drop-shadow(0 0 5px rgba(255, 245, 200, 0.4)); }
+}
+
+.ui-panel {
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(140, 80, 255, 0.2), transparent 55%),
+    linear-gradient(180deg, #1c1430, #0c0818);
+  border: 2px solid rgba(176, 130, 255, 0.45);
+  box-shadow:
+    0 0 0 2px rgba(0, 229, 255, 0.16),
+    0 22px 50px rgba(0, 0, 0, 0.5);
+}
+
+.metal-plaque {
+  border-radius: 1.1rem;
+  background: linear-gradient(180deg, #1a2238, #0c1220);
+  border: 1.5px solid rgba(0, 240, 255, 0.35);
+}
+
+.metal-plaque-gold {
+  border-color: rgba(240, 193, 75, 0.7);
+  box-shadow:
+    0 0 22px rgba(240, 193, 75, 0.3),
+    inset 0 0 20px rgba(240, 193, 75, 0.1);
+}
+
+.panel-slam {
+  animation: panel-slam 0.34s cubic-bezier(0.2, 1.4, 0.3, 1) both;
+}
+
+@keyframes panel-slam {
+  0% { opacity: 0; transform: scale(0.82) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.splash-settle {
+  animation: splash-settle 0.38s 0.12s cubic-bezier(0.2, 1.4, 0.3, 1) both;
+}
+
+@keyframes splash-settle {
+  0% { opacity: 0; transform: scale(0.7); }
+  70% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.cta-hint {
+  animation: cta-hint 3s ease-in-out infinite;
+}
+
+@keyframes cta-hint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.title-punch {
+  animation: title-punch 0.26s 0.06s cubic-bezier(0.2, 1.4, 0.3, 1) both;
+}
+
+@keyframes title-punch {
+  0% { opacity: 0; transform: scale(0.7); }
+  62% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.bonus-trigger-flash {
+  background: radial-gradient(circle at 50% 40%, rgba(88, 28, 135, 0.45), transparent 55%);
+}
+
+.bigwin-overlay { cursor: pointer; }
+
+.bigwin-tier-step {
+  animation: bigwin-tier-punch 0.42s cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+
+@keyframes bigwin-tier-punch {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Short inhale before SUPER / SENSATIONAL / MAX — dim + compress, no board flash */
+.bigwin-overlay .cele-float.is-anticipate {
+  transition: transform 180ms ease-out, filter 180ms ease-out;
+  transform: scale(0.94);
+  filter: brightness(0.72);
+}
+
+.bigwin-overlay[data-anticipate="1"] .bigwin-scrim {
+  background: rgba(6, 2, 16, 0.82);
+  transition: background 180ms ease-out;
+}
+
+.bigwin-scrim {
+  background: radial-gradient(
+    ellipse 62% 55% at 50% 46%,
+    rgba(12, 4, 28, 0.28),
+    rgba(8, 2, 18, 0.72) 100%
+  );
+  backdrop-filter: blur(2px);
+}
+
+.cele-overlay-dim {
+  background: rgba(8, 2, 18, 0.7);
+  backdrop-filter: blur(7px);
+  animation: screen-hit 0.45s ease-out;
+}
+
+/* Auto FREE SPINS intro — short beat before the bonus board deals. */
+.fs-intro-overlay {
+  background: rgba(6, 2, 16, 0.78);
+  backdrop-filter: blur(8px);
+  animation: fs-intro-scrim 1.35s ease-out both;
+  pointer-events: none;
+}
+
+.fs-intro-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.fs-intro-title {
+  margin: 0;
+  font-family: "Chakra Petch", "Exo 2", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  color: #fff6c8;
+  text-shadow:
+    0 0 18px rgba(255, 210, 90, 0.65),
+    0 4px 0 rgba(80, 30, 10, 0.35),
+    0 12px 28px rgba(0, 0, 0, 0.45);
+  animation: fs-intro-pop 0.7s cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+
+.fs-intro-count {
+  margin: 0;
+  font-family: "Chakra Petch", "Exo 2", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.05rem, 3.2vw, 1.55rem);
+  letter-spacing: 0.18em;
+  color: rgba(255, 248, 220, 0.92);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  animation: fs-intro-fade 0.55s ease-out 0.22s both;
+}
+
+@keyframes fs-intro-scrim {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fs-intro-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fs-intro-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Storm plate: deep violet-navy metal, gold corner light, thin cyan edge —
+   NOT a candy purple gradient card. */
+.cele-card {
+  position: relative;
+  padding: 1.85rem 1.35rem 1.45rem;
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(ellipse 90% 42% at 50% -10%, rgba(96, 42, 170, 0.5), transparent 60%),
+    radial-gradient(ellipse 70% 40% at 50% 108%, rgba(0, 229, 255, 0.1), transparent 55%),
+    linear-gradient(180deg, #251244 0%, #140a28 52%, #0a0516 100%);
+  border: 1.5px solid rgba(148, 108, 220, 0.55);
+  box-shadow:
+    0 0 0 1.5px rgba(8, 4, 16, 0.9),
+    0 0 0 3px rgba(240, 193, 75, 0.28),
+    0 30px 70px rgba(0, 0, 0, 0.65),
+    0 0 60px rgba(80, 36, 150, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Gold corner brackets — craft detail, not sticker sparkles */
+.cele-card::before,
+.cele-card::after {
+  content: "";
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  pointer-events: none;
+  border-color: rgba(240, 193, 75, 0.85);
+  border-style: solid;
+  filter: drop-shadow(0 0 5px rgba(240, 193, 75, 0.5));
+}
+
+.cele-card::before {
+  left: 0.55rem;
+  top: 0.55rem;
+  border-width: 2.5px 0 0 2.5px;
+  border-top-left-radius: 0.9rem;
+}
+
+.cele-card::after {
+  right: 0.55rem;
+  bottom: 0.55rem;
+  border-width: 0 2.5px 2.5px 0;
+  border-bottom-right-radius: 0.9rem;
+}
+
+.cele-float { padding: 0.5rem 0.25rem 0.25rem; }
+
+.cele-spark-field {
+  pointer-events: none;
+  position: absolute;
+  inset: -1.1rem -0.6rem;
+}
+
+/* Quiet dust dots at the plate corners — static, tiny */
+.cele-spark-dot {
+  position: absolute;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #9be8ff 70%);
+  box-shadow: 0 0 5px rgba(155, 232, 255, 0.8);
+  opacity: 0.85;
+}
+
+.cele-spark-dot-a {
+  top: 1.6rem;
+  right: 2.2rem;
+}
+
+.cele-spark-dot-b {
+  bottom: 2.4rem;
+  left: 0.9rem;
+  width: 0.24rem;
+  height: 0.24rem;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--gold) 70%);
+  box-shadow: 0 0 5px rgba(240, 193, 75, 0.8);
+}
+
+.cele-sub {
+  margin: 0.45rem 0 0.15rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.36em;
+  color: #9be8ff;
+}
+
+.cele-caption {
+  margin-top: 0.2rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.34em;
+  color: #ffe9ad;
+  text-shadow: 0 2px 12px rgba(240, 193, 75, 0.35);
+}
+
+.cele-hint {
+  margin-top: 1rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  color: #9be8ff;
+}
+
+/* Free-spins trigger: soft ivory cartoon cloud carrying the spin count. */
+.fs-cloud {
+  position: relative;
+  width: 15rem;
+  margin-top: 0.7rem;
+  filter: drop-shadow(0 14px 26px rgba(10, 6, 2, 0.4));
+}
+
+.fs-cloud-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fs-cloud-num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Optical belly — slight right toward true center, a touch lower */
+  transform: translate(0.06rem, 0.95rem);
+  padding: 0;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 32%, #ffc93a 55%, #ff9a1a 82%, #ff7d1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 2px 0 rgba(122, 59, 6, 0.9))
+    drop-shadow(0 4px 10px rgba(80, 40, 8, 0.35));
+}
+
+/* End-of-bonus: Cook Out composition — dim table, white TOTAL WIN over a big
+   gold amount, CTA above the HUD. No card, no splat. */
+.total-scrim {
+  display: block;
+  background: rgba(8, 6, 18, 0.55);
+}
+
+/* Optical mid-frame (above HUD) — slight lift so label+amount sit dead center */
+.total-win-stack {
+  transform: translateY(-3.5vh);
+}
+
+.total-win-label {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 3px 0 rgba(9, 6, 20, 0.85),
+    0 12px 34px rgba(0, 0, 0, 0.55);
+}
+
+.total-win-amount {
+  margin-top: 0.4rem;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 6.4rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 32%, #ffc93a 55%, #ff9a1a 82%, #ff7d1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2.5px rgba(255, 252, 240, 0.95);
+  filter:
+    drop-shadow(0 3px 0 rgba(122, 59, 6, 0.95))
+    drop-shadow(0 6px 0 rgba(60, 28, 2, 0.8))
+    drop-shadow(0 16px 32px rgba(0, 0, 0, 0.45));
+}
+
+.total-win-cta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* One small sparkle above the word — static */
+.cele-stars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 0.1rem;
+}
+
+.cele-star {
+  width: 1rem;
+  height: 1rem;
+  filter: drop-shadow(0 0 6px rgba(155, 232, 255, 0.7));
+  transform: translateY(0.25rem);
+}
+
+/* Wet cloud pool (ported from Remotion CloudSplat) — grid centers the hero value */
+.cele-splat {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20rem;
+  aspect-ratio: 200 / 120;
+  height: auto;
+  margin-top: -0.35rem;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.cele-splat-hero {
+  width: 21.5rem;
+}
+
+.cele-splat-compact {
+  width: 6.6rem;
+  margin-top: 0.15rem;
+  margin-bottom: 0.05rem;
+}
+
+.cele-splat-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Same registration as NICE / SUPER / MAX WIN — no extra nudge. */
+  transform: none;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* Hero value in the wet pool — solid casino gold, razor sharp */
+.cele-splat-num {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 2.7rem;
+  letter-spacing: 0;
+  transform: translate(0.14rem, 32%);
+}
+
+.cele-splat-num-gold {
+  color: #ffd75e;
+  text-shadow:
+    0 2px 0 rgba(146, 94, 18, 0.6),
+    0 4px 8px rgba(18, 6, 38, 0.5);
+}
+
+.cele-splat-num-ivory {
+  color: #fdf9ef;
+  text-shadow:
+    0 2px 0 rgba(60, 34, 8, 0.55),
+    0 4px 8px rgba(18, 6, 38, 0.5);
+}
+
+.cele-splat-num-hero {
+  font-size: 4.5rem;
+}
+
+.cele-splat-num-compact {
+  font-size: 1.85rem;
+}
+
+/* Display word: one solid gold face, single small depth copy behind.
+   No text-stroke (it ate the fill edge) and no offset layer stack
+   (copies crossed into neighbouring glyphs). */
+.cele-word {
+  position: relative;
+  display: inline-block;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.88;
+  margin: 0.1rem 0 0.25rem;
+}
+
+.cele-word-depth {
+  position: absolute;
+  inset: 0;
+  transform: translate(3px, 4px);
+  color: #341a5e;
+}
+
+.cele-word-face {
+  position: relative;
+  color: #ffd75e;
+  text-shadow:
+    0 1px 0 rgba(255, 248, 214, 0.55),
+    0 3px 0 rgba(201, 146, 42, 0.85),
+    0 7px 14px rgba(8, 2, 20, 0.55);
+}
+
+.cele-word-nice { font-size: 5.8rem; }
+.cele-word-super { font-size: 6.2rem; }
+.cele-word-sensational { font-size: 4.4rem; letter-spacing: -0.02em; }
+.cele-word-max { font-size: 5.2rem; }
+.cele-word-congrats {
+  font-size: 2.35rem;
+  letter-spacing: -0.02em;
+  line-height: 0.94;
+}
+
+/* Tier escalation: hotter face on the top tiers */
+/* Tier escalation: bigger moments get bigger treatment */
+.bigwin-overlay[data-tier="super"] .cele-splat { width: 24rem; }
+.bigwin-overlay[data-tier="sensational"] .cele-splat,
+.bigwin-overlay[data-tier="max"] .cele-splat { width: 26rem; }
+.bigwin-overlay[data-tier="sensational"] .cele-word-face,
+.bigwin-overlay[data-tier="max"] .cele-word-face {
+  color: #ffe98a;
+  text-shadow:
+    0 1px 0 rgba(255, 252, 235, 0.65),
+    0 3px 0 rgba(196, 128, 30, 0.9),
+    0 8px 18px rgba(6, 2, 16, 0.6);
+}
+
+.cele-plaque {
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(140, 80, 255, 0.32), transparent 60%),
+    linear-gradient(180deg, #2e1660, #120824);
+  border: 2px solid rgba(240, 193, 75, 0.55);
+  box-shadow:
+    0 0 0 1.5px rgba(0, 229, 255, 0.22),
+    0 10px 28px rgba(0, 0, 0, 0.45),
+    0 0 22px rgba(240, 193, 75, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cele-spark-dot, .title-punch, .splash-settle, .panel-slam, .cta-hint, .bigwin-tier-step {
+    animation: none;
+  }
+}
+
+html.lite-fx .cele-spark-dot,
+html.lite-fx .title-punch,
+html.lite-fx .splash-settle,
+html.lite-fx .panel-slam,
+html.lite-fx .cta-hint,
+html.lite-fx .bigwin-tier-step {
+  animation: none;
+}
+
+html.lite-fx .ember-field {
+  display: none;
+}
+
+html.lite-fx .storm-spire.is-charged .storm-spire-glow,
+html.lite-fx .storm-spire.is-charged .storm-spire-seams,
+html.lite-fx .storm-spire.is-idle .storm-spire-glow {
+  animation: none;
+}
+
+/* ——— Storm Spire: charged totem balancing the Bonus Bank on the right ———
+   Raised above the HUD so the bolt has room to land on the orb. */
+/* Design px inside the scaled stage (1200×675) — NEVER vw/clamp here:
+   the bolt tip is calibrated to this orb. Orb center = (W−99, H−347). */
+.storm-spire {
+  position: absolute;
+  right: 24px;
+  bottom: 116px;
+  z-index: 4;
+  width: 150px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.storm-spire-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.94;
+  filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.55));
+}
+
+.storm-spire-glow {
+  transform-origin: 115px 66px;
+}
+
+.storm-spire.is-idle .storm-spire-glow {
+  animation: spire-breathe 4.8s ease-in-out infinite;
+}
+
+.storm-spire.is-charged .storm-spire-glow {
+  animation: spire-charge 1.5s ease-in-out infinite;
+}
+
+.storm-spire.is-charged .storm-spire-seams {
+  animation: spire-seams 1.1s ease-in-out infinite;
+}
+
+@keyframes spire-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes spire-charge {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes spire-seams {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ——— Charged dust drifting across the night (base + FS idle) ——— */
+.ember-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.ember-field i {
+  position: absolute;
+  bottom: -1.5%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff8e0, rgba(240, 193, 75, 0.75) 55%, transparent 80%);
+  box-shadow: 0 0 6px rgba(240, 193, 75, 0.55);
+  opacity: 0;
+  animation: ember-drift 11s linear infinite;
+}
+
+.ember-field i:nth-child(2n) {
+  background: radial-gradient(circle at 35% 30%, #eafcff, rgba(0, 240, 255, 0.65) 55%, transparent 80%);
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.5);
+  animation-duration: 14s;
+  animation-delay: 3.4s;
+}
+
+.ember-field i:nth-child(3n) {
+  width: 2px;
+  height: 2px;
+  animation-duration: 17s;
+  animation-delay: 6.2s;
+}
+
+.ember-field i:nth-child(1) { left: 4%; }
+.ember-field i:nth-child(2) { left: 11%; }
+.ember-field i:nth-child(3) { left: 19%; }
+.ember-field i:nth-child(4) { left: 27%; }
+.ember-field i:nth-child(5) { left: 34%; }
+.ember-field i:nth-child(6) { left: 42%; }
+.ember-field i:nth-child(7) { left: 50%; }
+.ember-field i:nth-child(8) { left: 58%; }
+.ember-field i:nth-child(9) { left: 65%; }
+.ember-field i:nth-child(10) { left: 73%; }
+.ember-field i:nth-child(11) { left: 81%; }
+.ember-field i:nth-child(12) { left: 88%; }
+.ember-field i:nth-child(13) { left: 94%; }
+.ember-field i:nth-child(14) { left: 76%; }
+
+@keyframes ember-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.8);
+  }
+  12% {
+    opacity: 0.75;
+  }
+  55% {
+    opacity: 0.5;
+    transform: translate3d(14px, -310px, 0) scale(1);
+  }
+  90% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-8px, -526px, 0) scale(0.7);
+  }
+}
+
+/* ——— Confirm dialog, storm metal ——— */
+.confirm-panel {
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(ellipse 90% 44% at 50% -10%, rgba(96, 42, 170, 0.5), transparent 60%),
+    linear-gradient(180deg, #251244, #0d0620);
+  border: 1.5px solid rgba(148, 108, 220, 0.55);
+  box-shadow:
+    0 0 0 3px rgba(240, 193, 75, 0.26),
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 0 44px rgba(80, 36, 150, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.confirm-btn-cancel {
+  border: 1.5px solid rgba(0, 240, 255, 0.6);
+  color: #9be8ff;
+  background: rgba(0, 240, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.confirm-btn-cancel:hover {
+  background: rgba(0, 240, 255, 0.14);
+}
+
+.confirm-btn-confirm {
+  border: 1.5px solid rgba(255, 232, 170, 0.75);
+  color: #2a1804;
+  background: linear-gradient(180deg, #ffe9ad, #f0c14b 52%, #c9a227);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(240, 193, 75, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.confirm-btn-confirm:hover {
+  filter: brightness(1.07);
+}
+
+/* ——— Menu panel + game info card ——— */
+.menu-panel-card {
+  background:
+    radial-gradient(ellipse 90% 44% at 50% -10%, rgba(96, 42, 170, 0.42), transparent 60%),
+    linear-gradient(180deg, #22103e, #0c0618);
+  border: 1.5px solid rgba(148, 108, 220, 0.5);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 0 0 2px rgba(8, 4, 16, 0.85),
+    0 16px 44px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(80, 36, 150, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.menu-info-btn {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.12), rgba(0, 240, 255, 0.05));
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  border-radius: 0.75rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.menu-info-btn:hover {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.08));
+}
+
+.menu-close-btn {
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.6rem;
+  background: rgba(0, 240, 255, 0.08);
+}
+
+.menu-close-btn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ——— Storm-cyan buy pill (buy modal, standard tier) ——— */
+.buy-btn-storm {
+  background: linear-gradient(180deg, #17a8cc 0%, #0d6f9a 55%, #0a4e78 100%);
+  border: 1.5px solid rgba(155, 232, 255, 0.55);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(0, 194, 224, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.buy-btn-storm:hover {
+  filter: brightness(1.08);
+}
+
+/* ——— thunder03 from the sky, hanging over the spire. Visible trunk is a
+   little left of frame-center (~52%), so the clip sits slightly right of
+   the orb x; strike reaches down to the ball. ——— */
+/* thunder03 trunk ~42% of frame, bright tip ~97% down.
+   Sized so the tip lands on the spire orb center (1101, 328) @1200×675.
+   Design px + object-fit: fill → the hit survives every GameStage scale. */
+.idle-thunder {
+  position: absolute;
+  left: 825px;
+  top: -215px;
+  width: 520px;
+  height: 560px;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  object-fit: fill;
+  opacity: 0.8;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* Color follows the highest × on the board (base clip is blue-cyan). */
+.idle-thunder[data-tier="gold"] { filter: hue-rotate(-150deg) saturate(1.5) contrast(1.05); }
+.idle-thunder[data-tier="ice"]  { filter: hue-rotate(38deg) saturate(1.55) brightness(1.08) contrast(1.08); }
+.idle-thunder[data-tier="pink"] { filter: hue-rotate(115deg) saturate(1.6) contrast(1.05); }
+.idle-thunder[data-tier="red"]  { filter: hue-rotate(150deg) saturate(1.9) contrast(1.1); }
+
+html.lite-fx .idle-thunder {
+  display: none;
+}
+
+/* ——— Spire strike reaction: orb flash + corona + seam surge ——— */
+.storm-spire.is-struck .storm-spire-glow {
+  animation: spire-strike-flash 1.25s ease-out both;
+}
+
+.storm-spire.is-struck .storm-spire-corona {
+  animation: spire-corona 0.9s ease-out both;
+}
+
+.storm-spire.is-struck .storm-spire-seams {
+  animation: spire-seams 0.45s steps(2) 2;
+}
+
+@keyframes spire-strike-flash {
+  0% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  38% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+@keyframes spire-corona {
+  0% {
+    opacity: 0.95;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+.storm-spire-corona {
+  transform-origin: 115px 66px;
+}
+
+html.lite-fx .storm-spire.is-struck .storm-spire-glow,
+html.lite-fx .storm-spire.is-struck .storm-spire-corona,
+html.lite-fx .storm-spire.is-struck .storm-spire-seams {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storm-spire.is-struck .storm-spire-glow,
+  .storm-spire.is-struck .storm-spire-corona,
+  .storm-spire.is-struck .storm-spire-seams {
+    animation: none;
+  }
+
+  .storm-spire-corona {
+    opacity: 0;
+  }
+}
+
+/* ——— Bonus Bank: the ivory cartoon cloud carries the running ×bank ——— */
+.bank-cloud {
+  position: relative;
+  width: 7rem;
+  filter: drop-shadow(0 8px 16px rgba(10, 6, 2, 0.35));
+}
+
+@media (min-width: 640px) {
+  .bank-cloud {
+    width: 8.8rem;
+  }
+}
+
+.bank-cloud-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bank-cloud-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Sit a bit lower in the cloud belly */
+  transform: translate(0.04rem, 0.32rem);
+  padding: 0;
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 32%, #ffc93a 55%, #ff9a1a 82%, #ff7d1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 2px 0 rgba(122, 59, 6, 0.9))
+    drop-shadow(0 3px 8px rgba(80, 40, 8, 0.3));
+}
+
+.bank-cloud-value.is-digits-2 {
+  font-size: 1.32rem;
+  letter-spacing: -0.02em;
+}
+
+.bank-cloud-value.is-digits-3 {
+  font-size: 1.12rem;
+  letter-spacing: -0.03em;
+}
+
+.bank-cloud-value.is-digits-4 {
+  font-size: 0.84rem;
+  letter-spacing: -0.05em;
+}
+
+@media (min-width: 640px) {
+  .bank-cloud-value {
+    font-size: 2rem;
+    transform: translate(0.05rem, 0.52rem);
+  }
+  .bank-cloud-value.is-digits-2 {
+    font-size: 1.62rem;
+  }
+  .bank-cloud-value.is-digits-3 {
+    font-size: 1.34rem;
+  }
+  .bank-cloud-value.is-digits-4 {
+    font-size: 0.98rem;
+  }
+}
+
+/* Dev preview: ?cloudPreview=1 */
+.mult-cloud-preview {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.2), transparent 58%),
+    linear-gradient(180deg, #1a1030, #0a0614);
+}
+
+.mult-cloud-preview-title {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mult-cloud-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.25rem 1.5rem;
+}
+
+.mult-cloud-preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.mult-cloud-preview-item .bank-cloud {
+  width: 8.8rem;
+}
+
+.mult-cloud-preview-label {
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 232, 180, 0.7);
+}
+
+/* resting cloud: ×0 stays muted until the first multiplier lands */
+.bank-cloud-empty .bank-cloud-value {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #a89d82;
+  filter: none;
+}
+
+.bank-cloud-empty .bank-cloud-img {
+  opacity: 0.88;
+}
+
+/* charged cloud: warm glow once the bank is alive */
+.bank-cloud-live {
+  filter:
+    drop-shadow(0 8px 16px rgba(10, 6, 2, 0.35))
+    drop-shadow(0 0 16px rgba(255, 200, 90, 0.4));
+}
+
+/* ——— Free spins left: thin candy-cane rim. ——— */
+.spins-plaque {
+  padding: 0;
+  border-radius: 1.35rem;
+  border: 5px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(16, 8, 32, 0.2), rgba(8, 4, 18, 0.08)) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      #fff 0 6px,
+      #ff7eb8 6px 12px
+    ) border-box;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 140, 190, 0.4),
+    0 10px 24px rgba(30, 10, 4, 0.38);
+}
+
+.spins-plaque-inner {
+  border-radius: 1rem;
+  padding: 0.55rem 0.45rem 0.5rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(16, 8, 32, 0.92), rgba(8, 4, 18, 0.96));
+  border: 2px solid #ff9ec8;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+/* Caption: light cream on the dark playfield well */
+.spins-caption {
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  line-height: 1.28;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: #fff4dc;
+  text-shadow:
+    0 1px 0 rgba(20, 10, 40, 0.75),
+    0 0 8px rgba(255, 220, 140, 0.25);
+}
+
+.spins-remaining {
+  margin-top: 0.25rem;
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 2.9rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 32%, #ffc93a 55%, #ff9a1a 82%, #ff7d1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* no text-stroke — it draws inner contours through 4 / 8 / 0 */
+  filter: drop-shadow(0 2px 0 rgba(122, 40, 12, 0.9)) drop-shadow(0 4px 9px rgba(120, 30, 10, 0.4));
+}
+
+@media (min-width: 640px) {
+  .spins-remaining {
+    font-size: 3.6rem;
+  }
+}
+
+/* ——— WIN under the grid: gold type, no framed chip.
+   No text-stroke — it draws inner contours through 4 / 8 / 0. ——— */
+.win-plaque {
+  display: inline-block;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: transparent;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 42%, #ffc93a 68%, #ff9a1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 252, 240, 0.85))
+    drop-shadow(0 3px 0 rgba(24, 10, 44, 0.9))
+    drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 22px rgba(255, 196, 80, 0.35));
+}
+
+@media (min-width: 640px) {
+  .win-plaque {
+    font-size: 1.9rem;
+  }
+}
+
+/* ——— Boot loading: gathering the storm ——— */
+.loading-splash {
+  background: #02040c;
+}
+
+.loading-splash-glow {
+  background:
+    radial-gradient(ellipse 55% 40% at 50% 45%, rgba(0, 240, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 70%, rgba(240, 193, 75, 0.07), transparent 55%);
+  animation: intro-glow-pulse 3.2s ease-in-out infinite;
+}
+
+/* Storm line: charge gathers from both ends toward the bolt gap */
+/* ——— Boot: single Cloudy Poker splash on the sunny sky ——— */
+.boot-splash {
+  background: #2e2e30;
+}
+
+.boot-sky {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.boot-vignette {
+  background: radial-gradient(
+    ellipse 95% 80% at 50% 42%,
+    transparent 52%,
+    rgba(8, 8, 10, 0.55) 100%
+  );
+}
+
+.boot-continue {
+  color: #fff;
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.65),
+    0 6px 18px rgba(0, 0, 0, 0.5);
+  animation: boot-continue-blink 1.3s ease-in-out infinite;
+}
+
+/* Modes / max win / RTP reference table (Game Info) */
+.modes-table {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(6, 8, 16, 0.6);
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+}
+
+.modes-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 0.9fr 0.7fr;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.modes-row:last-child {
+  border-bottom: none;
+}
+
+.modes-row > span:first-child {
+  text-align: left;
+}
+
+.modes-head {
+  font-weight: 800;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modes-name {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@keyframes boot-continue-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-continue {
+    animation: none;
+  }
+}
+
+html.lite-fx .boot-continue {
+  animation: none;
+}
+
+/* Feature tickets: thin candy-cane rim (same as buy-bonus / slot) */
+.boot-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Design-px size: same on every 16:9 stage (1024×576 and 1200×675). */
+  font-size: 16px;
+  width: 11.5em;
+  padding: 0;
+  border-radius: 1.35em;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(16, 8, 32, 0.12), rgba(8, 4, 18, 0.04)) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      #fff 0 5px,
+      #ff7eb8 5px 10px
+    ) border-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 140, 190, 0.35),
+    0 1.1em 2em rgba(24, 15, 4, 0.36);
+}
+
+.boot-card-inner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0.85em 0.7em 0.8em;
+  border-radius: 1.05em;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(16, 8, 32, 0.92), rgba(8, 4, 18, 0.96));
+  border: 1.5px solid #ff9ec8;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 6px 14px rgba(0, 0, 0, 0.28);
+}
+
+.boot-card-icon {
+  display: grid;
+  place-items: center;
+  height: 5.2em;
+  margin-bottom: 0.55em;
+  overflow: visible;
+}
+
+/* Title + caption pinned to the bottom of the ticket */
+.boot-card-title {
+  margin-top: auto;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 1.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 0.13em 0 rgba(10, 8, 20, 0.65),
+    0 0 0.9em rgba(120, 160, 255, 0.25);
+}
+
+.boot-card-caption {
+  margin: 0.55em auto 0;
+  max-width: 9.5em;
+  padding: 0.28em 0.3em;
+  border-radius: 0.4em;
+  background: linear-gradient(180deg, rgba(255, 196, 80, 0.3), rgba(255, 160, 40, 0.16));
+  box-shadow: inset 0 0 0 1px rgba(255, 210, 120, 0.42);
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.6em;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffe9b8;
+}
+
+/* Max-win ticket has no title — pin caption to the bottom */
+.boot-card-icon-max + .boot-card-caption {
+  margin-top: auto;
+}
+
+.boot-icon-cloud {
+  position: relative;
+  display: block;
+  width: 6.5em;
+  filter: drop-shadow(0 0.4em 0.8em rgba(20, 40, 80, 0.3));
+}
+
+.boot-icon-cloud-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.boot-icon-cloud-x {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Optical center — slight right + lower into the belly */
+  transform: translate(0.16em, 0.4em);
+  padding: 0;
+  font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+  font-weight: 800;
+  font-size: 1.1em;
+  background: linear-gradient(180deg, #fff6c4 6%, #ffe566 32%, #ffc93a 55%, #ff9a1a 82%, #ff7d1a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0.13em 0 rgba(122, 59, 6, 0.85));
+}
+
+/* Real ace of hearts from the deck, slight tilt, BONUS ribbon on top */
+.boot-icon-ace {
+  position: relative;
+  display: block;
+  width: 3.05em;
+  transform: rotate(-7deg);
+  filter: drop-shadow(0 0.45em 0.9em rgba(30, 20, 60, 0.4));
+}
+
+.boot-icon-ace-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.25em;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.9);
+}
+
+.boot-icon-ace-ribbon {
+  position: absolute;
+  left: 50%;
+  bottom: -0.32em;
+  transform: translateX(-50%) rotate(-2deg);
+  padding: 0.09em 0.42em;
+  border-radius: 0.35em;
+  background: #fff8ea;
+  color: #c41e3a;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 800;
+  font-size: 0.66em;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0.06em 0 rgba(122, 30, 20, 0.35), 0 0.2em 0.5em rgba(30, 20, 60, 0.35);
+  white-space: nowrap;
+}
+
+/* MAX WIN as the hero of the third ticket — two stacked lines with a
+   rainbow outline (gradient-stroke layer behind a white face). */
+.boot-card-icon-max {
+  flex: 1 1 auto;
+  height: auto;
+  align-content: center;
+}
+
+.boot-maxwin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-2.5deg);
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 1.52em;
+  line-height: 0.98;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0.25em 0.5em rgba(15, 25, 60, 0.4));
+}
+
+.boot-maxwin-line {
+  position: relative;
+  display: block;
+  color: #fff;
+  text-shadow:
+    0 0.2em 0 rgba(20, 30, 70, 0.3),
+    0 0.4em 0.9em rgba(15, 25, 60, 0.3);
+}
+
+.boot-maxwin-line::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, #a86bff 0%, #58c8ff 48%, #ffd23e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0.2em transparent;
+}
+
+/* Idle float: gentle bob + tilt, staggered; off for reduced motion / lite fx */
+@keyframes boot-float {
+  0%,
+  100% {
+    transform: translateY(0.35rem) rotate(var(--boot-tilt));
+  }
+  50% {
+    transform: translateY(-0.45rem) rotate(calc(var(--boot-tilt) * -1));
+  }
+}
+
+.boot-float-a {
+  --boot-tilt: 1.2deg;
+  animation: boot-float 3.6s ease-in-out infinite;
+}
+.boot-float-b {
+  --boot-tilt: -1.6deg;
+  animation: boot-float 3.9s ease-in-out 0.4s infinite;
+}
+.boot-float-c {
+  --boot-tilt: 1deg;
+  animation: boot-float 4.2s ease-in-out 0.8s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-float-a,
+  .boot-float-b,
+  .boot-float-c {
+    animation: none;
+  }
+}
+
+html.lite-fx .boot-float-a,
+html.lite-fx .boot-float-b,
+html.lite-fx .boot-float-c {
+  animation: none;
+}
+
+.boot-cards {
+  /* tickets scale continuously with the viewport (see .boot-card em-scale) */
+  gap: 1.85rem;
+}
+
+/* Phones: keep the 375×667 proportions, scaled up for wider phones */
+@media (max-width: 640px) {
+  .boot-cards {
+    gap: clamp(1.1rem, 5.5vw, 1.75rem);
+  }
+  .boot-card {
+    font-size: clamp(9px, 2.6vw, 14px);
+  }
+}
+
+.loading-bar {
+  position: relative;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  overflow: visible;
+}
+
+.loading-bar-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f5a00f, #ffd23e);
+  box-shadow: 0 0 12px rgba(255, 210, 120, 0.75);
+  transition: width 0.25s ease-out;
+}
+
+.loading-bar-fill::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle at 35% 30%, #ffffff, #ffe9a0 60%, rgba(245, 160, 15, 0.35));
+  box-shadow: 0 0 10px rgba(255, 226, 150, 0.95), 0 0 22px rgba(255, 200, 90, 0.6);
+  animation: charge-flicker 0.9s ease-in-out infinite;
+}
+
+@keyframes charge-flicker {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  45% {
+    filter: brightness(1.7);
+  }
+  60% {
+    filter: brightness(0.9);
+  }
+  75% {
+    filter: brightness(1.45);
+  }
+}
+
+.loading-pct {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  color: #ffe9ad;
+  text-shadow: 0 0 14px rgba(240, 193, 75, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-bar-fill::after {
+    animation: none;
+  }
+}
+
+html.lite-fx .loading-bar-fill::after {
+  animation: none;
+}
+
+/* ——— Intro: one-shot sky flicker behind the lockup (mount only) ——— */
+.intro-strike-flash {
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse 34% 46% at 88% 30%, rgba(205, 243, 255, 0.5), transparent 70%);
+  animation: intro-sky-flicker 2.6s ease-out both;
+}
+
+@keyframes intro-sky-flicker {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.9;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  14% {
+    opacity: 0.75;
+  }
+  22% {
+    opacity: 0.1;
+  }
+  27% {
+    opacity: 0.5;
+  }
+  45% {
+    opacity: 0;
+  }
+}
+
+/* Portrait: no totem. One lateral bolt (thunder01) rides the right edge,
+   head ~56% down — beside the 5×5, never through the cards or HUD. */
+.game-stage[data-orient="portrait"] .storm-spire {
+  display: none;
+}
+
+.game-stage[data-orient="portrait"] .idle-thunder {
+  left: 438px;
+  top: 447px;
+  width: 540px;
+  height: 500px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-strike-flash {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+html.lite-fx .intro-strike-flash {
+  animation: none;
+  opacity: 0;
+}
+
+/* Main spin control: white circular refresh arrow, optically centered */
+.spin-arrow {
+  filter: none;
+  transform: none;
+}
+
+
+/* ——— Boot wordmark (Cloudy Poker) — Chakra Petch over Exo 2 ——— */
+.boot-wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.94;
+}
+
+.boot-wordmark-cloudy {
+  font-family: "Chakra Petch", "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 4.2rem;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: #ffffff;
+  text-shadow:
+    0 2px 0 rgba(30, 70, 120, 0.55),
+    0 10px 26px rgba(30, 70, 120, 0.45),
+    0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+.boot-wordmark-poker {
+  margin-top: 0.45rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-weight: 800;
+  font-size: 2.6rem;
+  letter-spacing: 0.44em;
+  text-indent: 0.44em;
+  color: #f0c14b;
+  text-shadow:
+    0 2px 0 rgba(30, 50, 10, 0.35),
+    0 4px 16px rgba(30, 70, 120, 0.45);
+}
+
+/* ——— Portrait-only right-side sky strike (thunder05) — same × color tier ——— */
+.screen-thunder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right top;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.screen-thunder[data-tier="gold"] { filter: hue-rotate(-150deg) saturate(1.5) contrast(1.05); }
+.screen-thunder[data-tier="ice"]  { filter: hue-rotate(38deg) saturate(1.55) brightness(1.08) contrast(1.08); }
+.screen-thunder[data-tier="pink"] { filter: hue-rotate(115deg) saturate(1.6) contrast(1.05); }
+.screen-thunder[data-tier="red"]  { filter: hue-rotate(150deg) saturate(1.9) contrast(1.1); }
+
+html.lite-fx .screen-thunder {
+  display: none;
+}
+
+/* Side bolt is portrait-only — never on landscape, even if a clip is mounted. */
+.game-stage[data-orient="landscape"] .screen-thunder {
+  display: none;
+}
+
+.buy-modal-hint {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(155, 232, 255, 0.78);
+}
+
+.buy-price-x {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.info-h {
+  margin-bottom: 0.4rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.info-kicker {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+}
+
+.info-line-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem 0.5rem;
+  margin: 0.75rem 0 0.25rem;
+}
+
+@media (max-width: 520px) {
+  .info-line-wrap {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.info-line-map {
+  text-align: center;
+}
+
+.info-line-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  width: 3.4rem;
+  margin: 0 auto 0.35rem;
+}
+
+.info-line-grid span {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.info-line-grid span.is-on {
+  background: #7af0ff;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
+}
+
+.info-line-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.info-mini-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  min-width: 1.55rem;
+  padding: 0.12rem 0.2rem;
+  border-radius: 0.28rem;
+  background: #f6f0e4;
+  border: 1px solid rgba(20, 10, 40, 0.35);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.info-mini-card.is-red { color: #c41e3a; }
+.info-mini-card.is-black { color: #1a1228; }
+.info-mini-card.is-glow {
+  box-shadow: 0 0 0 1px rgba(240, 193, 75, 0.85), 0 0 8px rgba(240, 193, 75, 0.45);
+}
+
+.info-formula {
+  margin: 0.75rem 0;
+  padding: 0.7rem 0.5rem 0.55rem;
+  border-radius: 0.8rem;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(240, 193, 75, 0.28);
+  text-align: center;
+}
+
+.info-formula-eq {
+  margin-top: 0.45rem;
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.info-chip-x {
+  position: absolute;
+  right: -0.15rem;
+  top: -0.45rem;
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: #7af0ff;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
+}
+
+.info-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.info-mode-row {
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.info-mode-name {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #fff;
+}
+
+.info-mode-cost {
+  display: inline-block;
+  margin: 0.15rem 0 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.info-hand-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dotted rgba(240, 193, 75, 0.2);
+}
+
+.info-hand-row:last-child { border-bottom: none; }
+
+.info-hand-cards {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.info-hand-name {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.info-hand-pay {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.info-disclaimer {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(240, 193, 75, 0.06);
+  border: 1px solid rgba(240, 193, 75, 0.28);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
+}
+
+/* ——— Cloudy Poker UI panels: cream cards, gold rims, candy accents ——— */
+.confirm-panel,
+.menu-panel-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 45%),
+    linear-gradient(180deg, #fdf6e3, #f7e9c6 55%, #f0d9a4);
+  border: 3px solid #fff8e8;
+  border-radius: 1.6rem;
+  box-shadow:
+    0 0 0 3px rgba(224, 166, 60, 0.8),
+    0 26px 54px rgba(45, 35, 80, 0.38);
+  color: #4a2c12;
+}
+
+/* Buy-bonus shell — thin candy cane + soft butter yellow fill */
+.buy-bonus-sheet {
+  border-radius: 1.55rem;
+  color: #3a2a50;
+  border: 5px solid transparent;
+  background:
+    linear-gradient(180deg, #fffbeb 0%, #fff3c8 48%, #ffe9a8 100%) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      #fff 0 6px,
+      #ff7eb8 6px 12px
+    ) border-box;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 140, 190, 0.45),
+    0 22px 48px rgba(80, 20, 60, 0.36),
+    inset 0 0 36px rgba(255, 255, 255, 0.35);
+  position: relative;
+}
+.buy-bonus-sheet::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0.28rem;
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(ellipse 55% 45% at 18% 30%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 82% 70%, rgba(255, 255, 255, 0.22), transparent 62%);
+  opacity: 0.8;
+}
+
+/* — Bonus buy sheet (candy bonus-buy layout) — */
+.buy-bonus-sheet h2,
+.buy-bonus-title {
+  position: relative;
+  z-index: 1;
+  color: #3aa0ff;
+  text-shadow:
+    -2px -2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px 2px 0 #fff,
+    2px 2px 0 #fff,
+    0 3px 0 rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.buy-bonus-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  border: 2.5px solid #fff;
+  background: linear-gradient(180deg, #ff6b6b, #e02020);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(180, 40, 40, 0.4);
+}
+
+.buy-bonus-grid-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.buy-bonus-grid-ante {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+@media (min-width: 640px) {
+  .buy-bonus-grid-main {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+  .buy-bonus-grid-ante {
+    gap: 0.85rem;
+    margin-top: 1.05rem;
+  }
+}
+
+/* Feature tiles — thin candy-cane rim (same as panel) + dark well */
+.bonus-buy-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border-radius: 0.95rem;
+  border: 4px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(16, 8, 32, 0.12), rgba(8, 4, 18, 0.04)) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      #fff 0 5px,
+      #ff7eb8 5px 10px
+    ) border-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 140, 190, 0.35),
+    0 6px 14px rgba(30, 10, 4, 0.22);
+  transition: transform 0.12s ease;
+}
+
+.bonus-buy-tile:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.bonus-buy-tile:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.bonus-buy-tile-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 9.2rem;
+  padding: 0.95rem 0.75rem 0.8rem;
+  border-radius: 0.72rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(16, 8, 32, 0.92), rgba(8, 4, 18, 0.96));
+  border: 1.5px solid #ff9ec8;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.bonus-buy-tile.frame-plain .bonus-buy-tile-inner {
+  border-color: #ff9ec8;
+}
+
+.bonus-buy-tile-title {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff4dc;
+  text-shadow: 0 1px 0 rgba(20, 10, 40, 0.75);
+  line-height: 1.2;
+}
+
+.bonus-buy-tile-price {
+  font-family: "Chakra Petch", "Rajdhani", sans-serif;
+  font-size: clamp(1.6rem, 4.2vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #ffe566;
+  text-shadow:
+    0 2px 0 #8a4508,
+    0 3px 0 #5a2a04,
+    0 6px 12px rgba(80, 40, 8, 0.35);
+}
+
+.bonus-buy-tile-blurb {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 244, 220, 0.78);
+  line-height: 1.3;
+  max-width: 16em;
+}
+
+.buy-bonus-stake {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.85rem;
+}
+
+.buy-bonus-stake-caption {
+  font-family: "Exo 2", "Orbitron", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e4453a;
+  text-shadow: none;
+}
+
+.buy-bonus-stake-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.buy-bonus-stake-pill {
+  min-width: 7.2rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-family: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  font-size: 1.28rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  background: #141822;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.buy-bonus-stake-step {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 0.85rem;
+  border: 2.5px solid #fff;
+  background: #000;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.buy-bonus-stake-step:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.buy-bonus-stake-step:not(:disabled):hover {
+  filter: none;
+  transform: translateY(-2px);
+}
+
+.ante-candy {
+  padding: 0;
+  border-radius: 0.95rem;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(16, 8, 32, 0.12), rgba(8, 4, 18, 0.04)) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      #fff 0 5px,
+      #ff7eb8 5px 10px
+    ) border-box;
+  box-shadow:
+    0 0 0 1px rgba(255, 140, 190, 0.35),
+    0 6px 14px rgba(30, 10, 4, 0.22);
+}
+
+.ante-candy-btn {
+  border-radius: 0.7rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(16, 8, 32, 0.92), rgba(8, 4, 18, 0.96));
+  border: 1.5px solid #ff9ec8;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.ante-candy-label {
+  display: block;
+  color: #fff4dc;
+  text-shadow: 0 1px 0 rgba(20, 10, 40, 0.75);
+}
+
+.ante-candy-price {
+  display: block;
+  margin-top: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffe566;
+  text-shadow: 0 1px 0 rgba(60, 30, 0, 0.65);
+}
+
+.buy-btn-red {
+  background: linear-gradient(180deg, #ff5c4a, #e23434 55%, #c41e1e);
+  color: #fff;
+  box-shadow:
+    0 3px 0 rgba(122, 20, 12, 0.8),
+    0 6px 14px rgba(120, 30, 10, 0.35);
+}
+
+.buy-btn-green {
+  background: linear-gradient(180deg, #6fe06a, #3fbf4e 60%, #2f9e3a);
+  color: #fff;
+  box-shadow:
+    0 3px 0 rgba(20, 90, 30, 0.8),
+    0 6px 14px rgba(20, 90, 30, 0.3);
+}
+
+/* — Game info on cream — */
+.menu-panel-card .info-h { color: #c41e3a; }
+.menu-panel-card .info-line-label { color: #6b4a20; }
+.menu-panel-card .info-hand-name { color: #9b1c1c; }
+.menu-panel-card .info-hand-pay { color: #7a3b06; }
+.menu-panel-card .info-hand-row { border-bottom: 1px dotted rgba(196, 30, 58, 0.3); }
+.menu-panel-card .info-formula { background: rgba(255, 255, 255, 0.55); border-color: rgba(196, 30, 58, 0.3); }
+.menu-panel-card .info-formula-eq { color: #9b1c1c; }
+.menu-panel-card .info-chip-x { color: #c41e3a; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); }
+.menu-panel-card .info-line-grid span { background: rgba(74, 44, 18, 0.14); }
+.menu-panel-card .info-line-grid span.is-on { background: #e23434; box-shadow: 0 0 6px rgba(226, 52, 52, 0.5); }
+.menu-panel-card .modes-table { background: rgba(255, 255, 255, 0.55); border-color: rgba(196, 30, 58, 0.3); }
+.menu-panel-card .modes-head { color: #9b1c1c; background: rgba(226, 58, 58, 0.12); }
+.menu-panel-card .modes-row { border-bottom-color: rgba(196, 30, 58, 0.22); }
+.menu-panel-card .modes-name { color: #7a3b06; }
+.menu-panel-card .paytable-box {
+  border: 1.5px dashed rgba(196, 30, 58, 0.45);
+  background: rgba(255, 255, 255, 0.45);
+}
+.menu-panel-card .menu-slider {
+  background: linear-gradient(90deg, #f0c14b, #e23434);
+  box-shadow: inset 0 1px 2px rgba(122, 30, 10, 0.35);
+}
+.menu-panel-card .menu-slider::-moz-range-track {
+  background: linear-gradient(90deg, #f0c14b, #e23434);
+}
+.menu-panel-card .menu-info-btn {
+  color: #c41e3a;
+  background: rgba(255, 255, 255, 0.55);
+}
+.menu-panel-card .menu-info-btn:hover { background: #fff8e8; }
+.menu-panel-card .menu-close-btn { color: #7a3b06; }
+
+/* — Confirm: cream plate, red confirm / gold cancel — */
+.confirm-btn-cancel {
+  border: 2px solid #e0a63c;
+  color: #c41e3a;
+  background: rgba(255, 248, 232, 0.9);
+  box-shadow: 0 2px 0 rgba(122, 59, 6, 0.35);
+}
+
+.confirm-btn-cancel:hover { background: #fff8e8; }
+
+.confirm-btn-confirm {
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: #fff;
+  background: linear-gradient(180deg, #ff5c4a, #e23434 55%, #c41e1e);
+  box-shadow:
+    0 3px 0 rgba(122, 20, 12, 0.85),
+    0 8px 18px rgba(120, 30, 10, 0.4);
+}
+
+.confirm-btn-confirm:hover { filter: brightness(1.06); }
+
+.menu-panel-card .info-disclaimer {
+  background: rgba(226, 58, 58, 0.1);
+  border: 1px solid rgba(196, 30, 58, 0.3);
+  color: #9b1c1c;
+}
+.menu-panel-card .info-kicker {
+  background: rgba(226, 58, 58, 0.08);
+  border-color: rgba(196, 30, 58, 0.3);
+}

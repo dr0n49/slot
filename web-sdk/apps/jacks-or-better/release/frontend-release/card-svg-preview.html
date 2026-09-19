@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>SVG card preview</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 20px;
+				background: #001240;
+				font-family: Georgia, serif;
+			}
+			h2 {
+				color: #ffd54a;
+				text-align: center;
+				font-size: 14px;
+			}
+			.row {
+				display: flex;
+				gap: 10px;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-bottom: 18px;
+			}
+			.card {
+				width: 96px;
+				aspect-ratio: 5/7;
+				background: #f5f0e1;
+				border-radius: 9px;
+				border: 1px solid rgba(60, 45, 30, 0.22);
+				position: relative;
+				overflow: hidden;
+				box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+			}
+			.corner {
+				position: absolute;
+				top: 7px;
+				left: 7px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-weight: 700;
+				font-size: 13px;
+				line-height: 1;
+			}
+			.corner .suit {
+				font-size: 11px;
+			}
+			.red {
+				color: #c41e3a;
+			}
+			.black {
+				color: #1a1a1a;
+			}
+			.body {
+				position: absolute;
+				inset: 22px 8px 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.portrait {
+				flex: 0 0 44%;
+				width: 78%;
+				object-fit: contain;
+				object-position: center bottom;
+			}
+			.big {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 40px;
+				line-height: 1;
+			}
+			.pips {
+				position: absolute;
+				inset: 22px 10px 12px;
+				font-size: 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>J/Q/K/A + numeric (SVG + unicode, no JPG)</h2>
+		<div class="row" id="row"></div>
+		<script>
+			const cards = [
+				['J', 'C', '♣', 'black', 'J_C.svg'],
+				['Q', 'C', '♣', 'black', 'Q_C.svg'],
+				['K', 'C', '♣', 'black', 'K_C.svg'],
+				['A', 'C', '♣', 'black', 'A_C.svg'],
+				['7', 'H', '♥', 'red', null],
+				['T', 'S', '♠', 'black', null],
+				['K', 'H', '♥', 'red', 'K_H.svg'],
+				['A', 'D', '♦', 'red', null],
+				['J', 'S', '♠', 'black', 'J_S.svg'],
+				['Q', 'S', '♠', 'black', 'Q_S.svg'],
+				['K', 'S', '♠', 'black', 'K_S.svg'],
+				['A', 'S', '♠', 'black', null],
+			];
+			const row = document.getElementById('row');
+			for (const [rank, , glyph, colour, svg] of cards) {
+				const label = rank === 'T' ? '10' : rank;
+				const el = document.createElement('div');
+				el.className = 'card';
+				el.innerHTML = `<div class="corner ${colour}"><span>${label}</span><span class="suit">${glyph}</span></div>`;
+				if (svg) {
+					const body = document.createElement('div');
+					body.className = 'body';
+					body.innerHTML = `<img class="portrait" src="/cards/svg/${svg}" alt=""><div class="big ${colour}">${glyph}</div>`;
+					el.appendChild(body);
+				} else {
+					const pips = document.createElement('div');
+					pips.className = `pips ${colour}`;
+					pips.textContent = glyph.repeat(Math.min(Number(rank) || 10, 10));
+					el.appendChild(pips);
+				}
+				row.appendChild(el);
+			}
+		</script>
+	</body>
+</html>
