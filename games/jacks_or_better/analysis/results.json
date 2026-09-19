@@ -1,0 +1,105 @@
+{
+  "paytable": {
+    "Jacks or Better": 1,
+    "Two Pair": 2,
+    "Three of a Kind": 3,
+    "Straight": 4,
+    "Flush": 5,
+    "Full House": 7,
+    "Four of a Kind": 25,
+    "Straight Flush": 50,
+    "Royal Flush": 800
+  },
+  "n_deals": 2598960,
+  "base": {
+    "rtp": 0.9614720948861089,
+    "rtp_fraction": [
+      19165244903220,
+      19933230517200
+    ],
+    "hit_rate": 0.4549677310418176,
+    "royal_rate": 2.4892877427562107e-05,
+    "categories": {
+      "Nothing": {
+        "frequency": 0.5450322689581825,
+        "rtp_contribution": 0.0,
+        "pays": 0
+      },
+      "Jacks or Better": {
+        "frequency": 0.21509061653907235,
+        "rtp_contribution": 0.21509061653907235,
+        "pays": 1
+      },
+      "Two Pair": {
+        "frequency": 0.12925441418463626,
+        "rtp_contribution": 0.2585088283692725,
+        "pays": 2
+      },
+      "Three of a Kind": {
+        "frequency": 0.0744315331299549,
+        "rtp_contribution": 0.22329459938986473,
+        "pays": 3
+      },
+      "Straight": {
+        "frequency": 0.011281790971812282,
+        "rtp_contribution": 0.045127163887249126,
+        "pays": 4
+      },
+      "Flush": {
+        "frequency": 0.010903695651563175,
+        "rtp_contribution": 0.05451847825781587,
+        "pays": 5
+      },
+      "Full House": {
+        "frequency": 0.011510880605429855,
+        "rtp_contribution": 0.08057616423800898,
+        "pays": 7
+      },
+      "Four of a Kind": {
+        "frequency": 0.0023621364733313675,
+        "rtp_contribution": 0.05905341183328419,
+        "pays": 25
+      },
+      "Straight Flush": {
+        "frequency": 0.0001077706085898292,
+        "rtp_contribution": 0.0053885304294914605,
+        "pays": 50
+      },
+      "Royal Flush": {
+        "frequency": 2.4892877427562107e-05,
+        "rtp_contribution": 0.019914301942049684,
+        "pays": 800
+      }
+    },
+    "hold_size_counts": [
+      84360,
+      408108,
+      1647996,
+      146076,
+      292932,
+      19488
+    ]
+  },
+  "double_up": {
+    "model": "mandatory_red_black_fresh_deck_chain_until_loss_or_2",
+    "p_win": [
+      26,
+      52
+    ],
+    "max_chain": 2,
+    "combined_rtp": 0.9614720948861089,
+    "combined_hit_rate": 0.1137419327604544,
+    "royal_made_rate": 2.4892877427562107e-05,
+    "max_win_multiplier": 3200,
+    "max_win_rate": 6.223219356890527e-06,
+    "rtp_drift": 0.0
+  },
+  "ways_by_held": [
+    1533939,
+    178365,
+    16215,
+    1081,
+    47,
+    1
+  ]
+}
