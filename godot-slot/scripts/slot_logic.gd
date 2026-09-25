@@ -67,7 +67,7 @@ signal big_win(win_x: float)
 ## native rounds): the page drops label events whose rev doesn't match its
 ## pending board, so a late event from a superseded board can never paint
 ## another board's labels.
-signal win_lines(entries: Array, win_x: float, rev: int = -1)
+signal win_lines(entries: Array, win_x: float, rev: int)
 
 const COLS := 5
 const ROWS := 5
@@ -311,9 +311,9 @@ func _land_and_present(spin: Dictionary, shown_x: float, bet: float, on_landed: 
 	if shown_x > 0.0 and not win_indices.is_empty():
 		var entries := line_entries(spin, shown_x, bet)
 		sfx.play_win(shown_x)
-			reel_controller.play_win_presentation(_cells_for_indices(win_indices), all_cells)
-			_show_line_labels(entries)
-			win_lines.emit(entries, shown_x, -1)
+		reel_controller.play_win_presentation(_cells_for_indices(win_indices), all_cells)
+		_show_line_labels(entries)
+		win_lines.emit(entries, shown_x, -1)
 		if shown_x >= BIG_WIN_MIN:
 			# Let the player SEE the hand first: pulsing cards, ×N badges and
 			# the per-line cash labels stay on the grid on their own for this
