@@ -83,6 +83,8 @@ interface GodotSlotMessage {
   balance?: SlotBalance;
   lines?: GodotWinLine[];
   mode?: string;
+  /** Echo of the reveal payload's rev — identifies the board the win belongs to. */
+  rev?: number;
   /** anticipation: build-up on/off, and ms until the last reel stops. */
   active?: boolean;
   ms?: number;
@@ -116,6 +118,12 @@ export interface RevealPayload {
   shownX: number;
   /** Current bet in dollars — needed to split shownX into per-line cash. */
   bet: number;
+  /**
+   * Echoed back on the "win" event, so React can drop label sets that belong
+   * to a superseded board (a stalled presentation can otherwise emit late and
+   * paint the previous board's labels over the current one).
+   */
+  rev?: number;
 }
 
 export interface SlotGameHandle {
@@ -156,7 +164,7 @@ export interface SlotGameProps {
   /** Fired whenever the server-reported balance updates. */
   onBalance?: (balance: SlotBalance) => void;
   /** A landed board's win presentation started (paying lines + label positions). */
-  onWin?: (lines: GodotWinLine[], winX: number) => void;
+  onWin?: (lines: GodotWinLine[], winX: number, rev?: number) => void;
   /** Godot finished a round / a revealed board (reels stopped, presentation started). */
   onRoundEnd?: (mode: string | undefined) => void;
   /** Bonus anticipation: 2 jokers down, the remaining reels are held for a 3rd. */
@@ -245,7 +253,7 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
             if (data.balance) onBalance?.(data.balance);
             break;
           case "win":
-            onWin?.(data.lines ?? [], data.winX ?? 0);
+            onWin?.(data.lines ?? [], data.winX ?? 0, data.rev);
             break;
           case "round_end":
             onRoundEnd?.(data.mode);

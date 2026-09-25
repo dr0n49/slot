@@ -63,7 +63,11 @@ signal bonus_event(stage: String, data: Dictionary)
 signal big_win(win_x: float)
 ## The win presentation of a landed board just started: one entry per paying
 ## line (see line_entries()). React lights the matching Hand pays rows.
-signal win_lines(entries: Array, win_x: float)
+## rev echoes the reveal id React attached to this board's payload (-1 for
+## native rounds): the page drops label events whose rev doesn't match its
+## pending board, so a late event from a superseded board can never paint
+## another board's labels.
+signal win_lines(entries: Array, win_x: float, rev: int = -1)
 
 const COLS := 5
 const ROWS := 5
@@ -84,6 +88,10 @@ const BIG_WIN_REVEAL_TURBO := 1.5
 @onready var fx: FXManager = $"../FXManager"
 
 var _busy: bool = false
+## Bumped by every reveal_external: a coroutine whose captured generation no
+## longer matches is stale (superseded by a newer reveal) and must not touch
+## the board, emit events, or reset _busy after one of its await points.
+var _reveal_gen: int = 0
 var _continue_requested: bool = false
 ## The last reconstructed free-spin package, {} when the last round had none.
 var _last_bonus_package: Dictionary = {}
@@ -128,11 +136,21 @@ func request_ante(kind: String, bet: float) -> void:
 ##   lines: Array[Dictionary]   {id, hand_index, win_x, mult_factor}
 ##   shownX: float              this board's total win, in × of bet
 ##   bet: float                 current bet in dollars
+##   rev: int (optional)        reveal id echoed back on win_lines, so React
+##                              can drop label events from a superseded board
 func reveal_external(payload: Dictionary) -> void:
+	# Generation token: this reveal supersedes any still-running one. A stalled
+	# presentation (tab throttling, long network wait) must never wake up after
+	# a newer board landed and paint/emits over it.
+	_reveal_gen += 1
+	var gen := _reveal_gen
+	var rev := int(payload.get("rev", -1))
 	# Never drop a board: if the previous one is still landing, wait for it
 	# (bounded, so a stuck flag can't freeze the grid forever).
 	var waited := 0.0
 	while _busy and waited < 8.0:
+		if gen != _reveal_gen:
+			return
 		await get_tree().process_frame
 		waited += get_process_delta_time()
 	_busy = true
@@ -152,6 +170,8 @@ func reveal_external(payload: Dictionary) -> void:
 	var grid := grid_from_cards(spin["cards"])
 	reel_controller.stop_to(grid, mults_by_column(spin["multipliers"]))
 	await reel_controller.all_reels_stopped
+	if gen != _reveal_gen:
+		return
 
 	var all_cells := _all_cells()
 	var win_indices: Array = spin["win_indices"]
@@ -183,7 +203,7 @@ func reveal_external(payload: Dictionary) -> void:
 		# the browser's font fallback -- WIN_FONT is a Latin-only Oswald subset,
 		# so Cyrillic/CJK/Arabic/Hindi would render as empty boxes). It only
 		# needs to know where each label goes.
-		win_lines.emit(_with_screen_pos(entries), shown_x)
+		win_lines.emit(_with_screen_pos(entries), shown_x, rev)
 
 	outcome_resolved.emit(grid, shown_x)
 	_busy = false
@@ -291,9 +311,9 @@ func _land_and_present(spin: Dictionary, shown_x: float, bet: float, on_landed: 
 	if shown_x > 0.0 and not win_indices.is_empty():
 		var entries := line_entries(spin, shown_x, bet)
 		sfx.play_win(shown_x)
-		reel_controller.play_win_presentation(_cells_for_indices(win_indices), all_cells)
-		_show_line_labels(entries)
-		win_lines.emit(entries, shown_x)
+			reel_controller.play_win_presentation(_cells_for_indices(win_indices), all_cells)
+			_show_line_labels(entries)
+			win_lines.emit(entries, shown_x, -1)
 		if shown_x >= BIG_WIN_MIN:
 			# Let the player SEE the hand first: pulsing cards, ×N badges and
 			# the per-line cash labels stay on the grid on their own for this

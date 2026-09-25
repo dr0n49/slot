@@ -173,19 +173,24 @@ func _on_js_continue(_args: Array) -> void:
 ## Paying lines of the board now being presented. winType = hand name of the
 ## best-paying line ("FLUSH", "JACKS OR BETTER", ...); lines[] carries every
 ## paying line with its handIndex (1..9, same numbering as React's Hand pays
-## rows) and the exact cash shown on its floating label.
-func _on_win_lines(entries: Array, win_x: float) -> void:
+## rows) and the exact cash shown on its floating label. rev echoes the reveal
+## id React sent with the payload (-1 = native round, no rev), so the page can
+## drop label events that belong to a superseded board.
+func _on_win_lines(entries: Array, win_x: float, rev: int = -1) -> void:
 	var best: Dictionary = {}
 	for e in entries:
 		if best.is_empty() or int(e["cents"]) > int(best["cents"]):
 			best = e
-	_post({
+	var payload := {
 		"event": "win",
 		"winX": win_x,
 		"winType": best.get("hand", ""),
 		"handIndex": best.get("handIndex", 0),
 		"lines": entries,
-	})
+	}
+	if rev >= 0:
+		payload["rev"] = rev
+	_post(payload)
 
 func _on_big_win(win_x: float) -> void:
 	_post({"event": "big_win", "winX": win_x})

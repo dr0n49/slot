@@ -218,6 +218,10 @@ export default function App() {
   godotReadyRef.current = godotReady;
   /** Paying lines of the board Godot just landed, with label positions (drawn by WinLineLabels). */
   const [winLabels, setWinLabels] = useState<{ key: number; lines: GodotWinLine[] } | null>(null);
+  /** Monotonic id attached to every reveal payload; Godot echoes it back on the
+      win event, and onGodotWin drops label sets from a superseded board. */
+  const revealSeqRef = useRef(0);
+  const pendingRevRef = useRef<number | null>(null);
   /** Bonus build-up in progress (2 jokers down, Godot holds the last reels): the board frame burns. */
   const [boardHot, setBoardHot] = useState(false);
   /**
@@ -422,6 +426,8 @@ export default function App() {
     setFieldWinCash(cash);
     // Godot owns the reels/cards/win-FX: hand it this already-resolved board to
     // paint (React keeps driving RGS/HUD/bonus timing exactly as before).
+    const rev = ++revealSeqRef.current;
+    pendingRevRef.current = rev;
     const reveal: RevealPayload = {
       cards: spin.cards,
       multipliers: spin.multipliers,
@@ -434,6 +440,7 @@ export default function App() {
       })),
       shownX,
       bet,
+      rev,
     };
     setWinLabels(null);
     setBoardHot(false);
@@ -491,8 +498,12 @@ export default function App() {
   }, []);
 
   /** Godot → React: the landed board's paying lines + where their labels go. */
-  const onGodotWin = useCallback((lines: GodotWinLine[]) => {
+  const onGodotWin = useCallback((lines: GodotWinLine[], _winX: number, rev?: number) => {
     if (revealGateRef.current.landed) return; // stale: belongs to an earlier board
+    // A stalled presentation can emit this event after a newer board's reveal
+    // went out — its labels would then describe the WRONG board. Godot echoes
+    // the reveal id; anything that isn't the pending board's is dropped.
+    if (rev != null && rev !== pendingRevRef.current) return;
     setWinLabels({ key: Date.now(), lines });
   }, []);
 
