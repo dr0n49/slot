@@ -110,14 +110,18 @@ func set_mult(value: float, delay: float = 0.0) -> void:
 	var sz := _badge.size
 	_badge.position = Vector2(-sz.x * 0.5, BADGE_Y - sz.y * 0.5)
 	_badge.pivot_offset = sz * 0.5
-	_badge.scale = Vector2(0.3, 0.3)
-	_badge.modulate.a = 0.0
+	# Visible IMMEDIATELY at full size/alpha — the delayed tween below is pure
+	# juice (stamp overshoot). The old alpha-gated pop (hidden until a delayed
+	# tween ran) died whenever the tab's frames froze between the reel landing
+	# and the pop: the next spin's clear_mult then erased a chip the player
+	# never saw, while its value still counted in the line's ×N.
 	_badge.visible = true
+	_badge.modulate.a = 1.0
+	_badge.scale = Vector2.ONE
 	_badge_tween = create_tween()
 	if delay > 0.0:
 		_badge_tween.tween_interval(delay)
-	_badge_tween.tween_property(_badge, "modulate:a", 1.0, 0.08)
-	_badge_tween.parallel().tween_property(_badge, "scale", Vector2(1.25, 1.25), 0.16) \
+	_badge_tween.tween_property(_badge, "scale", Vector2(1.25, 1.25), 0.16) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_badge_tween.tween_property(_badge, "scale", Vector2.ONE, 0.14) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
