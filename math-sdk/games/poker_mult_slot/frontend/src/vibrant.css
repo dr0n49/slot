@@ -1686,11 +1686,13 @@ html.lite-fx .cele-ember-burst {
 
 /* ════════════════════════════════════════════════════════════════════
    19. Día de Muertos candle shrine — left flank, bases ON the HUD top edge
-   Melted-crater velas: sunken dark wax pool ringed by a white melted lip.
-   Teardrop flames dance (sway/bob/halo breathe); the CANDLES THEMSELVES
-   ARE STATIC — no sway on the wax. No smoke, no tip curl. Shrine bottom
-   tracks the HUD top via 80px ÷ min(stage scale, 1). Compositor-only
-   motion. Off in portrait, frozen in lite-fx / reduced-motion.
+   Chunky flat-design pillar velas (Envato Día de Muertos video ref):
+   white cylinders with a flat side-shade, ellipse lid and a recessed top
+   face. Teardrop flames dance (sway/bob/halo breathe); the CANDLES
+   THEMSELVES ARE STATIC — no sway on the wax. No smoke, no tip curl.
+   Shrine bottom tracks the HUD top via 80px ÷ min(stage scale, 1).
+   Compositor-only motion. Off in portrait, frozen in lite-fx /
+   reduced-motion.
    ════════════════════════════════════════════════════════════════════ */
 .candle-shrine {
   position: absolute;
@@ -1734,46 +1736,41 @@ html.lite-fx .cele-ember-burst {
   50%      { opacity: 1;   transform: scale(1.06); }
 }
 
-/* —— velas: static chunky cylinders with a melted CRATER top —— */
+/* —— velas: chunky flat-design pillars (Día de Muertos video ref) —— */
 .shrine-candle {
   position: absolute;
   bottom: 0;
-  border-radius: 9px 9px 7px 7px;
+  border-radius: 12px 12px 9px 9px;
   background:
-    linear-gradient(90deg, #fdf6e8 0%, #ffffff 34%, #f2e7d0 72%, #ddc9a6 100%);
+    linear-gradient(90deg, #fffdf4 0%, #fffdf4 55%, #f0e4c9 55%, #dcc9a2 100%);
   box-shadow:
-    inset 0 -4px 0 rgba(160, 130, 80, 0.25),
+    inset 0 -3px 0 rgba(160, 130, 80, 0.18),
     0 3px 0 rgba(60, 30, 20, 0.35);
   /* static: no sway animation on the wax */
 }
-/* melted crater: white rolled lip + sunken dark wax pool inside */
+/* flat ellipse lid on top of the pillar */
 .shrine-candle::before {
   content: "";
   position: absolute;
-  top: -8px;
-  left: -4px;
-  right: -4px;
-  height: 17px;
+  top: -7px;
+  left: -3px;
+  right: -3px;
+  height: 15px;
   border-radius: 50%;
-  background: #fffdf6;
-  box-shadow:
-    inset 0 -3px 0 rgba(200, 170, 110, 0.35),
-    0 2px 0 rgba(60, 30, 20, 0.18);
+  background: linear-gradient(90deg, #fffef8 0%, #fffef8 55%, #f3e8cf 55%, #e6d5b2 100%);
+  box-shadow: 0 2px 0 rgba(60, 30, 20, 0.14);
 }
+/* recessed top face the wick stands in */
 .shrine-candle::after {
   content: "";
   position: absolute;
   top: -4px;
-  left: 2px;
-  right: 2px;
-  height: 11px;
+  left: 3px;
+  right: 3px;
+  height: 10px;
   border-radius: 50%;
-  background:
-    radial-gradient(ellipse 42% 58% at 50% 46%, rgba(255, 190, 90, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 52%, #6b3d1c 0%, #4a2408 55%, #38180a 100%);
-  box-shadow:
-    inset 0 2px 3px rgba(20, 5, 0, 0.65),
-    inset 0 -1px 1px rgba(255, 220, 150, 0.35);
+  background: radial-gradient(ellipse at 50% 52%, #efe2c6 0%, #e0cda6 60%, #d2ba8e 100%);
+  box-shadow: inset 0 1px 2px rgba(120, 90, 40, 0.35);
 }
 .shrine-candle .cshadow {
   position: absolute;
@@ -1788,23 +1785,23 @@ html.lite-fx .cele-ember-burst {
 }
 .shrine-candle .wick {
   position: absolute;
-  top: -10px;
+  top: -9px;
   left: 50%;
   width: 3px;
-  height: 8px;
+  height: 7px;
   margin-left: -1.5px;
   border-radius: 2px;
   background: #2c1c10;
 }
 
-/* —— stylised flame: teardrop only (no tip curl) —— */
+/* —— stylised flame: small teardrop (ref scale ~1/3 of the pillar) —— */
 .shrine-candle .flame {
   position: absolute;
-  top: -52px;
+  top: -44px;
   left: 50%;
-  width: 36px;
-  height: 51px;
-  margin-left: -18px;
+  width: 30px;
+  height: 42px;
+  margin-left: -15px;
   transform-origin: 50% 96%;
   animation: shrine-flame-sway var(--sway-d, 1.4s) ease-in-out calc(var(--sway-t, 0s) * -1 - 0.35s) infinite alternate;
 }
@@ -1841,20 +1838,20 @@ html.lite-fx .cele-ember-burst {
 /* soft glow disc behind each flame */
 .shrine-candle .flame-halo {
   position: absolute;
-  top: -58px;
+  top: -50px;
   left: 50%;
-  width: 48px;
-  height: 48px;
-  margin-left: -24px;
+  width: 42px;
+  height: 42px;
+  margin-left: -21px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 176, 48, 0.32) 0%, rgba(255, 130, 30, 0.10) 52%, transparent 72%);
   animation: shrine-halo-breathe var(--glow-d, 2.9s) ease-in-out var(--glow-t, 0s) infinite;
 }
 
-/* three candles: tall centre, shorter flankers — all standing on the HUD */
-.shrine-candle.c1 { left: 10px; width: 42px; height: 84px; }
-.shrine-candle.c2 { left: 58px; width: 46px; height: 112px; }
-.shrine-candle.c3 { left: 110px; width: 38px; height: 72px; }
+/* three candles: chunky pillars, centre tallest — standing on the HUD */
+.shrine-candle.c1 { left: 2px; width: 56px; height: 72px; }
+.shrine-candle.c2 { left: 46px; width: 64px; height: 96px; }
+.shrine-candle.c3 { left: 98px; width: 50px; height: 62px; }
 
 /* performance / accessibility switches, same contract as the embers */
 html.lite-fx .candle-shrine,

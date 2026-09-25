@@ -2,11 +2,11 @@ import { memo, type CSSProperties } from "react";
 
 /**
  * Día de Muertos candle shrine — left flank, bases sitting right on the HUD.
- * Flat-cartoon velas with a melted CRATER top (sunken wax pool inside a white
- * rim) and stylised teardrop flames. Candles themselves are static (no sway);
- * only the fire dances. No smoke, no tip curl. Compositor-only motion
- * (vibrant.css section 19). Hidden in portrait; frozen under lite-fx /
- * reduced-motion.
+ * Chunky flat-design pillar velas (Envato Día de Muertos video ref): white
+ * cylinders with a flat side-shade and an ellipse lid, stylised teardrop
+ * flames. Candles themselves are static (no sway); only the fire dances.
+ * No smoke, no tip curl. Compositor-only motion (vibrant.css section 19).
+ * Hidden in portrait; frozen under lite-fx / reduced-motion.
  */
 export const CandleShrine = memo(function CandleShrine() {
   return (
