@@ -411,9 +411,32 @@ export default function App() {
     setDealKey((k) => k + 1);
     setCards(spin.cards);
     setWinIdx(spin.winIndices ?? []);
-    setWinLines(spin.lines ?? []);
+    // The ×N on a line label must equal the chips the player can actually SEE
+    // on that line — badges render from spin.multipliers, so recompute every
+    // line's multFactor from that same array. When the engine's line math ever
+    // disagrees, the label follows the chips and the per-line cash is
+    // re-proportioned (Godot's line_entries rescales cash to still sum to the
+    // booked total). Mismatches are logged so the engine-side root cause can
+    // be traced.
+    const LINES: number[][] = Object.values(mathConfig.lines);
+    const lines = (spin.lines ?? []).map((l) => {
+      const chipSum = (LINES[l.id] ?? []).reduce(
+        (a, c) => a + (spin.multipliers[c] || 0),
+        0,
+      );
+      const mf = Math.max(1, chipSum);
+      if (mf !== l.multFactor) {
+        console.warn(
+          "[win-labels] line", l.id, "mf", l.multFactor, "->", mf,
+          "chips:", JSON.stringify(spin.multipliers),
+        );
+        return { ...l, multFactor: mf, winX: l.winX * (mf / l.multFactor) };
+      }
+      return l;
+    });
+    setWinLines(lines);
     // Hand-pays highlight is held back until the reels have stopped (see waitForReels).
-    pendingHandsRef.current = (spin.lines ?? [])
+    pendingHandsRef.current = lines
       .filter((l) => l.handIndex > 0 && l.winX > 0)
       .map((l) => ({ handIndex: l.handIndex, cash: dollars(l.winX, bet) }));
     setWinHands([]);
@@ -432,7 +455,7 @@ export default function App() {
       cards: spin.cards,
       multipliers: spin.multipliers,
       winIndices: spin.winIndices ?? [],
-      lines: (spin.lines ?? []).map((l) => ({
+      lines: lines.map((l) => ({
         id: l.id,
         hand_index: l.handIndex,
         win_x: l.winX,
