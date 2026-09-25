@@ -54,6 +54,8 @@ _CFG = json.loads(_CFG_PATH.read_text(encoding="utf-8"))
 
 MAX_WIN = float(_CFG["maxWin"])
 FS_COUNT = int(_CFG["fsCount"])
+#: Free spins open with this bank (x); the payout factor is max(1, bank). See MATH_AUDIT (2026-09-21).
+FS_START_BANK = float(_CFG.get("fsStartBank", 0.0))
 HAND_PAY = [float(x) for x in _CFG["hands"]["pays"]]
 LINE_PAY_SCALE = float(_CFG["params"]["linePayScale"])
 FLOOR_REROLLS = {k: int(v) for k, v in _CFG["params"]["floorRerolls"].items()}
@@ -193,7 +195,7 @@ def _bonus_package_raw(rng: random.Random, kind: str) -> float:
     flush: every FS spin redealt until ≥1 Flush-or-better line.
     3 goldens during any FS retrigger +5 extra spins (capped at MAX_FS).
     """
-    bank = 0.0
+    bank = FS_START_BANK
     total = 0.0
     remaining = FS_COUNT
     played = 0

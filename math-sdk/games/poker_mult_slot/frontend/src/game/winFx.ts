@@ -17,15 +17,15 @@ export function beamStrokePx(spinWinX: number, tileW: number): number {
   const x = Math.max(0.25, Number(spinWinX) || 0.25);
   // log10(0.25)≈-0.6 → 0; log10(10)=1 → 1; clamp
   const t = Math.min(1, Math.max(0, (Math.log10(x) + 0.6) / 1.6));
-  const px = 3.2 + t * 3.4;
-  return Math.max(2.6, Math.min(tileW * 0.115, px));
+  const px = 2.4 + t * 2.6;
+  return Math.max(2.2, Math.min(tileW * 0.09, px));
 }
 
 /** Dark outline extra width (CSS px) — thin contour, not a heavy rim. */
 export function beamOutlineExtraPx(spinWinX: number): number {
   const x = Math.max(0.25, Number(spinWinX) || 0.25);
   const t = Math.min(1, Math.max(0, (Math.log10(x) + 0.6) / 1.6));
-  return 2.4 + t * 2;
+  return 1.6 + t * 1.4;
 }
 
 /**

@@ -34,6 +34,8 @@ export type Strings = {
   playFor: string;
   need: string; // "{amount}"
   unavailable: string;
+  cancel: string;
+  confirm: string;
   win: string; // "{amount}"
   totalWin: string;
   auto: string;

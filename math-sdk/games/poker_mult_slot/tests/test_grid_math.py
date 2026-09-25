@@ -304,3 +304,20 @@ def test_vector_joker_mask_matches_scalar():
         cards = [int((ranks[i, j] - 2) * 4 + suits[i, j]) for j in range(25)]
         jokers = tuple(int(j) for j in np.flatnonzero(gmask[i]))
         assert list(vec[i]) == grid_math.eval_board(cards, jokers)
+
+
+def test_fs_start_bank_scales_package(monkeypatch):
+    """Free spins open with FS_START_BANK: with a fixed 1x spin and no bank
+    growth the package is FS_COUNT * max(1, start)."""
+    import gamestate
+
+    monkeypatch.setattr(gamestate, "_fs_spin", lambda rng, klass, floor: (1.0, 0.0, 0))
+    for start in (0.0, 1.0, 3.0):
+        monkeypatch.setattr(gamestate, "FS_START_BANK", start)
+        raw = gamestate._bonus_package_raw(random.Random(1), "bonus")
+        assert raw == gamestate.FS_COUNT * max(1.0, start)
+    # bank growth stacks on top of the start value
+    monkeypatch.setattr(gamestate, "_fs_spin", lambda rng, klass, floor: (1.0, 1.0, 0))
+    monkeypatch.setattr(gamestate, "FS_START_BANK", 3.0)
+    raw = gamestate._bonus_package_raw(random.Random(1), "bonus")
+    assert raw == sum(3.0 + k for k in range(1, gamestate.FS_COUNT + 1))

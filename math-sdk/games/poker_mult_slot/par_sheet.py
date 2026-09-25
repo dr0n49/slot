@@ -163,6 +163,8 @@ class GridParams:
     mode_scale: Dict[str, float] = field(
         default_factory=lambda: {m: 1.0 for m in MODE_COST}
     )
+    #: Free-spin bank before the first spin (x). The payout factor is max(1, bank).
+    fs_start_bank: float = 0.0
 
 
 def _norm(p: np.ndarray) -> np.ndarray:
@@ -382,7 +384,7 @@ def _fs_loop(
     floor_idx: Optional[int] = None,
 ) -> np.ndarray:
     """FS package with retriggers: 3 goldens → +5 extra spins (capped)."""
-    bank = np.zeros(m)
+    bank = np.full(m, float(params.fs_start_bank))
     total = np.zeros(m)
     remaining = np.full(m, FS_COUNT, dtype=np.int64)
     played = np.zeros(m, dtype=np.int64)
@@ -452,7 +454,7 @@ def _packages_package_floor(
                 gm_all[need].reshape(-1, N_CELLS),
             )
             sat[need] = (flat_h >= floor_idx).any(axis=1).reshape(-1, FS_COUNT).any(axis=1)
-        bank = np.zeros(n)
+        bank = np.full(n, float(params.fs_start_bank))
         pkg = np.zeros(n)
         remaining = np.full(n, FS_COUNT, dtype=np.int64)
         played = np.zeros(n, dtype=np.int64)
@@ -833,6 +835,7 @@ def export_math_config(
         "mathRtpTarget": TARGET_RTP_MID,
         "maxWin": MAX_WIN,
         "fsCount": FS_COUNT,
+        "fsStartBank": params.fs_start_bank,
         "retrigger": {
             "goldens": 3,
             "extraFs": RETRIGGER_FS,
@@ -963,6 +966,7 @@ def _load_frozen(path: Path) -> Optional[GridParams]:
     p.n_probs = {k: [float(x) for x in v] for k, v in cfg["multipliers"]["nProbs"].items()}
     p.intensity = {k: float(v) for k, v in cfg["multipliers"]["intensity"].items()}
     p.floor_rerolls = {k: int(v) for k, v in cfg["params"]["floorRerolls"].items()}
+    p.fs_start_bank = float(cfg.get("fsStartBank", 0.0))
     if "modeScale" in cfg["params"]:
         p.mode_scale = {k: float(v) for k, v in cfg["params"]["modeScale"].items()}
     return p

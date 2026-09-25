@@ -1,0 +1,208 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/slot_logic.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/reel_controller.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/fx_manager.gd" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/Symbol.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/WinBurst.tscn" id="6"]
+[ext_resource type="AudioStream" path="res://assets/audio/spin_loop.wav" id="7"]
+[ext_resource type="AudioStream" path="res://assets/audio/reel_stop_0.mp3" id="8"]
+[ext_resource type="AudioStream" path="res://assets/audio/reel_stop_1.mp3" id="9"]
+[ext_resource type="AudioStream" path="res://assets/audio/reel_stop_2.mp3" id="10"]
+[ext_resource type="AudioStream" path="res://assets/audio/reel_stop_3.mp3" id="11"]
+[ext_resource type="AudioStream" path="res://assets/audio/reel_stop_4.mp3" id="12"]
+[ext_resource type="AudioStream" path="res://assets/audio/win_line.mp3" id="13"]
+[ext_resource type="AudioStream" path="res://assets/audio/win_soft.mp3" id="14"]
+[ext_resource type="AudioStream" path="res://assets/audio/win_multi.mp3" id="15"]
+[ext_resource type="Script" path="res://scripts/sfx_manager.gd" id="16"]
+[ext_resource type="AudioStream" path="res://assets/audio/mult_land.mp3" id="17"]
+[ext_resource type="AudioStream" path="res://assets/audio/joker_land.mp3" id="18"]
+[ext_resource type="AudioStream" path="res://assets/audio/bonus_trigger.mp3" id="19"]
+
+[node name="SlotGame" type="Node2D"]
+
+[node name="SlotLogic" type="Node" parent="."]
+script = ExtResource("2")
+reel_controller_path = NodePath("../ReelController")
+
+[node name="ReelController" type="Node2D" parent="."]
+script = ExtResource("3")
+reel_paths = Array[NodePath]([NodePath("Reel_0"), NodePath("Reel_1"), NodePath("Reel_2"), NodePath("Reel_3"), NodePath("Reel_4")])
+
+[node name="Reel_0" type="Node2D" parent="ReelController"]
+position = Vector2(213, 180)
+
+[node name="SymbolStrip" type="Node2D" parent="ReelController/Reel_0"]
+
+[node name="Symbol_0" parent="ReelController/Reel_0/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 0)
+
+[node name="Symbol_1" parent="ReelController/Reel_0/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 205)
+
+[node name="Symbol_2" parent="ReelController/Reel_0/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 410)
+
+[node name="Symbol_3" parent="ReelController/Reel_0/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 615)
+
+[node name="Symbol_4" parent="ReelController/Reel_0/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 820)
+
+[node name="Reel_1" type="Node2D" parent="ReelController"]
+position = Vector2(368, 180)
+
+[node name="SymbolStrip" type="Node2D" parent="ReelController/Reel_1"]
+
+[node name="Symbol_0" parent="ReelController/Reel_1/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 0)
+
+[node name="Symbol_1" parent="ReelController/Reel_1/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 205)
+
+[node name="Symbol_2" parent="ReelController/Reel_1/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 410)
+
+[node name="Symbol_3" parent="ReelController/Reel_1/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 615)
+
+[node name="Symbol_4" parent="ReelController/Reel_1/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 820)
+
+[node name="Reel_2" type="Node2D" parent="ReelController"]
+position = Vector2(523, 180)
+
+[node name="SymbolStrip" type="Node2D" parent="ReelController/Reel_2"]
+
+[node name="Symbol_0" parent="ReelController/Reel_2/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 0)
+
+[node name="Symbol_1" parent="ReelController/Reel_2/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 205)
+
+[node name="Symbol_2" parent="ReelController/Reel_2/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 410)
+
+[node name="Symbol_3" parent="ReelController/Reel_2/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 615)
+
+[node name="Symbol_4" parent="ReelController/Reel_2/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 820)
+
+[node name="Reel_3" type="Node2D" parent="ReelController"]
+position = Vector2(678, 180)
+
+[node name="SymbolStrip" type="Node2D" parent="ReelController/Reel_3"]
+
+[node name="Symbol_0" parent="ReelController/Reel_3/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 0)
+
+[node name="Symbol_1" parent="ReelController/Reel_3/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 205)
+
+[node name="Symbol_2" parent="ReelController/Reel_3/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 410)
+
+[node name="Symbol_3" parent="ReelController/Reel_3/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 615)
+
+[node name="Symbol_4" parent="ReelController/Reel_3/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 820)
+
+[node name="Reel_4" type="Node2D" parent="ReelController"]
+position = Vector2(833, 180)
+
+[node name="SymbolStrip" type="Node2D" parent="ReelController/Reel_4"]
+
+[node name="Symbol_0" parent="ReelController/Reel_4/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 0)
+
+[node name="Symbol_1" parent="ReelController/Reel_4/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 205)
+
+[node name="Symbol_2" parent="ReelController/Reel_4/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 410)
+
+[node name="Symbol_3" parent="ReelController/Reel_4/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 615)
+
+[node name="Symbol_4" parent="ReelController/Reel_4/SymbolStrip" instance=ExtResource("5")]
+position = Vector2(0, 820)
+
+[node name="FXManager" type="Node2D" parent="." unique_name_in_owner=true]
+script = ExtResource("4")
+shake_camera_path = NodePath("ShakeCamera")
+win_burst_scene = ExtResource("6")
+big_win_confetti_path = NodePath("BigWinConfetti")
+
+[node name="ShakeCamera" type="Camera2D" parent="FXManager"]
+position = Vector2(523, 590)
+current = true
+
+[node name="BigWinPlayer" type="AnimationPlayer" parent="FXManager"]
+
+[node name="BigWinConfetti" parent="FXManager" instance=ExtResource("6")]
+position = Vector2(523, 435)
+amount = 120
+lifetime = 2.0
+explosiveness = 0.6
+
+[node name="SfxManager" type="Node" parent="."]
+script = ExtResource("16")
+
+[node name="SpinLoop" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("7")
+
+[node name="ReelStop0" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("8")
+
+[node name="ReelStop1" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("9")
+
+[node name="ReelStop2" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("10")
+
+[node name="ReelStop3" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("11")
+
+[node name="ReelStop4" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("12")
+
+[node name="WinLine" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("13")
+
+[node name="WinSoft" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("14")
+
+[node name="WinMulti" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("15")
+
+[node name="MultLand" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("17")
+
+[node name="JokerLand" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("18")
+
+[node name="BonusTrigger" type="AudioStreamPlayer" parent="SfxManager"]
+stream = ExtResource("19")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BigWinLabel" type="Label" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 72
+text = "BIG WIN"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -232,3 +232,37 @@ Retrigger +5 at 1/80 gives E[FS] ≈ 10 / (1 − 5/80) clipped by the 50 cap —
 - `frontend/src/game/engine.ts` — ante price from `mathConfig`
 - `frontend/tests/engine.test.ts` — flush 150×
 - `AGENTS.md`, `README.md`, `UPLOAD.md` — published costs
+
+
+---
+
+# Update 2026-09-21 — free spins start with Bonus Bank ×3
+
+**Why.** Expert review of the slot: the median bonus paid 0.36× of its price (≈62% of buys returned under half the cost), because the bank started at ×1 and the first spins were worth almost nothing. Fix: `fsStartBank = 3`. Free-spin line pay = handPay × chipFactor × max(1, bank), with the bank now starting at 3.
+
+**What changed.**
+- `frontend/src/mathConfig.json`: `fsStartBank: 3`; chip chances recalibrated (`base 0.20376, bonus 0.07648, job 0.08409, flush 0.08271, ante_job 0.96485, ante_flush 0.75064`).
+- `gamestate.py`: `FS_START_BANK`; `_bonus_package_raw` starts `bank = FS_START_BANK`.
+- `par_sheet.py`: reports/export `fs_start_bank`.
+- `tests/test_grid_math.py`: `test_fs_start_bank_scales_package` (22 tests pass).
+- Books, LUTs regenerated; LUTs trimmed to exactly 96.000% (max tilt 20%). Cap-level rows stay out of the books (25,000× declared), as before.
+- Frontend: `engine.ts` (`playBonusPackage`), `App.tsx` (`playFreeSpins`), `BonusBanner.tsx`, rules text (`freeGamesBody`).
+
+**Old vs new distribution (c = mode price).**
+
+| mode | median old→new | P(<0.5c) old→new | P(<cost) old→new | p99 old→new | max win old→new |
+|------|----------------|------------------|------------------|-------------|-----------------|
+| base | 0.50c → 0.50c | 43.0% → 44.0% | 74.6% → 76.6% | 8.0c → 13.5c | 1208× → 956× |
+| bonus | 0.36c → 0.72c | 62.4% → 16.4% | 81.3% → 76.9% | 8.3c → 3.9c | 8071× → 5172× |
+| bonus_job | 0.35c → 0.66c | 63.3% → 17.3% | 82.5% → 77.9% | 7.3c → 4.0c | 10964× → 3143× |
+| bonus_flush | 0.36c → 0.53c | 58.8% → 45.6% | 78.0% → 78.7% | 8.7c → 6.0c | 23166× → 24180× |
+| ante_job | unchanged | | | | |
+| ante_flush | unchanged | | | | |
+
+All six modes: RTP 96.000%, spread 0. Base hit rate 77.8% unchanged; base LDW share rose 52.5% → 54.4% (chips in the base game are now rarer because the recalibration shifts RTP into the bonus).
+
+**Known trade-offs.**
+- Base game got slightly leaner: chips are rarer, P(base spin < 1×) 74.6% → 76.6%.
+- Buy-flush improved less than buy-bonus/job (median 0.53c, 46% below half price). The flush package already had a high floor; most of its value sits in rare deep runs.
+- Max wins inside BONUS/JOB packages dropped (a higher floor at equal RTP leaves less mass in the tail). FLUSH max stays at ~24k×.
+- Books changed → they must be re-uploaded to Stake ACP (Files → Import Math → Publish Math). The frontend and math must be published together (rules text says ×3).

@@ -1,0 +1,596 @@
+diff --git a/godot-slot/scripts/fx_manager.gd b/godot-slot/scripts/fx_manager.gd
+index bed113c..75eb9e1 100644
+--- a/godot-slot/scripts/fx_manager.gd
++++ b/godot-slot/scripts/fx_manager.gd
+@@ -57,9 +57,15 @@ func screen_shake(strength: float) -> void:
+ 	_shake_strength = max(_shake_strength, min(strength, shake_max_offset))
+ 	set_process(true)
+ 
++## Bursts claimed for a delayed spawn (spawn_mult_bursts) but not yet
++## actually emitting — _get_free_burst treats these as busy too, so two
++## multiplier cells resolved in the same call never fight over one pooled
++## burst before the first one's delayed restart() has fired.
++var _reserved: Dictionary = {}
++
+ func _get_free_burst() -> GPUParticles2D:
+ 	for b in _burst_pool:
+-		if not b.emitting:
++		if not b.emitting and not _reserved.has(b):
+ 			return b
+ 	return _burst_pool[0]  # pool exhausted: steal the oldest instead of allocating
+ 
+@@ -70,6 +76,25 @@ func spawn_win_bursts(cells: Array) -> void:
+ 		burst.restart()
+ 		burst.emitting = true
+ 
++## A second, slightly-delayed burst on cells whose multiplier badge
++## contributed to this win — same pooled scene/particles as
++## spawn_win_bursts (no new pool, no new scene), just offset a beat later
++## so it reads as "the badge specifically just did something" rather than
++## doubling up on the same instant as the line-win burst.
++func spawn_mult_bursts(cells: Array) -> void:
++	for cell in cells:
++		var burst := _get_free_burst()
++		var pos: Vector2 = cell.global_position
++		_reserved[burst] = true
++		get_tree().create_timer(0.1).timeout.connect(func():
++			_reserved.erase(burst)
++			if not is_instance_valid(burst):
++				return
++			burst.global_position = pos
++			burst.restart()
++			burst.emitting = true
++		)
++
+ ## Built from code so the multi-property AnimationPlayer sequence the
+ ## brief asks for ("AnimationPlayer for complex timing / combined
+ ## params") ships as reviewable text instead of a binary .tres you'd
+diff --git a/godot-slot/scripts/reel_controller.gd b/godot-slot/scripts/reel_controller.gd
+index 2c110c7..05a9a1d 100644
+--- a/godot-slot/scripts/reel_controller.gd
++++ b/godot-slot/scripts/reel_controller.gd
+@@ -239,6 +239,7 @@ func start_spin() -> void:
+ 			cell.stop_win_pulse()
+ 			cell.play_dim(false)
+ 			cell.clear_mult()
++			cell.cancel_idle_glow()
+ 		_set_blur(s, 1.0)
+ 	set_process(true)
+ 	_set_phase(Phase.SPINNING)
+@@ -380,6 +381,17 @@ func play_win_presentation(winning_cells: Array, all: Array) -> void:
+ 	for cell in winning_cells:
+ 		cell.play_win_pulse()
+ 	fx.spawn_win_bursts(winning_cells)
++	# Multiplier cells among this win get their own small ember burst on
++	# top of the regular win burst — reads as "this badge is doing work",
++	# distinct from the plain per-line burst every winning cell already
++	# gets. Cell already knows its own `mult` (stamped on land); no math
++	# or win-calculation data is read here, only presentation state.
++	var mult_cells: Array = []
++	for cell in winning_cells:
++		if cell.mult > 0.0:
++			mult_cells.append(cell)
++	if not mult_cells.is_empty():
++		fx.spawn_mult_bursts(mult_cells)
+ 	_set_phase(Phase.WIN_ANIM)
+ 
+ func return_to_idle(all: Array) -> void:
+diff --git a/godot-slot/scripts/symbol_visual.gd b/godot-slot/scripts/symbol_visual.gd
+index f2b964d..95044c5 100644
+--- a/godot-slot/scripts/symbol_visual.gd
++++ b/godot-slot/scripts/symbol_visual.gd
+@@ -33,6 +33,21 @@ extends Node2D
+ @export_group("Dim (losing symbols during WIN_ANIM)")
+ @export var dim_amount: float = 0.58
+ 
++@export_group("Idle special-card glow (Joker at rest)")
++## Steady low-amplitude rim glow so a landed Joker reads as "special" at a
++## glance, without it looking like an active win pulse (that stays reserved
++## for play_win_pulse()). Off for every other symbol.
++@export_range(0.0, 1.0) var idle_glow_strength: float = 0.55
++## Idle sheen sweep: how often a resting Joker catches a light pass.
++@export_range(2.0, 12.0) var idle_sheen_period: float = 5.5
++@export_range(0.4, 1.2) var idle_sheen_duration: float = 0.85
++
++@export_group("Impact flash")
++## Brief additive flash layered under the win-pulse start and a multiplier
++## landing on a winning card, so the "hit" reads before the glow settles
++## into its steady breathe.
++@export_range(0.05, 0.5) var flash_duration: float = 0.18
++
+ @export_group("Multiplier badge")
+ ## Same look as React's old `.bonus-ribbon-mult` (noir.css): blood-red tag,
+ ## bone lettering, ink outline, stamped near the bottom of the card.
+@@ -56,6 +71,11 @@ var symbol_id: StringName
+ ## Multiplier currently shown on this cell (0 = none).
+ var mult: float = 0.0
+ 
++var _idle_tween: Tween
++var _idle_sheen_timer: SceneTreeTimer
++var _flash_tween: Tween
++var _is_idle_special: bool = false
++
+ func _ready() -> void:
+ 	sprite.scale = rest_scale
+ 	# Godot shares one Material resource by reference across every node
+@@ -137,9 +157,19 @@ func warm_badge() -> void:
+ 		_badge.visible = false
+ 	_badge.modulate.a = 1.0
+ 
++static func _is_special(id: StringName) -> bool:
++	return id == &"JOKER" or id == &"JOKER_gold"
++
+ func set_face(id: StringName, texture: Texture2D) -> void:
+ 	symbol_id = id
+ 	sprite.texture = texture
++	# A face change means the reel is scrolling this cell (or just landed a
++	# fresh symbol on it) — idle glow only belongs to a card actually at
++	# rest, so stop_win_pulse()/play_land_bounce() are what turn it back on
++	# once this cell has genuinely settled. Kill it eagerly here so a Joker
++	# scrolling past mid-spin never flashes idle glow for one frame.
++	if not _is_special(id):
++		_stop_idle_glow()
+ 
+ ## Called every frame (or on a throttled timer) by ReelController while
+ ## this cell's reel is at full spin speed. amount is 0..1.
+@@ -152,6 +182,7 @@ func play_blur(amount: float) -> void:
+ ## doesn't thud down as one flat block.
+ ## time_scale < 1 shortens the whole squash/rebound/settle (turbo passes 0.5).
+ func play_land_bounce(delay: float = 0.0, time_scale: float = 1.0) -> void:
++	_stop_idle_glow()
+ 	if _glow_material:
+ 		_glow_material.set_shader_parameter(&"blur_amount", 0.0)
+ 	_kill_tween()
+@@ -169,10 +200,16 @@ func play_land_bounce(delay: float = 0.0, time_scale: float = 1.0) -> void:
+ 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+ 	_tween.tween_property(sprite, "scale", rest_scale, bounce_duration * 0.5 * time_scale) \
+ 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
++	# Idle glow only belongs to a card genuinely at rest — pick it up once
++	# the land-bounce (and any anticipation dim ReelController applies
++	# right after) has had a chance to settle, not mid-bounce.
++	_tween.tween_callback(_maybe_start_idle_glow)
+ 
+ ## Winning symbol: looping breathing scale + shader glow pulse, until
+ ## stop_win_pulse() is called (when WIN_ANIM ends).
+ func play_win_pulse() -> void:
++	_stop_idle_glow()
++	_flash(1.0)
+ 	if _glow_material:
+ 		_glow_material.set_shader_parameter(&"dim_amount", 0.0)
+ 		_glow_material.set_shader_parameter(&"pulse_speed", win_pulse_speed)
+@@ -203,13 +240,85 @@ func stop_win_pulse() -> void:
+ 		_badge.modulate.a = 1.0
+ 	if _glow_material:
+ 		_glow_material.set_shader_parameter(&"pulse_strength", 0.0)
++	_maybe_start_idle_glow()
+ 
+ ## Non-winning symbols during WIN_ANIM: dim + slightly desaturate so the
+ ## eye is pulled straight to the winning cells.
+ func play_dim(dimmed: bool) -> void:
++	if dimmed:
++		_stop_idle_glow()
+ 	if _glow_material:
+ 		_glow_material.set_shader_parameter(&"dim_amount", dim_amount if dimmed else 0.0)
++	# A Joker that was dimmed during anticipation and comes back to rest
++	# (dimmed=false) with nothing else claiming this cell should pick its
++	# idle glow back up.
++	if not dimmed and _is_special(symbol_id) and not _is_idle_special:
++		_maybe_start_idle_glow()
+ 
+ func _kill_tween() -> void:
+ 	if _tween and _tween.is_valid():
+ 		_tween.kill()
++
++## --- Idle special-card glow (Joker at rest) ---------------------------------
++## Deliberately restrained: a steady low rim glow plus an occasional sheen
++## pass, not a hard scale pulse — the project already tried a harder idle
++## pulse on the SPIN button and rolled it back for reading as noisy, so
++## this stays understated by design.
++
++## Public: called by ReelController at spin-start so a Joker that was
++## sitting idle-glowing doesn't carry that state into the scroll.
++func cancel_idle_glow() -> void:
++	_stop_idle_glow()
++
++func _maybe_start_idle_glow() -> void:
++	if not _is_special(symbol_id) or _is_idle_special:
++		return
++	_is_idle_special = true
++	if _glow_material:
++		_glow_material.set_shader_parameter(&"idle_glow_strength", idle_glow_strength)
++	_schedule_idle_sheen()
++
++func _stop_idle_glow() -> void:
++	if not _is_idle_special:
++		return
++	_is_idle_special = false
++	if _idle_tween and _idle_tween.is_valid():
++		_idle_tween.kill()
++	if _idle_sheen_timer and _idle_sheen_timer.timeout.is_connected(_run_idle_sheen):
++		_idle_sheen_timer.timeout.disconnect(_run_idle_sheen)
++	_idle_sheen_timer = null
++	if _glow_material:
++		_glow_material.set_shader_parameter(&"idle_glow_strength", 0.0)
++		_glow_material.set_shader_parameter(&"sheen_pos", -0.5)
++
++func _schedule_idle_sheen() -> void:
++	if not _is_idle_special:
++		return
++	# Per-card phase offset so neighbouring Jokers never catch the light at
++	# the same moment — the same "never move in lockstep" rule as the glow
++	# material duplication above.
++	var wait := idle_sheen_period * randf_range(0.6, 1.4)
++	_idle_sheen_timer = get_tree().create_timer(wait)
++	_idle_sheen_timer.timeout.connect(_run_idle_sheen)
++
++func _run_idle_sheen() -> void:
++	if not _is_idle_special or not _glow_material:
++		return
++	_idle_tween = create_tween()
++	_idle_tween.tween_method(
++		func(v): _glow_material.set_shader_parameter(&"sheen_pos", v),
++		-0.35, 1.35, idle_sheen_duration
++	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
++	_idle_tween.tween_callback(_schedule_idle_sheen)
++
++## --- Impact flash ------------------------------------------------------------
++
++func _flash(amount: float) -> void:
++	if not _glow_material:
++		return
++	if _flash_tween and _flash_tween.is_valid():
++		_flash_tween.kill()
++	_glow_material.set_shader_parameter(&"flash_amount", amount)
++	_flash_tween = create_tween()
++	_flash_tween.tween_property(_glow_material, "shader_parameter/flash_amount", 0.0, flash_duration) \
++		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+diff --git a/godot-slot/shaders/symbol_fx.gdshader b/godot-slot/shaders/symbol_fx.gdshader
+index f5ad303..829903e 100644
+--- a/godot-slot/shaders/symbol_fx.gdshader
++++ b/godot-slot/shaders/symbol_fx.gdshader
+@@ -1,11 +1,13 @@
+ shader_type canvas_item;
+ 
+ // Combined per-symbol shader: motion-blur while spinning (blur_amount) +
+-// win glow/outline pulse + dim (pulse_*, dim_amount). One material per
+-// Sprite2D can only run one shader, and the two effects never actually
+-// overlap in time (blur only while SPINNING, glow/dim only after the
+-// reel has landed), so they're merged here instead of two separate
+-// files fighting over the same material slot.
++// win glow/outline pulse + dim (pulse_*, dim_amount) + idle special-card
++// glow (idle_*) + sheen sweep (sheen_*) + win flash (flash_amount).
++// One material per Sprite2D can only run one shader, and these effects
++// are largely mutually exclusive in time (blur only while SPINNING, glow/
++// dim only after landing, idle glow only at rest, flash only on impact),
++// so they're merged here instead of separate files fighting over the
++// same material slot.
+ 
+ uniform float blur_amount : hint_range(0.0, 1.0) = 0.0;
+ uniform float blur_reach : hint_range(0.0, 0.25) = 0.09; // UV units
+@@ -17,6 +19,24 @@ uniform vec4 glow_color : source_color = vec4(1.0, 0.85, 0.35, 1.0);
+ uniform float dim_amount : hint_range(0.0, 1.0) = 0.0;
+ uniform float outline_width : hint_range(0.0, 4.0) = 1.5;
+ 
++// Idle "special card" glow (Joker / gold Joker at rest) — same outline
++// technique as the win pulse but driven by its own low-amplitude uniform
++// so an idle Joker never reads as "this is currently winning".
++uniform float idle_glow_strength : hint_range(0.0, 1.0) = 0.0;
++uniform vec4 idle_glow_color : source_color = vec4(1.0, 0.82, 0.3, 1.0);
++uniform float idle_outline_width : hint_range(0.0, 4.0) = 1.2;
++
++// One-shot diagonal sheen sweep. sheen_pos runs -0.35..1.35 across a
++// single pass (script-driven via Tween); sheen_pos < -0.3 or > 1.3 means
++// "not running" so the branch below is skipped entirely off-pass.
++uniform float sheen_pos : hint_range(-0.5, 1.5) = -0.5;
++uniform float sheen_width : hint_range(0.02, 0.4) = 0.16;
++uniform float sheen_strength : hint_range(0.0, 1.0) = 0.55;
++
++// Brief additive flash on impact (win-pulse start / multiplier applied).
++// Script sets this to ~1.0 then tweens it back to 0 over a few frames.
++uniform float flash_amount : hint_range(0.0, 1.0) = 0.0;
++
+ void fragment() {
+ 	// TEXTURE (the sprite's implicit sampler2D) is only in scope inside
+ 	// fragment()/vertex()/light() in Godot's shading language — a plain
+@@ -47,35 +67,71 @@ void fragment() {
+ 	// No early `return` here — Godot's shading language rejects a `return`
+ 	// inside fragment()/vertex()/light(), even though it's ordinary GLSL
+ 	// elsewhere. Branch with if/else instead.
+-	if (pulse_strength <= 0.0 && dim_amount <= 0.0) {
++	bool any_fx = pulse_strength > 0.0 || dim_amount > 0.0 || idle_glow_strength > 0.0
++		|| (sheen_pos > -0.3 && sheen_pos < 1.3) || flash_amount > 0.001;
++
++	if (!any_fx) {
+ 		COLOR = tex;
+ 	} else {
+ 		vec2 px = TEXTURE_PIXEL_SIZE;
+-		float pulse = 0.0;
+-		if (pulse_strength > 0.0) {
+-			pulse = (sin(TIME * pulse_speed) * 0.5 + 0.5) * pulse_strength;
+-		}
++		vec3 rgb = tex.rgb;
++		float a = tex.a;
+ 
+-		// Cheap 4-tap alpha outline, brightened by the pulse so the glow
+-		// visibly breathes outward rather than just recoloring in place.
+-		float outline = 0.0;
++		// --- Win pulse (existing behaviour, unchanged in shape) ---
+ 		if (pulse_strength > 0.0) {
++			float pulse = (sin(TIME * pulse_speed) * 0.5 + 0.5) * pulse_strength;
+ 			float a_up = texture(TEXTURE, UV + vec2(0.0, -px.y * outline_width)).a;
+ 			float a_down = texture(TEXTURE, UV + vec2(0.0, px.y * outline_width)).a;
+ 			float a_left = texture(TEXTURE, UV + vec2(-px.x * outline_width, 0.0)).a;
+ 			float a_right = texture(TEXTURE, UV + vec2(px.x * outline_width, 0.0)).a;
+-			outline = clamp(a_up + a_down + a_left + a_right, 0.0, 1.0) * (1.0 - tex.a);
++			float outline = clamp(a_up + a_down + a_left + a_right, 0.0, 1.0) * (1.0 - tex.a);
++
++			vec3 glow_rgb = glow_color.rgb * (0.6 + pulse);
++			rgb = mix(rgb, rgb + glow_rgb * pulse, pulse_strength);
++			a = a + outline * glow_color.a * pulse;
+ 		}
+ 
+-		vec3 glow_rgb = glow_color.rgb * (0.6 + pulse);
+-		vec3 base_rgb = mix(tex.rgb, tex.rgb + glow_rgb * pulse, pulse_strength);
+-		float base_a = tex.a + outline * glow_color.a * pulse;
++		// --- Idle special-card glow: same outline technique, low and
++		// steady rather than a wide breathing pulse, so a Joker reads as
++		// "this card is special" at a glance without competing with an
++		// actual win. ---
++		if (idle_glow_strength > 0.0) {
++			float idle_pulse = (sin(TIME * 1.6) * 0.5 + 0.5) * 0.5 + 0.5; // 0.5..1.0, gentle
++			float a_up = texture(TEXTURE, UV + vec2(0.0, -px.y * idle_outline_width)).a;
++			float a_down = texture(TEXTURE, UV + vec2(0.0, px.y * idle_outline_width)).a;
++			float a_left = texture(TEXTURE, UV + vec2(-px.x * idle_outline_width, 0.0)).a;
++			float a_right = texture(TEXTURE, UV + vec2(px.x * idle_outline_width, 0.0)).a;
++			float outline = clamp(a_up + a_down + a_left + a_right, 0.0, 1.0) * (1.0 - tex.a);
++			float k = idle_glow_strength * idle_pulse;
++			rgb = mix(rgb, rgb + idle_glow_color.rgb * 0.45, k * tex.a * 0.35);
++			a = a + outline * idle_glow_color.a * k * 0.8;
++		}
++
++		// --- One-shot diagonal sheen sweep: a soft light band travelling
++		// bottom-left to top-right across the card, masked to the card's
++		// own alpha so it reads as light crossing the surface, not a
++		// sticker on top of it. ---
++		if (sheen_pos > -0.3 && sheen_pos < 1.3 && tex.a > 0.01) {
++			float diag = (UV.x + (1.0 - UV.y)) * 0.5; // 0 at bottom-left, 1 at top-right
++			float d = abs(diag - sheen_pos);
++			float band = smoothstep(sheen_width, 0.0, d);
++			rgb += vec3(1.0, 0.97, 0.85) * band * sheen_strength * tex.a;
++		}
+ 
+-		// Dim: desaturate + darken. Used on non-winning cells while WIN_ANIM
+-		// plays so the eye is pulled straight to the winning line.
+-		float luma = dot(base_rgb, vec3(0.299, 0.587, 0.114));
+-		base_rgb = mix(base_rgb, vec3(luma) * 0.55, dim_amount);
++		// --- Dim: desaturate + darken. Used on non-winning cells while
++		// WIN_ANIM plays so the eye is pulled straight to the winning
++		// line. Kept short of a full silhouette (max ~0.82) so a dimmed
++		// card still reads as a card, not a cut-out. ---
++		if (dim_amount > 0.0) {
++			float luma = dot(rgb, vec3(0.299, 0.587, 0.114));
++			rgb = mix(rgb, vec3(luma) * 0.55, dim_amount);
++		}
++
++		// --- Impact flash: brief additive white-gold, decays via script. ---
++		if (flash_amount > 0.001) {
++			rgb += vec3(1.0, 0.94, 0.8) * flash_amount * tex.a;
++		}
+ 
+-		COLOR = vec4(base_rgb, clamp(base_a, 0.0, 1.0));
++		COLOR = vec4(rgb, clamp(a, 0.0, 1.0));
+ 	}
+ }
+diff --git a/math-sdk/games/poker_mult_slot/frontend/src/vibrant.css b/math-sdk/games/poker_mult_slot/frontend/src/vibrant.css
+index 5f22177..9c54010 100644
+--- a/math-sdk/games/poker_mult_slot/frontend/src/vibrant.css
++++ b/math-sdk/games/poker_mult_slot/frontend/src/vibrant.css
+@@ -78,6 +78,50 @@
+     inset 0 -6px 10px rgba(0, 0, 0, 0.45),
+     0 0 0 1.5px var(--bone),
+     0 0 0 3px var(--ink);
++  position: relative;
++}
++/* Idle aura: a soft outer glow behind the seal that breathes very slowly
++   (9s) — NOT the old noir-spin-breathe pulse (that moved the ring itself
++   every frame and was dropped for reading as too heavy/nagging; see the
++   note above). This sits behind the button as its own layer, never
++   changes the ring/shadow above, and is subtle enough that a player who
++   isn't looking for it won't consciously notice it, while the button
++   still doesn't read as inert. Disabled/busy states get no aura — juice
++   belongs on the action that's actually available. */
++.respin-btn::before {
++  content: "";
++  position: absolute;
++  inset: -10px;
++  border-radius: 50%;
++  background: radial-gradient(circle, rgba(226, 176, 74, 0.35), transparent 70%);
++  opacity: 0;
++  pointer-events: none;
++  z-index: -1;
++  animation: spin-idle-aura 9s ease-in-out infinite;
++}
++.respin-btn:disabled::before {
++  animation: none;
++  opacity: 0;
++}
++@keyframes spin-idle-aura {
++  0%,
++  100% {
++    opacity: 0.18;
++    transform: scale(0.94);
++  }
++  50% {
++    opacity: 0.4;
++    transform: scale(1.04);
++  }
++}
++html.lite-fx .respin-btn::before {
++  display: none;
++}
++@media (prefers-reduced-motion: reduce) {
++  .respin-btn::before {
++    animation: none;
++    opacity: 0.25;
++  }
+ }
+ 
+ /* ══════════════════════════════════════════════════════════════════
+@@ -90,6 +134,41 @@
+     7px 9px 0 5px rgba(0, 0, 0, 0.55),
+     0 0 46px rgba(200, 16, 46, 0.34),
+     0 0 96px rgba(255, 150, 40, 0.16);
++  animation: frame-breathe 6.5s ease-in-out infinite;
++}
++/* Slow breathing variation on the frame's own outer glow — the two glow
++   layers above were static; this just lets them swell/ease a few percent
++   rather than sitting dead-still, without touching the gold/ink rim
++   (those stay crisp) or approaching anything like the old hard button
++   pulse this project already tried and walked back. Kept to a single
++   box-shadow variant (no separate glow element) so it costs nothing more
++   than the static version already did. */
++@keyframes frame-breathe {
++  0%,
++  100% {
++    box-shadow:
++      0 0 0 2px var(--gold),
++      0 0 0 5px var(--ink),
++      7px 9px 0 5px rgba(0, 0, 0, 0.55),
++      0 0 46px rgba(200, 16, 46, 0.34),
++      0 0 96px rgba(255, 150, 40, 0.16);
++  }
++  50% {
++    box-shadow:
++      0 0 0 2px var(--gold),
++      0 0 0 5px var(--ink),
++      7px 9px 0 5px rgba(0, 0, 0, 0.55),
++      0 0 58px rgba(200, 16, 46, 0.42),
++      0 0 118px rgba(255, 150, 40, 0.22);
++  }
++}
++html.lite-fx .card-stage-wrap {
++  animation: none;
++}
++@media (prefers-reduced-motion: reduce) {
++  .card-stage-wrap {
++    animation: none;
++  }
+ }
+ 
+ /* Richer, warmer backdrop: same vector art, more saturation + a marigold light pool. */
+@@ -224,6 +303,46 @@ html.lite-fx .ambient-embers {
+     color: #ffe680;
+   }
+ }
++/* One-shot gold beam sweeping across a row the instant it lights up — on
++   top of the existing flash/settle above (vb-hand-hit), not a replacement
++   for it. Pure transform/opacity on a pseudo-element, so it costs nothing
++   the row wasn't already paying for its own flare, and it runs once per
++   hit (the row's key changes on every new deal — see SidePanels.tsx —
++   so this replays honestly on repeat hits instead of ever looping). */
++.side-hand.is-hit::after {
++  content: "";
++  position: absolute;
++  inset: 0;
++  border-radius: inherit;
++  overflow: hidden;
++  pointer-events: none;
++  background: linear-gradient(
++    100deg,
++    transparent 40%,
++    rgba(255, 240, 200, 0.85) 50%,
++    transparent 60%
++  );
++  background-size: 250% 100%;
++  background-position: 120% 0;
++  opacity: 0;
++  animation: vb-hit-sweep 0.7s ease-out 0.32s both;
++}
++@keyframes vb-hit-sweep {
++  0% {
++    background-position: 120% 0;
++    opacity: 0;
++  }
++  15% {
++    opacity: 1;
++  }
++  70% {
++    opacity: 0.8;
++  }
++  100% {
++    background-position: -120% 0;
++    opacity: 0;
++  }
++}
+ /* the plaque itself flares once when it holds a winner */
+ .side-panel.is-winning {
+   animation: vb-panel-win 1.5s ease-out 0.12s both;
+@@ -256,6 +375,9 @@ html.lite-fx .ambient-embers {
+     animation: none;
+     color: #ffd84a;
+   }
++  .side-hand.is-hit::after {
++    display: none;
++  }
+ }
+ 
+ /* ══════════════════════════════════════════════════════════════════
+@@ -1300,9 +1422,21 @@ html.lite-fx .cele-ember-burst {
+   width: 132px;
+   height: 5.1rem;
+ }
++/* The button (132px) is taller than its slot (5.1rem ≈ 82px) by design,
++   same as the regular landscape rule above — the disc is meant to poke up
++   above the bar. But .hud-spin's `bottom` offset (0.95rem in landscape,
++   0.15rem at base) was tuned for the smaller 86px/normal-size disc; at
++   132px with that same offset the circle also pushes past the BOTTOM of
++   the HUD bar into the background below it, breaking out of the black
++   plate entirely instead of just rising above it. Pull it back down flush
++   with the bar's own bottom edge — bottom: 0 places the disc's bottom
++   edge at the slot's bottom edge, matching how the smaller landscape
++   button actually sits relative to its own (proportionally similar)
++   slot height. */
+ .game-stage[data-narrow="1"] .hud-spin {
+   height: 132px !important;
+   width: 132px !important;
++  bottom: 0 !important;
+ }
+ .game-stage[data-narrow="1"] .hud-stake {
+   gap: 0.6rem;
+@@ -1370,6 +1504,36 @@ html.lite-fx .cele-ember-burst {
+   box-shadow:
+     0 0 0 1.5px var(--gold-dk),
+     0 3px 0 1.5px var(--ink);
++  position: relative;
++}
++/* Same restrained idle aura as .respin-btn (see its comment) — a slow,
++   low-amplitude glow behind the button, gold-toned to match its own rim.
++   Off while disabled (busy / bonus already active) so it never implies
++   the button is inviting a tap it can't currently take. */
++.hud-bonus-btn::before {
++  content: "";
++  position: absolute;
++  inset: -8px;
++  border-radius: inherit;
++  background: radial-gradient(ellipse, rgba(226, 176, 74, 0.3), transparent 72%);
++  opacity: 0;
++  pointer-events: none;
++  z-index: -1;
++  animation: spin-idle-aura 9s ease-in-out infinite;
++  animation-delay: -3s; /* out of phase with the SPIN button's own aura */
++}
++.hud-bonus-btn:disabled::before {
++  animation: none;
++  opacity: 0;
++}
++html.lite-fx .hud-bonus-btn::before {
++  display: none;
++}
++@media (prefers-reduced-motion: reduce) {
++  .hud-bonus-btn::before {
++    animation: none;
++    opacity: 0.2;
++  }
+ }
+ 
+ .hud-sq-btn {

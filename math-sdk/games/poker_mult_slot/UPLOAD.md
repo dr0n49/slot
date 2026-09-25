@@ -15,6 +15,8 @@ Contains:
 
 In Stake Engine: **Files → Import Math** (select this folder) → Publish Math.
 
+**Books v2 (2026-09-21):** free spins start with bank ×3. Re-import the whole `publish_files/` folder; publish it together with the frontend build v21.
+
 Modes / costs (must match frontend):
 
 | mode | cost |

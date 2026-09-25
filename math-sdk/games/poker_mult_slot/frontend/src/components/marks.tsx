@@ -240,11 +240,11 @@ export function CloseMark({ className }: { className?: string }) {
   );
 }
 
-/** Hand-drawn card back (see ASSETS_LICENSE.md). Stretched to the tile. */
+/** Card back (see ASSETS_LICENSE.md). Stretched to the tile. Currently unused — kept for a future card-back flourish. */
 export function CardBackArt() {
   return (
     <img
-      src={assetUrl("assets/cards/card_back.png")}
+      src={assetUrl("assets/cards_v2/card_back.png")}
       alt=""
       className="card-back-img"
       draggable={false}

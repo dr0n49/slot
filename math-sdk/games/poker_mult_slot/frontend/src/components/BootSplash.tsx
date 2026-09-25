@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { assetUrl, cardImageUrls, jokerFaceUrl } from "../game/assets";
-import { BgPicture, SERIES_BG, SERIES_BG_PORTRAIT } from "./CosmicBackground";
+import { BgPicture, Bunting, SERIES_BG, SERIES_BG_PORTRAIT, SERIES_BG_BONUS, SERIES_BG_PORTRAIT_BONUS } from "./CosmicBackground";
 import { mathConfig } from "../game/engine";
 import type { Copy } from "../game/social";
 import { FitText } from "./FitText";
@@ -11,7 +11,16 @@ const GAME_TITLE = ["MUERTA", "POKER"] as const;
 type Props = {
   onContinue: () => void;
   copy: Copy;
+  /**
+   * The embedded Godot board has booted (WebBridge "ready"). Until then the
+   * bar holds short of 100% and tap-to-continue stays hidden, so the player
+   * never lands on Godot's own second loading screen.
+   */
+  gameReady?: boolean;
 };
+
+/** Where the bar parks while only the Godot build is still loading. */
+const WAIT_FOR_GAME_PCT = 92;
 
 const SOUND_PRELOAD: string[] = [
   assetUrl("assets/sounds/button_click.wav"),
@@ -19,7 +28,7 @@ const SOUND_PRELOAD: string[] = [
   assetUrl("assets/sounds/music_muerta.wav"),
 ];
 
-const IMAGE_PRELOAD: string[] = [assetUrl(SERIES_BG), assetUrl(SERIES_BG_PORTRAIT), ...cardImageUrls()];
+const IMAGE_PRELOAD: string[] = [assetUrl(SERIES_BG), assetUrl(SERIES_BG_PORTRAIT), assetUrl(SERIES_BG_BONUS), assetUrl(SERIES_BG_PORTRAIT_BONUS), ...cardImageUrls()];
 
 const PRELOAD_TIMEOUT_MS = 2500;
 /** Boot floor: real preload still gates completion — this only guarantees the
@@ -38,6 +47,9 @@ function withTimeout(p: Promise<void>, ms: number): Promise<void> {
     });
   });
 }
+
+/** Decoded card art stays referenced for the life of the page. */
+const DECODED_KEEP: HTMLImageElement[] = [];
 
 function preloadOne(url: string): Promise<void> {
   const lower = url.toLowerCase();
@@ -74,8 +86,15 @@ function preloadOne(url: string): Promise<void> {
   if (lower.includes(".jpg") || lower.includes(".jpeg") || lower.includes(".png") || lower.includes(".webp")) {
     return new Promise((resolve) => {
       const img = new Image();
-      img.onload = () => resolve();
+      img.decoding = "async";
       img.onerror = () => resolve();
+      img.onload = () => {
+        // Decode now (not at first paint) so the first spins don't hitch, and keep the
+        // element alive so the browser keeps the decoded bitmap around.
+        DECODED_KEEP.push(img);
+        const d = typeof img.decode === "function" ? img.decode() : Promise.resolve();
+        d.then(() => resolve(), () => resolve());
+      };
       img.src = url;
     });
   }
@@ -86,10 +105,18 @@ function preloadOne(url: string): Promise<void> {
  * Single boot screen (Cloudy Poker): sky, wordmark, three feature tickets,
  * preload bar that swaps to tap-to-continue at 100%. Tap before 100% is a no-op.
  */
-export function BootSplash({ onContinue, copy }: Props) {
+export function BootSplash({ onContinue, copy, gameReady = true }: Props) {
   const [progress, setProgress] = useState(0);
   const [shown, setShown] = useState(0);
+  // Mobile intro (Cookout reference): portrait shows ONE feature ticket at a
+  // time, cycling every ~3 s; landscape keeps all three side by side.
+  const [isPortrait, setIsPortrait] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(orientation: portrait)").matches,
+  );
+  const [cycle, setCycle] = useState(0);
   const progressRef = useRef(0);
+  const gameReadyRef = useRef(gameReady);
+  gameReadyRef.current = gameReady;
   const onDoneRef = useRef(onContinue);
   onDoneRef.current = onContinue;
   const ready = Math.round(shown) >= 100;
@@ -130,7 +157,9 @@ export function BootSplash({ onContinue, copy }: Props) {
     let raf = 0;
     const tick = () => {
       setShown((s) => {
-        const target = progressRef.current;
+        const target = gameReadyRef.current
+          ? progressRef.current
+          : Math.min(progressRef.current, WAIT_FOR_GAME_PCT);
         if (target - s <= 0.4) return target;
         return s + (target - s) * 0.06;
       });
@@ -140,7 +169,77 @@ export function BootSplash({ onContinue, copy }: Props) {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  // Track orientation flips so resize between phone/desktop keeps the right layout.
+  useEffect(() => {
+    const mq = window.matchMedia("(orientation: portrait)");
+    const onChange = () => setIsPortrait(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // 3 s rotation of the single mobile ticket.
+  useEffect(() => {
+    if (!isPortrait) return;
+    const t = setInterval(() => setCycle((c) => (c + 1) % 3), 3000);
+    return () => clearInterval(t);
+  }, [isPortrait]);
+
   const shownPct = Math.round(shown);
+
+  const tickets = [
+    <div className="boot-card boot-float-a" key="a">
+      <div className="boot-card-inner">
+        <div className="boot-card-icon">
+          <span className="boot-icon-cloud">
+            <img
+              src={assetUrl("assets/ui/bank-plate.svg")}
+              alt=""
+              className="boot-icon-cloud-img"
+              draggable={false}
+              aria-hidden
+            />
+            <span className="boot-icon-cloud-x">×2</span>
+          </span>
+        </div>
+        <FitText className="boot-card-title" maxLines={2} oneLine>{copy.bootMultTitle}</FitText>
+        <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootMultCaption}</FitText>
+      </div>
+    </div>,
+
+    <div className="boot-card boot-float-b" key="b">
+      <div className="boot-card-inner">
+        <div className="boot-card-icon">
+          <span className="boot-icon-ace">
+            <img
+              src={jokerFaceUrl()}
+              alt=""
+              className="boot-icon-ace-img"
+              draggable={false}
+              aria-hidden
+            />
+          </span>
+        </div>
+        <FitText className="boot-card-title" maxLines={2} oneLine>{copy.stormBonus}</FitText>
+        <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootBonusCaption(mathConfig.fsCount)}</FitText>
+      </div>
+    </div>,
+
+    <div className="boot-card boot-float-c" key="c">
+      <div className="boot-card-inner">
+        <div className="boot-card-icon boot-card-icon-max">
+          <span className="boot-maxwin" aria-hidden>
+            <span className="boot-maxwin-line" data-text="MAX">
+              MAX
+            </span>
+            <span className="boot-maxwin-line" data-text="WIN">
+              WIN
+            </span>
+          </span>
+        </div>
+        <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootMaxCaption}</FitText>
+      </div>
+    </div>,
+  ];
 
   return (
     <div
@@ -153,65 +252,28 @@ export function BootSplash({ onContinue, copy }: Props) {
     >
       <BgPicture className="boot-sky pointer-events-none absolute inset-0 z-0" />
       <div className="boot-vignette pointer-events-none absolute inset-0 z-[1]" />
+      <Bunting />
 
       <div className="boot-wordmark relative z-10" aria-label={GAME_TITLE.join(" ")}>
         <span className="boot-wordmark-cloudy">{GAME_TITLE[0]}</span>
         <span className="boot-wordmark-poker">{GAME_TITLE[1]}</span>
       </div>
 
-      <div className="boot-cards relative z-10 my-auto flex items-stretch justify-center">
-        <div className="boot-card boot-float-a">
-          <div className="boot-card-inner">
-            <div className="boot-card-icon">
-              <span className="boot-icon-cloud">
-                <img
-                  src={assetUrl("assets/ui/ink-plate.svg")}
-                  alt=""
-                  className="boot-icon-cloud-img"
-                  draggable={false}
-                  aria-hidden
-                />
-                <span className="boot-icon-cloud-x">×2</span>
-              </span>
-            </div>
-            <FitText className="boot-card-title" maxLines={2} oneLine>{copy.bootMultTitle}</FitText>
-            <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootMultCaption}</FitText>
-          </div>
-        </div>
 
-        <div className="boot-card boot-float-b">
-          <div className="boot-card-inner">
-            <div className="boot-card-icon">
-              <span className="boot-icon-ace">
-                <img
-                  src={jokerFaceUrl()}
-                  alt=""
-                  className="boot-icon-ace-img"
-                  draggable={false}
-                  aria-hidden
-                />
-              </span>
-            </div>
-            <FitText className="boot-card-title" maxLines={2} oneLine>{copy.stormBonus}</FitText>
-            <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootBonusCaption(mathConfig.fsCount)}</FitText>
+      <div
+        className={
+          isPortrait
+            ? "boot-cards boot-cards-cycle relative z-10 my-auto flex items-stretch justify-center"
+            : "boot-cards relative z-10 my-auto flex items-stretch justify-center"
+        }
+      >
+        {isPortrait ? (
+          <div key={cycle} className="boot-cycle-card">
+            {tickets[cycle]}
           </div>
-        </div>
-
-        <div className="boot-card boot-float-c">
-          <div className="boot-card-inner">
-            <div className="boot-card-icon boot-card-icon-max">
-              <span className="boot-maxwin" aria-hidden>
-                <span className="boot-maxwin-line" data-text="MAX">
-                  MAX
-                </span>
-                <span className="boot-maxwin-line" data-text="WIN">
-                  WIN
-                </span>
-              </span>
-            </div>
-            <FitText className="boot-card-caption" maxLines={3} min={0.6}>{copy.bootMaxCaption}</FitText>
-          </div>
-        </div>
+        ) : (
+          tickets
+        )}
       </div>
 
       <div className="boot-bottom relative z-10 mb-6 flex min-h-[4.6rem] w-80 flex-col items-center justify-end">

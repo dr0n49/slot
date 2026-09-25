@@ -3,6 +3,7 @@ import App from "./App";
 import { applyLiteFxClass } from "./game/fxMode";
 import "./index.css";
 import "./noir.css";
+import "./vibrant.css";
 
 applyLiteFxClass();
 

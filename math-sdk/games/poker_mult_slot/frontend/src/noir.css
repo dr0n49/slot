@@ -87,9 +87,125 @@ body {
   inset: 0;
   pointer-events: none;
   background: radial-gradient(ellipse 34% 58% at 50% 46%, rgba(200, 16, 46, 0.3), transparent 72%);
+  transition: background 0.9s ease;
 }
 .game-stage[data-orient="portrait"] .cosmic-bg::after {
   background: radial-gradient(ellipse 75% 34% at 50% 44%, rgba(200, 16, 46, 0.3), transparent 72%);
+}
+
+/* Free spins: the whole scene steps from blood-red to violet — same bunting art,
+   cheap hue-shift on the photo layer + a recoloured light pool, no new SVG needed. */
+.bg-bonus-layer .storm-photo {
+  filter: hue-rotate(-42deg) saturate(1.12) brightness(1.03);
+}
+.cosmic-bg[data-bonus="1"]::after {
+  background: radial-gradient(ellipse 34% 58% at 50% 46%, rgba(139, 32, 201, 0.34), transparent 72%);
+}
+.game-stage[data-orient="portrait"] .cosmic-bg[data-bonus="1"]::after {
+  background: radial-gradient(ellipse 75% 34% at 50% 44%, rgba(139, 32, 201, 0.34), transparent 72%);
+}
+
+/* Bunting (CosmicBackground.tsx → Bunting): live flags on a string instead of art baked into
+   the backdrop, so each one can sway on its own — plain cut flags, no face/symbol in the middle,
+   same weight in base and bonus. */
+.bunting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1600 / 140;
+  pointer-events: none;
+  /* Flags are sized in cqw of this box: 1 art unit = 1/1600 of its width. */
+  container-type: inline-size;
+}
+.bunting-ropes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+/* 0×0 anchor sitting exactly on the rope knot; everything below rotates around it. */
+.papel {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.papel-swing,
+.papel-pose,
+.papel-flutter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+/* Pendulum around the knot. ease-in-out between the two extremes is a sine
+   swing; alternate keeps it continuous (no snap back at the loop point). */
+.papel-swing {
+  transform: rotate(var(--rot, 0deg));
+  animation: papel-swing 4s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes papel-swing {
+  from {
+    transform: rotate(calc(var(--rot, 0deg) - var(--amp, 4deg)));
+  }
+  to {
+    transform: rotate(calc(var(--rot, 0deg) + var(--amp, 4deg)));
+  }
+}
+/* Faster secondary motion from the top edge: the sheet bends and slightly
+   foreshortens as if catching air — sells the paper as a physical object. */
+.papel-flutter {
+  animation: papel-flutter 1.8s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes papel-flutter {
+  from {
+    transform: skewX(-2.4deg) scale(1, 1);
+  }
+  to {
+    transform: skewX(2.8deg) scale(0.97, 0.955);
+  }
+}
+.papel-img,
+.papel-sheen {
+  position: absolute;
+  display: block;
+  max-width: none;
+  user-select: none;
+}
+/* Highlight clipped to the flag's own cut shape, breathing with the swing so
+   the paper catches and loses the light as it turns. */
+.papel-sheen {
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0) 30%, rgba(255, 244, 214, 0.32) 48%, rgba(255, 255, 255, 0) 66%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  opacity: 0;
+  animation: papel-sheen 4s ease-in-out infinite alternate;
+  will-change: opacity;
+}
+@keyframes papel-sheen {
+  from {
+    opacity: 0.05;
+  }
+  to {
+    opacity: 0.85;
+  }
+}
+html.lite-fx .papel-swing,
+html.lite-fx .papel-flutter,
+html.lite-fx .papel-sheen {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .papel-swing,
+  .papel-flutter,
+  .papel-sheen {
+    animation: none;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -234,13 +350,34 @@ body {
   clip-path: inset(-14px -14px var(--reel-pad-y) -14px);
 }
 
-/* Winners: blood-red ink halo that keeps pulsing while the line is shown. */
+/* Winners: blood-red ink halo that keeps pulsing while the line is shown.
+   The lift rolls left→right across the hand (--wi = column) so it reads as a wave,
+   not one flat blink. */
 .card-win.is-win {
   z-index: 8;
   filter: drop-shadow(0 0 4px rgba(255, 59, 78, 0.95)) drop-shadow(0 0 9px rgba(200, 16, 46, 0.35));
   animation:
-    card-win-lift-soft 0.4s cubic-bezier(0.28, 1.2, 0.4, 1) both,
-    noir-win-pulse 1.05s ease-in-out 0.4s infinite;
+    noir-win-lift 0.5s cubic-bezier(0.22, 1.3, 0.36, 1) calc(var(--wi, 0) * 65ms) both,
+    noir-win-pulse 1.05s ease-in-out calc(0.5s + var(--wi, 0) * 65ms) infinite;
+}
+.card-grid[data-turbo="1"] .card-win.is-win {
+  animation:
+    noir-win-lift 0.34s cubic-bezier(0.22, 1.3, 0.36, 1) calc(var(--wi, 0) * 35ms) both,
+    noir-win-pulse 0.9s ease-in-out calc(0.34s + var(--wi, 0) * 35ms) infinite;
+}
+@keyframes noir-win-lift {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-10px) scale(1.1) rotate(-1.4deg);
+  }
+  65% {
+    transform: translateY(-4px) scale(1.04) rotate(0.9deg);
+  }
+  100% {
+    transform: translateY(-6px) scale(1.06) rotate(0deg);
+  }
 }
 @keyframes noir-win-pulse {
   0%,
@@ -364,13 +501,15 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Buttons: ink plates with a bone hairline and a hard drop */
+/* Buttons: ink plates with a bone hairline and a hard drop — lighter footprint than a full
+   opaque plate (smaller, a bit see-through), full strength back on hover/press. */
 .hud-chip-btn,
 .hud-icon-btn,
 .hud-sq-btn {
   color: var(--bone);
   background: linear-gradient(180deg, #2e2023, #150d0f);
   border: 2px solid var(--ink);
+  opacity: 0.8;
   box-shadow:
     0 0 0 1.5px var(--bone-dim),
     0 3px 0 1.5px var(--ink);
@@ -379,6 +518,7 @@ body {
 .hud-icon-btn:not(:disabled):hover,
 .hud-sq-btn:not(:disabled):hover {
   transform: translateY(-1px);
+  opacity: 1;
   box-shadow:
     0 0 0 1.5px var(--gold),
     0 4px 0 1.5px var(--ink),
@@ -388,13 +528,14 @@ body {
 .hud-icon-btn:not(:disabled):active,
 .hud-sq-btn:not(:disabled):active {
   transform: translateY(2px);
+  opacity: 1;
   box-shadow:
     0 0 0 1.5px var(--gold),
     0 1px 0 1.5px var(--ink);
 }
 .hud-sq-btn {
-  height: 3.1rem;
-  width: 3.1rem;
+  height: 2.85rem;
+  width: 2.85rem;
   border-radius: 0.55rem;
 }
 .hud-sq-btn.is-on,
@@ -416,8 +557,8 @@ body {
   color: var(--bone);
 }
 .hud-chip-btn {
-  height: 1.9rem;
-  width: 1.9rem;
+  height: 1.7rem;
+  width: 1.7rem;
   border-radius: 0.4rem;
 }
 
@@ -487,7 +628,7 @@ body {
   filter: saturate(0.5) brightness(0.8);
 }
 .hud-spin:not(:disabled):active {
-  transform: translateX(-50%) translateY(4px) scale(0.98);
+  transform: translateY(4px) scale(0.98);
 }
 .spin-arrow {
   color: var(--bone);
@@ -558,34 +699,77 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   Landscape side plaques (paylines / hand pays)
+   Landscape side plaques (paylines / hand pays) — marquee sign with
+   real bulbs (SidePanels.tsx → MarqueeRing), redrawn in the spirit of
+   Hacksaw's Deal With Death: matte ink-outlined rail instead of a
+   glossy showbiz one, hard offset shadow (no blur) to match the board
+   frame's family, bulbs ringed in ink instead of soft brass bloom.
+   Layers back to front: mq-glow (win flare) → mq-plate (blood rail) →
+   mq-face (dark plaque, on a dashed "wire") → mq-ring (bulbs) → text.
    ══════════════════════════════════════════════════════════════════ */
 .side-panel {
   --mq: 13px;            /* width of the red marquee band around the plaque */
-  --mq-pitch: 24px;      /* distance between two big bulbs */
   position: absolute;
   z-index: 6;
   top: 50%;
   width: 15.5rem;
   padding: 0.85rem 0.9rem 0.95rem;
   transform: translateY(-54%);
+  border: 2px solid transparent;
   border-radius: 0.45rem;
-  /* thin dashed gold inner line (the "wire" the bulbs sit around) */
-  border: 2px dashed var(--gold);
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
-    linear-gradient(180deg, rgba(30, 20, 23, 0.97), rgba(10, 6, 8, 0.97));
-  /* red band + ink outline + hard shadow, all drawn OUTSIDE the plaque */
-  box-shadow:
-    0 0 0 var(--mq) var(--blood),
-    0 0 0 calc(var(--mq) + 3px) var(--ink),
-    calc(var(--mq) + 8px) calc(var(--mq) + 10px) 0 3px rgba(0, 0, 0, 0.5),
-    0 0 34px calc(var(--mq) + 6px) rgba(200, 16, 46, 0.28);
+  background: none;
+  box-shadow: none;
   pointer-events: none;
 }
-/* Bulb garland (SidePanels.tsx → MarqueeRing): big gold bulbs alternate with small red ones on the
-   red band. Each bulb has a dim base and a bright "lit" layer whose opacity is chased around the
-   loop by a per-bulb phase (--p): two comets run clockwise, lit bulbs flare with a halo. */
+.side-panel.is-winning {
+  animation: none;
+}
+/* the dark plaque face, strung on a thin dashed gold "wire" */
+.mq-face {
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 0.45rem;
+  border: 2px dashed var(--gold-dk);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, var(--char-1) 0%, var(--char-2) 55%, #0a0507 100%);
+  box-shadow:
+    0 0 0 1px var(--ink),
+    inset 0 0 34px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+}
+/* the rail the bulbs sit on: matte lacquered blood-red, ink + bone outline, hard offset shadow */
+.mq-plate {
+  position: absolute;
+  inset: calc(-2px - var(--mq));
+  z-index: -1;
+  border-radius: calc(0.45rem + var(--mq) * 0.6);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 8px),
+    linear-gradient(180deg, var(--blood-hi) 0%, var(--blood) 45%, var(--blood-deep) 100%);
+  box-shadow:
+    0 0 0 2px var(--ink),
+    0 0 0 4.5px var(--bone-dim),
+    0 0 0 6.5px var(--ink),
+    calc(var(--mq) * 0.6 + 5px) calc(var(--mq) * 0.6 + 7px) 0 3px rgba(0, 0, 0, 0.55),
+    0 0 40px calc(var(--mq) * 0.5) rgba(200, 16, 46, 0.3);
+  pointer-events: none;
+}
+.mq-glow {
+  position: absolute;
+  inset: calc(-2px - var(--mq));
+  z-index: -2;
+  border-radius: 22px;
+  opacity: 0;
+  box-shadow:
+    0 0 55px 20px rgba(226, 176, 74, 0.55),
+    0 0 90px 30px rgba(200, 16, 46, 0.28);
+  pointer-events: none;
+}
+/* Bulb garland: gold and blood-red bulbs alternate around the rail. Each bulb has a dim
+   base and a bright "lit" layer whose opacity is chased around the loop by a per-bulb
+   phase (--p): two comets run clockwise, and a win flares every bulb at once. */
 .mq-ring {
   --mq-dur: 2.6s;
   position: absolute;
@@ -598,22 +782,23 @@ body {
   height: 11px;
   margin: -5.5px 0 0 -5.5px;
   border-radius: 50%;
-  background: radial-gradient(circle at 38% 32%, #f3d56c 0 22%, #d4a52a 62%, #9c6f17 100%);
-  box-shadow: 0 0 0 1.6px #4a0a14;
+  background: radial-gradient(circle at 38% 30%, var(--gold-hi) 0 22%, var(--gold) 58%, var(--gold-dk) 100%);
+  box-shadow:
+    0 0 0 1.6px var(--ink),
+    0 2px 2px rgba(0, 0, 0, 0.55);
 }
-.mq-bulb.is-sm {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: radial-gradient(circle at 40% 34%, #ff6d6d 0, #c8102e 68%, #86091c 100%);
-  box-shadow: 0 0 0 1.2px #4a0a14;
+.mq-bulb.is-red {
+  background: radial-gradient(circle at 38% 30%, var(--blood-hi) 0 22%, var(--blood) 58%, var(--blood-deep) 100%);
+  box-shadow:
+    0 0 0 1.6px var(--ink),
+    0 2px 2px rgba(0, 0, 0, 0.55);
 }
 .mq-bulb::after {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: 50%;
-  background: radial-gradient(circle at 42% 36%, #fffef2 0 24%, #ffe863 60%, #ffc61f 100%);
+  background: radial-gradient(circle at 42% 36%, #fffef2 0 24%, var(--gold-hi) 60%, var(--gold) 100%);
   box-shadow:
     0 0 5px 2px rgba(255, 220, 70, 0.9),
     0 0 14px 5px rgba(255, 176, 30, 0.42);
@@ -621,8 +806,11 @@ body {
   animation: noir-chase var(--mq-dur) linear infinite;
   animation-delay: calc((var(--p) - 1) * var(--mq-dur));
 }
-.mq-bulb.is-sm::after {
-  box-shadow: 0 0 4px 1.5px rgba(255, 210, 60, 0.85);
+.mq-bulb.is-red::after {
+  background: radial-gradient(circle at 42% 36%, #ffe9e9 0 20%, var(--blood-hi) 55%, var(--blood) 100%);
+  box-shadow:
+    0 0 5px 2px rgba(255, 59, 78, 0.85),
+    0 0 14px 5px rgba(200, 16, 46, 0.45);
 }
 @keyframes noir-chase {
   0% { opacity: 0; }
@@ -631,14 +819,45 @@ body {
   30% { opacity: 0; }
   100% { opacity: 0; }
 }
-html.lite-fx .mq-bulb::after {
+/* a paying hand: the whole ring flares together and stays lit until the next spin */
+.side-panel.is-winning .mq-bulb::after {
+  animation: noir-mq-flash 1.2s ease-out 0.12s both;
+}
+.side-panel.is-winning .mq-glow {
+  animation: noir-mq-glow 1.5s ease-out 0.12s both;
+}
+@keyframes noir-mq-flash {
+  0% { opacity: 0.15; }
+  20% { opacity: 1; }
+  38% { opacity: 0.8; }
+  60%, 100% { opacity: 1; }
+}
+@keyframes noir-mq-glow {
+  0% { opacity: 0; }
+  28% { opacity: 1; }
+  100% { opacity: 0.35; }
+}
+/* pays less than the stake: bulbs stay lit, but no flare / flash around the sign */
+.side-panel.is-soft-win .mq-glow {
+  display: none;
+}
+.side-panel.is-soft-win.is-winning .mq-bulb::after {
   animation: none;
-  opacity: 0;
+  opacity: 1;
+}
+html.lite-fx .mq-bulb::after,
+html.lite-fx .side-panel.is-winning .mq-bulb::after {
+  animation: none;
+  opacity: 0.5;
 }
 @media (prefers-reduced-motion: reduce) {
-  .mq-bulb::after {
+  .mq-bulb::after,
+  .side-panel.is-winning .mq-bulb::after,
+  .side-panel.is-winning .mq-glow {
     animation: none;
-    opacity: 0;
+  }
+  .mq-bulb::after {
+    opacity: 0.5;
   }
 }
 .side-panel-left {
@@ -730,23 +949,22 @@ html.lite-fx .mq-bulb::after {
 }
 .game-stage[data-orient="landscape"] .hud-spin-slot {
   width: 92px;
-  height: 3.4rem;
+  height: 92px;
 }
 .game-stage[data-orient="landscape"] .hud-spin {
   width: 86px;
   height: 86px;
-  bottom: 0.95rem;
 }
 .game-stage[data-orient="landscape"] .hud-sq-btn {
-  height: 2.7rem;
-  width: 2.7rem;
+  height: 2.1rem;
+  width: 2.1rem;
 }
 .game-stage[data-orient="landscape"] .hud-meter-value {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
 }
 .game-stage[data-orient="landscape"] .hud-bonus-btn {
-  font-size: 0.82rem;
-  padding: 0.42rem 0.85rem;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.75rem;
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -763,12 +981,12 @@ html.lite-fx .mq-bulb::after {
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas:
     "info bonus snd"
-    "bal  spin  stk"
-    "bet  spin  fx";
+    "bet  spin  fx"
+    "bal  bal   stk"; /* layout owned by vibrant.css section 16 */
   align-items: center;
   column-gap: 10px;
-  row-gap: 10px;
-  padding: 22px 18px 18px;
+  row-gap: 8px;
+  padding: 16px 14px 12px;
 }
 .game-stage[data-orient="portrait"] .hud-left,
 .game-stage[data-orient="portrait"] .hud-right,
@@ -780,6 +998,12 @@ html.lite-fx .mq-bulb::after {
   grid-area: bal;
   justify-self: start;
   align-self: end;
+}
+/* bottom strip is meters-only: kill their side padding so the labels read
+   flush like the Cookout reference */
+.game-stage[data-orient="portrait"] .hud-left > .hud-meter .hud-meter-label,
+.game-stage[data-orient="portrait"] .hud-stake > .hud-meter .hud-meter-label {
+  letter-spacing: 0.18em;
 }
 .game-stage[data-orient="portrait"] .hud-tools > .hud-bonus-btn {
   grid-area: bonus;
@@ -842,9 +1066,6 @@ html.lite-fx .mq-bulb::after {
   height: 150px;
   width: 150px;
 }
-.game-stage[data-orient="portrait"] .hud-spin {
-  bottom: 0;
-}
 .game-stage[data-orient="portrait"] .hud-meter-label {
   font-size: 22px;
 }
@@ -853,8 +1074,8 @@ html.lite-fx .mq-bulb::after {
   margin-top: 2px;
 }
 .game-stage[data-orient="portrait"] .hud-sq-btn {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   border-radius: 14px;
 }
 .game-stage[data-orient="portrait"] .hud-bet-col {
@@ -862,8 +1083,8 @@ html.lite-fx .mq-bulb::after {
   gap: 10px;
 }
 .game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   border-radius: 14px;
 }
 .game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn svg {
@@ -1301,7 +1522,6 @@ html.lite-fx .mq-bulb::after {
   border-radius: 0.4em;
   background:
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 16, 46, 0.24), transparent 62%),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 8px),
     linear-gradient(180deg, #24181b, #120b0d);
   box-shadow: inset 0 0 0 0.1em rgba(241, 230, 204, 0.22);
 }
@@ -1365,12 +1585,8 @@ html.lite-fx .mq-bulb::after {
 .boot-maxwin-line::before {
   display: none;
 }
-.game-stage[data-orient="portrait"] .boot-card {
-  font-size: 17px;
-}
-.game-stage[data-orient="portrait"] .boot-cards {
-  gap: 1.4rem;
-}
+/* portrait ticket sizing now lives in vibrant.css section 21 (single
+   cycling card); the old 3-across portrait rules are superseded */
 .loading-bar {
   height: 8px;
   border-radius: 2px;
@@ -1431,7 +1647,8 @@ html.lite-fx .mq-bulb::after {
   background: rgba(5, 2, 3, 0.82);
 }
 
-/* Slow-turning ink rays behind the word */
+/* Slow-turning ink rays behind the word — colour + speed step with the tier,
+   so SENSATIONAL/MAX read as a different order of event, not just a bigger NICE. */
 .bigwin-overlay .cele-float::before {
   content: "";
   position: absolute;
@@ -1447,12 +1664,55 @@ html.lite-fx .mq-bulb::after {
   mask-image: radial-gradient(circle, #000 0, transparent 52%);
   animation: noir-rays 26s linear infinite;
 }
+.bigwin-overlay[data-tier="super"] .cele-float::before {
+  background: repeating-conic-gradient(from 0deg, rgba(240, 165, 52, 0.4) 0 6deg, transparent 6deg 18deg);
+  animation-duration: 19s;
+}
+/* SENSATIONAL steps out of the warm gold/blood family entirely — cool silver-blue vortex. */
+.bigwin-overlay[data-tier="sensational"] .cele-float::before {
+  background: repeating-conic-gradient(from 0deg, rgba(150, 210, 255, 0.42) 0 5deg, transparent 5deg 15deg);
+  animation-duration: 13s;
+}
+/* MAX — violet portal, the rarest family, fastest spin. */
+.bigwin-overlay[data-tier="max"] .cele-float::before {
+  background: repeating-conic-gradient(from 0deg, rgba(176, 82, 255, 0.46) 0 5deg, transparent 5deg 15deg);
+  animation-duration: 9s;
+}
+/* Second, contra-rotating ring — only on the top two rungs, for real portal depth. */
+.bigwin-overlay[data-tier="sensational"] .cele-float::after,
+.bigwin-overlay[data-tier="max"] .cele-float::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 46%;
+  width: 1180px;
+  height: 1180px;
+  margin: -590px 0 0 -590px;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle, transparent 30%, #000 42%, transparent 60%);
+  mask-image: radial-gradient(circle, transparent 30%, #000 42%, transparent 60%);
+  animation: noir-rays-rev 17s linear infinite;
+}
+.bigwin-overlay[data-tier="sensational"] .cele-float::after {
+  background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.28) 0 3deg, transparent 3deg 20deg);
+}
+.bigwin-overlay[data-tier="max"] .cele-float::after {
+  background: repeating-conic-gradient(from 0deg, rgba(255, 210, 90, 0.3) 0 3deg, transparent 3deg 20deg);
+  animation-duration: 11s;
+}
 @keyframes noir-rays {
   to {
     transform: rotate(360deg);
   }
 }
-html.lite-fx .bigwin-overlay .cele-float::before {
+@keyframes noir-rays-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+html.lite-fx .bigwin-overlay .cele-float::before,
+html.lite-fx .bigwin-overlay .cele-float::after {
   animation: none;
 }
 
@@ -1479,14 +1739,29 @@ html.lite-fx .bigwin-overlay .cele-float::before {
 .cele-word-super .cele-word-face {
   color: var(--gold-hi);
 }
-.bigwin-overlay[data-tier="sensational"] .cele-word-face,
+/* SENSATIONAL breaks out of the gold/blood family — bright metallic silver, cool glow.
+   Reads as a distinct rarer event, not "NICE but bigger". */
+.bigwin-overlay[data-tier="sensational"] .cele-word-face {
+  color: #eef3fb;
+  -webkit-text-stroke-color: #1a2233;
+  text-shadow:
+    0 5px 0 #7fa8d9,
+    0 10px 0 #34507a,
+    0 0 46px rgba(140, 200, 255, 0.75),
+    0 18px 30px rgba(0, 0, 0, 0.75);
+}
+.bigwin-overlay[data-tier="sensational"] .cele-word-depth {
+  -webkit-text-stroke-color: #1a2233;
+}
+/* MAX — the rarest rung, violet/gold hybrid so it still reads as "part of this game"
+   rather than a foreign palette. */
 .bigwin-overlay[data-tier="max"] .cele-word-face {
   color: var(--gold-hi);
   text-shadow:
-    0 5px 0 var(--blood-hi),
-    0 10px 0 var(--blood-deep),
-    0 0 44px rgba(255, 59, 78, 0.7),
-    0 18px 30px rgba(0, 0, 0, 0.75);
+    0 5px 0 #7a1fb0,
+    0 10px 0 #3d0e5c,
+    0 0 50px rgba(190, 90, 255, 0.85),
+    0 18px 30px rgba(0, 0, 0, 0.8);
 }
 .cele-word-nice {
   font-size: 5.6rem;
@@ -1526,6 +1801,74 @@ html.lite-fx .bigwin-overlay .cele-float::before {
   height: 2rem;
   filter: drop-shadow(0 0 10px rgba(255, 59, 78, 0.8));
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   Calavera flanks — SENSATIONAL / MAX only. Same mark both sides,
+   right one mirrored. Tinted per tier to match the vortex behind it.
+   ══════════════════════════════════════════════════════════════════ */
+.cele-word-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 2vw, 1.1rem);
+}
+.cele-calavera {
+  width: clamp(2.4rem, 6.2vw, 3.9rem);
+  height: auto;
+  flex: none;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(200, 16, 46, 0.5));
+  animation: cele-skull-pop 0.46s 0.05s cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+.cele-calavera-right {
+  transform: scaleX(-1);
+  animation-delay: 0.1s;
+}
+.bigwin-overlay[data-tier="sensational"] .cele-calavera {
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(150, 210, 255, 0.6));
+}
+.bigwin-overlay[data-tier="max"] .cele-calavera {
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(176, 82, 255, 0.65));
+}
+@keyframes cele-skull-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(6px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.cele-calavera-right.cele-calavera {
+  animation-name: cele-skull-pop-r;
+}
+@keyframes cele-skull-pop-r {
+  0% {
+    opacity: 0;
+    transform: scaleX(-1) scale(0.5) translateY(6px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(-1) scale(1) translateY(0);
+  }
+}
+.game-stage[data-orient="portrait"] .cele-calavera {
+  width: clamp(2rem, 9vw, 3rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cele-calavera {
+    animation: none;
+  }
+}
+html.lite-fx .cele-calavera {
+  animation: none;
+}
 .cele-spark-dot {
   background: var(--blood-hi);
   box-shadow: 0 0 8px rgba(255, 59, 78, 0.9);
@@ -1536,6 +1879,84 @@ html.lite-fx .bigwin-overlay .cele-float::before {
 }
 .cele-splat-img {
   filter: drop-shadow(6px 8px 0 rgba(0, 0, 0, 0.55));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SENSATIONAL / MAX confetti — the one screen-wide moment in the ladder.
+   Diamond chips (clip-path, no bitmap), colour family keyed to the tier,
+   thrown from a fixed centre so it reads full-viewport, not board-local.
+   ══════════════════════════════════════════════════════════════════ */
+.cele-confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cele-confetti-piece {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  opacity: 0;
+  animation: cele-confetti-fly var(--dur) cubic-bezier(0.15, 0.7, 0.3, 1) var(--delay) both;
+  will-change: transform, opacity;
+}
+@keyframes cele-confetti-fly {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--ang)) translateX(0) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--ang)) translateX(var(--dist)) rotate(var(--spin)) scale(0.85);
+  }
+}
+
+/* SENSATIONAL — icy silver/blue, matches the word's cool-metal shift. */
+.cele-confetti-sensational .cele-confetti-piece-0 {
+  background: linear-gradient(135deg, #ffffff, #bcdcff);
+  box-shadow: 0 0 8px rgba(160, 210, 255, 0.8);
+}
+.cele-confetti-sensational .cele-confetti-piece-1 {
+  background: linear-gradient(135deg, #9fd0ff, #4d84c9);
+  box-shadow: 0 0 8px rgba(120, 180, 255, 0.75);
+}
+.cele-confetti-sensational .cele-confetti-piece-2 {
+  background: linear-gradient(135deg, #fff6c8, #e2b04a);
+  box-shadow: 0 0 8px rgba(240, 193, 75, 0.7);
+}
+
+/* MAX — violet/gold, the rarest family on the ladder. */
+.cele-confetti-max .cele-confetti-piece-0 {
+  background: linear-gradient(135deg, #e6b6ff, #b052ff);
+  box-shadow: 0 0 9px rgba(176, 82, 255, 0.85);
+}
+.cele-confetti-max .cele-confetti-piece-1 {
+  background: linear-gradient(135deg, #ffd84a, #e2892a);
+  box-shadow: 0 0 9px rgba(255, 210, 90, 0.8);
+}
+.cele-confetti-max .cele-confetti-piece-2 {
+  background: linear-gradient(135deg, #ffffff, #d8b6ff);
+  box-shadow: 0 0 9px rgba(216, 182, 255, 0.75);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cele-confetti {
+    display: none;
+  }
+}
+html.lite-fx .cele-confetti {
+  display: none;
 }
 .cele-splat-num {
   transform: none;
@@ -1804,6 +2225,72 @@ html.lite-fx .bonus-drop-flash {
     animation: none;
   }
   .bonus-drop-flash {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Court faces (J/Q/K) + the joker — a slow foil sweep across the printed
+   illustration so the figure cards read as "alive" without new art frames.
+   One soft diagonal highlight, mostly idle, sweeps through every few
+   seconds; staggered per rank so a row of face cards doesn't blink in sync.
+   ══════════════════════════════════════════════════════════════════ */
+.card-shimmer {
+  position: absolute;
+  inset: -25% -70%;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(75deg, transparent 42%, rgba(255, 255, 255, 0.5) 50%, transparent 58%);
+  transform: translateX(-140%);
+  opacity: 0;
+}
+.card-shimmer-court {
+  animation: card-shimmer-sweep 7.4s ease-in-out infinite;
+}
+.card-shimmer-gold {
+  background: linear-gradient(75deg, transparent 40%, rgba(255, 232, 170, 0.65) 50%, transparent 60%);
+  animation: card-shimmer-sweep 6.2s ease-in-out 1.4s infinite;
+}
+/* Stagger by rank so J / Q / K on the same deal don't sweep in lockstep. */
+.reel-col:nth-child(5n + 1) .card-shimmer-court {
+  animation-delay: 0.2s;
+}
+.reel-col:nth-child(5n + 2) .card-shimmer-court {
+  animation-delay: 1.3s;
+}
+.reel-col:nth-child(5n + 3) .card-shimmer-court {
+  animation-delay: 2.4s;
+}
+.reel-col:nth-child(5n + 4) .card-shimmer-court {
+  animation-delay: 3.5s;
+}
+.reel-col:nth-child(5n + 5) .card-shimmer-court {
+  animation-delay: 4.6s;
+}
+@keyframes card-shimmer-sweep {
+  0%,
+  62% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  66% {
+    opacity: 0.85;
+  }
+  84% {
+    transform: translateX(140%);
+    opacity: 0.85;
+  }
+  90%,
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+html.lite-fx .card-shimmer {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-shimmer {
     display: none;
   }
 }

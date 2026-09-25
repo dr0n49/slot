@@ -9,7 +9,7 @@
 - Win = Hand Pay × multipliers (face values). Cap 25,000×.
 - Joker (bonus) cards: 3 = BONUS, 4 = JOB, 5 = Flush → 10 FS; bank × accumulates. Jokers are NOT poker cards: any line through one pays 0; floors count live lines only; no multipliers on jokers.
 - Buy UI: BONUS 25×, JOB 35×, Flush 190×; Ante SPIN JOB 5× / SPIN FLUSH 15×.
-- Bonus HUD: left side panel (`BonusBanner`) + storm during FS; WIN is cumulative; bank UI starts at ×0.
+- Bonus HUD: left side panel (`BonusBanner`) + storm during FS; WIN is cumulative; free spins open with bank ×3 (`fsStartBank` in mathConfig; payout factor = max(1, bank)).
 
 ## Dev
 ```bash

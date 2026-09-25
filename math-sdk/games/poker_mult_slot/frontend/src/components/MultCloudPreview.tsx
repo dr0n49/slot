@@ -20,7 +20,7 @@ export function MultCloudPreview() {
           <div key={n} className="mult-cloud-preview-item">
             <div className="bank-cloud bank-cloud-live">
               <img
-                src={assetUrl("assets/ui/ink-plate.svg")}
+                src={assetUrl("assets/ui/bank-plate.svg")}
                 alt=""
                 className="bank-cloud-img"
                 draggable={false}

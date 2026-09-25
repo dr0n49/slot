@@ -10,18 +10,22 @@ export function assetUrl(path: string): string {
 const RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"] as const;
 const SUITS = ["S", "H", "D", "C"] as const;
 
-/** Hand-drawn face PNG for a board card (`AH.png` … `KC.png`). */
+/**
+ * Day-of-the-Dead deck (`cards_v2/AH.webp` … `KC.webp`) — the active face set (see
+ * ASSETS_LICENSE.md). The old `assets/cards/*.png` "Hand Drawn Cards" pack it replaced
+ * has been removed from the project.
+ */
 export function cardFaceUrl(rank: string, suit: string): string {
-  return assetUrl(`assets/cards/${rank}${suit}.png`);
+  return assetUrl(`assets/cards_v2/${rank}${suit}.webp`);
 }
 
 /** Bonus (scatter) card — the gold joker. */
 export function jokerFaceUrl(): string {
-  return assetUrl("assets/cards/JOKER.png");
+  return assetUrl("assets/cards_v2/JOKER.webp");
 }
 
 export function cardBackUrl(): string {
-  return assetUrl("assets/cards/card_back.png");
+  return assetUrl("assets/cards_v2/card_back.png");
 }
 
 /** All 52 faces + the back — splash preloads so the first deal is not empty tiles. */

@@ -10,7 +10,7 @@ const FILES = {
 
 const MUSIC_FILE = assetUrl("assets/sounds/music_muerta.wav");
 /** Background loop sits well below SFX so the mix has space for game sounds. */
-const MUSIC_LEVEL = 0.42;
+const MUSIC_LEVEL = 0.34;
 
 type Sfx = keyof typeof FILES;
 
@@ -31,7 +31,7 @@ function persistVols() {
     /* storage unavailable */
   }
 }
-let sfxVol = loadVol("sfx", 0.7);
+let sfxVol = loadVol("sfx", 0.55);
 let masterVol = loadVol("master", 1);
 let masterMuted = false;
 try {
@@ -43,17 +43,47 @@ let audioCtx: AudioContext | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
 
+// ——— Music bed ———
+// Played through WebAudio as a looping AudioBufferSourceNode: the loop wraps on the exact
+// sample, so there is no gap or click at the seam. (An <audio loop> element re-seeks at the
+// end of the file, which leaves an audible hiccup in most browsers.) The <audio> element
+// below is only a fallback for when the WAV cannot be decoded.
+let musicBuffer: AudioBuffer | null = null;
+let musicLoading: Promise<AudioBuffer | null> | null = null;
+let musicSource: AudioBufferSourceNode | null = null;
+let musicGain: GainNode | null = null;
+let musicFallback = false;
+let musicStopTimer = 0;
+
+async function loadMusicBuffer(c: AudioContext): Promise<AudioBuffer | null> {
+  if (musicBuffer) return musicBuffer;
+  if (!musicLoading) {
+    musicLoading = (async () => {
+      try {
+        const res = await fetch(MUSIC_FILE);
+        const raw = await res.arrayBuffer();
+        musicBuffer = await c.decodeAudioData(raw);
+        return musicBuffer;
+      } catch {
+        return null;
+      } finally {
+        musicLoading = null;
+      }
+    })();
+  }
+  return musicLoading;
+}
+
 function ensureMusic() {
   if (!musicEl) {
     musicEl = new Audio(MUSIC_FILE);
-    musicEl.loop = true; // the WAV is a sample-exact seamless loop
+    musicEl.loop = true;
     musicEl.preload = "auto";
   }
   return musicEl;
 }
 
-function updateMusic() {
-  if (!unlocked) return;
+function updateMusicFallback() {
   const el = ensureMusic();
   el.volume = clamp01(MUSIC_LEVEL * masterVol);
   if (audioEnabled()) {
@@ -61,6 +91,62 @@ function updateMusic() {
   } else if (!el.paused) {
     el.pause();
   }
+}
+
+function updateMusic() {
+  if (!unlocked) return;
+  if (musicFallback) {
+    updateMusicFallback();
+    return;
+  }
+  const c = ensureCtx();
+  if (!c) return;
+  if (!musicGain) {
+    musicGain = c.createGain();
+    musicGain.gain.value = 0;
+    musicGain.connect(c.destination);
+  }
+  const on = audioEnabled() && masterVol > 0;
+  const target = on ? clamp01(MUSIC_LEVEL * masterVol) : 0;
+  // Short glide — no zipper noise on the volume slider, no click on mute/unmute.
+  musicGain.gain.cancelScheduledValues(c.currentTime);
+  musicGain.gain.setTargetAtTime(target, c.currentTime, 0.05);
+
+  window.clearTimeout(musicStopTimer);
+  if (!on) {
+    // Silent: release the source once the fade-out has finished.
+    if (musicSource) {
+      const src = musicSource;
+      musicStopTimer = window.setTimeout(() => {
+        if (musicSource !== src) return;
+        musicSource = null;
+        try {
+          src.stop();
+        } catch {
+          /* already stopped */
+        }
+      }, 400);
+    }
+    return;
+  }
+  if (musicSource) return;
+  void loadMusicBuffer(c).then((buf) => {
+    if (!buf) {
+      musicFallback = true;
+      updateMusic();
+      return;
+    }
+    // Re-check: state may have changed while the file was decoding.
+    if (musicSource || !audioEnabled() || !musicGain) return;
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    src.loop = true;
+    src.loopStart = 0;
+    src.loopEnd = buf.duration;
+    src.connect(musicGain);
+    src.start(0);
+    musicSource = src;
+  });
 }
 
 function canAudio() {
@@ -126,6 +212,70 @@ function ding(
   o.stop(t0 + dur + 0.02);
 }
 
+// ——— Sample pack (rendered SFX: card slap, guitar wins, bells, brass fanfares) ———
+// Decoded once after the first user gesture. Every call site falls back to the small synthesized
+// sting when a sample is not decoded yet, so a slow network never leaves the game silent.
+const SAMPLE_FILES = {
+  reel_stop_0: "assets/sounds/reel_stop_0.mp3",
+  reel_stop_1: "assets/sounds/reel_stop_1.mp3",
+  reel_stop_2: "assets/sounds/reel_stop_2.mp3",
+  reel_stop_3: "assets/sounds/reel_stop_3.mp3",
+  reel_stop_4: "assets/sounds/reel_stop_4.mp3",
+  spin_loop: "assets/sounds/spin_loop.wav",
+  win_soft: "assets/sounds/win_soft.mp3",
+  win_line: "assets/sounds/win_line.mp3",
+  win_multi: "assets/sounds/win_multi.mp3",
+  joker_land: "assets/sounds/joker_land.mp3",
+  anticipation: "assets/sounds/anticipation.mp3",
+  bonus_trigger: "assets/sounds/bonus_trigger.mp3",
+  big_nice: "assets/sounds/big_nice.mp3",
+  big_super: "assets/sounds/big_super.mp3",
+  big_sensational: "assets/sounds/big_sensational.mp3",
+  big_max: "assets/sounds/big_max.mp3",
+  mult_land: "assets/sounds/mult_land.mp3",
+} as const;
+type Sample = keyof typeof SAMPLE_FILES;
+const sampleBuffers = new Map<Sample, AudioBuffer>();
+const samplePending = new Set<Sample>();
+
+function loadSample(name: Sample) {
+  if (sampleBuffers.has(name) || samplePending.has(name)) return;
+  const c = ensureCtx();
+  if (!c) return;
+  samplePending.add(name);
+  void (async () => {
+    try {
+      const res = await fetch(assetUrl(SAMPLE_FILES[name]));
+      const buf = await c.decodeAudioData(await res.arrayBuffer());
+      sampleBuffers.set(name, buf);
+    } catch {
+      /* stays on the synthesized fallback */
+    } finally {
+      samplePending.delete(name);
+    }
+  })();
+}
+
+function preloadSamples() {
+  (Object.keys(SAMPLE_FILES) as Sample[]).forEach(loadSample);
+}
+
+/** Fire a decoded sample once. Returns false when it is not ready (caller uses the synth fallback). */
+function playSample(name: Sample, gain = 1, rate = 1): boolean {
+  const c = ensureCtx();
+  const buf = sampleBuffers.get(name);
+  if (!c || !buf || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return false;
+  const src = c.createBufferSource();
+  src.buffer = buf;
+  src.playbackRate.value = rate;
+  const g = c.createGain();
+  g.gain.value = Math.max(0.0001, sfxVol * masterVol * gain);
+  src.connect(g);
+  g.connect(c.destination);
+  src.start();
+  return true;
+}
+
 const dealBuffers = new Map<string, AudioBuffer>();
 
 async function dealBuffer(name: "card_deal" | "card_deal_turbo"): Promise<AudioBuffer | null> {
@@ -147,7 +297,7 @@ async function dealBuffer(name: "card_deal" | "card_deal_turbo"): Promise<AudioB
 /** One shared reel-spin rumble for the whole spin (not per column). */
 let reelSpinLoop: {
   osc: OscillatorNode;
-  lfo: OscillatorNode;
+  lfo: OscillatorNode | null;
   gain: GainNode;
   stopped: boolean;
 } | null = null;
@@ -156,6 +306,22 @@ function startReelSpinLoopInternal() {
   stopReelSpinLoopInternal(0);
   const c = ensureCtx();
   if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
+  const loopBuf = sampleBuffers.get("spin_loop");
+  if (loopBuf) {
+    // Riffling-deck loop (rendered sample) — seamless, replaces the synth rumble.
+    const src = c.createBufferSource();
+    src.buffer = loopBuf;
+    src.loop = true;
+    const gain = c.createGain();
+    const vol = sfxVol * masterVol * 0.34;
+    gain.gain.setValueAtTime(0.0001, c.currentTime);
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.001, vol), c.currentTime + 0.08);
+    src.connect(gain);
+    gain.connect(c.destination);
+    src.start();
+    reelSpinLoop = { osc: src as unknown as OscillatorNode, lfo: null, gain, stopped: false };
+    return;
+  }
   const osc = c.createOscillator();
   osc.type = "sawtooth";
   osc.frequency.value = 48;
@@ -202,7 +368,7 @@ function stopReelSpinLoopInternal(fadeMs = 90) {
   window.setTimeout(() => {
     try {
       loop.osc.stop();
-      loop.lfo.stop();
+      loop.lfo?.stop();
     } catch {
       /* already stopped */
     }
@@ -210,7 +376,7 @@ function stopReelSpinLoopInternal(fadeMs = 90) {
 }
 
 /** Rising "the bonus might drop" tension bed, held for the extra reel time. */
-let anticipationVoice: { osc: OscillatorNode; lfo: OscillatorNode; gain: GainNode } | null = null;
+let anticipationVoice: { osc: OscillatorNode; lfo: OscillatorNode | null; gain: GainNode } | null = null;
 
 function stopAnticipationInternal(fadeMs = 120) {
   const v = anticipationVoice;
@@ -228,7 +394,7 @@ function stopAnticipationInternal(fadeMs = 120) {
   window.setTimeout(() => {
     try {
       v.osc.stop();
-      v.lfo.stop();
+      v.lfo?.stop();
     } catch {
       /* already stopped */
     }
@@ -240,6 +406,20 @@ function playAnticipationInternal(durationMs: number) {
   if (!audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
   const c = ensureCtx();
   if (!c) return;
+  const sample = sampleBuffers.get("anticipation");
+  if (sample) {
+    // Rising heartbeat drone; the playback rate squeezes its build into the real hold time.
+    const src = c.createBufferSource();
+    src.buffer = sample;
+    src.playbackRate.value = Math.min(2.2, Math.max(0.8, 3.0 / Math.max(0.6, durationMs / 1000)));
+    const gain = c.createGain();
+    gain.gain.value = Math.max(0.001, sfxVol * masterVol * 0.7);
+    src.connect(gain);
+    gain.connect(c.destination);
+    src.start();
+    anticipationVoice = { osc: src as unknown as OscillatorNode, lfo: null, gain };
+    return;
+  }
   const now = c.currentTime;
   const dur = Math.max(0.25, durationMs / 1000);
   const osc = c.createOscillator();
@@ -276,6 +456,7 @@ function playReelStopInternal(col: number) {
   if (!audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
   const c = ensureCtx();
   if (!c) return;
+  if (playSample(`reel_stop_${Math.min(4, Math.max(0, col))}` as Sample, 0.85)) return;
   const now = c.currentTime;
   const vol = sfxVol * masterVol;
   const f = 185 + col * 28;
@@ -305,6 +486,7 @@ export const audio = {
     // Warm deal buffers so the cascade isn't late on the first spin.
     void dealBuffer("card_deal");
     void dealBuffer("card_deal_turbo");
+    preloadSamples();
     updateMusic();
   },
   isMasterMuted() {
@@ -316,7 +498,7 @@ export const audio = {
     // unmuting — enabling sound must actually be audible, so restore defaults.
     if (!masterMuted) {
       if (masterVol <= 0) masterVol = 1;
-      if (sfxVol <= 0) sfxVol = 0.7;
+      if (sfxVol <= 0) sfxVol = 0.55;
     }
     persistVols();
     if (!masterMuted) {
@@ -349,6 +531,7 @@ export const audio = {
   playScatter(count: number) {
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
+    if (playSample("bonus_trigger", count >= 5 ? 1 : count >= 4 ? 0.92 : 0.85)) return;
     const n = count >= 5 ? 5 : count >= 4 ? 4 : 3;
     const hits = n === 5 ? [392, 494, 587, 698, 880] : n === 4 ? [392, 523, 659, 784] : [440, 554, 659];
     const vol = sfxVol * 0.42 * masterVol;
@@ -364,10 +547,18 @@ export const audio = {
   },
 
   /** One clear "lines paid" hit, timed with the card-win reveal. */
-  playLineWin(lines = 1) {
+  playLineWin(lines = 1, soft = false) {
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
+    if (soft) {
+      // Pays less than the stake: one plucked note, not a celebration.
+      if (playSample("win_soft", 0.6)) return;
+      const v = sfxVol * 0.2 * masterVol;
+      ding(c, 523.25, c.currentTime, 0.14, v, "triangle");
+      return;
+    }
     const multi = lines >= 3;
+    if (playSample(multi ? "win_multi" : "win_line", multi ? 0.85 : 0.8)) return;
     const vol = sfxVol * (multi ? 0.5 : 0.42) * masterVol;
     const base = multi ? 659.25 : 587.33;
     const now = c.currentTime;
@@ -385,6 +576,7 @@ export const audio = {
   playBigWin(tier: "nice" | "super" | "sensational" | "max") {
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
+    if (playSample(`big_${tier}` as Sample, 0.85)) return;
     const now = c.currentTime;
     const vol = sfxVol * masterVol;
     if (tier === "nice") {
@@ -458,6 +650,28 @@ export const audio = {
 
   stopReelSpinLoop(fadeMs = 90) {
     stopReelSpinLoopInternal(fadeMs);
+  },
+
+  /** A joker (bonus card) has just landed: heavy toll + gold glint. */
+  playJokerLand() {
+    if (playSample("joker_land", 0.9)) return;
+    const c = ensureCtx();
+    if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
+    const now = c.currentTime;
+    const vol = sfxVol * masterVol;
+    ding(c, 110, now, 0.9, vol * 0.4, "sine");
+    ding(c, 880, now + 0.05, 0.4, vol * 0.18, "triangle");
+  },
+
+  /** A 10–20× line win (below the Big Win ladder): a lighter fanfare. */
+  playMidWin(spinWinX: number) {
+    if (spinWinX < 10 || spinWinX >= 20) return;
+    playSample("big_nice", 0.6);
+  },
+
+  /** A multiplier chip lands on the board. */
+  playMultLand() {
+    playSample("mult_land", 0.7);
   },
 
   /** Short reel_stop — must be called from the column snap callback. */

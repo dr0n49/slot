@@ -38,7 +38,7 @@ export function BonusBanner({ spinsLeft, bank, copy }: Props) {
       <div className="bonus-side-stack flex flex-col items-center gap-3.5 sm:gap-5">
         <div className={`bank-cloud ${hasBank ? "bank-cloud-live" : "bank-cloud-empty"} ${strike ? "bank-strike" : ""}`}>
           <img
-            src={assetUrl("assets/ui/ink-plate.svg")}
+            src={assetUrl("assets/ui/bank-plate.svg")}
             alt=""
             className="bank-cloud-img"
             draggable={false}

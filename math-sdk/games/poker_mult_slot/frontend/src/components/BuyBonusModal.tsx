@@ -140,7 +140,7 @@ export function BuyBonusModal({
               type="button"
               className="buy-bonus-stake-step"
               disabled={!canBetDown}
-              aria-label="Decrease stake"
+              aria-label="Decrease play amount"
               onClick={() => {
                 audio.play("button_click");
                 onBetDown();
@@ -153,7 +153,7 @@ export function BuyBonusModal({
               type="button"
               className="buy-bonus-stake-step"
               disabled={!canBetUp}
-              aria-label="Increase stake"
+              aria-label="Increase play amount"
               onClick={() => {
                 audio.play("button_click");
                 onBetUp();

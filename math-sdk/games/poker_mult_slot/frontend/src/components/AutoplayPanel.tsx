@@ -12,7 +12,7 @@ export function AutoplayPanel({ open, onClose, onSelect, title = "AUTOPLAY ROUND
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-4">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
       <button
         type="button"
         aria-label="Close"
@@ -22,7 +22,7 @@ export function AutoplayPanel({ open, onClose, onSelect, title = "AUTOPLAY ROUND
       <div
         role="dialog"
         aria-modal
-        className="relative w-full max-w-[280px] rounded-2xl border border-white/20 bg-[#1a2333] p-4 shadow-[0_16px_48px_rgba(0,0,0,0.55)]"
+        className="relative my-auto max-h-[92vh] w-full max-w-[280px] overflow-y-auto rounded-2xl border border-white/20 bg-[#1a2333] p-4 shadow-[0_16px_48px_rgba(0,0,0,0.55)]"
       >
         <h3 className="mb-3 text-center font-sans text-xs font-semibold tracking-[0.18em] text-white/70">
           {title}

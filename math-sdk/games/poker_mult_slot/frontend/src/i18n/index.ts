@@ -22,6 +22,7 @@ function mathCopyVars() {
     maxFs: mathConfig.retrigger.maxFs,
     extraFs: mathConfig.retrigger.extraFs,
     fsCount: mathConfig.fsCount,
+    startBank: Math.max(1, Number((mathConfig as { fsStartBank?: number }).fsStartBank ?? 1)),
   };
 }
 
@@ -39,7 +40,7 @@ function formatMoney(n: number): string {
 
 /** Build the app `Copy` shape from localized strings (+ social wording variants). */
 export function buildCopy(lang: Lang, social: boolean): Copy {
-  const s = getStrings(lang);
+  const s = getStrings(lang, social);
   const money = formatMoney;
   const math = mathCopyVars();
 
@@ -52,6 +53,8 @@ export function buildCopy(lang: Lang, social: boolean): Copy {
     auto: s.auto,
     autoplayTitle: s.autoplayTitle,
     disable: s.disable,
+    cancel: s.cancel,
+    confirm: s.confirm,
     bonusBank: s.bonusBank,
     freeSpinsLeft: s.freeSpinsLeft,
     freeSpins: s.freeSpins,

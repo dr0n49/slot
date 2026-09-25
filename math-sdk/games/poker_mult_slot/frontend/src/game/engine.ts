@@ -500,7 +500,8 @@ export function playBonusPackage(kind: BonusKind): {
   finalBank: number;
 } {
   const spins: SpinResult[] = [];
-  let bank = 0;
+  // Free spins open with a starting bank (mathConfig.fsStartBank); the payout factor is max(1, bank).
+  let bank = Number((cfg as { fsStartBank?: number }).fsStartBank ?? 0);
   let totalWinX = 0;
   let remaining = cfg.fsCount;
 

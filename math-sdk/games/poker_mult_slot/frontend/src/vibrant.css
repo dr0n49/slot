@@ -1,0 +1,1941 @@
+/*
+ * VIBRANT layer — loaded after noir.css. Answers the review notes
+ * ("poor animations", "low quality assets", pale / static). Every rule here is additive or an
+ * override; delete this file (and its import in main.tsx) to get the previous look back.
+ *
+ * What lives here:
+ *   1. Black HUD plates
+ *   2. Board frame + backdrop: warmer light, saturation, floating embers
+ *   3. Card tint (the colour grading itself is baked into public/assets/cards_v2)
+ *   4. "Hand pays" plaque lights up for the hands that paid
+ *   5. Reel motion: vertical blur on fast reels
+ *   6. Bonus anticipation: reels that already landed dim, the live ones burn
+ */
+
+/* ══════════════════════════════════════════════════════════════════
+   1. HUD — black, but with real depth (v2)
+   Kept black per his call, but flat #000 + borderless plates read as cut-out
+   web squares next to the gold-bordered grid frame above them. Fixes:
+   a thin gold hairline at the very top ties the bar to the frame's own gold
+   edge, and the plates get a bevel (lighter top-left highlight, darker
+   bottom-right) instead of a flat fill, so they read as pressed metal/bone
+   chips rather than flat squares.
+   ══════════════════════════════════════════════════════════════════ */
+.hud-bar {
+  /* near-black, faint vertical gradient for depth, thin gold top hairline
+     to visually continue the grid frame's gold edge into the HUD */
+  background: linear-gradient(180deg, #0d0d0f 0%, #000 60%);
+  border-top: 2px solid var(--gold-dk, #7a5a22);
+  box-shadow:
+    0 -1px 0 rgba(226, 176, 74, 0.35),
+    0 -14px 30px rgba(0, 0, 0, 0.7);
+}
+.hud-chip-btn,
+.hud-icon-btn,
+.hud-sq-btn,
+.hud-bet-col .hud-icon-btn,
+.hud-vol-pop {
+  background: linear-gradient(145deg, #38383e 0%, #17171a 46%, #060607 100%);
+  border-color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.6),
+    0 2px 0 1.5px rgba(0, 0, 0, 0.8);
+}
+.hud-chip-btn:not(:disabled):hover,
+.hud-icon-btn:not(:disabled):hover,
+.hud-sq-btn:not(:disabled):hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.6),
+    0 0 0 1.5px var(--gold),
+    0 0 14px rgba(226, 176, 74, 0.4);
+}
+.hud-sq-btn.is-on,
+.hud-icon-btn.is-on {
+  background: linear-gradient(145deg, var(--blood-hi), var(--blood) 55%, var(--blood-deep));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(255, 59, 78, 0.5);
+}
+.hud-vol-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--blood-hi) var(--hud-vol), #3a3a3e var(--hud-vol));
+}
+/* SPIN button: a THIN bone/ink ring, always on (rest and hover look the
+   same — no hover dependency, per the user's call after comparing a
+   recording of both). Went through a few wrong turns before this: no ring
+   at all read as too plain (lost the "seal" shape), a thick ring read as
+   too heavy. This keeps the ring but at roughly half the old thickness and
+   drops the outer glow entirely. noir.css's `animation: noir-spin-breathe`
+   drives its own (thick) box-shadow every frame, so it's disabled here —
+   this static thin box-shadow stands in for it, in both states. */
+.respin-btn {
+  animation: none;
+  border: none;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.18),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.45),
+    0 0 0 1.5px var(--bone),
+    0 0 0 3px var(--ink);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   2. Board frame + backdrop
+   ══════════════════════════════════════════════════════════════════ */
+.card-stage-wrap {
+  box-shadow:
+    0 0 0 2px var(--gold),
+    0 0 0 5px var(--ink),
+    7px 9px 0 5px rgba(0, 0, 0, 0.55),
+    0 0 46px rgba(200, 16, 46, 0.34),
+    0 0 96px rgba(255, 150, 40, 0.16);
+}
+
+/* Richer, warmer backdrop: same vector art, more saturation + a marigold light pool. */
+.storm-photo {
+  filter: saturate(1.35) contrast(1.06) brightness(1.08);
+}
+.cosmic-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 46% 60% at 50% 46%, rgba(255, 138, 40, 0.14), transparent 70%),
+    radial-gradient(ellipse 30% 44% at 8% 70%, rgba(255, 60, 100, 0.10), transparent 72%),
+    radial-gradient(ellipse 30% 44% at 92% 70%, rgba(255, 60, 100, 0.10), transparent 72%);
+}
+
+/* Floating marigold embers / petals (CosmicBackground → AmbientEmbers). Fills the empty flanks. */
+.ambient-embers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --rise: -720px;
+}
+.game-stage[data-orient="portrait"] .ambient-embers {
+  --rise: -1250px;
+}
+.ambient-embers i {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  bottom: -3%;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fff2b8 0, #ffb13a 45%, rgba(255, 120, 30, 0) 72%);
+  filter: drop-shadow(0 0 6px rgba(255, 150, 40, 0.9));
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: vb-ember var(--d) linear var(--t) infinite;
+}
+.ambient-embers i.is-petal {
+  border-radius: 62% 0 62% 0;
+  background: linear-gradient(135deg, #ffb13a, #ff5a1a);
+  filter: none;
+}
+@keyframes vb-ember {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--rise), 0) rotate(240deg) scale(1);
+    opacity: 0;
+  }
+}
+html.lite-fx .ambient-embers {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-embers {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   3. Cards
+   The deck is pre-graded (bone stock + per-suit glow), so the old
+   translucent tint would only muddy it. The printed outline stays.
+   ══════════════════════════════════════════════════════════════════ */
+.reel-symbol.card-tile::after {
+  background: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   4. "Hand pays" plaque — winners light up
+   Timing comes from --result-delay (set by App = reels stopped + breath),
+   so the row ignites right after the win beams start.
+   ══════════════════════════════════════════════════════════════════ */
+/* rows carry their side bleed permanently, so lighting one up never shifts the layout */
+.side-hand {
+  position: relative;
+  margin: 0 -0.4rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  border-radius: 3px;
+}
+/* lit only after the reels have stopped: App reveals the hits when the deal settles */
+.side-hand.is-hit {
+  animation: vb-hand-hit 1.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.12s both;
+}
+@keyframes vb-hand-hit {
+  0% {
+    background: transparent;
+    box-shadow: none;
+  }
+  20% {
+    background: rgba(255, 59, 78, 0.78);
+    box-shadow:
+      0 0 0 2px var(--gold-hi),
+      0 0 22px 4px rgba(255, 90, 70, 0.9);
+  }
+  100% {
+    background: linear-gradient(90deg, rgba(200, 16, 46, 0.62), rgba(226, 176, 74, 0.3));
+    box-shadow:
+      inset 0 0 0 1.5px var(--gold-hi),
+      0 0 14px rgba(255, 90, 70, 0.55);
+  }
+}
+/* text turns yellow with the highlight */
+.side-hand.is-hit .side-hand-name {
+  animation: vb-hit-name 1.1s ease-out 0.12s both;
+}
+.side-hand.is-hit .side-hand-pay {
+  animation: vb-hit-pay 1.1s ease-out 0.12s both;
+}
+@keyframes vb-hit-name {
+  to {
+    color: #ffd84a;
+    text-shadow: 0 1px 0 var(--ink);
+  }
+}
+@keyframes vb-hit-pay {
+  to {
+    color: #ffe680;
+  }
+}
+/* the plaque itself flares once when it holds a winner */
+.side-panel.is-winning {
+  animation: vb-panel-win 1.5s ease-out 0.12s both;
+}
+@keyframes vb-panel-win {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 var(--mq) var(--blood),
+      0 0 0 calc(var(--mq) + 3px) var(--ink),
+      calc(var(--mq) + 8px) calc(var(--mq) + 10px) 0 3px rgba(0, 0, 0, 0.5),
+      0 0 34px calc(var(--mq) + 6px) rgba(200, 16, 46, 0.28);
+  }
+  28% {
+    box-shadow:
+      0 0 0 var(--mq) var(--blood),
+      0 0 0 calc(var(--mq) + 3px) var(--ink),
+      calc(var(--mq) + 8px) calc(var(--mq) + 10px) 0 3px rgba(0, 0, 0, 0.5),
+      0 0 58px calc(var(--mq) + 16px) rgba(255, 190, 60, 0.7);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .side-hand.is-hit,
+  .side-panel.is-winning {
+    animation: none;
+    background: linear-gradient(90deg, rgba(200, 16, 46, 0.62), rgba(226, 176, 74, 0.3));
+  }
+  .side-hand.is-hit .side-hand-pay,
+  .side-hand.is-hit .side-hand-name {
+    animation: none;
+    color: #ffd84a;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   5. Reel motion
+   No filter on the moving strips. An SVG blur (filter: url(#…)) on five
+   fast-moving reels is rasterised on the CPU every frame and toggles on/off
+   mid-spin — it dropped the spin to ~40 fps (worse on phones). The speed of
+   the strip itself already reads as motion.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════
+   6. Bonus anticipation — the reels that already landed sink into shade,
+   the ones still deciding stay lit + burn (noir.css .reel-hot).
+   ══════════════════════════════════════════════════════════════════ */
+.card-grid.is-hot .reel-col:not(:has(.reel-hot)):not(:has(.is-gold)) {
+  filter: brightness(0.5) saturate(0.6);
+  transition: filter 0.3s ease-out;
+}
+.playfield-board:has(.card-grid.is-hot) {
+  animation: vb-board-tension 0.5s ease-in-out infinite alternate;
+}
+@keyframes vb-board-tension {
+  from {
+    box-shadow:
+      inset 0 0 0 1.5px rgba(241, 230, 204, 0.28),
+      inset 0 12px 30px rgba(0, 0, 0, 0.6),
+      0 0 0 rgba(255, 190, 60, 0);
+  }
+  to {
+    box-shadow:
+      inset 0 0 0 1.5px rgba(255, 217, 122, 0.7),
+      inset 0 12px 30px rgba(0, 0, 0, 0.6),
+      0 0 22px 4px rgba(255, 190, 60, 0.55);
+  }
+}
+html.lite-fx .playfield-board:has(.card-grid.is-hot) {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .playfield-board:has(.card-grid.is-hot) {
+    animation: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   7. WIN readout in the HUD — same type as BALANCE / BET
+   (landscape HUD centre only; the portrait under-board banner keeps its own look).
+   Mirrors .hud-meter-label / .hud-meter-value in noir.css.
+   ══════════════════════════════════════════════════════════════════ */
+.hud-win .win-plaque,
+.hud-win .hud-win-amount {
+  font-family: var(--f-ui);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--bone);
+  background: none;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  filter: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.hud-win .hud-win-label {
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--bone-dim);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+/* total: small caps label stacked over the value, exactly like a meter */
+.hud-win .hud-win-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   8. Flat surfaces, glowing red bulbs, spin button position
+   ══════════════════════════════════════════════════════════════════ */
+/* Hand pays board: plain dark fill (no diagonal hatching) */
+.side-panel {
+  background: linear-gradient(180deg, rgba(30, 20, 23, 0.97), rgba(10, 6, 8, 0.97));
+}
+
+/* Marquee: the small red bulbs are lit red lamps — bright core, dark rim, red bloom that spills
+   past the red band; when the chase reaches them they flare hot pink-white. */
+.mq-bulb.is-sm {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: radial-gradient(circle at 40% 34%, #ffd6da 0, #ff4a60 42%, #e0112e 100%);
+  box-shadow:
+    0 0 0 1.3px #3a0610,
+    0 0 7px 3px rgba(255, 84, 104, 0.85);
+}
+.mq-bulb.is-sm::after {
+  background: radial-gradient(circle at 42% 36%, #fff 0 26%, #ffc2ca 55%, #ff5a70 100%);
+  box-shadow:
+    0 0 9px 5px rgba(255, 96, 116, 0.95),
+    0 0 24px 10px rgba(255, 40, 70, 0.55);
+}
+
+/* Spin button sits a little lower in the landscape HUD (ring + hard shadow still clear the edge) */
+.game-stage[data-orient="landscape"] .hud-spin {
+  width: 56px;
+  height: 56px;
+}
+
+/* Slot frame + board: same fills as noir.css, minus the diagonal hatching */
+.card-stage-wrap {
+  background:
+    var(--rivet) left 3px top 3px / 11px 11px no-repeat,
+    var(--rivet) right 3px top 3px / 11px 11px no-repeat,
+    var(--rivet) left 3px bottom 3px / 11px 11px no-repeat,
+    var(--rivet) right 3px bottom 3px / 11px 11px no-repeat,
+    linear-gradient(180deg, #2b1b1e 0%, #150d0f 55%, #0d0708 100%);
+}
+.playfield-board {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(200, 16, 46, 0.2), transparent 62%),
+    linear-gradient(180deg, #171012 0%, #0b0607 100%);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   9. Boot loading bar
+   The fill's width is already eased frame-by-frame in BootSplash (rAF). index.css puts a
+   0.25 s CSS transition on top of it; retargeted every frame it never gets going and the
+   bar sat at 0 px while the % counter climbed. No transition = the bar follows the counter.
+   ══════════════════════════════════════════════════════════════════ */
+.loading-bar {
+  height: 10px;
+  border-radius: 999px;
+  overflow: visible;
+}
+.loading-bar-fill {
+  transition: none;
+  min-width: 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%) 0 0 / 46px 100% repeat-x,
+    linear-gradient(90deg, var(--blood-deep), var(--blood-hi) 72%, #ffd97a);
+  box-shadow:
+    0 0 14px rgba(255, 59, 78, 0.75),
+    0 0 30px rgba(255, 90, 60, 0.35);
+  animation: vb-load-shine 0.9s linear infinite;
+}
+@keyframes vb-load-shine {
+  to {
+    background-position: 46px 0, 0 0;
+  }
+}
+html.lite-fx .loading-bar-fill,
+.loading-bar-fill:where(.reduce) {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-bar-fill {
+    animation: none;
+  }
+}
+
+/* Free-spins backdrop (bolder papel-picado cuts) crossfades over the base one */
+.bg-bonus-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   9. Hand pays board — marquee sign with real-looking bulbs (SidePanels.tsx → MarqueeRing)
+   Deal With Death direction: a matte ink-lacquered rail instead of a glossy showbiz
+   one, hard offset shadow (no blur) to match the slot frame, and bulbs kept
+   realistic (brass collar, socket gap, specular glass) but ringed in ink instead
+   of a soft brass halo. No diagonal hatching anywhere on the sign.
+   Layers, back to front: mq-glow (win flare) → mq-plate (lacquered red rail) → the dark plaque
+   itself → mq-ring (bulbs). Each bulb = brass collar + glass + specular; ::after is the lit
+   filament layer whose opacity is chased around the loop.
+   ══════════════════════════════════════════════════════════════════ */
+.side-panel {
+  --mq: 20px;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  will-change: transform;
+  background: none;
+  box-shadow: none;
+}
+/* the dark plaque face, refined down to a single ink ring + the dashed gold "wire" the bulbs hang on */
+.mq-face {
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 0.5rem;
+  border: 2px dashed var(--gold-dk);
+  background: linear-gradient(180deg, #1d1215 0%, #120a0c 55%, #0b0507 100%);
+  box-shadow:
+    0 0 0 2px #0a0507,
+    inset 0 0 34px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+}
+.side-panel.is-winning {
+  animation: none;
+}
+.mq-plate {
+  position: absolute;
+  inset: calc(-2px - var(--mq));
+  z-index: -1;
+  border-radius: calc(0.5rem + var(--mq) * 0.55);
+  /* the frame the bulbs sit on: matte lacquered blood-red rail, ink outline, thin gold trim, hard offset shadow */
+  background: linear-gradient(180deg, #d4243f 0%, #c8102e 45%, #7d0a1a 100%);
+  box-shadow:
+    0 0 0 3px #12060a,
+    0 0 0 4.5px rgba(226, 176, 74, 0.75),
+    0 0 0 6.5px #12060a,
+    calc(var(--mq) * 0.55 + 4px) calc(var(--mq) * 0.55 + 8px) 0 6px rgba(0, 0, 0, 0.5),
+    0 0 40px 12px rgba(200, 16, 46, 0.32);
+  pointer-events: none;
+}
+.mq-glow {
+  position: absolute;
+  inset: calc(-2px - var(--mq));
+  z-index: -2;
+  border-radius: 24px;
+  opacity: 0;
+  box-shadow: 0 0 60px 22px rgba(255, 190, 60, 0.7);
+  pointer-events: none;
+}
+.mq-ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* the bulb: brass collar → dark socket gap → glass, ringed in ink instead of a soft brass halo */
+.mq-bulb {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.95) 0 9%, rgba(255, 255, 255, 0) 24%),
+    radial-gradient(circle at 68% 76%, rgba(255, 255, 255, 0.28) 0 10%, rgba(255, 255, 255, 0) 30%),
+    linear-gradient(90deg, transparent 28%, rgba(96, 58, 12, 0.55) 28% 72%, transparent 72%) 50% 60% / 100% 1px no-repeat,
+    radial-gradient(circle at 50% 46%, #f4d98c 0 34%, #c99a3c 68%, #6b4a12 100%);
+  box-shadow:
+    0 0 0 1.6px var(--ink),
+    inset -1.5px -2px 3px rgba(60, 30, 0, 0.55),
+    0 3px 3px 3px rgba(0, 0, 0, 0.55);
+}
+.mq-bulb.is-red {
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.85) 0 9%, rgba(255, 255, 255, 0) 24%),
+    radial-gradient(circle at 68% 76%, rgba(255, 200, 200, 0.25) 0 10%, rgba(255, 255, 255, 0) 30%),
+    linear-gradient(90deg, transparent 28%, rgba(70, 8, 16, 0.6) 28% 72%, transparent 72%) 50% 60% / 100% 1px no-repeat,
+    radial-gradient(circle at 50% 46%, #ff8c98 0 30%, #d2172f 66%, #740a18 100%);
+}
+/* lit glass: white-hot core, warm falloff, bloom that also tints the rail around it */
+.mq-bulb::after {
+  content: "";
+  position: absolute;
+  inset: -0.5px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, #fff 0 12%, rgba(255, 255, 255, 0) 30%),
+    radial-gradient(circle at 50% 50%, #fffbe6 0 30%, #ffe27a 58%, #ffb52a 100%);
+  box-shadow:
+    0 0 4px 1.5px rgba(255, 240, 170, 0.95),
+    0 0 12px 5px rgba(255, 182, 40, 0.6),
+    0 0 26px 10px rgba(255, 130, 30, 0.28);
+  opacity: 0;
+  animation: noir-chase var(--mq-dur, 2.6s) linear infinite;
+  animation-delay: calc((var(--p) - 1) * var(--mq-dur, 2.6s));
+}
+.mq-ring {
+  --mq-dur: 2.6s;
+}
+.mq-bulb.is-red::after {
+  background:
+    radial-gradient(circle at 34% 28%, #fff 0 12%, rgba(255, 255, 255, 0) 30%),
+    radial-gradient(circle at 50% 50%, #ffe3e6 0 26%, #ff6a7d 58%, #ea1a38 100%);
+  box-shadow:
+    0 0 4px 1.5px rgba(255, 170, 180, 0.95),
+    0 0 12px 5px rgba(255, 50, 80, 0.62),
+    0 0 26px 10px rgba(255, 30, 60, 0.3);
+}
+/* a paying hand: the whole ring flares together and stays lit until the next spin */
+.side-panel.is-winning .mq-bulb::after {
+  animation: mq-flash 1.2s ease-out 0.12s both;
+}
+.side-panel.is-winning .mq-glow {
+  animation: mq-glow 1.5s ease-out 0.12s both;
+}
+/* flare, then every bulb stays lit (fill-mode both) until the next spin clears .is-winning */
+@keyframes mq-flash {
+  0% { opacity: 0.15; }
+  20% { opacity: 1; }
+  38% { opacity: 0.8; }
+  60%, 100% { opacity: 1; }
+}
+@keyframes mq-glow {
+  0% { opacity: 0; }
+  28% { opacity: 1; }
+  100% { opacity: 0.35; }
+}
+html.lite-fx .mq-bulb::after,
+html.lite-fx .side-panel.is-winning .mq-bulb::after {
+  animation: none;
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mq-bulb::after,
+  .side-panel.is-winning .mq-bulb::after,
+  .side-panel.is-winning .mq-glow {
+    animation: none;
+  }
+  .mq-bulb::after {
+    opacity: 0.5;
+  }
+}
+
+/* ── inside of the plaque ─────────────────────────────────────────── */
+.side-panel-title {
+  position: relative;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 0;
+  color: #f6e7c4;
+  text-shadow:
+    0 2px 0 #12060a,
+    0 0 14px rgba(226, 176, 74, 0.35);
+}
+/* engraved rule with a diamond in the middle */
+.side-panel-title::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 6px;
+  height: 6px;
+  background: #e2b04a;
+  box-shadow: 0 0 6px rgba(226, 176, 74, 0.6);
+  transform: translateX(-50%) rotate(45deg);
+}
+.side-panel-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9px;
+  background:
+    linear-gradient(90deg, transparent, rgba(226, 176, 74, 0.85) 20%, rgba(226, 176, 74, 0.85) 46%, transparent 46.5%, transparent 53.5%, rgba(226, 176, 74, 0.85) 54%, rgba(226, 176, 74, 0.85) 80%, transparent) 50% 50% / 100% 1.5px no-repeat; 
+}
+.side-hand {
+  border-radius: 3px;
+  padding-top: 0.34rem;
+  padding-bottom: 0.34rem;
+}
+.side-hand + .side-hand {
+  border-top: 0;
+}
+.side-hand:nth-child(even) {
+  background: rgba(255, 240, 210, 0.045);
+}
+.side-hand-name {
+  color: #d9ccb0;
+  letter-spacing: 0.07em;
+}
+.side-hand-dots {
+  border-bottom: 2px dotted rgba(226, 176, 74, 0.26);
+}
+.side-hand-pay {
+  font-variant-numeric: tabular-nums;
+  color: #ffd766;
+  text-shadow:
+    0 1px 0 #12060a,
+    0 0 8px rgba(255, 190, 60, 0.25);
+}
+/* Royal Flush row is a plain row (no permanent highlight) */
+.side-hand.is-top .side-hand-name {
+  color: #d9ccb0;
+}
+.side-hand.is-top .side-hand-pay {
+  color: #ffd766;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   10. Non-paying cards while a win is shown
+   The new deck has dark court cards (K♣, J♠, K♦…): the old "brightness .55 + opacity .4" turned them
+   into black smudges with bright accents. Now every non-winner just recedes — cream stock stays
+   cream-grey, dark courts stay readable — and the paying cards still pop.
+   ══════════════════════════════════════════════════════════════════ */
+.card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+  animation: vb-dim-in 0.32s ease-out both;
+}
+@keyframes vb-dim-in {
+  from {
+    opacity: 1;
+    filter: none;
+  }
+  to {
+    opacity: 0.6;
+    filter: grayscale(0.55) brightness(0.72);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-grid.is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+    animation: none;
+    opacity: 0.6;
+    filter: grayscale(0.55) brightness(0.72);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   11. Joker (bonus scatter) — must read at a glance
+   The joker face is now a dark card with a gold frame (everything else is cream), and on top of that
+   it gets a bright gold rim, a pulsing inner glow and a fast gold glint. The drop-in animation stays.
+   ══════════════════════════════════════════════════════════════════ */
+.reel-symbol.is-gold .bonus-card {
+  border: 2px solid #ffd766;
+  animation:
+    noir-bonus-drop 0.62s cubic-bezier(0.3, 0.7, 0.3, 1) both,
+    vb-joker-glow 1.5s ease-in-out 0.62s infinite;
+}
+.reel-symbol.is-gold .bonus-card .card-face-img {
+  filter: saturate(1.15) contrast(1.05);
+}
+.reel-symbol.is-gold .bonus-card::after {
+  opacity: 1;
+  background: linear-gradient(115deg, transparent 34%, rgba(255, 236, 170, 0.55) 48%, transparent 62%);
+  background-size: 260% 100%;
+  animation: charged-sweep 1.9s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+@keyframes vb-joker-glow {
+  0%,
+  100% {
+    border-color: #e2b04a;
+    box-shadow:
+      inset 0 0 0 1px #1a0a0e,
+      inset 0 0 10px 1px rgba(255, 200, 80, 0.45);
+    filter: brightness(1);
+  }
+  50% {
+    border-color: #fff0b0;
+    box-shadow:
+      inset 0 0 0 1px #1a0a0e,
+      inset 0 0 20px 4px rgba(255, 214, 110, 0.9);
+    filter: brightness(1.12);
+  }
+}
+html.lite-fx .reel-symbol.is-gold .bonus-card {
+  animation: vb-joker-glow 1.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-symbol.is-gold .bonus-card {
+    animation: none;
+    border-color: #ffd766;
+    box-shadow: inset 0 0 14px 2px rgba(255, 214, 110, 0.7);
+  }
+  .reel-symbol.is-gold .bonus-card::after {
+    animation: none;
+  }
+}
+
+/* ── 12. Paylines: slimmer glow so the trail doesn't cover the card art ── */
+.gold-beam-path,
+.gold-beam-layer.is-soft .gold-beam-path,
+.gold-beam-layer.is-mid .gold-beam-path,
+.gold-beam-layer.is-big .gold-beam-path {
+  filter: drop-shadow(0 0 1.5px rgba(255, 235, 170, 0.85)) drop-shadow(0 0 4px rgba(255, 59, 78, 0.7));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   13. Win presentation that respects the cards
+   • the cash number over the board is smaller and gets out of the way after a beat
+     (the HUD WIN meter keeps the amount);
+   • a hand that pays LESS than the stake (soft grade) is not celebrated: no cash punch (see
+     CardGrid), no dimming of the other cards — just the thin payline + the plaque row.
+   ══════════════════════════════════════════════════════════════════ */
+.field-win-punch {
+  font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+  -webkit-text-stroke: 4px var(--ink);
+  animation:
+    field-win-punch 0.42s cubic-bezier(0.22, 1.35, 0.36, 1) both,
+    vb-punch-out 0.45s ease-in 1.05s forwards;
+}
+.game-stage[data-orient="portrait"] .field-win-punch {
+  font-size: 2.1rem;
+}
+@keyframes vb-punch-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -62%) scale(0.92);
+  }
+}
+.card-grid[data-win-grade="soft"].is-win-reveal .grid-cell.is-dim:not(.gold-celebrate) {
+  animation: none;
+  opacity: 1;
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .field-win-punch {
+    animation: vb-punch-out 0.01s linear 1.2s forwards;
+  }
+}
+
+/* Pays less than the stake: bulbs stay lit, but no flare / flash around the sign */
+.side-panel.is-soft-win .mq-glow {
+  display: none;
+}
+.side-panel.is-soft-win.is-winning .mq-bulb::after {
+  animation: none;
+  opacity: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   10. Hand pays marquee — v3 (arcade sign from the reference video)
+   Overrides sections 8–9 above (this file loads last). Look, outside in:
+   dark outline → maroon rail carrying the lamps → orange line → bright
+   yellow neon tube → black plaque. Lamps: big flat mustard bulbs with a
+   small dark-red lamp between every two. Two short segments of LIME light
+   (3 big + 2 small lamps each) run clockwise; a paying hand lights the
+   whole ring. SidePanels.tsx → layoutBulbs() places them (.is-sm = small).
+   ══════════════════════════════════════════════════════════════════ */
+.side-panel {
+  --mq: 20px;
+}
+.mq-plate {
+  border-radius: calc(0.5rem + var(--mq) * 0.6);
+  background: linear-gradient(180deg, #86161b 0%, #6a0f13 50%, #520a0d 100%);
+  box-shadow:
+    0 0 0 2.5px #2a0406,
+    0 6px 14px 2px rgba(0, 0, 0, 0.55),
+    0 0 36px 10px rgba(160, 12, 24, 0.28);
+}
+.mq-face {
+  border: 3px solid #ffe93c;
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, #121012 0%, #0b090a 60%, #070506 100%);
+  box-shadow:
+    0 0 0 2.5px #e3501c,
+    0 0 0 4px #3a0508,
+    0 0 9px 2px rgba(255, 226, 60, 0.45),
+    inset 0 0 10px 1px rgba(255, 226, 60, 0.18),
+    inset 0 0 34px rgba(0, 0, 0, 0.8);
+}
+.mq-ring {
+  --mq-dur: 3s;
+}
+/* big bulb, unlit: flat mustard glass, dark rim */
+.mq-bulb {
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 36%, #f6dc72 0 30%, #e3c14a 62%, #c9a232 100%);
+  box-shadow:
+    0 0 0 2px #3a0508,
+    0 2px 2px 1px rgba(0, 0, 0, 0.45);
+}
+/* small lamp between two big ones, unlit: dark red */
+.mq-bulb.is-sm {
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  background: radial-gradient(circle at 42% 36%, #c62424 0 35%, #9c1212 70%, #6e0a0a 100%);
+  box-shadow: 0 0 0 1.5px #3a0508;
+}
+/* lit layer: lime-yellow glass with a neon halo; crisp on/off so the
+   segment reads as a group of lamps switching, not a fading comet */
+.mq-bulb::after,
+.mq-bulb.is-sm::after {
+  content: "";
+  position: absolute;
+  inset: -0.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 44% 38%, #fbffc4 0 18%, #e9ff45 46%, #c6e81a 78%, #9fbd0c 100%);
+  box-shadow:
+    0 0 5px 2px rgba(222, 255, 60, 0.95),
+    0 0 14px 6px rgba(196, 255, 30, 0.45);
+  opacity: 0;
+  animation: mq-run var(--mq-dur, 3s) linear infinite;
+  animation-delay: calc((var(--p) - 1) * var(--mq-dur, 3s));
+}
+.mq-bulb.is-sm::after {
+  box-shadow:
+    0 0 4px 1.5px rgba(222, 255, 60, 0.9),
+    0 0 10px 4px rgba(196, 255, 30, 0.4);
+}
+@keyframes mq-run {
+  0% { opacity: 1; }
+  12% { opacity: 1; }
+  13.5% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* a paying hand: every lamp lights up (and stays lit until the next spin) */
+.side-panel.is-winning .mq-bulb::after,
+.side-panel.is-winning .mq-bulb.is-sm::after {
+  animation: mq-flash 1.2s ease-out 0.12s both;
+}
+.side-panel.is-soft-win.is-winning .mq-bulb::after {
+  animation: none;
+  opacity: 1;
+}
+.mq-glow {
+  box-shadow:
+    0 0 55px 20px rgba(214, 255, 60, 0.38),
+    0 0 90px 30px rgba(200, 16, 46, 0.25);
+}
+html.lite-fx .mq-bulb::after,
+html.lite-fx .side-panel.is-winning .mq-bulb::after {
+  animation: none;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mq-bulb::after,
+  .mq-bulb.is-sm::after {
+    animation: none;
+    opacity: 0;
+  }
+  .side-panel.is-winning .mq-bulb::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   10. Plain type on the BONUS button and the buy-bonus panel — the
+   tattoo/display lettering read as too stylized there; switch those
+   labels to the same regular UI font as Balance / Bet / Win. Prices and
+   blurbs already use --f-ui in noir.css, so only the display-font
+   labels need overriding here.
+   ══════════════════════════════════════════════════════════════════ */
+.hud-bonus-btn {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+.buy-bonus-sheet h2,
+.buy-bonus-title {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+.bonus-buy-tile-title {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: none;
+}
+.ante-candy-label {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   11. Big Win ladder (NICE / SUPER / SENSATIONAL / MAX) — real punch on
+   every rung, not just the top two.
+   Before: BigWinOverlay.tsx already sets a `.bigwin-tier-step` class
+   (keyed by stepKey, so React remounts it each rung) and a
+   `data-anticipate="1"` attribute on the overlay before SUPER+, but
+   neither had ANY CSS behind them — the word just appeared, and the
+   anticipation beat was only a slightly darker scrim. NICE/SUPER also
+   had no burst at all (confetti was sensational/max only), so they read
+   as a plain word-swap while the top two rungs already looked good.
+   Fixes, in order:
+     a. .bigwin-tier-step — punch-in scale/rotate overshoot + a fast
+        white flash-ring, on every rung including NICE.
+     b. [data-anticipate="1"] — the scrim now visibly pulses/breathes
+        (brightness + slight zoom) instead of just sitting darker, so
+        the beat before SUPER/SENSATIONAL/MAX reads as "something is
+        building" rather than a stall.
+     c. .bigwin-shake — a short screen-shake fired on every rung punch
+        (via the same stepKey remount), scaled down for NICE, harder for
+        MAX, applied to the overlay button itself so it moves the whole
+        celebration, not just the word.
+     d. A small spark burst now plays on NICE/SUPER too (reusing
+        CeleConfetti's existing piece markup/animation — same component,
+        just also rendered, in smaller count, for these two tiers).
+   ══════════════════════════════════════════════════════════════════ */
+
+/* a. word punch-in — every rung, not just a fade */
+.bigwin-tier-step {
+  animation: vb-word-punch 0.5s cubic-bezier(0.16, 1.4, 0.4, 1) both;
+}
+@keyframes vb-word-punch {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) rotate(-6deg);
+    filter: brightness(2.4);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.12) rotate(1.5deg);
+    filter: brightness(1.5);
+  }
+  80% {
+    transform: scale(0.97) rotate(-0.5deg);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+}
+/* fast white ring that expands from behind the word on the punch, sold with
+   a pseudo-element on the row wrapper so it doesn't fight the word's own
+   stroke/shadow stack */
+.cele-word-row {
+  position: relative;
+}
+.cele-word-row::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  animation: vb-flash-ring 0.5s ease-out both;
+}
+@keyframes vb-flash-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(14);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigwin-tier-step,
+  .cele-word-row::before {
+    animation: none;
+  }
+}
+html.lite-fx .cele-word-row::before {
+  display: none;
+}
+
+/* b. anticipation beat — visible pulse instead of a static darker scrim */
+.bigwin-overlay[data-anticipate="1"] .bigwin-scrim {
+  animation: vb-antic-pulse 0.55s ease-in-out infinite;
+}
+@keyframes vb-antic-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+}
+.bigwin-overlay[data-anticipate="1"] .cele-float {
+  animation: vb-antic-zoom 0.55s ease-in-out infinite;
+}
+@keyframes vb-antic-zoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+html.lite-fx .bigwin-overlay[data-anticipate="1"] .bigwin-scrim,
+html.lite-fx .bigwin-overlay[data-anticipate="1"] .cele-float {
+  animation: none;
+}
+
+/* c. screen-shake on the punch — same stepKey remount drives this via the
+   overlay button itself (parent of everything), scaled per tier so NICE
+   is a light rattle and MAX properly rocks the screen. */
+.bigwin-overlay {
+  animation: vb-shake-nice 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.bigwin-overlay[data-tier="super"] {
+  animation-name: vb-shake-super;
+}
+.bigwin-overlay[data-tier="sensational"] {
+  animation-name: vb-shake-big;
+}
+.bigwin-overlay[data-tier="max"] {
+  animation-name: vb-shake-big;
+  animation-duration: 0.5s;
+}
+@keyframes vb-shake-nice {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-3px);
+  }
+  40%,
+  60% {
+    transform: translateX(3px);
+  }
+}
+@keyframes vb-shake-super {
+  10%,
+  90% {
+    transform: translateX(-2px) translateY(1px);
+  }
+  20%,
+  80% {
+    transform: translateX(3px) translateY(-1px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px) translateY(1px);
+  }
+  40%,
+  60% {
+    transform: translateX(5px) translateY(-1px);
+  }
+}
+@keyframes vb-shake-big {
+  10%,
+  90% {
+    transform: translate3d(-3px, 2px, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(5px, -2px, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-8px, 2px, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(8px, -2px, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigwin-overlay,
+  .bigwin-overlay[data-tier="super"],
+  .bigwin-overlay[data-tier="sensational"],
+  .bigwin-overlay[data-tier="max"] {
+    animation: none;
+  }
+}
+html.lite-fx .bigwin-overlay {
+  animation: none;
+}
+
+/* d. small spark burst on NICE/SUPER — confetti component now also renders
+   for these two tiers (see BigWinOverlay.tsx), fewer/smaller pieces than
+   sensational/max so the top two rungs still read as the bigger moment. */
+.cele-confetti-nice .cele-confetti-piece,
+.cele-confetti-super .cele-confetti-piece {
+  width: calc(var(--size) * 0.7);
+  height: calc(var(--size) * 0.7);
+}
+.cele-confetti-nice .cele-confetti-piece-0,
+.cele-confetti-super .cele-confetti-piece-0 {
+  background: linear-gradient(135deg, #fff6c8, #e2b04a);
+  box-shadow: 0 0 7px rgba(240, 193, 75, 0.7);
+}
+.cele-confetti-nice .cele-confetti-piece-1,
+.cele-confetti-super .cele-confetti-piece-1 {
+  background: linear-gradient(135deg, #ffffff, #f0d9a0);
+  box-shadow: 0 0 6px rgba(255, 240, 200, 0.6);
+}
+.cele-confetti-nice .cele-confetti-piece-2,
+.cele-confetti-super .cele-confetti-piece-2 {
+  background: linear-gradient(135deg, #ffd84a, #b3771f);
+  box-shadow: 0 0 6px rgba(255, 210, 90, 0.6);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   12. Big Win backdrop — new concept, ember/smoke instead of spinning rays
+   His call (Sept 23): the rotating conic-gradient ray rings behind the Big
+   Win word (noir.css .cele-float::before/::after — red for NICE, gold for
+   SUPER, ice-blue for SENSATIONAL, violet for MAX) "read cheap". Replacing
+   the whole approach rather than tuning it further:
+     - kill the rays entirely (display: none on the pseudo-elements);
+     - deepen the scrim into a plain dark vignette (no colour wheel);
+     - add CeleEmberBurst (Celebration.tsx) — marigold embers + drifting
+       smoke puffs rising from the word, same visual family as the board's
+       own ambient embers (§2 above), so this reads as "this game's fire"
+       rather than a stock slot vortex. Word style itself is untouched.
+   ══════════════════════════════════════════════════════════════════ */
+.bigwin-overlay .cele-float::before,
+.bigwin-overlay .cele-float::after {
+  display: none;
+}
+.bigwin-scrim {
+  background: radial-gradient(ellipse 62% 56% at 50% 46%, rgba(30, 10, 8, 0.55), rgba(4, 2, 2, 0.94) 100%);
+  backdrop-filter: blur(2px);
+}
+.bigwin-overlay[data-anticipate="1"] .bigwin-scrim {
+  background: rgba(4, 2, 2, 0.94);
+}
+
+.cele-ember-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cele-ember-piece {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: cele-ember-rise var(--dur) ease-out var(--delay) both;
+}
+.cele-ember-piece-ember {
+  background: radial-gradient(circle at 38% 32%, #fff2c4 0, #ffb13a 46%, rgba(255, 110, 20, 0) 75%);
+  filter: drop-shadow(0 0 5px rgba(255, 150, 40, 0.75));
+}
+.cele-ember-piece-smoke {
+  background: radial-gradient(circle at 45% 40%, rgba(120, 100, 95, 0.55), rgba(60, 48, 46, 0) 72%);
+  filter: blur(1px);
+}
+@keyframes cele-ember-rise {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--ang)) translateX(0) rotate(calc(var(--ang) * -1)) translateY(0) scale(0.4);
+  }
+  14% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--ang)) translateX(var(--dist)) rotate(calc(var(--ang) * -1)) translateY(-18vmin)
+      translateX(var(--drift)) scale(1.25);
+  }
+}
+/* Per-tier tint — warm marigold for NICE/SUPER, the burst cools + thickens
+   for the top two rungs to still read as a bigger event than a warmer NICE. */
+.cele-ember-burst-sensational .cele-ember-piece-ember {
+  background: radial-gradient(circle at 38% 32%, #eaf6ff 0, #8fc8ff 46%, rgba(90, 160, 255, 0) 75%);
+  filter: drop-shadow(0 0 6px rgba(140, 200, 255, 0.75));
+}
+.cele-ember-burst-max .cele-ember-piece-ember {
+  background: radial-gradient(circle at 38% 32%, #f8e8ff 0, #b052ff 46%, rgba(160, 60, 255, 0) 75%);
+  filter: drop-shadow(0 0 7px rgba(176, 82, 255, 0.8));
+}
+@media (prefers-reduced-motion: reduce) {
+  .cele-ember-burst {
+    display: none;
+  }
+}
+html.lite-fx .cele-ember-burst {
+  display: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   13. Narrow-landscape rescue (GameStage.tsx → data-narrow="1")
+   A landscape window much squarer than the 1200×675 design ratio has no
+   room for the right-side Hand Pays plaque, so it is hidden here. The
+   narrow block used to enlarge the whole HUD in design px as well — the
+   constant-height pass (section 18) makes that redundant: the HUD already
+   renders 1:1 real px via --hud-unscale, so only the plaque hide remains.
+   ════════════════════════════════════════════════════════════════════ */
+.game-stage[data-narrow="1"] .side-panel {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   14. Bonus Bank ×N plaque (BonusBanner.tsx → .bank-cloud) — was the
+   scalloped ink-plate.svg banner (shared with the win-amount plaques),
+   which read wrong for a standalone ×N badge. Swapped to its own faceted
+   hexagon asset (bank-plate.svg) — same ink/bone/red material family,
+   plain sharp-cut silhouette instead of the wavy banner. Text stays the
+   plain flat gold noir.css already set (no gradient/emboss — that read
+   worse here than the plain fill).
+   ══════════════════════════════════════════════════════════════════ */
+.bank-cloud-live {
+  filter: drop-shadow(5px 6px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(255, 59, 78, 0.55));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   15. Bottom HUD pass 2 — spin seal recolor + bigger, tidier controls.
+   The blood-red spin seal read as an off-family accent colour next to the
+   black/gold HUD (and its bone arrow all but disappears at a glance).
+   Pass 2a tried a bone/ivory face + ink arrow; the user's actual reference
+   (a real competitor HUD screenshot) turned out to want the opposite: a
+   flat black seal with plain white arrows, no gradient — closer to a
+   stamped rubber seal than a lit disc. Balance/Stake labels move off the
+   warm tan bone-dim to a cooler neutral so they don't read as an accent
+   colour. BONUS keeps its red plaque but drops one shadow ring and
+   matches the taller row it now sits in. +/- and turbo/auto sized against
+   the actual HUD bar height (~157px design-space at this breakpoint):
+   sq-btn ≈ 59% of the bar (matches the reference's chunky turbo/repeat
+   squares), the stacked +/- column ≈ 37-39% per button since it's two
+   buttons sharing that column's height, not one square.
+   ══════════════════════════════════════════════════════════════════ */
+.respin-btn {
+  background: #0a0a0a;
+}
+.respin-btn:not(:disabled):hover {
+  background: #161616;
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.18),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.45),
+    0 0 0 1.5px var(--bone),
+    0 0 0 3px var(--ink);
+}
+.spin-arrow {
+  color: #ffffff;
+  filter: none;
+}
+.hud-spin:not(:disabled):hover .spin-arrow {
+  color: #ffffff;
+}
+
+.hud-meter-label {
+  color: #cdd2d6;
+}
+
+.hud-bonus-btn {
+  padding: 0.5rem 1.15rem;
+  box-shadow:
+    0 0 0 1.5px var(--gold-dk),
+    0 3px 0 1.5px var(--ink);
+}
+
+.hud-sq-btn {
+  height: 2.7rem;
+  width: 2.7rem;
+  border-radius: 0.6rem;
+}
+.hud-bet-col .hud-icon-btn {
+  height: 1.45rem;
+  width: 1.6rem;
+  border-radius: 0.28rem;
+}
+.hud-bet-col {
+  gap: 0.24rem;
+}
+
+/* Whole landscape HUD pulled in a size notch: pass 2's bar/spin/buttons all
+   read oversized once seen at real scale next to the card grid. */
+/* Height pass: bar pulled ~20% lower (was 96 design px, now 73) — paddings and the
+   spin seal scaled together so the row keeps its proportions. */
+.game-stage[data-orient="landscape"] .hud-inner {
+  padding-top: 0.3rem;
+  padding-bottom: 0.4rem;
+}
+.game-stage[data-orient="landscape"] .hud-spin {
+  width: 56px;
+  height: 56px;
+}
+.game-stage[data-orient="landscape"] .hud-spin-slot {
+  width: 62px;
+  height: 62px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   16. PORTRAIT HUD — info/sound out of the isolated top row
+   User feedback: with info + mute chips flanking BONUS in their own top
+   row, that row read as a separate panel floating above the main bar,
+   and the chips themselves felt oversized. Given each their own slim
+   edge column in the bottom row instead — beside the bet stepper /
+   turbo+auto, not fighting either group for space — and shrunk down;
+   BONUS is now alone on top, a single centered pill instead of a
+   3-item row.
+   ══════════════════════════════════════════════════════════════════ */
+/* One size system (design px; ~0.56 real px each on a 375 px phone):
+   every small button is the same 56 px square (≈31 real px), BONUS is the
+   same 56 px tall, and SPIN spans both lower rows at 132 px — so info,
+   mute, −/+, turbo and auto all read as one family instead of a mix of
+   44 / 66 / 70 px plates. */
+/* Cookout-reference layout v3 — compact, everything centered on the axis.
+   Absolute placement inside .hud-inner (fixed 210 design px tall): the SPIN
+   disc is mathematically centered (left 50%), −/+ flank it symmetrically,
+   the 4 small buttons form one tight centered group under it, BONUS is a
+   64 px circle inset from the edge, meters sit in the 76 px strip. Grid
+   rows shared between differently-sized groups caused the off-centre gaps
+   — absolute positioning removes that entirely. */
+.game-stage[data-orient="portrait"] .hud-inner {
+  display: block;
+  position: relative;
+  height: 210px;
+  padding: 0;
+}
+/* —— SPIN: exact screen centre —— */
+.game-stage[data-orient="portrait"] .hud-spin-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 106px;
+  width: 80px;
+  height: 80px;
+  margin-left: -40px;
+  transform: none;
+}
+.game-stage[data-orient="portrait"] .respin-btn {
+  width: 80px;
+  height: 80px;
+}
+/* —— bet stepper flanking the disc —— */
+.game-stage[data-orient="portrait"] .hud-stake > .hud-bet-col {
+  display: contents;
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn {
+  position: absolute;
+  bottom: 131px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  padding: 0;
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn:first-child {
+  left: calc(50% + 50px);   /* + on the right */
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn:last-child {
+  right: calc(50% + 50px);  /* − on the left */
+}
+.game-stage[data-orient="portrait"] .hud-bet-col .hud-icon-btn svg {
+  height: 16px;
+  width: 16px;
+}
+/* —— BONUS: bigger circle, inset from the edge —— */
+.game-stage[data-orient="portrait"] .hud-tools > .hud-bonus-btn {
+  position: absolute;
+  left: 58px;
+  bottom: 104px;
+  height: 70px;
+  width: 70px;
+  padding: 0 4px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  border-radius: 50%;
+  white-space: normal;
+}
+/* —— one tight centered group of 4 small buttons —— */
+.game-stage[data-orient="portrait"] .hud-chip-btn,
+.game-stage[data-orient="portrait"] .hud-sq-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+.game-stage[data-orient="portrait"] .hud-chip-btn svg,
+.game-stage[data-orient="portrait"] .hud-sq-btn svg {
+  height: 16px;
+  width: 16px;
+}
+.game-stage[data-orient="portrait"] .hud-tools > .hud-chip-btn {
+  position: absolute;
+  left: calc(50% - 72px);
+  bottom: 66px;
+}
+.game-stage[data-orient="portrait"] .hud-sound-wrap {
+  position: absolute;
+  left: calc(50% - 34px);
+  bottom: 66px;
+  width: 30px;
+  height: 30px;
+}
+.game-stage[data-orient="portrait"] .hud-fx-row {
+  position: absolute;
+  left: calc(50% + 4px);
+  bottom: 66px;
+  gap: 8px;
+}
+.game-stage[data-orient="portrait"] .hud-fx-row .hud-sq-btn {
+  position: static;
+}
+/* —— meters strip: smaller type, flush to the edges —— */
+.game-stage[data-orient="portrait"] .hud-left > .hud-meter {
+  position: absolute;
+  left: 14px;
+  bottom: 4px;
+  text-align: left;
+}
+.game-stage[data-orient="portrait"] .hud-stake > .hud-meter {
+  position: absolute;
+  right: 14px;
+  bottom: 4px;
+  text-align: right;
+}
+.game-stage[data-orient="portrait"] .hud-meter-label {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+.game-stage[data-orient="portrait"] .hud-meter-value {
+  font-size: 24px;
+  margin-top: 2px;
+}
+
+/* ==============================================================
+   17. HUD layout robustness — responsive bugfix pass
+   Resize-shrink bugs fixed here: the SPIN disc used to hang off an
+   absolute bottom-offset inside an oversized .hud-spin-slot (escaped the
+   bar / clipped at the bottom edge on small viewports), the circle could
+   deform, and .hud-bar had no height floor so it squashed vertically.
+   - .hud-spin-slot now centres the disc with Flexbox (no absolute
+     offsets); every mode sizes the slot to fully contain disc + ring.
+   - .respin-btn is pinned to a perfect circle (aspect-ratio + 50 percent
+     radius) and can never be flex-squished.
+   - .hud-bar gets an explicit min-height floor; interactive controls
+     (SPIN / BET / BALANCE / BONUS / turbo / auto) are flex-shrink: 0 so
+     they never wrap onto a second row or collapse.
+   All lengths are design-space px - deliberately no vw/vh here: the
+   stage is transform-scaled, so viewport units would double-scale.
+   ============================================================== */
+.hud-bar {
+  display: flex;
+  align-items: stretch;
+  min-height: 72px;
+  overflow: visible;
+}
+.hud-inner {
+  align-items: center;
+  overflow: visible;
+}
+.hud-left,
+.hud-right,
+.hud-tools,
+.hud-stake,
+.hud-bet-col,
+.hud-fx-row,
+.hud-spin-slot,
+.hud-meter {
+  flex-shrink: 0;
+}
+.respin-btn,
+.hud-spin {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ==============================================================
+   18. Constant-height HUD (landscape)
+   The whole stage is transform-scaled (fit.scale = vw / design width), so
+   narrowing the window used to thin the HUD proportionally. The bar now
+   counter-scales by 1/scale (GameStage.tsx exposes --hud-unscale and
+   --stage-scale): every px inside the HUD renders 1:1 real, so the bar is
+   exactly 78 real px tall at any window size. Width is pre-expanded by the
+   scale so the bar still spans the real viewport edge to edge, and the bar
+   gets a fixed height so tier breakpoints never make it jump. The visual
+   overlap over the board zone at small scales is absorbed by the frame
+   reserve. Portrait keeps the proportional scale - its design px are tuned
+   ~0.58:1 for phone thumbs; unscaling would overflow 390 px handsets.
+   ============================================================== */
+.game-stage[data-orient="landscape"] .hud-root {
+  width: calc(100% / var(--hud-unscale, 1));
+  transform: scale(var(--hud-unscale, 1));
+  transform-origin: 0 100%;
+}
+.game-stage[data-orient="landscape"] .hud-bar {
+  min-height: 80px;
+}
+/* The bar renders 1:1 real px, but the flex column still reserves only
+   bar_height × scale of layout height — the visual surplus would cover the
+   board frame. Feed the difference back as bottom margin on the board slot
+   so the board shrinks to end exactly at the bar's visual top edge. */
+.game-stage[data-orient="landscape"] .godot-board-slot {
+  margin-bottom: max(0px, calc(80px * (1 - var(--stage-scale, 1)) / var(--stage-scale, 1)));
+}
+
+/* Real-px compression tiers. The unscaled HUD lays out in real px now, so
+   plain viewport media queries keep the single row intact on narrow
+   windows. Selectors that compete with [data-narrow] rules use the
+   .hud-bar descendant path to stay later-equal in specificity. */
+@media (max-width: 1000px) and (orientation: landscape) {
+  .game-stage[data-orient="landscape"] .hud-inner {
+    padding-left: 14px;
+    padding-right: 14px;
+    column-gap: 8px;
+  }
+  .game-stage[data-orient="landscape"] .hud-right {
+    gap: 8px;
+  }
+  .game-stage[data-orient="landscape"] .hud-tools,
+  .game-stage[data-orient="landscape"] .hud-fx-row {
+    gap: 6px;
+  }
+  .game-stage[data-orient="landscape"] .hud-stake {
+    gap: 7px;
+  }
+  .game-stage[data-orient="landscape"] .hud-meter-value {
+    font-size: 1.05rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-bonus-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.72rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin-slot {
+    width: 58px;
+    height: 58px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin {
+    width: 52px;
+    height: 52px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-sq-btn {
+    height: 36px;
+    width: 36px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-chip-btn {
+    height: 20px;
+    width: 20px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-bet-col .hud-icon-btn {
+    height: 21px;
+    width: 23px;
+  }
+}
+@media (max-width: 760px) and (orientation: landscape) {
+  .game-stage[data-orient="landscape"] .hud-inner {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 6px;
+    column-gap: 6px;
+  }
+  .game-stage[data-orient="landscape"] .hud-meter-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+  .game-stage[data-orient="landscape"] .hud-meter-value {
+    font-size: 0.95rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-win .win-plaque,
+  .game-stage[data-orient="landscape"] .hud-win .hud-win-amount {
+    font-size: 1.5rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-win .hud-win-label {
+    font-size: 0.7rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-bonus-btn {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.66rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin-slot {
+    width: 54px;
+    height: 54px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin {
+    width: 48px;
+    height: 48px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-sq-btn {
+    height: 32px;
+    width: 32px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-chip-btn {
+    height: 18px;
+    width: 18px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-bet-col .hud-icon-btn {
+    height: 19px;
+    width: 21px;
+  }
+}
+@media (max-width: 560px) and (orientation: landscape) {
+  .game-stage[data-orient="landscape"] .hud-meter {
+    min-width: 0;
+  }
+  .game-stage[data-orient="landscape"] .hud-meter-value {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 96px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin-slot {
+    width: 48px;
+    height: 48px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-spin {
+    width: 42px;
+    height: 42px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-sq-btn {
+    height: 28px;
+    width: 28px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bar .hud-chip-btn {
+    height: 16px;
+    width: 16px;
+  }
+  .game-stage[data-orient="landscape"] .hud-bonus-btn {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.6rem;
+  }
+  .game-stage[data-orient="landscape"] .hud-right {
+    gap: 6px;
+  }
+  .game-stage[data-orient="landscape"] .hud-tools {
+    gap: 4px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   19. Día de Muertos candle shrine — left flank, bases ON the HUD top edge
+   Melted-crater velas: sunken dark wax pool ringed by a white melted lip.
+   Teardrop flames dance (sway/bob/halo breathe); the CANDLES THEMSELVES
+   ARE STATIC — no sway on the wax. No smoke, no tip curl. Shrine bottom
+   tracks the HUD top via 80px ÷ min(stage scale, 1). Compositor-only
+   motion. Off in portrait, frozen in lite-fx / reduced-motion.
+   ════════════════════════════════════════════════════════════════════ */
+.candle-shrine {
+  position: absolute;
+  left: max(6px, 1.1vw);
+  bottom: calc(80px / min(var(--stage-scale, 1), 1));
+  width: 150px;
+  height: 240px;
+  z-index: 1;
+  pointer-events: none;
+  filter: saturate(1.08);
+}
+.game-stage[data-orient="portrait"] .candle-shrine {
+  display: none;
+}
+
+/* warm ambience: halo + floor pool */
+.candle-shrine .shrine-halo {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 190px;
+  height: 160px;
+  margin-left: -95px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 72%, rgba(255, 158, 44, 0.24) 0%, rgba(255, 106, 26, 0.11) 40%, transparent 70%);
+  animation: shrine-halo-breathe var(--glow-d, 2.9s) ease-in-out var(--glow-t, 0s) infinite;
+}
+.candle-shrine .shrine-floor-light {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 230px;
+  height: 40px;
+  margin-left: -115px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 170, 60, 0.16) 0%, transparent 68%);
+  animation: shrine-halo-breathe 3.8s ease-in-out -1.9s infinite;
+}
+@keyframes shrine-halo-breathe {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+
+/* —— velas: static chunky cylinders with a melted CRATER top —— */
+.shrine-candle {
+  position: absolute;
+  bottom: 0;
+  border-radius: 9px 9px 7px 7px;
+  background:
+    linear-gradient(90deg, #fdf6e8 0%, #ffffff 34%, #f2e7d0 72%, #ddc9a6 100%);
+  box-shadow:
+    inset 0 -4px 0 rgba(160, 130, 80, 0.25),
+    0 3px 0 rgba(60, 30, 20, 0.35);
+  /* static: no sway animation on the wax */
+}
+/* melted crater: white rolled lip + sunken dark wax pool inside */
+.shrine-candle::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  right: -4px;
+  height: 17px;
+  border-radius: 50%;
+  background: #fffdf6;
+  box-shadow:
+    inset 0 -3px 0 rgba(200, 170, 110, 0.35),
+    0 2px 0 rgba(60, 30, 20, 0.18);
+}
+.shrine-candle::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 2px;
+  right: 2px;
+  height: 11px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 42% 58% at 50% 46%, rgba(255, 190, 90, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 52%, #6b3d1c 0%, #4a2408 55%, #38180a 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(20, 5, 0, 0.65),
+    inset 0 -1px 1px rgba(255, 220, 150, 0.35);
+}
+.shrine-candle .cshadow {
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  width: 150%;
+  height: 13px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(20, 5, 15, 0.5);
+  filter: blur(1px);
+}
+.shrine-candle .wick {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 3px;
+  height: 8px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: #2c1c10;
+}
+
+/* —— stylised flame: teardrop only (no tip curl) —— */
+.shrine-candle .flame {
+  position: absolute;
+  top: -52px;
+  left: 50%;
+  width: 36px;
+  height: 51px;
+  margin-left: -18px;
+  transform-origin: 50% 96%;
+  animation: shrine-flame-sway var(--sway-d, 1.4s) ease-in-out calc(var(--sway-t, 0s) * -1 - 0.35s) infinite alternate;
+}
+.shrine-candle .flame-outer {
+  fill: #ff9d1f;
+  stroke: #e2601c;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.shrine-candle .flame-core {
+  fill: #ffd257;
+  animation: shrine-flame-core 0.62s ease-in-out infinite alternate;
+}
+@keyframes shrine-flame-core {
+  0%   { transform: translateY(0) scale(1); }
+  100% { transform: translateY(1.6px) scale(0.94); }
+}
+.shrine-candle .flame-base {
+  fill: #fff8e2;
+}
+@keyframes shrine-flame-sway {
+  0%   { transform: rotate(-5.5deg) scaleX(0.95); }
+  100% { transform: rotate(5.5deg) scaleX(1.06); }
+}
+.shrine-candle .flame-inner {
+  animation: shrine-flame-bob calc(var(--sway-d, 1.4s) * 0.77) ease-in-out infinite alternate;
+  transform-origin: 22px 48px;
+}
+@keyframes shrine-flame-bob {
+  0%   { transform: translateY(1.4px); }
+  100% { transform: translateY(-1.8px); }
+}
+
+/* soft glow disc behind each flame */
+.shrine-candle .flame-halo {
+  position: absolute;
+  top: -58px;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 176, 48, 0.32) 0%, rgba(255, 130, 30, 0.10) 52%, transparent 72%);
+  animation: shrine-halo-breathe var(--glow-d, 2.9s) ease-in-out var(--glow-t, 0s) infinite;
+}
+
+/* three candles: tall centre, shorter flankers — all standing on the HUD */
+.shrine-candle.c1 { left: 10px; width: 42px; height: 84px; }
+.shrine-candle.c2 { left: 58px; width: 46px; height: 112px; }
+.shrine-candle.c3 { left: 110px; width: 38px; height: 72px; }
+
+/* performance / accessibility switches, same contract as the embers */
+html.lite-fx .candle-shrine,
+.candle-shrine:where(.reduce) {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .candle-shrine .flame,
+  .candle-shrine .flame-inner,
+  .candle-shrine .shrine-halo,
+  .candle-shrine .shrine-floor-light {
+    animation: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   20. Portrait HUD = thin meters strip (Cookout reference)
+   The bar's dark plate covers ONLY the last grid row (76 design px:
+   BALANCE left, PLAY right). The control rows above it are transparent
+   and float over the sky art, so the HUD reads as one thin line at the
+   bottom edge with buttons hovering just above it.
+   ════════════════════════════════════════════════════════════════════ */
+.game-stage[data-orient="portrait"] .hud-bar {
+  position: relative;
+  background: none;
+  border-top: none;
+  box-shadow: none;
+}
+.game-stage[data-orient="portrait"] .hud-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 58px;
+  background: linear-gradient(180deg, #0d0d0f 0%, #000 60%);
+  border-top: 2px solid var(--gold-dk, #7a5a22);
+  box-shadow:
+    0 -1px 0 rgba(226, 176, 74, 0.35),
+    0 -14px 30px rgba(0, 0, 0, 0.7);
+}
+.game-stage[data-orient="portrait"] .hud-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   21. Mobile intro cycle (Cookout reference)
+   Portrait boot: ONE feature ticket, big and centered, swapping every 3 s
+   (MULTIPLIERS → BONUS → MAX WIN) with a quick pop/fade swap. Landscape
+   keeps the classic three-tickets row untouched.
+   ════════════════════════════════════════════════════════════════════ */
+/* Sizes are stage design px (the stage is transform-scaled, so vw/vh
+   would double-scale): card = 62% of the 675px stage width, base font
+   34 design px → titles ~30 real px on a 390px phone, like the reference. */
+.game-stage[data-orient="portrait"] .boot-cards-cycle {
+  width: 100%;
+  min-height: 420px;
+  align-items: center;
+}
+.game-stage[data-orient="portrait"] .boot-cycle-card {
+  width: 62%;
+  animation: boot-cycle-in 0.45s cubic-bezier(0.22, 1.35, 0.36, 1) both;
+}
+.game-stage[data-orient="portrait"] .boot-cycle-card .boot-card {
+  width: 100%;
+  font-size: 34px;
+  animation: none; /* the row floats gently; a single big card stays still */
+}
+@keyframes boot-cycle-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-stage[data-orient="portrait"] .boot-cycle-card {
+    animation: none;
+  }
+}

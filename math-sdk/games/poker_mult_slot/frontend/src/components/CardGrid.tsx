@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import type { Card, Rank, Suit } from "../game/engine";
 import { cardFaceUrl, jokerFaceUrl } from "../game/assets";
 import { audio } from "../game/audio";
@@ -63,20 +63,33 @@ function randomCycleFace(): { rank: Rank; suit: Suit } {
  * Column-0 total spin (A+B+C). Later columns add stop-stagger only.
  */
 export function reelSpinMs(turbo: boolean): number {
-  return turbo ? 520 : 720;
+  return turbo ? 400 : 940;
 }
 
 /** Delay between adjacent columns starting phase C (L→R). */
 export function columnStopGapMs(turbo: boolean): number {
-  return turbo ? 70 : 100;
+  return turbo ? 50 : 135;
 }
 
 export function reelRampMs(turbo: boolean): number {
-  return turbo ? 80 : 130;
+  return turbo ? 60 : 160;
 }
 
 export function reelDecelMs(turbo: boolean): number {
-  return turbo ? 150 : 210;
+  return turbo ? 120 : 290;
+}
+
+/**
+ * Wind-up before the drop: the strip dips UP a few px, then falls. Carved out of the existing
+ * spin time (stop times are unchanged), skipped in turbo so turbo stays snappy.
+ */
+export function reelWindupMs(turbo: boolean): number {
+  return turbo ? 0 : 90;
+}
+
+/** Landing settle: the strip overshoots a touch and rebounds — cosmetic, runs after the reel has "stopped". */
+export function reelBounceMs(turbo: boolean): number {
+  return turbo ? 110 : 190;
 }
 
 /** Filler symbols below the finals — long enough that the strip never looks short. */
@@ -188,7 +201,7 @@ function reelDistanceAt(
 
 /** Pause after the last column settles before any win FX (glow / line / dim). */
 export function winFxPauseMs(turbo: boolean): number {
-  return turbo ? 150 : 220;
+  return turbo ? 70 : 200;
 }
 
 /**
@@ -202,11 +215,11 @@ export function beamRevealHoldMs(
 ): number {
   if (lineCount <= 0) return 0;
   const pause = winFxPauseMs(turbo) / 1000;
-  const glowLead = turbo ? 0.12 : 0.2;
-  const sweepStep = turbo ? 0.14 : 0.22;
-  const drawSec = turbo ? 0.22 : 0.3;
+  const glowLead = turbo ? 0.08 : 0.2;
+  const sweepStep = turbo ? 0.1 : 0.22;
+  const drawSec = turbo ? 0.16 : 0.3;
   const lingerSec =
-    grade === "soft" ? (turbo ? 0.28 : 0.4) : turbo ? 0.22 : 0.35;
+    grade === "soft" ? (turbo ? 0.12 : 0.25) : turbo ? 0.16 : 0.35;
   return Math.round(
     (pause + glowLead + (lineCount - 1) * sweepStep + drawSec + lingerSec) * 1000,
   );
@@ -343,30 +356,38 @@ function readGeom(el: HTMLElement): GridGeom {
 
 type StripFace = { rank: Rank; suit: Suit; golden?: boolean };
 
-function ReelFace({
+const ReelFace = memo(function ReelFace({
   card,
   mult,
   goldCaption,
   settled,
   className,
+  style,
 }: {
   card: StripFace;
   mult?: number;
   goldCaption?: string;
   settled: boolean;
   className?: string;
+  style?: CSSProperties;
 }) {
   const gold = !!card.golden && settled;
   const showMult = settled && !card.golden && (mult ?? 0) > 0;
   const redSuit = card.suit === "H" || card.suit === "D";
+  // Court faces (J/Q/K) carry a character illustration, same as the joker — give the
+  // static art a slow foil sweep so the board doesn't read as flat printed pips.
+  const court = settled && !gold && (card.rank === "J" || card.rank === "Q" || card.rank === "K");
   return (
     <div
       className={`reel-symbol card-tile${gold ? " is-gold" : ""}${className ? ` ${className}` : ""}`}
       data-suit={card.suit}
       data-suit-tone={redSuit ? "red" : "black"}
       data-caption={gold ? goldCaption : undefined}
+      style={style}
     >
-      <div className={`card-face-static ${gold ? "bonus-card" : "card-face"}`}>
+      <div
+        className={`card-face-static ${gold ? "bonus-card" : "card-face"}${court ? " is-court" : ""}`}
+      >
         <img
           src={gold ? jokerFaceUrl() : cardFaceUrl(card.rank, card.suit)}
           alt=""
@@ -375,11 +396,13 @@ function ReelFace({
           aria-hidden
         />
         {gold ? <span className="bonus-drop-flash" aria-hidden /> : null}
+        {gold ? <span className="card-shimmer card-shimmer-gold" aria-hidden /> : null}
+        {court ? <span className="card-shimmer card-shimmer-court" aria-hidden /> : null}
         {showMult ? <div className="bonus-ribbon bonus-ribbon-mult">×{Math.round(mult!)}</div> : null}
       </div>
     </div>
   );
-}
+});
 
 /**
  * One vertical reel: strip scrolls TOP→BOTTOM (translateY increases),
@@ -422,7 +445,10 @@ function ReelColumn({
 }) {
   const stripRef = useRef<HTMLDivElement>(null);
   const colRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const settledRef = useRef(false);
+  /** Set from the effect: px overshoot for the landing bounce (0 = none, e.g. reduced motion). */
+  const bouncePxRef = useRef(0);
   const onStopRef = useRef(onColumnStop);
   onStopRef.current = onColumnStop;
   // Read at deal time only: toggling TURBO must never restart a settled reel.
@@ -447,6 +473,21 @@ function ReelColumn({
     if (settledRef.current) return;
     settledRef.current = true;
     el.style.transform = "translate3d(0, 0, 0)";
+    viewportRef.current?.removeAttribute("data-fast");
+    // Landing settle (Web Animations, composited over the resting transform): dip past the seat,
+    // rebound a hair, settle. Purely visual — the reel is already "stopped" for game logic.
+    const o = bouncePxRef.current;
+    if (o > 0 && typeof el.animate === "function") {
+      el.animate(
+        [
+          { transform: "translate3d(0, 0, 0)", offset: 0 },
+          { transform: `translate3d(0, ${o}px, 0)`, offset: 0.38 },
+          { transform: `translate3d(0, ${(-o * 0.32).toFixed(2)}px, 0)`, offset: 0.72 },
+          { transform: "translate3d(0, 0, 0)", offset: 1 },
+        ],
+        { duration: reelBounceMs(turboRef.current), easing: "cubic-bezier(0.25, 0.8, 0.35, 1)" },
+      );
+    }
     setSettled(true);
     onStopRef.current?.(col);
   };
@@ -475,6 +516,10 @@ function ReelColumn({
     const duration = Math.max(160, stopMsRef.current);
     const ramp = reelRampMs(turboRef.current);
     const decel = reelDecelMs(turboRef.current);
+    // Wind-up (dip up before the drop) + landing bounce sizes, in stage px.
+    const windMs = duration > 400 ? reelWindupMs(turboRef.current) : 0;
+    const dip = windMs > 0 ? pitch * 0.09 : 0;
+    bouncePxRef.current = reduce ? 0 : pitch * (turboRef.current ? 0.035 : 0.055);
 
     if (reduce || travel <= 0 || dealKey === 0) {
       // Initial board paint — seated, no boot-time spin.
@@ -490,8 +535,15 @@ function ReelColumn({
     const tick = (now: number) => {
       if (!alive || settledRef.current) return;
       const elapsed = now - t0;
-      const dist = reelDistanceAt(elapsed, duration, travel, ramp, decel);
-      const y = startY + dist; // increases toward 0
+      let y: number;
+      if (elapsed < windMs) {
+        // ease-out dip upward, velocity reaches 0 exactly when the drop begins
+        const u = elapsed / windMs;
+        y = startY - dip * (1 - (1 - u) * (1 - u));
+      } else {
+        const dist = reelDistanceAt(elapsed - windMs, duration - windMs, travel + dip, ramp, decel);
+        y = startY - dip + dist; // increases toward 0
+      }
       el.style.transform = `translate3d(0, ${y}px, 0)`;
       if (elapsed < duration) {
         raf = requestAnimationFrame(tick);
@@ -530,7 +582,7 @@ function ReelColumn({
           }
         />
       ) : null}
-      <div className="reel-viewport">
+      <div ref={viewportRef} className="reel-viewport">
         <div ref={stripRef} className={`reel-strip${settled ? " is-settled" : " is-spinning"}`}>
           {strip.map((face, i) => {
             const isFinal = i < ROWS;
@@ -546,11 +598,12 @@ function ReelColumn({
             const celebrate = gold && !!goldCelebrate && settled;
             return (
               <ReelFace
-                key={`${dealKey}-${col}-${i}`}
+                key={isFinal ? `${dealKey}-${col}-${i}` : `f-${col}-${i}`}
                 card={isFinal ? finals[row]! : face}
                 mult={isFinal ? mults[row] : undefined}
                 goldCaption={goldCaption}
                 settled={settled && isFinal}
+                style={win ? ({ "--wi": col } as CSSProperties) : undefined}
                 className={[
                   isFinal ? "grid-cell relative" : "",
                   win ? "card-win is-win" : "",
@@ -609,9 +662,9 @@ function GoldBeams({
   const stroke = beamStrokePx(spinWinX, geom.tw);
   const outlineExtra = beamOutlineExtraPx(spinWinX) / Math.max(pxScale, 0.05);
   const outlineWidth = stroke + outlineExtra;
-  const glowLead = turbo ? 0.12 : 0.2;
-  const sweepStep = turbo ? 0.14 : 0.22;
-  const drawDur = turbo ? 0.22 : 0.3;
+  const glowLead = turbo ? 0.08 : 0.2;
+  const sweepStep = turbo ? 0.1 : 0.22;
+  const drawDur = turbo ? 0.16 : 0.3;
   const uid = `gb-${dealKey}`;
   const gradeClass = soft ? " is-soft" : big ? " is-big" : " is-mid";
   const outlineOpacity = soft ? 0.55 : big ? 0.9 : 0.78;
@@ -794,6 +847,8 @@ export function CardGrid({
     if (stoppedColsRef.current.has(col)) return;
     stoppedColsRef.current.add(col);
     audio.playReelStop(col);
+    if (cards.some((c, i) => i % COLS === col && c?.golden)) audio.playJokerLand();
+    else if (multipliers.some((m, i) => i % COLS === col && (m ?? 0) > 0)) audio.playMultLand();
     if (stoppedColsRef.current.size >= COLS) {
       audio.stopReelSpinLoop();
       audio.stopAnticipation();
@@ -829,20 +884,31 @@ export function CardGrid({
 
   const sparkCount = winFxOn && grade === "big" ? 22 : 0;
 
-  // Centroid of paying cells — punch the cash number on the cluster.
+  // Cash number: centred on the paying cells horizontally, but sat on the row ABOVE them
+  // (or below, for a top-row win) so the winning hand itself stays readable.
   const fieldPunch =
-    winFxOn && winCash > 0 && formatCash && winIndices.length > 0
+    winFxOn && grade !== "soft" && winCash > 0 && formatCash && winIndices.length > 0
       ? (() => {
           let sx = 0;
           let sy = 0;
+          let minR = ROWS;
+          let maxR = 0;
           for (const i of winIndices) {
             const c = i % COLS;
             const r = Math.floor(i / COLS);
             sx += c * (geom.tw + geom.gap) + geom.tw / 2;
             sy += geom.padY + r * (geom.th + geom.gap) + geom.th / 2;
+            minR = Math.min(minR, r);
+            maxR = Math.max(maxR, r);
           }
           const n = winIndices.length;
-          return { x: sx / n, y: sy / n, label: formatCash(winCash) };
+          let y = sy / n;
+          const rowY = (r: number) => geom.padY + r * (geom.th + geom.gap) + geom.th / 2;
+          if (maxR - minR <= 1) {
+            if (minR >= 1) y = rowY(minR - 1);
+            else if (maxR < ROWS - 1) y = rowY(maxR + 1);
+          }
+          return { x: sx / n, y, label: formatCash(winCash) };
         })()
       : null;
 

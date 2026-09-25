@@ -28,6 +28,8 @@ export type Copy = {
   auto: string;
   autoplayTitle: string;
   disable: string;
+  cancel: string;
+  confirm: string;
   bonusBank: string;
   freeSpinsLeft: string;
   freeSpins: string;

@@ -42,5 +42,6 @@ Modes: `base` 1× · `bonus` 25× · `bonus_job` 35× · `bonus_flush` 190× · 
 
 ## Notes
 - Win = Hand Pay × multipliers; hard cap 25,000×
+- Free spins start with Bonus Bank ×3 (`fsStartBank`); every paying chip adds on top. Books, LUTs and the frontend mirror all read this one value from `mathConfig.json`.
 - Joker (bonus) cards: 3 = BONUS, 4 = JOB, 5 = Flush → 10 free spins. A joker is not a poker card: every line through it pays 0.
 - Local demo still uses client RNG; books replace outcomes once wired to RGS `Play()`

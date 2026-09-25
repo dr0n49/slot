@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { audio } from "../game/audio";
+import { assetUrl } from "../game/assets";
 import {
   BIG_WIN_ANTICIPATION_MS,
   BIG_WIN_COUNT_MS,
@@ -9,7 +10,23 @@ import {
   type BigWinTier,
 } from "../game/bigWin";
 import type { Copy } from "../game/social";
-import { CeleSparkField, CeleSplat, CeleStars, CeleWord } from "./Celebration";
+import { CeleConfetti, CeleEmberBurst, CeleSparkField, CeleSplat, CeleWord } from "./Celebration";
+
+/** Calavera mascot mark, one side — SENSATIONAL/MAX only (the two rungs that also get
+ * the vortex + confetti). Same <img> both sides, right one mirrored via CSS — no second
+ * asset. Rendered left-word-right in DOM order so a plain flex row lays them out correctly. */
+function CeleSkull({ tier, side }: { tier: BigWinTier; side: "left" | "right" }) {
+  if (tier !== "sensational" && tier !== "max") return null;
+  return (
+    <img
+      src={assetUrl("assets/ui/calavera.svg")}
+      alt=""
+      className={`cele-calavera cele-calavera-${side}`}
+      draggable={false}
+      aria-hidden
+    />
+  );
+}
 
 type Props = {
   tier: BigWinTier;
@@ -69,6 +86,10 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
   const doneRef = useRef(false);
   const skipRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
+  // Tracks the last tier the ladder loop has already played a sting for, so a
+  // tap-to-skip that lands mid-step doesn't layer a second playBigWin(tier)
+  // on top of the one the loop just fired for that same step.
+  const lastStingTierRef = useRef<BigWinTier | null>(null);
 
   const scale = turbo ? 0.7 : 1;
 
@@ -87,7 +108,10 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
     setDisplayTier(tier);
     setStepKey((n) => n + 1);
     setFinished(true);
-    audio.playBigWin(tier);
+    if (lastStingTierRef.current !== tier) {
+      lastStingTierRef.current = tier;
+      audio.playBigWin(tier);
+    }
   };
 
   useEffect(() => {
@@ -156,6 +180,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
 
           setDisplayTier(step);
           setStepKey((n) => n + 1);
+          lastStingTierRef.current = step;
           audio.playBigWin(step);
 
           const countMs = BIG_WIN_COUNT_MS[step] * scale;
@@ -207,13 +232,23 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
       aria-label={WORD_OF[displayTier](copy)}
     >
       <div className="bigwin-scrim pointer-events-none absolute inset-0" />
+      {/* Ember/smoke burst replaces the old spinning conic-gradient rays
+          (noir.css .cele-float::before/::after, killed in vibrant.css §12) —
+          a marigold ember + smoke plume drifting outward from the word,
+          same visual family as the board's own ambient embers. */}
+      <CeleEmberBurst key={`ember-${stepKey}`} tier={displayTier} />
+      {/* Confetti now fires on every rung (NICE/SUPER get a smaller, quicker
+          burst — see vibrant.css §11d — SENSATIONAL/MAX keep the big one) so
+          the two most-common Big Win tiers stop reading as a plain word-swap. */}
+      <CeleConfetti key={`confetti-${stepKey}`} tier={displayTier} />
       <div
         className={`cele-float relative z-10 flex flex-col items-center${anticipate ? " is-anticipate" : ""}`}
       >
         <CeleSparkField />
-        <CeleStars />
-        <div key={stepKey} className="bigwin-tier-step">
+        <div key={stepKey} className="bigwin-tier-step cele-word-row">
+          <CeleSkull tier={displayTier} side="left" />
           <CeleWord variant={displayTier}>{WORD_OF[displayTier](copy)}</CeleWord>
+          <CeleSkull tier={displayTier} side="right" />
         </div>
         <CeleSplat>
           <span className="tabular-nums">{copy.money(shown)}</span>

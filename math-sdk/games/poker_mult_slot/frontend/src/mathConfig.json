@@ -206,10 +206,10 @@
       ]
     },
     "chance": {
-      "base": 0.364,
-      "bonus": 0.2648,
-      "job": 0.2202,
-      "flush": 0.159,
+      "base": 0.20376,
+      "bonus": 0.07648,
+      "job": 0.08409,
+      "flush": 0.08271,
       "ante_job": 0.96485,
       "ante_flush": 0.75064
     },
@@ -275,5 +275,6 @@
       "guarantee": "FLUSH LINE"
     }
   },
-  "mc": null
+  "mc": null,
+  "fsStartBank": 3
 }

@@ -562,27 +562,26 @@ input,
 
 .hud-spin-slot {
   position: relative;
-  width: 100px;
-  height: 3.85rem;
+  display: flex;
+  width: 104px;
+  height: 104px;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
 }
 .hud-spin {
-  position: absolute;
-  left: 50%;
-  bottom: 0.15rem;
   margin: 0;
-  transform: translateX(-50%);
 }
 .hud-spin:not(:disabled):hover {
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(-2px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
 }
 .hud-spin:not(:disabled):active {
-  transform: translateX(-50%) scale(0.97);
+  transform: scale(0.97);
   transition-duration: 80ms;
 }
 .hud-spin:disabled {
-  transform: translateX(-50%) scale(0.97);
+  transform: scale(0.97);
 }
 
 /* Hacksaw-style: big white cash punch centered on the paying cluster. */
@@ -639,8 +638,8 @@ input,
   .hud-win .win-plaque { font-size: 2rem; }
   .hud-win-amount { font-size: 2.15rem; }
   .hud-spin-slot {
-    width: 100px;
-    height: 3.85rem;
+    width: 104px;
+    height: 104px;
   }
   .hud-bet-col .hud-icon-btn {
     height: 1.22rem;
@@ -2648,11 +2647,12 @@ html.lite-fx .storm-layer {
 .game-stage[data-orient="portrait"] .game-main {
   gap: 0 !important;
   padding-top: 0.2rem !important;
-  padding-bottom: 0.08rem !important;
+  /* breathing room between the board and the floating HUD buttons */
+  padding-bottom: 1.15rem !important;
 }
 .game-stage[data-orient="portrait"] .card-stage {
-  padding-top: 0.7rem !important;
-  padding-bottom: 0.55rem !important;
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.35rem !important;
 }
 .game-stage[data-orient="portrait"] .card-stage-slot {
   /* Portrait: 5×5 + frame float centered on the sky, not sitting on the HUD. */
@@ -3202,7 +3202,7 @@ html.lite-fx .storm-layer {
    The band is the wrap's own padded box: fit() measures wrap.offsetWidth/Height,
    so the whole frame is always inside the stage and scales with --board-scale. */
 .card-stage-wrap {
-  padding: 0.45rem;
+  padding: 0.32rem;
   border-radius: 1.55rem;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(96, 60, 8, 0.16)),
@@ -3213,7 +3213,7 @@ html.lite-fx .storm-layer {
 
 .playfield-board {
   position: relative;
-  padding: 0.45rem;
+  padding: 0.3rem;
   border-radius: 1.05rem;
   background:
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90, 40, 160, 0.14), transparent 58%),
@@ -5491,4 +5491,101 @@ html.lite-fx .screen-thunder {
 .menu-panel-card .info-kicker {
   background: rgba(226, 58, 58, 0.08);
   border-color: rgba(196, 30, 58, 0.3);
+}
+
+/* ── Godot board + per-line win labels (App.tsx → SlotGame / WinLineLabels) ──
+   The Godot viewport is 800×1146 (project.godot). The board box keeps that
+   exact aspect inside whatever space is left between the top and the HUD, so
+   Godot never needs letterbox bars and React's background / Hand pays panel
+   stay visible around it. Keep the ratio in sync with project.godot. */
+.godot-board-slot {
+  container-type: size;
+  /* Room left around the board for the riveted plate frame: wrap padding +
+     border and board padding + border (~20px a side), the outer ink/gold
+     rings and the hard offset shadow. */
+  --board-frame: 34px;
+}
+.godot-board {
+  position: relative;
+  width: min(calc(100cqw - var(--board-frame)), calc((100cqh - var(--board-frame)) * 800 / 1146));
+  height: min(calc(100cqh - var(--board-frame)), calc((100cqw - var(--board-frame)) * 1146 / 800));
+  container-type: size;
+  transition: opacity 0.35s ease;
+}
+.win-line-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.win-line-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  font-family: "Oswald", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  transform: translate(-50%, -62%) scale(0.45);
+  animation: win-line-pop 0.75s both;
+}
+.win-line-name {
+  margin-bottom: 0.15cqh;
+  font-size: 2.55cqh;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #ffd97a;
+  -webkit-text-stroke: 0.62cqh #0a0607;
+  paint-order: stroke fill;
+  text-shadow: 0 0.42cqh 0 rgba(0, 0, 0, 0.65);
+}
+.win-line-cash {
+  font-size: 5.4cqh;
+  color: #ffffff;
+  -webkit-text-stroke: 1cqh #0a0607;
+  paint-order: stroke fill;
+  text-shadow: 0 0.45cqh 0 rgba(0, 0, 0, 0.65);
+}
+@keyframes win-line-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -62%) scale(0.45);
+  }
+  14% {
+    opacity: 1;
+  }
+  31% {
+    transform: translate(-50%, -62%) scale(1.14);
+  }
+  55% {
+    transform: translate(-50%, -62%) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, calc(-62% - 1.2cqh)) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .win-line-label {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -62%);
+  }
+}
+
+/* Bonus anticipation (Godot → onAnticipation): the plate around the board
+   burns while the last reels are held for a 3rd joker — same tension pulse
+   the old CSS grid used (keyframes vb-board-tension in vibrant.css). */
+.playfield-board.is-hot {
+  animation: vb-board-tension 0.5s ease-in-out infinite alternate;
+}
+html.lite-fx .playfield-board.is-hot {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .playfield-board.is-hot {
+    animation: none;
+  }
 }

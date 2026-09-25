@@ -94,7 +94,10 @@ type Props = {
   onToggleAuto: () => void;
 };
 
-/** Bottom bar: meters on the sides, win in the middle, spin on the right. */
+/**
+ * Bottom bar: BALANCE + tools on the left, WIN in the middle (same type as BALANCE / BET),
+ * BET (− / +) + SPIN + TURBO / AUTO on the right. Colours live in vibrant.css (black plates).
+ */
 export function BottomHud({
   balance,
   bet,
@@ -144,61 +147,52 @@ export function BottomHud({
         <div className="hud-inner relative mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center gap-3 overflow-visible px-6 py-3">
           <div className="hud-left flex min-w-0 items-center gap-2">
             <div className="hud-tools">
-            <button
-              type="button"
-              onClick={onMenu}
-              className="hud-chip-btn"
-              aria-label="Game info"
-            >
-              <InfoMark className="h-[72%] w-[72%]" />
-            </button>
-
-            <div ref={soundWrapRef} className="hud-sound-wrap">
-              {volOpen ? (
-                <div className="hud-vol-pop" role="dialog" aria-label="Volume">
-                  <button
-                    type="button"
-                    className="hud-vol-pop-btn"
-                    onClick={onToggleSound}
-                    aria-label={soundOn ? "Mute" : "Unmute"}
-                  >
-                    <SpeakerMark className="h-4 w-4 shrink-0" muted={!soundOn} />
-                  </button>
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={Math.round(soundVol * 100)}
-                    onChange={(e) => onSoundVolume(Number(e.target.value) / 100)}
-                    className="hud-vol-slider"
-                    style={{ ["--hud-vol" as string]: `${Math.round(soundVol * 100)}%` }}
-                    aria-label="Volume"
-                  />
-                  <span className="hud-vol-num">{Math.round(soundVol * 100)}</span>
-                </div>
-              ) : null}
+              <button type="button" onClick={onMenu} className="hud-chip-btn" aria-label="Game info">
+                <InfoMark className="h-[72%] w-[72%]" />
+              </button>
+              <div ref={soundWrapRef} className="hud-sound-wrap">
+                {volOpen ? (
+                  <div className="hud-vol-pop" role="dialog" aria-label="Volume">
+                    <button
+                      type="button"
+                      className="hud-vol-pop-btn"
+                      onClick={onToggleSound}
+                      aria-label={soundOn ? "Mute" : "Unmute"}
+                    >
+                      <SpeakerMark className="h-4 w-4 shrink-0" muted={!soundOn} />
+                    </button>
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      value={Math.round(soundVol * 100)}
+                      onChange={(e) => onSoundVolume(Number(e.target.value) / 100)}
+                      className="hud-vol-slider"
+                      style={{ ["--hud-vol" as string]: `${Math.round(soundVol * 100)}%` }}
+                      aria-label="Volume"
+                    />
+                    <span className="hud-vol-num">{Math.round(soundVol * 100)}</span>
+                  </div>
+                ) : null}
+                <button
+                  type="button"
+                  onClick={openSound}
+                  className={`hud-chip-btn ${soundOn ? "" : "is-muted"}`}
+                  aria-label={soundOn ? "Mute" : "Unmute"}
+                  title={soundOn ? "Mute" : "Unmute"}
+                >
+                  <SpeakerMark className="h-[72%] w-[72%]" muted={!soundOn} />
+                </button>
+              </div>
               <button
                 type="button"
-                onClick={openSound}
-                className={`hud-chip-btn ${soundOn ? "" : "is-muted"}`}
-                aria-label={soundOn ? "Mute" : "Unmute"}
-                title={soundOn ? "Mute" : "Unmute"}
+                disabled={busy || bonusActive}
+                onClick={onBuyBonus}
+                className="hud-bonus-btn disabled:opacity-40"
               >
-                <SpeakerMark className="h-[72%] w-[72%]" muted={!soundOn} />
+                {hasAnte ? copy.disable : copy.stormBonus}
               </button>
             </div>
-
-            <button
-              type="button"
-              disabled={busy || bonusActive}
-              onClick={onBuyBonus}
-              className="hud-bonus-btn disabled:opacity-40"
-            >
-              {hasAnte ? copy.disable : copy.stormBonus}
-            </button>
-
-            </div>
-
             <div className="hud-meter text-left">
               <div className="hud-meter-label">{copy.balance}</div>
               <div className="hud-meter-value">{copy.money(balance)}</div>
@@ -211,32 +205,30 @@ export function BottomHud({
 
           <div className="hud-right ml-auto flex shrink-0 items-center justify-end gap-2 sm:gap-3">
             <div className="hud-stake">
-            <div className="hud-meter text-right">
-              <div className="hud-meter-label">{stakeLabel}</div>
-              <div className="hud-meter-value">{copy.money(stakeValue)}</div>
-            </div>
-
-            <div className="hud-bet-col">
-              <button
-                type="button"
-                disabled={busy || bonusActive}
-                onClick={onBetUp}
-                className="hud-icon-btn"
-                aria-label="Increase stake"
-              >
-                <PlusMark className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-              </button>
-              <button
-                type="button"
-                disabled={busy || bonusActive}
-                onClick={onBetDown}
-                className="hud-icon-btn"
-                aria-label="Decrease stake"
-              >
-                <MinusMark className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-              </button>
-            </div>
-
+              <div className="hud-meter text-right">
+                <div className="hud-meter-label">{stakeLabel}</div>
+                <div className="hud-meter-value">{copy.money(stakeValue)}</div>
+              </div>
+              <div className="hud-bet-col">
+                <button
+                  type="button"
+                  disabled={busy || bonusActive}
+                  onClick={onBetUp}
+                  className="hud-icon-btn"
+                  aria-label="Increase play amount"
+                >
+                  <PlusMark className="h-4 w-4 sm:h-5 sm:w-5" />
+                </button>
+                <button
+                  type="button"
+                  disabled={busy || bonusActive}
+                  onClick={onBetDown}
+                  className="hud-icon-btn"
+                  aria-label="Decrease play amount"
+                >
+                  <MinusMark className="h-4 w-4 sm:h-5 sm:w-5" />
+                </button>
+              </div>
             </div>
 
             <div className="hud-spin-slot">
@@ -247,7 +239,7 @@ export function BottomHud({
                   if (auto) onToggleAuto();
                   else onSpin();
                 }}
-                className="respin-btn hud-spin relative z-40 flex h-[100px] w-[100px] items-center justify-center rounded-full disabled:opacity-60"
+                className="respin-btn hud-spin relative z-40 flex h-full w-full items-center justify-center rounded-full disabled:opacity-60"
                 aria-label={auto ? "Stop autoplay" : "Spin"}
               >
                 {autoLeft > 0 ? (

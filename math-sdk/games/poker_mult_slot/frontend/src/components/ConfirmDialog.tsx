@@ -4,10 +4,12 @@ type Props = {
   description?: string;
   onCancel: () => void;
   onConfirm: () => void;
+  cancelLabel?: string;
+  confirmLabel?: string;
 };
 
 /** Cloudy-styled confirm: cream plate, gold CANCEL, red CONFIRM. */
-export function ConfirmDialog({ open, title, description, onCancel, onConfirm }: Props) {
+export function ConfirmDialog({ open, title, description, onCancel, onConfirm, cancelLabel = "CANCEL", confirmLabel = "CONFIRM" }: Props) {
   if (!open) return null;
 
   return (
@@ -37,14 +39,14 @@ export function ConfirmDialog({ open, title, description, onCancel, onConfirm }:
             onClick={onCancel}
             className="confirm-btn-cancel flex-1 rounded-full py-3 font-display text-base sm:text-lg font-extrabold tracking-wider"
           >
-            CANCEL
+            {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
             className="confirm-btn-confirm flex-1 rounded-full py-3 font-display text-base sm:text-lg font-extrabold tracking-wider"
           >
-            CONFIRM
+            {confirmLabel}
           </button>
         </div>
       </div>

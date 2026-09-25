@@ -21,7 +21,7 @@ export function BonusTriggerOverlay({ onContinue, copy }: Props) {
         <p className="cele-sub">{copy.youWon}</p>
         <div className="fs-cloud splash-settle">
           <img
-            src={assetUrl("assets/ui/ink-plate.svg")}
+            src={assetUrl("assets/ui/bank-plate.svg")}
             alt=""
             className="fs-cloud-img"
             draggable={false}
