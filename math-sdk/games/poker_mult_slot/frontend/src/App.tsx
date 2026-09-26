@@ -597,7 +597,7 @@ export default function App() {
           ? fromCents(Math.max(0, toCents(snapTotal) - toCents(winAccum)))
           : rawPay;
       await waitForReels(spin.cards, t);
-      if ((spin.lines?.length ?? 0) > 0) audio.playLineWin(spin.lines?.length ?? 1, winGrade(spin.spinWinX) === "soft");
+      if ((spin.lines?.length ?? 0) > 0) audio.playLineWin(spin.spinWinX);
       setBonusBank(running);
       winAccum = fromCents(toCents(winAccum) + toCents(spinPay));
       setBonusTotal(winAccum);
@@ -768,8 +768,17 @@ export default function App() {
             await waitForReels(spin.cards, t);
             const lineN = spin.lines?.length ?? 0;
             if (lineN > 0) {
-              audio.playLineWin(lineN, winGrade(spin.spinWinX) === "soft");
-              audio.playMidWin(spin.spinWinX);
+              audio.playLineWin(spin.spinWinX);
+              const tier = bigWinTier(spin.spinWinX);
+              if (tier) {
+                // Ladder REPLACES the mid-win sting (never stacks with it)
+                // and follows the on-grid reveal hold, like Godot's native path.
+                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await showBigWin(tier, spin.spinWinX);
+              } else {
+                audio.playMidWin(spin.spinWinX);
+                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+              }
               await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
@@ -832,8 +841,17 @@ export default function App() {
             await waitForReels(spin.cards, t);
             const lineN = spin.lines?.length ?? 0;
             if (lineN > 0) {
-              audio.playLineWin(lineN, winGrade(spin.spinWinX) === "soft");
-              audio.playMidWin(spin.spinWinX);
+              audio.playLineWin(spin.spinWinX);
+              const tier = bigWinTier(spin.spinWinX);
+              if (tier) {
+                // Ladder REPLACES the mid-win sting (never stacks with it)
+                // and follows the on-grid reveal hold, like Godot's native path.
+                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await showBigWin(tier, spin.spinWinX);
+              } else {
+                audio.playMidWin(spin.spinWinX);
+                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+              }
               await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
@@ -850,8 +868,17 @@ export default function App() {
           await waitForReels(round.base.cards, t);
           const baseLines = round.base.lines?.length ?? 0;
           if (baseLines > 0) {
-            audio.playLineWin(baseLines, winGrade(round.base.spinWinX) === "soft");
-            audio.playMidWin(round.base.spinWinX);
+            audio.playLineWin(round.base.spinWinX);
+            const tier = bigWinTier(round.base.spinWinX);
+            if (tier) {
+              // Ladder REPLACES the mid-win sting (never stacks with it)
+              // and follows the on-grid reveal hold, like Godot's native path.
+              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await showBigWin(tier, round.base.spinWinX);
+            } else {
+              audio.playMidWin(round.base.spinWinX);
+              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+            }
             await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
           }
         }

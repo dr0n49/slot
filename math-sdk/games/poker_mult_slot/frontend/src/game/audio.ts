@@ -1,4 +1,10 @@
-/** Casino audio — SFX WAV pack. No music bed, no thunder: deal + UI + stings only. */
+/** Casino audio — SFX WAV pack + music bed.
+ *  AUDIO OWNERSHIP: React owns music, win stings (selection by winX ONLY),
+ *  Big Win stings, UI sounds and ducking. Godot owns ONLY frame-synced
+ *  sounds (reel stops, spin loop, joker land, mult land, anticipation cue)
+ *  and never plays win stings — so each sting fires exactly once.
+ *  Every trigger passes a 50 ms retrigger guard; win stings are limited to
+ *  one voice (a new sting replaces the previous instead of stacking). */
 
 import { assetUrl } from "./assets";
 
@@ -42,6 +48,47 @@ try {
 let audioCtx: AudioContext | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
+
+// ——— Retrigger guard + per-category voice limits ———
+// The SAME event twice within 50 ms is ignored (rapid clicking, or any
+// future React/Godot overlap, must never flange a hit against itself).
+// Wins are capped at ONE voice: a new win/big-win sting stops the previous
+// one instead of stacking on top of it. UI is capped at 2 voices.
+const RETRIGGER_MS = 50;
+const lastTriggerAt = new Map<string, number>();
+const activeWinVoices = new Set<AudioBufferSourceNode>();
+
+/** Debug aid (?sfxlog=1): every ADMITTED trigger lands here with a timestamp,
+ *  so a verification run can prove no sample fires twice within 100 ms. */
+const sfxLogEnabled =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).has("sfxlog");
+
+function logTrigger(event: string) {
+  if (!sfxLogEnabled) return;
+  const w = window as typeof window & { __sfxLog?: Array<{ t: number; event: string }> };
+  (w.__sfxLog ??= []).push({ t: performance.now(), event });
+}
+
+/** False (skip the sound) when this exact event fired within RETRIGGER_MS. */
+function gate(event: string): boolean {
+  const now = performance.now();
+  if (now - (lastTriggerAt.get(event) ?? -Infinity) < RETRIGGER_MS) return false;
+  lastTriggerAt.set(event, now);
+  logTrigger(event);
+  return true;
+}
+
+function stopWinVoices() {
+  for (const src of activeWinVoices) {
+    try {
+      src.stop();
+    } catch {
+      /* already stopped */
+    }
+  }
+  activeWinVoices.clear();
+}
 
 // ——— Music bed ———
 // Played through WebAudio as a looping AudioBufferSourceNode: the loop wraps on the exact
@@ -170,6 +217,7 @@ function audioEnabled() {
 }
 
 function playSfx(name: Sfx, gain = 1) {
+  if (!gate(`ui:${name}`)) return;
   if (!audioEnabled()) return;
   if (sfxVol <= 0 || masterVol <= 0) return;
   let list = pool.get(name);
@@ -179,9 +227,14 @@ function playSfx(name: Sfx, gain = 1) {
   }
   let el = list.find((a) => a.paused);
   if (!el) {
-    el = new Audio(FILES[name]);
-    el.preload = "auto";
-    list.push(el);
+    // UI voice cap: with every element busy, recycle the oldest instead of
+    // stacking a third copy of the same click.
+    if (list.length >= 2) el = list[0];
+    else {
+      el = new Audio(FILES[name]);
+      el.preload = "auto";
+      list.push(el);
+    }
   }
   el.volume = clamp01(sfxVol * gain * masterVol);
   el.currentTime = 0;
@@ -260,11 +313,13 @@ function preloadSamples() {
   (Object.keys(SAMPLE_FILES) as Sample[]).forEach(loadSample);
 }
 
-/** Fire a decoded sample once. Returns false when it is not ready (caller uses the synth fallback). */
-function playSample(name: Sample, gain = 1, rate = 1): boolean {
+/** Fire a decoded sample once. Returns false when it is not ready (caller uses the synth fallback).
+ *  category "wins" registers the voice so the next win sting can replace it. */
+function playSample(name: Sample, gain = 1, rate = 1, category?: "wins"): boolean {
   const c = ensureCtx();
   const buf = sampleBuffers.get(name);
   if (!c || !buf || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return false;
+  if (category === "wins") stopWinVoices();
   const src = c.createBufferSource();
   src.buffer = buf;
   src.playbackRate.value = rate;
@@ -272,6 +327,10 @@ function playSample(name: Sample, gain = 1, rate = 1): boolean {
   g.gain.value = Math.max(0.0001, sfxVol * masterVol * gain);
   src.connect(g);
   g.connect(c.destination);
+  if (category === "wins") {
+    activeWinVoices.add(src);
+    src.onended = () => activeWinVoices.delete(src);
+  }
   src.start();
   return true;
 }
@@ -529,6 +588,7 @@ export const audio = {
 
   /** Bright lock-in sting for 3/4/5 golden cards. */
   playScatter(count: number) {
+    if (!gate("bonus:scatter")) return;
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     if (playSample("bonus_trigger", count >= 5 ? 1 : count >= 4 ? 0.92 : 0.85)) return;
@@ -546,19 +606,27 @@ export const audio = {
     for (const f of chord) ding(c, f, resolve, 0.62, vol * 0.26, "sine");
   },
 
-  /** One clear "lines paid" hit, timed with the card-win reveal. */
-  playLineWin(lines = 1, soft = false) {
+  /**
+   * The one win-sting, selected by winX ONLY (never by line count):
+   *   <1x  → win_soft (pays less than the stake: a plucked note, no celebration)
+   *   ≥15x → win_multi
+   *   else → win_line
+   * A new sting replaces the previous win voice instead of stacking.
+   */
+  playLineWin(spinWinX = 0) {
+    if (!gate("wins:line")) return;
+    const x = Number(spinWinX) || 0;
+    if (x <= 0) return;
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    if (soft) {
-      // Pays less than the stake: one plucked note, not a celebration.
-      if (playSample("win_soft", 0.6)) return;
+    if (x < 1) {
+      if (playSample("win_soft", 0.85, 1, "wins")) return;
       const v = sfxVol * 0.2 * masterVol;
       ding(c, 523.25, c.currentTime, 0.14, v, "triangle");
       return;
     }
-    const multi = lines >= 3;
-    if (playSample(multi ? "win_multi" : "win_line", multi ? 0.85 : 0.8)) return;
+    const multi = x >= 15;
+    if (playSample(multi ? "win_multi" : "win_line", 0.85, 1, "wins")) return;
     const vol = sfxVol * (multi ? 0.5 : 0.42) * masterVol;
     const base = multi ? 659.25 : 587.33;
     const now = c.currentTime;
@@ -571,12 +639,15 @@ export const audio = {
 
   /**
    * Big-win tier sting — escalates with the ladder
-   * (nice → super → sensational → max).
+   * (nice → super → sensational → max). Replaces any running win voice
+   * (the ladder never stacks on a line-win sting).
    */
   playBigWin(tier: "nice" | "super" | "sensational" | "max") {
+    if (!gate("wins:big")) return;
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    if (playSample(`big_${tier}` as Sample, 0.85)) return;
+    stopWinVoices();
+    if (playSample(`big_${tier}` as Sample, 0.85, 1, "wins")) return;
     const now = c.currentTime;
     const vol = sfxVol * masterVol;
     if (tier === "nice") {
@@ -654,6 +725,7 @@ export const audio = {
 
   /** A joker (bonus card) has just landed: heavy toll + gold glint. */
   playJokerLand() {
+    if (!gate("bonus:joker")) return;
     if (playSample("joker_land", 0.9)) return;
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
@@ -666,16 +738,20 @@ export const audio = {
   /** A 10–20× line win (below the Big Win ladder): a lighter fanfare. */
   playMidWin(spinWinX: number) {
     if (spinWinX < 10 || spinWinX >= 20) return;
-    playSample("big_nice", 0.6);
+    if (!gate("wins:mid")) return;
+    stopWinVoices();
+    playSample("big_nice", 0.7, 1, "wins");
   },
 
   /** A multiplier chip lands on the board. */
   playMultLand() {
+    if (!gate("bonus:mult")) return;
     playSample("mult_land", 0.7);
   },
 
   /** Short reel_stop — must be called from the column snap callback. */
   playReelStop(col: number) {
+    if (!gate(`reels:stop${col}`)) return;
     playReelStopInternal(col);
   },
 };
