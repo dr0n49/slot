@@ -94,15 +94,16 @@ body {
 }
 
 /* Free spins: the whole scene steps from blood-red to violet — same bunting art,
-   cheap hue-shift on the photo layer + a recoloured light pool, no new SVG needed. */
+   cheap hue-shift on the photo layer + a recoloured light pool, no new SVG needed.
+   Tuned deeper into violet per feedback (was -42deg / 0.34 purple pool). */
 .bg-bonus-layer .storm-photo {
-  filter: hue-rotate(-42deg) saturate(1.12) brightness(1.03);
+  filter: hue-rotate(-58deg) saturate(1.18) brightness(1.02);
 }
 .cosmic-bg[data-bonus="1"]::after {
-  background: radial-gradient(ellipse 34% 58% at 50% 46%, rgba(139, 32, 201, 0.34), transparent 72%);
+  background: radial-gradient(ellipse 34% 58% at 50% 46%, rgba(139, 32, 201, 0.52), transparent 74%);
 }
 .game-stage[data-orient="portrait"] .cosmic-bg[data-bonus="1"]::after {
-  background: radial-gradient(ellipse 75% 34% at 50% 44%, rgba(139, 32, 201, 0.34), transparent 72%);
+  background: radial-gradient(ellipse 75% 34% at 50% 44%, rgba(139, 32, 201, 0.52), transparent 74%);
 }
 
 /* Bunting (CosmicBackground.tsx → Bunting): live flags on a string instead of art baked into

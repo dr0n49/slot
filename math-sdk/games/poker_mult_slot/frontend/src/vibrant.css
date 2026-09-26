@@ -1920,6 +1920,16 @@ html.lite-fx .candle-shrine,
   width: 100%;
   font-size: 34px;
   animation: none; /* the row floats gently; a single big card stays still */
+  /* Every ticket shares one box height (the tall MULTIPLIERS/BONUS one) —
+     MAX WIN's compact content used to render a visibly shorter card. */
+  min-height: 435px;
+  display: flex;
+}
+.game-stage[data-orient="portrait"] .boot-cycle-card .boot-card-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @keyframes boot-cycle-in {
   0% {
