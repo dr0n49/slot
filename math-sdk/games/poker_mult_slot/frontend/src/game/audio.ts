@@ -15,8 +15,11 @@ const FILES = {
 } as const;
 
 const MUSIC_FILE = assetUrl("assets/sounds/music_muerta.wav");
-/** Background loop sits well below SFX so the mix has space for game sounds. */
-const MUSIC_LEVEL = 0.34;
+/** Background loop sits well below SFX so the mix has space for game sounds.
+ *  music_muerta.wav is normalized to -22 LUFS (see scripts/normalize_audio.sh):
+ *  at ×0.40 the bed plays at ≈ -30 LUFS effective — ~6-7 dB under the win
+ *  stings (files -17…-14.5 × default volumes) and ~10 dB under reel stops. */
+const MUSIC_LEVEL = 0.4;
 
 type Sfx = keyof typeof FILES;
 
