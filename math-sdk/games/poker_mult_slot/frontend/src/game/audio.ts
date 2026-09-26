@@ -15,11 +15,11 @@ const FILES = {
 } as const;
 
 const MUSIC_FILE = assetUrl("assets/sounds/music_muerta.wav");
-/** Background loop sits well below SFX so the mix has space for game sounds.
- *  music_muerta.wav is normalized to -22 LUFS (see scripts/normalize_audio.sh):
- *  at ×0.40 the bed plays at ≈ -30 LUFS effective — ~6-7 dB under the win
- *  stings (files -17…-14.5 × default volumes) and ~10 dB under reel stops. */
-const MUSIC_LEVEL = 0.4;
+/** Background loop sits clearly below SFX but alive on phone speakers:
+ *  music_muerta.wav is normalized to -22 LUFS (see scripts/normalize_audio.sh);
+ *  at ×0.68 the bed plays at ≈ -25.5 LUFS effective — clearance during wins
+ *  comes from the ducking node (B4), not from burying the bed. */
+const MUSIC_LEVEL = 0.68;
 
 type Sfx = keyof typeof FILES;
 
@@ -62,7 +62,9 @@ let musicEl: HTMLAudioElement | null = null;
 // one instead of stacking on top of it. UI is capped at 2 voices.
 const RETRIGGER_MS = 50;
 const lastTriggerAt = new Map<string, number>();
-const activeWinVoices = new Set<AudioBufferSourceNode>();
+/** Active win-category voices with their gain nodes, so a replacing sting
+ *  fades the previous one out over ~40 ms instead of hard-stopping it (click). */
+const activeWinVoices = new Set<{ src: AudioBufferSourceNode; gain: GainNode }>();
 
 /** Debug aid (?sfxlog=1): every ADMITTED trigger lands here with a timestamp,
  *  so a verification run can prove no sample fires twice within 100 ms. */
@@ -86,9 +88,15 @@ function gate(event: string): boolean {
 }
 
 function stopWinVoices() {
-  for (const src of activeWinVoices) {
+  const c = audioCtx;
+  const now = c?.currentTime ?? 0;
+  for (const v of activeWinVoices) {
     try {
-      src.stop();
+      // 40 ms exponential fade, then a stop 10 ms past the tail — no click.
+      v.gain.gain.cancelScheduledValues(now);
+      v.gain.gain.setValueAtTime(Math.max(0.0001, v.gain.gain.value), now);
+      v.gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+      v.src.stop(now + 0.05);
     } catch {
       /* already stopped */
     }
@@ -336,8 +344,9 @@ function playSample(name: Sample, gain = 1, rate = 1, category?: "wins"): boolea
   src.connect(g);
   g.connect(c.destination);
   if (category === "wins") {
-    activeWinVoices.add(src);
-    src.onended = () => activeWinVoices.delete(src);
+    const voice = { src, gain: g };
+    activeWinVoices.add(voice);
+    src.onended = () => activeWinVoices.delete(voice);
   }
   src.start();
   return true;
