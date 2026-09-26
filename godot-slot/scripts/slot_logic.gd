@@ -250,6 +250,9 @@ func reveal_external(payload: Dictionary) -> void:
 			reel_controller.play_win_presentation(lit, all_cells)
 			if paying:
 				win_focus.emit(0, rev)
+			# Winners keep pulsing; everything else settles into idle life
+			# (B3) — the resting board is never a frozen screenshot.
+			reel_controller.settle_to_idle(lit)
 		_presenting = false
 
 	outcome_resolved.emit(grid, shown_x)
