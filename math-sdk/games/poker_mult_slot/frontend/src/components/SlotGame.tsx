@@ -77,7 +77,9 @@ interface GodotSlotMessage {
     | "big_win"
     | "bonus"
     | "anticipation"
-    | "reels_settled";
+    | "reels_settled"
+    | "win_focus"
+    | "skip";
   phase?: SlotPhase;
   grid?: string[][];
   winX?: number;
@@ -90,6 +92,8 @@ interface GodotSlotMessage {
   /** anticipation: build-up on/off, and ms until the last reel stops. */
   active?: boolean;
   ms?: number;
+  /** win_focus: hand index in focus during the per-hand cycle (0 = all). */
+  handIndex?: number;
 }
 
 /** One paying line, in the shape Godot's SlotLogic.line_entries() expects. */
@@ -179,11 +183,15 @@ export interface SlotGameProps {
   onAnticipation?: (active: boolean, ms: number) => void;
   /** Every reel of the current board landed (rev-stamped real settle signal). */
   onReelsSettled?: (rev?: number) => void;
+  /** Per-hand cycle beat: one paying hand is in focus (0 = all together). */
+  onWinFocus?: (handIndex: number, rev?: number) => void;
+  /** The player tapped the board mid-presentation — skip React's holds too. */
+  onPresentationSkip?: () => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
   function SlotGame(
-    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled },
+    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip },
     ref,
   ) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -276,12 +284,18 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
           case "reels_settled":
             onReelsSettled?.(data.rev);
             break;
+          case "win_focus":
+            onWinFocus?.(data.handIndex ?? 0, data.rev);
+            break;
+          case "skip":
+            onPresentationSkip?.();
+            break;
         }
       }
 
       window.addEventListener("message", handleMessage);
       return () => window.removeEventListener("message", handleMessage);
-    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled]);
+    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip]);
 
     return (
       <iframe

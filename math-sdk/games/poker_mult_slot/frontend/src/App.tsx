@@ -246,6 +246,37 @@ export default function App() {
    *  into an elapsed time for the HUD win reveal (see resultDelaySec). */
   const revealStartRef = useRef(0);
   /**
+   * Win-presentation skip: bumped by Space (during a spin) or Godot's "skip"
+   * event (board tap). Every active presentation hold registers a resolver —
+   * a bump releases them all, so the beat structure is fully skippable.
+   */
+  const presentationSkipRef = useRef<{ resolvers: Set<() => void> }>({ resolvers: new Set() });
+  const bumpPresentationSkip = useCallback(() => {
+    const s = presentationSkipRef.current;
+    const list = [...s.resolvers];
+    s.resolvers.clear();
+    for (const r of list) r();
+  }, []);
+  /** Hold used between win-presentation beats; a skip releases it early. */
+  const sleepSkippable = useCallback(
+    (ms: number) =>
+      new Promise<void>((resolve) => {
+        const s = presentationSkipRef.current;
+        const done = () => {
+          window.clearTimeout(timer);
+          s.resolvers.delete(wrapped);
+          resolve();
+        };
+        const wrapped = () => {
+          s.resolvers.delete(wrapped);
+          resolve();
+        };
+        const timer = window.setTimeout(done, ms);
+        s.resolvers.add(wrapped);
+      }),
+    [],
+  );
+  /**
    * Delay of the HUD win text (--result-delay). Initialized per deal to the
    * OLD computed timeline as a fallback, then shortened to the real settle
    * moment when Godot reports "reels_settled" (the computed value comes from
@@ -587,6 +618,22 @@ export default function App() {
     else audio.stopAnticipation();
   }, []);
 
+  /** B1 per-hand cycle beat: light only the focusing hand's Hand pays row
+   *  (0 = all together). Events from superseded boards are dropped by rev. */
+  const onGodotWinFocus = useCallback((handIndex: number, rev?: number) => {
+    if (rev != null && rev !== pendingRevRef.current) return;
+    if (handIndex > 0) {
+      setWinHands(pendingHandsRef.current.filter((h) => h.handIndex === handIndex));
+    } else {
+      setWinHands(pendingHandsRef.current);
+    }
+  }, []);
+
+  /** The player tapped the board mid-presentation — cut React's holds too. */
+  const onGodotPresentationSkip = useCallback(() => {
+    bumpPresentationSkip();
+  }, [bumpPresentationSkip]);
+
   /** Godot → React: the landed board's paying lines + where their labels go. */
   const onGodotWin = useCallback((lines: GodotWinLine[], _winX: number, rev?: number) => {
     // A stalled presentation can emit this event after a newer board's reveal
@@ -666,7 +713,7 @@ export default function App() {
       setBonusBank(running);
       winAccum = fromCents(toCents(winAccum) + toCents(spinPay));
       setBonusTotal(winAccum);
-      await sleep(Math.max(holdMs, beamRevealHoldMs(spin.lines?.length ?? 0, t, winGrade(spin.spinWinX))));
+      await sleepSkippable(Math.max(holdMs, beamRevealHoldMs(spin.lines?.length ?? 0, t, winGrade(spin.spinWinX))));
       const fsTier = bigWinTier(spin.spinWinX);
       if (fsTier) await showBigWin(fsTier, spin.spinWinX);
       // playMidWin is skipped here on purpose: during free spins a 10–20×
@@ -840,13 +887,13 @@ export default function App() {
               if (tier) {
                 // Ladder REPLACES the mid-win sting (never stacks with it)
                 // and follows the on-grid reveal hold, like Godot's native path.
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
               }
-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+              await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
           payOut(spin.spinWinX, booked);
@@ -913,13 +960,13 @@ export default function App() {
               if (tier) {
                 // Ladder REPLACES the mid-win sting (never stacks with it)
                 // and follows the on-grid reveal hold, like Godot's native path.
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
               }
-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+              await sleepSkippable(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
           payOut(spin.spinWinX, booked);
@@ -954,13 +1001,13 @@ export default function App() {
             if (tier) {
               // Ladder REPLACES the mid-win sting (never stacks with it)
               // and follows the on-grid reveal hold, like Godot's native path.
-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await sleepSkippable(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
               await showBigWin(tier, round.base.spinWinX);
             } else {
               audio.playMidWin(round.base.spinWinX);
-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await sleepSkippable(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
             }
-            await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+            await sleepSkippable(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
           }
         }
 
@@ -1047,11 +1094,18 @@ export default function App() {
         continueResolver.current = null;
         return;
       }
+      if (busyRef.current) {
+        // Mid-spin Space = skip the win presentation (Godot's beat cycle via
+        // continueRound, React's holds via the skip bump).
+        bumpPresentationSkip();
+        slotRef.current?.continueRound();
+        return;
+      }
       doSpin();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [doSpin, triggerKind, bonusSummary, bootOpen]);
+  }, [doSpin, triggerKind, bonusSummary, bootOpen, bumpPresentationSkip]);
 
   const click = (fn: () => void) => {
     audio.unlock();
@@ -1179,6 +1233,8 @@ export default function App() {
                 onRoundEnd={onGodotRoundEnd}
                 onAnticipation={onGodotAnticipation}
                 onReelsSettled={onGodotReelsSettled}
+                onWinFocus={onGodotWinFocus}
+                onPresentationSkip={onGodotPresentationSkip}
               />
               {winLabels ? (
                 <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} />
