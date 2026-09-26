@@ -57,6 +57,11 @@ import {
 /** Local demo wallet — high enough to buy flush/job at top ladder stakes. */
 const DEMO_BALANCE = 1_000_000;
 
+/** Session persistence (demo wallet): the pending "you won N spins" card and
+ *  the balance survive a reload, so a bought/caught bonus is never lost. */
+const PENDING_BONUS_KEY = "muerta.pendingBonus";
+const BALANCE_KEY = "muerta.balanceCents";
+
 /** Ladder covers micro → high stakes; buy price = mode× × bet (any currency). */
 const BET_STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 15, 20, 50, 100, 200, 500, 1000];
 
@@ -239,6 +244,8 @@ export default function App() {
   const rgsSettledCents = useRef<number | null>(null);
   const continueResolver = useRef<(() => void) | null>(null);
   const bigWinResolver = useRef<(() => void) | null>(null);
+  /** One-shot guard: the pending-bonus resume runs at most once per session. */
+  const resumeAttemptedRef = useRef(false);
   autoRef.current = auto;
   turboRef.current = turbo;
 
@@ -246,6 +253,10 @@ export default function App() {
     const c = Math.round(cents);
     balanceRef.current = c;
     setBalance(fromCents(c));
+    // Demo wallet survives reloads so a restored pending bonus is coherent.
+    try {
+      localStorage.setItem(BALANCE_KEY, String(c));
+    } catch {}
   };
   const debit = (amount: number) => {
     const d = toCents(amount);
@@ -377,21 +388,18 @@ export default function App() {
   const waitForBonusContinue = (kind: BonusKind) => {
     return new Promise<void>((resolve) => {
       setTriggerKind(kind);
+      // Persist: if the player leaves mid-wait, the same "you won N spins"
+      // card comes back on the next boot (demo wallet; RGS sessions resume
+      // server-side instead).
+      try {
+        localStorage.setItem(PENDING_BONUS_KEY, kind);
+      } catch {}
       continueResolver.current = () => {
         setTriggerKind(null);
         resolve();
       };
-      // The trigger card stays tappable, but never stalls the flow: it moves on by itself after a beat.
-      const mine = continueResolver.current;
-      window.setTimeout(
-        () => {
-          if (continueResolver.current && continueResolver.current === mine) {
-            continueResolver.current();
-            continueResolver.current = null;
-          }
-        },
-        turboRef.current ? 1500 : 2800,
-      );
+      // HARD WAIT: the flow moves only when the screen is tapped — no
+      // auto-continue, the pending bonus must never play itself out unseen.
     });
   };
 
@@ -556,6 +564,10 @@ export default function App() {
     snapTotal?: number,
   ) => {
     setBonusKind(kind);
+    // Free spins are rolling — the pending trigger card has done its job.
+    try {
+      localStorage.removeItem(PENDING_BONUS_KEY);
+    } catch {}
     setFsTotal(mathConfig.fsCount);
     const startBank = Number((mathConfig as { fsStartBank?: number }).fsStartBank ?? 0);
     setBonusBank(startBank);
@@ -614,6 +626,74 @@ export default function App() {
     }
     return winAccum;
   };
+
+  /** Demo-only: a pending bonus from a previous session (the player left while
+   *  the "you won N spins" card was up) comes back and waits for the tap. */
+  const resumePendingBonus = async (kind: BonusKind) => {
+    const g = kind === "flush" ? 5 : kind === "job" ? 4 : 3;
+    const preview = playTriggerSpin(g);
+    applySpinVisual(preview);
+    await waitForReels(preview.cards, turboRef.current);
+    await celebrateGoldens(g);
+    await waitForBonusContinue(kind);
+    const pack = playBonusPackage(kind);
+    await playFreeSpins(kind, pack.spins, undefined);
+    const payout = dollars(Math.min(pack.totalWinX, maxWinCap), bet);
+    setLastWin(payout);
+    credit(payout);
+    if (pack.totalWinX >= maxWinCap - 1e-9) setMaxWinFlash(true);
+    await waitForBonusSummary(kind, payout);
+  };
+
+  /** Tab hidden → cancel autoplay and freeze the decorative loops; the Godot
+   *  canvas throttles natively and rounds in flight settle server-side.
+   *  Sound ducks so a minimized tab stays silent, industry-style. */
+  useEffect(() => {
+    let mutedByHide = false;
+    const onVis = () => {
+      if (document.hidden) {
+        autoRef.current = false;
+        autoLeftRef.current = 0;
+        setAuto(false);
+        setAutoLeft(0);
+        if (!audio.isMasterMuted()) {
+          audio.toggleMasterMute();
+          mutedByHide = true;
+        }
+        document.documentElement.classList.add("tab-hidden");
+      } else {
+        document.documentElement.classList.remove("tab-hidden");
+        if (mutedByHide) {
+          audio.toggleMasterMute();
+          mutedByHide = false;
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+
+  /** Restore a pending bonus once the player has entered the game. */
+  useEffect(() => {
+    if (bootOpen || !godotReady) return;
+    if (rgs) return; // RGS wallets resume server-side, never replay locally
+    if (busyRef.current || bonusKind || triggerKind) return;
+    if (resumeAttemptedRef.current) return;
+    let kind: BonusKind | null = null;
+    try {
+      const raw = localStorage.getItem(PENDING_BONUS_KEY);
+      kind = raw === "bonus" || raw === "job" || raw === "flush" ? (raw as BonusKind) : null;
+    } catch {}
+    resumeAttemptedRef.current = true;
+    if (kind !== "bonus" && kind !== "job" && kind !== "flush") return;
+    // Demo wallet balance paired with the pending bonus (see writeCents).
+    try {
+      const saved = Number(localStorage.getItem(BALANCE_KEY));
+      if (Number.isFinite(saved) && saved >= 0) writeCents(saved);
+    } catch {}
+    void resumePendingBonus(kind);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bootOpen, godotReady, bonusKind, triggerKind]);
 
   const runSpinSequence = useCallback(
     async (opts?: { bought?: PaidKind; guaranteed?: AnteKind }) => {

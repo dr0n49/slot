@@ -68,6 +68,47 @@ const PAPEL_FLAGS: Array<{ x: number; y: number; rot: number; sx: number; sy: nu
 const ROPES = ["M-20 4 Q259.67 72 539.33 4", "M1060.67 4 Q1340.33 72 1620 4"];
 const U = (n: number) => `${((n * 100) / 1600).toFixed(4)}cqw`;
 
+/** Flag motifs in the flat Día-de-Muertos style of the reference clip: sugar
+ *  skulls and marigold flowers stamped over the cloth flags, alternating. */
+const MOTIF_ACCENTS = ["#c8102e", "#2ea8a0", "#e0861e", "#b03aa0"];
+
+function FlagMotif({ variant, accent }: { variant: "skull" | "flower"; accent: string }) {
+  if (variant === "flower") {
+    return (
+      <svg className="papel-motif-svg" viewBox="0 0 44 56" aria-hidden>
+        {[0, 60, 120, 180, 240, 300].map((a) => (
+          <ellipse
+            key={a}
+            cx="22"
+            cy="15.5"
+            rx="6.2"
+            ry="10.5"
+            fill={accent}
+            transform={`rotate(${a} 22 26)`}
+          />
+        ))}
+        <circle cx="22" cy="26" r="6" fill="#ffd257" />
+        <circle cx="22" cy="26" r="2.6" fill="#26121a" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="papel-motif-svg" viewBox="0 0 44 56" aria-hidden>
+      <path
+        d="M22 4C10.5 4 5.5 12.6 5.5 22.5c0 7.2 3 11.6 5.4 14.6l.4 9.4c.1 2.6 2.3 4.7 5 4.7h11.4c2.7 0 4.9-2.1 5-4.7l.4-9.4c2.4-3 5.4-7.4 5.4-14.6C38.5 12.6 33.5 4 22 4Z"
+        fill="#f1e6cc"
+      />
+      <circle cx="14.6" cy="24.5" r="5.6" fill={accent} />
+      <circle cx="29.4" cy="24.5" r="5.6" fill={accent} />
+      <circle cx="14.6" cy="24.5" r="2.1" fill="#26121a" />
+      <circle cx="29.4" cy="24.5" r="2.1" fill="#26121a" />
+      <path d="M22 30.5l-3.4 5.8h6.8Z" fill="#26121a" />
+      <rect x="15.5" y="43.5" width="13" height="5.6" rx="1.6" fill="#f1e6cc" stroke="#26121a" strokeWidth="1.1" />
+      <path d="M19 43.8v5.2M22 43.8v5.2M25 43.8v5.2" stroke="#26121a" strokeWidth="1.1" />
+    </svg>
+  );
+}
+
 /** Two ropes with five flags each, a clear gap over the board's top-centre.
  *  Exported so BootSplash can hang the same live garland over the intro cards. */
 export function Bunting() {
@@ -101,6 +142,8 @@ export function Bunting() {
         // Deterministic per-flag variety so neighbours never swing in lockstep.
         const swingS = 3.2 + rnd(i, 7) * 1.8;
         const flutterS = 1.35 + rnd(i, 3) * 0.9;
+        const motif: "skull" | "flower" = i % 2 === 0 ? "skull" : "flower";
+        const accent = MOTIF_ACCENTS[Math.floor(rnd(i, 11) * MOTIF_ACCENTS.length)];
         return (
           <div
             key={i}
@@ -156,6 +199,12 @@ export function Bunting() {
                       } as CSSProperties
                     }
                   />
+                  <span
+                    className="papel-motif"
+                    style={{ left: U(-22), top: U(16), width: U(44), height: U(56) }}
+                  >
+                    <FlagMotif variant={motif} accent={accent} />
+                  </span>
                 </div>
               </div>
             </div>

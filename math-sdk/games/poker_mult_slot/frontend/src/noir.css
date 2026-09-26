@@ -178,6 +178,19 @@ body {
   max-width: none;
   user-select: none;
 }
+/* Flat skull/flower motif stamped on each flag (Día de Muertos video ref) —
+   rides the same swing/flutter wrappers as the flag art. */
+.papel-motif {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.96;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.45));
+}
+.papel-motif-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 /* Highlight clipped to the flag's own cut shape, breathing with the swing so
    the paper catches and loses the light as it turns. */
 .papel-sheen {
@@ -1344,6 +1357,15 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
 .buy-bonus-stake-pill {
   color: var(--bone);
 }
+/* BET stepper in the FEATURES sheet — keep the −/+ buttons compact */
+.buy-bonus-stake-step {
+  width: 2.9rem;
+  height: 2.9rem;
+  min-width: 2.9rem;
+  padding: 0;
+  font-size: 1.45rem;
+  line-height: 1;
+}
 .buy-btn-red,
 .buy-btn-green,
 .buy-btn-storm {
@@ -2122,9 +2144,10 @@ html.lite-fx .cele-confetti {
   min-width: 10rem;
 }
 .game-stage[data-orient="portrait"] .buy-bonus-stake-step {
-  width: 4.6rem;
-  height: 4.6rem;
-  font-size: 2rem;
+  width: 3.7rem;
+  height: 3.7rem;
+  min-width: 3.7rem;
+  font-size: 1.7rem;
 }
 .game-stage[data-orient="portrait"] .buy-bonus-close {
   width: 3.4rem;
