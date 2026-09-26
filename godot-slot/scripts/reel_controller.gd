@@ -448,6 +448,31 @@ func play_win_presentation(winning_cells: Array, all: Array) -> void:
 	fx.spawn_win_bursts(winning_cells)
 	_set_phase(Phase.WIN_ANIM)
 
+## --- B1 small-win choreography primitives ---------------------------------
+## SlotLogic drives the beat structure (settle → pop → labels → per-hand
+## cycle → all together); these are the per-beat cell operations.
+
+## Dim everyone but the winners, winners still neutral (their pop comes next).
+func dim_for_win(winning: Array) -> void:
+	for cell in all_cells():
+		cell.play_dim(not (cell in winning))
+
+## The pop attack for a set of winning cards, staggered per card.
+func pop_winners(winning: Array, stagger: float, time_scale: float) -> void:
+	var i := 0
+	for cell in winning:
+		cell.play_win_pop(i * stagger, time_scale)
+		i += 1
+
+## Per-hand cycle: `group` pulses, every other winner sinks into shade.
+## Losers stay dimmed from dim_for_win().
+func focus_win_group(group: Array, all_winners: Array) -> void:
+	for cell in all_winners:
+		if cell in group:
+			cell.play_win_pulse()
+		else:
+			cell.play_dim(true)
+
 func return_to_idle(all: Array) -> void:
 	for cell in all:
 		cell.stop_win_pulse()

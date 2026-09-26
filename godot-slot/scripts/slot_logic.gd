@@ -61,6 +61,10 @@ signal round_finished(result: Dictionary)
 ## from a superseded board — round completion is first-wins between this
 ## and the host page's own fallback timer.
 signal reveal_settled(rev: int)
+## B1 per-hand cycle beat: one paying hand is in focus (0 = all together).
+signal win_focus(hand_index: int, rev: int)
+## The player tapped the board while the win presentation ran (skip).
+signal presentation_skipped
 ## stage: "trigger" | "start" | "spin" | "end" — see _play_bonus().
 signal bonus_event(stage: String, data: Dictionary)
 ## A single board paid >= BIG_WIN_MIN x. The round now waits for
@@ -93,6 +97,8 @@ const BIG_WIN_REVEAL_TURBO := 1.5
 @onready var fx: FXManager = $"../FXManager"
 
 var _busy: bool = false
+## True while the B1 win-presentation choreography runs (tap = skip).
+var _presenting: bool = false
 ## Bumped by every reveal_external: a coroutine whose captured generation no
 ## longer matches is stale (superseded by a newer reveal) and must not touch
 ## the board, emit events, or reset _busy after one of its await points.
@@ -202,22 +208,92 @@ func reveal_external(payload: Dictionary) -> void:
 			if not (c in lit):
 				lit.append(c)
 	if not lit.is_empty():
-		reel_controller.play_win_presentation(lit, all_cells)
+		# --- B1 small-win choreography (skippable: tap the board / Space) ---
+		# settle → 120 ms beat → pop (1 → 1.12 → 1.04 + glow flash) → labels
+		# stagger in → per-hand cycle (~700 ms each) → all together. Turbo
+		# scales every beat. The gen token stops a superseded reveal from
+		# touching cells after any await.
+		_continue_requested = false
+		_presenting = true
+		reel_controller.dim_for_win(lit)
+		await _wait(_t(0.12, 0.05), true)
+		var alive := gen == _reveal_gen
+		if alive:
+			reel_controller.pop_winners(lit, _t(0.035, 0.02), _t(1.0, 0.6))
+			await _wait(_t(0.26, 0.15), true)
+			alive = gen == _reveal_gen
 
-	if paying:
-		var entries := line_entries(spin, shown_x, bet)
-		# Win stings are React-owned (audio ownership rule): Godot fires only
-		# frame-synced SFX. The host page plays the sting keyed off shown_x.
-		# No Godot-drawn labels here: the host page draws them (localized, with
-		# the browser's font fallback -- WIN_FONT is a Latin-only Oswald subset,
-		# so Cyrillic/CJK/Arabic/Hindi would render as empty boxes). It only
-		# needs to know where each label goes.
-		win_lines.emit(_with_screen_pos(entries), shown_x, rev)
+		if paying:
+			var entries := line_entries(spin, shown_x, bet)
+			# Win stings are React-owned (audio ownership rule): Godot fires only
+			# frame-synced SFX. The host page plays the sting keyed off shown_x.
+			# No Godot-drawn labels here: the host page draws them (localized, with
+			# the browser's font fallback -- WIN_FONT is a Latin-only Oswald subset,
+			# so Cyrillic/CJK/Arabic/Hindi would render as empty boxes). It only
+			# needs to know where each label goes. Emitted after the pop beat so
+			# the labels stagger in AFTER the cards have punched in.
+			win_lines.emit(_with_screen_pos(entries), shown_x, rev)
+
+		if alive and paying:
+			var groups := _hand_groups(spin, lit)
+			if groups.size() > 1:
+				for g in groups:
+					if gen != _reveal_gen:
+						alive = false
+						break
+					reel_controller.focus_win_group(g["cells"], lit)
+					win_focus.emit(int(g["hand_index"]), rev)
+					await _wait(_t(0.7, 0.4), true)
+				alive = alive and gen == _reveal_gen
+		if alive and not lit.is_empty():
+			# All together: pulse + bursts via the shared presentation.
+			reel_controller.play_win_presentation(lit, all_cells)
+			if paying:
+				win_focus.emit(0, rev)
+		_presenting = false
 
 	outcome_resolved.emit(grid, shown_x)
 	_busy = false
 	round_finished.emit({"winX": shown_x, "bonusKind": "", "mode": "external", "error": false,
 		"rev": rev})
+
+## B1: winning cells grouped per hand (for the one-by-one cycle), ordered by
+## what they paid, desc. A hand can own several lines — cells dedupe. Jokers
+## (not part of any line) are not cycled; they stay lit for the finale.
+func _hand_groups(spin: Dictionary, lit: Array) -> Array:
+	var by_hand: Dictionary = {}
+	var cash: Dictionary = {}
+	var order: Array = []
+	for l in spin.get("lines", []):
+		var hid := int(l["hand_index"])
+		var line_id := int(l["id"])
+		if line_id < 0 or line_id >= BoardMath.LINES.size():
+			continue
+		var cells: Array = (by_hand.get(hid, []) as Array).duplicate()
+		for idx in BoardMath.LINES[line_id]:
+			var c := _cell_at(int(idx) / COLS, int(idx) % COLS)
+			if c in lit and not (c in cells):
+				cells.append(c)
+		if cells.is_empty():
+			continue
+		if not by_hand.has(hid):
+			order.append(hid)
+			cash[hid] = 0.0
+		by_hand[hid] = cells
+		cash[hid] = float(cash[hid]) + float(l.get("win_x", 0.0))
+	var out: Array = []
+	for hid in order:
+		out.append({"hand_index": hid, "cells": by_hand[hid], "cash": float(cash[hid])})
+	out.sort_custom(func(a, b): return float(a["cash"]) > float(b["cash"]))
+	return out
+
+## Tap anywhere on the board while the win presentation runs: skip it.
+func _input(event: InputEvent) -> void:
+	if not _presenting:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		_continue_requested = true
+		presentation_skipped.emit()
 
 ## Adds nx/ny to each line entry: where its label belongs, normalized 0..1
 ## over the whole canvas (camera and stretch applied), so the host page can
