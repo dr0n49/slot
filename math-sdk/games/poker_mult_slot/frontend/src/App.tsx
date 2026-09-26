@@ -454,10 +454,13 @@ export default function App() {
       } catch {}
       continueResolver.current = () => {
         setTriggerKind(null);
+        audio.duckFor(0); // bonus intro over — release the bed
         resolve();
       };
       // HARD WAIT: the flow moves only when the screen is tapped — no
       // auto-continue, the pending bonus must never play itself out unseen.
+      // The bed stays ducked for the whole wait (B4: bonus intro clearance).
+      audio.duckFor(60_000);
     });
   };
 
@@ -469,8 +472,10 @@ export default function App() {
         setBonusSummary(null);
         setBonusKind(null);
         setFsIndex(0);
+        audio.duckFor(0); // outro screen closed — release the bed
         resolve();
       };
+      audio.duckFor(60_000); // outro total count-up keeps the bed clear
     });
 
   const applySpinVisual = (spin: SpinResult) => {
@@ -1172,6 +1177,11 @@ export default function App() {
   const revealDelay = resultDelaySec;
 
   const inBonus = !!(bonusKind || bonusSummary);
+
+  // B4: tint the music bed for bonus mode (dark low-pass sweep + slight lift).
+  useEffect(() => {
+    audio.setBonusMusic(inBonus);
+  }, [inBonus]);
   const hudWin: HudWin | null = inBonus
     ? { key: 1, mode: "total", label: copy.totalWin, amount: bonusTotal }
     : maxWinFlash
