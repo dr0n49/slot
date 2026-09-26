@@ -221,6 +221,8 @@ export default function App() {
   const [fsTotal, setFsTotal] = useState(mathConfig.fsCount);
   const [goldCelebrate, setGoldCelebrate] = useState(false);
   const [bonusTriggered, setBonusTriggered] = useState(false);
+  /** Ref mirror for the anticipation-end callback (miss release vs bonus). */
+  const bonusTriggeredRef = useRef(false);
 
   const autoRef = useRef(auto);
   const turboRef = useRef(turbo);
@@ -515,6 +517,7 @@ export default function App() {
     setSpinWinX(spin.spinWinX);
     setGoldCelebrate(false);
     setBonusTriggered((spin.goldCount ?? 0) >= 3);
+    bonusTriggeredRef.current = (spin.goldCount ?? 0) >= 3;
     const shownX = spin.spinWinX > 0 ? Math.min(spin.spinWinX, maxWinCap) : 0;
     const cash = shownX > 0 ? dollars(shownX, bet) : 0;
     setFieldWinCash(cash);
@@ -620,6 +623,7 @@ export default function App() {
   const onGodotAnticipation = useCallback((active: boolean, ms: number) => {
     setBoardHot(active);
     if (active) audio.playAnticipation(ms);
+    else if (!bonusTriggeredRef.current) audio.playMissRelease();
     else audio.stopAnticipation();
   }, []);
 
@@ -1067,6 +1071,7 @@ export default function App() {
     if (buyOpen || menuOpen || autoOpen || confirm) return;
     audio.unlock();
     slotRef.current?.resumeAudio();
+    audio.playSpinPress();
     if (anteKind) {
       void runSpinSequence({ guaranteed: anteKind });
     } else {
@@ -1275,7 +1280,7 @@ export default function App() {
         onBetUp={() => click(() => setBetIdx((i) => Math.min(betLevels.length - 1, i + 1)))}
         onSpin={doSpin}
         onToggleTurbo={onToggleTurbo}
-        onToggleAuto={() => (auto ? stopAuto() : click(() => setAutoOpen(true)))}
+        onToggleAuto={() => (auto ? click(() => stopAuto()) : click(() => setAutoOpen(true)))}
       />
 
       <BuyBonusModal

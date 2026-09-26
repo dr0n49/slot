@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { audio } from "../game/audio";
 import type { Copy } from "../game/social";
+import { CeleConfetti } from "./Celebration";
 
 type Props = {
   amount: number;
@@ -10,10 +12,15 @@ type Props = {
 /**
  * End-of-bonus summary, Cook Out composition: dim table (no card, no splat),
  * white TOTAL WIN over the big gold amount counting up in whole cents (≤1.8s),
- * tap-anywhere hint above the HUD.
+ * tap-anywhere hint above the HUD. B6: warm outro sting + marigold confetti
+ * burst on entry, the count ticks as it climbs.
  */
 export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
   const [shown, setShown] = useState(0);
+
+  useEffect(() => {
+    audio.playBonusOutro();
+  }, []);
 
   useEffect(() => {
     const t0 = performance.now();
@@ -24,6 +31,7 @@ export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
       const eased = 1 - Math.pow(1 - k, 3);
       // whole cents per frame — no wet fractional strings
       setShown(Math.round(amount * eased * 100) / 100);
+      audio.playCountTick(k);
       if (k < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -36,6 +44,7 @@ export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
       className="cele-overlay total-scrim fixed inset-0 z-[70] text-center"
       onClick={onContinue}
     >
+      <CeleConfetti tier="nice" />
       <div className="total-win-stack absolute inset-0 flex flex-col items-center justify-center px-4">
         <div className="total-win-label">{copy.totalWin}</div>
         <div className="total-win-amount tabular-nums">{copy.money(shown)}</div>
