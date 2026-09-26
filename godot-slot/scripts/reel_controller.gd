@@ -62,9 +62,14 @@ const CLIP_BOTTOM := 924.0
 ## Eased ramp into full speed. 0 would be an instant jump-cut — the other
 ## classic "poor animation" tell.
 @export_range(0.02, 0.6) var spin_up_time: float = 0.18
+## Anticipation dip: the strip pulls UP for this long before dropping —
+## reads as the reels "tensing" before the launch. CARVED out of
+## min_spin_time (0.48 = 0.41 + 0.07), so total spin time does not grow.
+@export_range(0.0, 0.2) var pullback_time: float = 0.07
+@export_range(0.0, 60.0) var pullback_px: float = 14.0
 ## Shortest time the reels spin before the first one may stop, however
-## quickly the server answered.
-@export_range(0.0, 2.0) var min_spin_time: float = 0.55
+## quickly the server answered (pullback included).
+@export_range(0.0, 2.0) var min_spin_time: float = 0.48
 ## Delay between each column's stop, left→right. This alone is most of
 ## what makes a reel stop read as "premium" instead of "all 5 columns
 ## clunk down together".
@@ -80,7 +85,9 @@ const CLIP_BOTTOM := 924.0
 @export_group("Turbo timing")
 @export var turbo_spin_speed_px: float = 3400.0
 @export var turbo_spin_up_time: float = 0.06
-@export var turbo_min_spin_time: float = 0.12
+@export var turbo_pullback_time: float = 0.03
+@export var turbo_pullback_px: float = 8.0
+@export var turbo_min_spin_time: float = 0.1
 @export var turbo_reel_stop_stagger: float = 0.045
 @export var turbo_last_reel_extra_delay: float = 0.05
 @export var turbo_drop_time: float = 0.09
@@ -125,6 +132,7 @@ class ReelState:
 	var target: Array = []
 	var target_mults: Array = []  # multiplier per row (0 = none)
 	var speed_k: float = 1.0      # 1 = full speed; eases down while "hot"
+	var last_blur: float = 0.0    # last blur amount pushed to the shader
 
 var _reels: Array[Node2D] = []
 var _states: Array = []
@@ -235,11 +243,11 @@ func start_spin() -> void:
 		s.target = []
 		s.target_mults = []
 		s.speed_k = 1.0
+		s.last_blur = 0.0
 		for cell in s.cells:
 			cell.stop_win_pulse()
 			cell.play_dim(false)
 			cell.clear_mult()
-		_set_blur(s, 1.0)
 	set_process(true)
 	_set_phase(Phase.SPINNING)
 
@@ -277,6 +285,8 @@ func _process(delta: float) -> void:
 	var any := false
 	var speed_max := _t(spin_speed_px, turbo_spin_speed_px)
 	var ramp := _t(spin_up_time, turbo_spin_up_time)
+	var pb := _t(pullback_time, turbo_pullback_time)
+	var pb_px := _t(pullback_px, turbo_pullback_px)
 	for i in _states.size():
 		var s: ReelState = _states[i]
 		if not s.spinning:
@@ -286,11 +296,24 @@ func _process(delta: float) -> void:
 		var k: float = clamp(s.t / max(ramp, 0.001), 0.0, 1.0)
 		var want_k: float = anticipation_speed if (_hot and i > _ann_col) else 1.0
 		s.speed_k = move_toward(s.speed_k, want_k, delta * 2.5)
-		s.offset += speed_max * k * k * s.speed_k * delta
-		while s.offset >= CELL_H:
-			s.offset -= CELL_H
-			_shift_faces(s)
-		s.strip.position.y = s.rest_y + s.offset
+		if pb > 0.0 and s.t < pb:
+			# Tense-up: the strip dips UP, eased in, before the launch. The
+			# time is carved out of min_spin_time, so stops stay on schedule.
+			var u := s.t / pb
+			s.offset = -pb_px * u * u
+			s.strip.position.y = s.rest_y + s.offset
+		else:
+			s.offset += speed_max * k * k * s.speed_k * delta
+			while s.offset >= CELL_H:
+				s.offset -= CELL_H
+				_shift_faces(s)
+			s.strip.position.y = s.rest_y + s.offset
+		# Motion blur tracks the reel's actual speed: ramps in with the
+		# launch, eases down while "hot" reels slow, cuts only at the settle.
+		var b := clampf(k * s.speed_k, 0.0, 1.0)
+		if absf(b - s.last_blur) > 0.02:
+			s.last_blur = b
+			_set_blur(s, b)
 		if s.stop_at >= 0.0 and _elapsed >= s.stop_at:
 			_settle_reel(i)
 	if not any:
@@ -314,7 +337,6 @@ func _settle_reel(index: int) -> void:
 	var s: ReelState = _states[index]
 	s.spinning = false
 	s.stop_at = -1.0
-	_set_blur(s, 0.0)
 	for row in ROWS:
 		if row < s.target.size():
 			var id: StringName = s.target[row]
@@ -328,6 +350,13 @@ func _settle_reel(index: int) -> void:
 	var tw := create_tween()
 	tw.tween_property(s.strip, "position:y", s.rest_y, drop) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	# Motion blur bleeds out over the drop (speed-driven while spinning) —
+	# the cards sharpen as they brake, not in a single frame.
+	var blur_from := s.last_blur
+	s.last_blur = 0.0
+	if blur_from > 0.01:
+		tw.parallel().tween_method(
+			func(v: float) -> void: _set_blur(s, v), blur_from, 0.0, drop)
 
 	var row_stagger := _t(row_land_stagger, turbo_row_land_stagger)
 	var bounce_scale := _t(1.0, turbo_bounce_scale)
