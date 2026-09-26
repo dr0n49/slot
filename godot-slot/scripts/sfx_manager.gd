@@ -27,9 +27,27 @@ extends Node
 @onready var _bonus_trigger: AudioStreamPlayer = $BonusTrigger
 
 var _spinning: bool = false
+## Per-sound random pitch: ±3-4 % on every fire so a 5-column stop cascade
+## never plays as five identical thuds (the "machine-gun" tell).
+var _rng := RandomNumberGenerator.new()
+## Last-played timestamps for the 50 ms retrigger guard — the same event
+## twice within the window is ignored (rapid spins, badges landing together).
+var _last_played_ms: Dictionary = {}
+
+const RETRIGGER_MS := 50
 
 func _ready() -> void:
+	_rng.randomize()
 	_spin_loop.finished.connect(_on_spin_loop_finished)
+
+## Guard + pitch + play, in one place so every one-shot gets the same treatment.
+func _fire(player: AudioStreamPlayer, key: StringName, pitch_jitter: float) -> void:
+	var now := Time.get_ticks_msec()
+	if now - int(_last_played_ms.get(key, -RETRIGGER_MS * 10)) < RETRIGGER_MS:
+		return
+	_last_played_ms[key] = now
+	player.pitch_scale = 1.0 + _rng.randf_range(-pitch_jitter, pitch_jitter)
+	player.play()
 
 func _on_spin_loop_finished() -> void:
 	if _spinning:
@@ -57,18 +75,22 @@ func stop_spin_loop() -> void:
 
 func play_reel_stop(index: int) -> void:
 	if index >= 0 and index < _reel_stop.size():
-		_reel_stop[index].play()
+		_fire(_reel_stop[index], &"reel_stop", 0.035)
 
 ## A multiplier badge stamps onto a card (delayed to the badge's pop-in).
+## Called once per badge; badges landing together collapse into one hit
+## through the retrigger guard (checked at play time, after the delay).
 func play_mult_land(delay: float = 0.0) -> void:
 	if delay <= 0.0:
-		_mult_land.play()
+		_fire(_mult_land, &"mult_land", 0.03)
 	else:
-		get_tree().create_timer(delay).timeout.connect(_mult_land.play)
+		get_tree().create_timer(delay).timeout.connect(
+			func(): _fire(_mult_land, &"mult_land", 0.03)
+		)
 
 ## A golden JOKER (bonus scatter) card lands.
 func play_joker_land() -> void:
-	_joker_land.play()
+	_fire(_joker_land, &"joker_land", 0.03)
 
 ## Bonus triggered: goldens light up, free-spins banner incoming.
 func play_bonus_trigger() -> void:
