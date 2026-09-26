@@ -238,7 +238,7 @@ html.lite-fx .papel-sheen {
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 8px),
     linear-gradient(180deg, #2b1b1e 0%, #150d0f 55%, #0d0708 100%);
   box-shadow:
-    0 0 0 2px var(--bone-dim),
+    0 0 0 2px #ffffff,
     0 0 0 5px var(--ink),
     7px 9px 0 5px rgba(0, 0, 0, 0.55),
     0 0 46px rgba(200, 16, 46, 0.28);
@@ -525,7 +525,7 @@ html.lite-fx .papel-sheen {
   border: 2px solid var(--ink);
   opacity: 0.8;
   box-shadow:
-    0 0 0 1.5px var(--bone-dim),
+    0 0 0 1.5px #ffffff,
     0 3px 0 1.5px var(--ink);
 }
 .hud-chip-btn:not(:disabled):hover,
@@ -601,7 +601,7 @@ html.lite-fx .papel-sheen {
   background: linear-gradient(180deg, #2e2023, #150d0f);
   border: 2px solid var(--ink);
   box-shadow:
-    0 0 0 1.5px var(--bone-dim),
+    0 0 0 1.5px #ffffff,
     0 8px 22px rgba(0, 0, 0, 0.6);
 }
 .hud-vol-slider::-webkit-slider-runnable-track {
@@ -1106,10 +1106,17 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
   width: 32px;
 }
 .game-stage[data-orient="portrait"] .hud-bonus-btn {
-  height: 66px;
-  padding: 0 24px;
-  font-size: 32px;
-  border-radius: 12px;
+  height: 58px;
+  padding: 0 30px;
+  font-size: 29px;
+  letter-spacing: 0.16em;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4.5px var(--ink),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 0 2px var(--ink),
+    0 0 26px rgba(255, 59, 78, 0.55);
 }
 
 /* WIN plate under the board: a proper tattoo banner, always readable */
@@ -1248,7 +1255,7 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
   border: 2px solid var(--ink);
   border-radius: 0.5rem;
   box-shadow:
-    0 0 0 1.5px var(--bone-dim),
+    0 0 0 1.5px #ffffff,
     0 3px 0 1.5px var(--ink);
 }
 .confirm-btn-cancel,
@@ -1286,13 +1293,11 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
 
 .buy-bonus-sheet h2,
 .buy-bonus-title {
-  font-family: var(--f-tattoo);
-  font-weight: 400;
-  letter-spacing: 0.06em;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  letter-spacing: 0.14em;
   color: var(--bone);
-  -webkit-text-stroke: 5px var(--ink);
-  paint-order: stroke fill;
-  text-shadow: 2px 3px 0 var(--blood);
+  text-shadow: 0 2px 0 var(--ink);
 }
 .bonus-buy-tile,
 .ante-candy {
@@ -1300,7 +1305,7 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
   border-radius: 0.55rem;
   background: none;
   box-shadow:
-    0 0 0 1.5px var(--bone-dim),
+    0 0 0 1.5px #ffffff,
     0 4px 0 1.5px var(--ink);
 }
 .bonus-buy-tile-inner,
@@ -1318,10 +1323,10 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
     0 0 18px rgba(226, 176, 74, 0.3);
 }
 .bonus-buy-tile-title {
-  font-family: var(--f-display);
-  font-weight: 400;
+  font-family: var(--f-ui);
+  font-weight: 700;
   font-size: 1.15rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--bone);
   text-shadow: 0 2px 0 var(--ink);
 }
@@ -1340,14 +1345,16 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
   color: var(--bone-dim);
 }
 .ante-candy-label {
-  font-family: var(--f-display);
-  font-weight: 400;
+  font-family: var(--f-ui);
+  font-weight: 700;
   font-size: 1.05rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--bone);
   text-shadow: 0 2px 0 var(--ink);
 }
 .ante-candy-price {
+  font-family: var(--f-ui);
+  font-weight: 700;
   color: var(--gold-hi);
 }
 .ante-candy-btn {
@@ -1359,11 +1366,11 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
 }
 /* BET stepper in the FEATURES sheet — keep the −/+ buttons compact */
 .buy-bonus-stake-step {
-  width: 2.9rem;
-  height: 2.9rem;
-  min-width: 2.9rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  min-width: 2.4rem;
   padding: 0;
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   line-height: 1;
 }
 .buy-btn-red,
@@ -1536,7 +1543,7 @@ html.lite-fx .side-panel.is-winning .mq-bulb::after {
   border-radius: 0.6em;
   background: none;
   box-shadow:
-    0 0 0 0.1em var(--bone-dim),
+    0 0 0 0.1em #ffffff,
     0 0 0 0.3em var(--ink),
     0.4em 0.55em 0 0.3em rgba(0, 0, 0, 0.55);
 }
@@ -2144,10 +2151,10 @@ html.lite-fx .cele-confetti {
   min-width: 10rem;
 }
 .game-stage[data-orient="portrait"] .buy-bonus-stake-step {
-  width: 3.7rem;
-  height: 3.7rem;
-  min-width: 3.7rem;
-  font-size: 1.7rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  min-width: 3.2rem;
+  font-size: 1.5rem;
 }
 .game-stage[data-orient="portrait"] .buy-bonus-close {
   width: 3.4rem;
@@ -2400,3 +2407,4 @@ html.lite-fx .reel-hot {
     animation: none;
   }
 }
+
