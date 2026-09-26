@@ -240,6 +240,8 @@ function playSfx(name: Sfx, gain = 1) {
     }
   }
   el.volume = clamp01(sfxVol * gain * masterVol);
+  // ±3 % random pitch so a burst of clicks never sounds machine-gunned.
+  el.playbackRate = 0.97 + Math.random() * 0.06;
   el.currentTime = 0;
   void el.play().catch(() => {});
 }
@@ -518,7 +520,8 @@ function playReelStopInternal(col: number) {
   if (!audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
   const c = ensureCtx();
   if (!c) return;
-  if (playSample(`reel_stop_${Math.min(4, Math.max(0, col))}` as Sample, 0.85)) return;
+  // ±3-4 % pitch: five columns stopping in a row must not read as one sample.
+  if (playSample(`reel_stop_${Math.min(4, Math.max(0, col))}` as Sample, 0.85, 0.96 + Math.random() * 0.08)) return;
   const now = c.currentTime;
   const vol = sfxVol * masterVol;
   const f = 185 + col * 28;
