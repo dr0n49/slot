@@ -163,12 +163,12 @@ for src_path in "$SOUNDS_DIR"/*; do
   cp "$TMP/$name" "$SOUNDS_DIR/$name"
 
   # Keep the Godot copy byte-identical (the reels' SFX ship from the pck).
+  # The first-seen Godot copy is preserved once beside the frontend backup so
+  # a stale/partial earlier sync can never block the current one.
   if [ -d "$GODOT_AUDIO_DIR" ] && [ -f "$GODOT_AUDIO_DIR/$name" ]; then
-    if cmp -s "$orig" "$GODOT_AUDIO_DIR/$name"; then
-      cp "$TMP/$name" "$GODOT_AUDIO_DIR/$name"
-    else
-      echo "  ! $name: Godot copy differs from the frontend original — left untouched, normalize it by hand" >&2
-    fi
+    godot_first="$BACKUP/$name.godot-first-seen"
+    [ -f "$godot_first" ] || cp "$GODOT_AUDIO_DIR/$name" "$godot_first"
+    cp "$TMP/$name" "$GODOT_AUDIO_DIR/$name"
   fi
 
   printf "%-22s %7s %9s %9s %9s %9s\n" "$name" "$dur" "$i_b" "$tp_b" "$i_a" "$tp_a"
