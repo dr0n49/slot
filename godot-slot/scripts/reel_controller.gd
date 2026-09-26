@@ -374,6 +374,41 @@ func _settle_reel(index: int) -> void:
 			all_reels_stopped.emit()
 		)
 
+## Fast-forward (the tab was hidden mid-spin and browser rAF froze): every
+## still-spinning reel lands on its target INSTANTLY — no scroll replay, no
+## per-reel bounce choreography, no SFX/shake. Completion behaves like a
+## normal settle (all_reels_stopped fires), so the win presentation runs
+## exactly once, on the visible screen. No-op when nothing is spinning.
+func snap_spinning_reels() -> void:
+	var snapped := false
+	for i in _states.size():
+		var s: ReelState = _states[i]
+		if not s.spinning:
+			continue
+		snapped = true
+		s.spinning = false
+		s.stop_at = -1.0
+		_set_blur(s, 0.0)
+		for row in ROWS:
+			if row < s.target.size():
+				var id: StringName = s.target[row]
+				s.cells[row].set_face(id, SymbolAtlas.texture_for(id))
+			var m: float = float(s.target_mults[row]) if row < s.target_mults.size() else 0.0
+			if m > 0.0:
+				s.cells[row].set_mult(m, 0.0)
+			else:
+				s.cells[row].clear_mult()
+		s.strip.position.y = s.rest_y
+		_stopped_count += 1
+	if not snapped:
+		return
+	sfx.stop_spin_loop()
+	_set_phase(Phase.REEL_STOPPING)
+	# No anticipation theatrics for a snapped board: burn out the build-up and
+	# let the host page's anticipation-off event stop its riser.
+	_end_hot()
+	all_reels_stopped.emit()
+
 ## Called by SlotLogic once wins for the current grid are known.
 func play_win_presentation(winning_cells: Array, all: Array) -> void:
 	_set_phase(Phase.WIN_EVAL)

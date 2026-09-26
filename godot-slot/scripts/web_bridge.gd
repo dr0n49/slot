@@ -24,6 +24,10 @@ extends Node
 ##                                               {cards, multipliers, winIndices,
 ##                                               lines, shownX, bet}.
 ##   window.godotSlot.continueRound()           skip the FS banner / Big Win done
+##   window.godotSlot.snapRound()               reels still spinning on a round
+##                                               whose host-side completion is
+##                                               open (tab was hidden mid-spin):
+##                                               snap to the final board instantly
 ##   window.godotSlot.setBet(bet)               fallback bet for spin() w/o arg
 ##   window.godotSlot.setTurbo(on)              fast reels / short holds
 ##   window.godotSlot.setVolume(v)              0..1 master volume (0 = mute)
@@ -57,9 +61,13 @@ extends Node
 ##        are held for a 3rd (active:true, ms = until the last reel stops);
 ##        active:false when the build-up ends. React plays its anticipation
 ##        sound and lights the board frame.
+##   {event:"reels_settled", rev}   ← every reel of reveal `rev` has landed;
+##        the host page closes the round on this OR its fallback timer,
+##        whichever comes first (late events for a closed round are ignored).
 ##   {event:"round_end", winX, bonusKind, mode, error, readyForSpin:true}
 ##        ← the "ready for the next spin" signal: sent once per round, after
-##          every animation (win, 0x, bonus, or error) has finished.
+##          every animation (win, 0x, bonus, or error) has finished. Carries
+##          `rev` for external reveals.
 
 var _slot_logic: SlotLogic
 var _reel_controller: ReelController
@@ -95,9 +103,9 @@ func _ready() -> void:
 	_slot_logic.bonus_event.connect(_on_bonus_event)
 	_slot_logic.big_win.connect(_on_big_win)
 	_slot_logic.win_lines.connect(_on_win_lines)
+	_slot_logic.reveal_settled.connect(_on_reveal_settled)
 	_reel_controller.phase_changed.connect(_on_phase_changed)
 	_reel_controller.anticipation.connect(_on_anticipation)
-	_reel_controller.all_reels_stopped.connect(_on_reels_settled)
 
 	JavaScriptBridge.eval("""
 		window.godotSlot = window.godotSlot || {};
@@ -114,6 +122,7 @@ func _ready() -> void:
 	godot_slot.ante = _cb(_on_js_ante)
 	godot_slot.reveal = _cb(_on_js_reveal)
 	godot_slot.continueRound = _cb(_on_js_continue)
+	godot_slot.snapRound = _cb(_on_js_snap_round)
 	godot_slot.setBet = _cb(_on_js_set_bet)
 	godot_slot.setTurbo = _cb(_on_js_set_turbo)
 	godot_slot.setVolume = _cb(_on_js_set_volume)
@@ -189,6 +198,12 @@ func _on_js_reveal(args: Array) -> void:
 func _on_js_continue(_args: Array) -> void:
 	_slot_logic.continue_round()
 
+## The host page came back to a visible tab while a round was still open
+## (rAF had been frozen): snap the reels to the final board instantly —
+## the win presentation then runs once, on the visible screen.
+func _on_js_snap_round(_args: Array) -> void:
+	_reel_controller.snap_spinning_reels()
+
 ## Paying lines of the board now being presented. winType = hand name of the
 ## best-paying line ("FLUSH", "JACKS OR BETTER", ...); lines[] carries every
 ## paying line with its handIndex (1..9, same numbering as React's Hand pays
@@ -245,11 +260,10 @@ func _on_phase_changed(phase: ReelController.Phase) -> void:
 func _on_anticipation(active: bool, duration: float) -> void:
 	_post({"event": "anticipation", "active": active, "ms": int(round(duration * 1000.0))})
 
-## Every column landed (including the last drop's overshoot). The host page
-## times its HUD win reveal to this real signal instead of a computed guess
-## (--result-delay); it keeps its computed value only as a fallback.
-func _on_reels_settled() -> void:
-	_post({"event": "reels_settled"})
+## Every reel of the current external reveal landed (rev-stamped). The host
+## page closes its round on this OR its own fallback timer — first wins.
+func _on_reveal_settled(rev: int) -> void:
+	_post({"event": "reels_settled", "rev": rev})
 
 func _on_round_started(mode: String) -> void:
 	_post({"event": "round_start", "mode": mode})

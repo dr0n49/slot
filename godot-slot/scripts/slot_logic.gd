@@ -56,6 +56,11 @@ signal balance_updated(balance: Dictionary)
 signal round_started(mode: String)
 ## result: {winX, bonusKind, mode, error}
 signal round_finished(result: Dictionary)
+## Every reel of the CURRENT external reveal has landed (real settle beat,
+## before the win presentation). rev lets the host page drop late events
+## from a superseded board — round completion is first-wins between this
+## and the host page's own fallback timer.
+signal reveal_settled(rev: int)
 ## stage: "trigger" | "start" | "spin" | "end" — see _play_bonus().
 signal bonus_event(stage: String, data: Dictionary)
 ## A single board paid >= BIG_WIN_MIN x. The round now waits for
@@ -172,6 +177,9 @@ func reveal_external(payload: Dictionary) -> void:
 	await reel_controller.all_reels_stopped
 	if gen != _reveal_gen:
 		return
+	# Real settle beat for the host page (rev-stamped so a late event from a
+	# superseded board is ignored — see ReelController.snap_spinning_reels).
+	reveal_settled.emit(rev)
 
 	var all_cells := _all_cells()
 	var win_indices: Array = spin["win_indices"]
@@ -208,7 +216,8 @@ func reveal_external(payload: Dictionary) -> void:
 
 	outcome_resolved.emit(grid, shown_x)
 	_busy = false
-	round_finished.emit({"winX": shown_x, "bonusKind": "", "mode": "external", "error": false})
+	round_finished.emit({"winX": shown_x, "bonusKind": "", "mode": "external", "error": false,
+		"rev": rev})
 
 ## Adds nx/ny to each line entry: where its label belongs, normalized 0..1
 ## over the whole canvas (camera and stretch applied), so the host page can
