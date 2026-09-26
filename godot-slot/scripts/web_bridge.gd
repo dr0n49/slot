@@ -28,10 +28,10 @@ extends Node
 ##   window.godotSlot.setTurbo(on)              fast reels / short holds
 ##   window.godotSlot.setVolume(v)              0..1 master volume (0 = mute)
 ##   window.godotSlot.setDemoBalance(dollars)   offline demo wallet only
-## spin()/buyBonus() are ignored while a round is in flight (SlotLogic.is_busy).
-## spin()/buyBonus()/ante() drive Godot's OWN RgsClient -- NOT currently called
-## by App.tsx (it calls reveal() instead), left in place and harmless if you
-## ever want Godot to own the wallet call again.
+## spin()/buyBonus()/ante() would drive Godot's OWN RgsClient — they are HARD
+## NO-OPS on a Web export (see _embed_noop): React owns the real wallet round
+## and talks to Godot exclusively through reveal(). The native paths remain
+## runnable only in editor/desktop test runs.
 ##
 ## Godot -> page, via window.parent.postMessage(payload, "*"); every payload
 ## has type:"godot-slot":
@@ -97,6 +97,7 @@ func _ready() -> void:
 	_slot_logic.win_lines.connect(_on_win_lines)
 	_reel_controller.phase_changed.connect(_on_phase_changed)
 	_reel_controller.anticipation.connect(_on_anticipation)
+	_reel_controller.all_reels_stopped.connect(_on_reels_settled)
 
 	JavaScriptBridge.eval("""
 		window.godotSlot = window.godotSlot || {};
@@ -132,7 +133,21 @@ func _cb(fn: Callable) -> JavaScriptObject:
 	_callbacks.append(cb)
 	return cb
 
+## EMBED SAFETY: on a Web export the native wallet entry points below are
+## HARD NO-OPS. React owns the RGS session (rgs.ts) and paints boards via
+## reveal(); these handlers would otherwise run RgsClient, whose
+## is_rgs_session() reads the IFRAME's URL (no sessionID there) and would
+## silently fall back to OFFLINE DEMO MATH in production. They only work in
+## editor/desktop runs (OS.has_feature("web") false) for local testing.
+func _embed_noop(entry: String) -> bool:
+	if OS.has_feature("web"):
+		push_warning("WebBridge: %s() is disabled in the embed — React owns the wallet round (use reveal())." % entry)
+		return true
+	return false
+
 func _on_js_spin(args: Array) -> void:
+	if _embed_noop("spin"):
+		return
 	if _slot_logic.is_busy():
 		return
 	var bet: float = float(args[0]) if args.size() > 0 else _bet
@@ -140,6 +155,8 @@ func _on_js_spin(args: Array) -> void:
 	_slot_logic.request_spin(bet)
 
 func _on_js_buy_bonus(args: Array) -> void:
+	if _embed_noop("buyBonus"):
+		return
 	if _slot_logic.is_busy() or args.is_empty():
 		return
 	var kind := str(args[0])
@@ -148,6 +165,8 @@ func _on_js_buy_bonus(args: Array) -> void:
 	_slot_logic.request_buy(kind, bet)
 
 func _on_js_ante(args: Array) -> void:
+	if _embed_noop("ante"):
+		return
 	if _slot_logic.is_busy() or args.is_empty():
 		return
 	var kind := str(args[0])
@@ -225,6 +244,12 @@ func _on_phase_changed(phase: ReelController.Phase) -> void:
 
 func _on_anticipation(active: bool, duration: float) -> void:
 	_post({"event": "anticipation", "active": active, "ms": int(round(duration * 1000.0))})
+
+## Every column landed (including the last drop's overshoot). The host page
+## times its HUD win reveal to this real signal instead of a computed guess
+## (--result-delay); it keeps its computed value only as a fallback.
+func _on_reels_settled() -> void:
+	_post({"event": "reels_settled"})
 
 func _on_round_started(mode: String) -> void:
 	_post({"event": "round_start", "mode": mode})
