@@ -198,7 +198,8 @@ func reveal_external(payload: Dictionary) -> void:
 
 	if paying:
 		var entries := line_entries(spin, shown_x, bet)
-		sfx.play_win(shown_x)
+		# Win stings are React-owned (audio ownership rule): Godot fires only
+		# frame-synced SFX. The host page plays the sting keyed off shown_x.
 		# No Godot-drawn labels here: the host page draws them (localized, with
 		# the browser's font fallback -- WIN_FONT is a Latin-only Oswald subset,
 		# so Cyrillic/CJK/Arabic/Hindi would render as empty boxes). It only
@@ -310,7 +311,8 @@ func _land_and_present(spin: Dictionary, shown_x: float, bet: float, on_landed: 
 	var win_indices: Array = spin.get("win_indices", [])
 	if shown_x > 0.0 and not win_indices.is_empty():
 		var entries := line_entries(spin, shown_x, bet)
-		sfx.play_win(shown_x)
+		# Win stings are React-owned (audio ownership rule) — this native path
+		# only runs in editor/desktop testing, never in the React embed.
 		reel_controller.play_win_presentation(_cells_for_indices(win_indices), all_cells)
 		_show_line_labels(entries)
 		win_lines.emit(entries, shown_x, -1)

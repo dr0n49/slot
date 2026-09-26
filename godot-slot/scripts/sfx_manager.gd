@@ -49,25 +49,15 @@ func stop_spin_loop() -> void:
 ## index: which reel column just landed (0..4). Called from
 ## ReelController._settle_reel(), in lockstep with that column's own
 ## land-bounce squash so the thud reads as belonging to that card.
+##
+## NOTE: there is deliberately NO play_win() here any more. Win stings are
+## React-owned (audio ownership rule) — SfxManager only fires frame-synced
+## sounds (spin loop, reel stops, joker/mult land). The WinLine/WinSoft/
+## WinMulti players remain in the scene unused so the .tscn stays stable.
+
 func play_reel_stop(index: int) -> void:
 	if index >= 0 and index < _reel_stop.size():
 		_reel_stop[index].play()
-
-## win_x: the resolved spin's total win multiplier (<=0 = no win, skip).
-## Buckets the same way winGrade() in the React app does (soft/normal/big)
-## so the SFX size matches what the beam/pulse FX are about to sell.
-## Called from SlotLogic.request_spin() right before
-## ReelController.play_win_presentation(), so the payout tick fires in the
-## same beat as the pulse/beam reveal, not after it.
-func play_win(win_x: float) -> void:
-	if win_x <= 0.0:
-		return
-	if win_x < 1.0:
-		_win_soft.play()
-	elif win_x >= 15.0:
-		_win_multi.play()
-	else:
-		_win_line.play()
 
 ## A multiplier badge stamps onto a card (delayed to the badge's pop-in).
 func play_mult_land(delay: float = 0.0) -> void:
