@@ -76,7 +76,8 @@ interface GodotSlotMessage {
     | "round_start"
     | "big_win"
     | "bonus"
-    | "anticipation";
+    | "anticipation"
+    | "reels_settled";
   phase?: SlotPhase;
   grid?: string[][];
   winX?: number;
@@ -169,11 +170,13 @@ export interface SlotGameProps {
   onRoundEnd?: (mode: string | undefined) => void;
   /** Bonus anticipation: 2 jokers down, the remaining reels are held for a 3rd. */
   onAnticipation?: (active: boolean, ms: number) => void;
+  /** Every column of the current board has landed (real reel-settle signal). */
+  onReelsSettled?: () => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
   function SlotGame(
-    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation },
+    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled },
     ref,
   ) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -261,12 +264,15 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
           case "anticipation":
             onAnticipation?.(!!data.active, data.ms ?? 0);
             break;
+          case "reels_settled":
+            onReelsSettled?.();
+            break;
         }
       }
 
       window.addEventListener("message", handleMessage);
       return () => window.removeEventListener("message", handleMessage);
-    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation]);
+    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled]);
 
     return (
       <iframe

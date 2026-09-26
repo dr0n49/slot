@@ -48,6 +48,9 @@ try {
 } catch {
   /* ignore */
 }
+/** Session-only mute (hidden tab): NEVER persisted, NEVER touches the user's
+ *  mute state or the HUD speaker icon. Undone on visibilitychange. */
+let tempMuted = false;
 let audioCtx: AudioContext | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
@@ -216,7 +219,7 @@ function ensureCtx() {
 }
 
 function audioEnabled() {
-  return canAudio() && unlocked && !masterMuted;
+  return canAudio() && unlocked && !masterMuted && !tempMuted;
 }
 
 function playSfx(name: Sfx, gain = 1) {
@@ -556,6 +559,13 @@ export const audio = {
   },
   isMasterMuted() {
     return masterMuted;
+  },
+  /** Session-only silence for the hidden-tab pause. Not persisted, not shown
+   *  on the speaker icon, forgotten the moment the tab is visible again. */
+  setTempMuted(v: boolean) {
+    if (tempMuted === v) return;
+    tempMuted = v;
+    updateMusic();
   },
   toggleMasterMute() {
     masterMuted = !masterMuted;

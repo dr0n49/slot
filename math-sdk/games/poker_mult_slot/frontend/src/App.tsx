@@ -227,6 +227,16 @@ export default function App() {
       win event, and onGodotWin drops label sets from a superseded board. */
   const revealSeqRef = useRef(0);
   const pendingRevRef = useRef<number | null>(null);
+  /** performance.now() of the current reveal — turns Godot's "reels_settled"
+   *  into an elapsed time for the HUD win reveal (see resultDelaySec). */
+  const revealStartRef = useRef(0);
+  /**
+   * Delay of the HUD win text (--result-delay). Initialized per deal to the
+   * OLD computed timeline as a fallback, then shortened to the real settle
+   * moment when Godot reports "reels_settled" (the computed value comes from
+   * the retired React reel timeline and lands ~250 ms late).
+   */
+  const [resultDelaySec, setResultDelaySec] = useState(1.5);
   /** Bonus build-up in progress (2 jokers down, Godot holds the last reels): the board frame burns. */
   const [boardHot, setBoardHot] = useState(false);
   /**
@@ -476,8 +486,22 @@ export default function App() {
     setWinLabels(null);
     setBoardHot(false);
     revealGateRef.current = { landed: false, onLanded: null };
+    // Fallback timing for the HUD win reveal; Godot's "reels_settled" event
+    // (see onGodotReelsSettled) replaces it with the real settle moment.
+    revealStartRef.current = performance.now();
+    setResultDelaySec((dealDurationMs(cards, turboRef.current) + winFxPauseMs(turboRef.current)) / 1000);
     slotRef.current?.reveal(reveal);
   };
+
+  /** Godot: every column of the current board landed. Pull the HUD win reveal
+   *  (--result-delay) forward to the real settle moment + a small breath.
+   *  If the fallback already fired (event lost), the later time stays. */
+  const onGodotReelsSettled = useCallback(() => {
+    const started = revealStartRef.current;
+    if (!started) return;
+    const elapsed = (performance.now() - started) / 1000 + 0.1;
+    setResultDelaySec((prev) => (elapsed < prev - 0.05 ? elapsed : prev));
+  }, []);
 
   const waitForReels = (_spinCards: { golden?: boolean }[], t: boolean) =>
     new Promise<void>((resolve) => {
@@ -649,24 +673,22 @@ export default function App() {
    *  canvas throttles natively and rounds in flight settle server-side.
    *  Sound ducks so a minimized tab stays silent, industry-style. */
   useEffect(() => {
-    let mutedByHide = false;
     const onVis = () => {
       if (document.hidden) {
         autoRef.current = false;
         autoLeftRef.current = 0;
         setAuto(false);
         setAutoLeft(0);
-        if (!audio.isMasterMuted()) {
-          audio.toggleMasterMute();
-          mutedByHide = true;
-        }
+        // Temporary, session-only silence: never persisted, never shown on
+        // the speaker icon (audio.setTempMuted). Godot's bus is silenced too
+        // — its frame-synced SFX don't flow through the React audio module.
+        audio.setTempMuted(true);
+        slotRef.current?.setVolume(0);
         document.documentElement.classList.add("tab-hidden");
       } else {
         document.documentElement.classList.remove("tab-hidden");
-        if (mutedByHide) {
-          audio.toggleMasterMute();
-          mutedByHide = false;
-        }
+        audio.setTempMuted(false);
+        slotRef.current?.setVolume(audio.isMasterMuted() ? 0 : audio.getMasterVolume());
       }
     };
     document.addEventListener("visibilitychange", onVis);
@@ -1031,8 +1053,10 @@ export default function App() {
     }
   };
 
-  // Result text appears with the deal settle (--result-delay).
-  const revealDelay = (dealDurationMs(cards, turbo) + winFxPauseMs(turbo)) / 1000;
+  // Result text appears when the reels really settle (--result-delay is
+  // driven by Godot's "reels_settled" event; see applySpinVisual for the
+  // per-deal fallback value).
+  const revealDelay = resultDelaySec;
 
   const inBonus = !!(bonusKind || bonusSummary);
   const hudWin: HudWin | null = inBonus
@@ -1095,6 +1119,7 @@ export default function App() {
                 onWin={onGodotWin}
                 onRoundEnd={onGodotRoundEnd}
                 onAnticipation={onGodotAnticipation}
+                onReelsSettled={onGodotReelsSettled}
               />
               {winLabels ? (
                 <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} />
