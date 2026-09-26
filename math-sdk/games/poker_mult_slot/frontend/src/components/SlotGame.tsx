@@ -84,7 +84,8 @@ interface GodotSlotMessage {
   balance?: SlotBalance;
   lines?: GodotWinLine[];
   mode?: string;
-  /** Echo of the reveal payload's rev — identifies the board the win belongs to. */
+  /** Echo of the reveal payload's rev — identifies the board the win belongs to.
+   *  Present on `win`, `reels_settled` and (for external reveals) `round_end`. */
   rev?: number;
   /** anticipation: build-up on/off, and ms until the last reel stops. */
   active?: boolean;
@@ -136,6 +137,12 @@ export interface SlotGameHandle {
   reveal: (payload: RevealPayload) => void;
   /** Skip the free-spins banner hold / end the Big Win overlay wait. */
   continueRound: () => void;
+  /**
+   * Reels still spinning on an open round (the tab was hidden mid-spin and
+   * browser rAF froze): snap Godot to the final board instantly — the win
+   * presentation then runs once, on the visible screen.
+   */
+  snapRound: () => void;
   /** Fast reels / short holds. */
   setTurbo: (on: boolean) => void;
   /** 0..1 master volume (0 = mute). */
@@ -167,11 +174,11 @@ export interface SlotGameProps {
   /** A landed board's win presentation started (paying lines + label positions). */
   onWin?: (lines: GodotWinLine[], winX: number, rev?: number) => void;
   /** Godot finished a round / a revealed board (reels stopped, presentation started). */
-  onRoundEnd?: (mode: string | undefined) => void;
+  onRoundEnd?: (mode: string | undefined, rev?: number) => void;
   /** Bonus anticipation: 2 jokers down, the remaining reels are held for a 3rd. */
   onAnticipation?: (active: boolean, ms: number) => void;
-  /** Every column of the current board has landed (real reel-settle signal). */
-  onReelsSettled?: () => void;
+  /** Every reel of the current board landed (rev-stamped real settle signal). */
+  onReelsSettled?: (rev?: number) => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
@@ -186,14 +193,15 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
     // wait for onReady themselves before calling spin()/setBet()/reveal().
     const pendingRef = useRef<Array<{ fn: string; args: unknown[] }>>([]);
 
-    type GodotSlotApi = {
-      spin: (bet: number) => void;
-      setBet: (bet: number) => void;
-      reveal: (json: string) => void;
-      continueRound: () => void;
-      setTurbo: (on: boolean) => void;
-      setVolume: (v: number) => void;
-    };
+  type GodotSlotApi = {
+    spin: (bet: number) => void;
+    setBet: (bet: number) => void;
+    reveal: (json: string) => void;
+    continueRound: () => void;
+    snapRound: () => void;
+    setTurbo: (on: boolean) => void;
+    setVolume: (v: number) => void;
+  };
 
     const callGodot = useCallback((fn: keyof GodotSlotApi, ...args: unknown[]) => {
       const win = iframeRef.current?.contentWindow as
@@ -215,6 +223,7 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
         setBet: (bet: number) => callGodot("setBet", bet),
         reveal: (payload: RevealPayload) => callGodot("reveal", JSON.stringify(payload)),
         continueRound: () => callGodot("continueRound"),
+        snapRound: () => callGodot("snapRound"),
         setTurbo: (on: boolean) => callGodot("setTurbo", on),
         setVolume: (v: number) => callGodot("setVolume", v),
         resumeAudio: () => {
@@ -259,13 +268,13 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
             onWin?.(data.lines ?? [], data.winX ?? 0, data.rev);
             break;
           case "round_end":
-            onRoundEnd?.(data.mode);
+            onRoundEnd?.(data.mode, data.rev);
             break;
           case "anticipation":
             onAnticipation?.(!!data.active, data.ms ?? 0);
             break;
           case "reels_settled":
-            onReelsSettled?.();
+            onReelsSettled?.(data.rev);
             break;
         }
       }

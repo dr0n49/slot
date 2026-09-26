@@ -36,6 +36,7 @@ import {
   type BonusKind,
   type BuyKind,
   type Card,
+  type RoundResult,
   type SpinResult,
 } from "./game/engine";
 import { isSocialMode } from "./game/social";
@@ -99,6 +100,20 @@ export default function App() {
   }
   const rgs = isRgsSession();
   const qaCele = useMemo(() => new URLSearchParams(window.location.search).get("cele"), []);
+  /**
+   * DEV-ONLY verification hook: ?forcebase=25x runs a real base-game round
+   * with the requested win (board searched via playUntilWinX) through the
+   * plain spin branch of runSpinSequence — to verify the Big Win ladder,
+   * presentation holds and autospin continuation. Ignored in production
+   * builds (import.meta.env.DEV) and on RGS sessions.
+   */
+  const forceBaseX = useMemo(() => {
+    if (!import.meta.env.DEV || rgs) return null;
+    const raw = new URLSearchParams(window.location.search).get("forcebase");
+    if (!raw) return null;
+    const n = Number.parseFloat(raw.replace(/x$/i, ""));
+    return Number.isFinite(n) && n > 0 ? n : null;
+  }, [rgs]);
   const qaPreview =
     qaCele === "trigger" ||
     qaCele === "flush" ||
@@ -240,13 +255,15 @@ export default function App() {
   /** Bonus build-up in progress (2 jokers down, Godot holds the last reels): the board frame burns. */
   const [boardHot, setBoardHot] = useState(false);
   /**
-   * Reveal handshake: applySpinVisual opens it, Godot's round_end closes it
-   * once the reels have actually stopped — waitForReels waits on that instead
-   * of guessing Godot's animation length.
+   * Reveal handshake: applySpinVisual opens it (rev-stamped), and the FIRST
+   * of Godot's reels_settled / round_end or React's fallback timer closes it
+   * (see closeRevealGate). Late events for an already-closed round are
+   * ignored — no second win reveal, sting or count-up.
    */
-  const revealGateRef = useRef<{ landed: boolean; onLanded: (() => void) | null }>({
+  const revealGateRef = useRef<{ landed: boolean; onLanded: (() => void) | null; rev: number | null }>({
     landed: true,
     onLanded: null,
+    rev: null,
   });
   /** Wallet in integer cents — source of truth (no float ghosts). */
   const balanceRef = useRef(toCents(DEMO_BALANCE));
@@ -485,7 +502,7 @@ export default function App() {
     };
     setWinLabels(null);
     setBoardHot(false);
-    revealGateRef.current = { landed: false, onLanded: null };
+    revealGateRef.current = { landed: false, onLanded: null, rev };
     // Fallback timing for the HUD win reveal; Godot's "reels_settled" event
     // (see onGodotReelsSettled) replaces it with the real settle moment.
     revealStartRef.current = performance.now();
@@ -493,15 +510,34 @@ export default function App() {
     slotRef.current?.reveal(reveal);
   };
 
-  /** Godot: every column of the current board landed. Pull the HUD win reveal
-   *  (--result-delay) forward to the real settle moment + a small breath.
-   *  If the fallback already fired (event lost), the later time stays. */
-  const onGodotReelsSettled = useCallback(() => {
-    const started = revealStartRef.current;
-    if (!started) return;
-    const elapsed = (performance.now() - started) / 1000 + 0.1;
-    setResultDelaySec((prev) => (elapsed < prev - 0.05 ? elapsed : prev));
+  /**
+   * Round completion, idempotent per round id (rev): whichever of Godot's
+   * reels_settled / round_end or the fallback timer comes FIRST wins. A late
+   * event for an already-closed round — or one from a superseded board — is
+   * ignored, so the win reveal / sting / count-up can never run twice.
+   */
+  const closeRevealGate = useCallback((rev?: number) => {
+    const gate = revealGateRef.current;
+    if (gate.landed) return; // first closer wins
+    if (rev == null && gate.rev != null) return; // un-stamped vs stamped gate
+    if (rev != null && gate.rev != null && rev !== gate.rev) return; // stale board
+    gate.landed = true;
+    gate.onLanded?.();
   }, []);
+
+  /** Godot: every reel of the current board landed. While the round is still
+   *  open, pull the HUD win reveal (--result-delay) forward to the real
+   *  settle moment + a small breath. Then close the round (first wins). */
+  const onGodotReelsSettled = useCallback((rev?: number) => {
+    if (!revealGateRef.current.landed) {
+      const started = revealStartRef.current;
+      if (started) {
+        const elapsed = (performance.now() - started) / 1000 + 0.1;
+        setResultDelaySec((prev) => (elapsed < prev - 0.05 ? elapsed : prev));
+      }
+    }
+    closeRevealGate(rev);
+  }, [closeRevealGate]);
 
   const waitForReels = (_spinCards: { golden?: boolean }[], t: boolean) =>
     new Promise<void>((resolve) => {
@@ -519,9 +555,11 @@ export default function App() {
         resolve();
       };
 
-      // Primary signal: Godot's round_end for this board (reels really stopped).
-      // The timer is only a safety net in case that message never arrives.
-      const fallbackMs = dealDurationMs(_spinCards, t) + (godotReadyRef.current ? 6000 : 48);
+      // Primary signal: Godot's reels_settled / round_end for this board
+      // (reels really stopped — see closeRevealGate). The timer is only a
+      // safety net: expected spin duration + 1.5 s, turbo-aware, covering a
+      // frozen/backgrounded tab (rAF throttle).
+      const fallbackMs = dealDurationMs(_spinCards, t) + (godotReadyRef.current ? 1500 : 48);
       timer = window.setTimeout(finish, fallbackMs);
       dealGateRef.current = {
         timer,
@@ -534,16 +572,13 @@ export default function App() {
     });
 
   /** Godot → React: a revealed board landed (see revealGateRef). */
-  const onGodotRoundEnd = useCallback((mode: string | undefined) => {
+  const onGodotRoundEnd = useCallback((mode: string | undefined, rev?: number) => {
     if (mode && mode !== "external") return;
     // Safety net: the build-up always ends once the reels have stopped.
     setBoardHot(false);
     audio.stopAnticipation();
-    const gate = revealGateRef.current;
-    if (gate.landed) return;
-    gate.landed = true;
-    gate.onLanded?.();
-  }, []);
+    closeRevealGate(rev);
+  }, [closeRevealGate]);
 
   /** Godot → React: bonus build-up started / ended — sound + burning board frame. */
   const onGodotAnticipation = useCallback((active: boolean, ms: number) => {
@@ -554,11 +589,17 @@ export default function App() {
 
   /** Godot → React: the landed board's paying lines + where their labels go. */
   const onGodotWin = useCallback((lines: GodotWinLine[], _winX: number, rev?: number) => {
-    if (revealGateRef.current.landed) return; // stale: belongs to an earlier board
     // A stalled presentation can emit this event after a newer board's reveal
-    // went out — its labels would then describe the WRONG board. Godot echoes
-    // the reveal id; anything that isn't the pending board's is dropped.
-    if (rev != null && rev !== pendingRevRef.current) return;
+    // went out — its labels would then describe the WRONG board. The rev echo
+    // is the ownership check: labels whose rev isn't the pending board's are
+    // dropped. (An already-CLOSED gate does not drop them: after a mid-round
+    // tab-hide + snap, the presentation legitimately runs on the visible
+    // screen once, labels included.)
+    if (rev != null) {
+      if (rev !== pendingRevRef.current) return;
+    } else if (revealGateRef.current.landed) {
+      return; // native/un-stamped event for a closed round
+    }
     setWinLabels({ key: Date.now(), lines });
   }, []);
 
@@ -689,6 +730,10 @@ export default function App() {
         document.documentElement.classList.remove("tab-hidden");
         audio.setTempMuted(false);
         slotRef.current?.setVolume(audio.isMasterMuted() ? 0 : audio.getMasterVolume());
+        // Back mid-round (rAF had been frozen): snap Godot to the final board
+        // instantly — no spin replay; the win presentation then runs once,
+        // on the visible screen. Closed rounds are left alone.
+        if (!revealGateRef.current.landed) slotRef.current?.snapRound();
       }
     };
     document.addEventListener("visibilitychange", onVis);
@@ -881,7 +926,21 @@ export default function App() {
           return;
         }
 
-        const round = playRound({ maxWinX: maxWinCap });
+        const round: RoundResult = forceBaseX != null
+          ? {
+              // ?forcebase=25x dev hook (see forceBaseX): a REAL base-game
+              // round whose board is searched for the requested win, through
+              // this exact branch — used to verify the Big Win ladder,
+              // presentation holds and autospin continuation.
+              base: playUntilWinX(() => playSpin("base"), forceBaseX),
+              bonusKind: null,
+              freeSpins: [],
+              bonusBank: 0,
+              roundWinX: forceBaseX,
+              cappedWinX: forceBaseX,
+              isMaxWin: false,
+            }
+          : playRound({ maxWinX: maxWinCap });
         applySpinVisual(round.base);
         const basePay = round.base.spinWinX > 0 ? dollars(round.base.spinWinX, bet) : 0;
         setLastWin(basePay);
