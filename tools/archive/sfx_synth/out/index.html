@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Muerta Poker — in-house SFX audition (C3)</title>
+<style>
+  body { background: #120a0d; color: #f1e6cc; font: 15px/1.5 system-ui, sans-serif; margin: 2rem; }
+  h1 { color: #ffd97a; } h2 { color: #e0861e; margin-bottom: .2rem; }
+  section { border-bottom: 1px solid #2c1c22; padding: 1rem 0; }
+  .row audio { height: 32px; margin-right: .4rem; vertical-align: middle; }
+  .v { color: #9c8b7a; font-size: .8rem; margin-right: .8rem; }
+  .desc { color: #b6a48d; margin: .2rem 0 .6rem; }
+  .cur { color: #7d6f61; font-size: .85rem; margin: .5rem 0 .2rem; }
+  .none { color: #7d6f61; font-size: .85rem; }
+</style></head><body>
+<h1>Muerta Poker — in-house SFX audition</h1>
+<p>4 variations per sound (varying partial ratios, decays, velocity). Pick per sound, e.g. “count_tick: v2”.</p>
+
+      <section>
+        <h2>count_tick</h2>
+        <p class="desc">Dry marimba ~880 Hz, 40-60 ms, almost no tail (code pitch-steps it).</p>
+        <div class="row"><audio controls preload="none" src="count_tick_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="count_tick_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="count_tick_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="count_tick_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: — (synthesized triangle blip at runtime; no file)</p>
+        <div class="row"><span class="none">runtime synth — no file</span></div>
+      </section>
+      <section>
+        <h2>fs_count</h2>
+        <p class="desc">Wood knock + small bell A5 → D6, 0.3 s.</p>
+        <div class="row"><audio controls preload="none" src="fs_count_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="fs_count_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="fs_count_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="fs_count_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: — (synthesized two-note chime at runtime; no file)</p>
+        <div class="row"><span class="none">runtime synth — no file</span></div>
+      </section>
+      <section>
+        <h2>spin_press</h2>
+        <p class="desc">Deep wood knock, 90-110 ms, heavier than button_click.</p>
+        <div class="row"><audio controls preload="none" src="spin_press_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="spin_press_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="spin_press_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="spin_press_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: button_click.wav</p>
+        <div class="row"><audio controls preload="none" src="current_button_click.wav"></audio><span class="v">now</span></div>
+      </section>
+      <section>
+        <h2>autoplay_start</h2>
+        <p class="desc">Wood knock + small bell, <150 ms.</p>
+        <div class="row"><audio controls preload="none" src="autoplay_start_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="autoplay_start_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="autoplay_start_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="autoplay_start_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: button_click.wav</p>
+        <div class="row"><audio controls preload="none" src="current_button_click.wav"></audio><span class="v">now</span></div>
+      </section>
+      <section>
+        <h2>autoplay_stop</h2>
+        <p class="desc">Two quick descending wood knocks, <150 ms.</p>
+        <div class="row"><audio controls preload="none" src="autoplay_stop_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="autoplay_stop_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="autoplay_stop_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="autoplay_stop_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: button_click.wav</p>
+        <div class="row"><audio controls preload="none" src="current_button_click.wav"></audio><span class="v">now</span></div>
+      </section>
+      <section>
+        <h2>miss_release</h2>
+        <p class="desc">Soft low-drum heartbeat that stops + one low marimba B♭2 decaying. 0.8 s, calm.</p>
+        <div class="row"><audio controls preload="none" src="miss_release_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="miss_release_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="miss_release_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="miss_release_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: win_soft.mp3 pitched to 0.85</p>
+        <div class="row"><audio controls preload="none" src="current_win_soft.mp3"></audio><span class="v">now</span></div>
+      </section>
+      <section>
+        <h2>bonus_outro</h2>
+        <p class="desc">Low drum hit + marimba chord roll resolving minor → major + bell glint, 2 s.</p>
+        <div class="row"><audio controls preload="none" src="bonus_outro_v1.wav"></audio><span class="v">v1</span><audio controls preload="none" src="bonus_outro_v2.wav"></audio><span class="v">v2</span><audio controls preload="none" src="bonus_outro_v3.wav"></audio><span class="v">v3</span><audio controls preload="none" src="bonus_outro_v4.wav"></audio><span class="v">v4</span></div>
+        <p class="cur">current in-game: big_nice.mp3 at 0.7 gain</p>
+        <div class="row"><audio controls preload="none" src="current_big_nice.mp3"></audio><span class="v">now</span></div>
+      </section>
+</body></html>
