@@ -65,6 +65,14 @@ signal reveal_settled(rev: int)
 signal win_focus(hand_index: int, rev: int)
 ## The player tapped the board while the win presentation ran (skip).
 signal presentation_skipped
+## C1: the pop of a hand (or of all winners, hand_index 0) just fired — the
+## FIRST visible change of the win presentation.
+signal win_pop_start(hand_index: int, rev: int)
+## C1: the pop peak passed — the host may now show labels, its Hand pays row
+## and the WIN text for `hand_index` (0 = all).
+signal win_reveal(hand_index: int, rev: int)
+## C1 diagnosis: ms-from-settle timeline of every visual change on a win.
+signal win_debug(rev: int, timeline: Array)
 ## stage: "trigger" | "start" | "spin" | "end" — see _play_bonus().
 signal bonus_event(stage: String, data: Dictionary)
 ## A single board paid >= BIG_WIN_MIN x. The round now waits for
@@ -207,53 +215,97 @@ func reveal_external(payload: Dictionary) -> void:
 		for c in golden_cells:
 			if not (c in lit):
 				lit.append(c)
+	## C1 diagnosis timeline (ms from settle).
+	var dbg_t0 := Time.get_ticks_msec()
+	var dbg: Array = []
+	var dbg_mark := func(label: String) -> void:
+		dbg.append([Time.get_ticks_msec() - dbg_t0, label])
+
 	if not lit.is_empty():
-		# --- B1 small-win choreography (skippable: tap the board / Space) ---
-		# settle → 120 ms beat → pop (1 → 1.12 → 1.04 + glow flash) → labels
-		# stagger in → per-hand cycle (~700 ms each) → all together. Turbo
-		# scales every beat. The gen token stops a superseded reveal from
-		# touching cells after any await.
+		# --- C1 win choreography: the POP is the first visible change ---
+		# settle → ~110 ms of NOTHING → one frame: winners pop + glow flash
+		# while losers START a ~150 ms dim (never before the pop) → at the pop
+		# peak the host shows labels / Hand pays row / WIN text (win_reveal)
+		# → up to 3 highest-paying hands cycle (each hand's cards pop) →
+		# "all together" pulse + bursts LAST. Autospin (payload.auto) pops
+		# everything at once with no cycle. Not-yet-shown winning cards stay
+		# neutral. Every beat is skippable (tap / Space); turbo scales all.
+		var auto := bool(payload.get("auto", false))
+		var beat := _t(0.11, 0.05)
+		var peak := _t(0.13, 0.07)
+		var cycle := _t(0.55, 0.26)
+		var dim_ramp := _t(0.15, 0.08)
+		var groups: Array = _hand_groups(spin, lit) if paying else []
+		var no_cycle := auto or groups.size() <= 1
+		var show: Array = groups.slice(0, 3) if groups.size() > 0 else []
 		_continue_requested = false
 		_presenting = true
-		reel_controller.dim_for_win(lit)
-		await _wait(_t(0.12, 0.05), true)
+		dbg_mark.call("reveal_settled")
+		await _wait(beat, true)
 		var alive := gen == _reveal_gen
+		dbg_mark.call("beat_end_no_visual_change")
+
 		if alive:
-			reel_controller.pop_winners(lit, _t(0.035, 0.02), _t(1.0, 0.6))
-			await _wait(_t(0.26, 0.15), true)
+			# ONE frame: pop + glow flash, losers start dimming in parallel.
+			reel_controller.dim_for_win(lit, dim_ramp)
+			dbg_mark.call("dim_ramp_start")
+			if no_cycle:
+				reel_controller.pop_winners(lit, _t(0.035, 0.02), _t(1.0, 0.6))
+				dbg_mark.call("pop_all_winners")
+				win_pop_start.emit(0, rev)
+			else:
+				reel_controller.pop_winners(show[0]["cells"], _t(0.03, 0.015), _t(1.0, 0.6))
+				dbg_mark.call("pop_hand_%d" % int(show[0]["hand_index"]))
+				win_pop_start.emit(int(show[0]["hand_index"]), rev)
+			await _wait(peak, true)
 			alive = gen == _reveal_gen
-
-		if paying:
-			var entries := line_entries(spin, shown_x, bet)
-			# Win stings are React-owned (audio ownership rule): Godot fires only
-			# frame-synced SFX. The host page plays the sting keyed off shown_x.
-			# No Godot-drawn labels here: the host page draws them (localized, with
-			# the browser's font fallback -- WIN_FONT is a Latin-only Oswald subset,
-			# so Cyrillic/CJK/Arabic/Hindi would render as empty boxes). It only
-			# needs to know where each label goes. Emitted after the pop beat so
-			# the labels stagger in AFTER the cards have punched in.
-			win_lines.emit(_with_screen_pos(entries), shown_x, rev)
-
-		if alive and paying:
-			var groups := _hand_groups(spin, lit)
-			if groups.size() > 1:
-				for g in groups:
-					if gen != _reveal_gen:
-						alive = false
-						break
-					reel_controller.focus_win_group(g["cells"], lit)
-					win_focus.emit(int(g["hand_index"]), rev)
-					await _wait(_t(0.7, 0.4), true)
-				alive = alive and gen == _reveal_gen
-		if alive and not lit.is_empty():
-			# All together: pulse + bursts via the shared presentation.
-			reel_controller.play_win_presentation(lit, all_cells)
+		if alive:
+			# Pop peak passed: host shows labels / Hand pays row / WIN text.
+			var first_hand := 0 if no_cycle else int(show[0]["hand_index"])
+			win_reveal.emit(first_hand, rev)
+			dbg_mark.call("win_reveal_%d" % first_hand)
 			if paying:
+				dbg_mark.call("emit_win_lines")
+				win_lines.emit(_with_screen_pos(line_entries(spin, shown_x, bet)), shown_x, rev)
+
+		# Cycle the remaining hands (max 3, highest-paying first).
+		if alive and not no_cycle:
+			for k in range(1, show.size()):
+				if gen != _reveal_gen:
+					alive = false
+					break
+				await _wait(cycle, true)
+				if gen != _reveal_gen:
+					alive = false
+					break
+				reel_controller.pop_winners(show[k]["cells"], _t(0.03, 0.015), _t(1.0, 0.6))
+				dbg_mark.call("pop_hand_%d" % int(show[k]["hand_index"]))
+				win_pop_start.emit(int(show[k]["hand_index"]), rev)
+				await _wait(peak, true)
+				if gen != _reveal_gen:
+					alive = false
+					break
+				win_reveal.emit(int(show[k]["hand_index"]), rev)
+				win_focus.emit(int(show[k]["hand_index"]), rev)
+				dbg_mark.call("win_reveal_%d" % int(show[k]["hand_index"]))
+			# "All together" beat LAST (skip it when a newer board arrived).
+			if alive:
+				await _wait(cycle * 0.7, true)
+				alive = gen == _reveal_gen
+		if alive and not lit.is_empty():
+			reel_controller.play_win_presentation(lit, all_cells)
+			if not no_cycle:
+				# All-together host beat (single-hand/auto already revealed).
+				win_pop_start.emit(0, rev)
+				win_reveal.emit(0, rev)
 				win_focus.emit(0, rev)
+			dbg_mark.call("finale_all_pulse_bursts")
 			# Winners keep pulsing; everything else settles into idle life
 			# (B3) — the resting board is never a frozen screenshot.
 			reel_controller.settle_to_idle(lit)
+			dbg_mark.call("settle_to_idle")
 		_presenting = false
+		win_debug.emit(rev, dbg)
 
 	outcome_resolved.emit(grid, shown_x)
 	_busy = false

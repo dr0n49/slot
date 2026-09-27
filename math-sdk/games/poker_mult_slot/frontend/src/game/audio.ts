@@ -78,6 +78,12 @@ const sfxLogEnabled =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).has("sfxlog");
 
+/** C1 diagnosis: log a named visual-change mark into the same ?sfxlog=1
+ *  timeline (no-ops without the flag). */
+export function sfxDebugEvent(event: string) {
+  logTrigger(event);
+}
+
 function logTrigger(event: string) {
   if (!sfxLogEnabled) return;
   const w = window as typeof window & { __sfxLog?: Array<{ t: number; event: string }> };
