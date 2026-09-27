@@ -50,7 +50,6 @@ const BADGE_Y := 58.0
 
 var _glow_material: ShaderMaterial
 var _tween: Tween
-var _glow_tween: Tween
 var _badge: Label
 var _badge_tween: Tween
 var symbol_id: StringName
@@ -175,37 +174,6 @@ func play_land_bounce(delay: float = 0.0, time_scale: float = 1.0) -> void:
 	_tween.tween_property(sprite, "scale", rest_scale, bounce_duration * 0.5 * time_scale) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-## B1 small-win choreography — the attack: the card punches in
-## (1 → 1.12 → 1.04, TRANS_BACK), the glow FLASHES once (brief over-drive
-## that settles into the pulse level), then the gentle win pulse takes over.
-## `delay` staggers cards inside a beat; `time_scale` shortens it in turbo.
-func play_win_pop(delay: float = 0.0, time_scale: float = 1.0) -> void:
-	if _glow_material:
-		_glow_material.set_shader_parameter(&"dim_amount", 0.0)
-	_kill_tween()
-	sprite.scale = rest_scale
-	_tween = create_tween()
-	if delay > 0.0:
-		_tween.tween_interval(delay)
-	_tween.tween_property(sprite, "scale", rest_scale * 1.12, 0.16 * time_scale) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	_tween.tween_property(sprite, "scale", rest_scale * 1.04, 0.09 * time_scale) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	_tween.tween_callback(play_win_pulse)
-	if _glow_material:
-		_kill_glow_tween()
-		_glow_material.set_shader_parameter(&"pulse_strength", win_pulse_strength * 2.4)
-		_glow_tween = create_tween()
-		_glow_tween.tween_method(_set_pulse_strength, win_pulse_strength * 2.4, win_pulse_strength, 0.3 * time_scale)
-
-func _set_pulse_strength(v: float) -> void:
-	if _glow_material:
-		_glow_material.set_shader_parameter(&"pulse_strength", v)
-
-func _kill_glow_tween() -> void:
-	if _glow_tween and _glow_tween.is_valid():
-		_glow_tween.kill()
-
 ## Winning symbol: looping breathing scale + shader glow pulse, until
 ## stop_win_pulse() is called (when WIN_ANIM ends).
 func play_win_pulse() -> void:
@@ -213,7 +181,6 @@ func play_win_pulse() -> void:
 		_glow_material.set_shader_parameter(&"dim_amount", 0.0)
 		_glow_material.set_shader_parameter(&"pulse_speed", win_pulse_speed)
 		_glow_material.set_shader_parameter(&"pulse_strength", win_pulse_strength)
-	_kill_glow_tween()
 	_kill_tween()
 	_tween = create_tween().set_loops()
 	_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -232,7 +199,6 @@ func play_win_pulse() -> void:
 
 func stop_win_pulse() -> void:
 	_kill_tween()
-	_kill_glow_tween()
 	sprite.scale = rest_scale
 	if _badge.visible:
 		if _badge_tween and _badge_tween.is_valid():
