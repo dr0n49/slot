@@ -18,7 +18,7 @@ import { WinLineLabels } from "./components/WinLineLabels";
 import { BigWinOverlay } from "./components/BigWinOverlay";
 import { MultCloudPreview } from "./components/MultCloudPreview";
 import { audio } from "./game/audio";
-import { bigWinTier, type BigWinTier } from "./game/bigWin";
+import { BIG_WIN_MIN, bigWinTier, type BigWinTier } from "./game/bigWin";
 import { winGrade } from "./game/winFx";
 import {
   buyBonusPrice,
@@ -818,6 +818,25 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootOpen, godotReady, bonusKind, triggerKind]);
 
+  /** ?forcebase helper (dev only): deal until a base board pays the target ×,
+   *  accepting only boards that reach the Big Win ladder floor (≥20×) so the
+   *  hook can actually verify the ladder. Falls back to playUntilWinX. */
+  const forceWinSpin = (targetX: number): SpinResult => {
+    let best: SpinResult | null = null;
+    let bestD = Number.POSITIVE_INFINITY;
+    for (let i = 0; i < 1500; i++) {
+      const s = playSpin("base");
+      if (s.spinWinX < BIG_WIN_MIN) continue;
+      const d = Math.abs(s.spinWinX - targetX);
+      if (d < bestD) {
+        best = s;
+        bestD = d;
+        if (d < 1e-9) break;
+      }
+    }
+    return best ?? playUntilWinX(() => playSpin("base"), targetX);
+  };
+
   const runSpinSequence = useCallback(
     async (opts?: { bought?: PaidKind; guaranteed?: AnteKind }) => {
       if (busyRef.current) return;
@@ -987,8 +1006,11 @@ export default function App() {
               // ?forcebase=25x dev hook (see forceBaseX): a REAL base-game
               // round whose board is searched for the requested win, through
               // this exact branch — used to verify the Big Win ladder,
-              // presentation holds and autospin continuation.
-              base: playUntilWinX(() => playSpin("base"), forceBaseX),
+              // presentation holds and autospin continuation. The search
+              // only accepts boards that actually reach the ladder floor
+              // (≥20×), else a forced "25x" could return a 14× board and
+              // verify nothing.
+              base: forceWinSpin(forceBaseX),
               bonusKind: null,
               freeSpins: [],
               bonusBank: 0,
