@@ -55,9 +55,8 @@ let audioCtx: AudioContext | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
 // ——— Music chain (WebAudio path) ———
-// source → bonusBoost → duck → level → destination
-// bonusBoost lifts the bed +1.5 dB in bonus mode (C2: level only — the low
-// pass tint read as muffled; no dedicated bonus track exists yet).
+// source → tone (bonus low-pass) → bonusBoost → duck → level → destination
+let musicTone: BiquadFilterNode | null = null;
 let musicBonusBoost: GainNode | null = null;
 let musicDuckGain: GainNode | null = null;
 let duckReleaseTimer = 0;
@@ -176,16 +175,24 @@ function updateMusic() {
   const c = ensureCtx();
   if (!c) return;
   if (!musicGain) {
-    // Chain: source → bonusBoost → duck → level → destination.
+    // Chain: source → tone → bonusBoost → duck → level → destination.
+    // tone darkens the bed in bonus mode (1 s sweep), bonusBoost lifts it
+    // slightly so bonus reads as a shifted mode, duck clears space for win
+    // stings (B4).
+    musicTone = c.createBiquadFilter();
+    musicTone.type = "lowpass";
+    musicTone.frequency.value = 18500;
+    musicTone.Q.value = 0.4;
     musicBonusBoost = c.createGain();
     musicBonusBoost.gain.value = 1;
     musicDuckGain = c.createGain();
     musicDuckGain.gain.value = 1;
+    musicTone.connect(musicBonusBoost);
     musicBonusBoost.connect(musicDuckGain);
     musicDuckGain.connect(c.destination);
     musicGain = c.createGain();
     musicGain.gain.value = 0;
-    musicGain.connect(musicBonusBoost);
+    musicGain.connect(musicTone);
   }
   const on = audioEnabled() && masterVol > 0;
   const target = on ? clamp01(MUSIC_LEVEL * masterVol) : 0;
@@ -662,16 +669,16 @@ export const audio = {
     }
   },
 
-  /** Bonus-mode treatment for the bed (C2): a +1.5 dB level lift, ~1 s in
-   *  and out. No filtering — the low-pass tint read as muffled/broken. A
-   *  dedicated bonus track replaces this when one exists. */
+  /** Bonus-mode tint for the bed (B4): dark low-pass sweep + slight lift,
+   *  ~1 s in and out, until a dedicated bonus track exists. */
   setBonusMusic(on: boolean) {
     const c = ensureCtx();
-    if (!c || !musicBonusBoost) return;
+    if (!c || !musicTone || !musicBonusBoost) return;
     const now = c.currentTime;
+    musicTone.frequency.cancelScheduledValues(now);
+    musicTone.frequency.setTargetAtTime(on ? 1100 : 18500, now, 1 / 3);
     musicBonusBoost.gain.cancelScheduledValues(now);
-    // +1.5 dB = ×1.188
-    musicBonusBoost.gain.setTargetAtTime(on ? 1.188 : 1, now, 1 / 3);
+    musicBonusBoost.gain.setTargetAtTime(on ? 1.25 : 1, now, 1 / 3);
   },
 
   /** Bright lock-in sting for 3/4/5 golden cards. */
