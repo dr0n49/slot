@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import type { Copy } from "../game/social";
 import { useBoardCenteredPanel } from "./useBoardAnchoredCta";
 
@@ -41,7 +42,10 @@ export function ErrorModal({ state, copy, balance, required, onRetry, onLower, o
       <div className="absolute inset-0 bg-black/45" aria-hidden />
     );
 
-  return (
+  // Portal to <body>: the .game-stage ancestor carries a transform, which
+  // would turn position: fixed into stage-local coordinates. Outside of it,
+  // fixed maps 1:1 to the viewport and the board-rect centering is exact.
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {backdrop}
       <div
@@ -114,6 +118,7 @@ export function ErrorModal({ state, copy, balance, required, onRetry, onLower, o
           ) : null}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

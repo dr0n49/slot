@@ -1,0 +1,109 @@
+:root {
+	--nv-ink: #0c0712;
+	--nv-panel: #1a1024;
+	--nv-panel-2: #261635;
+	--nv-line: rgba(255, 213, 74, 0.28);
+	--nv-gold: #ffd54a;
+	--nv-gold-bright: #ffc107;
+	--nv-gold-dark: #b8860b;
+	--nv-cream: #fff3c4;
+	--nv-ember: #ff6a1a;
+	--nv-red: #d81f1f;
+	--nv-cyan: #37e6ff;
+	--nv-green: #3dff8a;
+	--nv-font-display: 'Anton', 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+	--nv-hud-top: #0a1f6e;
+	--nv-hud-bottom: #001240;
+	--nv-font-hud: 'Arial Black', 'Impact', 'Haettenschweiler', sans-serif;
+	--nv-font-ui: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--nv-text-shadow: 0 2px 0 rgba(0, 0, 0, 0.85), 0 0 14px rgba(255, 170, 40, 0.35);
+}
+
+/* The engine modals (settings / auto-play / error) read this family. */
+:root {
+	--font-family: var(--nv-font-ui);
+}
+
+.nv-stage {
+	color: var(--nv-gold);
+	font-family: var(--nv-font-ui);
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Dialog buttons: same language as the Muerta-style HUD (charcoal chip, red "BONUS" call-to-action). */
+.nv-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 40px;
+	min-width: 44px;
+	padding: 6px 16px;
+	border: 2px solid #0a0607;
+	border-radius: 8px;
+	background: linear-gradient(180deg, #2a2a2e, #0a0a0c);
+	box-shadow:
+		0 0 0 1.5px #b7a98a,
+		0 3px 0 1.5px #0a0607;
+	color: #f1e6cc;
+	font-family: 'Oswald', var(--nv-font-ui);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	cursor: pointer;
+	white-space: nowrap;
+	transition:
+		filter 0.12s ease,
+		transform 0.12s ease,
+		box-shadow 0.12s ease;
+}
+.nv-btn svg {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+	flex: none;
+}
+.nv-btn:hover:not(:disabled) {
+	transform: translateY(-1px);
+	box-shadow:
+		0 0 0 1.5px #e2b04a,
+		0 4px 0 1.5px #0a0607,
+		0 0 14px rgba(226, 176, 74, 0.35);
+}
+.nv-btn:active:not(:disabled) {
+	transform: translateY(2px);
+	box-shadow:
+		0 0 0 1.5px #e2b04a,
+		0 1px 0 1.5px #0a0607;
+}
+.nv-btn:focus-visible {
+	outline: 3px solid #ffd97a;
+	outline-offset: 3px;
+}
+.nv-btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+.nv-btn.active {
+	background: linear-gradient(180deg, #ff3b4e, #c8102e 55%, #7d0a1a);
+	box-shadow:
+		0 0 0 1.5px #e2b04a,
+		0 3px 0 1.5px #0a0607,
+		0 0 16px rgba(255, 59, 78, 0.55);
+}
+.nv-btn.gold {
+	font-family: 'Pirata One', Georgia, serif;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	color: #ffd97a;
+	background: linear-gradient(180deg, #e01b3a, #c8102e 50%, #7d0a1a);
+	box-shadow:
+		0 0 0 1.5px #8f6318,
+		inset 0 1px rgba(255, 255, 255, 0.28),
+		0 3px 0 1.5px #0a0607;
+	text-shadow: 0 2px 0 #0a0607;
+}

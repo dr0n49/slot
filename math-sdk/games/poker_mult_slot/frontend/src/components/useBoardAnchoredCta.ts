@@ -7,13 +7,25 @@ import { useEffect, useState, type CSSProperties } from "react";
  * If that strip is too small on a given screen, just below the frame — but
  * never overlapping any HUD control.
  *
- * All measurements are live rects (no hard-coded px). The app stage
- * (.game-stage) carries a transform, which makes it the containing block for
- * fixed-position descendants — so the screen-space target (measured from
- * getBoundingClientRect) is converted into stage-local CSS coordinates via
- * the stage's effective scale. Landscape returns undefined → the existing
- * layout is untouched.
+ * All measurements are live screen-space rects (no hard-coded px) and are
+ * re-measured on resize / orientation change / board settle. These helpers
+ * assume the consumer is rendered OUTSIDE the scaled .game-stage (e.g. in a
+ * body portal) so position: fixed maps 1:1 to viewport coordinates. In
+ * landscape they return undefined → the existing layout is untouched.
+ *
+ * The stage scale (.game-stage fits the viewport via a transform) is returned
+ * alongside so portaled panels can match the in-stage visual size.
  */
+
+function stageScale(): number {
+  const stage = document.querySelector(".game-stage");
+  if (stage instanceof HTMLElement && stage.offsetWidth > 0) {
+    const r = stage.getBoundingClientRect();
+    if (r.width > 0) return r.width / stage.offsetWidth;
+  }
+  return 1;
+}
+
 export function useBoardAnchoredCta(): CSSProperties | undefined {
   const [style, setStyle] = useState<CSSProperties | undefined>(undefined);
 
@@ -23,42 +35,31 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
         setStyle(undefined);
         return;
       }
-      const stage = document.querySelector(".game-stage");
-      const cta = document.querySelector(".total-win-cta, .cele-hint");
       const board = document.querySelector(".playfield-board")?.getBoundingClientRect();
       const grid = document.querySelector(".godot-board")?.getBoundingClientRect();
       const hudTop =
         document.querySelector(".hud-bar")?.getBoundingClientRect().top ?? window.innerHeight;
-      if (!stage || !board || board.width < 40) {
+      if (!board || board.width < 40) {
         setStyle(undefined);
         return;
       }
-      const stageRect = stage.getBoundingClientRect();
-      const scale =
-        stage instanceof HTMLElement && stage.offsetWidth > 0
-          ? stageRect.width / stage.offsetWidth
-          : 1;
-
       // Strip between the last card row (≈ the Godot canvas box bottom) and
       // the board frame's bottom border — all in SCREEN space.
       const stripTop = grid ? grid.bottom : board.bottom - 24;
       const stripBottom = board.bottom;
-      const hintScreenH = ((cta instanceof HTMLElement ? cta.offsetHeight : 24) * scale) || 24 * scale;
-      let screenTop: number;
+      const hintScreenH = 20 * stageScale(); // .cele-hint/.total-win-cta line height
+      let top: number;
       if (stripBottom - stripTop >= hintScreenH + 6) {
-        screenTop = (stripTop + stripBottom - hintScreenH) / 2; // centered in the strip
+        top = (stripTop + stripBottom - hintScreenH) / 2; // centered in the strip
       } else {
-        screenTop = stripBottom + 6; // strip too small: just below the frame
-        if (screenTop + hintScreenH > hudTop - 6) screenTop = hudTop - 6 - hintScreenH; // never over the HUD
+        top = stripBottom + 6; // strip too small: just below the frame
+        if (top + hintScreenH > hudTop - 6) top = hudTop - 6 - hintScreenH; // never over the HUD
       }
-
-      // Screen space → stage-local CSS space (the transformed ancestor is the
-      // containing block for position: fixed).
       setStyle({
         position: "fixed",
-        left: (board.left - stageRect.left) / scale,
-        width: board.width / scale,
-        top: (screenTop - stageRect.top) / scale,
+        left: board.left,
+        width: board.width,
+        top,
         bottom: "auto",
         margin: 0,
       });
@@ -82,7 +83,9 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
  * Portrait-only centering for modal panels (error states): the panel is
  * centered on the BOARD rect instead of the viewport, so it never sits under
  * the HUD buttons. Landscape returns undefined → the existing viewport
- * centering stays. Pair with transform: translate(-50%, -50%).
+ * centering stays. Pair with transform: translate(-50%, -50%) — the returned
+ * transform also applies the stage scale so portaled panels match the
+ * in-stage visual size.
  */
 export function useBoardCenteredPanel(): CSSProperties | undefined {
   const [style, setStyle] = useState<CSSProperties | undefined>(undefined);
@@ -93,34 +96,29 @@ export function useBoardCenteredPanel(): CSSProperties | undefined {
         setStyle(undefined);
         return;
       }
-      const stage = document.querySelector(".game-stage");
       const board = document.querySelector(".playfield-board")?.getBoundingClientRect();
       const hudTop =
         document.querySelector(".hud-bar")?.getBoundingClientRect().top ?? window.innerHeight;
-      if (!stage || !board || board.width < 40) {
+      if (!board || board.width < 40) {
         setStyle(undefined);
         return;
       }
-      const stageRect = stage.getBoundingClientRect();
-      const scale =
-        stage instanceof HTMLElement && stage.offsetWidth > 0
-          ? stageRect.width / stage.offsetWidth
-          : 1;
-      // Center on the board, nudged up into the board area so the panel
-      // (whose rendered height is unknown at measure time) keeps clear of the
-      // HUD even in short viewports.
+      // Centering via explicit left/top on the panel's MEASURED size — the
+      // panel's slam-in animation owns the transform property, so a
+      // translate(-50%,-50%) would be overridden by it.
+      const panel = document.querySelector(".confirm-panel");
+      const w = panel instanceof HTMLElement ? panel.offsetWidth : 340;
+      const h = panel instanceof HTMLElement ? panel.offsetHeight : 210;
+      // Center on the board, clamped so the panel never covers the HUD and
+      // never leaves the viewport.
       const screenX = board.left + board.width / 2;
-      const boardSafeCenterY = Math.min(
+      const screenY = Math.min(
         board.top + board.height / 2,
-        Math.max(board.top + 120, (hudTop - 40 + board.top) / 2),
+        Math.max(board.top + 140, (hudTop + board.top) / 2),
       );
-      setStyle({
-        position: "fixed",
-        left: (screenX - stageRect.left) / scale,
-        top: (boardSafeCenterY - stageRect.top) / scale,
-        transform: "translate(-50%, -50%)",
-        margin: 0,
-      });
+      const left = Math.max(8, Math.min(screenX - w / 2, window.innerWidth - w - 8));
+      const top = Math.max(8, Math.min(screenY - h / 2, hudTop - h - 8));
+      setStyle({ position: "fixed", left, top, margin: 0 });
     };
     compute();
     window.addEventListener("resize", compute);
