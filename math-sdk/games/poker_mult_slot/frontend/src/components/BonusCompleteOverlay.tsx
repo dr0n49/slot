@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Copy } from "../game/social";
+import { useBoardAnchoredCta } from "./useBoardAnchoredCta";
 
 type Props = {
   amount: number;
@@ -10,10 +11,12 @@ type Props = {
 /**
  * End-of-bonus summary, Cook Out composition: dim table (no card, no splat),
  * white TOTAL WIN over the big gold amount counting up in whole cents (≤1.8s),
- * tap-anywhere hint above the HUD.
+ * tap-anywhere hint above the HUD. In portrait the hint anchors to the board's
+ * bottom strip (see useBoardAnchoredCta) so it never overlaps the HUD.
  */
 export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
   const [shown, setShown] = useState(0);
+  const ctaStyle = useBoardAnchoredCta();
 
   useEffect(() => {
     const t0 = performance.now();
@@ -40,7 +43,7 @@ export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
         <div className="total-win-label">{copy.totalWin}</div>
         <div className="total-win-amount tabular-nums">{copy.money(shown)}</div>
       </div>
-      <div className="cta-hint total-win-cta">{copy.tapToContinue}</div>
+      <div className="cta-hint total-win-cta" style={ctaStyle}>{copy.tapToContinue}</div>
     </button>
   );
 }

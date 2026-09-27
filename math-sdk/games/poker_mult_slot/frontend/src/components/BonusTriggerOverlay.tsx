@@ -2,14 +2,18 @@ import { assetUrl } from "../game/assets";
 import { mathConfig } from "../game/engine";
 import type { Copy } from "../game/social";
 import { CeleWord } from "./Celebration";
+import { useBoardAnchoredCta } from "./useBoardAnchoredCta";
 
 type Props = {
   onContinue: () => void;
   copy: Copy;
 };
 
-/** Bonus trigger — CONGRATULATIONS → YOU HAVE WON → spins cloud → tap. */
+/** Bonus trigger — CONGRATULATIONS → YOU HAVE WON → spins cloud → tap.
+ *  In portrait the hint anchors to the board's bottom strip
+ *  (see useBoardAnchoredCta) so it never overlaps the HUD. */
 export function BonusTriggerOverlay({ onContinue, copy }: Props) {
+  const ctaStyle = useBoardAnchoredCta();
   return (
     <button
       type="button"
@@ -30,7 +34,7 @@ export function BonusTriggerOverlay({ onContinue, copy }: Props) {
           <span className="fs-cloud-num tabular-nums">{mathConfig.fsCount}</span>
         </div>
         <p className="cele-caption">{copy.freeSpins}</p>
-        <div className="cta-hint cele-hint">{copy.tapToContinue}</div>
+        <div className="cta-hint cele-hint" style={ctaStyle}>{copy.tapToContinue}</div>
       </div>
     </button>
   );

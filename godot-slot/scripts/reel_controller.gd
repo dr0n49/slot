@@ -340,10 +340,6 @@ func _settle_reel(index: int) -> void:
 		if m > 0.0:
 			has_mult = true
 			s.cells[row].set_mult(m, land + _t(0.12, 0.05))
-			# One hit per badge, synced to its stamp-in pop. Badges landing in
-			# the same instant collapse into a single hit via the SfxManager's
-			# 50 ms retrigger guard.
-			sfx.play_mult_land(land + _t(0.12, 0.05))
 		else:
 			s.cells[row].clear_mult()
 		if row < s.target.size() and (s.target[row] == &"JOKER" or s.target[row] == &"JOKER_gold"):
@@ -352,9 +348,9 @@ func _settle_reel(index: int) -> void:
 	sfx.play_reel_stop(index)
 	if has_joker:
 		sfx.play_joker_land()
-	# play_mult_land is fired per badge above, not per column: the badge's own
-	# stamp-in pop carries it, and the SfxManager retrigger guard collapses
-	# badges that stamp in the same instant into a single hit.
+	# play_mult_land is deliberately NOT triggered (SfxManager keeps the player
+	# and mult_land.mp3 ships, but the badge landing is visual-only): the
+	# reel-stop thud already covers "something landed here".
 	var is_last := index == _states.size() - 1
 	fx.screen_shake(shake_on_stop_big if is_last else shake_on_stop_small)
 
