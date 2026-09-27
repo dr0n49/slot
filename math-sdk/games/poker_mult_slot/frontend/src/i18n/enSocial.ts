@@ -143,4 +143,15 @@ export const enSocial: Strings = {
   flushBonusBlurb: "FLUSH OR BETTER EACH SPIN",
   buyModalHint:
     "All modes RTP {rtp}%. Max win {maxWin}×. Ante stays on until you turn it off.",
+  errFundsTitle: "INSUFFICIENT FUNDS",
+  errFundsBody: "You don't have enough coins for this play amount.",
+  errFundsDetail: "Coins: {balance} — Required: {required}",
+  errFundsLower: "LOWER BET",
+  errNetTitle: "CONNECTION LOST",
+  errNetBody: "The connection to the game server was interrupted.",
+  errRetry: "RETRY",
+  errRetrying: "RETRYING ({attempt}/{max})…",
+  errSessionTitle: "SESSION EXPIRED",
+  errSessionBody: "Your session has ended. Reload the game to continue.",
+  errReload: "RELOAD",
 };

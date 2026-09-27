@@ -50,6 +50,17 @@ export type Copy = {
   bigWinMax: string;
   youWon: string;
   tapToContinue: string;
+  errFundsTitle: string;
+  errFundsBody: string;
+  errFundsDetail: (balance: string, required: string) => string;
+  errFundsLower: string;
+  errNetTitle: string;
+  errNetBody: string;
+  errRetry: string;
+  errRetrying: (attempt: number, max: number) => string;
+  errSessionTitle: string;
+  errSessionBody: string;
+  errReload: string;
   bootMultTitle: string;
   bootMultCaption: string;
   bootBonusCaption: (count: number) => string;

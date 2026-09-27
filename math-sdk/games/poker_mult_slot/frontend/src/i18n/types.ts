@@ -139,6 +139,17 @@ export type Strings = {
   jobBonusBlurb: string;
   flushBonusBlurb: string;
   buyModalHint: string;
+  errFundsTitle: string;
+  errFundsBody: string;
+  errFundsDetail: string; // "{balance}" "{required}"
+  errFundsLower: string;
+  errNetTitle: string;
+  errNetBody: string;
+  errRetry: string;
+  errRetrying: string; // "{attempt}" "{max}"
+  errSessionTitle: string;
+  errSessionBody: string;
+  errReload: string;
 };
 
 export function detectLang(): Lang {

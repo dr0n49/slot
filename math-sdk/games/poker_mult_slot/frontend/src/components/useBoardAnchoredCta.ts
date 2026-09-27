@@ -77,3 +77,61 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
 
   return style;
 }
+
+/**
+ * Portrait-only centering for modal panels (error states): the panel is
+ * centered on the BOARD rect instead of the viewport, so it never sits under
+ * the HUD buttons. Landscape returns undefined → the existing viewport
+ * centering stays. Pair with transform: translate(-50%, -50%).
+ */
+export function useBoardCenteredPanel(): CSSProperties | undefined {
+  const [style, setStyle] = useState<CSSProperties | undefined>(undefined);
+
+  useEffect(() => {
+    const compute = () => {
+      if (!window.matchMedia("(orientation: portrait)").matches) {
+        setStyle(undefined);
+        return;
+      }
+      const stage = document.querySelector(".game-stage");
+      const board = document.querySelector(".playfield-board")?.getBoundingClientRect();
+      const hudTop =
+        document.querySelector(".hud-bar")?.getBoundingClientRect().top ?? window.innerHeight;
+      if (!stage || !board || board.width < 40) {
+        setStyle(undefined);
+        return;
+      }
+      const stageRect = stage.getBoundingClientRect();
+      const scale =
+        stage instanceof HTMLElement && stage.offsetWidth > 0
+          ? stageRect.width / stage.offsetWidth
+          : 1;
+      // Center on the board, nudged up into the board area so the panel
+      // (whose rendered height is unknown at measure time) keeps clear of the
+      // HUD even in short viewports.
+      const screenX = board.left + board.width / 2;
+      const boardSafeCenterY = Math.min(
+        board.top + board.height / 2,
+        Math.max(board.top + 120, (hudTop - 40 + board.top) / 2),
+      );
+      setStyle({
+        position: "fixed",
+        left: (screenX - stageRect.left) / scale,
+        top: (boardSafeCenterY - stageRect.top) / scale,
+        transform: "translate(-50%, -50%)",
+        margin: 0,
+      });
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    window.addEventListener("orientationchange", compute);
+    const t = window.setInterval(compute, 500);
+    return () => {
+      window.removeEventListener("resize", compute);
+      window.removeEventListener("orientationchange", compute);
+      window.clearInterval(t);
+    };
+  }, []);
+
+  return style;
+}

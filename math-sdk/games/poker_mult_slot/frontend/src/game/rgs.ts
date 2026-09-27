@@ -49,6 +49,63 @@ export function isSocialFromUrl(): boolean {
   return param("social") === "true";
 }
 
+// ─── Error classification (C: error states) ────────────────────────────────
+// StatusCode table from the Stake Engine RGS OpenAPI schema
+// (web-sdk/packages/rgs-fetcher/src/schema.ts):
+//   ERR_IPB  Insufficient Player Balance            (no rollback)
+//   ERR_IS   Invalid Session Token/Session Timeout  (no rollback)
+//   ERR_ATE  Auth Token Expired                     (no rollback)
+//   ERR_GLE  Gambling limits exceeded               (no rollback)
+//   ERR_BNF  Bet not found                          (no rollback)
+//   ERR_BE   Player already has an active bet       (no rollback)
+//   ERR_UE   General Server Error (rollback)        ERR_GE (no rollback)
+// The schema types `Error` as any, so payloads are parsed defensively.
+
+export type RgsErrorKind = "funds" | "session" | "net" | "server";
+
+export class RgsError extends Error {
+  readonly kind: RgsErrorKind;
+  readonly code: string;
+  readonly httpStatus: number;
+  constructor(kind: RgsErrorKind, code: string, httpStatus: number, endpoint: string) {
+    super(`RGS ${endpoint} ${kind} (${code || "no code"}, http ${httpStatus})`);
+    this.name = "RgsError";
+    this.kind = kind;
+    this.code = code;
+    this.httpStatus = httpStatus;
+  }
+}
+
+export function classifyRgsError(e: unknown): { kind: RgsErrorKind; code: string; httpStatus: number } {
+  if (e instanceof RgsError) return { kind: e.kind, code: e.code, httpStatus: e.httpStatus };
+  // fetch() network failures (DNS/offline/aborted) land here.
+  return { kind: "net", code: e instanceof Error ? e.name : "UNKNOWN", httpStatus: 0 };
+}
+
+function classifyCode(code: string, httpStatus: number): RgsErrorKind {
+  if (code === "ERR_IPB") return "funds";
+  if (code === "ERR_IS" || code === "ERR_ATE") return "session";
+  if (
+    code === "ERR_UE" || code === "ERR_GE" || code === "ERR_GLE" ||
+    code === "ERR_BE" || code === "ERR_BNF" || code === "ERR_SCR" || code === "ERR_OPT"
+  ) return "server";
+  if (httpStatus >= 400) return "server";
+  return "net";
+}
+
+/** Dev-only error hooks: ?err=funds|net|session|drop — vite dev builds only,
+ *  inert in production. "drop" simulates a lost play response (bet already
+ *  placed server-side): first play fails with a network error, the retry is
+ *  rejected with ERR_BE (open round) so the recovery path runs, then it
+ *  succeeds. */
+function devErrMode(): string | null {
+  if (!import.meta.env.DEV) return null;
+  const e = param("err");
+  return e === "funds" || e === "net" || e === "session" || e === "drop" ? e : null;
+}
+let devDropArmed = false;
+let devDropRecoveryArmed = false;
+
 function rgsBase(): string {
   const host = param("rgs_url");
   if (!host) throw new Error("missing rgs_url");
@@ -56,15 +113,49 @@ function rgsBase(): string {
   return `https://${host.replace(/\/$/, "")}`;
 }
 
+const RGS_TIMEOUT_MS = 12_000;
+
 async function post<T>(endpoint: string, body: Record<string, unknown>): Promise<T> {
-  const res = await fetch(`${rgsBase()}${endpoint}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  // Dev hooks fire before the network layer (see devErrMode).
+  const de = devErrMode();
+  if (de === "funds") throw new RgsError("funds", "ERR_IPB", 400, endpoint);
+  if (de === "session") throw new RgsError("session", "ERR_IS", 401, endpoint);
+  if (de === "net" && endpoint === "/wallet/play") throw new RgsError("net", "NETWORK", 0, endpoint);
+  if (de === "drop" && endpoint === "/wallet/play") {
+    if (devDropArmed) {
+      devDropArmed = false;
+      devDropRecoveryArmed = true;
+      throw new RgsError("net", "NETWORK", 0, endpoint);
+    }
+    if (devDropRecoveryArmed) {
+      devDropRecoveryArmed = false;
+      throw new RgsError("server", "ERR_BE", 409, endpoint);
+    }
+  }
+
+  let res: Response;
+  try {
+    res = await fetch(`${rgsBase()}${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(RGS_TIMEOUT_MS),
+    });
+  } catch (e) {
+    const timedOut = e instanceof DOMException && e.name === "TimeoutError";
+    throw new RgsError("net", timedOut ? "TIMEOUT" : "NETWORK", 0, endpoint);
+  }
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`RGS ${endpoint} ${res.status}: ${text.slice(0, 200)}`);
+    let code = "";
+    try {
+      const j = JSON.parse(text) as Record<string, unknown>;
+      const errObj = (j?.error ?? j) as Record<string, unknown> | undefined;
+      code = String(errObj?.status ?? errObj?.statusCode ?? errObj?.code ?? "").trim();
+    } catch {
+      code = text.slice(0, 60);
+    }
+    throw new RgsError(classifyCode(code, res.status), code, res.status, endpoint);
   }
   return res.json() as Promise<T>;
 }
@@ -101,6 +192,37 @@ export async function endRound(): Promise<{ balance: RgsBalance }> {
   return post("/wallet/end-round", {
     sessionID: param("sessionID"),
   });
+}
+
+export async function balance(): Promise<{ balance?: RgsBalance }> {
+  return post("/wallet/balance", {
+    sessionID: param("sessionID"),
+  });
+}
+
+/**
+ * Round recovery after a lost response: the RGS has no "fetch open round"
+ * endpoint, so an unresolved round is settled with /wallet/end-round (the
+ * payout is booked to the operator wallet and the returned balance reflects
+ * it). ERR_BNF means nothing was open — just resync the balance. Returns the
+ * settled balance, or null when the recovery itself failed (caller retries).
+ */
+export async function settleOpenRound(): Promise<RgsBalance | null> {
+  try {
+    const end = await endRound();
+    return end.balance ?? null;
+  } catch (e) {
+    const { code } = classifyRgsError(e);
+    if (code === "ERR_BNF") {
+      try {
+        const b = await balance();
+        return b.balance ?? null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
 }
 
 /** Map UI mode → RGS betmode name (must match game_config / index.json). */

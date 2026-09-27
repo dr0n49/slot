@@ -8,6 +8,7 @@ import { FreeSpinsIntro } from "./components/FreeSpinsIntro";
 import { BuyBonusModal } from "./components/BuyBonusModal";
 import { dealDurationMs, beamRevealHoldMs, winFxPauseMs } from "./components/CardGrid";
 import { ConfirmDialog } from "./components/ConfirmDialog";
+import { ErrorModal, type ErrorModalState as RgsModalState } from "./components/ErrorModal";
 import { CosmicBackground } from "./components/CosmicBackground";
 import { SidePanels } from "./components/SidePanels";
 import { FullscreenMenu } from "./components/FullscreenMenu";
@@ -43,6 +44,7 @@ import { isSocialMode } from "./game/social";
 import { applyDocumentLang, buildCopy, detectLang } from "./i18n";
 import {
   authenticate,
+  classifyRgsError,
   endRound,
   fromApiAmount,
   isRgsSession,
@@ -51,7 +53,9 @@ import {
   payoutXFromRound,
   roundEvents,
   rgsModeName,
+  settleOpenRound,
   type AuthResponse,
+  type PlayResponse,
   type RgsRound,
 } from "./game/rgs";
 
@@ -325,26 +329,119 @@ export default function App() {
     };
   }, [rgs]);
 
-  /** RGS play + end-round. Wallet is updated from the response so Bets and the HUD match. */
-  const settleRgs = async (mode: string, amountDollars: number) => {
-    try {
-      rgsSettledCents.current = null;
-      const resp = await rgsPlay({ mode, amount: amountDollars, currency: rgsCurrency });
-      if (resp.round.active !== false) {
-        try {
-          // end-round settles the booked round (payout included) — keep its
-          // balance so the HUD can catch up as soon as the round is presented.
-          const end = await endRound();
-          if (end?.balance) rgsSettledCents.current = toCents(fromApiAmount(end.balance.amount));
-        } catch (e) {
-          console.warn("endRound", e);
-        }
-      }
-      return resp;
-    } catch (e) {
-      console.warn("RGS play failed", e);
-      return null;
+  /** C: highest bet step the player can afford that is LOWER than the current
+   *  bet (-1 when none — the "Lower bet" action is only offered then). */
+  const highestAffordableBetIdx = () => {
+    const balanceDollars = fromCents(balanceRef.current);
+    let idx = -1;
+    for (let i = 0; i < betLevels.length; i++) {
+      if (betLevels[i] <= balanceDollars + 1e-9) idx = i;
     }
+    return idx >= 0 && idx < betIdx ? idx : -1;
+  };
+
+  /** C: blocking error-modal state + the retry-loop plumbing. */
+  const [rgsModal, setRgsModal] = useState<RgsModalState | null>(null);
+  const rgsRetryResolveRef = useRef<(() => void) | null>(null);
+  const rgsCueRef = useRef(false);
+  const MAX_NET_RETRIES = 3;
+
+  // One short appearance cue, reusing an existing sample — no new sound stack.
+  useEffect(() => {
+    if (rgsModal && !rgsCueRef.current) {
+      rgsCueRef.current = true;
+      audio.play("button_click");
+    }
+    if (!rgsModal) rgsCueRef.current = false;
+  }, [rgsModal]);
+
+  /**
+   * Run an RGS call with the connection-lost UX: automatic retries with
+   * backoff (1 s / 2 s / 4 s), then a manual Retry button; funds and session
+   * errors abort with their own modals. Autoplay halts the moment a modal
+   * appears and is never silently resumed. Returns null when aborted — the
+   * game stays in a consistent idle state (no spin left running).
+   */
+  const rgsWithRetry = async <T,>(op: () => Promise<T>, required: number): Promise<T | null> => {
+    const delays = [1000, 2000, 4000];
+    let attempt = 0;
+    for (;;) {
+      try {
+        const r = await op();
+        setRgsModal(null);
+        return r;
+      } catch (e) {
+        const { kind, code } = classifyRgsError(e);
+        console.warn(`RGS failure: kind=${kind} code=${code || "n/a"}`, e);
+        stopAuto();
+        if (kind === "funds") {
+          setRgsModal({ kind: "funds", required, canLower: highestAffordableBetIdx() >= 0 });
+          return null;
+        }
+        if (kind === "session") {
+          setRgsModal({ kind: "session" });
+          return null;
+        }
+        if (attempt < MAX_NET_RETRIES) {
+          setRgsModal({ kind: "net", attempt: attempt + 1, maxAttempt: MAX_NET_RETRIES, retrying: true });
+          await sleep(delays[attempt]);
+          attempt += 1;
+          continue;
+        }
+        setRgsModal({ kind: "net", attempt: MAX_NET_RETRIES, maxAttempt: MAX_NET_RETRIES, retrying: false });
+        // Manual retry: the modal's Retry button resolves this wait; the auto
+        // attempt budget restarts. The game is idle here (no bet in flight —
+        // an open round is settled by the op's ERR_BE recovery before it
+        // retries), so nothing can double-fire while we wait.
+        await new Promise<void>((resolve) => {
+          rgsRetryResolveRef.current = resolve;
+        });
+        attempt = 0;
+      }
+    }
+  };
+
+  /** RGS play + end-round with retry/open-round recovery. Wallet is updated
+   *  from the response so Bets and the HUD match. Returns null when aborted
+   *  (insufficient funds / session expired / connection given up). */
+  const settleRgs = async (mode: string, amountDollars: number) => {
+    rgsSettledCents.current = null;
+    return rgsWithRetry(
+      async () => {
+        let resp: PlayResponse;
+        try {
+          resp = await rgsPlay({ mode, amount: amountDollars, currency: rgsCurrency });
+        } catch (e) {
+          if (classifyRgsError(e).code === "ERR_BE") {
+            // A previous response was lost and the round is still open:
+            // settle it exactly once (end-round books the payout server-side;
+            // there is no endpoint to re-fetch its result, so the balance
+            // sync IS the presentation), then place the new bet.
+            console.warn("RGS open round detected — settling via end-round");
+            const settled = await settleOpenRound();
+            if (settled) writeCents(toCents(fromApiAmount(settled.amount)));
+            resp = await rgsPlay({ mode, amount: amountDollars, currency: rgsCurrency });
+          } else {
+            throw e;
+          }
+        }
+        if (resp.round.active !== false) {
+          try {
+            // end-round settles the booked round (payout included) — keep its
+            // balance so the HUD can catch up as soon as the round is
+            // presented. A network failure here leaves the round open; the
+            // next play's ERR_BE recovery settles it (never re-bets, never
+            // double-credits).
+            const end = await endRound();
+            if (end?.balance) rgsSettledCents.current = toCents(fromApiAmount(end.balance.amount));
+          } catch (e) {
+            console.warn("endRound deferred — will recover on the next play", e);
+          }
+        }
+        return resp;
+      },
+      amountDollars,
+    );
   };
 
   const bookedFromRound = (round: RgsRound) => {
@@ -362,8 +459,23 @@ export default function App() {
     };
   };
 
+  /** C: pre-emptive insufficient-funds state — never send a doomed request. */
+  const showFundsModal = (required: number) => {
+    stopAuto();
+    audio.unlock();
+    slotRef.current?.resumeAudio();
+    audio.play("button_click");
+    setRgsModal({ kind: "funds", required, canLower: highestAffordableBetIdx() >= 0 });
+  };
+
   const askBuy = (kind: PaidKind) => {
     const cost = buyBonusPrice(kind, bet);
+    if (!canAfford(cost)) {
+      setBuyOpen(false);
+      setMenuOpen(false);
+      showFundsModal(cost);
+      return;
+    }
     const offer = mathConfig.bonusBuy[kind];
     const label = offer.label;
     const priceX = offer.priceUiX;
@@ -384,6 +496,12 @@ export default function App() {
     const mult = guaranteedSpinPriceX(kind);
     setBuyOpen(false);
     setMenuOpen(false);
+
+    // Turning an ante ON costs money up-front — intercept when unaffordable.
+    if (anteKind !== kind && !canAfford(cost)) {
+      showFundsModal(cost);
+      return;
+    }
 
     if (anteKind === kind) {
       const c = copy.confirmAnteOff(name, money(bet));
@@ -1013,6 +1131,12 @@ export default function App() {
     if (bootOpen) return;
     if (busyRef.current || bonusKind || triggerKind || bonusSummary) return;
     if (buyOpen || menuOpen || autoOpen || confirm) return;
+    // C: pre-emptive insufficient-funds — show the state, never send a
+    // doomed request.
+    if (!canAfford(bet)) {
+      showFundsModal(bet);
+      return;
+    }
     audio.unlock();
     slotRef.current?.resumeAudio();
     if (anteKind) {
@@ -1030,6 +1154,9 @@ export default function App() {
     menuOpen,
     autoOpen,
     confirm,
+    bet,
+    betLevels,
+    betIdx,
     runSpinSequence,
   ]);
 
@@ -1264,6 +1391,26 @@ export default function App() {
         }}
         onConfirm={onConfirm}
       />
+
+      {rgsModal ? (
+        <ErrorModal
+          state={rgsModal}
+          copy={copy}
+          balance={money(balance)}
+          required={money(rgsModal.kind === "funds" ? rgsModal.required : 0)}
+          onRetry={() => {
+            const resolve = rgsRetryResolveRef.current;
+            rgsRetryResolveRef.current = null;
+            resolve?.();
+          }}
+          onLower={() => {
+            const idx = highestAffordableBetIdx();
+            if (idx >= 0) setBetIdx(idx);
+            setRgsModal(null);
+          }}
+          onDismiss={() => setRgsModal(null)}
+        />
+      ) : null}
 
       {bootOpen ? (
         <BootSplash
