@@ -185,9 +185,6 @@ func _setup_reel(reel: Node2D) -> ReelState:
 	for cell in s.cells:
 		_random_face(cell)
 	_random_face(entry)
-	# The boot board rests: idle life on from the first frame (B3).
-	for cell in s.cells:
-		cell.set_idle_life(true)
 	return s
 
 func _random_face(cell: SymbolVisual) -> void:
@@ -229,29 +226,6 @@ func all_cells() -> Array:
 
 ## Starts every reel scrolling immediately (the server answer comes later
 ## through stop_to()).
-## --- B3 idle board life -----------------------------------------------------
-## The board is never a frozen screenshot: whenever it rests (boot, after a
-## spin's presentation ends), non-pulsing cards breathe subtly. Off during
-## spins and win beats. Off-screen entry cells never breathe (invisible).
-
-func set_idle_life(on: bool) -> void:
-	for s in _states:
-		for cell in s.cells:
-			cell.set_idle_life(on)
-		s.entry.set_idle_life(false)
-
-## End of an external reveal: winners keep their pulse, everything else
-## settles back into idle life.
-func settle_to_idle(winning: Array) -> void:
-	_set_phase(Phase.RETURN_IDLE)
-	for cell in all_cells():
-		if cell in winning:
-			continue
-		cell.stop_win_pulse()
-		cell.play_dim(false)
-	set_idle_life(true)
-	_set_phase(Phase.IDLE)
-
 func start_spin() -> void:
 	if is_spinning():
 		return
@@ -274,7 +248,6 @@ func start_spin() -> void:
 			cell.stop_win_pulse()
 			cell.play_dim(false)
 			cell.clear_mult()
-	set_idle_life(false)
 	set_process(true)
 	_set_phase(Phase.SPINNING)
 
@@ -504,7 +477,6 @@ func return_to_idle(all: Array) -> void:
 	for cell in all:
 		cell.stop_win_pulse()
 		cell.play_dim(false)
-	set_idle_life(true)
 	_set_phase(Phase.RETURN_IDLE)
 	_set_phase(Phase.IDLE)
 

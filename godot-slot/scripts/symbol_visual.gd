@@ -41,15 +41,6 @@ extends Node2D
 @export var badge_text_color: Color = Color("#f1e6cc")
 @export var badge_ink: Color = Color("#0a0607")
 
-@export_group("Idle life (B3)")
-## Micro-breathing so the board is never a frozen screenshot between spins:
-## ±breath scale wobble plus a faint brightness shimmer. Cheap (one sin per
-## cell per frame, transform/opacity only), randomized phase per cell, and
-## fully suspended while spinning / presenting / win-pulsing.
-@export var idle_breath: float = 0.006
-@export var idle_shimmer: float = 0.03
-@export var idle_speed: float = 1.1
-
 const BADGE_FONT: FontFile = preload("res://assets/fonts/oswald-latin-700-normal.woff2")
 ## Card art is 444x624 at rest_scale 0.293 → ~130x183; badge sits this far
 ## below the card centre (its own centre).
@@ -65,10 +56,6 @@ var _badge_tween: Tween
 var symbol_id: StringName
 ## Multiplier currently shown on this cell (0 = none).
 var mult: float = 0.0
-## Idle-life state (B3): on only while the board is resting.
-var _idle_on: bool = false
-var _idle_phase: float = 0.0
-var _idle_time: float = 0.0
 
 func _ready() -> void:
 	sprite.scale = rest_scale
@@ -80,28 +67,6 @@ func _ready() -> void:
 		_glow_material = (sprite.material as ShaderMaterial).duplicate()
 		sprite.material = _glow_material
 	_make_badge()
-	# Idle life starts OFF; ReelController enables it when the board rests.
-	_idle_phase = randf() * TAU
-	set_process(false)
-
-## B3: turn this cell's micro-breathing on/off (ReelController owns the
-## lifecycle: off during spins/presentations, on whenever the board rests).
-func set_idle_life(on: bool) -> void:
-	_idle_on = on
-	_idle_time = 0.0
-	if not on:
-		sprite.scale = rest_scale
-		sprite.modulate = Color(1, 1, 1, 1)
-	set_process(on)
-
-func _process(delta: float) -> void:
-	if _tween and _tween.is_valid():
-		return # a win pop/pulse owns the sprite scale
-	_idle_time += delta
-	var w := 1.0 + idle_breath * sin(_idle_time * idle_speed + _idle_phase)
-	sprite.scale = rest_scale * w
-	var m := 1.0 + idle_shimmer * sin(_idle_time * idle_speed * 0.8 + _idle_phase * 0.7)
-	sprite.modulate = Color(m, m, m, 1)
 
 func _make_badge() -> void:
 	_badge = Label.new()
