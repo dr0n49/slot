@@ -280,27 +280,8 @@ func stop_win_pulse() -> void:
 ## Non-winning symbols during WIN_ANIM: dim + slightly desaturate so the
 ## eye is pulled straight to the winning cells.
 func play_dim(dimmed: bool) -> void:
-	_kill_glow_tween()
 	if _glow_material:
 		_glow_material.set_shader_parameter(&"dim_amount", dim_amount if dimmed else 0.0)
-
-## C1: dim that RAMPES in over `duration` (losers start dimming in the same
-## frame the winners pop — never before). Reuses the glow tween slot.
-func play_dim_ramp(dimmed: bool, duration: float) -> void:
-	if not _glow_material:
-		return
-	_kill_glow_tween()
-	var from: float = _glow_material.get_shader_parameter(&"dim_amount")
-	var to: float = dim_amount if dimmed else 0.0
-	if duration <= 0.0 or absf(to - from) < 0.01:
-		_glow_material.set_shader_parameter(&"dim_amount", to)
-		return
-	_glow_tween = create_tween()
-	_glow_tween.tween_method(_set_dim_amount, from, to, duration)
-
-func _set_dim_amount(v: float) -> void:
-	if _glow_material:
-		_glow_material.set_shader_parameter(&"dim_amount", v)
 
 func _kill_tween() -> void:
 	if _tween and _tween.is_valid():

@@ -79,10 +79,7 @@ interface GodotSlotMessage {
     | "anticipation"
     | "reels_settled"
     | "win_focus"
-    | "skip"
-    | "win_dbg"
-    | "win_reveal"
-    | "win_pop_start";
+    | "skip";
   phase?: SlotPhase;
   grid?: string[][];
   winX?: number;
@@ -97,8 +94,6 @@ interface GodotSlotMessage {
   ms?: number;
   /** win_focus: hand index in focus during the per-hand cycle (0 = all). */
   handIndex?: number;
-  /** win_dbg: ms-from-settle timeline of the win presentation (C1 diagnosis). */
-  timeline?: Array<[number, string]>;
 }
 
 /** One paying line, in the shape Godot's SlotLogic.line_entries() expects. */
@@ -129,8 +124,6 @@ export interface RevealPayload {
   shownX: number;
   /** Current bet in dollars — needed to split shownX into per-line cash. */
   bet: number;
-  /** True while autoplay is running — Godot skips the per-hand cycle. */
-  auto?: boolean;
   /**
    * Echoed back on the "win" event, so React can drop label sets that belong
    * to a superseded board (a stalled presentation can otherwise emit late and
@@ -194,17 +187,11 @@ export interface SlotGameProps {
   onWinFocus?: (handIndex: number, rev?: number) => void;
   /** The player tapped the board mid-presentation — skip React's holds too. */
   onPresentationSkip?: () => void;
-  /** C1 diagnosis: ms-from-settle timeline of a win presentation. */
-  onWinDebug?: (timeline: Array<[number, string]>, rev?: number) => void;
-  /** C1: pop peak passed — show labels / Hand pays row / WIN text (0 = all). */
-  onWinReveal?: (handIndex: number, rev?: number) => void;
-  /** C1: a pop just fired — the first visible win change (React logs it). */
-  onWinPopStart?: (handIndex: number, rev?: number) => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
   function SlotGame(
-    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip, onWinDebug, onWinReveal, onWinPopStart },
+    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip },
     ref,
   ) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -303,21 +290,12 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
           case "skip":
             onPresentationSkip?.();
             break;
-          case "win_dbg":
-            onWinDebug?.(data.timeline ?? [], data.rev);
-            break;
-          case "win_reveal":
-            onWinReveal?.(data.handIndex ?? 0, data.rev);
-            break;
-          case "win_pop_start":
-            onWinPopStart?.(data.handIndex ?? 0, data.rev);
-            break;
         }
       }
 
       window.addEventListener("message", handleMessage);
       return () => window.removeEventListener("message", handleMessage);
-    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip, onWinDebug, onWinReveal, onWinPopStart]);
+    }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onWinFocus, onPresentationSkip]);
 
     return (
       <iframe

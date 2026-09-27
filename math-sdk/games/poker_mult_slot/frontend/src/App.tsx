@@ -17,7 +17,7 @@ import { SlotGame, type GodotWinLine, type SlotGameHandle, type RevealPayload } 
 import { WinLineLabels } from "./components/WinLineLabels";
 import { BigWinOverlay } from "./components/BigWinOverlay";
 import { MultCloudPreview } from "./components/MultCloudPreview";
-import { audio, sfxDebugEvent } from "./game/audio";
+import { audio } from "./game/audio";
 import { BIG_WIN_MIN, bigWinTier, type BigWinTier } from "./game/bigWin";
 import { winGrade } from "./game/winFx";
 import {
@@ -244,14 +244,9 @@ export default function App() {
       win event, and onGodotWin drops label sets from a superseded board. */
   const revealSeqRef = useRef(0);
   const pendingRevRef = useRef<number | null>(null);
-  /**
-   * Paying-line data from Godot's "win" event, stashed until the win_reveal
-   * beat says "show labels for hand N" (C1: React starts no win visual on
-   * its own timer — labels/plaque/WIN text are all event-driven).
-   */
-  const pendingLinesRef = useRef<GodotWinLine[] | null>(null);
-  /** C1: HUD WIN text/plaque stays hidden until Godot's win_reveal beat. */
-  const [winTextVisible, setWinTextVisible] = useState(false);
+  /** performance.now() of the current reveal — turns Godot's "reels_settled"
+   *  into an elapsed time for the HUD win reveal (see resultDelaySec). */
+  const revealStartRef = useRef(0);
   /**
    * Win-presentation skip: bumped by Space (during a spin) or Godot's "skip"
    * event (board tap). Every active presentation hold registers a resolver —
@@ -283,9 +278,13 @@ export default function App() {
       }),
     [],
   );
-  /** C1: legacy CSS-timer win reveal retired — the plaque mounts when Godot's
-   *  win_reveal beat says so (see onGodotWinReveal), with a fixed pop-in. */
-  const RESULT_DELAY_SEC = 0.05;
+  /**
+   * Delay of the HUD win text (--result-delay). Initialized per deal to the
+   * OLD computed timeline as a fallback, then shortened to the real settle
+   * moment when Godot reports "reels_settled" (the computed value comes from
+   * the retired React reel timeline and lands ~250 ms late).
+   */
+  const [resultDelaySec, setResultDelaySec] = useState(1.5);
   /** Bonus build-up in progress (2 jokers down, Godot holds the last reels): the board frame burns. */
   const [boardHot, setBoardHot] = useState(false);
   /**
@@ -538,16 +537,15 @@ export default function App() {
       })),
       shownX,
       bet,
-      auto: autoRef.current,
       rev,
     };
     setWinLabels(null);
     setBoardHot(false);
-    // C1: the win presentation is fully event-driven — nothing shows until
-    // Godot's win_reveal beat (or the frozen-tab fallback below).
-    pendingLinesRef.current = null;
-    setWinTextVisible(false);
     revealGateRef.current = { landed: false, onLanded: null, rev };
+    // Fallback timing for the HUD win reveal; Godot's "reels_settled" event
+    // (see onGodotReelsSettled) replaces it with the real settle moment.
+    revealStartRef.current = performance.now();
+    setResultDelaySec((dealDurationMs(cards, turboRef.current) + winFxPauseMs(turboRef.current)) / 1000);
     slotRef.current?.reveal(reveal);
   };
 
@@ -566,37 +564,19 @@ export default function App() {
     gate.onLanded?.();
   }, []);
 
-  /** Godot: every reel of the current board landed → close the round (first
-   *  wins). The VISUALS are not started here — they follow Godot's
-   *  win_reveal beat, or the frozen-tab fallback below. */
+  /** Godot: every reel of the current board landed. While the round is still
+   *  open, pull the HUD win reveal (--result-delay) forward to the real
+   *  settle moment + a small breath. Then close the round (first wins). */
   const onGodotReelsSettled = useCallback((rev?: number) => {
-    sfxDebugEvent("react:reels_settled");
+    if (!revealGateRef.current.landed) {
+      const started = revealStartRef.current;
+      if (started) {
+        const elapsed = (performance.now() - started) / 1000 + 0.1;
+        setResultDelaySec((prev) => (elapsed < prev - 0.05 ? elapsed : prev));
+      }
+    }
     closeRevealGate(rev);
   }, [closeRevealGate]);
-
-  /** C1: pop peak passed — show the labels/Hand pays row for this hand (or
-   *  all, handIndex 0) plus the HUD WIN text with its count-up. */
-  const onGodotWinReveal = useCallback((handIndex: number, rev?: number) => {
-    if (rev != null && rev !== pendingRevRef.current) return;
-    sfxDebugEvent(`react:win_reveal_hand_${handIndex}`);
-    setWinTextVisible(true);
-    const all = pendingLinesRef.current;
-    if (all) {
-      const shown = handIndex > 0 ? all.filter((l) => l.handIndex === handIndex) : all;
-      if (shown.length > 0) setWinLabels({ key: Date.now(), lines: shown });
-    }
-    setWinHands(
-      handIndex > 0
-        ? pendingHandsRef.current.filter((h) => h.handIndex === handIndex)
-        : pendingHandsRef.current,
-    );
-  }, []);
-
-  /** C1: a pop just fired on the board — the first visible win change. */
-  const onGodotWinPopStart = useCallback((handIndex: number, rev?: number) => {
-    if (rev != null && rev !== pendingRevRef.current) return;
-    sfxDebugEvent(`react:win_pop_hand_${handIndex}`);
-  }, []);
 
   const waitForReels = (_spinCards: { golden?: boolean }[], t: boolean) =>
     new Promise<void>((resolve) => {
@@ -610,21 +590,8 @@ export default function App() {
         done = true;
         window.clearTimeout(timer);
         if (dealGateRef.current?.finish === finish) dealGateRef.current = null;
+        setWinHands(pendingHandsRef.current);
         resolve();
-      };
-      // Frozen-tab fallback: if the timer had to close the round (Godot never
-      // reported), show the whole win presentation at once — the player must
-      // never be left with a paying board and no win visuals.
-      const finishFromFallback = () => {
-        const wasLanded = revealGateRef.current.landed;
-        finish();
-        if (!wasLanded) {
-          sfxDebugEvent("react:fallback_win_presentation");
-          setWinTextVisible(true);
-          setWinHands(pendingHandsRef.current);
-          const all = pendingLinesRef.current;
-          if (all && all.length > 0) setWinLabels({ key: Date.now(), lines: all });
-        }
       };
 
       // Primary signal: Godot's reels_settled / round_end for this board
@@ -632,15 +599,15 @@ export default function App() {
       // safety net: expected spin duration + 1.5 s, turbo-aware, covering a
       // frozen/backgrounded tab (rAF throttle).
       const fallbackMs = dealDurationMs(_spinCards, t) + (godotReadyRef.current ? 1500 : 48);
-      timer = window.setTimeout(finishFromFallback, fallbackMs);
+      timer = window.setTimeout(finish, fallbackMs);
       dealGateRef.current = {
         timer,
-        finish: finishFromFallback,
-        resolve: finishFromFallback,
+        finish,
+        resolve: finish,
       };
       const gate = revealGateRef.current;
-      if (gate.landed) finishFromFallback();
-      else gate.onLanded = finishFromFallback;
+      if (gate.landed) finish();
+      else gate.onLanded = finish;
     });
 
   /** Godot → React: a revealed board landed (see revealGateRef). */
@@ -676,20 +643,20 @@ export default function App() {
     bumpPresentationSkip();
   }, [bumpPresentationSkip]);
 
-  /** Godot → React: the landed board's paying lines + where their labels go.
-   *  C1: DATA ONLY — stashed until a win_reveal beat says which hand's labels
-   *  show and when. A stalled presentation emitting after a newer board is
-   *  dropped by the rev echo. (An already-CLOSED gate does not drop it: after
-   *  a mid-round tab-hide + snap, the presentation legitimately runs on the
-   *  visible screen once, labels included.) */
+  /** Godot → React: the landed board's paying lines + where their labels go. */
   const onGodotWin = useCallback((lines: GodotWinLine[], _winX: number, rev?: number) => {
+    // A stalled presentation can emit this event after a newer board's reveal
+    // went out — its labels would then describe the WRONG board. The rev echo
+    // is the ownership check: labels whose rev isn't the pending board's are
+    // dropped. (An already-CLOSED gate does not drop them: after a mid-round
+    // tab-hide + snap, the presentation legitimately runs on the visible
+    // screen once, labels included.)
     if (rev != null) {
       if (rev !== pendingRevRef.current) return;
     } else if (revealGateRef.current.landed) {
       return; // native/un-stamped event for a closed round
     }
-    sfxDebugEvent("react:win_lines_data_stashed");
-    pendingLinesRef.current = lines;
+    setWinLabels({ key: Date.now(), lines });
   }, []);
 
   /** Stop button — snap strips; waitForReels resolves when columns report settled. */
@@ -1231,24 +1198,24 @@ export default function App() {
     }
   };
 
+  // Result text appears when the reels really settle (--result-delay is
+  // driven by Godot's "reels_settled" event; see applySpinVisual for the
+  // per-deal fallback value).
+  const revealDelay = resultDelaySec;
+
   const inBonus = !!(bonusKind || bonusSummary);
 
-  // B4/C2: bonus-mode bed treatment (level only since C2 — see setBonusMusic).
+  // B4: tint the music bed for bonus mode (dark low-pass sweep + slight lift).
   useEffect(() => {
     audio.setBonusMusic(inBonus);
   }, [inBonus]);
-  // C1: the HUD WIN text / MAX WIN plaque is part of the win presentation —
-  // it appears on Godot's win_reveal beat, never on a React timer. The bonus
-  // TOTAL face is a running counter and stays visible throughout.
   const hudWin: HudWin | null = inBonus
     ? { key: 1, mode: "total", label: copy.totalWin, amount: bonusTotal }
-    : !winTextVisible
-      ? null
-      : maxWinFlash
-        ? { key: dealKey, mode: "max", text: copy.maxWin }
-        : lastWin > 0
-          ? { key: dealKey, mode: "win", amount: lastWin }
-          : null;
+    : maxWinFlash
+      ? { key: dealKey, mode: "max", text: copy.maxWin }
+      : lastWin > 0
+        ? { key: dealKey, mode: "win", amount: lastWin }
+        : null;
   const anteBet = anteKind ? guaranteedSpinPrice(anteKind, bet) : null;
   const soft = winGrade(spinWinX) === "soft";
 
@@ -1257,7 +1224,7 @@ export default function App() {
     <div
       className="relative flex h-full w-full flex-col overflow-hidden"
       style={{
-        "--result-delay": `${RESULT_DELAY_SEC}s`,
+        "--result-delay": `${revealDelay}s`,
         "--board-scale": boardScale,
       } as CSSProperties}
     >
@@ -1305,11 +1272,6 @@ export default function App() {
                 onReelsSettled={onGodotReelsSettled}
                 onWinFocus={onGodotWinFocus}
                 onPresentationSkip={onGodotPresentationSkip}
-                onWinReveal={onGodotWinReveal}
-                onWinPopStart={onGodotWinPopStart}
-                onWinDebug={(timeline) => {
-                  for (const [ms, label] of timeline) sfxDebugEvent(`godot:${ms}ms:${label}`);
-                }}
               />
               {winLabels ? (
                 <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} />

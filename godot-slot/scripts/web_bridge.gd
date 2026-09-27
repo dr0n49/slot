@@ -104,7 +104,6 @@ func _ready() -> void:
 	_slot_logic.big_win.connect(_on_big_win)
 	_slot_logic.win_lines.connect(_on_win_lines)
 	_slot_logic.reveal_settled.connect(_on_reveal_settled)
-	_slot_logic.win_debug.connect(_on_win_debug)
 	_reel_controller.phase_changed.connect(_on_phase_changed)
 	_reel_controller.anticipation.connect(_on_anticipation)
 
@@ -265,10 +264,6 @@ func _on_anticipation(active: bool, duration: float) -> void:
 ## page closes its round on this OR its own fallback timer — first wins.
 func _on_reveal_settled(rev: int) -> void:
 	_post({"event": "reels_settled", "rev": rev})
-
-## C1 diagnosis: ms-from-settle timeline of every visual change on a win.
-func _on_win_debug(rev: int, timeline: Array) -> void:
-	_post({"event": "win_dbg", "rev": rev, "timeline": timeline})
 
 func _on_round_started(mode: String) -> void:
 	_post({"event": "round_start", "mode": mode})
