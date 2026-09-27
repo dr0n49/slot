@@ -54,12 +54,6 @@ let tempMuted = false;
 let audioCtx: AudioContext | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
-// ——— Music chain (WebAudio path) ———
-// source → tone (bonus low-pass) → bonusBoost → duck → level → destination
-let musicTone: BiquadFilterNode | null = null;
-let musicBonusBoost: GainNode | null = null;
-let musicDuckGain: GainNode | null = null;
-let duckReleaseTimer = 0;
 
 // ——— Retrigger guard + per-category voice limits ———
 // The SAME event twice within 50 ms is ignored (rapid clicking, or any
@@ -169,24 +163,9 @@ function updateMusic() {
   const c = ensureCtx();
   if (!c) return;
   if (!musicGain) {
-    // Chain: source → tone → bonusBoost → duck → level → destination.
-    // tone darkens the bed in bonus mode (1 s sweep), bonusBoost lifts it
-    // slightly so bonus reads as a shifted mode, duck clears space for win
-    // stings (B4).
-    musicTone = c.createBiquadFilter();
-    musicTone.type = "lowpass";
-    musicTone.frequency.value = 18500;
-    musicTone.Q.value = 0.4;
-    musicBonusBoost = c.createGain();
-    musicBonusBoost.gain.value = 1;
-    musicDuckGain = c.createGain();
-    musicDuckGain.gain.value = 1;
-    musicTone.connect(musicBonusBoost);
-    musicBonusBoost.connect(musicDuckGain);
-    musicDuckGain.connect(c.destination);
     musicGain = c.createGain();
     musicGain.gain.value = 0;
-    musicGain.connect(musicTone);
+    musicGain.connect(c.destination);
   }
   const on = audioEnabled() && masterVol > 0;
   const target = on ? clamp01(MUSIC_LEVEL * masterVol) : 0;
@@ -632,53 +611,9 @@ export const audio = {
     playSfx(name);
   },
 
-  /**
-   * Music ducking (B4): -6 dB under win stings / Big Win / bonus screens.
-   * 150 ms attack, 400 ms release. duckFor(0) releases immediately.
-   * Win stings duck automatically; App ducks long during bonus screens.
-   */
-  duckFor(ms: number) {
-    const c = ensureCtx();
-    window.clearTimeout(duckReleaseTimer);
-    if (!c) return;
-    if (!musicDuckGain) {
-      // ensureCtx succeeded but the music chain may not exist yet — build it.
-      if (!musicGain) updateMusic();
-    }
-    if (!musicDuckGain) return;
-    const now = c.currentTime;
-    musicDuckGain.gain.cancelScheduledValues(now);
-    musicDuckGain.gain.setValueAtTime(Math.max(0.0001, musicDuckGain.gain.value), now);
-    if (ms > 0) {
-      musicDuckGain.gain.setTargetAtTime(0.501, now, 0.05); // ≈150 ms attack
-      duckReleaseTimer = window.setTimeout(() => {
-        if (!audioCtx || !musicDuckGain) return;
-        const t = audioCtx.currentTime;
-        musicDuckGain.gain.cancelScheduledValues(t);
-        musicDuckGain.gain.setValueAtTime(Math.max(0.0001, musicDuckGain.gain.value), t);
-        musicDuckGain.gain.setTargetAtTime(1, t, 0.133); // ≈400 ms release
-      }, ms);
-    } else {
-      musicDuckGain.gain.setTargetAtTime(1, now, 0.133);
-    }
-  },
-
-  /** Bonus-mode tint for the bed (B4): dark low-pass sweep + slight lift,
-   *  ~1 s in and out, until a dedicated bonus track exists. */
-  setBonusMusic(on: boolean) {
-    const c = ensureCtx();
-    if (!c || !musicTone || !musicBonusBoost) return;
-    const now = c.currentTime;
-    musicTone.frequency.cancelScheduledValues(now);
-    musicTone.frequency.setTargetAtTime(on ? 1100 : 18500, now, 1 / 3);
-    musicBonusBoost.gain.cancelScheduledValues(now);
-    musicBonusBoost.gain.setTargetAtTime(on ? 1.25 : 1, now, 1 / 3);
-  },
-
   /** Bright lock-in sting for 3/4/5 golden cards. */
   playScatter(count: number) {
     if (!gate("bonus:scatter")) return;
-    this.duckFor(2600);
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     if (playSample("bonus_trigger", count >= 5 ? 1 : count >= 4 ? 0.92 : 0.85)) return;
@@ -705,7 +640,6 @@ export const audio = {
    */
   playLineWin(spinWinX = 0) {
     if (!gate("wins:line")) return;
-    this.duckFor(1200);
     const x = Number(spinWinX) || 0;
     if (x <= 0) return;
     const c = ensureCtx();
@@ -735,7 +669,6 @@ export const audio = {
    */
   playBigWin(tier: "nice" | "super" | "sensational" | "max") {
     if (!gate("wins:big")) return;
-    this.duckFor(3200);
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     stopWinVoices();
@@ -831,7 +764,6 @@ export const audio = {
   playMidWin(spinWinX: number) {
     if (spinWinX < 10 || spinWinX >= 20) return;
     if (!gate("wins:mid")) return;
-    this.duckFor(1800);
     stopWinVoices();
     playSample("big_nice", 0.7, 1, "wins");
   },
