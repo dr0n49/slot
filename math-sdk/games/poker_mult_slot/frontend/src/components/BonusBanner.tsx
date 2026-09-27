@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import { assetUrl } from "../game/assets";
-import { audio } from "../game/audio";
 import type { Copy } from "../game/social";
 
 type Props = {
@@ -34,17 +33,6 @@ export function BonusBanner({ spinsLeft, bank, copy }: Props) {
     return () => clearTimeout(t);
   }, [bank]);
 
-  // B6: the spins-left counter punches + flashes on every change (next spin
-  // consumed, +N retrigger) instead of swapping text silently.
-  const [spinsPunch, setSpinsPunch] = useState(0);
-  const prevSpins = useRef(spinsLeft);
-  useEffect(() => {
-    if (spinsLeft === prevSpins.current) return;
-    prevSpins.current = spinsLeft;
-    setSpinsPunch((n) => n + 1);
-    audio.playFsCount();
-  }, [spinsLeft]);
-
   return (
     <aside className="bonus-side-panel pointer-events-none absolute left-2 top-16 z-[50] w-[7.75rem] sm:left-4 sm:top-20 sm:w-[10rem]">
       <div className="bonus-side-stack flex flex-col items-center gap-3.5 sm:gap-5">
@@ -62,12 +50,7 @@ export function BonusBanner({ spinsLeft, bank, copy }: Props) {
         <div className="spins-plaque w-full">
           <div className="spins-plaque-inner">
             <div className="spins-caption">{copy.freeSpinsLeft}</div>
-            <div
-              key={spinsPunch}
-              className={`spins-remaining leading-none tabular-nums${spinsPunch > 0 ? " spins-punch" : ""}`}
-            >
-              {spinsLeft}
-            </div>
+            <div className="spins-remaining leading-none tabular-nums">{spinsLeft}</div>
           </div>
         </div>
       </div>

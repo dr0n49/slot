@@ -251,8 +251,8 @@ function audioEnabled() {
   return canAudio() && unlocked && !masterMuted && !tempMuted;
 }
 
-function playSfx(name: Sfx, gain = 1, gateKey?: string) {
-  if (!gate(gateKey ?? `ui:${name}`)) return;
+function playSfx(name: Sfx, gain = 1) {
+  if (!gate(`ui:${name}`)) return;
   if (!audioEnabled()) return;
   if (sfxVol <= 0 || masterVol <= 0) return;
   let list = pool.get(name);
@@ -846,61 +846,5 @@ export const audio = {
   playReelStop(col: number) {
     if (!gate(`reels:stop${col}`)) return;
     playReelStopInternal(col);
-  },
-
-  /** Spin button press (B5): the usual click, its own gate key so a spin
-   *  press right after another UI click still sounds. */
-  playSpinPress() {
-    playSfx("button_click", 1, "ui:spin");
-  },
-
-  /** Anticipation ended WITHOUT the bonus (B5): a soft low release so the
-   *  riser doesn't just evaporate. Not played when 3 jokers landed. */
-  playMissRelease() {
-    if (!gate("bonus:miss")) return;
-    stopAnticipationInternal();
-    if (playSample("win_soft", 0.5, 0.85)) return;
-    const c = ensureCtx();
-    if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    const v = sfxVol * 0.12 * masterVol;
-    ding(c, 233.08, c.currentTime, 0.3, v, "sine");
-    ding(c, 116.54, c.currentTime + 0.02, 0.4, v * 0.6, "sine");
-  },
-
-  /** Bonus outro (B6): warm resolve sting under the TOTAL WIN count-up. */
-  playBonusOutro() {
-    if (!gate("bonus:outro")) return;
-    stopWinVoices();
-    if (playSample("big_nice", 0.7, 1, "wins")) return;
-    const c = ensureCtx();
-    if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    const now = c.currentTime;
-    const v = sfxVol * 0.3 * masterVol;
-    [523.25, 659.25, 783.99].forEach((f, i) =>
-      ding(c, f, now + i * 0.09, 0.5, v * (0.8 - i * 0.15), "triangle"),
-    );
-  },
-
-  /** Free-spin counter change (+N retrigger or next spin) (B5/B6): quick
-   *  two-note chime. Synthesized on purpose — no suitable sample in the pack
-   *  (see docs/SOUND_SPEC.md for the proper recording prompt). */
-  playFsCount() {
-    if (!gate("bonus:fscount")) return;
-    const c = ensureCtx();
-    if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    const now = c.currentTime;
-    const v = sfxVol * 0.16 * masterVol;
-    ding(c, 880, now, 0.09, v, "triangle");
-    ding(c, 1174.66, now + 0.07, 0.14, v * 0.8, "triangle");
-  },
-
-  /** Count-up tick (B5): tiny rising blip while a total counts up. The
-   *  50 ms retrigger gate throttles it to ≈20 ticks/s naturally. */
-  playCountTick(progress = 0) {
-    if (!gate("ui:tick")) return;
-    const c = ensureCtx();
-    if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
-    const f = 1180 + Math.min(1, Math.max(0, progress)) * 620;
-    ding(c, f, c.currentTime, 0.045, sfxVol * 0.07 * masterVol, "triangle");
   },
 };

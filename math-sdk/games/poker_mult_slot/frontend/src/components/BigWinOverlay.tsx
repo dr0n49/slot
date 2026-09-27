@@ -141,11 +141,10 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
             reject(new DOMException("aborted", "AbortError"));
             return;
           }
-        const k = Math.min(1, (now - t0) / durMs);
-        const v = from + (to - from) * ease(k);
-        setShown(Math.round(v * 100) / 100);
-        audio.playCountTick(k);
-        if (k < 1) raf = requestAnimationFrame(tick);
+          const k = Math.min(1, (now - t0) / durMs);
+          const v = from + (to - from) * ease(k);
+          setShown(Math.round(v * 100) / 100);
+          if (k < 1) raf = requestAnimationFrame(tick);
           else {
             setShown(to);
             resolve();

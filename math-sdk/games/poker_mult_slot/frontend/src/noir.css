@@ -2408,28 +2408,3 @@ html.lite-fx .reel-hot {
   }
 }
 
-
-/* B6: free-spin counter change — punch + flash instead of a silent text swap.
-   The span is re-keyed per change (BonusBanner), so the animation replays. */
-.spins-punch {
-  animation: spins-punch 0.45s cubic-bezier(0.22, 1.35, 0.36, 1) both;
-}
-@keyframes spins-punch {
-  0% {
-    transform: scale(1.5);
-    filter: brightness(2) saturate(1.4);
-  }
-  55% {
-    transform: scale(0.9);
-    filter: brightness(1.15);
-  }
-  100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .spins-punch {
-    animation: none;
-  }
-}
