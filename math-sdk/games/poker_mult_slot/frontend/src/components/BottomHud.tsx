@@ -13,10 +13,14 @@ export function HudWinFace({
   win,
   money,
   formatWin,
+  countMs,
 }: {
   win: HudWin | null;
   money: (n: number) => string;
   formatWin: (amount: string) => string;
+  /** B1: count-up duration — the plaque mounts on the win-reveal event, so the
+   *  count always runs while visible (600 ms normal / 220 ms turbo). */
+  countMs?: number;
 }) {
   if (!win) return null;
   if (win.mode === "total") {
@@ -39,8 +43,12 @@ export function HudWinFace({
     );
   }
   return (
-    <div key={win.key} className="result-reveal win-plaque win-plaque-count">
-      <WinLabelWithCount formatWin={formatWin} money={money} amount={win.amount} />
+    <div
+      key={win.key}
+      className="result-reveal win-plaque win-plaque-count"
+      style={{ ["--result-delay" as string]: "0s" }}
+    >
+      <WinLabelWithCount formatWin={formatWin} money={money} amount={win.amount} countMs={countMs} />
     </div>
   );
 }
@@ -50,10 +58,12 @@ function WinLabelWithCount({
   amount,
   money,
   formatWin,
+  countMs,
 }: {
   amount: number;
   money: (n: number) => string;
   formatWin: (amount: string) => string;
+  countMs?: number;
 }) {
   const final = money(amount);
   const template = formatWin("\u0000");
@@ -61,7 +71,7 @@ function WinLabelWithCount({
   return (
     <>
       {left}
-      <CountUpAmount value={amount} format={money} />
+      <CountUpAmount value={amount} format={money} durationMs={countMs} />
       {right}
       {/* ensure layout matches final string width roughly */}
       <span className="sr-only">{formatWin(final)}</span>
@@ -200,7 +210,7 @@ export function BottomHud({
           </div>
 
           <div className="hud-win" aria-live="polite">
-            <HudWinFace win={win} money={copy.money} formatWin={copy.win} />
+            <HudWinFace win={win} money={copy.money} formatWin={copy.win} countMs={turbo ? 220 : 600} />
           </div>
 
           <div className="hud-right ml-auto flex shrink-0 items-center justify-end gap-2 sm:gap-3">

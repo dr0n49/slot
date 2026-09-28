@@ -181,6 +181,12 @@ func reveal_external(payload: Dictionary) -> void:
 	# superseded board is ignored — see ReelController.snap_spinning_reels).
 	reveal_settled.emit(rev)
 
+	# B1 evaluation breath: a short beat between the reels landing and the win
+	# presentation, so the landing bounce reads before winners pop/losers dim.
+	await _wait(_t(0.1, 0.04))
+	if gen != _reveal_gen:
+		return
+
 	var all_cells := _all_cells()
 	var win_indices: Array = spin["win_indices"]
 	var paying := shown_x > 0.0 and not win_indices.is_empty()

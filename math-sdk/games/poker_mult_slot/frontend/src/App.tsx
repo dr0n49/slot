@@ -304,6 +304,21 @@ export default function App() {
   /** Skipped holds snap the per-line labels' stagger to zero so every hand name
    *  and cash amount is visible the moment the presentation completes. */
   const [labelsInstant, setLabelsInstant] = useState(false);
+  /**
+   * B1: the HUD win plaque mounts on the SAME explicit, rev-stamped win-reveal
+   * event as the per-line labels (Godot's `win` message — see onGodotWin), so
+   * the count-up runs while the plaque is visible instead of finishing behind
+   * its old CSS reveal delay. Cleared per deal; a hold that times out without
+   * a reveal falls back to it (the final amount must always be shown).
+   */
+  const [revealWin, setRevealWin] = useState<{ key: number; amount: number } | null>(null);
+  const revealWinRef = useRef<{ key: number; amount: number } | null>(null);
+  revealWinRef.current = revealWin;
+  /** Mirror of lastWin for event handlers (see onGodotWin). */
+  const lastWinRef = useRef(0);
+  useEffect(() => {
+    lastWinRef.current = lastWin;
+  }, [lastWin]);
   /** One-shot guard: the pending-bonus resume runs at most once per session. */
   const resumeAttemptedRef = useRef(false);
   autoRef.current = auto;
@@ -562,6 +577,7 @@ export default function App() {
   const waitForBonusContinue = (kind: BonusKind) => {
     return new Promise<void>((resolve) => {
       setTriggerKind(kind);
+      setRevealWin(null);
       // Persist: if the player leaves mid-wait, the same "you won N spins"
       // card comes back on the next boot (demo wallet; RGS sessions resume
       // server-side instead).
@@ -581,6 +597,7 @@ export default function App() {
     new Promise<void>((resolve) => {
       setBonusSummary({ kind, amount });
       setBonusTotal(amount);
+      setRevealWin(null);
       continueResolver.current = () => {
         setBonusSummary(null);
         setBonusKind(null);
@@ -650,6 +667,7 @@ export default function App() {
     setWinLabels(null);
     setBoardHot(false);
     setLabelsInstant(false);
+    setRevealWin(null);
     revealGateRef.current = { landed: false, onLanded: null, rev };
     // Fallback timing for the HUD win reveal; Godot's "reels_settled" event
     // (see onGodotReelsSettled) replaces it with the real settle moment.
@@ -735,7 +753,9 @@ export default function App() {
     else audio.stopAnticipation();
   }, []);
 
-  /** Godot → React: the landed board's paying lines + where their labels go. */
+  /** Godot → React: the landed board's paying lines + where their labels go.
+   *  This IS the win-reveal beat (B1): labels and the HUD count-up start here,
+   *  together, on the same rev-stamped event. */
   const onGodotWin = useCallback((lines: GodotWinLine[], _winX: number, rev?: number) => {
     // A stalled presentation can emit this event after a newer board's reveal
     // went out — its labels would then describe the WRONG board. The rev echo
@@ -749,6 +769,9 @@ export default function App() {
       return; // native/un-stamped event for a closed round
     }
     setWinLabels({ key: Date.now(), lines });
+    if (lastWinRef.current > 0) {
+      setRevealWin({ key: rev ?? Date.now(), amount: lastWinRef.current });
+    }
   }, []);
 
   /** Stop button — snap strips; waitForReels resolves when columns report settled. */
@@ -770,8 +793,12 @@ export default function App() {
    * finished, the value was booked before the reels settled) and every win
    * line label (stagger snapped to zero). A skipped hold never starts or
    * debits a spin: the same gesture only clears this hold.
+   *
+   * `fallbackWin` covers a missed Godot `win` event: if the hold times out and
+   * no rev-stamped reveal ever arrived, the plaque still mounts with the booked
+   * amount — the final state is never hidden behind a lost event.
    */
-  const holdPresentation = (ms: number) =>
+  const holdPresentation = (ms: number, fallbackWin?: { key: number; amount: number }) =>
     new Promise<void>((resolve) => {
       if (ms <= 0) {
         resolve();
@@ -782,6 +809,9 @@ export default function App() {
         window.clearTimeout(timer);
         presentationSkipRef.current = null;
         setHoldOpen(false);
+        if (fallbackWin && fallbackWin.amount > 0 && revealWinRef.current == null) {
+          setRevealWin(fallbackWin);
+        }
         resolve();
       };
       const timer = window.setTimeout(done, ms);
@@ -1016,13 +1046,14 @@ export default function App() {
             if (lineN > 0) {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
+              const fbWin = { key: revealSeqRef.current, amount: antePay };
               if (tier) {
                 // ONE skippable presentation hold (B2), then the ladder.
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
               }
             }
           }
@@ -1087,13 +1118,14 @@ export default function App() {
             if (lineN > 0) {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
+              const fbWin = { key: revealSeqRef.current, amount: booked.pay };
               if (tier) {
                 // ONE skippable presentation hold (B2), then the ladder.
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
               }
             }
           }
@@ -1126,14 +1158,15 @@ export default function App() {
           if (baseLines > 0) {
             audio.playLineWin(round.base.spinWinX);
             const tier = bigWinTier(round.base.spinWinX);
+            const fbWin = { key: revealSeqRef.current, amount: basePay };
             if (tier) {
               // ONE skippable presentation hold (B2), then the ladder REPLACES
               // the mid-win sting (never stacks with it).
-              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), fbWin);
               await showBigWin(tier, round.base.spinWinX);
             } else {
               audio.playMidWin(round.base.spinWinX);
-              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), fbWin);
             }
           }
         }
@@ -1317,8 +1350,8 @@ export default function App() {
     ? { key: 1, mode: "total", label: copy.totalWin, amount: bonusTotal }
     : maxWinFlash
       ? { key: dealKey, mode: "max", text: copy.maxWin }
-      : lastWin > 0
-        ? { key: dealKey, mode: "win", amount: lastWin }
+      : revealWin && revealWin.amount > 0
+        ? { key: revealWin.key, mode: "win", amount: revealWin.amount }
         : null;
   const anteBet = anteKind ? guaranteedSpinPrice(anteKind, bet) : null;
   const soft = winGrade(spinWinX) === "soft";

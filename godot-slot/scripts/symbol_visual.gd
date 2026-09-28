@@ -29,6 +29,12 @@ extends Node2D
 @export var win_pulse_strength: float = 0.62
 @export var win_scale_peak: float = 1.08
 @export var win_pulse_period: float = 0.35
+## Winner pop on reveal (B1): 1.00 → peak → 1.00, then the breathing loop.
+@export var win_pop_peak: float = 1.06
+@export var win_pop_up_s: float = 0.09
+@export var win_pop_down_s: float = 0.16
+## Loser dim interpolates over this many seconds during the win presentation.
+@export var dim_interpolate_s: float = 0.12
 
 @export_group("Dim (losing symbols during WIN_ANIM)")
 @export var dim_amount: float = 0.58
@@ -49,7 +55,19 @@ const BADGE_Y := 58.0
 @onready var sprite: Sprite2D = $Sprite2D
 
 var _glow_material: ShaderMaterial
-var _tween: Tween
+## Landing squash/rebound tween — OWNED by the landing; the win pulse must
+## never kill it (B1): killing a half-finished squash made cards teleport.
+var _land_tween: Tween
+## One-shot winner pop (1.0 → peak → 1.0) that hands off to the breathing loop.
+var _pop_tween: Tween
+## Looping breathing pulse that starts after the pop.
+var _breath_tween: Tween
+## Dim interpolation tween.
+var _dim_tween: Tween
+## Wall-clock tracking of the land tween so the pop can start exactly when the
+## landing finishes without awaiting (an awaited killed tween never resumes).
+var _land_total_ms: int = 0
+var _land_start_ms: int = 0
 var _badge: Label
 var _badge_tween: Tween
 var symbol_id: StringName
@@ -158,34 +176,60 @@ func play_blur(amount: float) -> void:
 func play_land_bounce(delay: float = 0.0, time_scale: float = 1.0) -> void:
 	if _glow_material:
 		_glow_material.set_shader_parameter(&"blur_amount", 0.0)
-	_kill_tween()
+	_kill_land_tween()
 	sprite.scale = rest_scale
 
-	_tween = create_tween()
+	_land_tween = create_tween()
 	if delay > 0.0:
-		_tween.tween_interval(delay)
+		_land_tween.tween_interval(delay)
 	# Impact: flatten wide. This ease is intentionally sharp (EASE_OUT on
 	# TRANS_BACK gives a tiny anticipation dip before the squash lands).
-	_tween.tween_property(sprite, "scale", rest_scale * overshoot_scale, squash_duration * time_scale) \
+	_land_tween.tween_property(sprite, "scale", rest_scale * overshoot_scale, squash_duration * time_scale) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	# Rebound past neutral — the actual "bounce" — then settle to rest.
-	_tween.tween_property(sprite, "scale", rest_scale * settle_scale, bounce_duration * 0.5 * time_scale) \
+	_land_tween.tween_property(sprite, "scale", rest_scale * settle_scale, bounce_duration * 0.5 * time_scale) \
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	_tween.tween_property(sprite, "scale", rest_scale, bounce_duration * 0.5 * time_scale) \
+	_land_tween.tween_property(sprite, "scale", rest_scale, bounce_duration * 0.5 * time_scale) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	# Wall-clock window the pulse defers to (no awaits — a killed tween's
+	# await would never resume).
+	_land_total_ms = int(round((delay + (squash_duration + bounce_duration) * time_scale) * 1000.0))
+	_land_start_ms = Time.get_ticks_msec()
 
-## Winning symbol: looping breathing scale + shader glow pulse, until
-## stop_win_pulse() is called (when WIN_ANIM ends).
+## Seconds left before the landing tween has fully settled this cell.
+func _land_remaining_s() -> float:
+	if _land_total_ms <= 0 or _land_tween == null or not _land_tween.is_valid():
+		return 0.0
+	return maxf(0.0, float(_land_total_ms - (Time.get_ticks_msec() - _land_start_ms)) / 1000.0)
+
+## Winning symbol: a one-shot pop (1.0 → win_pop_peak → 1.0) that starts only
+## AFTER this cell's landing bounce has finished (it defers by the remaining
+## land time instead of killing it — review fix B1), then hands off to the
+## looping breathing pulse until stop_win_pulse() (when WIN_ANIM ends).
 func play_win_pulse() -> void:
 	if _glow_material:
 		_glow_material.set_shader_parameter(&"dim_amount", 0.0)
 		_glow_material.set_shader_parameter(&"pulse_speed", win_pulse_speed)
 		_glow_material.set_shader_parameter(&"pulse_strength", win_pulse_strength)
-	_kill_tween()
-	_tween = create_tween().set_loops()
-	_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(sprite, "scale", rest_scale * win_scale_peak, win_pulse_period)
-	_tween.tween_property(sprite, "scale", rest_scale, win_pulse_period)
+	if _pop_tween and _pop_tween.is_valid():
+		_pop_tween.kill()
+	_pop_tween = create_tween()
+	var wait := _land_remaining_s()
+	if wait > 0.0:
+		_pop_tween.tween_interval(wait)
+	_pop_tween.tween_property(sprite, "scale", rest_scale * win_pop_peak, win_pop_up_s) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_pop_tween.tween_property(sprite, "scale", rest_scale, win_pop_down_s) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_pop_tween.tween_callback(_start_breathing)
+
+func _start_breathing() -> void:
+	if _breath_tween and _breath_tween.is_valid():
+		_breath_tween.kill()
+	_breath_tween = create_tween().set_loops()
+	_breath_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_breath_tween.tween_property(sprite, "scale", rest_scale * win_scale_peak, win_pulse_period)
+	_breath_tween.tween_property(sprite, "scale", rest_scale, win_pulse_period)
 	# A multiplier on a winning card throbs with it, so the eye links the ×N
 	# to the line it boosted.
 	if _badge.visible:
@@ -198,7 +242,10 @@ func play_win_pulse() -> void:
 		_badge_tween.tween_property(_badge, "scale", Vector2.ONE, win_pulse_period)
 
 func stop_win_pulse() -> void:
-	_kill_tween()
+	if _pop_tween and _pop_tween.is_valid():
+		_pop_tween.kill()
+	if _breath_tween and _breath_tween.is_valid():
+		_breath_tween.kill()
 	sprite.scale = rest_scale
 	if _badge.visible:
 		if _badge_tween and _badge_tween.is_valid():
@@ -209,11 +256,24 @@ func stop_win_pulse() -> void:
 		_glow_material.set_shader_parameter(&"pulse_strength", 0.0)
 
 ## Non-winning symbols during WIN_ANIM: dim + slightly desaturate so the
-## eye is pulled straight to the winning cells.
-func play_dim(dimmed: bool) -> void:
-	if _glow_material:
-		_glow_material.set_shader_parameter(&"dim_amount", dim_amount if dimmed else 0.0)
+## eye is pulled straight to the winning cells. duration > 0 interpolates
+## the shader param over that many seconds instead of snapping (B1).
+func play_dim(dimmed: bool, duration: float = 0.0) -> void:
+	if _glow_material == null:
+		return
+	var target := dim_amount if dimmed else 0.0
+	if _dim_tween and _dim_tween.is_valid():
+		_dim_tween.kill()
+	if duration <= 0.0:
+		_glow_material.set_shader_parameter(&"dim_amount", target)
+		return
+	var from_v := float(_glow_material.get_shader_parameter(&"dim_amount") or 0.0)
+	_dim_tween = create_tween()
+	_dim_tween.tween_method(
+		func(v: float): _glow_material.set_shader_parameter(&"dim_amount", v),
+		from_v, target, duration)
 
-func _kill_tween() -> void:
-	if _tween and _tween.is_valid():
-		_tween.kill()
+func _kill_land_tween() -> void:
+	if _land_tween and _land_tween.is_valid():
+		_land_tween.kill()
+	_land_total_ms = 0

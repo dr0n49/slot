@@ -91,6 +91,10 @@ const CLIP_BOTTOM := 924.0
 @export_group("Juice")
 @export var shake_on_stop_small: float = 2.4
 @export var shake_on_stop_big: float = 9.0
+## Loser dim interpolation during the win presentation (B1: 120 ms normal;
+## turbo roughly halves it).
+@export var cell_dim_time: float = 0.12
+@export var turbo_cell_dim_time: float = 0.07
 
 @export_group("Bonus anticipation")
 ## Once 2 jokers have landed, every reel to the right of them is held this
@@ -406,10 +410,13 @@ func snap_spinning_reels() -> void:
 	all_reels_stopped.emit()
 
 ## Called by SlotLogic once wins for the current grid are known.
+## B1: losers dim over ~120 ms; winners pop only after their own landing
+## bounce finished (SymbolVisual defers the pulse internally) — the pulse no
+## longer kills a half-finished squash.
 func play_win_presentation(winning_cells: Array, all: Array) -> void:
 	_set_phase(Phase.WIN_EVAL)
 	for cell in all:
-		cell.play_dim(not (cell in winning_cells))
+		cell.play_dim(not (cell in winning_cells), _t(cell_dim_time, turbo_cell_dim_time))
 	for cell in winning_cells:
 		cell.play_win_pulse()
 	fx.spawn_win_bursts(winning_cells)
