@@ -6,6 +6,9 @@ type Props = {
   lines: GodotWinLine[];
   copy: Copy;
   turbo: boolean;
+  /** B2: a skipped presentation hold snaps every label in at once (the
+   *  staggered pop would otherwise keep hand names appearing for ~1 s). */
+  instant?: boolean;
 };
 
 /**
@@ -18,14 +21,14 @@ type Props = {
  * over the iframe) and the exact cents per line, so labels always add up to
  * the booked win. Sizes are in cqh of the board box (.godot-board).
  */
-export function WinLineLabels({ lines, copy, turbo }: Props) {
+export function WinLineLabels({ lines, copy, turbo, instant }: Props) {
   const stagger = turbo ? 0.05 : 0.12;
   const placed = lines.filter((l) => l.nx != null && l.ny != null);
   if (placed.length === 0) return null;
   return (
     <div className="win-line-labels" aria-hidden>
       {placed.map((l, i) => {
-        const mult = l.multFactor > 1 ? `  ×${Math.round(l.multFactor)}` : "";
+        const mult = l.multFactor > 1 ? `  ×${Math.round(l.multFactor)}` : "";
         return (
           <div
             key={`${l.lineId}-${i}`}
@@ -33,7 +36,7 @@ export function WinLineLabels({ lines, copy, turbo }: Props) {
             style={{
               left: `${(l.nx ?? 0.5) * 100}%`,
               top: `${(l.ny ?? 0.5) * 100}%`,
-              animationDelay: `${i * stagger}s`,
+              animationDelay: instant ? "0s" : `${i * stagger}s`,
             }}
           >
             <span className="win-line-name">

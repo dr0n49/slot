@@ -225,6 +225,26 @@ export function beamRevealHoldMs(
   );
 }
 
+/**
+ * ONE skippable post-settle presentation hold for the base/ante/RGS win
+ * branches (review fix B2 — replaces the old double beamRevealHoldMs sleeps):
+ *   1 hand    900–1,100 ms  (soft pays sit at the short end)
+ *   2+ hands  1,200–1,350 ms
+ *   turbo     300–450 ms
+ * Space / board tap end the hold early (labels + final amount stay shown) —
+ * see App.holdPresentation. Free spins keep their own holdMs (not in scope).
+ */
+export function presentationHoldMs(
+  lineCount: number,
+  turbo: boolean,
+  grade: WinGrade | null = "mid",
+): number {
+  if (lineCount <= 0) return 0;
+  if (turbo) return 380 + Math.min(lineCount - 1, 2) * 30;
+  if (lineCount <= 1) return grade === "soft" ? 900 : 1000;
+  return Math.round(Math.min(1350, 1200 + (lineCount - 2) * 75));
+}
+
 function cellCenter(i: number, g: GridGeom): { x: number; y: number } {
   const c = i % COLS;
   const r = Math.floor(i / COLS);

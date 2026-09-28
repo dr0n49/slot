@@ -6,7 +6,12 @@ import { BonusCompleteOverlay } from "./components/BonusCompleteOverlay";
 import { BonusTriggerOverlay } from "./components/BonusTriggerOverlay";
 import { FreeSpinsIntro } from "./components/FreeSpinsIntro";
 import { BuyBonusModal } from "./components/BuyBonusModal";
-import { dealDurationMs, beamRevealHoldMs, winFxPauseMs } from "./components/CardGrid";
+import {
+  dealDurationMs,
+  beamRevealHoldMs,
+  presentationHoldMs,
+  winFxPauseMs,
+} from "./components/CardGrid";
 import { ConfirmDialog } from "./components/ConfirmDialog";
 import { ErrorModal, type ErrorModalState as RgsModalState } from "./components/ErrorModal";
 import { CosmicBackground } from "./components/CosmicBackground";
@@ -34,6 +39,7 @@ import {
   playSpin,
   playUntilPackageWinX,
   playUntilWinX,
+  reseed,
   type BonusKind,
   type BuyKind,
   type Card,
@@ -127,6 +133,17 @@ export default function App() {
     qaCele === "super" ||
     qaCele === "sensational" ||
     qaCele === "max";
+  /**
+   * DEV-ONLY verification hook: ?seed=N reseeds the demo RNG (engine.reseed)
+   * so verification runs are reproducible (audit seeds: 24 = two-joker tease,
+   * 35 = natural trigger). Ignored in production builds and on RGS sessions.
+   */
+  useEffect(() => {
+    if (!import.meta.env.DEV || rgs) return;
+    const raw = new URLSearchParams(window.location.search).get("seed");
+    if (raw) reseed(Number.parseInt(raw, 10) || 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const lang = useMemo(() => detectLang(), []);
   const copy = useMemo(() => {
     applyDocumentLang(lang);
@@ -275,6 +292,18 @@ export default function App() {
   const rgsSettledCents = useRef<number | null>(null);
   const continueResolver = useRef<(() => void) | null>(null);
   const bigWinResolver = useRef<(() => void) | null>(null);
+  /**
+   * B2 presentation hold: Space / a board tap ends the current hold instantly
+   * (all labels + the final amount stay shown; it never starts or debits a
+   * spin). Null while no hold is open, so the same Space press that skips a
+   * hold can never also fire a spin.
+   */
+  const presentationSkipRef = useRef<(() => void) | null>(null);
+  /** While a hold is open, a transparent catcher over the board turns taps into skips. */
+  const [holdOpen, setHoldOpen] = useState(false);
+  /** Skipped holds snap the per-line labels' stagger to zero so every hand name
+   *  and cash amount is visible the moment the presentation completes. */
+  const [labelsInstant, setLabelsInstant] = useState(false);
   /** One-shot guard: the pending-bonus resume runs at most once per session. */
   const resumeAttemptedRef = useRef(false);
   autoRef.current = auto;
@@ -620,6 +649,7 @@ export default function App() {
     };
     setWinLabels(null);
     setBoardHot(false);
+    setLabelsInstant(false);
     revealGateRef.current = { landed: false, onLanded: null, rev };
     // Fallback timing for the HUD win reveal; Godot's "reels_settled" event
     // (see onGodotReelsSettled) replaces it with the real settle moment.
@@ -731,6 +761,37 @@ export default function App() {
     new Promise<void>((resolve) => {
       setBigWin({ tier, amount: dollars(spinWinX, bet), spinWinX });
       bigWinResolver.current = resolve;
+    });
+
+  /**
+   * B2: the ONE post-settle presentation hold per win (see presentationHoldMs).
+   * Resolves on timeout or on the first Space / board tap. On a skip the final
+   * state is revealed immediately — the HUD win plaque (its count-up has long
+   * finished, the value was booked before the reels settled) and every win
+   * line label (stagger snapped to zero). A skipped hold never starts or
+   * debits a spin: the same gesture only clears this hold.
+   */
+  const holdPresentation = (ms: number) =>
+    new Promise<void>((resolve) => {
+      if (ms <= 0) {
+        resolve();
+        return;
+      }
+      setHoldOpen(true);
+      const done = () => {
+        window.clearTimeout(timer);
+        presentationSkipRef.current = null;
+        setHoldOpen(false);
+        resolve();
+      };
+      const timer = window.setTimeout(done, ms);
+      presentationSkipRef.current = () => {
+        if (presentationSkipRef.current) {
+          setResultDelaySec(0.001);
+          setLabelsInstant(true);
+        }
+        done();
+      };
     });
 
   const celebrateGoldens = async (count: number) => {
@@ -956,15 +1017,13 @@ export default function App() {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
               if (tier) {
-                // Ladder REPLACES the mid-win sting (never stacks with it)
-                // and follows the on-grid reveal hold, like Godot's native path.
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                // ONE skippable presentation hold (B2), then the ladder.
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
               }
-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
           payOut(spin.spinWinX, booked);
@@ -1029,15 +1088,13 @@ export default function App() {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
               if (tier) {
-                // Ladder REPLACES the mid-win sting (never stacks with it)
-                // and follows the on-grid reveal hold, like Godot's native path.
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                // ONE skippable presentation hold (B2), then the ladder.
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
                 await showBigWin(tier, spin.spinWinX);
               } else {
                 audio.playMidWin(spin.spinWinX);
-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)));
               }
-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
             }
           }
           payOut(spin.spinWinX, booked);
@@ -1070,15 +1127,14 @@ export default function App() {
             audio.playLineWin(round.base.spinWinX);
             const tier = bigWinTier(round.base.spinWinX);
             if (tier) {
-              // Ladder REPLACES the mid-win sting (never stacks with it)
-              // and follows the on-grid reveal hold, like Godot's native path.
-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              // ONE skippable presentation hold (B2), then the ladder REPLACES
+              // the mid-win sting (never stacks with it).
+              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
               await showBigWin(tier, round.base.spinWinX);
             } else {
               audio.playMidWin(round.base.spinWinX);
-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
             }
-            await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
           }
         }
 
@@ -1123,7 +1179,9 @@ export default function App() {
         setAutoLeft(autoLeftRef.current);
         if (Number.isFinite(autoLeftRef.current) && autoLeftRef.current <= 0) stopAuto();
       })();
-    }, turbo ? 480 : 900);
+      // Autoplay gap AFTER the presentation completes (B2): 150–250 ms normal,
+      // 60–100 ms turbo — the old 900/480 ms made autoplay feel sluggish.
+    }, turbo ? 80 : 200);
     return () => clearTimeout(t);
   }, [auto, busy, bonusKind, triggerKind, bonusSummary, bootOpen, anteKind, runSpinSequence, turbo]);
 
@@ -1162,12 +1220,22 @@ export default function App() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // KeyUP fires with the same code — without this guard a Space press
+      // would act twice (the keyup lands after a skipped hold resolved, and
+      // would start + debit a brand-new spin).
+      if (e.type !== "keydown") return;
       if (e.code !== "Space" && e.key !== " ") return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       e.preventDefault();
       if (e.repeat) return;
       if (bootOpen) return;
+      // An open presentation hold ends on Space (B2): labels + final amount
+      // stay shown, and this same press never starts a new spin.
+      if (presentationSkipRef.current) {
+        presentationSkipRef.current();
+        return;
+      }
       if (triggerKind || bonusSummary) {
         audio.play("button_click");
         continueResolver.current?.();
@@ -1307,8 +1375,24 @@ export default function App() {
                 onAnticipation={onGodotAnticipation}
                 onReelsSettled={onGodotReelsSettled}
               />
+              {/* B2: while a presentation hold is open, a tap anywhere on the
+                  board completes it (labels + final amount stay shown). Only
+                  mounted during the hold, so normal board input is untouched. */}
+              {holdOpen ? (
+                <div
+                  aria-hidden
+                  className="absolute inset-0 cursor-pointer"
+                  onClick={() => presentationSkipRef.current?.()}
+                />
+              ) : null}
               {winLabels ? (
-                <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} />
+                <WinLineLabels
+                  key={winLabels.key}
+                  lines={winLabels.lines}
+                  copy={copy}
+                  turbo={turbo}
+                  instant={labelsInstant}
+                />
               ) : null}
             </div>
           </div>
