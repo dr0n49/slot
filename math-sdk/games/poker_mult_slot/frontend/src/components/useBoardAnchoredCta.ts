@@ -107,7 +107,16 @@ export function useBoardCenteredPanel(): CSSProperties | undefined {
       // panel's slam-in animation owns the transform property, so a
       // translate(-50%,-50%) would be overridden by it.
       const panel = document.querySelector(".confirm-panel");
-      const w = panel instanceof HTMLElement ? panel.offsetWidth : 340;
+      const MARGIN = 8;
+      // Once this panel is `position: fixed` (set below), its `w-full`
+      // Tailwind class resolves against the viewport, not the old flex
+      // container's padded box — so the RAW measured offsetWidth is often
+      // exactly window.innerWidth, with no room left for MARGIN on either
+      // side. Clamping here and re-asserting `width` in the style below
+      // keeps the two consistent, so the panel can never render wider than
+      // the box the left/top clamp below assumes.
+      const rawW = panel instanceof HTMLElement ? panel.offsetWidth : 340;
+      const w = Math.min(rawW, window.innerWidth - MARGIN * 2);
       const h = panel instanceof HTMLElement ? panel.offsetHeight : 210;
       // Center on the board, clamped so the panel never covers the HUD and
       // never leaves the viewport.
@@ -116,9 +125,9 @@ export function useBoardCenteredPanel(): CSSProperties | undefined {
         board.top + board.height / 2,
         Math.max(board.top + 140, (hudTop + board.top) / 2),
       );
-      const left = Math.max(8, Math.min(screenX - w / 2, window.innerWidth - w - 8));
-      const top = Math.max(8, Math.min(screenY - h / 2, hudTop - h - 8));
-      setStyle({ position: "fixed", left, top, margin: 0 });
+      const left = Math.max(MARGIN, Math.min(screenX - w / 2, window.innerWidth - w - MARGIN));
+      const top = Math.max(MARGIN, Math.min(screenY - h / 2, hudTop - h - MARGIN));
+      setStyle({ position: "fixed", left, top, width: w, margin: 0 });
     };
     compute();
     window.addEventListener("resize", compute);
