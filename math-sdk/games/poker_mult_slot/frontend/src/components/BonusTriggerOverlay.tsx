@@ -11,8 +11,12 @@ type Props = {
 };
 
 /** Bonus trigger — CONGRATULATIONS → YOU HAVE WON → spins cloud → tap.
- *  In portrait the hint anchors to the board's bottom strip
- *  (see useBoardAnchoredCta) so it never overlaps the HUD. */
+ *  In portrait the hint anchors to the board's bottom strip through a body
+ *  portal (see useBoardAnchoredCta — the overlay lives inside the scaled
+ *  .game-stage, where position:fixed maps to the transformed box). In
+ *  landscape the hint stays INSIDE the inner flex-col, centered under
+ *  FREE SPINS — as a second child of the outer flex-row button it would
+ *  render beside the column instead. */
 export function BonusTriggerOverlay({ onContinue, copy }: Props) {
   const ctaStyle = useBoardAnchoredCta();
   return (
@@ -35,17 +39,14 @@ export function BonusTriggerOverlay({ onContinue, copy }: Props) {
           <span className="fs-cloud-num tabular-nums">{mathConfig.fsCount}</span>
         </div>
         <p className="cele-caption">{copy.freeSpins}</p>
+        {ctaStyle ? null : <div className="cta-hint cele-hint">{copy.tapToContinue}</div>}
       </div>
-      {/* B5: body portal — see BonusCompleteOverlay (fixed-position hints must
-          not be children of the scaled .game-stage). */}
-      {ctaStyle ? (
-        createPortal(
-          <div className="cta-hint cele-hint" style={ctaStyle}>{copy.tapToContinue}</div>,
-          document.body,
-        )
-      ) : (
-        <div className="cta-hint cele-hint">{copy.tapToContinue}</div>
-      )}
+      {ctaStyle
+        ? createPortal(
+            <div className="cta-hint cele-hint" style={ctaStyle}>{copy.tapToContinue}</div>,
+            document.body,
+          )
+        : null}
     </button>
   );
 }
