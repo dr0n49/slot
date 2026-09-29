@@ -820,6 +820,8 @@ export default function App() {
           setResultDelaySec(0.001);
           setLabelsInstant(true);
         }
+        // Skip/cancel releases the music duck immediately (C5).
+        audio.releaseDuck();
         done();
       };
     });
@@ -938,7 +940,9 @@ export default function App() {
       } else {
         document.documentElement.classList.remove("tab-hidden");
         audio.setTempMuted(false);
-        slotRef.current?.setVolume(audio.isMasterMuted() ? 0 : audio.getMasterVolume());
+        slotRef.current?.setVolume(
+          audio.isMasterMuted() ? 0 : audio.getSfxVolume() * audio.getMasterVolume(),
+        );
         // Back mid-round (rAF had been frozen): snap Godot to the final board
         // instantly — no spin replay; the win presentation then runs once,
         // on the visible screen. Closed rounds are left alone.
@@ -1278,7 +1282,9 @@ export default function App() {
   // Godot's SfxManager owns reel/win SFX and its reels have their own turbo:
   // both follow React's settings (calls before Godot boots are queued).
   useEffect(() => {
-    slotRef.current?.setVolume(audioMuted ? 0 : soundVol);
+    // C1: Godot receives the SAME combined SFX trim as React's own sounds
+    // (sfxVol × masterVol) — it used to get only masterVol and played ~+5 dB hot.
+    slotRef.current?.setVolume(audioMuted ? 0 : audio.getSfxVolume() * soundVol);
   }, [audioMuted, soundVol]);
   useEffect(() => {
     slotRef.current?.setTurbo(turbo);
@@ -1538,6 +1544,7 @@ export default function App() {
           copy={copy}
           onDone={() => {
             setBigWin(null);
+            audio.releaseDuck();
             bigWinResolver.current?.();
             bigWinResolver.current = null;
           }}
@@ -1549,6 +1556,7 @@ export default function App() {
           copy={copy}
           onContinue={() => {
             audio.play("button_click");
+            audio.releaseDuck();
             if (continueResolver.current) {
               continueResolver.current();
               continueResolver.current = null;
@@ -1567,6 +1575,7 @@ export default function App() {
           copy={copy}
           onContinue={() => {
             audio.play("button_click");
+            audio.releaseDuck();
             if (continueResolver.current) {
               continueResolver.current();
               continueResolver.current = null;

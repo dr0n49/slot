@@ -36,8 +36,17 @@ var _last_played_ms: Dictionary = {}
 
 const RETRIGGER_MS := 50
 
+## C1 fixed trims (on top of the combined volume React pushes through
+## web_bridge.setVolume — see App.tsx): the spin loop used to swamp the mix
+## and the ordinary stops read louder than everything React owns.
+const SPIN_LOOP_TRIM_DB := -9.0
+const REEL_STOP_TRIM_DB := -3.0
+
 func _ready() -> void:
 	_rng.randomize()
+	_spin_loop.volume_db = SPIN_LOOP_TRIM_DB
+	for p in _reel_stop:
+		p.volume_db = REEL_STOP_TRIM_DB
 	_spin_loop.finished.connect(_on_spin_loop_finished)
 
 ## Guard + pitch + play, in one place so every one-shot gets the same treatment.

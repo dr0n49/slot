@@ -17,9 +17,16 @@ const FILES = {
 const MUSIC_FILE = assetUrl("assets/sounds/music_muerta.wav");
 /** Background loop sits clearly below SFX but alive on phone speakers:
  *  music_muerta.wav is normalized to -22 LUFS (see scripts/normalize_audio.sh);
- *  at ×0.68 the bed plays at ≈ -25.5 LUFS effective — clearance during wins
- *  comes from the ducking node (B4), not from burying the bed. */
+ *  at ×0.68 the bed plays at ≈ -25.5 LUFS effective. Clearance during wins now
+ *  comes from the REAL ducking node below (C5: 5-6 dB, attack 100 ms, release
+ *  350 ms), not from burying the bed. */
 const MUSIC_LEVEL = 0.68;
+/** C5 music ducking: −5.5 dB under win / joker-focus / bonus-transition cues. */
+const DUCK_FACTOR = 0.53;
+const DUCK_ATTACK_S = 0.1;
+const DUCK_RELEASE_S = 0.35;
+let musicDucked = false;
+let duckReleaseTimer = 0;
 
 type Sfx = keyof typeof FILES;
 
@@ -52,6 +59,11 @@ try {
  *  mute state or the HUD speaker icon. Undone on visibilitychange. */
 let tempMuted = false;
 let audioCtx: AudioContext | null = null;
+/** C5: persistent buses. Every WebAudio voice connects to sfxGain → masterGain
+ *  → destination, so mute (≈40 ms ramp) and volume changes reach voices that
+ *  are ALREADY playing — tested by muting mid big-win sting. */
+let masterGain: GainNode | null = null;
+let sfxGain: GainNode | null = null;
 const pool = new Map<Sfx, HTMLAudioElement[]>();
 let musicEl: HTMLAudioElement | null = null;
 
@@ -170,10 +182,14 @@ function updateMusic() {
     musicGain.connect(c.destination);
   }
   const on = audioEnabled() && masterVol > 0;
-  const target = on ? clamp01(MUSIC_LEVEL * masterVol) : 0;
-  // Short glide — no zipper noise on the volume slider, no click on mute/unmute.
+  const base = on ? clamp01(MUSIC_LEVEL * masterVol) : 0;
+  // C5: the bed ducks 5.5 dB under win / joker-focus / bonus cues — attack
+  // 100 ms in, release 350 ms back (a muted bed never ducks).
+  const target = on ? base * (musicDucked ? DUCK_FACTOR : 1) : 0;
+  const tc = !on ? 0.05 : musicDucked ? DUCK_ATTACK_S / 3 : DUCK_RELEASE_S / 3;
+  // Short glide — no zipper noise on the volume slider, no click on mute.
   musicGain.gain.cancelScheduledValues(c.currentTime);
-  musicGain.gain.setTargetAtTime(target, c.currentTime, 0.05);
+  musicGain.gain.setTargetAtTime(target, c.currentTime, tc);
 
   window.clearTimeout(musicStopTimer);
   if (!on) {
@@ -216,6 +232,21 @@ function canAudio() {
   return typeof window !== "undefined" && typeof Audio !== "undefined";
 }
 
+/** C5: duck the music bed while a foreground reward cue plays. The release is
+ *  scheduled for the cue's own tail AND can be forced early (skip/cancel) via
+ *  releaseDuck(). */
+function duckForCue(durationMs: number) {
+  duckMusic(true);
+  window.clearTimeout(duckReleaseTimer);
+  duckReleaseTimer = window.setTimeout(() => duckMusic(false), durationMs);
+}
+
+function duckMusic(on: boolean) {
+  if (musicDucked === on) return;
+  musicDucked = on;
+  updateMusic();
+}
+
 function clamp01(v: number) {
   return Math.min(1, Math.max(0, v));
 }
@@ -223,9 +254,43 @@ function clamp01(v: number) {
 /** Lazily created WebAudio context (needs a user gesture before it will run). */
 function ensureCtx() {
   if (!canAudio() || !unlocked) return null;
-  if (!audioCtx) audioCtx = new AudioContext();
+  if (!audioCtx) {
+    audioCtx = new AudioContext();
+    masterGain = audioCtx.createGain();
+    masterGain.connect(audioCtx.destination);
+    sfxGain = audioCtx.createGain();
+    sfxGain.connect(masterGain);
+    applyVoiceGains();
+  }
   if (audioCtx.state === "suspended") void audioCtx.resume().catch(() => {});
   return audioCtx;
+}
+
+/** C5: live gain application — the bus gains (and the HTMLAudio pool volumes)
+ *  follow mute/volume changes in real time. setTargetAtTime tc 0.02 ≈ a
+ *  40 ms ramp: no click, fast enough for a mid-sting mute test. */
+function applyVoiceGains() {
+  const c = audioCtx;
+  if (!c || !masterGain || !sfxGain) return;
+  const now = c.currentTime;
+  const mv = (masterMuted || tempMuted) ? 0.0001 : Math.max(0.0001, masterVol);
+  masterGain.gain.cancelScheduledValues(now);
+  masterGain.gain.setTargetAtTime(mv, now, 0.02);
+  sfxGain.gain.cancelScheduledValues(now);
+  sfxGain.gain.setTargetAtTime(Math.max(0.0001, sfxVol), now, 0.02);
+  updateUiGains();
+}
+
+/** HTMLAudio UI cues can't join the WebAudio bus — their per-element volume
+ *  is recomputed here on every mute/volume change instead. */
+function updateUiGains() {
+  const silent = masterMuted || tempMuted;
+  for (const list of pool.values()) {
+    for (const el of list) {
+      const g = (el as HTMLAudioElement & { __gain?: number }).__gain ?? 1;
+      el.volume = silent ? 0 : clamp01(sfxVol * g * masterVol);
+    }
+  }
 }
 
 function audioEnabled() {
@@ -252,6 +317,7 @@ function playSfx(name: Sfx, gain = 1) {
       list.push(el);
     }
   }
+  (el as HTMLAudioElement & { __gain?: number }).__gain = gain;
   el.volume = clamp01(sfxVol * gain * masterVol);
   // ±3 % random pitch so a burst of clicks never sounds machine-gunned.
   el.playbackRate = 0.97 + Math.random() * 0.06;
@@ -262,8 +328,9 @@ function playSfx(name: Sfx, gain = 1) {
 // ——— WebAudio stings + deal cascade ———
 
 /** Short bell partial used by the win/scatter stings. dest defaults to the
- *  speaker; win stings pass a shared cue gain so the whole synthesized cue
- *  lives under one cancelable voice (same policy as sampled stings). */
+ *  SFX bus (C5) so mute/volume changes reach the partial live; win stings
+ *  pass a shared cue gain so the whole synthesized cue lives under one
+ *  cancelable voice (same policy as sampled stings). */
 function ding(
   c: AudioContext,
   freq: number,
@@ -281,7 +348,7 @@ function ding(
   g.gain.exponentialRampToValueAtTime(Math.max(0.001, gain), t0 + 0.014);
   g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
   o.connect(g);
-  g.connect(dest ?? c.destination);
+  g.connect(dest ?? sfxGain ?? c.destination);
   o.start(t0);
   o.stop(t0 + dur + 0.02);
   return o;
@@ -336,7 +403,8 @@ function preloadSamples() {
 }
 
 /** Fire a decoded sample once. Returns false when it is not ready (caller uses the synth fallback).
- *  category "wins" registers the voice so the next win sting can replace it. */
+ *  category "wins" registers the voice so the next win sting can replace it.
+ *  The per-voice gain is RELATIVE — sfxVol/masterVol live on the C5 buses. */
 function playSample(name: Sample, gain = 1, rate = 1, category?: "wins"): boolean {
   const c = ensureCtx();
   const buf = sampleBuffers.get(name);
@@ -346,9 +414,9 @@ function playSample(name: Sample, gain = 1, rate = 1, category?: "wins"): boolea
   src.buffer = buf;
   src.playbackRate.value = rate;
   const g = c.createGain();
-  g.gain.value = Math.max(0.0001, sfxVol * masterVol * gain);
+  g.gain.value = Math.max(0.0001, gain);
   src.connect(g);
-  g.connect(c.destination);
+  g.connect(sfxGain ?? c.destination);
   if (category === "wins") {
     const voice = { src, gain: g };
     activeWinVoices.add(voice);
@@ -395,11 +463,11 @@ function startReelSpinLoopInternal() {
     src.buffer = loopBuf;
     src.loop = true;
     const gain = c.createGain();
-    const vol = sfxVol * masterVol * 0.34;
+    const vol = 0.34;
     gain.gain.setValueAtTime(0.0001, c.currentTime);
     gain.gain.exponentialRampToValueAtTime(Math.max(0.001, vol), c.currentTime + 0.08);
     src.connect(gain);
-    gain.connect(c.destination);
+    gain.connect(sfxGain ?? c.destination);
     src.start();
     reelSpinLoop = { osc: src as unknown as OscillatorNode, lfo: null, gain, stopped: false };
     return;
@@ -419,12 +487,12 @@ function startReelSpinLoopInternal() {
   lfo.connect(lfoGain);
   lfoGain.connect(filter.frequency);
   const gain = c.createGain();
-  const vol = sfxVol * masterVol * 0.11;
+  const vol = 0.11;
   gain.gain.setValueAtTime(0.0001, c.currentTime);
   gain.gain.exponentialRampToValueAtTime(Math.max(0.001, vol), c.currentTime + 0.1);
   osc.connect(filter);
   filter.connect(gain);
-  gain.connect(c.destination);
+  gain.connect(sfxGain ?? c.destination);
   osc.start();
   lfo.start();
   reelSpinLoop = { osc, lfo, gain, stopped: false };
@@ -495,9 +563,9 @@ function playAnticipationInternal(durationMs: number) {
     src.buffer = sample;
     src.playbackRate.value = Math.min(2.2, Math.max(0.8, 3.0 / Math.max(0.6, durationMs / 1000)));
     const gain = c.createGain();
-    gain.gain.value = Math.max(0.001, sfxVol * masterVol * 0.7);
+    gain.gain.value = Math.max(0.001, 0.7);
     src.connect(gain);
-    gain.connect(c.destination);
+    gain.connect(sfxGain ?? c.destination);
     src.start();
     anticipationVoice = { osc: src as unknown as OscillatorNode, lfo: null, gain };
     return;
@@ -520,7 +588,7 @@ function playAnticipationInternal(durationMs: number) {
   const lfoGain = c.createGain();
   lfoGain.gain.value = 0.04;
   const gain = c.createGain();
-  const vol = sfxVol * masterVol * 0.16;
+  const vol = 0.16;
   gain.gain.setValueAtTime(0.0001, now);
   gain.gain.exponentialRampToValueAtTime(Math.max(0.001, vol * 0.5), now + 0.12);
   gain.gain.exponentialRampToValueAtTime(Math.max(0.001, vol), now + dur);
@@ -528,7 +596,7 @@ function playAnticipationInternal(durationMs: number) {
   lfoGain.connect(gain.gain);
   osc.connect(filter);
   filter.connect(gain);
-  gain.connect(c.destination);
+  gain.connect(sfxGain ?? c.destination);
   osc.start(now);
   lfo.start(now);
   anticipationVoice = { osc, lfo, gain };
@@ -541,7 +609,7 @@ function playReelStopInternal(col: number) {
   // ±3-4 % pitch: five columns stopping in a row must not read as one sample.
   if (playSample(`reel_stop_${Math.min(4, Math.max(0, col))}` as Sample, 0.85, 0.96 + Math.random() * 0.08)) return;
   const now = c.currentTime;
-  const vol = sfxVol * masterVol;
+  const vol = 1; // relative — the C5 bus carries sfxVol × masterVol
   const f = 185 + col * 28;
   ding(c, f, now, 0.07, vol * 0.22, "triangle");
   ding(c, f * 0.5, now, 0.09, vol * 0.12, "sine");
@@ -552,9 +620,9 @@ function playReelStopInternal(col: number) {
     src.buffer = buf;
     src.playbackRate.value = 1.05 + col * 0.03;
     const g = ctx.createGain();
-    g.gain.value = Math.max(0.001, vol * 0.38);
+    g.gain.value = Math.max(0.001, 0.38);
     src.connect(g);
-    g.connect(ctx.destination);
+    g.connect(sfxGain ?? ctx.destination);
     src.start(ctx.currentTime);
   });
 }
@@ -580,7 +648,13 @@ export const audio = {
   setTempMuted(v: boolean) {
     if (tempMuted === v) return;
     tempMuted = v;
+    applyVoiceGains();
     updateMusic();
+  },
+  /** C5: end the music duck early — skip/cancel of the cue that started it. */
+  releaseDuck() {
+    window.clearTimeout(duckReleaseTimer);
+    duckMusic(false);
   },
   toggleMasterMute() {
     masterMuted = !masterMuted;
@@ -595,6 +669,7 @@ export const audio = {
       unlocked = true;
       ensureCtx();
     }
+    applyVoiceGains();
     updateMusic();
     return masterMuted;
   },
@@ -604,6 +679,7 @@ export const audio = {
   setMasterVolume(v: number) {
     masterVol = clamp01(v);
     persistVols();
+    applyVoiceGains();
     updateMusic();
   },
   getSfxVolume() {
@@ -612,6 +688,7 @@ export const audio = {
   setSfxVolume(v: number) {
     sfxVol = clamp01(v);
     persistVols();
+    applyVoiceGains();
   },
   play(name: Sfx) {
     playSfx(name);
@@ -620,12 +697,13 @@ export const audio = {
   /** Bright lock-in sting for 3/4/5 golden cards. */
   playScatter(count: number) {
     if (!gate("bonus:scatter")) return;
+    duckForCue(1600);
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     if (playSample("bonus_trigger", count >= 5 ? 1 : count >= 4 ? 0.92 : 0.85)) return;
     const n = count >= 5 ? 5 : count >= 4 ? 4 : 3;
     const hits = n === 5 ? [392, 494, 587, 698, 880] : n === 4 ? [392, 523, 659, 784] : [440, 554, 659];
-    const vol = sfxVol * 0.42 * masterVol;
+    const vol = 0.42;
     const now = c.currentTime;
     hits.forEach((f, i) => {
       const t = now + i * 0.155;
@@ -650,6 +728,7 @@ export const audio = {
     if (!gate("wins:line")) return;
     const x = Number(spinWinX) || 0;
     if (x <= 0) return;
+    duckForCue(x < 1 ? 1200 : 2200);
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     if (x < 1) {
@@ -660,7 +739,7 @@ export const audio = {
       cue.connect(c.destination);
       // One voice for the cue: a replacing sting fades the cue gain (no
       // click), exactly like it fades a sampled sting.
-      const o = ding(c, 523.25, c.currentTime, 0.14, sfxVol * 0.2 * masterVol, "triangle", cue);
+      const o = ding(c, 523.25, c.currentTime, 0.14, 0.2, "triangle", cue);
       const voice = { src: o, gain: cue };
       activeWinVoices.add(voice);
       o.onended = () => activeWinVoices.delete(voice);
@@ -669,7 +748,7 @@ export const audio = {
     const multi = x >= 15;
     if (playSample(multi ? "win_multi" : "win_line", 0.85, 1, "wins")) return;
     stopWinVoices();
-    const vol = sfxVol * (multi ? 0.5 : 0.42) * masterVol;
+    const vol = multi ? 0.5 : 0.42;
     const base = multi ? 659.25 : 587.33;
     const now = c.currentTime;
     const cue = c.createGain();
@@ -699,6 +778,7 @@ export const audio = {
    */
   playBigWin(tier: "nice" | "super" | "sensational" | "max") {
     if (!gate("wins:big")) return;
+    duckForCue(6000);
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     stopWinVoices();
@@ -710,7 +790,7 @@ export const audio = {
     const cue = c.createGain();
     cue.gain.value = 1;
     cue.connect(c.destination);
-    const vol = sfxVol * masterVol;
+    const vol = 1; // relative — the C5 bus carries sfxVol × masterVol
     const first = ding(c, 523.25, now, 0.22, vol * 0.35, "triangle", cue);
     const voice = { src: first, gain: cue };
     activeWinVoices.add(voice);
@@ -774,11 +854,15 @@ export const audio = {
 
   /** Fade out reel_spin_loop (call when the last column snaps). */
   playAnticipation(durationMs: number) {
+    // Joker-focus build-up: the bed ducks under the riser and releases when
+    // the build-up ends (Godot's anticipation-off → stopAnticipation).
+    duckForCue(Math.max(600, durationMs + 400));
     playAnticipationInternal(durationMs);
   },
 
   stopAnticipation() {
     stopAnticipationInternal();
+    duckMusic(false);
   },
 
   stopReelSpinLoop(fadeMs = 90) {
@@ -817,3 +901,20 @@ export const audio = {
     playReelStopInternal(col);
   },
 };
+
+/** DEV-ONLY verification accessor (import.meta.env.DEV): current bus gains,
+ *  duck state and active win voices — lets an automated run prove that mute
+ *  and the duck actually reach already-playing voices. Returns null in prod. */
+export function debugAudioBuses():
+  | { master: number; sfx: number; music: number; ducked: boolean; winVoices: number }
+  | null {
+  if (!import.meta.env.DEV) return null;
+  if (!audioCtx || !masterGain || !sfxGain) return null;
+  return {
+    master: masterGain.gain.value,
+    sfx: sfxGain.gain.value,
+    music: musicGain ? musicGain.gain.value : -1,
+    ducked: musicDucked,
+    winVoices: activeWinVoices.size,
+  };
+}
