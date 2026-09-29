@@ -45,6 +45,7 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
       }
       // Strip between the last card row (≈ the Godot canvas box bottom) and
       // the board frame's bottom border — all in SCREEN space.
+      // B5 gaps: 12 px below the frame, never closer than 8 px to the HUD.
       const stripTop = grid ? grid.bottom : board.bottom - 24;
       const stripBottom = board.bottom;
       const hintScreenH = 20 * stageScale(); // .cele-hint/.total-win-cta line height
@@ -52,8 +53,8 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
       if (stripBottom - stripTop >= hintScreenH + 6) {
         top = (stripTop + stripBottom - hintScreenH) / 2; // centered in the strip
       } else {
-        top = stripBottom + 6; // strip too small: just below the frame
-        if (top + hintScreenH > hudTop - 6) top = hudTop - 6 - hintScreenH; // never over the HUD
+        top = stripBottom + 12; // strip too small: 12 px below the frame
+        if (top + hintScreenH > hudTop - 8) top = hudTop - 8 - hintScreenH; // 8 px to the HUD
       }
       setStyle({
         position: "fixed",

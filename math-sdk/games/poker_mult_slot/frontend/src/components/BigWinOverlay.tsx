@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { audio } from "../game/audio";
 import { assetUrl } from "../game/assets";
 import {
@@ -10,7 +10,11 @@ import {
   type BigWinTier,
 } from "../game/bigWin";
 import type { Copy } from "../game/social";
+import { isLiteFx } from "../game/fxMode";
 import { CeleConfetti, CeleEmberBurst, CeleSparkField, CeleSplat, CeleWord } from "./Celebration";
+
+/** B4: lite-fx keeps a cheap reward beat — this many simple sparks per tier. */
+const LITE_SPARKS: Record<BigWinTier, number> = { nice: 6, super: 8, sensational: 10, max: 12 };
 
 /** Calavera mascot mark, one side — SENSATIONAL/MAX only (the two rungs that also get
  * the vortex + confetti). Same <img> both sides, right one mirrored via CSS — no second
@@ -83,6 +87,9 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
   const [stepKey, setStepKey] = useState(0);
   const [anticipate, setAnticipate] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  /** Read once: lite-fx swaps the celebration for a cheap transform/opacity beat. */
+  const lite = useMemo(() => isLiteFx(), []);
   const doneRef = useRef(false);
   const skipRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -97,6 +104,12 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
     if (doneRef.current) return;
     doneRef.current = true;
     abortRef.current?.abort();
+    if (lite) {
+      // B4: soft 140 ms fade-out instead of a hard unmount (120–160 ms window).
+      setLeaving(true);
+      window.setTimeout(onDone, 140);
+      return;
+    }
     onDone();
   };
 
@@ -227,7 +240,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
       type="button"
       data-tier={displayTier}
       data-anticipate={anticipate ? "1" : "0"}
-      className="cele-overlay bigwin-overlay fixed inset-0 z-[65] flex flex-col items-center justify-center gap-3 p-4 text-center"
+      className={`cele-overlay bigwin-overlay fixed inset-0 z-[65] flex flex-col items-center justify-center gap-3 p-4 text-center${anticipate ? " is-anticipate" : ""}${leaving ? " is-leaving" : ""}`}
       onClick={onClick}
       aria-label={WORD_OF[displayTier](copy)}
     >
@@ -244,7 +257,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
       <div
         className={`cele-float relative z-10 flex flex-col items-center${anticipate ? " is-anticipate" : ""}`}
       >
-        <CeleSparkField />
+        <CeleSparkField count={lite ? LITE_SPARKS[displayTier] : undefined} />
         <div key={stepKey} className="bigwin-tier-step cele-word-row">
           <CeleSkull tier={displayTier} side="left" />
           <CeleWord variant={displayTier}>{WORD_OF[displayTier](copy)}</CeleWord>

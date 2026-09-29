@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { assetUrl } from "../game/assets";
 import { mathConfig } from "../game/engine";
 import type { Copy } from "../game/social";
@@ -34,8 +35,17 @@ export function BonusTriggerOverlay({ onContinue, copy }: Props) {
           <span className="fs-cloud-num tabular-nums">{mathConfig.fsCount}</span>
         </div>
         <p className="cele-caption">{copy.freeSpins}</p>
-        <div className="cta-hint cele-hint" style={ctaStyle}>{copy.tapToContinue}</div>
       </div>
+      {/* B5: body portal — see BonusCompleteOverlay (fixed-position hints must
+          not be children of the scaled .game-stage). */}
+      {ctaStyle ? (
+        createPortal(
+          <div className="cta-hint cele-hint" style={ctaStyle}>{copy.tapToContinue}</div>,
+          document.body,
+        )
+      ) : (
+        <div className="cta-hint cele-hint">{copy.tapToContinue}</div>
+      )}
     </button>
   );
 }

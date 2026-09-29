@@ -15,7 +15,33 @@ export function CeleStars() {
 }
 
 /** Two tiny dust dots at the plate corners — nothing sticker-like. */
-export function CeleSparkField() {
+export function CeleSparkField({ count }: { count?: number }) {
+  // B4: lite-fx passes a tier-driven count (6/8/10/12) — the spark field then
+  // renders that many CHEAP sparks (transform/opacity only, 650 ms lifetime);
+  // each one just drifts outward from the word, number renders above them.
+  if (count != null) {
+    return (
+      <div className="cele-spark-field lite-spark-field" aria-hidden>
+        {Array.from({ length: count }, (_, i) => {
+          const ang = (i / count) * Math.PI * 2 + (i % 2) * 0.45;
+          const dist = 88 + (i % 3) * 46;
+          return (
+            <span
+              key={i}
+              className="cele-spark-lite"
+              style={{
+                left: `${50 + Math.cos(ang) * 7}%`,
+                top: `${44 + Math.sin(ang) * 5}%`,
+                ["--tx" as string]: `${Math.round(Math.cos(ang) * dist)}px`,
+                ["--ty" as string]: `${Math.round(Math.sin(ang) * dist * 0.72)}px`,
+                ["--d" as string]: `${(i % 4) * 60}ms`,
+              }}
+            />
+          );
+        })}
+      </div>
+    );
+  }
   return (
     <div className="cele-spark-field" aria-hidden>
       <span className="cele-spark-dot cele-spark-dot-a" />

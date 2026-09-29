@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import type { Copy } from "../game/social";
 import { audio } from "../game/audio";
 import { CountUpAmount } from "./CountUpAmount";
@@ -36,7 +37,17 @@ export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
           />
         </div>
       </div>
-      <div className="cta-hint total-win-cta" style={ctaStyle}>{copy.tapToContinue}</div>
+      {/* B5: the hint renders through a BODY PORTAL — the overlay lives inside
+          the scaled .game-stage, where position:fixed maps to the transformed
+          box, not the viewport; the hook measures in screen space. */}
+      {ctaStyle ? (
+        createPortal(
+          <div className="cta-hint total-win-cta" style={ctaStyle}>{copy.tapToContinue}</div>,
+          document.body,
+        )
+      ) : (
+        <div className="cta-hint total-win-cta">{copy.tapToContinue}</div>
+      )}
     </button>
   );
 }
