@@ -179,11 +179,19 @@ export interface SlotGameProps {
   onAnticipation?: (active: boolean, ms: number) => void;
   /** Every reel of the current board landed (rev-stamped real settle signal). */
   onReelsSettled?: (rev?: number) => void;
+  /**
+   * Boot-speed: Godot's own loader tracks wasm/pck download progress on its
+   * (invisible) #status-progress element. SlotGame polls it while the engine
+   * boots — same-origin iframe, read-only — so the host splash can show REAL
+   * progress instead of stalling. Fires only while the value advances; stops
+   * once the loader tears its status overlay down.
+   */
+  onBootProgress?: (current: number, total: number) => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
   function SlotGame(
-    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled },
+    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onBootProgress },
     ref,
   ) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -282,6 +290,30 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
       window.addEventListener("message", handleMessage);
       return () => window.removeEventListener("message", handleMessage);
     }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled]);
+
+    // Boot-speed: forward the loader's real download progress (#status-progress)
+    // to the host page while the engine boots. The loader removes its overlay
+    // once done — that stops the poll.
+    const onBootProgressRef = useRef(onBootProgress);
+    onBootProgressRef.current = onBootProgress;
+    useEffect(() => {
+      if (!onBootProgressRef.current) return;
+      const id = window.setInterval(() => {
+        const win = iframeRef.current?.contentWindow;
+        const doc = win?.document;
+        if (!win || !doc) return;
+        const status = doc.getElementById("status");
+        if (!status) {
+          window.clearInterval(id);
+          return;
+        }
+        const bar = doc.getElementById("status-progress") as HTMLProgressElement | null;
+        if (!bar || !(bar.max > 0) || !(bar.value > 0)) return;
+        onBootProgressRef.current?.(bar.value, bar.max);
+      }, 300);
+      return () => window.clearInterval(id);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [src]);
 
     return (
       <iframe

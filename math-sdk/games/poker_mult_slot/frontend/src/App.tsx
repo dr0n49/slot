@@ -255,6 +255,10 @@ export default function App() {
   const slotRef = useRef<SlotGameHandle>(null);
   /** Godot build booted (WebBridge "ready") — gates the boot splash and shows the board. */
   const [godotReady, setGodotReady] = useState(false);
+  /** Boot-speed: real engine/pack download progress forwarded from the Godot
+   *  loader (see SlotGame onBootProgress) so the splash bar tracks the actual
+   *  download instead of stalling at the wait cap. */
+  const [godotProgress, setGodotProgress] = useState<{ current: number; total: number } | null>(null);
   const godotReadyRef = useRef(false);
   godotReadyRef.current = godotReady;
   /** Paying lines of the board Godot just landed, with label positions (drawn by WinLineLabels). */
@@ -1398,6 +1402,7 @@ export default function App() {
                 width="100%"
                 height="100%"
                 onReady={() => setGodotReady(true)}
+                onBootProgress={(current, total) => setGodotProgress({ current, total })}
                 onWin={onGodotWin}
                 onRoundEnd={onGodotRoundEnd}
                 onAnticipation={onGodotAnticipation}
@@ -1538,6 +1543,7 @@ export default function App() {
         <BootSplash
           copy={copy}
           gameReady={godotReady}
+          godotProgress={godotProgress}
           onContinue={() => {
             audio.unlock();
             slotRef.current?.resumeAudio();

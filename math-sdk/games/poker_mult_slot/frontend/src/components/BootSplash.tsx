@@ -17,6 +17,10 @@ type Props = {
    * never lands on Godot's own second loading screen.
    */
   gameReady?: boolean;
+  /** Boot-speed: real Godot engine/pack download progress (current/total) —
+   *  fills the existing loading bar during the phase the old bar spent
+   *  stalling at the wait cap. Same elements, same design. */
+  godotProgress?: { current: number; total: number } | null;
 };
 
 /** Where the bar parks while only the Godot build is still loading. */
@@ -105,7 +109,7 @@ function preloadOne(url: string): Promise<void> {
  * Single boot screen (Cloudy Poker): sky, wordmark, three feature tickets,
  * preload bar that swaps to tap-to-continue at 100%. Tap before 100% is a no-op.
  */
-export function BootSplash({ onContinue, copy, gameReady = true }: Props) {
+export function BootSplash({ onContinue, copy, gameReady = true, godotProgress }: Props) {
   const [progress, setProgress] = useState(0);
   const [shown, setShown] = useState(0);
   // Mobile intro (Cookout reference): portrait shows ONE feature ticket at a
@@ -117,6 +121,8 @@ export function BootSplash({ onContinue, copy, gameReady = true }: Props) {
   const progressRef = useRef(0);
   const gameReadyRef = useRef(gameReady);
   gameReadyRef.current = gameReady;
+  const godotProgressRef = useRef(godotProgress);
+  godotProgressRef.current = godotProgress;
   const onDoneRef = useRef(onContinue);
   onDoneRef.current = onContinue;
   const ready = Math.round(shown) >= 100;
@@ -159,7 +165,18 @@ export function BootSplash({ onContinue, copy, gameReady = true }: Props) {
       setShown((s) => {
         const target = gameReadyRef.current
           ? progressRef.current
-          : Math.min(progressRef.current, WAIT_FOR_GAME_PCT);
+          : Math.max(
+              // Old behavior: splash-asset preloads, capped while the engine
+              // is still coming up...
+              Math.min(progressRef.current, WAIT_FOR_GAME_PCT),
+              // Boot-speed: ...plus the REAL engine/pack download mapped into
+              // the same [0..92] span, so the bar tracks the actual wait.
+              (() => {
+                const gp = godotProgressRef.current;
+                if (!gp || !(gp.total > 0)) return 0;
+                return Math.min(1, gp.current / gp.total) * WAIT_FOR_GAME_PCT;
+              })(),
+            );
         if (target - s <= 0.4) return target;
         return s + (target - s) * 0.06;
       });
