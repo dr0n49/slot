@@ -349,9 +349,16 @@ func _settle_reel(index: int) -> void:
 		if row < s.target.size() and (s.target[row] == &"JOKER" or s.target[row] == &"JOKER_gold"):
 			has_joker = true
 
-	sfx.play_reel_stop(index)
-	if has_joker:
-		sfx.play_joker_land()
+	# C7: the stop thud and the joker toll fire at the VISIBLE collision —
+	# row 0's squash starts at ~55 % of the drop (first rest contact), so a
+	# scene-tree timer lands within one frame of the impact instead of at the
+	# brake start (old behavior) or the tween's settle-back end.
+	var collision := drop * 0.55
+	get_tree().create_timer(collision).timeout.connect(func():
+		sfx.play_reel_stop(index)
+		if has_joker:
+			sfx.play_joker_land()
+	)
 	# play_mult_land is deliberately NOT triggered (SfxManager keeps the player
 	# and mult_land.mp3 ships, but the badge landing is visual-only): the
 	# reel-stop thud already covers "something landed here".

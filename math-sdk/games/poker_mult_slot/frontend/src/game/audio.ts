@@ -63,8 +63,10 @@ let musicEl: HTMLAudioElement | null = null;
 const RETRIGGER_MS = 50;
 const lastTriggerAt = new Map<string, number>();
 /** Active win-category voices with their gain nodes, so a replacing sting
- *  fades the previous one out over ~40 ms instead of hard-stopping it (click). */
-const activeWinVoices = new Set<{ src: AudioBufferSourceNode; gain: GainNode }>();
+ *  fades the previous one out over ~40 ms instead of hard-stopping it (click).
+ *  src is anything stoppable (buffer source or oscillator) — synthesized
+ *  fallback cues register their first oscillator. */
+const activeWinVoices = new Set<{ src: { stop: (when?: number) => void }; gain: GainNode }>();
 
 /** Debug aid (?sfxlog=1): every ADMITTED trigger lands here with a timestamp,
  *  so a verification run can prove no sample fires twice within 100 ms. */
@@ -259,7 +261,9 @@ function playSfx(name: Sfx, gain = 1) {
 
 // ——— WebAudio stings + deal cascade ———
 
-/** Short bell partial used by the win/scatter stings. */
+/** Short bell partial used by the win/scatter stings. dest defaults to the
+ *  speaker; win stings pass a shared cue gain so the whole synthesized cue
+ *  lives under one cancelable voice (same policy as sampled stings). */
 function ding(
   c: AudioContext,
   freq: number,
@@ -267,7 +271,8 @@ function ding(
   dur: number,
   gain: number,
   type: OscillatorType,
-) {
+  dest?: AudioNode,
+): OscillatorNode {
   const o = c.createOscillator();
   const g = c.createGain();
   o.type = type;
@@ -276,9 +281,10 @@ function ding(
   g.gain.exponentialRampToValueAtTime(Math.max(0.001, gain), t0 + 0.014);
   g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
   o.connect(g);
-  g.connect(c.destination);
+  g.connect(dest ?? c.destination);
   o.start(t0);
   o.stop(t0 + dur + 0.02);
+  return o;
 }
 
 // ——— Sample pack (rendered SFX: card slap, guitar wins, bells, brass fanfares) ———
@@ -637,6 +643,8 @@ export const audio = {
    *   ≥15x → win_multi
    *   else → win_line
    * A new sting replaces the previous win voice instead of stacking.
+   * The synthesized fallback runs through ONE cue gain registered as a win
+   * voice, so the replacement policy covers it too (C7).
    */
   playLineWin(spinWinX = 0) {
     if (!gate("wins:line")) return;
@@ -646,49 +654,78 @@ export const audio = {
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     if (x < 1) {
       if (playSample("win_soft", 0.85, 1, "wins")) return;
-      const v = sfxVol * 0.2 * masterVol;
-      ding(c, 523.25, c.currentTime, 0.14, v, "triangle");
+      stopWinVoices();
+      const cue = c.createGain();
+      cue.gain.value = 1;
+      cue.connect(c.destination);
+      // One voice for the cue: a replacing sting fades the cue gain (no
+      // click), exactly like it fades a sampled sting.
+      const o = ding(c, 523.25, c.currentTime, 0.14, sfxVol * 0.2 * masterVol, "triangle", cue);
+      const voice = { src: o, gain: cue };
+      activeWinVoices.add(voice);
+      o.onended = () => activeWinVoices.delete(voice);
       return;
     }
     const multi = x >= 15;
     if (playSample(multi ? "win_multi" : "win_line", 0.85, 1, "wins")) return;
+    stopWinVoices();
     const vol = sfxVol * (multi ? 0.5 : 0.42) * masterVol;
     const base = multi ? 659.25 : 587.33;
     const now = c.currentTime;
-    ding(c, base, now, 0.16, vol, "triangle");
-    ding(c, base * 1.5, now + 0.07, 0.22, vol * 0.8, "triangle");
-    ding(c, base * 2, now + 0.15, 0.42, vol * 0.55, "sine");
-    ding(c, base * 3.01, now + 0.15, 0.2, vol * 0.16, "sine");
-    if (multi) ding(c, base * 2.5, now + 0.24, 0.3, vol * 0.3, "sine");
+    const cue = c.createGain();
+    cue.gain.value = 1;
+    cue.connect(c.destination);
+    const first = ding(c, base, now, 0.16, vol, "triangle", cue);
+    const voice = { src: first, gain: cue };
+    activeWinVoices.add(voice);
+    first.onended = () => activeWinVoices.delete(voice);
+    ding(c, base * 1.5, now + 0.07, 0.22, vol * 0.8, "triangle", cue);
+    ding(c, base * 2, now + 0.15, 0.42, vol * 0.55, "sine", cue);
+    ding(c, base * 3.01, now + 0.15, 0.2, vol * 0.16, "sine", cue);
+    if (multi) ding(c, base * 2.5, now + 0.24, 0.3, vol * 0.3, "sine", cue);
   },
 
   /**
    * Big-win tier sting — escalates with the ladder
    * (nice → super → sensational → max). Replaces any running win voice
    * (the ladder never stacks on a line-win sting).
+   *
+   * C7 per-tier gains: the samples ship at different loudnesses (measured
+   * integrated LUFS: nice −13.1, super −15.0, sensational −14.5, max −14.5),
+   * which made SUPER ~2 dB QUIETER than NICE. These gains make the ladder
+   * monotonic (−16.0 → −14.7 → −14.5 → −14.3 effective LUFS at unity master)
+   * while keeping each file's true peak ≤ −1.2 dBFS (file peaks: −1.3 / −1.5
+   * / −1.5 / −1.4 + gain).
    */
   playBigWin(tier: "nice" | "super" | "sensational" | "max") {
     if (!gate("wins:big")) return;
     const c = ensureCtx();
     if (!c || !audioEnabled() || sfxVol <= 0 || masterVol <= 0) return;
     stopWinVoices();
-    if (playSample(`big_${tier}` as Sample, 0.85, 1, "wins")) return;
+    const TIER_GAIN = { nice: 0.72, super: 1.035, sensational: 1.035, max: 1.023 } as const;
+    if (playSample(`big_${tier}` as Sample, TIER_GAIN[tier], 1, "wins")) return;
+    // Synthesized fallback: same one-voice/cancellation policy as sampled
+    // stings (C7) — every partial runs through one registered cue gain.
     const now = c.currentTime;
+    const cue = c.createGain();
+    cue.gain.value = 1;
+    cue.connect(c.destination);
     const vol = sfxVol * masterVol;
+    const first = ding(c, 523.25, now, 0.22, vol * 0.35, "triangle", cue);
+    const voice = { src: first, gain: cue };
+    activeWinVoices.add(voice);
+    first.onended = () => activeWinVoices.delete(voice);
     if (tier === "nice") {
-      const v = vol * 0.48;
-      ding(c, 523.25, now, 0.22, v, "triangle");
-      ding(c, 659.25, now + 0.08, 0.28, v * 0.85, "triangle");
-      ding(c, 783.99, now + 0.18, 0.45, v * 0.55, "sine");
+      ding(c, 659.25, now + 0.08, 0.28, vol * 0.3, "triangle", cue);
+      ding(c, 783.99, now + 0.18, 0.45, vol * 0.19, "sine", cue);
       return;
     }
     if (tier === "super") {
-      const v = vol * 0.55;
-      ding(c, 392, now, 0.18, v * 0.7, "triangle");
-      ding(c, 523.25, now + 0.07, 0.22, v, "triangle");
-      ding(c, 659.25, now + 0.14, 0.28, v * 0.9, "triangle");
-      ding(c, 830.61, now + 0.24, 0.5, v * 0.5, "sine");
-      ding(c, 1046.5, now + 0.28, 0.35, v * 0.22, "sine");
+      ding(c, 392, now, 0.18, vol * 0.24, "triangle", cue);
+      ding(c, 523.25, now + 0.07, 0.22, vol * 0.35, "triangle", cue);
+      ding(c, 659.25, now + 0.14, 0.28, vol * 0.31, "triangle", cue);
+      ding(c, 830.61, now + 0.24, 0.5, vol * 0.17, "sine", cue);
+      ding(c, 1046.5, now + 0.28, 0.35, vol * 0.08, "sine", cue);
       return;
     }
     if (tier === "sensational") {
@@ -696,12 +733,12 @@ export const audio = {
       const hits = [440, 554, 659, 830, 988];
       hits.forEach((f, i) => {
         const t = now + i * 0.07;
-        ding(c, f, t, 0.22, v * (0.55 + i * 0.08), "triangle");
-        ding(c, f * 2.01, t, 0.14, v * 0.18, "sine");
+        ding(c, f, t, 0.22, v * (0.55 + i * 0.08), "triangle", cue);
+        ding(c, f * 2.01, t, 0.14, v * 0.18, "sine", cue);
       });
       const resolve = now + 0.42;
       for (const f of [523.25, 659.25, 783.99, 1046.5]) {
-        ding(c, f, resolve, 0.7, v * 0.28, "sine");
+        ding(c, f, resolve, 0.7, v * 0.28, "sine", cue);
       }
       return;
     }
@@ -711,14 +748,14 @@ export const audio = {
       const hits = [349.23, 440, 523.25, 659.25, 783.99, 987.77];
       hits.forEach((f, i) => {
         const t = now + i * 0.085;
-        ding(c, f, t, 0.26, v * (0.5 + i * 0.07), "triangle");
-        ding(c, f * 2, t + 0.02, 0.16, v * 0.2, "sine");
+        ding(c, f, t, 0.26, v * (0.5 + i * 0.07), "triangle", cue);
+        ding(c, f * 2, t + 0.02, 0.16, v * 0.2, "sine", cue);
       });
       const resolve = now + 0.58;
       for (const f of [523.25, 659.25, 783.99, 1046.5, 1318.5]) {
-        ding(c, f, resolve, 0.95, v * 0.3, "sine");
+        ding(c, f, resolve, 0.95, v * 0.3, "sine", cue);
       }
-      ding(c, 1568, resolve + 0.05, 0.55, v * 0.18, "sine");
+      ding(c, 1568, resolve + 0.05, 0.55, v * 0.18, "sine", cue);
     }
   },
 

@@ -1047,14 +1047,9 @@ export default function App() {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
               const fbWin = { key: revealSeqRef.current, amount: antePay };
-              if (tier) {
-                // ONE skippable presentation hold (B2), then the ladder.
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
-                await showBigWin(tier, spin.spinWinX);
-              } else {
-                audio.playMidWin(spin.spinWinX);
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
-              }
+              // ONE skippable hold (B2) + one cue per range (C7, see base branch).
+              await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
+              if (tier) await showBigWin(tier, spin.spinWinX);
             }
           }
           payOut(spin.spinWinX, booked);
@@ -1119,14 +1114,9 @@ export default function App() {
               audio.playLineWin(spin.spinWinX);
               const tier = bigWinTier(spin.spinWinX);
               const fbWin = { key: revealSeqRef.current, amount: booked.pay };
-              if (tier) {
-                // ONE skippable presentation hold (B2), then the ladder.
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
-                await showBigWin(tier, spin.spinWinX);
-              } else {
-                audio.playMidWin(spin.spinWinX);
-                await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
-              }
+              // ONE skippable hold (B2) + one cue per range (C7, see base branch).
+              await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), fbWin);
+              if (tier) await showBigWin(tier, spin.spinWinX);
             }
           }
           payOut(spin.spinWinX, booked);
@@ -1159,15 +1149,12 @@ export default function App() {
             audio.playLineWin(round.base.spinWinX);
             const tier = bigWinTier(round.base.spinWinX);
             const fbWin = { key: revealSeqRef.current, amount: basePay };
-            if (tier) {
-              // ONE skippable presentation hold (B2), then the ladder REPLACES
-              // the mid-win sting (never stacks with it).
-              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), fbWin);
-              await showBigWin(tier, round.base.spinWinX);
-            } else {
-              audio.playMidWin(round.base.spinWinX);
-              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), fbWin);
-            }
+            // ONE skippable presentation hold (B2). C7: ONE foreground cue per
+            // range — playMidWin (10–<20×) used to replace playLineWin the
+            // instant both fired; the line sting alone covers every
+            // sub-ladder win now, and the ladder REPLACES it (never stacks).
+            await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), fbWin);
+            if (tier) await showBigWin(tier, round.base.spinWinX);
           }
         }
 

@@ -56,6 +56,12 @@ func _on_spin_loop_finished() -> void:
 ## Called from ReelController.spin_to() the instant a spin starts.
 func play_spin_loop() -> void:
 	_spinning = true
+	# C2: a new spin resets the reel-stop guards — a rapid turbo restart
+	# (or the next reveal landing within the 50 ms window) can never suppress
+	# this spin's first stops because of the previous spin's timestamps.
+	for i in _reel_stop.size():
+		_last_played_ms.erase(StringName("reel_stop_%d" % i))
+	_last_played_ms.erase(&"joker_land")
 	if not _spin_loop.playing:
 		_spin_loop.play()
 
@@ -75,7 +81,10 @@ func stop_spin_loop() -> void:
 
 func play_reel_stop(index: int) -> void:
 	if index >= 0 and index < _reel_stop.size():
-		_fire(_reel_stop[index], &"reel_stop", 0.035)
+		# C2: per-column guard key — the shared &"reel_stop" key swallowed
+		# stops 2..5 whenever columns landed within 50 ms of each other
+		# (turbo stagger is 45 ms).
+		_fire(_reel_stop[index], StringName("reel_stop_%d" % index), 0.035)
 
 ## A multiplier badge stamps onto a card (delayed to the badge's pop-in).
 ## Called once per badge; badges landing together collapse into one hit
