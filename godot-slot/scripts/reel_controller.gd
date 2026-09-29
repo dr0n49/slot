@@ -15,12 +15,13 @@ extends Node2D
 ##    reel sits inside a clip_contents Control, so cards scroll in/out of the
 ##    reel window instead of spilling over the grid's padding.
 ## 2. stop_to(grid) — called once SlotLogic has the resolved board. Stops
-##    are scheduled left→right (reel_stop_stagger apart, plus an extra
+##    are scheduled left→right (reel_stop_stagger apart, plus a short
 ##    anticipation beat on the last reel), but never before min_spin_time
 ##    has elapsed since start_spin(), so a fast server answer still reads
-##    as a real spin. Each reel drops its final 5 faces in from above with
-##    a TRANS_BACK overshoot, fires its own land sound + land-bounce + a
-##    small screen shake.
+##    as a real spin. Each reel lands CONTINUOUSLY from its live phase (no
+##    phase reset), wraps its target faces in at rest, rides a +0.03-cell
+##    overshoot settled in 70 ms, and fires its own collision sound +
+##    row-staggered land squash + a subtle screen shake.
 ## 3. all_reels_stopped is emitted once the LAST reel's drop has finished.
 ## spin_to(grid) = start_spin() + stop_to(grid), kept for older callers.
 ##
@@ -69,28 +70,37 @@ const CLIP_BOTTOM := 924.0
 ## what makes a reel stop read as "premium" instead of "all 5 columns
 ## clunk down together".
 @export_range(0.0, 0.4) var reel_stop_stagger: float = 0.16
-## Extra beat added before the LAST reel stops — the classic anticipation
-## hold reviewers specifically asked for.
-@export_range(0.0, 0.6) var last_reel_extra_delay: float = 0.24
-## Final drop of the landing faces into place (TRANS_BACK overshoot).
-@export_range(0.03, 0.4) var drop_time: float = 0.16
+## Extra beat before the LAST reel stops — cut to 60-100 ms (B3): the old
+## unconditional 240 ms pause read as a stall on every spin.
+@export_range(0.0, 0.6) var last_reel_extra_delay: float = 0.08
+@export var turbo_last_reel_extra_delay: float = 0.03
+## Landing travel is computed from the strip's live phase and speed; the
+## overshoot (+0.03 cell) settles back in this many seconds.
+@export_range(0.0, 0.08) var land_overshoot_cells: float = 0.03
+@export_range(0.03, 0.2) var land_settle_time: float = 0.07
 ## Stagger between rows landing within a single reel (top row lands first).
-@export_range(0.0, 0.08) var row_land_stagger: float = 0.035
+@export_range(0.0, 0.08) var row_land_stagger: float = 0.012
+@export var turbo_row_land_stagger: float = 0.006
+## B3 blur ramps with speed: 0 -> 1 on spin-up, bleed back to 0 while braking.
+@export_range(0.08, 0.4) var blur_up_time: float = 0.16
+@export var turbo_blur_up_time: float = 0.08
+@export_range(0.08, 0.4) var blur_bleed_time: float = 0.12
+@export var turbo_blur_bleed_time: float = 0.07
 
 @export_group("Turbo timing")
 @export var turbo_spin_speed_px: float = 3400.0
 @export var turbo_spin_up_time: float = 0.06
 @export var turbo_min_spin_time: float = 0.12
 @export var turbo_reel_stop_stagger: float = 0.045
-@export var turbo_last_reel_extra_delay: float = 0.05
-@export var turbo_drop_time: float = 0.09
-@export var turbo_row_land_stagger: float = 0.01
 ## Multiplier on SymbolVisual's land-bounce durations while turbo is on.
 @export var turbo_bounce_scale: float = 0.5
 
 @export_group("Juice")
-@export var shake_on_stop_small: float = 2.4
-@export var shake_on_stop_big: float = 9.0
+## B3: ordinary shakes are subtle (0.8 early reels / 2-2.5 last reel) with a
+## 90-140 ms decay (FXManager.shake_decay); the heavy shake is joker/bonus only.
+@export var shake_on_stop_small: float = 0.8
+@export var shake_on_stop_big: float = 2.2
+@export var shake_on_stop_joker: float = 5.0
 ## Loser dim interpolation during the win presentation (B1: 120 ms normal;
 ## turbo roughly halves it).
 @export var cell_dim_time: float = 0.12
@@ -129,6 +139,7 @@ class ReelState:
 	var target: Array = []
 	var target_mults: Array = []  # multiplier per row (0 = none)
 	var speed_k: float = 1.0      # 1 = full speed; eases down while "hot"
+	var blur_tween: Tween         # 0->1 spin-up ramp / bleed to 0 on braking
 
 var _reels: Array[Node2D] = []
 var _states: Array = []
@@ -243,7 +254,7 @@ func start_spin() -> void:
 			cell.stop_win_pulse()
 			cell.play_dim(false)
 			cell.clear_mult()
-		_set_blur(s, 1.0)
+		_ramp_blur(s, 0.0, 1.0, _t(blur_up_time, turbo_blur_up_time))
 	set_process(true)
 	_set_phase(Phase.SPINNING)
 
@@ -318,52 +329,51 @@ func _settle_reel(index: int) -> void:
 	var s: ReelState = _states[index]
 	s.spinning = false
 	s.stop_at = -1.0
-	_set_blur(s, 0.0)
-	for row in ROWS:
-		if row < s.target.size():
-			var id: StringName = s.target[row]
+
+	# B3: NO phase reset. The strip keeps its current mid-cell phase and lands
+	# continuously — the old -0.42-cell teleport read as a lurch. Blur bleeds
+	# out over the braking distance instead of snapping off.
+	_ramp_blur(s, 1.0, 0.0, _t(blur_bleed_time, turbo_blur_bleed_time))
+
+	# Pre-arrange the landing chain invisibly: the off-screen entry cell feeds
+	# target[0] into row 0 at the final wrap, rows 0..3 already carry
+	# target[1..4]. No visible teleport — the reel simply keeps scrolling.
+	if s.target.size() == ROWS:
+		s.entry.set_face(s.target[0], SymbolAtlas.texture_for(s.target[0]))
+		for row in range(ROWS - 1):
+			var id: StringName = s.target[row + 1]
 			s.cells[row].set_face(id, SymbolAtlas.texture_for(id))
-	_random_face(s.entry)
 
-	# Drop the final faces in from slightly above with a small overshoot —
-	# reads as the reel braking onto its stop instead of teleporting.
-	var drop := _t(drop_time, turbo_drop_time)
-	s.strip.position.y = s.rest_y - CELL_H * 0.42
+	# Landing travel: the rest of the current cell, then a +0.03-cell overshoot
+	# settled back in 70 ms. The wrap (the visible collision) fires the stop
+	# beat exactly when the cards reach rest.
+	var wrap_y: float = s.rest_y + CELL_H
+	var overshoot_y: float = s.rest_y + CELL_H * land_overshoot_cells
+	var approach := clampf(
+		(wrap_y - s.strip.position.y) / _t(spin_speed_px, turbo_spin_speed_px),
+		0.05, 0.14)
 	var tw := create_tween()
-	tw.tween_property(s.strip, "position:y", s.rest_y, drop) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(s.strip, "position:y", wrap_y, approach) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tw.tween_callback(_on_reel_wrapped.bind(s, index))
+	tw.tween_property(s.strip, "position:y", overshoot_y, 0.03) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(s.strip, "position:y", s.rest_y, land_settle_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
+	# Row landing squashes start at the collision, staggered top to bottom.
 	var row_stagger := _t(row_land_stagger, turbo_row_land_stagger)
 	var bounce_scale := _t(1.0, turbo_bounce_scale)
-	var has_mult := false
-	var has_joker := false
 	for row in ROWS:
-		var land := drop * 0.55 + row * row_stagger
-		s.cells[row].play_land_bounce(land, bounce_scale)
+		s.cells[row].play_land_bounce(row * row_stagger, bounce_scale)
 		var m: float = float(s.target_mults[row]) if row < s.target_mults.size() else 0.0
 		if m > 0.0:
-			has_mult = true
-			s.cells[row].set_mult(m, land + _t(0.12, 0.05))
+			s.cells[row].set_mult(m, approach + row * row_stagger + _t(0.12, 0.05))
 		else:
 			s.cells[row].clear_mult()
-		if row < s.target.size() and (s.target[row] == &"JOKER" or s.target[row] == &"JOKER_gold"):
-			has_joker = true
-
-	# C7: the stop thud and the joker toll fire at the VISIBLE collision —
-	# row 0's squash starts at ~55 % of the drop (first rest contact), so a
-	# scene-tree timer lands within one frame of the impact instead of at the
-	# brake start (old behavior) or the tween's settle-back end.
-	var collision := drop * 0.55
-	get_tree().create_timer(collision).timeout.connect(func():
-		sfx.play_reel_stop(index)
-		if has_joker:
-			sfx.play_joker_land()
-	)
 	# play_mult_land is deliberately NOT triggered (SfxManager keeps the player
 	# and mult_land.mp3 ships, but the badge landing is visual-only): the
 	# reel-stop thud already covers "something landed here".
-	var is_last := index == _states.size() - 1
-	fx.screen_shake(shake_on_stop_big if is_last else shake_on_stop_small)
 
 	if _hot:
 		_cool_reel(index)
@@ -372,14 +382,39 @@ func _settle_reel(index: int) -> void:
 
 	_stopped_count += 1
 	if _stopped_count == _states.size():
-		sfx.stop_spin_loop()
 		_set_phase(Phase.REEL_STOPPING)
-		# Let the last reel finish its drop before anyone starts the win
+		# Let the last reel finish its settle before anyone starts the win
 		# presentation on top of it.
 		tw.tween_callback(func():
 			_end_hot()
 			all_reels_stopped.emit()
 		)
+
+## The strip reached rest: wrap the faces (entry feeds row 0 — the chain
+## pre-arranged in _settle_reel) and fire the collision beat (thud / joker).
+func _on_reel_wrapped(s: ReelState, index: int) -> void:
+	_shift_faces(s)
+	sfx.play_reel_stop(index)
+	if _reel_has_joker(s):
+		sfx.play_joker_land()
+	if index == _states.size() - 1:
+		sfx.stop_spin_loop()
+	fx.screen_shake(shake_on_stop_joker if _reel_has_joker(s) else
+		(shake_on_stop_big if index == _states.size() - 1 else shake_on_stop_small))
+
+func _reel_has_joker(s: ReelState) -> bool:
+	for id in s.target:
+		if _is_joker(id):
+			return true
+	return false
+
+## B3: blur ramps with speed instead of snapping (0 -> 1 on spin-up, bleed to
+## 0 over the braking distance).
+func _ramp_blur(s: ReelState, from_v: float, to_v: float, dur: float) -> void:
+	if s.blur_tween and s.blur_tween.is_valid():
+		s.blur_tween.kill()
+	s.blur_tween = create_tween()
+	s.blur_tween.tween_method(func(v: float): _set_blur(s, v), from_v, to_v, dur)
 
 ## Fast-forward (the tab was hidden mid-spin and browser rAF froze): every
 ## still-spinning reel lands on its target INSTANTLY — no scroll replay, no

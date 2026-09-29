@@ -10,7 +10,9 @@ extends Node2D
 @export var shake_camera_path: NodePath
 ## Higher = shake stops sooner. Too low and it lingers, reads as "the
 ## camera is broken" rather than "impact".
-@export_range(1.0, 20.0) var shake_decay: float = 6.5
+## B3: exponential decay constant — a stop shake settles to ~5 % within
+## ~120 ms (the old 6.5 rang on for half a second).
+@export_range(1.0, 60.0) var shake_decay: float = 24.0
 @export var shake_max_offset: float = 24.0
 
 @export_group("Particles")

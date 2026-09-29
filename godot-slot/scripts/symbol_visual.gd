@@ -16,13 +16,12 @@ extends Node2D
 @export var rest_scale: Vector2 = Vector2(0.293, 0.293)
 
 @export_group("Land Bounce")
-@export var bounce_duration: float = 0.46
-@export var squash_duration: float = 0.10
-## Squash on impact: wide + flat. Push X up / Y down for a "heavier" card.
-@export var overshoot_scale: Vector2 = Vector2(1.20, 0.76)
-## Elastic rebound past neutral before settling. Keep close to 1.0 or the
-## symbol visibly "wobbles" too long and starts to read as loose, not juicy.
-@export var settle_scale: Vector2 = Vector2(0.95, 1.07)
+## B3 landing: a mild squash (1.04/0.97) held 45-60 ms, then a cubic settle
+## over 100-140 ms. No elastic rebound — the old 1.20/0.76 + TRANS_ELASTIC
+## combo read as a loose wobble (and got killed mid-flight by the win pulse).
+@export var squash_scale: Vector2 = Vector2(1.04, 0.97)
+@export_range(0.03, 0.12) var squash_time: float = 0.05
+@export_range(0.08, 0.3) var settle_time: float = 0.12
 
 @export_group("Win Pulse")
 @export var win_pulse_speed: float = 3.4
@@ -182,18 +181,14 @@ func play_land_bounce(delay: float = 0.0, time_scale: float = 1.0) -> void:
 	_land_tween = create_tween()
 	if delay > 0.0:
 		_land_tween.tween_interval(delay)
-	# Impact: flatten wide. This ease is intentionally sharp (EASE_OUT on
-	# TRANS_BACK gives a tiny anticipation dip before the squash lands).
-	_land_tween.tween_property(sprite, "scale", rest_scale * overshoot_scale, squash_duration * time_scale) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	# Rebound past neutral — the actual "bounce" — then settle to rest.
-	_land_tween.tween_property(sprite, "scale", rest_scale * settle_scale, bounce_duration * 0.5 * time_scale) \
-		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	_land_tween.tween_property(sprite, "scale", rest_scale, bounce_duration * 0.5 * time_scale) \
+	# B3 impact: mild wide-flat squash, then a single cubic settle to rest.
+	_land_tween.tween_property(sprite, "scale", rest_scale * squash_scale, squash_time * time_scale) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_land_tween.tween_property(sprite, "scale", rest_scale, settle_time * time_scale) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	# Wall-clock window the pulse defers to (no awaits — a killed tween's
 	# await would never resume).
-	_land_total_ms = int(round((delay + (squash_duration + bounce_duration) * time_scale) * 1000.0))
+	_land_total_ms = int(round((delay + (squash_time + settle_time) * time_scale) * 1000.0))
 	_land_start_ms = Time.get_ticks_msec()
 
 ## Seconds left before the landing tween has fully settled this cell.
