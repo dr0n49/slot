@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { Copy } from "../game/social";
+import { audio } from "../game/audio";
 import { CountUpAmount } from "./CountUpAmount";
 import { AutoMark, HudBoltMark, InfoMark, MinusMark, PlusMark, SpeakerMark, SpinArrowMark } from "./marks";
 
@@ -71,7 +72,12 @@ function WinLabelWithCount({
   return (
     <>
       {left}
-      <CountUpAmount value={amount} format={money} durationMs={countMs} />
+      <CountUpAmount
+        value={amount}
+        format={money}
+        durationMs={countMs}
+        onTick={audio.playCountTick}
+      />
       {right}
       {/* ensure layout matches final string width roughly */}
       <span className="sr-only">{formatWin(final)}</span>

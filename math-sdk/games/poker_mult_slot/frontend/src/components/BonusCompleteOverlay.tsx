@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import type { Copy } from "../game/social";
+import { audio } from "../game/audio";
+import { CountUpAmount } from "./CountUpAmount";
 import { useBoardAnchoredCta } from "./useBoardAnchoredCta";
 
 type Props = {
@@ -13,25 +14,10 @@ type Props = {
  * white TOTAL WIN over the big gold amount counting up in whole cents (≤1.8s),
  * tap-anywhere hint above the HUD. In portrait the hint anchors to the board's
  * bottom strip (see useBoardAnchoredCta) so it never overlaps the HUD.
+ * C3: a short chip-lock lands exactly when the count reaches the final amount.
  */
 export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
-  const [shown, setShown] = useState(0);
   const ctaStyle = useBoardAnchoredCta();
-
-  useEffect(() => {
-    const t0 = performance.now();
-    const dur = 1800;
-    let raf = 0;
-    const tick = (now: number) => {
-      const k = Math.min(1, (now - t0) / dur);
-      const eased = 1 - Math.pow(1 - k, 3);
-      // whole cents per frame — no wet fractional strings
-      setShown(Math.round(amount * eased * 100) / 100);
-      if (k < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [amount]);
 
   return (
     <button
@@ -41,7 +27,14 @@ export function BonusCompleteOverlay({ amount, onContinue, copy }: Props) {
     >
       <div className="total-win-stack absolute inset-0 flex flex-col items-center justify-center px-4">
         <div className="total-win-label">{copy.totalWin}</div>
-        <div className="total-win-amount tabular-nums">{copy.money(shown)}</div>
+        <div className="total-win-amount tabular-nums">
+          <CountUpAmount
+            value={amount}
+            format={copy.money}
+            durationMs={1800}
+            onCountEnd={audio.playChipLock}
+          />
+        </div>
       </div>
       <div className="cta-hint total-win-cta" style={ctaStyle}>{copy.tapToContinue}</div>
     </button>

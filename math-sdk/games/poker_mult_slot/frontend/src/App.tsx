@@ -1221,6 +1221,8 @@ export default function App() {
     }
     audio.unlock();
     slotRef.current?.resumeAudio();
+    // C3: one dry click per ACCEPTED spin gesture (guards passed above).
+    audio.playSpinPress();
     if (anteKind) {
       void runSpinSequence({ guaranteed: anteKind });
     } else {
@@ -1446,7 +1448,17 @@ export default function App() {
         onBetUp={() => click(() => setBetIdx((i) => Math.min(betLevels.length - 1, i + 1)))}
         onSpin={doSpin}
         onToggleTurbo={onToggleTurbo}
-        onToggleAuto={() => (auto ? stopAuto() : click(() => setAutoOpen(true)))}
+        onToggleAuto={() => {
+          if (auto) {
+            // C3: stopping autoplay is an accepted gesture — one dry click.
+            audio.unlock();
+            slotRef.current?.resumeAudio();
+            audio.playSpinPress();
+            stopAuto();
+          } else {
+            click(() => setAutoOpen(true));
+          }
+        }}
       />
 
       <BuyBonusModal

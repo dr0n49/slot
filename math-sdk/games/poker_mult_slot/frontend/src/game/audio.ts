@@ -297,7 +297,7 @@ function audioEnabled() {
   return canAudio() && unlocked && !masterMuted && !tempMuted;
 }
 
-function playSfx(name: Sfx, gain = 1) {
+function playSfx(name: Sfx, gain = 1, rate = 1) {
   if (!gate(`ui:${name}`)) return;
   if (!audioEnabled()) return;
   if (sfxVol <= 0 || masterVol <= 0) return;
@@ -320,7 +320,7 @@ function playSfx(name: Sfx, gain = 1) {
   (el as HTMLAudioElement & { __gain?: number }).__gain = gain;
   el.volume = clamp01(sfxVol * gain * masterVol);
   // ±3 % random pitch so a burst of clicks never sounds machine-gunned.
-  el.playbackRate = 0.97 + Math.random() * 0.06;
+  el.playbackRate = rate * (0.97 + Math.random() * 0.06);
   el.currentTime = 0;
   void el.play().catch(() => {});
 }
@@ -893,6 +893,27 @@ export const audio = {
   playMultLand() {
     if (!gate("bonus:mult")) return;
     playSample("mult_land", 0.7);
+  },
+
+  /** C3 spin_press / autoplay_stop: the 50 ms dry click, once per accepted
+   *  gesture (call AFTER the gesture passed every guard — never for rejected
+   *  presses). Reuses button_click.wav; no generic synth beep. */
+  playSpinPress() {
+    if (!gate("ui:spin_press")) return;
+    playSfx("button_click");
+  },
+
+  /** C3 win_count_tick: a quiet, brighter tick under the VISIBLE win count
+   *  (~85 ms apart, ≈ −15 dB vs the sting). Same dry asset, pitched up. */
+  playCountTick() {
+    if (!gate("wins:tick")) return;
+    playSfx("button_click", 0.075, 1.5);
+  },
+
+  /** C3 chip-lock: one muted clack when the bonus-summary count lands. */
+  playChipLock() {
+    if (!gate("ui:chip_lock")) return;
+    playSfx("button_click", 0.2, 0.85);
   },
 
   /** Short reel_stop — must be called from the column snap callback. */
