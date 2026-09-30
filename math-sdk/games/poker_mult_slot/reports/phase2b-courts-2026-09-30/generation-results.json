@@ -1,0 +1,136 @@
+[
+  {
+    "id": "JS",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-b72aded1-4bc4-49b0-99c6-d21c3129832f.png",
+    "file": "sources/JS.png",
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "f2db01faeaf9e419e7edfe120e33b99d139079454a0ae2c8595b8f7d9d66333f"
+  },
+  {
+    "id": "JH",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-abf46855-c3c5-4ca5-b603-92fbc1e77cdb.png",
+    "file": "sources/JH.png",
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "6646f3995906a2fd066e09af78265a32a68ecd714c89e9f2210ac20c713c660b"
+  },
+  {
+    "id": "JD",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-a8203d88-e591-4df6-930e-17fcd8dcd037.png",
+    "file": "sources/JD.png",
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "cb6f11158a35f443816bb72e536eba9d1341afe526bd72e5f579dfe54004288e"
+  },
+  {
+    "id": "JC",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-e62f4d16-a45c-4f5f-8d60-0002b04652f2.png",
+    "file": "sources/JC.png",
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "41218538950555e3686908a025adc9130f24309c67e28c429e216cf3d7ee61ff"
+  },
+  {
+    "id": "QS",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-27c67d98-be36-4c45-a005-58a6b0e8f534.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/QS.png",
+    "bytes": 3090995,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "sha256": "e19e2947c00029c3d890bf03c268be02eb0355c26a2e3b02e556915e4e273979"
+  },
+  {
+    "id": "QD",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-6223fc0b-69fb-41ef-815d-1a981ba59e91.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/QD.png",
+    "bytes": 3158375,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "sha256": "96a72f9c044f99eb51a8e3bc0c325106a5eb5649c725b71c0bf769db20250815"
+  },
+  {
+    "id": "QC",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-f4da1f21-d4f4-4acf-a783-ff7a7850acba.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/QC.png",
+    "bytes": 3066279,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "alphaMin": 0,
+    "alphaMax": 254,
+    "sha256": "c38d81ba62c5ec855c61bc5273a5a9fbd20cb785e6fdc3d488183497bd0f977a"
+  },
+  {
+    "id": "KS",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-9170b033-8df0-4ae7-ad9d-5401f4c1b989.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/KS.png",
+    "bytes": 3150540,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "5fb7acaf110225d0dc7889ae8b83c6474ce3316e951c23db2fd2bd9fd5230c53"
+  },
+  {
+    "id": "KH",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-3ed5c0de-9225-46bb-b861-06aede002b1e.png",
+    "path": "reports/phase2b-courts-2026-09-30/revisions/v1/KH.png",
+    "bytes": 3179713,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "08907ebd113876905fa133144a68b2bd315f85bafa8c420d0044ca665e7d96da"
+  },
+  {
+    "id": "KD",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-dcf45a7e-72c8-41cc-ba86-f8f20d460e36.png",
+    "path": "reports/phase2b-courts-2026-09-30/revisions/v1/KD.png",
+    "bytes": 3235127,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "4213edbfe71c2e74a2838e0086ee49c5fe6a02af89afebc18e7da50811cf6728"
+  },
+  {
+    "id": "KC",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-6b3559e6-a5d5-413b-9f98-521313f01110.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/KC.png",
+    "bytes": 3149854,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "1577f7d03eae45ee33c04732aceea65aaadf58fb82096f2be7c7495014675d8c"
+  },
+  {
+    "id": "KH",
+    "revision": "neck anatomy",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-0878183c-88bd-4f7c-809b-0f5686d11170.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/KH.png",
+    "bytes": 3053444,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "d9a65c18955f364004ee26eaadd9e71b6ec70cc976f4a343060d112c468fca13"
+  },
+  {
+    "id": "KD",
+    "revision": "neck anatomy",
+    "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-2dc34aaa-89a8-427e-bd51-095beb8fef0c.png",
+    "path": "reports/phase2b-courts-2026-09-30/sources/KD.png",
+    "bytes": 3123769,
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "sha256": "778d6b7bce78854922f799da503daefe60970a16618b0e0e3fe57b9ef8670299"
+  }
+]

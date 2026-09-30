@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-30",
+  "state": "neck revisions pending group approval",
+  "revisions": [
+    {
+      "id": "KH",
+      "request": "User: K♥ and K♦ have extra neck skeleton bones; remove the extra bones",
+      "editPrompt": "Use case: precise-object-edit. Edit target: the attached KH court illustration from the Queen A deck. The user identified extra bones in the neck skeleton. Change ONLY the small exposed neck region between the skull/beard and the robe collar: remove the superfluous lateral stacked bone columns / extra vertebra-like slabs, and make a single slim central cervical spine, naturally joined to the skull, with only restrained anatomically plausible collarbone ends partly hidden by the robe. The neck must read simply and clearly at a 60×85 card display size. Do not add ribs, duplicated neck bones, fingers, hands or ornaments. Preserve the king's skull, face, beard, hair, crown, entire clothing and gold engraving, rose and sceptre (KH) or chalice (KD), exact pose, proportions, silhouette, crop and all other pixels as closely as possible. Keep the approved Queen A one-engraver bone/ink/oxblood/gold style. Preserve transparent background and existing alpha. No letters, ranks, pips, suit symbols, border, words or new elements. Output one upright illustration with exactly the original portrait dimensions, 1024×1536.",
+      "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-f799bd58-a745-420e-b5a9-bafc4a785131.png",
+      "previousPath": "revisions/v1/KH.png",
+      "previousSha256": "08907ebd113876905fa133144a68b2bd315f85bafa8c420d0044ca665e7d96da",
+      "currentPath": "sources/KH.png",
+      "currentSha256": "d9a65c18955f364004ee26eaadd9e71b6ec70cc976f4a343060d112c468fca13",
+      "alphaCleanup": {
+        "prompt": "Use case: background-extraction / precise-object-edit. The attached KH king illustration is the edit target. Remove ONLY every dark/gray background haze, floating patch, smoky wedge and detached alpha artifact outside the complete king silhouette. Deliver genuine clean transparency around the king, including empty areas to either side above the shoulders and above the crown. There must be no visible colored pixel or shadow outside the outer crown/hair/robe/rose/sceptre contour. Keep all actual foreground engraving pixels, bone skull, beard, corrected SINGLE central cervical spine, natural collarbone ends, crown, long hair, red rose, staff, gold robe, hands and exact pose/scale/framing intact. Do not restore the earlier extra lateral neck-bone columns. Do not modify the character or add ornaments, haze, background, paper, border or text. Keep portrait dimensions exactly 1024×1536. Output RGBA with a truly transparent background, a clean sharp alpha edge and no matte/fringing.",
+        "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-0878183c-88bd-4f7c-809b-0f5686d11170.png",
+        "discardedPath": "revisions/neck-edit-alpha-defect/KH.png"
+      }
+    },
+    {
+      "id": "KD",
+      "request": "User: K♥ and K♦ have extra neck skeleton bones; remove the extra bones",
+      "editPrompt": "Use case: precise-object-edit. Edit target: the attached KD court illustration from the Queen A deck. The user identified extra bones in the neck skeleton. Change ONLY the small exposed neck region between the skull/beard and the robe collar: remove the superfluous lateral stacked bone columns / extra vertebra-like slabs, and make a single slim central cervical spine, naturally joined to the skull, with only restrained anatomically plausible collarbone ends partly hidden by the robe. The neck must read simply and clearly at a 60×85 card display size. Do not add ribs, duplicated neck bones, fingers, hands or ornaments. Preserve the king's skull, face, beard, hair, crown, entire clothing and gold engraving, rose and sceptre (KH) or chalice (KD), exact pose, proportions, silhouette, crop and all other pixels as closely as possible. Keep the approved Queen A one-engraver bone/ink/oxblood/gold style. Preserve transparent background and existing alpha. No letters, ranks, pips, suit symbols, border, words or new elements. Output one upright illustration with exactly the original portrait dimensions, 1024×1536.",
+      "generatedPath": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-2dc34aaa-89a8-427e-bd51-095beb8fef0c.png",
+      "previousPath": "revisions/v1/KD.png",
+      "previousSha256": "4213edbfe71c2e74a2838e0086ee49c5fe6a02af89afebc18e7da50811cf6728",
+      "currentPath": "sources/KD.png",
+      "currentSha256": "778d6b7bce78854922f799da503daefe60970a16618b0e0e3fe57b9ef8670299"
+    }
+  ]
+}

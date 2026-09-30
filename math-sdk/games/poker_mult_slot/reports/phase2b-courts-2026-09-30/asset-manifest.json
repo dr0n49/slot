@@ -1,0 +1,534 @@
+{
+  "date": "2026-09-30",
+  "state": "Court group pending approval. No runtime assets installed.",
+  "anchor": "Queen A (QH), source/master/native previews copied byte-for-byte",
+  "method": "11 separate built-in image_gen calls, each directly referencing approved Queen A; deterministic common crop/mirror/material template; only authored SVG ranks, suits and indices",
+  "ids": [
+    "JS",
+    "JH",
+    "JD",
+    "JC",
+    "QS",
+    "QH",
+    "QD",
+    "QC",
+    "KS",
+    "KH",
+    "KD",
+    "KC"
+  ],
+  "files": [
+    {
+      "path": "sources/JC.png",
+      "bytes": 3100139,
+      "sha256": "41218538950555e3686908a025adc9130f24309c67e28c429e216cf3d7ee61ff",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/JD.png",
+      "bytes": 3092070,
+      "sha256": "cb6f11158a35f443816bb72e536eba9d1341afe526bd72e5f579dfe54004288e",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/JH.png",
+      "bytes": 3315135,
+      "sha256": "6646f3995906a2fd066e09af78265a32a68ecd714c89e9f2210ac20c713c660b",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/JS.png",
+      "bytes": 3074465,
+      "sha256": "f2db01faeaf9e419e7edfe120e33b99d139079454a0ae2c8595b8f7d9d66333f",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/KC.png",
+      "bytes": 3149854,
+      "sha256": "1577f7d03eae45ee33c04732aceea65aaadf58fb82096f2be7c7495014675d8c",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/KD.png",
+      "bytes": 3123769,
+      "sha256": "778d6b7bce78854922f799da503daefe60970a16618b0e0e3fe57b9ef8670299",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/KH.png",
+      "bytes": 3053444,
+      "sha256": "d9a65c18955f364004ee26eaadd9e71b6ec70cc976f4a343060d112c468fca13",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/KS.png",
+      "bytes": 3150540,
+      "sha256": "5fb7acaf110225d0dc7889ae8b83c6474ce3316e951c23db2fd2bd9fd5230c53",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/QC.png",
+      "bytes": 3066279,
+      "sha256": "c38d81ba62c5ec855c61bc5273a5a9fbd20cb785e6fdc3d488183497bd0f977a",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/QD.png",
+      "bytes": 3158375,
+      "sha256": "96a72f9c044f99eb51a8e3bc0c325106a5eb5649c725b71c0bf769db20250815",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/QH.png",
+      "bytes": 3077218,
+      "sha256": "9d8a6899d2368280953656c39837bbb44f953e28c9b4b146c0f8f4bca0966baa",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/QS.png",
+      "bytes": 3090995,
+      "sha256": "e19e2947c00029c3d890bf03c268be02eb0355c26a2e3b02e556915e4e273979",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/card-material.png",
+      "bytes": 2837520,
+      "sha256": "7cb348d69d1ed09c98fb715cd2112d995a4c01dcf48a8deab234e8a15ff67ad1",
+      "width": 1058,
+      "height": 1487,
+      "channels": 3
+    },
+    {
+      "path": "vectors/JC-card-master.svg",
+      "bytes": 1428741,
+      "sha256": "08fd3cd420ce33e64f183cb8daa6f711a150d582690f5311e79d504607e0a56a"
+    },
+    {
+      "path": "vectors/JC-indices.svg",
+      "bytes": 773,
+      "sha256": "9a4e6a3be959d8cd247a03b175ef13a605b20a6e882446444c94d504dc112859"
+    },
+    {
+      "path": "vectors/JD-card-master.svg",
+      "bytes": 1458103,
+      "sha256": "afd8227454abdc3a8b140dffe338f0c898cb1c683e21e5ebf83710e4cc032602"
+    },
+    {
+      "path": "vectors/JD-indices.svg",
+      "bytes": 591,
+      "sha256": "56b0f8b1917e4cd84ee944c8e835dd6ba7bc7faae320eb8dd610314159d36778"
+    },
+    {
+      "path": "vectors/JH-card-master.svg",
+      "bytes": 1489791,
+      "sha256": "693775466bc0e8d06397675a6406dd83e99edeb8d1a0eb932780cc768236311c"
+    },
+    {
+      "path": "vectors/JH-indices.svg",
+      "bytes": 719,
+      "sha256": "76a9835333c350e56616b89f08a99d3f7974fd7968c3ad485fb9cf8d16c51540"
+    },
+    {
+      "path": "vectors/JS-card-master.svg",
+      "bytes": 1410631,
+      "sha256": "0726ec80a228e2d528e0e2f0cb7101aa12e1a68b053ac7d52736fda7d97c7ae7"
+    },
+    {
+      "path": "vectors/JS-indices.svg",
+      "bytes": 791,
+      "sha256": "3ad247cd585b73f6b951f2118a6f60b24e626e0daec2916bb530addb1b737f13"
+    },
+    {
+      "path": "vectors/KC-card-master.svg",
+      "bytes": 1448789,
+      "sha256": "9f7d0dfa332f5f8367224f9bf118eed91064b00f96bc13a1878b43d41c2cb931"
+    },
+    {
+      "path": "vectors/KC-indices.svg",
+      "bytes": 765,
+      "sha256": "2eda7a097efaf5093bdf4284e808bf3571bfb6a1a70331b3b18e71526f79167b"
+    },
+    {
+      "path": "vectors/KD-card-master.svg",
+      "bytes": 1461871,
+      "sha256": "5f883f524574822afbf8f175da3857bf2775faab2245bebb6f586885dd8306d7"
+    },
+    {
+      "path": "vectors/KD-indices.svg",
+      "bytes": 583,
+      "sha256": "ab72cab648954b406b40a780ed4ec08ea7f61d16b83dbbbf29696800371bd6cf"
+    },
+    {
+      "path": "vectors/KH-card-master.svg",
+      "bytes": 1438591,
+      "sha256": "26c7b6412cfa2746a14d3ed4729e0263de623ed7dd68e08414d6de762cdb9382"
+    },
+    {
+      "path": "vectors/KH-indices.svg",
+      "bytes": 711,
+      "sha256": "f8e67abfd9639f54bac94df0db6383f77bd02414857518c0ebdb9ee720d9984d"
+    },
+    {
+      "path": "vectors/KS-card-master.svg",
+      "bytes": 1431751,
+      "sha256": "6a063f51af53803e6028cb9e2fc455cd14c44574199043e0677ff34ebaaf185a"
+    },
+    {
+      "path": "vectors/KS-indices.svg",
+      "bytes": 783,
+      "sha256": "4c7e595b95b190842102eb4d6eb94d7335cf55f801a30c050d0ccc6d57414c0a"
+    },
+    {
+      "path": "vectors/QC-card-master.svg",
+      "bytes": 1437033,
+      "sha256": "9bb7b94f76278f4c7c52c8079e302af8db811e96fb96b325589ca3e2af7b93cf"
+    },
+    {
+      "path": "vectors/QC-indices.svg",
+      "bytes": 801,
+      "sha256": "2d83f66d674d86141f5e958ea4513829335e51d502694b2364be5ca46f2a8ca7"
+    },
+    {
+      "path": "vectors/QD-card-master.svg",
+      "bytes": 1449139,
+      "sha256": "37d833a5e757625768f3ae8006bea6acf92f8f8b0cf74d8df62336af5dc387c5"
+    },
+    {
+      "path": "vectors/QD-indices.svg",
+      "bytes": 619,
+      "sha256": "7252edcfae13bc8b199283af520b5ba075a77f0699a44395509b190406c650e6"
+    },
+    {
+      "path": "vectors/QH-card-master.svg",
+      "bytes": 1442161,
+      "sha256": "e0b00132b96f0d68acbc50786ef4a823d0a816e1e7d842553b1cdba2066d6422"
+    },
+    {
+      "path": "vectors/QH-indices.svg",
+      "bytes": 747,
+      "sha256": "e7f811ec7638ba129c2985962b278c2d7cbef7877e1d075bc14d61a2150b35a4"
+    },
+    {
+      "path": "vectors/QS-card-master.svg",
+      "bytes": 1436131,
+      "sha256": "1f2b540009db3d75f2301b147e480af6be4b06dbf00af4650ceab618f66321c2"
+    },
+    {
+      "path": "vectors/QS-indices.svg",
+      "bytes": 819,
+      "sha256": "5f46f25a177622f31903b89a1a7bc7546150248e9400d1d628b2cd0e41c50acb"
+    },
+    {
+      "path": "previews/JC-card-512x720.png",
+      "bytes": 855194,
+      "sha256": "077c2246498a330ec9dd6914e2152db28977a218dc9ae919d74305f650e31627",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/JC-desktop-86x121.png",
+      "bytes": 25639,
+      "sha256": "d89109e8f244cc5eb4da4fc253c681aa8e79ef03af5864f9dfa38e0c00cbea39",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/JC-portrait-60x85.png",
+      "bytes": 13142,
+      "sha256": "b226c415f1eda51fe208d8234da4eef9e7eceb5f94e694da4f988aa390b526b6",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/JD-card-512x720.png",
+      "bytes": 870396,
+      "sha256": "537537e822ccead4c2d695d843663d346bca0074c44cf3823d7e0bc35141cfaf",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/JD-desktop-86x121.png",
+      "bytes": 26364,
+      "sha256": "79a288a29b5dbbbe24321f368442e09ecf24bdda3c5eaa47fa2857b6e23f4a4c",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/JD-portrait-60x85.png",
+      "bytes": 13425,
+      "sha256": "977908992fe409c484d755c7e8eaf0fb3406e7f2ca173a0c991bc50d9af2b4d5",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/JH-card-512x720.png",
+      "bytes": 879623,
+      "sha256": "ff10e3f56428f7945ceb5f3b40e27c31c8962908ec6cf0a2bd1013622504d5f0",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/JH-desktop-86x121.png",
+      "bytes": 26511,
+      "sha256": "3d2c42072a1d15242ce85fa88814df462cb1a6a8c3b522be8f4f0e361f7d9d4f",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/JH-portrait-60x85.png",
+      "bytes": 13507,
+      "sha256": "483ddd2b7d40fb491a2578dd8e245d66974714204564613801e406aea649ea50",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/JS-card-512x720.png",
+      "bytes": 853079,
+      "sha256": "df9bc3e9963333800a084c242f088b4393b82319fe472c131b83daa6c10c5928",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/JS-desktop-86x121.png",
+      "bytes": 25564,
+      "sha256": "f787d94fa117d1f60db02228e7399c97f10c81cf48aaf231f9ee6e65cf67d55b",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/JS-portrait-60x85.png",
+      "bytes": 13090,
+      "sha256": "a9ad6fd73b17483b82722b8dcd4377ff6c18b38efa5f5a6eee462779c79c9e86",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/KC-card-512x720.png",
+      "bytes": 862628,
+      "sha256": "70c745ff4537e7d02069bb92b4315edd917a0662287d434315430246570241b5",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/KC-desktop-86x121.png",
+      "bytes": 25738,
+      "sha256": "eea8e546acc7833178ff47184c927e2c8ed3079cce7c1f1d63366f9ff2ae0ab5",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/KC-portrait-60x85.png",
+      "bytes": 13167,
+      "sha256": "470585d0c1b98eae261da27e81a53cf78b48b4dc2a6e4f138d1fdb175cd49b5a",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/KD-card-512x720.png",
+      "bytes": 877010,
+      "sha256": "12dd5e28c8190203d650d48acbf1dc5a61826c297d39d6528c93f3fa0db7f0b0",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/KD-desktop-86x121.png",
+      "bytes": 26073,
+      "sha256": "521495af0531b307395b399cbc9e8e4acd3db7acc20bb38c9b189f2e8b3b4385",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/KD-portrait-60x85.png",
+      "bytes": 13254,
+      "sha256": "7ced10f86afa6bb24d5c98f867a4a1bae054d1189115b82dbaae1976bb9ffd89",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/KH-card-512x720.png",
+      "bytes": 866690,
+      "sha256": "1907b627cbcb6104228469e52ed71f33819b1e461c87a08e5b9d05213dfbaade",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/KH-desktop-86x121.png",
+      "bytes": 25752,
+      "sha256": "50ecc61eb89771ed1a4bf15a30a3b1c8c2037cc730737a1c9668a48b6ed55c85",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/KH-portrait-60x85.png",
+      "bytes": 13095,
+      "sha256": "c1d9bfd2ca9d9694ca268e5dae80062d1c03f25a7dfa89d736b25839a40b4ca1",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/KS-card-512x720.png",
+      "bytes": 861052,
+      "sha256": "192e73d2a25537b06265e9c8ee33aab5b15f2e37a52b37cf588ad9f97dee5985",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/KS-desktop-86x121.png",
+      "bytes": 25477,
+      "sha256": "4031a5a1e21e896bd1dc3262dc0d83fd5b43daaa15b5f6d8aba327d74eb0e14b",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/KS-portrait-60x85.png",
+      "bytes": 12984,
+      "sha256": "fb67c6fa3130a9a3210e245c828653e555340748af0392ba0b11acb1ed66977a",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/QC-card-512x720.png",
+      "bytes": 856689,
+      "sha256": "095976ad4c11f99ac3c3c6396c214ba457b0a45acf54039cb6b09e0fbeae6f60",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/QC-desktop-86x121.png",
+      "bytes": 25904,
+      "sha256": "625e32fb4fd58f73e139e71810ba748f9baba2109d8f797948d33b7af80c52cb",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/QC-portrait-60x85.png",
+      "bytes": 13246,
+      "sha256": "1b84b5d83e4278bf40bd8f92aae3c9290faf7c6f5a7bc08adb751305aec64e9f",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/QD-card-512x720.png",
+      "bytes": 863884,
+      "sha256": "2bed60a0cf2f4023f94cd5a62744cb8e569d641d1013e305450accc19791947b",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/QD-desktop-86x121.png",
+      "bytes": 25907,
+      "sha256": "bf815acc552d48be8117a4c59ce1b78e1e1f699cadefb6c1fd48231337c14bcc",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/QD-portrait-60x85.png",
+      "bytes": 13283,
+      "sha256": "c580071ee7e31f767fdc77de9a6250a04c97719172ae328dbd5cc26eeb47474b",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/QH-card-512x720.png",
+      "bytes": 854640,
+      "sha256": "b4d2e13a0650a3aeb6f0277e5b3e4b19c8c07687d4ef3370937287ceb3fd0e88",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/QH-desktop-86x121.png",
+      "bytes": 25709,
+      "sha256": "515cb615ab0f7c75f3d48b6b28a64a5a44330d5f3cce3763dc451ee7408a5d75",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/QH-portrait-60x85.png",
+      "bytes": 13192,
+      "sha256": "fc11e42aa154218ad135cb605ffda75a47d62e9b31504c18b34ddeb8ac31948c",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/QS-card-512x720.png",
+      "bytes": 853104,
+      "sha256": "83607768e0ccb2d6405c84b332e7bb73bcc674e8f38ff5750ec1d63132b674f6",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/QS-desktop-86x121.png",
+      "bytes": 25669,
+      "sha256": "e2565eb2a6a6680be600605dbf433dd5be1c486c0b0aa33e93b5d1bd0659e244",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/QS-portrait-60x85.png",
+      "bytes": 13132,
+      "sha256": "f00b6bf2d5f31da68ac89cb1cc34e83cc6fcb007a6e95f27c82200891c8abbe2",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    }
+  ]
+}
