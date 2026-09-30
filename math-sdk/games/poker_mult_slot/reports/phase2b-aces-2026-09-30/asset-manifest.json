@@ -1,0 +1,113 @@
+{
+  "state": "Four aces pending approval; no runtime installation",
+  "previousGroup": "Queen A 12 courts approved after KH/KD neck correction",
+  "method": "Authored vector A ranks, all suit shapes, indices and engraved ornament; existing approved paper only",
+  "ids": [
+    "AS",
+    "AH",
+    "AD",
+    "AC"
+  ],
+  "files": [
+    {
+      "path": "vectors/AC-card-master.svg",
+      "bytes": 895964,
+      "sha256": "d7357d2a2d95310bc67f43ff22c966f337353f3af0be156c8f9ab2700bc4ac81"
+    },
+    {
+      "path": "vectors/AC-suit.svg",
+      "bytes": 184,
+      "sha256": "ff2dd3e144da69d1f0566c1788a3e5e96495c6667f881b72df00883674f1ee0d"
+    },
+    {
+      "path": "vectors/AD-card-master.svg",
+      "bytes": 895740,
+      "sha256": "a567593938d7a47336013dafbf7c2b5525f8b136846a7516e8a45ff8e6877efd"
+    },
+    {
+      "path": "vectors/AD-suit.svg",
+      "bytes": 128,
+      "sha256": "28fe0da63c8f50b0f932c40046a9c7c85bc88f0e67693b5546fcc40a60705256"
+    },
+    {
+      "path": "vectors/AH-card-master.svg",
+      "bytes": 895996,
+      "sha256": "5c46cfbf314c5bdb8c79abf31ae3a4412fd5520039070cb487682685910a7368"
+    },
+    {
+      "path": "vectors/AH-suit.svg",
+      "bytes": 192,
+      "sha256": "84b2e622284c61892ae2c73681cb7b469da6958bdd87a5ede3c1563eb5489541"
+    },
+    {
+      "path": "vectors/AS-card-master.svg",
+      "bytes": 896096,
+      "sha256": "55a4923d33f98f43bb20391163c1a0b3bad9608351abe2de28df86a84cdd91fd"
+    },
+    {
+      "path": "vectors/AS-suit.svg",
+      "bytes": 217,
+      "sha256": "253318ad731016c554ce2537528de3b2bd8f697bf1f2190ce1206e45ce7c0595"
+    },
+    {
+      "path": "previews/AC-card-512x720.png",
+      "bytes": 594822,
+      "sha256": "94e2586c150fbbfb2846426933e839d1814487b90912ab0f747e0490afaac419"
+    },
+    {
+      "path": "previews/AC-desktop-86x121.png",
+      "bytes": 20519,
+      "sha256": "13ecc0d9289f5e1fe4b2a02cd7a74de7e71f2a54e579550c55cbaacf3276916c"
+    },
+    {
+      "path": "previews/AC-portrait-60x85.png",
+      "bytes": 10867,
+      "sha256": "fae31562408a29b1269a239a8eceb5b5742337f43010ff57edf841d43d65f32b"
+    },
+    {
+      "path": "previews/AD-card-512x720.png",
+      "bytes": 623894,
+      "sha256": "fe616d0e2548027983a35e526632917a0cbd8afe7388cb098d0e2e0e662468cf"
+    },
+    {
+      "path": "previews/AD-desktop-86x121.png",
+      "bytes": 19860,
+      "sha256": "bc84a2a1b0cfb71cb0ab6b2db2c483feae0286f65520908164ed11122d2bef6a"
+    },
+    {
+      "path": "previews/AD-portrait-60x85.png",
+      "bytes": 10400,
+      "sha256": "65fe673972bcb05a67775a7d8a1248c4a1b7906a02effca6ac094f93e032b998"
+    },
+    {
+      "path": "previews/AH-card-512x720.png",
+      "bytes": 605525,
+      "sha256": "3fbef606a515bb34d367019000f45623d63d17f989155be0f65619348ea942e1"
+    },
+    {
+      "path": "previews/AH-desktop-86x121.png",
+      "bytes": 20047,
+      "sha256": "18093efbf8878b89878ae695cd04cc8e77a6c7abb51e1082dfdd5c7e633cc77d"
+    },
+    {
+      "path": "previews/AH-portrait-60x85.png",
+      "bytes": 10511,
+      "sha256": "d45d005a10f2dc481bd33737c13bb3cf8b841efc03584046868d003de2d8979a"
+    },
+    {
+      "path": "previews/AS-card-512x720.png",
+      "bytes": 606954,
+      "sha256": "efd2fb6cb86c3ccd3fc01c580caf6a61a7bd0ebbcef25a6fe98e77da6253dfc7"
+    },
+    {
+      "path": "previews/AS-desktop-86x121.png",
+      "bytes": 20695,
+      "sha256": "84b8322739535b1187af3e418e1c3d46f9205a723060c6165b5c86a65cba8d5a"
+    },
+    {
+      "path": "previews/AS-portrait-60x85.png",
+      "bytes": 10909,
+      "sha256": "2f107a145415327b769e8ed249d908df1c78533ebbffb8c308ce0e3fa0a9ba4a"
+    }
+  ]
+}
