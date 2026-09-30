@@ -1,0 +1,92 @@
+{
+  "verifiedAt": "2026-09-30T11:47:50.485Z",
+  "samples": [
+    {
+      "id": "spin_press",
+      "source": "ElevenLabs",
+      "seconds": 0.1,
+      "sampleCount": 4800,
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -16,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -15.999998506140162
+      },
+      "originalHashVerified": true
+    },
+    {
+      "id": "reel_stop",
+      "source": "ElevenLabs",
+      "seconds": 0.13,
+      "sampleCount": 6240,
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -11.99,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -12.000000253286988
+      },
+      "originalHashVerified": true
+    },
+    {
+      "id": "win_normal",
+      "source": "ElevenLabs",
+      "seconds": 0.65,
+      "sampleCount": 31200,
+      "measured": {
+        "integratedLufs": -20,
+        "truePeakDbtp": -5.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30,
+        "samplePeakDbfs": -5.148334946973311
+      },
+      "originalHashVerified": true
+    },
+    {
+      "id": "big_nice",
+      "source": "ElevenLabs",
+      "seconds": 1.2,
+      "sampleCount": 57600,
+      "measured": {
+        "integratedLufs": -18.07,
+        "truePeakDbtp": -4.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.81,
+        "samplePeakDbfs": -4.148654711756244
+      },
+      "originalHashVerified": true
+    },
+    {
+      "id": "bonus_trigger",
+      "source": "ElevenLabs",
+      "seconds": 1.25,
+      "sampleCount": 60000,
+      "measured": {
+        "integratedLufs": -17,
+        "truePeakDbtp": -3.14,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.5,
+        "samplePeakDbfs": -3.1495175525645447
+      },
+      "originalHashVerified": true
+    },
+    {
+      "id": "music_base",
+      "source": "Original local composition",
+      "seconds": 30,
+      "sampleCount": 1440000,
+      "measured": {
+        "integratedLufs": -23.99,
+        "truePeakDbtp": -8.24,
+        "loudnessRangeLu": 3.1,
+        "thresholdLufs": -33.99
+      },
+      "originalHashVerified": true
+    }
+  ],
+  "musicGrid": "Programmed100BPM/4/4; 50beats /12.5bars /30seconds; threeD-A-C-Dphrases; exact note-event assertion passed.",
+  "listeningApproval": "Pending: no subjective quality or live-performance claim.",
+  "noPurchases": true,
+  "noGameIntegration": true
+}

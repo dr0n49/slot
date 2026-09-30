@@ -1,0 +1,623 @@
+{
+  "startedAt": "2026-09-30T11:24:14.786Z",
+  "provider": "Mixed: ElevenLabs SFX plus original local composition",
+  "authorizedIds": [
+    "spin_press",
+    "reel_stop",
+    "win_normal",
+    "big_nice",
+    "bonus_trigger",
+    "music_base"
+  ],
+  "credentialsStored": false,
+  "purchased": false,
+  "results": [
+    {
+      "id": "spin_press",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:24:15.745Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Tight paper grip and low wood contact; distinctive press feedback. Begin within 20 ms. Source 0.5 s, edited contact 0.10 s; silence after contact.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/spin_press.mp3",
+      "sha256": "2854fb2a6b071608eb66d4570efa75ef4b5ae4086f58a17ccd4bae60464508c3",
+      "sourceBytes": 8821,
+      "providerContentType": "audio/mpeg",
+      "characterCost": "5",
+      "songId": null,
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "bits_per_sample": 0
+          }
+        ],
+        "format": {
+          "duration": "0.480000",
+          "size": "8821"
+        }
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/spin_press.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/spin_press.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 24
+            }
+          ],
+          "format": {
+            "duration": "0.100000",
+            "size": "14502"
+          }
+        },
+        "auditionProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 0
+            }
+          ],
+          "format": {
+            "duration": "0.100000",
+            "size": "4076"
+          }
+        },
+        "sourceTrimSeconds": 0,
+        "endFadeSeconds": 0.008333333333333333,
+        "gainDb": 19.825978347202884,
+        "mastering": "fixed gain; true-peak ceiling takes priority over integrated loudness",
+        "measured": {
+          "integratedLufs": null,
+          "truePeakDbtp": -16,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -70,
+          "samplePeakDbfs": -15.999998506140162
+        },
+        "mp3Measured": {
+          "integratedLufs": null,
+          "truePeakDbtp": -16.5,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -70
+        },
+        "loudnessTargetReached": null,
+        "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+        "listeningReview": "Pending user audition. Motif, key, tempo, timbre and subjective quality are not certified by level meters."
+      },
+      "status": "generated_awaiting_audition",
+      "provider": "ElevenLabs"
+    },
+    {
+      "id": "reel_stop",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:24:18.967Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. One crisp cardstock contact on wood; tiny damped D3 brass overtone. Precise quiet stop, no bright lingering ring. Begin within 20 ms. Source 0.5 s, edited contact 0.13 s.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/reel_stop.mp3",
+      "sha256": "0bb2b2122012288106ef80f9237507bc35f0eca4703c21bd3c742d7af34f34ec",
+      "sourceBytes": 8821,
+      "providerContentType": "audio/mpeg",
+      "characterCost": "5",
+      "songId": null,
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "bits_per_sample": 0
+          }
+        ],
+        "format": {
+          "duration": "0.480000",
+          "size": "8821"
+        }
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/reel_stop.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/reel_stop.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 24
+            }
+          ],
+          "format": {
+            "duration": "0.130000",
+            "size": "18822"
+          }
+        },
+        "auditionProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 0
+            }
+          ],
+          "format": {
+            "duration": "0.130000",
+            "size": "4652"
+          }
+        },
+        "sourceTrimSeconds": 0,
+        "endFadeSeconds": 0.01,
+        "gainDb": 32.8549468607071,
+        "mastering": "fixed gain; true-peak ceiling takes priority over integrated loudness",
+        "measured": {
+          "integratedLufs": null,
+          "truePeakDbtp": -11.99,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -70,
+          "samplePeakDbfs": -12.000000253286988
+        },
+        "mp3Measured": {
+          "integratedLufs": null,
+          "truePeakDbtp": -12.25,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -70
+        },
+        "loudnessTargetReached": null,
+        "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+        "listeningReview": "Pending user audition. Motif, key, tempo, timbre and subjective quality are not certified by level meters."
+      },
+      "status": "generated_awaiting_audition",
+      "provider": "ElevenLabs"
+    },
+    {
+      "id": "win_normal",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:24:21.567Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Compact four-note D-A-C-D motif on muted nylon and damped bell; tiny brushed drum contact, no flourish. Begin within 20 ms, complete the motif and decay inside 0.65 s.",
+        "duration_seconds": 0.65,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/win_normal.mp3",
+      "sha256": "b09a7437cd943172f5a8f97807d2e39aef27d7b2cc0808f1649ca6cb689d0930",
+      "sourceBytes": 11328,
+      "providerContentType": "audio/mpeg",
+      "characterCost": "6",
+      "songId": null,
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "bits_per_sample": 0
+          }
+        ],
+        "format": {
+          "duration": "0.640000",
+          "size": "11328"
+        }
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/win_normal.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/win_normal.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 24,
+              "time_base": "1/48000",
+              "duration_ts": 31200
+            }
+          ],
+          "format": {
+            "duration": "0.650000",
+            "size": "93702"
+          }
+        },
+        "auditionProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 0,
+              "time_base": "1/14112000",
+              "duration_ts": 9172800
+            }
+          ],
+          "format": {
+            "duration": "0.650000",
+            "size": "17324"
+          }
+        },
+        "sourceTrimSeconds": 0,
+        "endFadeSeconds": 0.01,
+        "gainDb": 26.06,
+        "mastering": "Initial edit and fixed gain, then 192-kHz oversampled 1-ms look-ahead limiter to meet approved LUFS and true-peak targets; no source regeneration.",
+        "measured": {
+          "integratedLufs": -20,
+          "truePeakDbtp": -5.15,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -30,
+          "samplePeakDbfs": -5.148334946973311
+        },
+        "mp3Measured": {
+          "integratedLufs": -20.28,
+          "truePeakDbtp": -5.41,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -30.28
+        },
+        "loudnessTargetReached": true,
+        "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+        "listeningReview": "Pending user audition. Motif, key, tempo, timbre and subjective quality are not certified by level meters.",
+        "finalLimiter": {
+          "addedGainDb": 3,
+          "limitDbfs": -5.15,
+          "attackMs": 1,
+          "releaseMs": 20,
+          "oversampleHz": 192000,
+          "latencyCompensated": true
+        }
+      },
+      "status": "generated_awaiting_audition",
+      "provider": "ElevenLabs"
+    },
+    {
+      "id": "big_nice",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:24:24.492Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Clear four-note D-A-C-D nylon/bell motif, light frame drum, short gold contact. Modest warm NICE reward; no metallic fizz. Immediate attack; motif and clean release inside 1.2 s.",
+        "duration_seconds": 1.2,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/big_nice.mp3",
+      "sha256": "fe06b885d8fc5dec5170d25ad132b5b423a156be1f0233ed1d4146986cdcac0a",
+      "sourceBytes": 20106,
+      "providerContentType": "audio/mpeg",
+      "characterCost": "12",
+      "songId": null,
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "bits_per_sample": 0
+          }
+        ],
+        "format": {
+          "duration": "1.200000",
+          "size": "20106"
+        }
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/big_nice.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/big_nice.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 24,
+              "time_base": "1/48000",
+              "duration_ts": 57600
+            }
+          ],
+          "format": {
+            "duration": "1.200000",
+            "size": "172902"
+          }
+        },
+        "auditionProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 0,
+              "time_base": "1/14112000",
+              "duration_ts": 16934400
+            }
+          ],
+          "format": {
+            "duration": "1.200000",
+            "size": "29996"
+          }
+        },
+        "sourceTrimSeconds": 0,
+        "endFadeSeconds": 0.01,
+        "gainDb": 27.29,
+        "mastering": "Initial edit and fixed gain, then 192-kHz oversampled 1-ms look-ahead limiter to meet approved LUFS and true-peak targets; no source regeneration.",
+        "measured": {
+          "integratedLufs": -18.07,
+          "truePeakDbtp": -4.15,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -29.81,
+          "samplePeakDbfs": -4.148654711756244
+        },
+        "mp3Measured": {
+          "integratedLufs": -18.32,
+          "truePeakDbtp": -4.4,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -30.06
+        },
+        "loudnessTargetReached": true,
+        "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+        "listeningReview": "Pending user audition. Motif, key, tempo, timbre and subjective quality are not certified by level meters.",
+        "finalLimiter": {
+          "addedGainDb": 4.080000000000002,
+          "limitDbfs": -4.15,
+          "attackMs": 1,
+          "releaseMs": 20,
+          "oversampleHz": 192000,
+          "latencyCompensated": true
+        }
+      },
+      "status": "generated_awaiting_audition",
+      "provider": "ElevenLabs"
+    },
+    {
+      "id": "bonus_trigger",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:24:31.782Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Three dry bone contacts then four-note D-A-C-D gold bell phrase and muted brass resolution. Distinct bonus recognition cadence; leave continuation space. Entire one-shot 1.25 s.",
+        "duration_seconds": 1.25,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/bonus_trigger.mp3",
+      "sha256": "97b6be7461f323ade378b6c83768a59285bf269079f63c0b88c8f9feb09eb1d2",
+      "sourceBytes": 20942,
+      "providerContentType": "audio/mpeg",
+      "characterCost": "12",
+      "songId": null,
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "44100",
+            "channels": 2,
+            "bits_per_sample": 0
+          }
+        ],
+        "format": {
+          "duration": "1.240000",
+          "size": "20942"
+        }
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/bonus_trigger.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/bonus_trigger.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 24,
+              "time_base": "1/48000",
+              "duration_ts": 60000
+            }
+          ],
+          "format": {
+            "duration": "1.250000",
+            "size": "180102"
+          }
+        },
+        "auditionProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "mp3",
+              "sample_rate": "48000",
+              "channels": 1,
+              "bits_per_sample": 0,
+              "time_base": "1/14112000",
+              "duration_ts": 17640000
+            }
+          ],
+          "format": {
+            "duration": "1.250000",
+            "size": "31724"
+          }
+        },
+        "sourceTrimSeconds": 0,
+        "endFadeSeconds": 0.01,
+        "gainDb": 23.37,
+        "mastering": "Initial edit and fixed gain, then 192-kHz oversampled 1-ms look-ahead limiter to meet approved LUFS and true-peak targets; no source regeneration.",
+        "measured": {
+          "integratedLufs": -17,
+          "truePeakDbtp": -3.14,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -29.5,
+          "samplePeakDbfs": -3.1495175525645447
+        },
+        "mp3Measured": {
+          "integratedLufs": -17.3,
+          "truePeakDbtp": -3.1,
+          "loudnessRangeLu": 0,
+          "thresholdLufs": -29.8
+        },
+        "loudnessTargetReached": true,
+        "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+        "listeningReview": "Pending user audition. Motif, key, tempo, timbre and subjective quality are not certified by level meters.",
+        "finalLimiter": {
+          "addedGainDb": 7,
+          "limitDbfs": -3.15,
+          "attackMs": 1,
+          "releaseMs": 20,
+          "oversampleHz": 192000,
+          "latencyCompensated": true
+        }
+      },
+      "status": "generated_awaiting_audition",
+      "provider": "ElevenLabs"
+    },
+    {
+      "id": "music_base",
+      "provider": "Original local composition",
+      "model": null,
+      "authoredAt": "2026-09-30T11:41:03.181Z",
+      "status": "authored_awaiting_audition",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/music_base.local-original.wav",
+      "sha256": "a76bce8ef54817425633d5630bfd778dcfb8291264591a05f62efce555360460",
+      "sourceProbe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "pcm_f32le",
+            "sample_rate": "48000",
+            "channels": 2,
+            "bits_per_sample": 32,
+            "time_base": "1/48000",
+            "duration_ts": 1440000
+          }
+        ],
+        "format": {
+          "duration": "30.000000",
+          "size": "11520044"
+        }
+      },
+      "request": {
+        "kind": "original_local_composition",
+        "durationSeconds": 30,
+        "key": "D minor",
+        "bpm": 100,
+        "meter": "4/4",
+        "motif": "D-A-C-D",
+        "instrumentation": [
+          "Karplus-Strong nylon string",
+          "damped warm modal bell",
+          "bone/wood modal contacts",
+          "filtered brushed-noise percussion",
+          "soft shaker",
+          "low muted harmonic brass"
+        ],
+        "brief": "Original quiet warm noir accompaniment using locally modelled/synthetic instruments; no provider music and no live recordings."
+      },
+      "edit": {
+        "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/music_base.wav",
+        "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/music_base.mp3",
+        "masterProbe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "pcm_s24le",
+              "sample_rate": "48000",
+              "channels": 2,
+              "bits_per_sample": 24,
+              "time_base": "1/48000",
+              "duration_ts": 1440000
+            }
+          ],
+          "format": {
+            "duration": "30.000000",
+            "size": "8640102"
+          }
+        },
+        "measured": {
+          "integratedLufs": -23.99,
+          "truePeakDbtp": -8.24,
+          "loudnessRangeLu": 3.1,
+          "thresholdLufs": -33.99
+        },
+        "mp3Measured": {
+          "integratedLufs": -24.26,
+          "truePeakDbtp": -8.48,
+          "loudnessRangeLu": 3.1,
+          "thresholdLufs": -34.26
+        },
+        "loudnessTargetReached": true,
+        "gainDb": -0.28000000000000114,
+        "mastering": "Original programmed score, short excerpt fade and fixed-gain master",
+        "sourceQuality": "Original authored 48-kHz stereo float32 WAV; final 24-bit WAV and MP3 derived locally.",
+        "listeningReview": "Pending user audition; instrument models are synthetic and are not claimed as live nylon/brass performances."
+      },
+      "provenance": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/music-base-provenance.json"
+    }
+  ],
+  "accountBefore": {
+    "tier": "free",
+    "status": "free",
+    "remainingCredits": 9080
+  },
+  "accountAfter": {
+    "tier": "free",
+    "status": "free",
+    "remainingCredits": 9070
+  },
+  "completedAt": "2026-09-30T11:45:22.279Z",
+  "completedSamples": 6,
+  "reportedSfxCharacterCostTotal": 40,
+  "billingNote": "Returned SFX billing headers total 40. The immediate end-of-run account delta was 10; these measures differ and the account counter may not yet be settled. No cost claim is inferred from that immediate delta.",
+  "musicApiAttempt": {
+    "status": "blocked_free_tier_music_api",
+    "error": {
+      "code": "limited_access",
+      "message": "Official Music API requires an existing paid plan; no subscription purchase is authorized."
+    },
+    "paidMusicCallsAfterFreeTierDetection": 0
+  }
+}

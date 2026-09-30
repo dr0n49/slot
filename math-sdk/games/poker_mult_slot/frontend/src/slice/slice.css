@@ -1,0 +1,16 @@
+.slice-controls { position:fixed;top:8px;left:8px;z-index:300;display:flex;gap:8px;align-items:center;font:14px Oswald,sans-serif;color:#ead8b2; }
+.slice-controls button,.slice-actions button { border:1px solid #987638;background:#18140e;color:#ead8b2;border-radius:3px;padding:7px 12px;cursor:pointer;font:inherit; }
+.slice-controls button:disabled {opacity:.4;cursor:default;}
+.slice-skip {position:absolute;inset:0;z-index:5;border:0;background:transparent;cursor:pointer;}
+.slice-comparison {padding:24px;color:#ead8b2;background:#10100d;min-height:100vh;font:16px Oswald,sans-serif;overflow:auto;}
+.slice-comparison h1 {font:32px 'Pirata One',serif;margin:0;}
+.slice-comparison h2 {font-size:20px;margin:20px 0 8px;}
+.slice-comparison header p {margin:4px 0 16px;color:#a89f8a;}
+.slice-actions {display:flex;gap:12px;flex-wrap:wrap;}
+.slice-compare {display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.slice-compare section {min-width:0;}
+.slice-compare iframe {width:100%;height:65vh;min-height:550px;border:1px solid #675839;}
+.slice-compare.is-mobile {grid-template-columns:390px 390px;justify-content:center;}
+.slice-compare.is-mobile iframe {width:390px;height:844px;}
+.slice-note {color:#a89f8a;}
+@media(max-width:800px){.slice-controls {font-size:11px;gap:3px}.slice-controls button {padding:4px 6px}.slice-compare {grid-template-columns:1fr}.slice-compare.is-mobile{grid-template-columns:390px;justify-content:start}.slice-comparison{padding:12px}}

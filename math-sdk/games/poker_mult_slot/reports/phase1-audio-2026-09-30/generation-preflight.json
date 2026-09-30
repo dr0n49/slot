@@ -1,0 +1,9 @@
+{
+  "endpoint": "https://api.elevenlabs.io/v1/user/subscription",
+  "httpStatus": 401,
+  "code": "missing_permissions",
+  "paidCallsSubmitted": 0,
+  "source": "Parent agent reported the completed official API preflight; process exited. No generation request submitted.",
+  "credentialPersisted": false,
+  "noSampleFilesCreated": true
+}

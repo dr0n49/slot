@@ -1,0 +1,113 @@
+{
+  "pixiVersion": "8.21.0",
+  "files": [
+    {
+      "file": "assets/BufferResource-B_iPAeom.js",
+      "name": "BufferResource",
+      "bytes": 11139,
+      "gzipBytes": 2854
+    },
+    {
+      "file": "assets/Filter-avkH12Q1.js",
+      "name": "Filter",
+      "bytes": 907,
+      "gzipBytes": 481
+    },
+    {
+      "file": "assets/PixiSlot-DwsZCHsE.js",
+      "name": "PixiSlot",
+      "bytes": 320142,
+      "gzipBytes": 101227
+    },
+    {
+      "file": "assets/RenderTargetSystem-CaSSV9qW.js",
+      "name": "RenderTargetSystem",
+      "bytes": 53877,
+      "gzipBytes": 14797
+    },
+    {
+      "file": "assets/browserAll-vlvya6Kr.js",
+      "name": "browserAll",
+      "bytes": 43340,
+      "gzipBytes": 11399
+    },
+    {
+      "file": "assets/webworkerAll-5tVq_X-9.js",
+      "name": "webworkerAll",
+      "bytes": 15738,
+      "gzipBytes": 4972
+    },
+    {
+      "file": "assets/CanvasRenderer-_MsQzewE.js",
+      "name": "CanvasRenderer",
+      "bytes": 18479,
+      "gzipBytes": 6187
+    },
+    {
+      "file": "assets/WebGLRenderer-By0jzqpV.js",
+      "name": "WebGLRenderer",
+      "bytes": 72689,
+      "gzipBytes": 19766
+    },
+    {
+      "file": "assets/WebGPURenderer-BHaCqI4-.js",
+      "name": "WebGPURenderer",
+      "bytes": 48902,
+      "gzipBytes": 14073
+    },
+    {
+      "file": "assets/BitmapFont-DRonn1mE.js",
+      "name": "BitmapFont",
+      "bytes": 13102,
+      "gzipBytes": 4791
+    },
+    {
+      "file": "assets/renderer-slice-B3-nX6hx.js",
+      "name": "renderer-slice",
+      "bytes": 581227,
+      "gzipBytes": 171338
+    }
+  ],
+  "sharedSliceJS": {
+    "file": "assets/renderer-slice-B3-nX6hx.js",
+    "name": "renderer-slice",
+    "bytes": 581227,
+    "gzipBytes": 171338
+  },
+  "allPixiPotentialChunks": {
+    "bytes": 598315,
+    "gzipBytes": 180547
+  },
+  "currentProductionJS": {
+    "file": "index-DiQZyJdy.js",
+    "bytes": 631505,
+    "gzipBytes": 186204
+  },
+  "godot": {
+    "wasmBytes": 39514754,
+    "pckBytes": 12231044,
+    "loaderBytes": 279815
+  },
+  "placeholderAssets": [
+    {
+      "file": "corner-proof.webp",
+      "bytes": 2984,
+      "sha256": "fb1ebef552eade77f5c47443f13d0bcdd149fe5f3a9ad1d487a922c6dc5ba261"
+    },
+    {
+      "file": "paper.webp",
+      "bytes": 94710,
+      "sha256": "6002a1c56eb319e2ebf29f188f215de18807506977a63ba84129c8a9c74a149f"
+    },
+    {
+      "file": "queen-proof.webp",
+      "bytes": 88630,
+      "sha256": "ee1d5bfdd88bfb28452131f1cddd15008ec0ac0e59326a2496f30b94316ed682"
+    },
+    {
+      "file": "reaper-proof.webp",
+      "bytes": 95772,
+      "sha256": "5892a18fd8aadbab39060828170bd8d741adea8473219391c41c98201f3971db"
+    }
+  ]
+}

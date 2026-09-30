@@ -1,0 +1,222 @@
+{
+  "title": "Audio route and audition gate",
+  "verifiedAt": "30 September 2026",
+  "packSubtotalUSD": 80.4,
+  "recommendation": "Audition six generated samples, then prefer licensed tactile recordings plus an authored 100 BPM D-minor score. Both licensed packs are material sources, not a complete Muerta sound family.",
+  "options": [
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "price": "API: SFX US$0.12/min; Music US$0.15/min. Starter US$6/mo; Creator US$22/mo (first month US$11); Pro US$99/mo",
+      "type": "Generated SFX + music",
+      "bestFor": "Fast bespoke paper/bone contacts and palette auditions.",
+      "limits": "Motif, timing, tails, mix and loops need editorial verification. Self-serve Music terms exclude monetized multi-platform Studio Games; suitable Enterprise terms needed for shipping music.",
+      "rights": "Paid SFX commercial use is subject to terms and beta exclusions. Music rights and entity eligibility are separate.",
+      "product": "https://elevenlabs.io/pricing/api",
+      "license": "https://elevenlabs.io/eleven-music-model-specific-terms",
+      "quality": "Five original provider SFX samples generated for private audition; music is a separate original local composition. Subjective listening approval is pending."
+    },
+    {
+      "id": "board-game",
+      "name": "Epic Stock Media — Board Game Sound Effects Kit",
+      "price": "US$41.40 sale / US$69 list",
+      "type": "Licensed tactile SFX materials",
+      "bestFor": "Card contacts, quiet wood clicks, UI mechanics. 1,203 sounds; 96 kHz / 24-bit WAV.",
+      "limits": "Select, trim and balance the restrained subset. Stock celebration sounds are not the Muerta motif; no base score is provided.",
+      "rights": "Perpetual royalty-free commercial sync in games; no attribution; one named editor, multi-user license for shared source access; no generative-AI input without additional permission.",
+      "product": "https://epicstockmedia.com/product/board-game-sound-effects-kit-for-tabletop-card-and-dice-games/",
+      "license": "https://epicstockmedia.com/licensing-agreement/",
+      "quality": "Fit inferred from published content and format, not certified by listening."
+    },
+    {
+      "id": "nylon-guitar",
+      "name": "Image Sounds — Nylon Guitar, Latin & Spanish Styles",
+      "price": "US$39",
+      "type": "Licensed nylon performance loops",
+      "bestFor": "Dry mic/DI nylon accompaniment. 676 four-bar loops, 93–125 BPM, key-labelled; 24-bit / 44.1 kHz.",
+      "limits": "Guitar only. Exact D-minor material and D-A-C-D motif are unverified; arranging, percussion, brass and bells remain authored work. This is not a ready soundtrack.",
+      "rights": "Indefinite worldwide commercial use in newly arranged music, including computer-game background music; non-transferable; no raw redistribution or generative-AI analysis/training uploads.",
+      "product": "https://www.imagesounds.com/produkt/nylon-guitar-latin-spanish-styles",
+      "license": "https://www.imagesounds.com/license-terms",
+      "quality": "Fit inferred from live nylon content, not certified by listening."
+    }
+  ],
+  "samples": [
+    {
+      "id": "spin_press",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.1,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "sample peak−16 dBFS",
+      "listenFor": "Instant dry grip and wood contact. Clearly distinct from the current UI click.",
+      "prompt": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Tight paper grip and low wood contact; distinctive press feedback. Begin within 20 ms. Source 0.5 s, edited contact 0.10 s; silence after contact.",
+      "provider": "ElevenLabs",
+      "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/spin_press.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/spin_press.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/spin_press.mp3",
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -16,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -15.999998506140162
+      },
+      "loudnessTargetReached": null,
+      "failure": null
+    },
+    {
+      "id": "reel_stop",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.13,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "sample peak−12 dBFS; all five within 1 dB perceived level",
+      "listenFor": "One precise card contact with a quiet D3 overtone, no lingering bright tail.",
+      "prompt": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. One crisp cardstock contact on wood; tiny damped D3 brass overtone. Precise quiet stop, no bright lingering ring. Begin within 20 ms. Source 0.5 s, edited contact 0.13 s.",
+      "provider": "ElevenLabs",
+      "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/reel_stop.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/reel_stop.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/reel_stop.mp3",
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -11.99,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -12.000000253286988
+      },
+      "loudnessTargetReached": null,
+      "failure": null
+    },
+    {
+      "id": "win_normal",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.65,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−20 LUFS-I; TP≤−5 dBTP",
+      "listenFor": "Compact D-A-C-D recognition at modest reward level, no excessive flourish.",
+      "prompt": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Compact four-note D-A-C-D motif on muted nylon and damped bell; tiny brushed drum contact, no flourish. Begin within 20 ms, complete the motif and decay inside 0.65 s.",
+      "provider": "ElevenLabs",
+      "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/win_normal.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/win_normal.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/win_normal.mp3",
+      "measured": {
+        "integratedLufs": -20,
+        "truePeakDbtp": -5.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30,
+        "samplePeakDbfs": -5.148334946973311
+      },
+      "loudnessTargetReached": true,
+      "failure": null
+    },
+    {
+      "id": "big_nice",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 1.2,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−18 LUFS-I; TP≤−4 dBTP",
+      "listenFor": "Same motif with enough breadth for NICE; warm transient, no metallic fizz.",
+      "prompt": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Clear four-note D-A-C-D nylon/bell motif, light frame drum, short gold contact. Modest warm NICE reward; no metallic fizz. Immediate attack; motif and clean release inside 1.2 s.",
+      "provider": "ElevenLabs",
+      "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/big_nice.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/big_nice.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/big_nice.mp3",
+      "measured": {
+        "integratedLufs": -18.07,
+        "truePeakDbtp": -4.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.81,
+        "samplePeakDbfs": -4.148654711756244
+      },
+      "loudnessTargetReached": true,
+      "failure": null
+    },
+    {
+      "id": "bonus_trigger",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 1.25,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−17 LUFS-I; TP≤−3 dBTP",
+      "listenFor": "Three bone contacts and a clear gold-bell motif; a new chapter rather than a second win.",
+      "prompt": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Three dry bone contacts then four-note D-A-C-D gold bell phrase and muted brass resolution. Distinct bonus recognition cadence; leave continuation space. Entire one-shot 1.25 s.",
+      "provider": "ElevenLabs",
+      "sourceQuality": "Provider MP3 preserved unchanged; 24-bit WAV is an edited decode, not a lossless-source claim.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/bonus_trigger.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/bonus_trigger.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/bonus_trigger.mp3",
+      "measured": {
+        "integratedLufs": -17,
+        "truePeakDbtp": -3.14,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.5,
+        "samplePeakDbfs": -3.1495175525645447
+      },
+      "loudnessTargetReached": true,
+      "failure": null
+    },
+    {
+      "id": "music_base",
+      "kind": "music",
+      "status": "authored_awaiting_audition",
+      "finalDurationSeconds": 30,
+      "channels": "stereo",
+      "loop": false,
+      "editTarget": "−24 LUFS-I; true peak ≤−3 dBTP; verify after editing. This 30-second audition is 12.5 bars at 100 BPM and is not the 16-bar production loop.",
+      "listenFor": "Quiet modeled nylon-string plucks, the programmed D-A-C-D phrase, restrained brush/bone pulse, warm bell and muted brass. Evaluate whether the synthetic instruments fit the identity on headphones and a phone; no live-performance claim.",
+      "prompt": "Original quiet warm noir accompaniment using locally modelled/synthetic instruments; no provider music and no live recordings.",
+      "provider": "Original local composition",
+      "sourceQuality": "Original authored 48-kHz stereo float32 WAV; final 24-bit WAV and MP3 derived locally.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/music_base.local-original.wav",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/music_base.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/music_base.mp3",
+      "measured": {
+        "integratedLufs": -23.99,
+        "truePeakDbtp": -8.24,
+        "loudnessRangeLu": 3.1,
+        "thresholdLufs": -33.99
+      },
+      "loudnessTargetReached": true,
+      "failure": null
+    }
+  ],
+  "mixRules": [
+    "Preserve approved per-cue levels; one foreground voice; bounded overlapping tails.",
+    "Foreground cue ducks music 6 dB with 80 ms attack / 450 ms release.",
+    "No success sound on loss; no continuous coin shower.",
+    "Meter integrated program and true peak after edits; runtime combined master ≤−1 dBTP.",
+    "Phone and headphone audition required before approving the full 42 briefs.",
+    "Do not upload licensed stock recordings to generative services as reference material."
+  ],
+  "apiBatchPrice": {
+    "sfxPerMinute": 0.12,
+    "musicPerMinute": 0.15,
+    "sfxSourceSeconds": 4.1,
+    "musicSourceSeconds": 30,
+    "arithmeticBatch": 0.0832,
+    "excludes": "Tax, minimums or plan-specific billing; no purchase authorized.",
+    "source": "https://elevenlabs.io/pricing/api"
+  },
+  "generation": {
+    "completedAt": "2026-09-30T11:45:22.279Z",
+    "successes": 6,
+    "authorizedSamples": 6,
+    "creditDelta": 10,
+    "accountTier": "free",
+    "purchased": false,
+    "listeningApproval": "Pending phone and headphone audition",
+    "failures": []
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "title": "Muerta Poker six-sample audio audition",
+  "verifiedAt": "2026-09-30",
+  "state": "six_samples_ready_for_user_audition_mixed_sources",
+  "authorizedScope": "Exactly five SFX samples and one 30-second music audition. No full cue-family generation, pack purchase, subscription purchase, or game integration.",
+  "sharedIdentity": "D minor; 100 BPM; 4/4; D-A-C-D; nylon guitar, damped bell, bone/wood contacts, brushed frame drum, muted brass.",
+  "generationAccess": {
+    "methods": [
+      "Existing free ElevenLabs credits for five private SFX auditions",
+      "Original locally authored composition for30smusic audition"
+    ],
+    "credentialPersisted": false,
+    "purchased": false,
+    "providerMusicUsed": false,
+    "userDirection": "Do not buy ElevenLabs; author original local music with honest synthetic/physical-model provenance.",
+    "musicProductionRights": "No provider music or stock recordings used; no third-party music license fee for the original local composition. Five Free-provider SFX remain private audition-only."
+  },
+  "creditEstimate": {
+    "singlePass": 1450,
+    "basis": "Official approximate price of 200 credits per SFX request and 900 credits per minute of music: 5×200 + 0.5×900. Actual billable usage is provider-dependent."
+  },
+  "samples": [
+    {
+      "id": "spin_press",
+      "approvedSourceId": "spin_press",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.1,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "sample peak−16 dBFS",
+      "rawFormat": "Actual provider source, MP3 44.1 kHz / 128 kbps for baseline API access; preserve original codec and metadata. Higher true source quality if the account supports it.",
+      "auditionMaster": "Edited WAV 48 kHz / 24-bit mono; mark transcoded origin if source was lossy. Export an MP3 audition from that edit.",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Tight paper grip and low wood contact; distinctive press feedback. Begin within 20 ms. Source 0.5 s, edited contact 0.10 s; silence after contact.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "listenFor": "Instant dry grip and wood contact. Clearly distinct from the current UI click.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/spin_press.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/spin_press.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/spin_press.mp3",
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -16,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -15.999998506140162
+      }
+    },
+    {
+      "id": "reel_stop",
+      "approvedSourceId": "reel_stop_0",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.13,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "sample peak−12 dBFS; all five within 1 dB perceived level",
+      "rawFormat": "Actual provider source, MP3 44.1 kHz / 128 kbps for baseline API access; preserve original codec and metadata. Higher true source quality if the account supports it.",
+      "auditionMaster": "Edited WAV 48 kHz / 24-bit mono; mark transcoded origin if source was lossy. Export an MP3 audition from that edit.",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. One crisp cardstock contact on wood; tiny damped D3 brass overtone. Precise quiet stop, no bright lingering ring. Begin within 20 ms. Source 0.5 s, edited contact 0.13 s.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "listenFor": "One precise card contact with a quiet D3 overtone, no lingering bright tail.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/reel_stop.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/reel_stop.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/reel_stop.mp3",
+      "measured": {
+        "integratedLufs": null,
+        "truePeakDbtp": -11.99,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -70,
+        "samplePeakDbfs": -12.000000253286988
+      }
+    },
+    {
+      "id": "win_normal",
+      "approvedSourceId": "win_normal",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 0.65,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−20 LUFS-I; TP≤−5 dBTP",
+      "rawFormat": "Actual provider source, MP3 44.1 kHz / 128 kbps for baseline API access; preserve original codec and metadata. Higher true source quality if the account supports it.",
+      "auditionMaster": "Edited WAV 48 kHz / 24-bit mono; mark transcoded origin if source was lossy. Export an MP3 audition from that edit.",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Compact four-note D-A-C-D motif on muted nylon and damped bell; tiny brushed drum contact, no flourish. Begin within 20 ms, complete the motif and decay inside 0.65 s.",
+        "duration_seconds": 0.65,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "listenFor": "Compact D-A-C-D recognition at modest reward level, no excessive flourish.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/win_normal.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/win_normal.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/win_normal.mp3",
+      "measured": {
+        "integratedLufs": -20,
+        "truePeakDbtp": -5.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30,
+        "samplePeakDbfs": -5.148334946973311
+      }
+    },
+    {
+      "id": "big_nice",
+      "approvedSourceId": "big_nice",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 1.2,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−18 LUFS-I; TP≤−4 dBTP",
+      "rawFormat": "Actual provider source, MP3 44.1 kHz / 128 kbps for baseline API access; preserve original codec and metadata. Higher true source quality if the account supports it.",
+      "auditionMaster": "Edited WAV 48 kHz / 24-bit mono; mark transcoded origin if source was lossy. Export an MP3 audition from that edit.",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Clear four-note D-A-C-D nylon/bell motif, light frame drum, short gold contact. Modest warm NICE reward; no metallic fizz. Immediate attack; motif and clean release inside 1.2 s.",
+        "duration_seconds": 1.2,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "listenFor": "Same motif with enough breadth for NICE; warm transient, no metallic fizz.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/big_nice.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/big_nice.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/big_nice.mp3",
+      "measured": {
+        "integratedLufs": -18.07,
+        "truePeakDbtp": -4.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.81,
+        "samplePeakDbfs": -4.148654711756244
+      }
+    },
+    {
+      "id": "bonus_trigger",
+      "approvedSourceId": "bonus_trigger",
+      "kind": "sfx",
+      "status": "generated_awaiting_audition",
+      "finalDurationSeconds": 1.25,
+      "channels": "mono",
+      "loop": false,
+      "editTarget": "−17 LUFS-I; TP≤−3 dBTP",
+      "rawFormat": "Actual provider source, MP3 44.1 kHz / 128 kbps for baseline API access; preserve original codec and metadata. Higher true source quality if the account supports it.",
+      "auditionMaster": "Edited WAV 48 kHz / 24-bit mono; mark transcoded origin if source was lossy. Export an MP3 audition from that edit.",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Premium warm gothic Día de los Muertos noir. D minor, 100 BPM. Nylon guitar, damped brass bell, dry bone/wood, brushed frame drum, muted low brass. Isolated dry one-shot, immediate attack, clean short tail. No voice, coin rain, applause, EDM or screams. Three dry bone contacts then four-note D-A-C-D gold bell phrase and muted brass resolution. Distinct bonus recognition cadence; leave continuation space. Entire one-shot 1.25 s.",
+        "duration_seconds": 1.25,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "listenFor": "Three bone contacts and a clear gold-bell motif; a new chapter rather than a second win.",
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/bonus_trigger.mp3",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/bonus_trigger.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/bonus_trigger.mp3",
+      "measured": {
+        "integratedLufs": -17,
+        "truePeakDbtp": -3.14,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.5,
+        "samplePeakDbfs": -3.1495175525645447
+      }
+    },
+    {
+      "id": "music_base",
+      "approvedSourceId": "music_base",
+      "kind": "music",
+      "status": "authored_awaiting_audition",
+      "finalDurationSeconds": 30,
+      "channels": "stereo",
+      "loop": false,
+      "editTarget": "−24 LUFS-I; true peak ≤−3 dBTP; verify after editing. This 30-second audition is 12.5 bars at 100 BPM and is not the 16-bar production loop.",
+      "rawFormat": "Original authored 48-kHz stereo float32 WAV; final 24-bit WAV and MP3 derived locally.",
+      "auditionMaster": "Original authored source WAV48kfloat32stereo → edited48k24-bitstereo WAV and192kbpsMP3 audition",
+      "endpoint": "local original composition",
+      "request": {
+        "kind": "original_local_composition",
+        "durationSeconds": 30,
+        "key": "D minor",
+        "bpm": 100,
+        "meter": "4/4",
+        "motif": "D-A-C-D",
+        "instrumentation": [
+          "Karplus-Strong nylon string",
+          "damped warm modal bell",
+          "bone/wood modal contacts",
+          "filtered brushed-noise percussion",
+          "soft shaker",
+          "low muted harmonic brass"
+        ],
+        "brief": "Original quiet warm noir accompaniment using locally modelled/synthetic instruments; no provider music and no live recordings."
+      },
+      "listenFor": "Quiet modeled nylon-string plucks, the programmed D-A-C-D phrase, restrained brush/bone pulse, warm bell and muted brass. Evaluate whether the synthetic instruments fit the identity on headphones and a phone; no live-performance claim.",
+      "initialProviderBrief": {
+        "endpoint": "https://api.elevenlabs.io/v1/music?output_format=auto",
+        "request": {
+          "model_id": "music_v2",
+          "music_length_ms": 30000,
+          "force_instrumental": true,
+          "prompt": "Compose a 30-second instrumental audition for Muerta Poker, an intimate premium gothic Día de los Muertos card game. D minor, exactly 100 BPM, 4/4 throughout. Sparse, softly damped nylon guitar carries the four-note identity D–A–C–D; recognizable, unhurried, repeated sparingly. Quiet dry bone and wooden contacts, a brushed frame drum, soft shaker, occasional damped warm brass bell, and low muted brass for restrained support. The mood is warm nocturnal candlelight and engraved bone, dark but inviting. Leave generous midrange and transient space for card stops and short win sounds. No voices or choir, no mariachi parody, no EDM, no horror drone, no casino coins, no applause, no rock drums, no bright cymbals, no sustained victory melody. Start directly in a settled accompaniment; avoid a cinematic intro, build or final triumphant cadence. Keep the instrument family and energy consistent for all 30 seconds. This is an audition excerpt, not a promised seamless loop. Provide melody, percussion and atmosphere stems if supported. Loudness will be measured and edited externally to −24 LUFS-I with true peak no higher than −3 dBTP."
+        }
+      },
+      "original": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/music_base.local-original.wav",
+      "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/music_base.wav",
+      "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/music_base.mp3",
+      "measured": {
+        "integratedLufs": -23.99,
+        "truePeakDbtp": -8.24,
+        "loudnessRangeLu": 3.1,
+        "thresholdLufs": -33.99
+      }
+    }
+  ],
+  "mixRules": [
+    "Preserve approved per-cue levels; one foreground voice; bounded overlapping tails.",
+    "Foreground cue ducks music 6 dB with 80 ms attack / 450 ms release.",
+    "No success sound on loss; no continuous coin shower.",
+    "Meter integrated program and true peak after edits; runtime combined master ≤−1 dBTP.",
+    "Phone and headphone audition required before approving the full 42 briefs.",
+    "Do not upload licensed stock recordings to generative services as reference material."
+  ],
+  "sourceDocs": [
+    "https://elevenlabs.io/pricing",
+    "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+    "https://elevenlabs.io/docs/api-reference/music/compose",
+    "https://elevenlabs.io/eleven-music-model-specific-terms"
+  ]
+}

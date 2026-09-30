@@ -1,0 +1,178 @@
+{
+  "date": "2026-09-30",
+  "state": "Approval candidates only; no runtime assets replaced",
+  "method": "Built-in image_gen illustration/material sources; deterministic crop/mirror/template composition; SVG path Q and heart indices; no generated rank/pip/index pixels",
+  "recommendation": "Queen B, provisional at 1\u00d7; same identity and palette as A, fewer fine gold crown shapes",
+  "files": [
+    {
+      "path": "sources/card-material.png",
+      "bytes": 2837520,
+      "sha256": "7cb348d69d1ed09c98fb715cd2112d995a4c01dcf48a8deab234e8a15ff67ad1",
+      "width": 1058,
+      "height": 1487,
+      "channels": 3
+    },
+    {
+      "path": "sources/queen-a-illustration.png",
+      "bytes": 3077218,
+      "sha256": "9d8a6899d2368280953656c39837bbb44f953e28c9b4b146c0f8f4bca0966baa",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/queen-b-illustration.png",
+      "bytes": 3088035,
+      "sha256": "0581a51e5e51f28919614ee4e79c96fb7c4c93a7fc42b90356930d6e19bd1879",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "sources/reaper-illustration.png",
+      "bytes": 3415622,
+      "sha256": "902c22cffdbb4c8add466e558c2d1b7ac02ad573000003212ac9badfdc2bd3b2",
+      "width": 1024,
+      "height": 1536,
+      "channels": 4
+    },
+    {
+      "path": "previews/current-queen-desktop-86x121.png",
+      "bytes": 25645,
+      "sha256": "6aeabcf87d49d25d4e37ac44f22a44d8a36b2974c295d990fe1fd8f275ad196b",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/current-queen-portrait-60x85.png",
+      "bytes": 13139,
+      "sha256": "a33810262bb693307b9a7b64f6834f3c70dd46ab09a97cefcd043b4a23458c8e",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/material-desktop-86x121.png",
+      "bytes": 15973,
+      "sha256": "1e101c808344dafe36392581ed63155edfaace000f53351ee19da811cb1c67f2",
+      "width": 86,
+      "height": 121,
+      "channels": 3
+    },
+    {
+      "path": "previews/material-portrait-60x85.png",
+      "bytes": 7846,
+      "sha256": "43b71688a90284a72a961f2517e961f7c1bcbfa5b70ca29840d534dee2e1a289",
+      "width": 60,
+      "height": 85,
+      "channels": 3
+    },
+    {
+      "path": "previews/queen-a-card-512x720.png",
+      "bytes": 854640,
+      "sha256": "b4d2e13a0650a3aeb6f0277e5b3e4b19c8c07687d4ef3370937287ceb3fd0e88",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/queen-a-desktop-86x121.png",
+      "bytes": 25709,
+      "sha256": "515cb615ab0f7c75f3d48b6b28a64a5a44330d5f3cce3763dc451ee7408a5d75",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/queen-a-portrait-60x85.png",
+      "bytes": 13192,
+      "sha256": "fc11e42aa154218ad135cb605ffda75a47d62e9b31504c18b34ddeb8ac31948c",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/queen-b-card-512x720.png",
+      "bytes": 846277,
+      "sha256": "43ebbbe566f36217c746613c0a4b83d0b60765ca982f2b752ec039c7bc1248b4",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/queen-b-desktop-86x121.png",
+      "bytes": 25614,
+      "sha256": "40fb7816b2d4476501383beab8f9c483b1c9905408d5d9ab7406b37a6e76441d",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/queen-b-portrait-60x85.png",
+      "bytes": 13158,
+      "sha256": "222fdc587e62ef96e87e19b4a2237618f70ebce7f4eb89ff44feb970b37fcfb7",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "previews/reaper-card-512x720.png",
+      "bytes": 858316,
+      "sha256": "bb9d28e002e450c9a4f18b8063e5d0ad94227385d8eba5f1a2b961458a393dc9",
+      "width": 512,
+      "height": 720,
+      "channels": 4
+    },
+    {
+      "path": "previews/reaper-desktop-86x121.png",
+      "bytes": 27484,
+      "sha256": "cc399c3fe49adb9286539c021d870010626818322a5e9d2c1197210af29fe1b2",
+      "width": 86,
+      "height": 121,
+      "channels": 4
+    },
+    {
+      "path": "previews/reaper-portrait-60x85.png",
+      "bytes": 14224,
+      "sha256": "be648ed9a87e9b6a7246b099c4fe7821921006a16b835ab70c8b86399bf0e06c",
+      "width": 60,
+      "height": 85,
+      "channels": 4
+    },
+    {
+      "path": "vectors/queen-a-card-master.svg",
+      "bytes": 1442161,
+      "sha256": "e0b00132b96f0d68acbc50786ef4a823d0a816e1e7d842553b1cdba2066d6422"
+    },
+    {
+      "path": "vectors/queen-b-card-master.svg",
+      "bytes": 1426321,
+      "sha256": "099fb5860842d7be2a9628f1d3c8bac5c7d0dd12445dd76358e4f80d59ea823b"
+    },
+    {
+      "path": "vectors/queen-indices.svg",
+      "bytes": 769,
+      "sha256": "cdb948c094c7a536104334df5df4d6a73db3c1796e12bc32763016e663978ccd"
+    },
+    {
+      "path": "vectors/reaper-card-master.svg",
+      "bytes": 1548085,
+      "sha256": "9fac75788c36fa3b81cab2cd40ca8b60d5b783b552a4b1d952c5aa21ca026c58"
+    }
+  ],
+  "nativeContactSheet": {
+    "path": "native-size-proof.png",
+    "width": 760,
+    "height": 454,
+    "cardsDesktop": [
+      86,
+      121
+    ],
+    "cardsPortrait": [
+      60,
+      85
+    ],
+    "scale": "1\u00d7; display the contact sheet at native size, or use fixed-CSS-size HTML at 100% zoom"
+  }
+}

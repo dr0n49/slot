@@ -1,0 +1,83 @@
+{
+  "editedAt": "2026-09-30T11:31:22.010Z",
+  "review": [
+    {
+      "id": "win_normal",
+      "before": {
+        "integratedLufs": -22.8,
+        "truePeakDbtp": -5,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -32.8,
+        "samplePeakDbfs": -5.011161648196257
+      },
+      "after": {
+        "integratedLufs": -20,
+        "truePeakDbtp": -5.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30,
+        "samplePeakDbfs": -5.148334946973311
+      },
+      "mp3": {
+        "integratedLufs": -20.28,
+        "truePeakDbtp": -5.41,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30.28
+      },
+      "actualWavSeconds": 0.65,
+      "durationSamples": 31200
+    },
+    {
+      "id": "big_nice",
+      "before": {
+        "integratedLufs": -20.95,
+        "truePeakDbtp": -4,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -33.43,
+        "samplePeakDbfs": -3.9988920723238714
+      },
+      "after": {
+        "integratedLufs": -18.07,
+        "truePeakDbtp": -4.15,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.81,
+        "samplePeakDbfs": -4.148654711756244
+      },
+      "mp3": {
+        "integratedLufs": -18.32,
+        "truePeakDbtp": -4.4,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -30.06
+      },
+      "actualWavSeconds": 1.2,
+      "durationSamples": 57600
+    },
+    {
+      "id": "bonus_trigger",
+      "before": {
+        "integratedLufs": -22.98,
+        "truePeakDbtp": -3,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -35.49,
+        "samplePeakDbfs": -3.4337930056813515
+      },
+      "after": {
+        "integratedLufs": -17,
+        "truePeakDbtp": -3.14,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.5,
+        "samplePeakDbfs": -3.1495175525645447
+      },
+      "mp3": {
+        "integratedLufs": -17.3,
+        "truePeakDbtp": -3.1,
+        "loudnessRangeLu": 0,
+        "thresholdLufs": -29.8
+      },
+      "actualWavSeconds": 1.25,
+      "durationSamples": 60000
+    }
+  ],
+  "verification": "All five WAV masters have exact approved sample counts, 48000Hz24bitmono. All returned sources remain unchanged.",
+  "reportedSfxCharacterCostTotal": 40,
+  "billingNote": "Returned SFX billing headers total 40. The immediate end-of-run account delta was 10; these measures differ and the account counter may not yet be settled. No cost claim is inferred from that immediate delta."
+}

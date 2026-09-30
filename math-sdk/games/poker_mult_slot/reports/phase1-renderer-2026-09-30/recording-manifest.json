@@ -1,0 +1,38 @@
+[
+  {
+    "file": "desktop-godot.mp4",
+    "seconds": 9.528604984283447,
+    "sourceFrames": 80,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "desktop-pixi.mp4",
+    "seconds": 6.973505973815918,
+    "sourceFrames": 60,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "portrait-godot.mp4",
+    "seconds": 8.398032903671265,
+    "sourceFrames": 85,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "portrait-pixi.mp4",
+    "seconds": 6.7841339111328125,
+    "sourceFrames": 67,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "mobile-lite-godot.mp4",
+    "seconds": 8.382222890853882,
+    "sourceFrames": 77,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "mobile-lite-pixi.mp4",
+    "seconds": 6.705564022064209,
+    "sourceFrames": 62,
+    "note": "Silent CDP screencast; original frame intervals preserved. 8–10 captured frames/s resampled to 30; not a frame-rate test."
+  }
+]

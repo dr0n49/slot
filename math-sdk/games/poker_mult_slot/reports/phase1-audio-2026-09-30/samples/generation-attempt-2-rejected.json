@@ -1,0 +1,141 @@
+{
+  "startedAt": "2026-09-30T11:12:47.303Z",
+  "provider": "ElevenLabs",
+  "authorizedIds": [
+    "spin_press",
+    "reel_stop",
+    "win_normal",
+    "big_nice",
+    "bonus_trigger",
+    "music_base"
+  ],
+  "credentialsStored": false,
+  "purchased": false,
+  "results": [
+    {
+      "id": "spin_press",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:12:48.549Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. A distinct tight paper grip and low wood contact; recognizable even before reel travel. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.1 s. Post-production target sample peak−16 dBFS; do not assume the generator meters it.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 400,
+        "code": "invalid_text_length",
+        "message": "Invalid text length received for text 'Muerta Poker sonic palette: D minor, 100 BPM, 4/4; ...', expected a maximum number of 450 characters but received 639 characters."
+      }
+    },
+    {
+      "id": "reel_stop",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:12:50.169Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped D3 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
+        "duration_seconds": 0.5,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 400,
+        "code": "invalid_text_length",
+        "message": "Invalid text length received for text 'Muerta Poker sonic palette: D minor, 100 BPM, 4/4; ...', expected a maximum number of 450 characters but received 700 characters."
+      }
+    },
+    {
+      "id": "win_normal",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:12:52.278Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Compact D-A-C-D motif on muted nylon and damped bell; tiny brushed drum contact, no flourish. Deliver isolated 0.65-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.65 s. Post-production target −20 LUFS-I; TP≤−5 dBTP; do not assume the generator meters it.",
+        "duration_seconds": 0.65,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 400,
+        "code": "invalid_text_length",
+        "message": "Invalid text length received for text 'Muerta Poker sonic palette: D minor, 100 BPM, 4/4; ...', expected a maximum number of 450 characters but received 650 characters."
+      }
+    },
+    {
+      "id": "big_nice",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:12:53.049Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. D-A-C-D nylon/bell motif, light frame drum and short gold contact; clear attack and clean release. Deliver isolated 1.2-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.2 s. Post-production target −18 LUFS-I; TP≤−4 dBTP; do not assume the generator meters it.",
+        "duration_seconds": 1.2,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 400,
+        "code": "invalid_text_length",
+        "message": "Invalid text length received for text 'Muerta Poker sonic palette: D minor, 100 BPM, 4/4; ...', expected a maximum number of 450 characters but received 653 characters."
+      }
+    },
+    {
+      "id": "bonus_trigger",
+      "model": "eleven_text_to_sound_v2",
+      "requestedAt": "2026-09-30T11:12:54.318Z",
+      "endpoint": "https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128",
+      "request": {
+        "text": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Distinct recognition cadence: three bone contacts then D-A-C-D gold bell phrase and muted brass resolution; leave space for player continuation. Deliver isolated 1.25-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.25 s. Post-production target −17 LUFS-I; TP≤−3 dBTP; do not assume the generator meters it.",
+        "duration_seconds": 1.25,
+        "prompt_influence": 0.65,
+        "model_id": "eleven_text_to_sound_v2",
+        "loop": false
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 400,
+        "code": "invalid_text_length",
+        "message": "Invalid text length received for text 'Muerta Poker sonic palette: D minor, 100 BPM, 4/4; ...', expected a maximum number of 450 characters but received 701 characters."
+      }
+    },
+    {
+      "id": "music_base",
+      "model": "music_v2",
+      "requestedAt": "2026-09-30T11:12:56.176Z",
+      "endpoint": "https://api.elevenlabs.io/v1/music?output_format=auto",
+      "request": {
+        "model_id": "music_v2",
+        "music_length_ms": 30000,
+        "force_instrumental": true,
+        "prompt": "Compose a 30-second instrumental audition for Muerta Poker, an intimate premium gothic Día de los Muertos card game. D minor, exactly 100 BPM, 4/4 throughout. Sparse, softly damped nylon guitar carries the four-note identity D–A–C–D; recognizable, unhurried, repeated sparingly. Quiet dry bone and wooden contacts, a brushed frame drum, soft shaker, occasional damped warm brass bell, and low muted brass for restrained support. The mood is warm nocturnal candlelight and engraved bone, dark but inviting. Leave generous midrange and transient space for card stops and short win sounds. No voices or choir, no mariachi parody, no EDM, no horror drone, no casino coins, no applause, no rock drums, no bright cymbals, no sustained victory melody. Start directly in a settled accompaniment; avoid a cinematic intro, build or final triumphant cadence. Keep the instrument family and energy consistent for all 30 seconds. This is an audition excerpt, not a promised seamless loop. Provide melody, percussion and atmosphere stems if supported. Loudness will be measured and edited externally to −24 LUFS-I with true peak no higher than −3 dBTP."
+      },
+      "status": "provider_rejected",
+      "error": {
+        "httpStatus": 402,
+        "code": "limited_access",
+        "message": "Music API is not available for free users. Please upgrade to a paid plan to use the API."
+      }
+    }
+  ],
+  "accountBefore": {
+    "tier": "free",
+    "status": "free",
+    "remainingCredits": 9080
+  },
+  "accountAfter": {
+    "tier": "free",
+    "status": "free",
+    "remainingCredits": 9080
+  },
+  "completedAt": "2026-09-30T11:12:57.571Z",
+  "completedSamples": 0
+}

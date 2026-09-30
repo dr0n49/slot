@@ -1,0 +1,2622 @@
+{
+  "id": "music_base",
+  "provider": "Original local composition",
+  "sourceType": "Programmed composition and physical/modal synthesized instruments; no live recordings; no ElevenLabs music",
+  "authoringDate": "2026-09-30T11:41:03.181Z",
+  "key": "D minor",
+  "bpm": 100,
+  "meter": "4/4",
+  "motif": "D-A-C-D",
+  "seconds": 30,
+  "beats": 50,
+  "bars": 12.5,
+  "seamlessLoop": false,
+  "source": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/originals/music_base.local-original.wav",
+  "sourceHash": "a76bce8ef54817425633d5630bfd778dcfb8291264591a05f62efce555360460",
+  "master": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/masters/music_base.wav",
+  "audition": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/samples/auditions/music_base.mp3",
+  "modelledInstruments": [
+    "Karplus-Strong nylon string",
+    "damped warm modal bell",
+    "bone/wood modal contacts",
+    "filtered brushed-noise percussion",
+    "soft shaker",
+    "low muted harmonic brass"
+  ],
+  "copyrightSource": "Newly authored score using user-approved four-note identity. No copied or licensed stock sound material; no provider-music license fee.",
+  "generator": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase1-audio-2026-09-30/music-base-composition.cjs",
+  "events": [
+    {
+      "voice": "nylon accompaniment",
+      "beat": 0,
+      "startSeconds": 0,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.09113534077312796,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 0.5,
+      "startSeconds": 0.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05049380544096231,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 1.5,
+      "startSeconds": 0.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.0570819337288849,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 2,
+      "startSeconds": 1.2,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06392175909550861,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 2.75,
+      "startSeconds": 1.65,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04196490106005221,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 3.5,
+      "startSeconds": 2.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05152622353844345,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 0,
+      "startSeconds": 0,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 2,
+      "startSeconds": 1.2,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 0.5,
+      "startSeconds": 0.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 1.5,
+      "startSeconds": 0.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 2.5,
+      "startSeconds": 1.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 3.5,
+      "startSeconds": 2.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 4,
+      "startSeconds": 2.4,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.09246745032679289,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 4.5,
+      "startSeconds": 2.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05231772105649113,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 5.5,
+      "startSeconds": 3.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "C4"
+      ],
+      "midi": [
+        60
+      ],
+      "frequenciesHz": [
+        261.6255653005986
+      ],
+      "gain": 0.05447172740846872,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 6,
+      "startSeconds": 3.6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06719563231384382,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 6.75,
+      "startSeconds": 4.05,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04446446501720696,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 7.5,
+      "startSeconds": 4.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05047319303359837,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 4,
+      "startSeconds": 2.4,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 6,
+      "startSeconds": 3.6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 4.5,
+      "startSeconds": 2.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 5.5,
+      "startSeconds": 3.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 6.5,
+      "startSeconds": 3.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 7.5,
+      "startSeconds": 4.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 5,
+      "startSeconds": 3,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 7,
+      "startSeconds": 4.2,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 8,
+      "startSeconds": 4.8,
+      "durationSeconds": 1.9,
+      "notes": [
+        "Bb2"
+      ],
+      "midi": [
+        46
+      ],
+      "frequenciesHz": [
+        116.54094037952248
+      ],
+      "gain": 0.0930948161448352,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 8.5,
+      "startSeconds": 5.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F3"
+      ],
+      "midi": [
+        53
+      ],
+      "frequenciesHz": [
+        174.61411571650194
+      ],
+      "gain": 0.05349293495833873,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 9.5,
+      "startSeconds": 5.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.0553571462508291,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 10,
+      "startSeconds": 6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "Bb2"
+      ],
+      "midi": [
+        46
+      ],
+      "frequenciesHz": [
+        116.54094037952248
+      ],
+      "gain": 0.06652617938704788,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 10.75,
+      "startSeconds": 6.45,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.044551555421091606,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 11.5,
+      "startSeconds": 6.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F3"
+      ],
+      "midi": [
+        53
+      ],
+      "frequenciesHz": [
+        174.61411571650194
+      ],
+      "gain": 0.05155139132589102,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 8,
+      "startSeconds": 4.8,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 10,
+      "startSeconds": 6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 8.5,
+      "startSeconds": 5.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 9.5,
+      "startSeconds": 5.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 10.5,
+      "startSeconds": 6.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 11.5,
+      "startSeconds": 6.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 12,
+      "startSeconds": 7.2,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.08786252644605934,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 12.5,
+      "startSeconds": 7.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05319117361880838,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 13.5,
+      "startSeconds": 8.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "E4"
+      ],
+      "midi": [
+        64
+      ],
+      "frequenciesHz": [
+        329.6275569128699
+      ],
+      "gain": 0.05376630191579461,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 14,
+      "startSeconds": 8.4,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06328443619636819,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 14.75,
+      "startSeconds": 8.85,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.041805176573507484,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 15.5,
+      "startSeconds": 9.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05051729294843972,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 12,
+      "startSeconds": 7.2,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 14,
+      "startSeconds": 8.4,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 12.5,
+      "startSeconds": 7.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 13.5,
+      "startSeconds": 8.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 14.5,
+      "startSeconds": 8.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 15.5,
+      "startSeconds": 9.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 13,
+      "startSeconds": 7.8,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 15,
+      "startSeconds": 9,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 16,
+      "startSeconds": 9.6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "A2"
+      ],
+      "midi": [
+        45
+      ],
+      "frequenciesHz": [
+        110
+      ],
+      "gain": 0.08992252168403937,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 16.5,
+      "startSeconds": 9.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "E3"
+      ],
+      "midi": [
+        52
+      ],
+      "frequenciesHz": [
+        164.81377845643496
+      ],
+      "gain": 0.05196348606728017,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 17.5,
+      "startSeconds": 10.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "G3"
+      ],
+      "midi": [
+        55
+      ],
+      "frequenciesHz": [
+        195.99771799087463
+      ],
+      "gain": 0.055908639582246546,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 18,
+      "startSeconds": 10.8,
+      "durationSeconds": 1.9,
+      "notes": [
+        "A2"
+      ],
+      "midi": [
+        45
+      ],
+      "frequenciesHz": [
+        110
+      ],
+      "gain": 0.06321717431256547,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 18.75,
+      "startSeconds": 11.25,
+      "durationSeconds": 1.4,
+      "notes": [
+        "C4"
+      ],
+      "midi": [
+        60
+      ],
+      "frequenciesHz": [
+        261.6255653005986
+      ],
+      "gain": 0.04205768312703818,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 19.5,
+      "startSeconds": 11.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "E3"
+      ],
+      "midi": [
+        52
+      ],
+      "frequenciesHz": [
+        164.81377845643496
+      ],
+      "gain": 0.04942345609329641,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 16,
+      "startSeconds": 9.6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 18,
+      "startSeconds": 10.8,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 16.5,
+      "startSeconds": 9.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 17.5,
+      "startSeconds": 10.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 18.5,
+      "startSeconds": 11.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 19.5,
+      "startSeconds": 11.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 20,
+      "startSeconds": 12,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.09019710268223657,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 20.5,
+      "startSeconds": 12.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05045150816150009,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 21.5,
+      "startSeconds": 12.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.05433787269024178,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 22,
+      "startSeconds": 13.2,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06278226158898324,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 22.75,
+      "startSeconds": 13.65,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04403896695585921,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 23.5,
+      "startSeconds": 14.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.04878490781132132,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 20,
+      "startSeconds": 12,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 22,
+      "startSeconds": 13.2,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 20.5,
+      "startSeconds": 12.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 21.5,
+      "startSeconds": 12.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 22.5,
+      "startSeconds": 13.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 23.5,
+      "startSeconds": 14.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 21,
+      "startSeconds": 12.6,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 23,
+      "startSeconds": 13.8,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 24,
+      "startSeconds": 14.4,
+      "durationSeconds": 1.9,
+      "notes": [
+        "C3"
+      ],
+      "midi": [
+        48
+      ],
+      "frequenciesHz": [
+        130.8127826502993
+      ],
+      "gain": 0.08990122544381766,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 24.5,
+      "startSeconds": 14.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "G3"
+      ],
+      "midi": [
+        55
+      ],
+      "frequenciesHz": [
+        195.99771799087463
+      ],
+      "gain": 0.05300114004284143,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 25.5,
+      "startSeconds": 15.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.05289347320944071,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 26,
+      "startSeconds": 15.6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "C3"
+      ],
+      "midi": [
+        48
+      ],
+      "frequenciesHz": [
+        130.8127826502993
+      ],
+      "gain": 0.06374585379175841,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 26.75,
+      "startSeconds": 16.05,
+      "durationSeconds": 1.4,
+      "notes": [
+        "E4"
+      ],
+      "midi": [
+        64
+      ],
+      "frequenciesHz": [
+        329.6275569128699
+      ],
+      "gain": 0.04170586821617558,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 27.5,
+      "startSeconds": 16.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "G3"
+      ],
+      "midi": [
+        55
+      ],
+      "frequenciesHz": [
+        195.99771799087463
+      ],
+      "gain": 0.050976559172384445,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 24,
+      "startSeconds": 14.4,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 26,
+      "startSeconds": 15.6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 24.5,
+      "startSeconds": 14.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 25.5,
+      "startSeconds": 15.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 26.5,
+      "startSeconds": 15.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 27.5,
+      "startSeconds": 16.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 28,
+      "startSeconds": 16.8,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.09286669038550928,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 28.5,
+      "startSeconds": 17.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05027111118800938,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 29.5,
+      "startSeconds": 17.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "C4"
+      ],
+      "midi": [
+        60
+      ],
+      "frequenciesHz": [
+        261.6255653005986
+      ],
+      "gain": 0.05323172745592892,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 30,
+      "startSeconds": 18,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06255164841571823,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 30.75,
+      "startSeconds": 18.45,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04197193588959053,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 31.5,
+      "startSeconds": 18.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.04833199821505696,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 28,
+      "startSeconds": 16.8,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 30,
+      "startSeconds": 18,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 28.5,
+      "startSeconds": 17.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 29.5,
+      "startSeconds": 17.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 30.5,
+      "startSeconds": 18.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 31.5,
+      "startSeconds": 18.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 29,
+      "startSeconds": 17.4,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 31,
+      "startSeconds": 18.6,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 32,
+      "startSeconds": 19.2,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.08737718071555718,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 32.5,
+      "startSeconds": 19.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05241923948146403,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 33.5,
+      "startSeconds": 20.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.05640267597613856,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 34,
+      "startSeconds": 20.4,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06467007005978376,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 34.75,
+      "startSeconds": 20.85,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04259090650329366,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 35.5,
+      "startSeconds": 21.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.04957652329560369,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 32,
+      "startSeconds": 19.2,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 34,
+      "startSeconds": 20.4,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 32.5,
+      "startSeconds": 19.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 33.5,
+      "startSeconds": 20.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 34.5,
+      "startSeconds": 20.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 35.5,
+      "startSeconds": 21.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 36,
+      "startSeconds": 21.6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.08766604420110582,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 36.5,
+      "startSeconds": 21.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.050603636860623954,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 37.5,
+      "startSeconds": 22.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "C4"
+      ],
+      "midi": [
+        60
+      ],
+      "frequenciesHz": [
+        261.6255653005986
+      ],
+      "gain": 0.05712912741666659,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 38,
+      "startSeconds": 22.8,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06520728477379308,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 38.75,
+      "startSeconds": 23.25,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04276740437414497,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 39.5,
+      "startSeconds": 23.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.050073674343526366,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 36,
+      "startSeconds": 21.6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 38,
+      "startSeconds": 22.8,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 36.5,
+      "startSeconds": 21.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 37.5,
+      "startSeconds": 22.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 38.5,
+      "startSeconds": 23.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 39.5,
+      "startSeconds": 23.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 37,
+      "startSeconds": 22.2,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 39,
+      "startSeconds": 23.4,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 40,
+      "startSeconds": 24,
+      "durationSeconds": 1.9,
+      "notes": [
+        "Bb2"
+      ],
+      "midi": [
+        46
+      ],
+      "frequenciesHz": [
+        116.54094037952248
+      ],
+      "gain": 0.08838614997917786,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 40.5,
+      "startSeconds": 24.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F3"
+      ],
+      "midi": [
+        53
+      ],
+      "frequenciesHz": [
+        174.61411571650194
+      ],
+      "gain": 0.051551116602569814,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 41.5,
+      "startSeconds": 24.9,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05470879821712151,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 42,
+      "startSeconds": 25.2,
+      "durationSeconds": 1.9,
+      "notes": [
+        "Bb2"
+      ],
+      "midi": [
+        46
+      ],
+      "frequenciesHz": [
+        116.54094037952248
+      ],
+      "gain": 0.06274556557303294,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 42.75,
+      "startSeconds": 25.65,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.0414642179015465,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 43.5,
+      "startSeconds": 26.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F3"
+      ],
+      "midi": [
+        53
+      ],
+      "frequenciesHz": [
+        174.61411571650194
+      ],
+      "gain": 0.048042054272256794,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 40,
+      "startSeconds": 24,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 42,
+      "startSeconds": 25.2,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 40.5,
+      "startSeconds": 24.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 41.5,
+      "startSeconds": 24.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 42.5,
+      "startSeconds": 25.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 43.5,
+      "startSeconds": 26.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 44,
+      "startSeconds": 26.4,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.0906368355923891,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 44.5,
+      "startSeconds": 26.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.05100347263611853,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 45.5,
+      "startSeconds": 27.3,
+      "durationSeconds": 1.4,
+      "notes": [
+        "E4"
+      ],
+      "midi": [
+        64
+      ],
+      "frequenciesHz": [
+        329.6275569128699
+      ],
+      "gain": 0.0529745513882488,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 46,
+      "startSeconds": 27.6,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.06398388900030404,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 46.75,
+      "startSeconds": 28.05,
+      "durationSeconds": 1.4,
+      "notes": [
+        "F4"
+      ],
+      "midi": [
+        65
+      ],
+      "frequenciesHz": [
+        349.2282314330039
+      ],
+      "gain": 0.04195675588456913,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 47.5,
+      "startSeconds": 28.5,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.04848296716157347,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 44,
+      "startSeconds": 26.4,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 46,
+      "startSeconds": 27.6,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 44.5,
+      "startSeconds": 26.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 45.5,
+      "startSeconds": 27.3,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 46.5,
+      "startSeconds": 27.9,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 47.5,
+      "startSeconds": 28.5,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 45,
+      "startSeconds": 27,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "bone and wood contact",
+      "beat": 47,
+      "startSeconds": 28.2,
+      "durationSeconds": 0.07,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.035,
+      "pan": -0.08
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 48,
+      "startSeconds": 28.8,
+      "durationSeconds": 1.9,
+      "notes": [
+        "D3"
+      ],
+      "midi": [
+        50
+      ],
+      "frequenciesHz": [
+        146.8323839587038
+      ],
+      "gain": 0.09109321747912093,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 48.5,
+      "startSeconds": 29.1,
+      "durationSeconds": 1.4,
+      "notes": [
+        "A3"
+      ],
+      "midi": [
+        57
+      ],
+      "frequenciesHz": [
+        220
+      ],
+      "gain": 0.050246188812106844,
+      "pan": -0.18
+    },
+    {
+      "voice": "nylon accompaniment",
+      "beat": 49.5,
+      "startSeconds": 29.7,
+      "durationSeconds": 1.4,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.05423130023786798,
+      "pan": -0.18
+    },
+    {
+      "voice": "brushed frame drum",
+      "beat": 48,
+      "startSeconds": 28.8,
+      "durationSeconds": 0.3,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.1,
+      "pan": 0.03
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 48.5,
+      "startSeconds": 29.1,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.019,
+      "pan": 0.3
+    },
+    {
+      "voice": "soft dry shaker",
+      "beat": 49.5,
+      "startSeconds": 29.7,
+      "durationSeconds": 0.14,
+      "notes": [],
+      "midi": [],
+      "frequenciesHz": [],
+      "gain": 0.026,
+      "pan": 0.3
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 0,
+      "startSeconds": 0,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.085,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 1,
+      "startSeconds": 0.6,
+      "durationSeconds": 2.1,
+      "notes": [
+        "A4"
+      ],
+      "midi": [
+        69
+      ],
+      "frequenciesHz": [
+        440
+      ],
+      "gain": 0.074,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 2.5,
+      "startSeconds": 1.5,
+      "durationSeconds": 2.1,
+      "notes": [
+        "C5"
+      ],
+      "midi": [
+        72
+      ],
+      "frequenciesHz": [
+        523.2511306011972
+      ],
+      "gain": 0.071,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 3.5,
+      "startSeconds": 2.1,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.077,
+      "pan": 0.09
+    },
+    {
+      "voice": "damped warm bell",
+      "beat": 3.5,
+      "startSeconds": 2.1,
+      "durationSeconds": 0.8,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.019,
+      "pan": 0.22
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 16,
+      "startSeconds": 9.6,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.085,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 17,
+      "startSeconds": 10.2,
+      "durationSeconds": 2.1,
+      "notes": [
+        "A4"
+      ],
+      "midi": [
+        69
+      ],
+      "frequenciesHz": [
+        440
+      ],
+      "gain": 0.074,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 18.5,
+      "startSeconds": 11.1,
+      "durationSeconds": 2.1,
+      "notes": [
+        "C5"
+      ],
+      "midi": [
+        72
+      ],
+      "frequenciesHz": [
+        523.2511306011972
+      ],
+      "gain": 0.071,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 19.5,
+      "startSeconds": 11.7,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.077,
+      "pan": 0.09
+    },
+    {
+      "voice": "damped warm bell",
+      "beat": 19.5,
+      "startSeconds": 11.7,
+      "durationSeconds": 0.8,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.019,
+      "pan": 0.22
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 32,
+      "startSeconds": 19.2,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D4"
+      ],
+      "midi": [
+        62
+      ],
+      "frequenciesHz": [
+        293.6647679174076
+      ],
+      "gain": 0.085,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 33,
+      "startSeconds": 19.8,
+      "durationSeconds": 2.1,
+      "notes": [
+        "A4"
+      ],
+      "midi": [
+        69
+      ],
+      "frequenciesHz": [
+        440
+      ],
+      "gain": 0.074,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 34.5,
+      "startSeconds": 20.7,
+      "durationSeconds": 2.1,
+      "notes": [
+        "C5"
+      ],
+      "midi": [
+        72
+      ],
+      "frequenciesHz": [
+        523.2511306011972
+      ],
+      "gain": 0.071,
+      "pan": 0.09
+    },
+    {
+      "voice": "nylon D-A-C-D motif",
+      "beat": 35.5,
+      "startSeconds": 21.3,
+      "durationSeconds": 2.1,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.077,
+      "pan": 0.09
+    },
+    {
+      "voice": "damped warm bell",
+      "beat": 35.5,
+      "startSeconds": 21.3,
+      "durationSeconds": 0.8,
+      "notes": [
+        "D5"
+      ],
+      "midi": [
+        74
+      ],
+      "frequenciesHz": [
+        587.3295358348151
+      ],
+      "gain": 0.019,
+      "pan": 0.22
+    },
+    {
+      "voice": "low muted brass",
+      "beat": 4,
+      "startSeconds": 2.4,
+      "durationSeconds": 1.15,
+      "notes": [
+        "D2"
+      ],
+      "midi": [
+        38
+      ],
+      "frequenciesHz": [
+        73.41619197935188
+      ],
+      "gain": 0.032,
+      "pan": -0.02
+    },
+    {
+      "voice": "low muted brass",
+      "beat": 20,
+      "startSeconds": 12,
+      "durationSeconds": 1.15,
+      "notes": [
+        "A2"
+      ],
+      "midi": [
+        45
+      ],
+      "frequenciesHz": [
+        110
+      ],
+      "gain": 0.032,
+      "pan": -0.02
+    },
+    {
+      "voice": "low muted brass",
+      "beat": 36,
+      "startSeconds": 21.6,
+      "durationSeconds": 1.15,
+      "notes": [
+        "D2"
+      ],
+      "midi": [
+        38
+      ],
+      "frequenciesHz": [
+        73.41619197935188
+      ],
+      "gain": 0.032,
+      "pan": -0.02
+    }
+  ],
+  "mastering": {
+    "fixedGainDb": -0.28000000000000114,
+    "measured": {
+      "integratedLufs": -23.99,
+      "truePeakDbtp": -8.24,
+      "loudnessRangeLu": 3.1,
+      "thresholdLufs": -33.99
+    },
+    "mp3Measured": {
+      "integratedLufs": -24.26,
+      "truePeakDbtp": -8.48,
+      "loudnessRangeLu": 3.1,
+      "thresholdLufs": -34.26
+    },
+    "masterProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 24,
+          "time_base": "1/48000",
+          "duration_ts": 1440000
+        }
+      ],
+      "format": {
+        "duration": "30.000000",
+        "size": "8640102"
+      }
+    },
+    "sourceProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "pcm_f32le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 32,
+          "time_base": "1/48000",
+          "duration_ts": 1440000
+        }
+      ],
+      "format": {
+        "duration": "30.000000",
+        "size": "11520044"
+      }
+    },
+    "sourceFadeOutSeconds": 0.07,
+    "sourceQuality": "Original authored 48-kHz stereo float32 WAV; final 24-bit WAV and MP3 derived locally."
+  },
+  "listeningReview": "Pending user audition; instrument models are synthetic and are not claimed as live nylon/brass performances."
+}

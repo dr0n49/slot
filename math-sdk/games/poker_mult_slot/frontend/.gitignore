@@ -6,3 +6,5 @@ dist-ssr
 storybook-static
 *storybook.log
 .DS_Store
+
+dist-slice
