@@ -1,0 +1,9 @@
+# Phase 2E — Pixi bonus anticipation
+
+The motion clock now copies Godot's anticipation decision and timing from `reel_controller.gd`: two real jokers before the last column start the build-up at that column's brake; later columns gain 560 ms each (200 ms turbo), and their live speed eases to 0.55 at 2.5 per second. Two jokers first reached in the last column do not start a tease. No decision is possible during target-free wallet travel.
+
+The scene retains five cheap drawn frames, breathing 0.7→1→0.7 every 420 ms. Each future column's frame goes out at its brake. Landed plain cards dim, while actual joker nodes start the 1.06 pop and 1.08 breathing pulse after 450 ms (200 ms turbo). The ordinary-card dim is currently a cheap tint; Godot's shader also desaturates. This is a remaining visual difference for parity review. Reduced motion disables the tease, pulse, shake and squash. React receives exactly one anticipation-on/off pair and retains ownership of the riser and outer frame. Last settle, snap and a new round clear all state without stale timers.
+
+Three new clock tests protect the real-target tease, last-column/reduced exceptions, and snap followed by another wallet wait. All 39 tests and TypeScript pass. `verification.json` records actual engine seed 86 (two jokers, 0.25×) in desktop, 390×844, turbo and reduced mode: actual final 25 cards equal the payload, five collision events, one final settle, no premature HUD. Normal runs measure 59.7–60.0 FPS / p95 16.7–16.8 ms; turbo/reduced approximately 60 FPS / p95 16.7 ms. The built production export still retains Godot.
+
+Desktop and portrait GIF/MP4 evidence is attached in this folder. Full renderer parity, strict 50 ms feedback, the final art/audio integration, real-phone review and resubmission remain pending. No math or wallet source is changed in this sub-phase.

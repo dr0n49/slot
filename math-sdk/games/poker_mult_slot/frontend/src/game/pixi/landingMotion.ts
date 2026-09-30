@@ -9,6 +9,8 @@ export const LANDING = {
   squashX: 1.04, squashY: .97, squashMs: 50, squashSettleMs: 120,
   rowMs: 12, turboRowMs: 6, turboBounceScale: .5,
   shakeSmall: .8, shakeLast: 2.2, shakeJoker: 5, shakeDecay: 24,
+  anticipationMs: 560, turboAnticipationMs: 200, anticipationSpeed: .55,
+  speedEase: 2.5, pulseDelayMs: 450, turboPulseDelayMs: 200,
 } as const;
 
 export type ReelMotion = {
@@ -20,12 +22,14 @@ export type ReelMotion = {
   approachFrom: number;
   squashAt: number;
   collisionAt: number;
+  speedK: number;
 };
 type Callbacks = {
   wrap: (column: number) => void;
   prepare: (column: number) => void;
   collision: (column: number, joker: boolean) => void;
   settled: () => void;
+  anticipation?: (active: boolean, ms: number) => void;
 };
 const sineIn = (v: number) => 1 - Math.cos(v * Math.PI / 2);
 const sineOut = (v: number) => Math.sin(v * Math.PI / 2);
@@ -35,8 +39,9 @@ const unit = (v: number) => Math.max(0, Math.min(1, v));
 export class LandingMotion {
   readonly reels: ReelMotion[] = Array.from({length: 5}, () => ({
     phase: "rest", offset: 0, stopAt: Infinity, approachAt: 0,
-    approachMs: 0, approachFrom: 0, squashAt: Infinity, collisionAt: Infinity,
+    approachMs: 0, approachFrom: 0, squashAt: Infinity, collisionAt: Infinity, speedK: 1,
   }));
+  readonly anticipation = {active:false, column:-1, startedAt:0, shadedAt:Array(5).fill(Infinity) as number[]};
   private startedAt = 0;
   private lastFrameAt = 0;
   private target = false;
@@ -47,11 +52,12 @@ export class LandingMotion {
 
   begin(now: number, turbo: boolean) {
     if (this.active) return;
+    this.endAnticipation();
     this.startedAt = this.lastFrameAt = now;
     this.fast = turbo; this.active = true; this.target = false; this.jokers = [];
     for (const reel of this.reels) Object.assign(reel, {
       phase: "travel", offset: 0, stopAt: Infinity,
-      squashAt: Infinity, collisionAt: Infinity,
+      squashAt: Infinity, collisionAt: Infinity, speedK: 1,
     });
   }
 
@@ -63,12 +69,13 @@ export class LandingMotion {
     let jokerSum = 0, anticipationColumn = -1;
     for (let c = 0; c < 5; c++) {
       jokerSum += jokerCounts[c];
-      if (jokerSum >= 2) { anticipationColumn = c; break; }
+      if (jokerSum >= 2) { anticipationColumn = c < 4 && !this.reduced ? c : -1; break; }
     }
+    this.anticipation.column=anticipationColumn;
     for (let c = 0; c < 5; c++) {
       let delay = this.reduced ? 0 : c * (this.fast ? LANDING.turboColumnMs : LANDING.columnMs);
       if (!this.reduced && anticipationColumn >= 0 && c > anticipationColumn)
-        delay += (c - anticipationColumn) * (this.fast ? 200 : 560);
+        delay += (c - anticipationColumn) * (this.fast ? LANDING.turboAnticipationMs : LANDING.anticipationMs);
       else if (!this.reduced && anticipationColumn < 0 && c === 4)
         delay += this.fast ? LANDING.turboLastMs : LANDING.lastMs;
       this.reels[c].stopAt = first + delay;
@@ -102,9 +109,33 @@ export class LandingMotion {
   }
 
   private rest() {
+    this.endAnticipation();
     for (const reel of this.reels) Object.assign(reel, {
-      phase: "rest", offset: 0, squashAt: Infinity,
+      phase: "rest", offset: 0, squashAt: Infinity, speedK: 1,
     });
+  }
+
+  private endAnticipation() {
+    const wasActive=this.anticipation.active;
+    Object.assign(this.anticipation,{active:false,column:-1,startedAt:0});
+    this.anticipation.shadedAt.fill(Infinity);
+    for(const reel of this.reels)reel.speedK=1;
+    if(wasActive)this.callbacks.anticipation?.(false,0);
+  }
+
+  private shadeAtBrake(column:number, now:number) {
+    const hot=this.anticipation;
+    if(hot.active){hot.shadedAt[column]=now;return}
+    if(column!==hot.column)return;
+    hot.active=true;hot.startedAt=now;
+    for(let c=0;c<=column;c++)hot.shadedAt[c]=now;
+    this.callbacks.anticipation?.(true,Math.max(0,this.reels[4].stopAt-now));
+  }
+
+  pulseElapsed(column:number, now:number) {
+    return this.anticipation.active&&!this.reduced
+      ? now-this.anticipation.shadedAt[column]-(this.fast?LANDING.turboPulseDelayMs:LANDING.pulseDelayMs)
+      : -Infinity;
   }
 
   tick(now: number) {
@@ -117,14 +148,18 @@ export class LandingMotion {
       if (reel.phase === "rest") continue;
       if (reel.phase === "travel") {
         if (!this.reduced) {
+          const want=this.anticipation.active&&c>this.anticipation.column?LANDING.anticipationSpeed:1;
+          const step=seconds*LANDING.speedEase;
+          reel.speedK+=Math.sign(want-reel.speedK)*Math.min(Math.abs(want-reel.speedK),step);
           const ramp = unit((now - this.startedAt) / (this.fast ? LANDING.turboRampMs : LANDING.rampMs));
-          reel.offset += speed * ramp * ramp * seconds;
+          reel.offset += speed * ramp * ramp * reel.speedK * seconds;
           while (reel.offset >= LANDING.cell) {
             reel.offset -= LANDING.cell; this.callbacks.wrap(c);
           }
         }
         if (!this.target || now < reel.stopAt) continue;
         this.callbacks.prepare(c);
+        this.shadeAtBrake(c,now);
         // Keep the exact mid-cell offset. Only the target chain changes.
         reel.approachAt = now; reel.approachFrom = reel.offset;
         reel.approachMs = this.reduced ? 0 : Math.max(50, Math.min(140,
@@ -157,6 +192,7 @@ export class LandingMotion {
     }
     if (this.target && this.reels.every(r => r.phase === "rest")) {
       this.active = false;
+      this.endAnticipation();
       this.callbacks.settled();
     }
   }

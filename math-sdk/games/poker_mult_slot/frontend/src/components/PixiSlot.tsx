@@ -129,6 +129,17 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
         new CustomEvent("pixi-landing",{bubbles:true,detail:{event,t:performance.now(),rev:target?.rev,...extra}}));
       const win = new Container(), nice = new Container();app.stage.addChild(win,nice);
       nice.visible=false;
+      const hotFrames=Array.from({length:5},(_,c)=>{
+        const g=new Graphics(),left=X+c*DX-9,top=Y-4,height=5*DY-15;
+        g.roundRect(left,top,CW+18,height,6).fill({color:0xa91e35,alpha:.06});
+        for(let n=0;n<12;n++){
+          const alpha=.32*(1-n/12)**2,y=n*12.5;
+          g.rect(left+3,top+y,CW+12,12.5).fill({color:0xa91e35,alpha});
+          g.rect(left+3,top+height-y-12.5,CW+12,12.5).fill({color:0xa91e35,alpha});
+        }
+        g.roundRect(left,top,CW+18,height,6).stroke({color:0xd3b165,width:4});
+        g.visible=false;app.stage.addChild(g);return g;
+      });
       const corners=new Container();app.stage.addChild(corners);
       for(const [x,y,rotation] of [[14,42,0],[786,42,Math.PI/2],[786,1112,Math.PI],[14,1112,-Math.PI/2]]) {
         const s=new Sprite(tex("corner-proof"));s.width=40;s.height=40;s.anchor.set(.5);s.position.set(x,y);s.rotation=rotation;corners.addChild(s);
@@ -167,6 +178,9 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
           if(soundEnabled){audio.playReelStop(column);if(joker)audio.playJokerLand()}
           if(column===4)audio.stopReelSpinLoop(0);
           emit("landing_collision",{column,joker,offset:motion.reels[column].offset,shake:strength,soundEnabled});
+        },anticipation:(active,ms)=>{
+          callbacks.current.onAnticipation?.(active,ms);
+          emit("anticipation",{active,ms,column:motion.anticipation.column});
         },settled:()=>finalise()},reduced);
       const points=(id:number)=>LINES[id].map(i=>[X+(i%5)*DX+CW/2,Y+Math.floor(i/5)*DY+CH/2]);
       function paintWins(time:number) {
@@ -237,12 +251,28 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
         motion.tick(now);
         for(let c=0;c<5;c++){
           reels[c].node.y=Y+motion.reels[c].offset;
-          for(let row=0;row<5;row++)reels[c].cards[row+1].scale.set(...motion.squash(c,row,now));
+          const hot=motion.anticipation,shade=hot.active&&Number.isFinite(hot.shadedAt[c]);
+          const pulseElapsed=motion.pulseElapsed(c,now);
+          hotFrames[c].visible=hot.active&&c>hot.column&&motion.reels[c].phase==="travel";
+          // Godot's hot-frame opacity breathes 0.7→1→0.7 every 420 ms.
+          hotFrames[c].alpha=.85-.15*Math.cos((now-hot.startedAt)*Math.PI*2/420);
+          for(let row=0;row<5;row++){
+            const node=reels[c].cards[row+1],joker=!!paintedCards.get(node)?.golden;
+            node.tint=shade&&!joker?0xbcbcbc:0xffffff;
+            const [sx,sy]=motion.squash(c,row,now);
+            let pulse=1;
+            if(shade&&joker&&pulseElapsed>=0){
+              if(pulseElapsed<90)pulse=1+.06*(1-(1-pulseElapsed/90)**3);
+              else if(pulseElapsed<250)pulse=1+.06*(1-(Math.min(1,(pulseElapsed-90)/160)))**3;
+              else pulse=1+.04*(1-Math.cos((pulseElapsed-250)*Math.PI/350));
+            }
+            node.scale.set(sx*pulse,sy*pulse);
+          }
         }
         const delta=Math.max(0,(now-lastFrameAt)/1000);lastFrameAt=now;
         if(shakeStrength>.01){const angle=Math.random()*Math.PI*2;app.stage.position.set(-Math.cos(angle)*shakeStrength,-Math.sin(angle)*shakeStrength);
           shakeStrength*=Math.max(0,1-LANDING.shakeDecay*delta)}else{shakeStrength=0;app.stage.position.set(0)}
-        host.current!.dataset.landing=JSON.stringify({hasTarget:!!target,reels:motion.reels,
+        host.current!.dataset.landing=JSON.stringify({hasTarget:!!target,reels:motion.reels,anticipation:motion.anticipation,
           scales:reels.map(r=>r.cards.slice(1,6).map(n=>[n.scale.x,n.scale.y])),shake:shakeStrength});
         if(settled&&target){const t=now-settledAt;
           if(!notified&&t>=100){notified=true;

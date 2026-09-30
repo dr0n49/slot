@@ -59,4 +59,34 @@ describe("real-target landing contract",()=>{
     expect(h.collisions).toHaveLength(5);expect(h.settled).toBe(1);
     expect(h.motion.squash(1,2,150)).toEqual([1,1]);
   });
+  it("starts anticipation at the second-joker brake, slows only future reels, and ends once after the last settle",()=>{
+    const events:Array<{active:boolean;t:number;ms:number}>=[];let time=0,settled=0;
+    const motion=new LandingMotion({wrap:()=>{},prepare:()=>{},collision:()=>{},settled:()=>settled++,anticipation:(active,ms)=>events.push({active,t:time,ms})});
+    motion.begin(0,false);motion.reveal(0,[1,1,0,0,1]);
+    for(time=10;time<=700;time+=10)motion.tick(time);
+    expect(events).toHaveLength(0);expect(motion.reels[4].speedK).toBe(1);
+    time=710;motion.tick(time);expect(events[0]).toEqual({active:true,t:710,ms:2160});
+    expect(motion.anticipation.shadedAt.slice(0,2)).toEqual([710,710]);
+    for(time=720;time<=1100;time+=10)motion.tick(time);
+    expect(motion.reels[0].speedK).toBe(1);expect(motion.reels[4].speedK).toBeCloseTo(.55);
+    expect(motion.pulseElapsed(0,1159)).toBe(-1);expect(motion.pulseElapsed(0,1160)).toBe(0);
+    for(time=1110;time<=3200;time+=10)motion.tick(time);
+    expect(settled).toBe(1);expect(events.map(e=>e.active)).toEqual([true,false]);
+    expect(motion.anticipation.active).toBe(false);expect(motion.reels.every(r=>r.speedK===1)).toBe(true);
+  });
+  it("does not tease when the second joker is in the final column, or in reduced motion",()=>{
+    for(const reduced of [false,true]){
+      const events:boolean[]=[];const motion=new LandingMotion({wrap:()=>{},prepare:()=>{},collision:()=>{},settled:()=>{},anticipation:active=>events.push(active)},reduced);
+      motion.begin(0,false);motion.reveal(0,reduced?[1,1,0,0,1]:[0,0,0,1,1]);
+      for(let t=10;t<2000;t+=10)motion.tick(t);
+      expect(events).toEqual([]);expect(motion.reels[4].stopAt).toBe(reduced?120:1270);
+    }
+  });
+  it("a snap clears an active tease and its delayed pulse without replay in the next wallet wait",()=>{
+    const events:boolean[]=[];const motion=new LandingMotion({wrap:()=>{},prepare:()=>{},collision:()=>{},settled:()=>{},anticipation:active=>events.push(active)});
+    motion.begin(0,true);motion.reveal(0,[1,1,0,0,1]);for(let t=10;t<230;t+=10)motion.tick(t);
+    expect(events).toEqual([true]);expect(motion.snap()).toBe(true);expect(events).toEqual([true,false]);
+    motion.begin(240,true);for(let t=250;t<1700;t+=10)motion.tick(t);
+    expect(events).toEqual([true,false]);expect(motion.pulseElapsed(0,1700)).toBe(-Infinity);
+  });
 });
