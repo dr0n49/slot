@@ -9,6 +9,7 @@ import { cardFaceUrl } from "../game/assets";
 import { isLiteFx } from "../game/fxMode";
 import { audio } from "../game/audio";
 import { LANDING, LandingMotion } from "../game/pixi/landingMotion";
+import { BONUS_BEATS } from "./bonusBeats";
 import type { RevealPayload, SlotGameHandle, SlotGameProps, GodotWinLine } from "./SlotGame";
 
 const W = 800, H = 1146, CW = 134, CH = 188, DX = 146, DY = LANDING.cell, X = 40, Y = 72;
@@ -83,6 +84,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
       host.current!.appendChild(app.canvas);
       const paintedCards = new WeakMap<Container, Card>();
       const cardBodies = new WeakMap<Container, Container>();
+      const badges = new WeakMap<Container, { node: Container; entering: boolean }>();
       shadeFilter = new ColorMatrixFilter();
       // Godot symbol_fx: mix(rgb, dot(rgb,[.299,.587,.114])*.55, .58).
       // Keep alpha and the separate multiplier plate unchanged.
@@ -93,7 +95,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
         0,0,0,1,0,
       ];
       const shadeFilters = [shadeFilter];
-      function face(card: Card, multiplier = 0) {
+      function face(card: Card, multiplier = 0, entering = false) {
         const node = new Container();
         const body = new Container();node.addChild(body);cardBodies.set(node,body);
         paintedCards.set(node,card);node.pivot.set(CW/2,CH/2);
@@ -125,8 +127,10 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
             if(py>0)mark.rotation=Math.PI;body.addChild(mark);
           }
           if(multiplier>0) {
-            const plate=new Graphics().roundRect(77,CH-32,53,26,4).fill(0x211711).stroke({color:0xc8a052,width:1});node.addChild(plate);
-            const t=label("×"+multiplier,19,0xf1ddb2);t.position.set(82,CH-33);node.addChild(t);
+            const badge=new Container();node.addChild(badge);badge.alpha=entering&&!reduced?0:1;
+            badges.set(node,{node:badge,entering:entering&&!reduced});
+            const plate=new Graphics().roundRect(77,CH-32,53,26,4).fill(0x211711).stroke({color:0xc8a052,width:1});badge.addChild(plate);
+            const t=label("×"+multiplier,19,0xf1ddb2);t.position.set(82,CH-33);badge.addChild(t);
           }
         }
         return node;
@@ -178,7 +182,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
         // Entry holds target row 0; visible rows 0..3 hold target rows 1..4.
         // The next continuous wrap installs all five rows at collision.
         for(let row=0;row<5;row++){
-          const i=row*5+c,old=reel.cards[row],node=face(target.cards[i],target.multipliers[i]);
+          const i=row*5+c,old=reel.cards[row],node=face(target.cards[i],target.multipliers[i],true);
           node.position.copyFrom(old.position);reel.node.removeChild(old);old.destroy({children:true});
           reel.node.addChild(node);reel.cards[row]=node;
         }
@@ -199,7 +203,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
       function paintWins(time:number) {
         win.removeChildren().forEach(n=>n.destroy({children:true}));if(!target)return;
         const ordered=[...target.lines].sort((a,b)=>b.win_x-a.win_x);
-        const active=skipped||reduced||time>=600?ordered:ordered.slice(time>=350?1:0,time>=350?2:1);
+        const active=skipped||reduced||target.freeSpin||time>=600?ordered:ordered.slice(time>=350?1:0,time>=350?2:1);
         for(const line of active) {
           const g=new Graphics();for(const i of LINES[line.id])
             g.roundRect(X+(i%5)*DX-2,Y+Math.floor(i/5)*DY-2,CW+4,CH+4,5).stroke({color:0xd3b165,width:2.5});
@@ -254,7 +258,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
             for(let c=0;c<5;c++)reels[c].node.y=Y+motion.reels[c].offset;app.render()}
           target=p;
           app.ticker.start();
-          motion.reveal(performance.now(),Array.from({length:5},(_,c)=>p.cards.filter((card,i)=>i%5===c&&card.golden).length));layoutNice();emit("target_received",{cards:p.cards,multipliers:p.multipliers,shownX:p.shownX,bet:p.bet,lines:p.lines})},
+          motion.reveal(performance.now(),Array.from({length:5},(_,c)=>p.cards.filter((card,i)=>i%5===c&&card.golden).length));layoutNice();emit("target_received",{cards:p.cards,multipliers:p.multipliers,shownX:p.shownX,bet:p.bet,lines:p.lines,freeSpin:!!p.freeSpin,bankAdd:p.bankAdd??0})},
         snap:()=>{if(motion.snap())finalise(true)},skip:()=>{if(settled){skipped=true;skippedAt=performance.now()}},turbo:v=>{fast=v},
         sound:v=>{soundEnabled=v;if(!v)audio.stopReelSpinLoop(0)},
       };
@@ -274,6 +278,11 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
           for(const node of reels[c].cards){
             const body=cardBodies.get(node)!,shaded=shade&&!paintedCards.get(node)?.golden;
             if(!!body.filters!==shaded)body.filters=shaded?shadeFilters:null;
+            const badge=badges.get(node);
+            if(badge?.entering){
+              badge.node.alpha=skipped||reduced?1:Math.max(0,Math.min(1,(now-motion.reels[c].collisionAt)/BONUS_BEATS.multiplier));
+              if(badge.node.alpha===1)badge.entering=false;
+            }
           }
           for(let row=0;row<5;row++){
             const node=reels[c].cards[row+1],joker=!!paintedCards.get(node)?.golden;
@@ -291,9 +300,11 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
         if(shakeStrength>.01){const angle=Math.random()*Math.PI*2;app.stage.position.set(-Math.cos(angle)*shakeStrength,-Math.sin(angle)*shakeStrength);
           shakeStrength*=Math.max(0,1-LANDING.shakeDecay*delta)}else{shakeStrength=0;app.stage.position.set(0)}
         host.current!.dataset.landing=JSON.stringify({hasTarget:!!target,reels:motion.reels,anticipation:motion.anticipation,
-          scales:reels.map(r=>r.cards.slice(1,6).map(n=>[n.scale.x,n.scale.y])),shake:shakeStrength});
+          scales:reels.map(r=>r.cards.slice(1,6).map(n=>[n.scale.x,n.scale.y])),
+          badges:reels.map(r=>r.cards.slice(1,6).map(n=>badges.get(n)?.node.alpha??null)),shake:shakeStrength});
         if(settled&&target){const t=now-settledAt;
-          if(!notified&&t>=100){notified=true;
+          const readDelay=reduced||target.freeSpin?0:100;
+          if(!notified&&t>=readDelay){notified=true;
             const totalCents=Math.round(target.shownX*target.bet*100),sum=target.lines.reduce((v,l)=>v+l.win_x,0);
             const cents=target.lines.map(l=>Math.floor(totalCents*l.win_x/sum));let remainder=totalCents-cents.reduce((a,b)=>a+b,0);
             const order=target.lines.map((l,i)=>({i,f:totalCents*l.win_x/sum-cents[i]})).sort((a,b)=>b.f-a.f);
@@ -303,8 +314,8 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
             callbacks.current.onWin?.(lines,target.shownX,target.rev);callbacks.current.onRoundEnd?.("external",target.rev);
           }
           // Only three scene changes: first focus, second focus, final all.
-          const beat=t<100?-1:skipped||reduced||fast?3:t<450?0:t<700?1:2;
-          if(host.current!.dataset.beat!==String(beat)){host.current!.dataset.beat=String(beat);if(t>=100)paintWins(fast?600:t-100)}
+          const beat=t<readDelay?-1:skipped||reduced||fast||target.freeSpin?3:t<450?0:t<700?1:2;
+          if(host.current!.dataset.beat!==String(beat)){host.current!.dataset.beat=String(beat);if(t>=readDelay)paintWins(fast?600:t-readDelay)}
           nice.visible=audition&&target.shownX>=20&&target.shownX<=50&&
             (skipped?now-skippedAt<350:t>=950&&t<2200);
           if(nice.visible){const u=skipped||reduced?1:Math.min(1,(t-950)/800);

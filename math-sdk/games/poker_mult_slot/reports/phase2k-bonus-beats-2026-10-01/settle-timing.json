@@ -1,0 +1,346 @@
+[
+  {
+    "label": "desktop",
+    "ordinary": {
+      "count": 14,
+      "minMs": 1426.3999999910593,
+      "medianMs": 1446.3999999910593,
+      "maxMs": 1463.800000011921
+    },
+    "durations": [
+      {
+        "rev": 2,
+        "ms": 1437.6000000089407,
+        "tease": false
+      },
+      {
+        "rev": 3,
+        "ms": 1426.3999999910593,
+        "tease": false
+      },
+      {
+        "rev": 4,
+        "ms": 1446.3999999910593,
+        "tease": false
+      },
+      {
+        "rev": 5,
+        "ms": 1459.699999988079,
+        "tease": false
+      },
+      {
+        "rev": 6,
+        "ms": 1447.199999988079,
+        "tease": false
+      },
+      {
+        "rev": 7,
+        "ms": 1454.300000011921,
+        "tease": false
+      },
+      {
+        "rev": 8,
+        "ms": 1929.5,
+        "tease": true
+      },
+      {
+        "rev": 9,
+        "ms": 1442,
+        "tease": false
+      },
+      {
+        "rev": 10,
+        "ms": 1442.800000011921,
+        "tease": false
+      },
+      {
+        "rev": 11,
+        "ms": 1429.199999988079,
+        "tease": false
+      },
+      {
+        "rev": 12,
+        "ms": 1447,
+        "tease": false
+      },
+      {
+        "rev": 13,
+        "ms": 1430.7000000029802,
+        "tease": false
+      },
+      {
+        "rev": 14,
+        "ms": 1429.6000000089407,
+        "tease": false
+      },
+      {
+        "rev": 15,
+        "ms": 1463.800000011921,
+        "tease": false
+      },
+      {
+        "rev": 16,
+        "ms": 1447.9000000059605,
+        "tease": false
+      }
+    ]
+  },
+  {
+    "label": "portrait",
+    "ordinary": {
+      "count": 14,
+      "minMs": 493.79999999701977,
+      "medianMs": 510.80000001192093,
+      "maxMs": 526.0999999940395
+    },
+    "durations": [
+      {
+        "rev": 2,
+        "ms": 502.29999999701977,
+        "tease": false
+      },
+      {
+        "rev": 3,
+        "ms": 495.19999998807907,
+        "tease": false
+      },
+      {
+        "rev": 4,
+        "ms": 526.0999999940395,
+        "tease": false
+      },
+      {
+        "rev": 5,
+        "ms": 509.8999999910593,
+        "tease": false
+      },
+      {
+        "rev": 6,
+        "ms": 493.79999999701977,
+        "tease": false
+      },
+      {
+        "rev": 7,
+        "ms": 512.6000000089407,
+        "tease": false
+      },
+      {
+        "rev": 8,
+        "ms": 663.9000000059605,
+        "tease": true
+      },
+      {
+        "rev": 9,
+        "ms": 524,
+        "tease": false
+      },
+      {
+        "rev": 10,
+        "ms": 510.80000001192093,
+        "tease": false
+      },
+      {
+        "rev": 11,
+        "ms": 508.90000000596046,
+        "tease": false
+      },
+      {
+        "rev": 12,
+        "ms": 510.20000000298023,
+        "tease": false
+      },
+      {
+        "rev": 13,
+        "ms": 511.70000000298023,
+        "tease": false
+      },
+      {
+        "rev": 14,
+        "ms": 511.09999999403954,
+        "tease": false
+      },
+      {
+        "rev": 15,
+        "ms": 508.70000000298023,
+        "tease": false
+      },
+      {
+        "rev": 16,
+        "ms": 512.7000000029802,
+        "tease": false
+      }
+    ]
+  },
+  {
+    "label": "mobile-lite",
+    "ordinary": {
+      "count": 14,
+      "minMs": 491,
+      "medianMs": 509.5,
+      "maxMs": 526.7999999970198
+    },
+    "durations": [
+      {
+        "rev": 2,
+        "ms": 498.6000000089407,
+        "tease": false
+      },
+      {
+        "rev": 3,
+        "ms": 498.6000000089407,
+        "tease": false
+      },
+      {
+        "rev": 4,
+        "ms": 526,
+        "tease": false
+      },
+      {
+        "rev": 5,
+        "ms": 510.59999999403954,
+        "tease": false
+      },
+      {
+        "rev": 6,
+        "ms": 509.5,
+        "tease": false
+      },
+      {
+        "rev": 7,
+        "ms": 504.80000001192093,
+        "tease": false
+      },
+      {
+        "rev": 8,
+        "ms": 676.2000000029802,
+        "tease": true
+      },
+      {
+        "rev": 9,
+        "ms": 524.9000000059605,
+        "tease": false
+      },
+      {
+        "rev": 10,
+        "ms": 494.29999999701977,
+        "tease": false
+      },
+      {
+        "rev": 11,
+        "ms": 510.20000000298023,
+        "tease": false
+      },
+      {
+        "rev": 12,
+        "ms": 492,
+        "tease": false
+      },
+      {
+        "rev": 13,
+        "ms": 526.7999999970198,
+        "tease": false
+      },
+      {
+        "rev": 14,
+        "ms": 493.3999999910593,
+        "tease": false
+      },
+      {
+        "rev": 15,
+        "ms": 491,
+        "tease": false
+      },
+      {
+        "rev": 16,
+        "ms": 511.5,
+        "tease": false
+      }
+    ]
+  },
+  {
+    "label": "reduced",
+    "ordinary": {
+      "count": 15,
+      "minMs": 124.20000000298023,
+      "medianMs": 128.5,
+      "maxMs": 135.20000000298023
+    },
+    "durations": [
+      {
+        "rev": 2,
+        "ms": 135.20000000298023,
+        "tease": false
+      },
+      {
+        "rev": 3,
+        "ms": 132.79999999701977,
+        "tease": false
+      },
+      {
+        "rev": 4,
+        "ms": 126.40000000596046,
+        "tease": false
+      },
+      {
+        "rev": 5,
+        "ms": 126.59999999403954,
+        "tease": false
+      },
+      {
+        "rev": 6,
+        "ms": 124.20000000298023,
+        "tease": false
+      },
+      {
+        "rev": 7,
+        "ms": 132.59999999403954,
+        "tease": false
+      },
+      {
+        "rev": 8,
+        "ms": 132.59999999403954,
+        "tease": false
+      },
+      {
+        "rev": 9,
+        "ms": 128.29999999701977,
+        "tease": false
+      },
+      {
+        "rev": 10,
+        "ms": 128.09999999403954,
+        "tease": false
+      },
+      {
+        "rev": 11,
+        "ms": 128.5,
+        "tease": false
+      },
+      {
+        "rev": 12,
+        "ms": 128.40000000596046,
+        "tease": false
+      },
+      {
+        "rev": 13,
+        "ms": 131.40000000596046,
+        "tease": false
+      },
+      {
+        "rev": 14,
+        "ms": 130.09999999403954,
+        "tease": false
+      },
+      {
+        "rev": 15,
+        "ms": 129.3999999910593,
+        "tease": false
+      },
+      {
+        "rev": 16,
+        "ms": 126,
+        "tease": false
+      }
+    ]
+  }
+]

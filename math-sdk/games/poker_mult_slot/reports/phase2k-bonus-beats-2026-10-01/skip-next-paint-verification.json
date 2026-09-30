@@ -1,0 +1,87 @@
+{
+  "runs": [
+    {
+      "label": "mobile-lite",
+      "fsSpins": 15,
+      "introMs": 495.59999999403954,
+      "expectedIntro": 500,
+      "changes": [
+        {
+          "rev": 2,
+          "add": 2,
+          "bank": 5,
+          "ms": 52.29999999701977,
+          "skipped": true
+        },
+        {
+          "rev": 6,
+          "add": 3,
+          "bank": 8,
+          "ms": 317.29999999701977,
+          "skipped": false
+        },
+        {
+          "rev": 7,
+          "add": 2,
+          "bank": 10,
+          "ms": 317.8999999910593,
+          "skipped": false
+        }
+      ],
+      "badgeTimes": [
+        183,
+        167.5,
+        167.09999999403954
+      ],
+      "finalBank": 10,
+      "total": "120.00",
+      "metrics": {
+        "fps": 58.81398902250405,
+        "p95Ms": 16.799999999999272
+      },
+      "skip": {
+        "t": 10177.79999999702,
+        "rev": 2,
+        "firstPaint": {
+          "t": 10184.199999988079,
+          "bank": "×5",
+          "collection": false,
+          "labels": 3
+        }
+      }
+    }
+  ],
+  "wallet": [
+    {
+      "label": "mobile-lite",
+      "endpoint": "authenticate",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats",
+        "language": "uk"
+      }
+    },
+    {
+      "label": "mobile-lite",
+      "endpoint": "play",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats",
+        "mode": "bonus_job",
+        "amount": 1000000,
+        "currency": "USD"
+      }
+    },
+    {
+      "label": "mobile-lite",
+      "endpoint": "end-round",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats"
+      }
+    }
+  ],
+  "errors": [],
+  "failedAssets": [],
+  "browser": "154.0.8037.92"
+}

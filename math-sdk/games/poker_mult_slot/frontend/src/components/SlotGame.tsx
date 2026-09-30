@@ -120,6 +120,10 @@ export interface RevealPayload {
   shownX: number;
   /** Current bet in dollars — needed to split shownX into per-line cash. */
   bet: number;
+  /** Abbreviated FS presentation; no change to the supplied result. */
+  freeSpin?: boolean;
+  /** Engine-supplied eligible increment; presentation must never recompute it. */
+  bankAdd?: number;
   /**
    * Echoed back on the "win" event, so React can drop label sets that belong
    * to a superseded board (a stalled presentation can otherwise emit late and

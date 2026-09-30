@@ -10,6 +10,7 @@ type Props = {
   /** B2: a skipped presentation hold snaps every label in at once (the
    *  staggered pop would otherwise keep hand names appearing for ~1 s). */
   instant?: boolean;
+  compact?: boolean;
 };
 
 /**
@@ -22,7 +23,7 @@ type Props = {
  * so all resolved labels add up to
  * the booked win. Sizes are in cqh of the board box (.godot-board).
  */
-export function WinLineLabels({ lines, copy, turbo, instant }: Props) {
+export function WinLineLabels({ lines, copy, turbo, instant, compact }: Props) {
   const reduced=useMemo(()=>matchMedia("(prefers-reduced-motion: reduce)").matches,[]);
   const [focus,setFocus]=useState(0);
   const all=!!instant||turbo||reduced||lines.length<=1;
@@ -36,7 +37,7 @@ export function WinLineLabels({ lines, copy, turbo, instant }: Props) {
   const placed=all||focus>=2?ordered:ordered.slice(focus,focus+1);
   if (placed.length === 0) return null;
   return (
-    <div className="win-line-labels" aria-hidden>
+    <div className={`win-line-labels${compact ? " is-compact" : ""}`} aria-hidden>
       {placed.map((l, i) => {
         const mult = l.multFactor > 1 ? `  ×${Math.round(l.multFactor)}` : "";
         return (

@@ -1,0 +1,176 @@
+{
+  "runs": [
+    {
+      "label": "desktop",
+      "fsSpins": 15,
+      "introMs": 832.0999999940395,
+      "expectedIntro": 850,
+      "changes": [
+        {
+          "rev": 2,
+          "add": 2,
+          "bank": 5,
+          "ms": 316.20000000298023,
+          "skipped": false
+        },
+        {
+          "rev": 6,
+          "add": 3,
+          "bank": 8,
+          "ms": 315.19999998807907,
+          "skipped": false
+        },
+        {
+          "rev": 7,
+          "add": 2,
+          "bank": 10,
+          "ms": 315,
+          "skipped": false
+        }
+      ],
+      "badgeTimes": [
+        181.20000000298023,
+        165.79999999701977,
+        181.1000000089407
+      ],
+      "finalBank": 10,
+      "total": "120.00",
+      "metrics": {
+        "fps": 58.68709830031353,
+        "p95Ms": 16.799999999999272
+      },
+      "skip": null
+    },
+    {
+      "label": "portrait",
+      "fsSpins": 15,
+      "introMs": 490.09999999403954,
+      "expectedIntro": 500,
+      "changes": [
+        {
+          "rev": 2,
+          "add": 2,
+          "bank": 5,
+          "ms": 317.09999999403954,
+          "skipped": false
+        },
+        {
+          "rev": 6,
+          "add": 3,
+          "bank": 8,
+          "ms": 316.5,
+          "skipped": false
+        },
+        {
+          "rev": 7,
+          "add": 2,
+          "bank": 10,
+          "ms": 316,
+          "skipped": false
+        }
+      ],
+      "badgeTimes": [
+        165.59999999403954,
+        166.29999999701977,
+        167.3999999910593
+      ],
+      "finalBank": 10,
+      "total": "120.00",
+      "metrics": {
+        "fps": 58.821546551614794,
+        "p95Ms": 16.799999999999272
+      },
+      "skip": null
+    }
+  ],
+  "wallet": [
+    {
+      "label": "desktop",
+      "endpoint": "authenticate",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "language": "en"
+      }
+    },
+    {
+      "label": "desktop",
+      "endpoint": "play",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "mode": "bonus_job",
+        "amount": 1000000,
+        "currency": "USD"
+      }
+    },
+    {
+      "label": "desktop",
+      "endpoint": "end-round",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats"
+      }
+    },
+    {
+      "label": "portrait",
+      "endpoint": "authenticate",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "language": "en"
+      }
+    },
+    {
+      "label": "portrait",
+      "endpoint": "play",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "mode": "bonus_job",
+        "amount": 1000000,
+        "currency": "USD"
+      }
+    },
+    {
+      "label": "portrait",
+      "endpoint": "end-round",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats"
+      }
+    },
+    {
+      "label": "mobile-lite",
+      "endpoint": "authenticate",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats",
+        "language": "uk"
+      }
+    },
+    {
+      "label": "mobile-lite",
+      "endpoint": "play",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats",
+        "mode": "bonus_job",
+        "amount": 1000000,
+        "currency": "USD"
+      }
+    },
+    {
+      "label": "mobile-lite",
+      "endpoint": "end-round",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs&device=mobile&social=true&lang=uk",
+      "body": {
+        "sessionID": "bonus-beats"
+      }
+    }
+  ],
+  "errors": [],
+  "failedAssets": [],
+  "browser": "154.0.8037.92",
+  "fatal": "Error: FS hands not all resolved"
+}

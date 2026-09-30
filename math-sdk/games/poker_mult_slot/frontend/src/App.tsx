@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { flushSync } from "react-dom";
 import { AutoplayPanel } from "./components/AutoplayPanel";
 import { BottomHud, HudWinFace, type HudWin } from "./components/BottomHud";
 import { BonusBanner } from "./components/BonusBanner";
+import { BankCollection, type BankBeat } from "./components/BankCollection";
+import { BONUS_BEATS } from "./components/bonusBeats";
 import { BonusCompleteOverlay } from "./components/BonusCompleteOverlay";
 import { BonusTriggerOverlay } from "./components/BonusTriggerOverlay";
 import { FreeSpinsIntro } from "./components/FreeSpinsIntro";
 import { BuyBonusModal } from "./components/BuyBonusModal";
-import { dealDurationMs, beamRevealHoldMs, presentationHoldMs, winFxPauseMs } from "./components/CardGrid";
+import { dealDurationMs, presentationHoldMs, winFxPauseMs } from "./components/CardGrid";
 import { ConfirmDialog } from "./components/ConfirmDialog";
 import { ErrorModal, type ErrorModalState as RgsModalState } from "./components/ErrorModal";
 import { CosmicBackground } from "./components/CosmicBackground";
@@ -197,6 +200,9 @@ export default function App() {
 
   const [bonusKind, setBonusKind] = useState<BonusKind | null>(qaCele === "fs" ? "job" : null);
   const [fsIntro, setFsIntro] = useState(false);
+  const [fsIntroDuration, setFsIntroDuration] = useState<number>(BONUS_BEATS.intro);
+  const [fsIntroResolved, setFsIntroResolved] = useState(false);
+  const [bankCollection, setBankCollection] = useState<BankBeat | null>(null);
   const [portrait, setPortrait] = useState(
     () => typeof window !== "undefined" && window.innerHeight > window.innerWidth,
   );
@@ -616,7 +622,7 @@ export default function App() {
       };
     });
 
-  const applySpinVisual = (spin: SpinResult) => {
+  const applySpinVisual = (spin: SpinResult, freeSpin = false) => {
     setDealKey((k) => k + 1);
     setResultReady(false); // new deal: HUD win text stays hidden until the real settle signal
     setCards(spin.cards);
@@ -673,10 +679,12 @@ export default function App() {
       })),
       shownX,
       bet,
+      freeSpin,
+      bankAdd: freeSpin ? spin.bankAdd : undefined,
       rev,
     };
     setWinLabels(null);
-    setLabelsInstant(false);
+    setLabelsInstant(freeSpin);
     setRevealWin(null);
     setBoardHot(false);
     revealGateRef.current = { landed: false, onLanded: null, rev };
@@ -805,12 +813,13 @@ export default function App() {
 
   /** One post-settle hold. The first skip exposes the final result; a
    * second skip exits, and neither gesture can also start a paid round. */
-  const holdPresentation = (ms: number, finalWin?: { key: number; amount: number }) =>
+  const holdPresentation = (ms: number, finalWin?: { key: number; amount: number }, resolveVisual?: () => void) =>
     new Promise<void>((resolve) => {
       if (ms <= 0) { resolve(); return; }
       setHoldOpen(true);
       let timer = 0;
       let skipped = false;
+      let resolvedAt = Infinity;
       const showFinal = (instant: boolean) => {
         if (!finalWin || finalWin.amount <= 0) return;
         flushOnSettle(() => setRevealWin((previous) =>
@@ -818,22 +827,34 @@ export default function App() {
       };
       const done = () => {
         window.clearTimeout(timer);
+        window.removeEventListener("resize", interrupt);
+        document.removeEventListener("visibilitychange", visibility);
         presentationSkipRef.current = null;
         setHoldOpen(false);
+        resolveVisual?.();
         showFinal(skipped);
         resolve();
       };
       timer = window.setTimeout(done, ms);
       presentationSkipRef.current = () => {
         audio.releaseDuck();
-        if (skipped) { done(); return; }
+        if (skipped) { if (performance.now() - resolvedAt >= 350) done(); return; }
         skipped = true;
         slotRef.current?.continueRound();
-        setLabelsInstant(true);
-        showFinal(true);
+        // Resolve native Space/resize/visibility input before its next paint.
+        flushSync(() => {
+          setLabelsInstant(true);
+          resolveVisual?.();
+          showFinal(true);
+        });
+        resolvedAt = performance.now();
         window.clearTimeout(timer);
         timer = window.setTimeout(done, 350);
       };
+      const interrupt = () => { if (!skipped) presentationSkipRef.current?.(); };
+      const visibility = () => { if (document.hidden) interrupt(); };
+      window.addEventListener("resize", interrupt);
+      document.addEventListener("visibilitychange", visibility);
     });
 
   const celebrateGoldens = async (count: number) => {
@@ -859,9 +880,12 @@ export default function App() {
     setBonusBank(startBank);
     setLastWin(0);
     setBonusTotal(0);
-    // Short intro beat before the bonus board starts dealing.
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const introMs = reduced ? BONUS_BEATS.reduced : turboRef.current ? BONUS_BEATS.introTurbo : BONUS_BEATS.intro;
+    setFsIntroDuration(introMs);
+    setFsIntroResolved(reduced);
     setFsIntro(true);
-    await sleep(turboRef.current ? 900 : 1350);
+    await holdPresentation(introMs, undefined, () => setFsIntroResolved(true));
     setFsIntro(false);
     let running = startBank;
     let winAccum = 0;
@@ -871,11 +895,10 @@ export default function App() {
     for (let i = 0; i < spins.length; i++) {
       // Re-read each spin — turbo can be toggled mid-bonus.
       const t = turboRef.current;
-      const holdMs = t ? 550 : 900;
       setFsIndex(i + 1);
       const spin = spins[i];
       running += spin.bankAdd;
-      applySpinVisual(spin);
+      applySpinVisual(spin, true);
       const extra = spin.retriggerAdd ?? 0;
       const rawPay = fromCents(toCents(localPays[i] * scale));
       const spinPay =
@@ -884,14 +907,33 @@ export default function App() {
           : rawPay;
       await waitForReels(spin.cards, t);
       if ((spin.lines?.length ?? 0) > 0) audio.playLineWin(spin.spinWinX);
-      setBonusBank(running);
+      const bankNow = running;
+      let bankLocked = false;
+      const lockBank = () => {
+        if (bankLocked) return;
+        bankLocked = true;
+        setBankCollection(null);
+        setBonusBank(bankNow);
+        if (spin.bankAdd > 0) audio.playMultLand();
+      };
+      if (spin.bankAdd > 0 && !reduced) {
+        const indices = (spin.winIndices ?? []).filter((index) => spin.multipliers[index] > 0 && !spin.cards[index].golden);
+        setBankCollection({ rev: revealSeqRef.current, indices, add: spin.bankAdd });
+      }
+      const bankTimer = spin.bankAdd > 0 && !reduced ? window.setTimeout(lockBank, BONUS_BEATS.bank) : 0;
+      if (!bankTimer) lockBank();
       winAccum = fromCents(toCents(winAccum) + toCents(spinPay));
       // TOTAL WIN on the HUD gains this spin only once its reels REALLY
       // stopped (closeRevealGate) — waitForReels may have resolved through
       // its fallback timer while Godot is still dealing (see settleFlushRef).
       const totalNow = winAccum;
       flushOnSettle(() => setBonusTotal(totalNow));
-      await sleep(Math.max(holdMs, beamRevealHoldMs(spin.lines?.length ?? 0, t, winGrade(spin.spinWinX))));
+      const beatMs = reduced ? BONUS_BEATS.reduced : t ? BONUS_BEATS.turboWin
+        : (spin.lines?.length ?? 0) > 0 ? BONUS_BEATS.win : BONUS_BEATS.noWin;
+      // The bank and abbreviated hand result share one presentation hold.
+      // A skip resolves both, then preserves the same 350 ms final read.
+      await holdPresentation(Math.max(beatMs, bankTimer ? BONUS_BEATS.bank + 50 : 0), undefined, lockBank);
+      window.clearTimeout(bankTimer);
       const fsTier = bigWinTier(spin.spinWinX);
       if (fsTier) await showBigWin(fsTier, spin.spinWinX);
       // playMidWin is skipped here on purpose: during free spins a 10–20×
@@ -1009,6 +1051,7 @@ export default function App() {
       setFieldWinCash(0);
       setTriggerKind(null);
       setFsIntro(false);
+      setBankCollection(null);
 
       try {
         type Booked = { pay: number; x: number; bonus: BonusKind | null };
@@ -1383,6 +1426,7 @@ export default function App() {
       <CosmicBackground bonus={inBonus} />
 
       {inBonus ? <BonusBanner spinsLeft={Math.max(0, fsTotal - fsIndex)} bank={bonusBank} copy={copy} /> : null}
+      {bankCollection ? <BankCollection key={bankCollection.rev} beat={bankCollection} /> : null}
 
       <SidePanels copy={copy} hits={winHands} dealKey={dealKey} soft={soft} />
 
@@ -1425,7 +1469,7 @@ export default function App() {
                 <div aria-hidden className="absolute inset-0 cursor-pointer" onClick={() => presentationSkipRef.current?.()} />
               ) : null}
               {winLabels ? (
-                <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} instant={labelsInstant} />
+                <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} instant={labelsInstant} compact={inBonus} />
               ) : null}
             </div>
           </div>
@@ -1575,7 +1619,7 @@ export default function App() {
         />
       ) : null}
 
-      {fsIntro ? <FreeSpinsIntro copy={copy} count={mathConfig.fsCount} /> : null}
+      {fsIntro ? <FreeSpinsIntro copy={copy} count={mathConfig.fsCount} durationMs={fsIntroDuration} resolved={fsIntroResolved} /> : null}
 
       {bonusSummary ? (
         <BonusCompleteOverlay

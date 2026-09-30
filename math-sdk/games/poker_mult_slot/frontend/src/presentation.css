@@ -69,3 +69,62 @@
   filter: none;
 }
 .total-win-cta { animation: none; text-align: center; }
+
+/* Bonus beats share one quiet bone/gold treatment and the live bank geometry. */
+.fs-intro-overlay {
+  background: rgba(17,16,15,.28);
+  backdrop-filter: none;
+  animation: fs-intro-scrim var(--fs-intro-duration) ease-out both;
+}
+.fs-intro-title {
+  color: #e5d7b3;
+  -webkit-text-stroke: 1px #11100f;
+  text-shadow: 0 2px 0 #b89148, 0 4px 0 #5b4932;
+  animation: muerta-reward-lock 220ms ease-out both;
+}
+.fs-intro-count {
+  color: #ecd297;
+  text-shadow: 0 2px 0 #11100f;
+  animation: fs-intro-fade 160ms ease-out 60ms both;
+}
+.fs-intro-overlay.is-resolved,
+.fs-intro-overlay.is-resolved .fs-intro-title,
+.fs-intro-overlay.is-resolved .fs-intro-count { animation: none; opacity: 1; transform: none; }
+.win-line-labels.is-compact .win-line-label { animation: muerta-fs-label 120ms ease-out both; }
+@keyframes muerta-fs-label {
+  from { opacity: 0; transform: translate(-50%,-62%); }
+  to { opacity: 1; transform: translate(-50%,-62%); }
+}
+.bank-collection {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 55; overflow: visible; pointer-events: none;
+}
+.bank-collection-thread {
+  fill: none; stroke: #b89148; stroke-width: 1;
+  stroke-dasharray: 1; animation: muerta-bank-thread 300ms ease-out both;
+}
+.bank-collection-fleck {
+  fill: #e5d7b3; animation: muerta-bank-fleck 300ms ease-in-out both;
+}
+.bank-strike { animation: muerta-bank-lock 160ms ease-out both; }
+@keyframes muerta-bank-lock {
+  from { transform: scale(1.02); }
+  to { transform: scale(1); }
+}
+@keyframes muerta-bank-thread {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  30% { opacity: .65; }
+  85% { stroke-dashoffset: 0; opacity: .65; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes muerta-bank-fleck {
+  from { offset-distance: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  to { offset-distance: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-intro-overlay, .fs-intro-title, .fs-intro-count,
+  .bank-strike, .win-line-labels.is-compact .win-line-label { animation: none; opacity: 1; }
+  .fs-intro-title, .fs-intro-count { transform: none; }
+  .win-line-labels.is-compact .win-line-label { transform: translate(-50%,-62%); }
+}

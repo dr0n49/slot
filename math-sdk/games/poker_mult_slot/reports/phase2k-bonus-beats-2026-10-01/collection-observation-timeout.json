@@ -1,0 +1,37 @@
+{
+  "runs": [],
+  "wallet": [
+    {
+      "label": "desktop",
+      "endpoint": "authenticate",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "language": "en"
+      }
+    },
+    {
+      "label": "desktop",
+      "endpoint": "play",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats",
+        "mode": "bonus_job",
+        "amount": 1000000,
+        "currency": "USD"
+      }
+    },
+    {
+      "label": "desktop",
+      "endpoint": "end-round",
+      "frame": "http://127.0.0.1:5183/?renderer=pixi&sessionID=bonus-beats&rgs_url=http%3A%2F%2F127.0.0.1%3A5183%2Fmock-rgs",
+      "body": {
+        "sessionID": "bonus-beats"
+      }
+    }
+  ],
+  "errors": [],
+  "failedAssets": [],
+  "browser": "154.0.8037.92",
+  "fatal": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.bank-collection') to be visible\u001b[22m\n"
+}
