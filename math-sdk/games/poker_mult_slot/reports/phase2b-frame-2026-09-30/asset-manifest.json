@@ -1,0 +1,110 @@
+{
+  "state": "Frame pending native-size approval; no runtime installation",
+  "source": [
+    1048,
+    1501
+  ],
+  "alphaCenter": 0,
+  "bounds": {
+    "left": 28,
+    "top": 27,
+    "width": 989,
+    "height": 1438
+  },
+  "method": "Built-in generated frame material; normal 9-slice extraction and layout preserve existing outer dimensions and keep carving clear of cards.",
+  "proofs": [
+    {
+      "label": "desktop",
+      "frame": [
+        554,
+        784
+      ],
+      "card": [
+        86,
+        121
+      ],
+      "corner": 32,
+      "rail": 11
+    },
+    {
+      "label": "portrait",
+      "frame": [
+        379,
+        539
+      ],
+      "card": [
+        60,
+        85
+      ],
+      "corner": 22,
+      "rail": 8
+    }
+  ],
+  "files": [
+    {
+      "path": "sources/frame.png",
+      "bytes": 898728,
+      "sha256": "601b1ca20bfb3c70a8b44fe4f500c3286e4c4279abb9bb6f182ef15d365a494c"
+    },
+    {
+      "path": "slices/nw.png",
+      "bytes": 85063,
+      "sha256": "d9d7539da6c84e2915f7a9aa8f0198e65990a3665d013bacd51f025b5caa4253"
+    },
+    {
+      "path": "slices/n.png",
+      "bytes": 103760,
+      "sha256": "4e33953632168ed45fb20f39d6a99b95d250785c99c437f87928a7e83aca92d4"
+    },
+    {
+      "path": "slices/ne.png",
+      "bytes": 83686,
+      "sha256": "0df23fcad5f0cc9f012f523641b0b2283f7aff37f939a98627b1c5ab125981ef"
+    },
+    {
+      "path": "slices/w.png",
+      "bytes": 204469,
+      "sha256": "8705e28c6bbdf8150eb9569a387b1864e3fc659f8e91b5e3e2549ceac9945741"
+    },
+    {
+      "path": "slices/e.png",
+      "bytes": 208118,
+      "sha256": "4d8e2758d5dbe36e8b3aa67e4a5274aea0721669f608c8452b16e2a2e0ba8dd2"
+    },
+    {
+      "path": "slices/sw.png",
+      "bytes": 83532,
+      "sha256": "704271552cfa132cca09e9dc86098c57b7617e5eefe667c5dc0edfccc2c64d23"
+    },
+    {
+      "path": "slices/s.png",
+      "bytes": 107582,
+      "sha256": "d52d833f15160adce9dcb691d033eccc7633aa0260cdb85709321a62f068cc56"
+    },
+    {
+      "path": "slices/se.png",
+      "bytes": 83529,
+      "sha256": "77eab1651e7fcbf4b76044278d4b2da3956dd0ded4e7e3d9a5a272eabc396894"
+    },
+    {
+      "path": "previews/frame-desktop-554x784.png",
+      "bytes": 98880,
+      "sha256": "b4de334c05c944d18c2de461e5426628063106d8b50a8f9e074966d764b05644"
+    },
+    {
+      "path": "frame-desktop-native.png",
+      "bytes": 478925,
+      "sha256": "635026848b95bcad2ec57777d85b5dad0b2174c52d9486facef9a52cc75c410c"
+    },
+    {
+      "path": "previews/frame-portrait-379x539.png",
+      "bytes": 50010,
+      "sha256": "3385b533baccc162afb0c391ceffd54fef3a31f9b7caed83e454fc4cde508c35"
+    },
+    {
+      "path": "frame-portrait-native.png",
+      "bytes": 253310,
+      "sha256": "2d0d20aa7b3fe8deedfb88b630f285c729d99448eaec70b3bf672c08a484157b"
+    }
+  ]
+}

@@ -6,4 +6,4 @@ The initial result had face-like folded shapes around the scythes; it is archive
 
 The original returned source is 1058×1487, retained at its native resolution. The delivery proof is reduced to the deck's common 512×720 master and exact 86×121 / 60×85 display sizes. All exports are reread and hashed in `asset-manifest.json`. `native-size-proof.html` fixes those CSS dimensions at 100% zoom and puts approved Queen A alongside for material comparison. No runtime asset is installed.
 
-STOP for card-back approval at final size. The next art group is the frame, then backgrounds, bunting, candles and plaque, each separately approved in that order. The new deck is installed as one coherent set. The vector-only ranks/pips/indices rule is preserved.
+Approved explicitly by the user after the final-size proofs: “Утверждаю — переходите к рамке”. The next art group is the frame, then backgrounds, bunting, candles and plaque, each separately approved in that order. The new deck is installed as one coherent set. The vector-only ranks/pips/indices rule is preserved.
