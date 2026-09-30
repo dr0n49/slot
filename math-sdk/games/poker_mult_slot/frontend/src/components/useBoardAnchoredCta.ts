@@ -48,7 +48,7 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
       // B5 gaps: 12 px below the frame, never closer than 8 px to the HUD.
       const stripTop = grid ? grid.bottom : board.bottom - 24;
       const stripBottom = board.bottom;
-      const hintScreenH = 20 * stageScale(); // .cele-hint/.total-win-cta line height
+      const hintScreenH = document.querySelector(".cta-hint")?.getBoundingClientRect().height || 26 * stageScale();
       let top: number;
       if (stripBottom - stripTop >= hintScreenH + 6) {
         top = (stripTop + stripBottom - hintScreenH) / 2; // centered in the strip
@@ -56,6 +56,10 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
         top = stripBottom + 12; // strip too small: 12 px below the frame
         if (top + hintScreenH > hudTop - 8) top = hudTop - 8 - hintScreenH; // 8 px to the HUD
       }
+      // Portrait WIN lives immediately below the board, above the controls.
+      // Keep the hint above that existing result area as well as the HUD.
+      const resultTop = document.querySelector(".stage-win .hud-win-copy")?.getBoundingClientRect().top;
+      if (resultTop != null) top = Math.min(top, resultTop - 8 - hintScreenH);
       setStyle({
         position: "fixed",
         left: board.left,
@@ -63,6 +67,7 @@ export function useBoardAnchoredCta(): CSSProperties | undefined {
         top,
         bottom: "auto",
         margin: 0,
+        textAlign: "center",
       });
     };
     compute();

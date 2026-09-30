@@ -1,0 +1,14 @@
+[
+  {
+    "file": "desktop.mp4",
+    "seconds": 2.2962870597839355,
+    "sourceFrames": 43,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "portrait.mp4",
+    "seconds": 0.7467160224914551,
+    "sourceFrames": 15,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  }
+]

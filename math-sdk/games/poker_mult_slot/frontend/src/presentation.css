@@ -54,3 +54,18 @@
   .bigwin-overlay .bigwin-tier-step,
   html.lite-fx .bigwin-overlay .bigwin-tier-step { animation: none; transform: none; }
 }
+
+/* The final feature total shares the live reward type treatment. */
+.total-scrim { background: rgba(17,16,15,.55); animation: none; }
+.total-win-label {
+  color: #e5d7b3;
+  -webkit-text-stroke: 1px #11100f;
+  text-shadow: 0 2px 0 #b89148, 0 4px 0 #5b4932;
+}
+.total-win-amount {
+  color: #ecd297;
+  -webkit-text-stroke: 2px #11100f;
+  text-shadow: 0 3px 0 #b89148, 0 6px 0 #5b4932;
+  filter: none;
+}
+.total-win-cta { animation: none; text-align: center; }
