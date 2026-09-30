@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-import { Application, Assets, Container, Graphics, Sprite, Text, Texture, Rectangle } from "pixi.js";
+import { Application, Assets, ColorMatrixFilter, Container, Graphics, Sprite, Text, Texture, Rectangle } from "pixi.js";
 import { LINES } from "../game/engine";
 import paperUrl from "../slice/assets/paper.webp";
 import queenUrl from "../slice/assets/queen-proof.webp";
@@ -55,6 +55,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
     setTurbo:v=>call(s=>s.turbo(v)),setBet:()=>{},spin:()=>{},setVolume:v=>call(s=>s.sound(v>0)),resumeAudio:audio.unlock}), []);
   useEffect(() => {
     let disposed = false, initialized = false;
+    let shadeFilter: ColorMatrixFilter | undefined;
     const app = new Application();
     const init = async () => {
       const audition=!!props.audition;
@@ -81,35 +82,47 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
       app.canvas.style.width="100%";app.canvas.style.height="100%";
       host.current!.appendChild(app.canvas);
       const paintedCards = new WeakMap<Container, Card>();
+      const cardBodies = new WeakMap<Container, Container>();
+      shadeFilter = new ColorMatrixFilter();
+      // Godot symbol_fx: mix(rgb, dot(rgb,[.299,.587,.114])*.55, .58).
+      // Keep alpha and the separate multiplier plate unchanged.
+      shadeFilter.matrix = [
+        .515381,.187253,.036366,0,0,
+        .095381,.607253,.036366,0,0,
+        .095381,.187253,.456366,0,0,
+        0,0,0,1,0,
+      ];
+      const shadeFilters = [shadeFilter];
       function face(card: Card, multiplier = 0) {
         const node = new Container();
+        const body = new Container();node.addChild(body);cardBodies.set(node,body);
         paintedCards.set(node,card);node.pivot.set(CW/2,CH/2);
-        const paper = new Sprite(tex("paper"));paper.width=CW;paper.height=CH;node.addChild(paper);
-        node.addChild(new Graphics().roundRect(1,1,CW-2,CH-2,5).stroke({color:0x1b1511,width:2})
+        const paper = new Sprite(tex("paper"));paper.width=CW;paper.height=CH;body.addChild(paper);
+        body.addChild(new Graphics().roundRect(1,1,CW-2,CH-2,5).stroke({color:0x1b1511,width:2})
           .roundRect(5,5,CW-10,CH-10,3).stroke({color:0xa07737,width:1}));
         const ink = card.suit === "H" || card.suit === "D" ? 0x741b1c : 0x171510;
         if (card.golden) {
-          const art = new Sprite(tex("reaper-proof"));art.position.set(14,20);art.width=106;art.height=151;node.addChild(art);
-          const title=label("JOKER",17,0x171510,"Pirata One");title.anchor.set(.5);title.position.set(CW/2,12);node.addChild(title);
+          const art = new Sprite(tex("reaper-proof"));art.position.set(14,20);art.width=106;art.height=151;body.addChild(art);
+          const title=label("JOKER",17,0x171510,"Pirata One");title.anchor.set(.5);title.position.set(CW/2,12);body.addChild(title);
         } else {
           for (const reversed of [false,true]) {
             const index=new Container();const rank=label(card.rank === "T" ? "10" : card.rank ?? "?",23,ink);
             rank.anchor.set(.5,0);index.addChild(rank);const mark=pip(card.suit??"S",17,ink);mark.position.set(0,39);index.addChild(mark);
-            index.position.set(reversed?CW-13:13,reversed?CH-10:9);if(reversed)index.rotation=Math.PI;node.addChild(index);
+            index.position.set(reversed?CW-13:13,reversed?CH-10:9);if(reversed)index.rotation=Math.PI;body.addChild(index);
           }
           if (!audition && ["J","Q","K"].includes(card.rank??"")) {
-            const art=new Sprite(legacyCourts[card.rank!+card.suit!]);art.position.set(27,9);art.width=80;art.height=170;node.addChild(art);
+            const art=new Sprite(legacyCourts[card.rank!+card.suit!]);art.position.set(27,9);art.width=80;art.height=170;body.addChild(art);
           } else if (card.rank === "Q" && card.suit === "H") {
-            const art=new Sprite(tex("queen-proof"));art.position.set(28,18);art.width=78;art.height=151;node.addChild(art);
+            const art=new Sprite(tex("queen-proof"));art.position.set(28,18);art.width=78;art.height=151;body.addChild(art);
           } else if (["J","Q","K"].includes(card.rank??"")) {
-            const monogram=label(card.rank!,74,ink,"Pirata One");monogram.anchor.set(.5);monogram.position.set(CW/2,CH/2);node.addChild(monogram);
-            node.addChild(new Graphics().poly([CW/2,28,CW-29,CH/2,CW/2,CH-28,29,CH/2]).stroke({color:0xa07737,width:1.5}));
+            const monogram=label(card.rank!,74,ink,"Pirata One");monogram.anchor.set(.5);monogram.position.set(CW/2,CH/2);body.addChild(monogram);
+            body.addChild(new Graphics().poly([CW/2,28,CW-29,CH/2,CW/2,CH-28,29,CH/2]).stroke({color:0xa07737,width:1.5}));
           } else if(card.rank === "A") {
-            const mark=pip(card.suit??"S",75,ink);mark.position.set(CW/2,CH/2+14);node.addChild(mark);
-            node.addChild(new Graphics().circle(CW/2,CH/2-3,44).stroke({color:0xa07737,width:1}));
+            const mark=pip(card.suit??"S",75,ink);mark.position.set(CW/2,CH/2+14);body.addChild(mark);
+            body.addChild(new Graphics().circle(CW/2,CH/2-3,44).stroke({color:0xa07737,width:1}));
           } else for(const [px,py] of pips[card.rank === "T"?10:Number(card.rank)]??[]) {
             const mark=pip(card.suit??"S",20,ink);mark.position.set(CW/2+px*25,CH/2+py*54+4);
-            if(py>0)mark.rotation=Math.PI;node.addChild(mark);
+            if(py>0)mark.rotation=Math.PI;body.addChild(mark);
           }
           if(multiplier>0) {
             const plate=new Graphics().roundRect(77,CH-32,53,26,4).fill(0x211711).stroke({color:0xc8a052,width:1});node.addChild(plate);
@@ -258,7 +271,9 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
           hotFrames[c].alpha=.85-.15*Math.cos((now-hot.startedAt)*Math.PI*2/420);
           for(let row=0;row<5;row++){
             const node=reels[c].cards[row+1],joker=!!paintedCards.get(node)?.golden;
-            node.tint=shade&&!joker?0xbcbcbc:0xffffff;
+            const body=cardBodies.get(node)!;
+            const shaded=shade&&!joker;
+            if(!!body.filters!==shaded)body.filters=shaded?shadeFilters:null;
             const [sx,sy]=motion.squash(c,row,now);
             let pulse=1;
             if(shade&&joker&&pulseElapsed>=0){
@@ -298,7 +313,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
       callbacks.current.onLoaderDone?.();callbacks.current.onReady?.();
     };
     init().catch(e=>{console.warn("Pixi initialization",e);host.current?.setAttribute("data-error",String(e));callbacks.current.onRendererError?.()});
-    return()=>{disposed=true;scene.current=null;audio.stopReelSpinLoop(0);if(initialized)app.destroy(true,{children:true})};
+    return()=>{disposed=true;scene.current=null;audio.stopReelSpinLoop(0);if(initialized)app.destroy(true,{children:true});shadeFilter?.destroy()};
   }, []);
   return <div ref={host} data-renderer="pixi" style={{width:"100%",height:"100%",willChange:"transform",transform:"translate3d(0,0,0)"}} />;
 });
