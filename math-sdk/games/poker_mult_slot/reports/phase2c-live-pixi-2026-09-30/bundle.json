@@ -1,0 +1,63 @@
+{
+  "note": "All emitted JS chunks, including optional Pixi backends. Godot is retained; the default route loads no Pixi scene. Not every emitted chunk is fetched per route.",
+  "files": [
+    {
+      "name": "BitmapFont-BYHlihuD.js",
+      "bytes": 13093,
+      "gzipBytes": 4786
+    },
+    {
+      "name": "BufferResource-BQ5ivC4d.js",
+      "bytes": 11139,
+      "gzipBytes": 2853
+    },
+    {
+      "name": "CanvasRenderer-BWp5vqP5.js",
+      "bytes": 18470,
+      "gzipBytes": 6184
+    },
+    {
+      "name": "Filter-Dt-kZCuW.js",
+      "bytes": 907,
+      "gzipBytes": 479
+    },
+    {
+      "name": "PixiSlot-q_pzg5oi.js",
+      "bytes": 326796,
+      "gzipBytes": 103598
+    },
+    {
+      "name": "RenderTargetSystem-Dnnfb6kV.js",
+      "bytes": 53877,
+      "gzipBytes": 14796
+    },
+    {
+      "name": "WebGLRenderer-k6wf4Ae0.js",
+      "bytes": 72680,
+      "gzipBytes": 19766
+    },
+    {
+      "name": "WebGPURenderer-MDGbCFzR.js",
+      "bytes": 48893,
+      "gzipBytes": 14074
+    },
+    {
+      "name": "browserAll-DcRiuwSD.js",
+      "bytes": 43331,
+      "gzipBytes": 11396
+    },
+    {
+      "name": "index-DWz8gUG8.js",
+      "bytes": 633626,
+      "gzipBytes": 187138
+    },
+    {
+      "name": "webworkerAll-DC4fL2e6.js",
+      "bytes": 15729,
+      "gzipBytes": 4970
+    }
+  ],
+  "totalBytes": 1238541,
+  "totalGzipBytes": 370040,
+  "godotRetained": true
+}

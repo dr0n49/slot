@@ -14,7 +14,8 @@ import { SidePanels } from "./components/SidePanels";
 import { FullscreenMenu } from "./components/FullscreenMenu";
 import { GameStage } from "./components/GameStage";
 import { BootSplash } from "./components/BootSplash";
-import { SlotGame, type GodotWinLine, type SlotGameHandle, type RevealPayload } from "./components/SlotGame";
+import { type GodotWinLine, type SlotGameHandle, type RevealPayload } from "./components/SlotGame";
+import { BoardRenderer } from "./components/BoardRenderer";
 import { WinLineLabels } from "./components/WinLineLabels";
 import { BigWinOverlay } from "./components/BigWinOverlay";
 import { MultCloudPreview } from "./components/MultCloudPreview";
@@ -1401,12 +1402,17 @@ export default function App() {
               className="godot-board"
               style={{ opacity: godotReady ? 1 : 0, pointerEvents: godotReady ? undefined : "none" }}
             >
-              <SlotGame
+              <BoardRenderer
                 ref={slotRef}
+                initialCards={cards}
                 src="./godot-slot/index.html"
                 width="100%"
                 height="100%"
-                onReady={() => setGodotReady(true)}
+                onReady={() => {
+                  slotRef.current?.setTurbo(turboRef.current);
+                  slotRef.current?.setVolume(audio.isMasterMuted() ? 0 : audio.getMasterVolume());
+                  setGodotReady(true);
+                }}
                 onBootProgress={(current, total) => setGodotProgress({ current, total })}
                 onLoaderDone={() => setGodotLoaderDone(true)}
                 onWin={onGodotWin}
