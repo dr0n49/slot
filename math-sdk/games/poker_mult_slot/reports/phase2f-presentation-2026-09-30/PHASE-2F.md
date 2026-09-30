@@ -1,0 +1,15 @@
+# Phase 2F — approved reward timing and focus
+
+The normal ladder now uses the approved counts (800/1050/1500/2400 ms), holds (450/600/750/1000 ms) and 120 ms transfers. The duplicate end pause is removed. MAX measures 8.965–8.977 s from first word to dismissal. Turbo uses 150 ms intermediate recognitions, an 800 ms final count and 350 ms final hold; the measured full ladder is 2.015 s. These MAX timing runs audition the actual production `BigWinOverlay` component at 600× over a previously resolved real 1× board; they do not assert a 600× engine/wallet outcome. This distinction is recorded in each fixture.
+
+The real React base-spin path is separately tested with unchanged engine seed 2826: 21.25× NICE, actual painted board equals its real engine payload, one settlement, no early HUD, and a 1.26 s NICE overlay. `desktop-nice.gif` and `portrait-nice.gif` show this actual game path. The other desktop/portrait recordings are the MAX component audition.
+
+Space now consumes the presentation input before the paid-spin handler, shows the exact final tier/value, cancels particles and impact animations, and retains the final state for at least 350 ms. A second early Space is consumed without cutting that minimum hold short. Resize/visibility resolves to the same final state. Reduced motion renders the final value and no particles; its measured 432 ms includes the minimum hold and ≤80 ms exit. The ordinary single hold, resultReady/closeRevealGate and visible count remain; its first skip also tells the renderer to show every final winning path.
+
+Four-hand labels now show the strongest hand for 350 ms, the second for 250 ms, then all individual names, amounts and multipliers together. Browser evidence records exactly `1 → 1 → 4` visible labels at 347/251 ms observed intervals. Turbo, reduced and skip show all immediately. The Pixi paths use the same schedule after their 100 ms settle breath.
+
+All four words retain live localized text and their existing anchors, with one bone/ink/gold treatment, a warm light spill, fixed camera and one capped particle pool: 8/12/18/28 desktop, 6/8/8/12 lite, zero reduced/skip. Blue/violet rung colors, fullscreen blur/shake and the side mascot marks are removed. The existing plaque is still a placeholder until its later art approval group; no new deck assets are installed.
+
+Seven MAX component runs cover normal desktop/390×844, turbo, lite skip, reduced, Space skip, and Ukrainian social resize. Two real NICE runs and the four-hand focus run supplement them. Final timing runs are approximately 60 FPS / p95 16.7–16.8 ms; console and asset errors are recorded in `verification.json`. TypeScript and 39 tests pass. Production build retains Godot. Math, payouts, thresholds, icons and HUD positions are unchanged.
+
+Full renderer parity still requires complete feature-flow evidence and the unresolved strict 50 ms feedback gate. Art approvals, licensed audio sources/full bank, and real-phone play remain required before any resubmission. This is not final parity approval.

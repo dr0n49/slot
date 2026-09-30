@@ -1,0 +1,56 @@
+/* Approved bone/ink/gold family. Geometry and localized text stay live. */
+.bigwin-overlay { --reward-light: .08; animation: none; }
+.bigwin-overlay[data-tier="super"] { --reward-light: .14; animation: none; }
+.bigwin-overlay[data-tier="sensational"] { --reward-light: .2; animation: none; }
+.bigwin-overlay[data-tier="max"] { --reward-light: .28; animation: none; }
+.bigwin-overlay .bigwin-scrim,
+.bigwin-overlay[data-anticipate="1"] .bigwin-scrim {
+  background: rgba(17,16,15,.12);
+  backdrop-filter: none;
+  animation: none;
+  transform: none;
+  filter: none;
+}
+.bigwin-overlay .bigwin-scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 45% 38% at 50% 47%, rgba(184,145,72,var(--reward-light)), transparent 75%);
+}
+.bigwin-overlay .cele-float,
+.bigwin-overlay[data-anticipate="1"] .cele-float { animation: none; transform: none; filter: none; }
+.bigwin-overlay .cele-word-row::before { display: none; }
+.bigwin-overlay .cele-word-depth {
+  color: #11100f;
+  -webkit-text-stroke: 3px #11100f;
+  transform: translate(2px,4px);
+}
+.bigwin-overlay .cele-word-face {
+  color: #e5d7b3;
+  -webkit-text-fill-color: currentColor;
+  -webkit-text-stroke: 1.5px #11100f;
+  text-shadow: 0 2px 0 #b89148, 0 4px 0 #5b4932, 0 8px 15px rgba(17,16,15,.55);
+}
+.bigwin-overlay[data-tier="super"] .cele-word-face,
+.bigwin-overlay[data-tier="sensational"] .cele-word-face,
+.bigwin-overlay[data-tier="max"] .cele-word-face { color: #ecd297; }
+.bigwin-overlay[data-tier="max"] .cele-word-face {
+  text-shadow: 0 2px 0 #b89148, 0 5px 0 #5b4932, 0 9px 20px rgba(184,145,72,.24);
+}
+.bigwin-overlay .bigwin-tier-step { animation: muerta-reward-lock 240ms cubic-bezier(.2,.8,.3,1) both; }
+.bigwin-overlay.is-resolved .bigwin-tier-step,
+.bigwin-overlay.is-resolved .cele-splat { animation: none; transform: none; filter: none; }
+@keyframes muerta-reward-lock {
+  0% { opacity: 0; transform: translateY(3px) scale(.97); }
+  65% { opacity: 1; transform: translateY(0) scale(1.015); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.bigwin-overlay .cele-confetti-piece,
+.bigwin-overlay .cele-confetti-piece-0 { background: #b89148; box-shadow: none; }
+.bigwin-overlay .cele-confetti-piece-1 { background: #e5d7b3; }
+.bigwin-overlay .cele-confetti-piece-2 { background: #8d6932; }
+.bigwin-overlay .cele-spark-lite { background: #e5d7b3; box-shadow: 0 0 3px #b89148; }
+@media (prefers-reduced-motion: reduce) {
+  .bigwin-overlay .bigwin-tier-step,
+  html.lite-fx .bigwin-overlay .bigwin-tier-step { animation: none; transform: none; }
+}

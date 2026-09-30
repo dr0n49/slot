@@ -1,0 +1,26 @@
+[
+  {
+    "file": "desktop.mp4",
+    "seconds": 8.963780879974365,
+    "sourceFrames": 161,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "portrait.mp4",
+    "seconds": 8.91363000869751,
+    "sourceFrames": 179,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "desktop-nice.mp4",
+    "seconds": 4.064198970794678,
+    "sourceFrames": 72,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  },
+  {
+    "file": "portrait-nice.mp4",
+    "seconds": 4.207590103149414,
+    "sourceFrames": 79,
+    "note": "Silent CDP screencast; original frame intervals preserved. Captured frames resampled to 30; not a frame-rate test."
+  }
+]

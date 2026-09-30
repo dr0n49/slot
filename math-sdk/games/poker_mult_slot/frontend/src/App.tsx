@@ -828,6 +828,7 @@ export default function App() {
         audio.releaseDuck();
         if (skipped) { done(); return; }
         skipped = true;
+        slotRef.current?.continueRound();
         setLabelsInstant(true);
         showFinal(true);
         window.clearTimeout(timer);

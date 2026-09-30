@@ -4,6 +4,7 @@ import { applyLiteFxClass } from "./game/fxMode";
 import "./index.css";
 import "./noir.css";
 import "./vibrant.css";
+import "./presentation.css";
 
 applyLiteFxClass();
 

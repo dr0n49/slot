@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { audio } from "../game/audio";
-import { assetUrl } from "../game/assets";
 import {
   BIG_WIN_ANTICIPATION_MS,
   BIG_WIN_COUNT_MS,
@@ -11,26 +10,10 @@ import {
 } from "../game/bigWin";
 import type { Copy } from "../game/social";
 import { isLiteFx } from "../game/fxMode";
-import { CeleConfetti, CeleEmberBurst, CeleSparkField, CeleSplat, CeleWord } from "./Celebration";
+import { CeleConfetti, CeleSparkField, CeleSplat, CeleWord } from "./Celebration";
 
 /** B4: lite-fx keeps a cheap reward beat — this many simple sparks per tier. */
-const LITE_SPARKS: Record<BigWinTier, number> = { nice: 6, super: 8, sensational: 10, max: 12 };
-
-/** Calavera mascot mark, one side — SENSATIONAL/MAX only (the two rungs that also get
- * the vortex + confetti). Same <img> both sides, right one mirrored via CSS — no second
- * asset. Rendered left-word-right in DOM order so a plain flex row lays them out correctly. */
-function CeleSkull({ tier, side }: { tier: BigWinTier; side: "left" | "right" }) {
-  if (tier !== "sensational" && tier !== "max") return null;
-  return (
-    <img
-      src={assetUrl("assets/ui/calavera.svg")}
-      alt=""
-      className={`cele-calavera cele-calavera-${side}`}
-      draggable={false}
-      aria-hidden
-    />
-  );
-}
+const LITE_SPARKS: Record<BigWinTier, number> = { nice: 6, super: 8, sensational: 8, max: 12 };
 
 type Props = {
   tier: BigWinTier;
@@ -90,15 +73,15 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
   const [leaving, setLeaving] = useState(false);
   /** Read once: lite-fx swaps the celebration for a cheap transform/opacity beat. */
   const lite = useMemo(() => isLiteFx(), []);
+  const reduced = useMemo(() => matchMedia("(prefers-reduced-motion: reduce)").matches, []);
   const doneRef = useRef(false);
   const skipRef = useRef(false);
+  const resolvedAtRef = useRef(0);
   const abortRef = useRef<AbortController | null>(null);
   // Tracks the last tier the ladder loop has already played a sting for, so a
   // tap-to-skip that lands mid-step doesn't layer a second playBigWin(tier)
   // on top of the one the loop just fired for that same step.
   const lastStingTierRef = useRef<BigWinTier | null>(null);
-
-  const scale = turbo ? 0.7 : 1;
 
   const dismiss = () => {
     if (doneRef.current) return;
@@ -107,7 +90,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
     if (lite) {
       // B4: soft 140 ms fade-out instead of a hard unmount (120–160 ms window).
       setLeaving(true);
-      window.setTimeout(onDone, 140);
+      window.setTimeout(onDone, reduced ? 80 : 140);
       return;
     }
     onDone();
@@ -115,6 +98,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
 
   const jumpToEnd = () => {
     skipRef.current = true;
+    resolvedAtRef.current=performance.now();
     abortRef.current?.abort();
     setAnticipate(false);
     setShown(amount);
@@ -128,12 +112,13 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
   };
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).has("cele")) {
+    if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("cele")) {
       setShown(amount);
       setDisplayTier(tier);
       setFinished(true);
       return;
     }
+    if(reduced){jumpToEnd();return}
 
     const ac = new AbortController();
     abortRef.current = ac;
@@ -187,7 +172,7 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
           // Anticipation beat before every upgrade after NICE
           if (!isFirst) {
             setAnticipate(true);
-            await sleep(BIG_WIN_ANTICIPATION_MS * scale, ac.signal);
+            await sleep(BIG_WIN_ANTICIPATION_MS, ac.signal);
             setAnticipate(false);
           }
 
@@ -196,12 +181,12 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
           lastStingTierRef.current = step;
           audio.playBigWin(step);
 
-          const countMs = BIG_WIN_COUNT_MS[step] * scale;
+          const countMs = turbo ? (isLast ? 800 : 150) : BIG_WIN_COUNT_MS[step];
           await countTo(fromCash, toCash, countMs, isLast);
           fromCash = toCash;
 
-          const holdMs = BIG_WIN_HOLD_MS[step] * scale;
-          await sleep(holdMs, ac.signal);
+          const holdMs = turbo ? (isLast ? 350 : 0) : BIG_WIN_HOLD_MS[step];
+          if(holdMs>0)await sleep(holdMs, ac.signal);
         }
         setFinished(true);
       } catch {
@@ -218,50 +203,56 @@ export function BigWinOverlay({ tier, amount, spinWinX, copy, turbo, onDone }: P
 
   useEffect(() => {
     if (!finished) return;
-    if (new URLSearchParams(window.location.search).has("cele")) return;
+    if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("cele")) return;
     // Short settle after skip / natural end, then close — overlay stays up
     // through the whole ladder so the board never flashes through.
-    const t = window.setTimeout(dismiss, turbo ? 500 : 700);
+    const t = window.setTimeout(dismiss, skipRef.current ? 350 : 0);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finished]);
 
   const onClick = () => {
     if (doneRef.current) return;
-    if (!finished) {
+    if (!finished&&!skipRef.current) {
       jumpToEnd();
       return;
     }
+    if(skipRef.current&&performance.now()-resolvedAtRef.current<350)return;
     dismiss();
   };
+
+  useEffect(()=>{
+    const onKey=(event:KeyboardEvent)=>{
+      if(event.code!=="Space"&&event.key!==" ")return;
+      const tag=(event.target as HTMLElement|null)?.tagName;
+      if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT")return;
+      event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)onClick();
+    };
+    const onResize=()=>{if(!doneRef.current&&!skipRef.current)jumpToEnd()};
+    const onVisibility=()=>{if(document.hidden)onResize()};
+    window.addEventListener("keydown",onKey,true);window.addEventListener("resize",onResize);
+    document.addEventListener("visibilitychange",onVisibility);
+    return()=>{window.removeEventListener("keydown",onKey,true);window.removeEventListener("resize",onResize);document.removeEventListener("visibilitychange",onVisibility)};
+  },[finished]);
 
   return (
     <button
       type="button"
       data-tier={displayTier}
       data-anticipate={anticipate ? "1" : "0"}
-      className={`cele-overlay bigwin-overlay fixed inset-0 z-[65] flex flex-col items-center justify-center gap-3 p-4 text-center${anticipate ? " is-anticipate" : ""}${leaving ? " is-leaving" : ""}`}
+      className={`cele-overlay bigwin-overlay fixed inset-0 z-[65] flex flex-col items-center justify-center gap-3 p-4 text-center${anticipate ? " is-anticipate" : ""}${leaving ? " is-leaving" : ""}${finished&&skipRef.current ? " is-resolved" : ""}`}
       onClick={onClick}
       aria-label={WORD_OF[displayTier](copy)}
     >
       <div className="bigwin-scrim pointer-events-none absolute inset-0" />
-      {/* Ember/smoke burst replaces the old spinning conic-gradient rays
-          (noir.css .cele-float::before/::after, killed in vibrant.css §12) —
-          a marigold ember + smoke plume drifting outward from the word,
-          same visual family as the board's own ambient embers. */}
-      <CeleEmberBurst key={`ember-${stepKey}`} tier={displayTier} />
-      {/* Confetti now fires on every rung (NICE/SUPER get a smaller, quicker
-          burst — see vibrant.css §11d — SENSATIONAL/MAX keep the big one) so
-          the two most-common Big Win tiers stop reading as a plain word-swap. */}
-      <CeleConfetti key={`confetti-${stepKey}`} tier={displayTier} />
+      {/* One particle pool per rung, within the approved desktop/lite caps. */}
+      {!reduced&&!skipRef.current&&!lite&&<CeleConfetti key={`confetti-${stepKey}`} tier={displayTier} />}
       <div
         className={`cele-float relative z-10 flex flex-col items-center${anticipate ? " is-anticipate" : ""}`}
       >
-        <CeleSparkField count={lite ? LITE_SPARKS[displayTier] : undefined} />
+        {!reduced&&!skipRef.current&&lite&&<CeleSparkField count={LITE_SPARKS[displayTier]} />}
         <div key={stepKey} className="bigwin-tier-step cele-word-row">
-          <CeleSkull tier={displayTier} side="left" />
           <CeleWord variant={displayTier}>{WORD_OF[displayTier](copy)}</CeleWord>
-          <CeleSkull tier={displayTier} side="right" />
         </div>
         <CeleSplat>
           <span className="tabular-nums">{copy.money(shown)}</span>

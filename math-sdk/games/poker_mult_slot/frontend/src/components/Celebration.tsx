@@ -105,9 +105,9 @@ function rnd(i: number, salt: number): number {
 
 const CONFETTI_COUNT: Record<BigWinTier, number> = {
   nice: 8,
-  super: 13,
-  sensational: 20,
-  max: 36,
+  super: 12,
+  sensational: 18,
+  max: 28,
 };
 
 /**

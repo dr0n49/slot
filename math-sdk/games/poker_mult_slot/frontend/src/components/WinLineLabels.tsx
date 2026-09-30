@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import type { Copy } from "../game/social";
 import { handNameFor } from "./SidePanels";
 import type { GodotWinLine } from "./SlotGame";
@@ -12,18 +13,27 @@ type Props = {
 };
 
 /**
- * Per-line win labels over the Godot board: localized hand name + cash.
+ * Localized hand names and cash over either board renderer.
  *
  * Drawn here rather than inside Godot so every language renders: Godot's
  * label font is a Latin-only Oswald subset (Cyrillic, CJK, Arabic, Hindi
  * would show as empty boxes), while the browser falls back per glyph to a
- * system font. Godot still decides WHERE each label goes (nx/ny, normalized
- * over the iframe) and the exact cents per line, so labels always add up to
+ * system font. The renderer supplies each anchor (nx/ny) and exact cents,
+ * so all resolved labels add up to
  * the booked win. Sizes are in cqh of the board box (.godot-board).
  */
 export function WinLineLabels({ lines, copy, turbo, instant }: Props) {
-  const stagger = turbo ? 0.05 : 0.12;
-  const placed = lines.filter((l) => l.nx != null && l.ny != null);
+  const reduced=useMemo(()=>matchMedia("(prefers-reduced-motion: reduce)").matches,[]);
+  const [focus,setFocus]=useState(0);
+  const all=!!instant||turbo||reduced||lines.length<=1;
+  useEffect(()=>{
+    if(all){setFocus(2);return}
+    const second=window.setTimeout(()=>setFocus(1),350);
+    const resolved=window.setTimeout(()=>setFocus(2),600);
+    return()=>{window.clearTimeout(second);window.clearTimeout(resolved)};
+  },[all]);
+  const ordered=lines.filter((l) => l.nx != null && l.ny != null).sort((a,b)=>b.cents-a.cents);
+  const placed=all||focus>=2?ordered:ordered.slice(focus,focus+1);
   if (placed.length === 0) return null;
   return (
     <div className="win-line-labels" aria-hidden>
@@ -36,7 +46,7 @@ export function WinLineLabels({ lines, copy, turbo, instant }: Props) {
             style={{
               left: `${(l.nx ?? 0.5) * 100}%`,
               top: `${(l.ny ?? 0.5) * 100}%`,
-              animationDelay: instant ? "0s" : `${i * stagger}s`,
+              animationDelay: "0s",
             }}
           >
             <span className="win-line-name">

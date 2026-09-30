@@ -285,8 +285,8 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
             callbacks.current.onWin?.(lines,target.shownX,target.rev);callbacks.current.onRoundEnd?.("external",target.rev);
           }
           // Only three scene changes: first focus, second focus, final all.
-          const beat=skipped||reduced?3:t<350?0:t<600?1:2;
-          if(host.current!.dataset.beat!==String(beat)){host.current!.dataset.beat=String(beat);paintWins(t)}
+          const beat=t<100?-1:skipped||reduced||fast?3:t<450?0:t<700?1:2;
+          if(host.current!.dataset.beat!==String(beat)){host.current!.dataset.beat=String(beat);if(t>=100)paintWins(fast?600:t-100)}
           nice.visible=audition&&target.shownX>=20&&target.shownX<=50&&
             (skipped?now-skippedAt<350:t>=950&&t<2200);
           if(nice.visible){const u=skipped||reduced?1:Math.min(1,(t-950)/800);

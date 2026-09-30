@@ -56,10 +56,10 @@ export function bigWinStepCash(
 
 /** Hold on the finished number after each step's count-up (ms). Grows with tier. */
 export const BIG_WIN_HOLD_MS: Record<BigWinTier, number> = {
-  nice: 700,
-  super: 1100,
-  sensational: 1700,
-  max: 2000,
+  nice: 450,
+  super: 600,
+  sensational: 750,
+  max: 1000,
 };
 
 /** Count-up duration per step (ms). Final rung is slowest / heaviest. */
@@ -71,4 +71,4 @@ export const BIG_WIN_COUNT_MS: Record<BigWinTier, number> = {
 };
 
 /** Beat before SUPER / SENSATIONAL / MAX word punch (ms). */
-export const BIG_WIN_ANTICIPATION_MS = 200;
+export const BIG_WIN_ANTICIPATION_MS = 120;
