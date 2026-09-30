@@ -12,6 +12,8 @@ extends Node
 ##   window.godotSlot.spin(bet)                 plain spin
 ##   window.godotSlot.buyBonus(kind, bet)       kind: "bonus" | "job" | "flush"
 ##   window.godotSlot.ante(kind, bet)           SPIN JOB / SPIN FLUSH: "job" | "flush"
+##   window.godotSlot.beginTravel()            accepted press: target-free reels
+##   window.godotSlot.cancelTravel()           refused request: restore real board
 ##   window.godotSlot.reveal(json)              paint a board REACT already resolved
 ##                                               (see SlotLogic.reveal_external) --
 ##                                               this is the one React's App.tsx
@@ -32,10 +34,10 @@ extends Node
 ##   window.godotSlot.setTurbo(on)              fast reels / short holds
 ##   window.godotSlot.setVolume(v)              0..1 master volume (0 = mute)
 ##   window.godotSlot.setDemoBalance(dollars)   offline demo wallet only
-## spin()/buyBonus()/ante() would drive Godot's OWN RgsClient — they are HARD
-## NO-OPS on a Web export (see _embed_noop): React owns the real wallet round
-## and talks to Godot exclusively through reveal(). The native paths remain
-## runnable only in editor/desktop test runs.
+## spin()/buyBonus()/ante() are HARD NO-OPS on a Web export (see
+## _embed_noop). RgsClient is not an autoload; its transport script is excluded
+## from the Web PCK. React alone owns the wallet and supplies reveal(). Native
+## test rounds use SlotLogic's dynamically-created native demo wallet.
 ##
 ## Godot -> page, via window.parent.postMessage(payload, "*"); every payload
 ## has type:"godot-slot":
@@ -120,6 +122,8 @@ func _ready() -> void:
 	godot_slot.spin = _cb(_on_js_spin)
 	godot_slot.buyBonus = _cb(_on_js_buy_bonus)
 	godot_slot.ante = _cb(_on_js_ante)
+	godot_slot.beginTravel = _cb(_on_js_begin_travel)
+	godot_slot.cancelTravel = _cb(_on_js_cancel_travel)
 	godot_slot.reveal = _cb(_on_js_reveal)
 	godot_slot.continueRound = _cb(_on_js_continue)
 	godot_slot.snapRound = _cb(_on_js_snap_round)
@@ -142,12 +146,9 @@ func _cb(fn: Callable) -> JavaScriptObject:
 	_callbacks.append(cb)
 	return cb
 
-## EMBED SAFETY: on a Web export the native wallet entry points below are
-## HARD NO-OPS. React owns the RGS session (rgs.ts) and paints boards via
-## reveal(); these handlers would otherwise run RgsClient, whose
-## is_rgs_session() reads the IFRAME's URL (no sessionID there) and would
-## silently fall back to OFFLINE DEMO MATH in production. They only work in
-## editor/desktop runs (OS.has_feature("web") false) for local testing.
+## EMBED SAFETY: the native entry points are HARD NO-OPS on Web.
+## React owns the RGS session; no wallet autoload or transport is exported.
+## SlotLogic also refuses native rounds on Web as an independent guard.
 func _embed_noop(entry: String) -> bool:
 	if OS.has_feature("web"):
 		push_warning("WebBridge: %s() is disabled in the embed — React owns the wallet round (use reveal())." % entry)
@@ -182,6 +183,12 @@ func _on_js_ante(args: Array) -> void:
 	var bet: float = float(args[1]) if args.size() > 1 else _bet
 	_bet = bet
 	_slot_logic.request_ante(kind, bet)
+
+func _on_js_begin_travel(_args: Array) -> void:
+	_slot_logic.begin_external_travel()
+
+func _on_js_cancel_travel(_args: Array) -> void:
+	_slot_logic.cancel_external_travel()
 
 ## payload: a JSON-stringified {cards, multipliers, winIndices, lines,
 ## shownX, bet} -- see SlotLogic.reveal_external. Passed as a single JSON
@@ -246,7 +253,7 @@ func _on_js_set_volume(args: Array) -> void:
 
 func _on_js_set_demo_balance(args: Array) -> void:
 	if not args.is_empty():
-		RgsClient.set_offline_balance(float(args[0]))
+		_slot_logic.set_native_demo_balance(float(args[0]))
 
 func _on_phase_changed(phase: ReelController.Phase) -> void:
 	var name: String = ReelController.Phase.keys()[phase]

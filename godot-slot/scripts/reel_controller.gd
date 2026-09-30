@@ -148,6 +148,8 @@ var _stopped_count: int = 0
 var _turbo: bool = false
 var _elapsed: float = 0.0
 var _spin_started_at: float = 0.0
+## Faces and multiplier values before reversible wallet-wait travel.
+var _pending_travel_snapshot: Array = []
 var _random_ids: Array = []
 var _rng := RandomNumberGenerator.new()
 ## Bonus anticipation state for the current spin.
@@ -232,10 +234,18 @@ func all_cells() -> Array:
 ## --- Spin ------------------------------------------------------------------
 
 ## Starts every reel scrolling immediately (the server answer comes later
-## through stop_to()).
-func start_spin() -> void:
+## through stop_to()). An accepted external press supplies a small advance so
+## its very first rendered frame visibly moves, before the eased speed ramp.
+## The faces are still the previous real board; no result target is assigned.
+func start_spin(initial_travel_px: float = 0.0) -> void:
 	if is_spinning():
 		return
+	_pending_travel_snapshot.clear()
+	for s in _states:
+		var column: Array = []
+		for cell in s.cells:
+			column.append({"id": cell.symbol_id, "mult": cell.mult})
+		_pending_travel_snapshot.append(column)
 	_stopped_count = 0
 	_end_hot()
 	_ann_col = -1
@@ -245,7 +255,8 @@ func start_spin() -> void:
 	for s in _states:
 		s.spinning = true
 		s.t = 0.0
-		s.offset = 0.0
+		s.offset = clampf(initial_travel_px, 0.0, CELL_H - 1.0)
+		s.strip.position.y = s.rest_y + s.offset
 		s.stop_at = -1.0
 		s.target = []
 		s.target_mults = []
@@ -263,6 +274,8 @@ func start_spin() -> void:
 func stop_to(grid: Array, mults: Array = []) -> void:
 	if not is_spinning():
 		start_spin()
+	# The real target is now owned by the reveal; rollback is no longer legal.
+	_pending_travel_snapshot.clear()
 	var first: float = max(_elapsed, _spin_started_at + _t(min_spin_time, turbo_min_spin_time))
 	var stagger := _t(reel_stop_stagger, turbo_reel_stop_stagger)
 	var extra := _t(last_reel_extra_delay, turbo_last_reel_extra_delay)
@@ -281,6 +294,36 @@ func stop_to(grid: Array, mults: Array = []) -> void:
 		elif i == _states.size() - 1:
 			delay += extra
 		s.stop_at = first + delay
+
+## Cancels only target-free travel. Restore the previous real faces and
+## multiplier values without landing sounds, guessed cards, or a settle event.
+func cancel_pending_travel() -> void:
+	if _pending_travel_snapshot.size() != _states.size():
+		return
+	for s in _states:
+		if not s.target.is_empty():
+			return
+	set_process(false)
+	_end_hot()
+	sfx.stop_spin_loop()
+	for i in _states.size():
+		var s: ReelState = _states[i]
+		s.spinning = false
+		s.stop_at = -1.0
+		s.offset = 0.0
+		if s.blur_tween and s.blur_tween.is_valid():
+			s.blur_tween.kill()
+		_set_blur(s, 0.0)
+		s.strip.position.y = s.rest_y
+		for row in ROWS:
+			var previous: Dictionary = _pending_travel_snapshot[i][row]
+			var id: StringName = previous["id"]
+			s.cells[row].set_face(id, SymbolAtlas.texture_for(id))
+			s.cells[row].set_mult(float(previous["mult"]), 0.0)
+			s.cells[row].stop_win_pulse()
+			s.cells[row].play_dim(false)
+	_pending_travel_snapshot.clear()
+	_set_phase(Phase.IDLE)
 
 ## Convenience for callers that already have the board: spin + stop.
 func spin_to(grid: Array) -> void:
@@ -422,6 +465,11 @@ func _ramp_blur(s: ReelState, from_v: float, to_v: float, dur: float) -> void:
 ## normal settle (all_reels_stopped fires), so the win presentation runs
 ## exactly once, on the visible screen. No-op when nothing is spinning.
 func snap_spinning_reels() -> void:
+	# A hidden tab may return while the wallet is still pending. No target
+	# means no outcome: keep travelling and never emit a fake settled event.
+	for s in _states:
+		if s.spinning and s.target.size() != ROWS:
+			return
 	var snapped := false
 	for i in _states.size():
 		var s: ReelState = _states[i]
@@ -512,14 +560,26 @@ func _cool_reel(index: int) -> void:
 
 ## Landed reel during the build-up: plain cards dim, jokers pulse (after
 ## their land-bounce, which shares the SymbolVisual tween).
+## Rows are read from s.target, NOT from the cells' current faces: at settle
+## time the landing chain is pre-arranged one cell UP (cells[r] still shows
+## target[r + 1], target[0] waits in the entry) and wraps a beat later -- a
+## joker read from the live faces pulsed the card ABOVE itself once the wrap
+## landed, and a row-0 joker (still in the entry) was missed entirely. Only
+## reels that settle while the build-up is already running were affected;
+## pulsing cells[row] is correct in both phases, because the pulse timer
+## (>= 0.2 s) always fires after the wrap.
 func _shade_landed_reel(col: int) -> void:
 	var gen := _hot_gen
+	var s: ReelState = _states[col]
 	var jokers: Array = []
-	for cell in _states[col].cells:
-		if _is_joker(cell.symbol_id):
-			jokers.append(cell)
+	for row in s.cells.size():
+		var id: StringName = s.cells[row].symbol_id
+		if s.target.size() == s.cells.size():
+			id = s.target[row]
+		if _is_joker(id):
+			jokers.append(s.cells[row])
 		else:
-			cell.play_dim(true)
+			s.cells[row].play_dim(true)
 	if jokers.is_empty():
 		return
 	var wait := _t(anticipation_pulse_delay, turbo_anticipation_pulse_delay)

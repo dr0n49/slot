@@ -21,7 +21,6 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 [autoload]
 
 SymbolAtlas="*res://scripts/symbol_atlas.gd"
-RgsClient="*res://scripts/rgs_client.gd"
 WebBridge="*res://scripts/web_bridge.gd"
 
 [display]

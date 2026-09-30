@@ -129,6 +129,9 @@ export interface RevealPayload {
 }
 
 export interface SlotGameHandle {
+  /** Reversible travel before the wallet returns; never resolves a board. */
+  beginTravel: () => void;
+  cancelTravel: () => void;
   /** Request a spin at the given bet. No-ops if a round is already running. */
   spin: (bet: number) => void;
   /** Update the bet in the embedded game without spinning. */
@@ -187,21 +190,31 @@ export interface SlotGameProps {
    * once the loader tears its status overlay down.
    */
   onBootProgress?: (current: number, total: number) => void;
+  /**
+   * Godot's loader overlay (#status in the exported index.html) has been
+   * removed — the engine has everything it needs and is starting. The host
+   * splash must never release the player before this: entering earlier would
+   * show the engine's own "Loading..." screen (first visit, cold cache).
+   */
+  onLoaderDone?: () => void;
 }
 
 export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
   function SlotGame(
-    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onBootProgress },
+    { src, width = "100%", height = 720, className, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled, onBootProgress, onLoaderDone },
     ref,
   ) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const [ready, setReady] = useState(false);
+    const [waitingTravel, setWaitingTravel] = useState(false);
     // Commands sent before the iframe finishes booting are queued and
     // flushed once the "ready" event arrives, so callers don't have to
     // wait for onReady themselves before calling spin()/setBet()/reveal().
     const pendingRef = useRef<Array<{ fn: string; args: unknown[] }>>([]);
 
   type GodotSlotApi = {
+    beginTravel: () => void;
+    cancelTravel: () => void;
     spin: (bet: number) => void;
     setBet: (bet: number) => void;
     reveal: (json: string) => void;
@@ -227,9 +240,22 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
     useImperativeHandle(
       ref,
       () => ({
+        beginTravel: () => {
+          // The host can paint this reversible 4px card-surface movement on
+          // its first frame, before the iframe's separate render loop catches up.
+          setWaitingTravel(true);
+          callGodot("beginTravel");
+        },
+        cancelTravel: () => {
+          setWaitingTravel(false);
+          callGodot("cancelTravel");
+        },
         spin: (bet: number) => callGodot("spin", bet),
         setBet: (bet: number) => callGodot("setBet", bet),
-        reveal: (payload: RevealPayload) => callGodot("reveal", JSON.stringify(payload)),
+        reveal: (payload: RevealPayload) => {
+          setWaitingTravel(false);
+          callGodot("reveal", JSON.stringify(payload));
+        },
         continueRound: () => callGodot("continueRound"),
         snapRound: () => callGodot("snapRound"),
         setTurbo: (on: boolean) => callGodot("setTurbo", on),
@@ -292,24 +318,31 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
     }, [callGodot, onReady, onPhase, onSpinResult, onBalance, onWin, onRoundEnd, onAnticipation, onReelsSettled]);
 
     // Boot-speed: forward the loader's real download progress (#status-progress)
-    // to the host page while the engine boots. The loader removes its overlay
-    // once done — that stops the poll.
+    // to the host page while the engine boots, and report the moment the loader
+    // overlay is torn down (#status removed) — the engine is starting then, and
+    // only after that may the host splash ever release the player.
     const onBootProgressRef = useRef(onBootProgress);
     onBootProgressRef.current = onBootProgress;
+    const onLoaderDoneRef = useRef(onLoaderDone);
+    onLoaderDoneRef.current = onLoaderDone;
     useEffect(() => {
-      if (!onBootProgressRef.current) return;
       const id = window.setInterval(() => {
         const win = iframeRef.current?.contentWindow;
         const doc = win?.document;
         if (!win || !doc) return;
-        const status = doc.getElementById("status");
-        if (!status) {
-          window.clearInterval(id);
-          return;
-        }
+        // The game document must be parsed before #status's absence means
+        // anything: an about:blank iframe has neither element.
+        if (!doc.getElementById("canvas")) return;
         const bar = doc.getElementById("status-progress") as HTMLProgressElement | null;
-        if (!bar || !(bar.max > 0) || !(bar.value > 0)) return;
-        onBootProgressRef.current?.(bar.value, bar.max);
+        if (bar && bar.max > 0 && bar.value > 0) onBootProgressRef.current?.(bar.value, bar.max);
+        // Loader finished (overlay removed) or failed outright (failure
+        // notice shown) — either way the wait it can report is over.
+        const status = doc.getElementById("status");
+        const notice = doc.getElementById("status-notice");
+        if (!status || (notice && notice.textContent)) {
+          window.clearInterval(id);
+          onLoaderDoneRef.current?.();
+        }
       }, 300);
       return () => window.clearInterval(id);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -323,7 +356,7 @@ export const SlotGame = forwardRef<SlotGameHandle, SlotGameProps>(
         className={className}
         width={width}
         height={height}
-        style={{ border: "none", display: "block" }}
+        style={{ border: "none", display: "block", transform: waitingTravel ? "translateY(4px)" : undefined }}
         allow="autoplay"
         data-ready={ready}
       />

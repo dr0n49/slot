@@ -1,0 +1,321 @@
+--- reports/phase0.5-2026-09-30/baseline/App.tsx	2026-09-30 12:08:15
++++ frontend/src/App.tsx	2026-09-30 12:35:39
+@@ -6,7 +6,7 @@
+ import { BonusTriggerOverlay } from "./components/BonusTriggerOverlay";
+ import { FreeSpinsIntro } from "./components/FreeSpinsIntro";
+ import { BuyBonusModal } from "./components/BuyBonusModal";
+-import { dealDurationMs, beamRevealHoldMs, winFxPauseMs } from "./components/CardGrid";
++import { dealDurationMs, beamRevealHoldMs, presentationHoldMs, winFxPauseMs } from "./components/CardGrid";
+ import { ConfirmDialog } from "./components/ConfirmDialog";
+ import { ErrorModal, type ErrorModalState as RgsModalState } from "./components/ErrorModal";
+ import { CosmicBackground } from "./components/CosmicBackground";
+@@ -279,7 +279,7 @@
+   const [boardHot, setBoardHot] = useState(false);
+   /**
+    * Reveal handshake: applySpinVisual opens it (rev-stamped), and the FIRST
+-   * of Godot's reels_settled / round_end or React's fallback timer closes it
++   * of Godot's real reels_settled / round_end closes it
+    * (see closeRevealGate). Late events for an already-closed round are
+    * ignored — no second win reveal, sting or count-up.
+    */
+@@ -290,10 +290,8 @@
+   });
+   /**
+    * HUD-visible win values queued by the spin flow while the reveal gate is
+-   * still open (see flushOnSettle). waitForReels' fallback timer can resolve
+-   * the flow before Godot actually reports the settle (its base is a time
+-   * ESTIMATE); HUD win values must never ride that timer — they flush on the
+-   * REAL settle only, inside closeRevealGate.
++   * still open (see flushOnSettle). The recovery timer may request a snap,
++   * but only the real settle event flushes HUD values and resolves the flow.
+    */
+   const settleFlushRef = useRef<(() => void) | null>(null);
+   /** Run a HUD-only state update now if the board already landed, otherwise
+@@ -310,6 +308,33 @@
+   const rgsSettledCents = useRef<number | null>(null);
+   const continueResolver = useRef<(() => void) | null>(null);
+   const bigWinResolver = useRef<(() => void) | null>(null);
++  /**
++   * B2 presentation hold: Space / a board tap ends the current hold instantly
++   * (all labels + the final amount stay shown; it never starts or debits a
++   * spin). Null while no hold is open, so the same Space press that skips a
++   * hold can never also fire a spin.
++   */
++  const presentationSkipRef = useRef<(() => void) | null>(null);
++  /** While a hold is open, a transparent catcher over the board turns taps into skips. */
++  const [holdOpen, setHoldOpen] = useState(false);
++  /** Skipped holds snap the per-line labels' stagger to zero so every hand name
++   *  and cash amount is visible the moment the presentation completes. */
++  const [labelsInstant, setLabelsInstant] = useState(false);
++  /**
++   * B1: the HUD win plaque mounts on the SAME explicit, rev-stamped win-reveal
++   * event as the per-line labels (Godot's `win` message — see onGodotWin), so
++   * the count-up runs while the plaque is visible instead of finishing behind
++   * its old CSS reveal delay. Cleared per deal; a hold that times out without
++   * a reveal falls back to it (the final amount must always be shown).
++   */
++  const [revealWin, setRevealWin] = useState<{ key: number; amount: number; instant?: boolean } | null>(null);
++  const revealWinRef = useRef<{ key: number; amount: number } | null>(null);
++  revealWinRef.current = revealWin;
++  /** Mirror of lastWin for event handlers (see onGodotWin). */
++  const lastWinRef = useRef(0);
++  useEffect(() => {
++    lastWinRef.current = lastWin;
++  }, [lastWin]);
+   /** One-shot guard: the pending-bonus resume runs at most once per session. */
+   const resumeAttemptedRef = useRef(false);
+   autoRef.current = auto;
+@@ -561,6 +586,7 @@
+   const waitForBonusContinue = (kind: BonusKind) => {
+     return new Promise<void>((resolve) => {
+       setTriggerKind(kind);
++      setRevealWin(null);
+       // Persist: if the player leaves mid-wait, the same "you won N spins"
+       // card comes back on the next boot (demo wallet; RGS sessions resume
+       // server-side instead).
+@@ -579,6 +605,7 @@
+   const waitForBonusSummary = (kind: BonusKind, amount: number) =>
+     new Promise<void>((resolve) => {
+       setBonusSummary({ kind, amount });
++      setRevealWin(null);
+       setBonusTotal(amount);
+       continueResolver.current = () => {
+         setBonusSummary(null);
+@@ -648,6 +675,8 @@
+       rev,
+     };
+     setWinLabels(null);
++    setLabelsInstant(false);
++    setRevealWin(null);
+     setBoardHot(false);
+     revealGateRef.current = { landed: false, onLanded: null, rev };
+     settleFlushRef.current = null; // a new deal supersedes any queued HUD flush
+@@ -660,7 +689,7 @@
+ 
+   /**
+    * Round completion, idempotent per round id (rev): whichever of Godot's
+-   * reels_settled / round_end or the fallback timer comes FIRST wins. A late
++   * reels_settled / round_end comes FIRST wins. The fallback only asks Godot to snap. A late
+    * event for an already-closed round — or one from a superseded board — is
+    * ignored, so the win reveal / sting / count-up can never run twice.
+    */
+@@ -712,7 +741,7 @@
+       // safety net: expected spin duration + 1.5 s, turbo-aware, covering a
+       // frozen/backgrounded tab (rAF throttle).
+       const fallbackMs = dealDurationMs(_spinCards, t) + (godotReadyRef.current ? 1500 : 48);
+-      timer = window.setTimeout(finish, fallbackMs);
++      timer = window.setTimeout(() => slotRef.current?.snapRound(), fallbackMs);
+       dealGateRef.current = {
+         timer,
+         finish,
+@@ -753,6 +782,12 @@
+       return; // native/un-stamped event for a closed round
+     }
+     setWinLabels({ key: Date.now(), lines });
++    if (lastWinRef.current > 0) {
++      const key = rev ?? pendingRevRef.current ?? Date.now();
++      setRevealWin((previous) => previous?.key === key && previous.instant
++        ? previous
++        : { key, amount: lastWinRef.current });
++    }
+   }, []);
+ 
+   /** Stop button — snap strips; waitForReels resolves when columns report settled. */
+@@ -767,6 +802,38 @@
+       bigWinResolver.current = resolve;
+     });
+ 
++  /** One post-settle hold. The first skip exposes the final result; a
++   * second skip exits, and neither gesture can also start a paid round. */
++  const holdPresentation = (ms: number, finalWin?: { key: number; amount: number }) =>
++    new Promise<void>((resolve) => {
++      if (ms <= 0) { resolve(); return; }
++      setHoldOpen(true);
++      let timer = 0;
++      let skipped = false;
++      const showFinal = (instant: boolean) => {
++        if (!finalWin || finalWin.amount <= 0) return;
++        flushOnSettle(() => setRevealWin((previous) =>
++          instant || previous == null ? { ...finalWin, instant } : previous));
++      };
++      const done = () => {
++        window.clearTimeout(timer);
++        presentationSkipRef.current = null;
++        setHoldOpen(false);
++        showFinal(skipped);
++        resolve();
++      };
++      timer = window.setTimeout(done, ms);
++      presentationSkipRef.current = () => {
++        audio.releaseDuck();
++        if (skipped) { done(); return; }
++        skipped = true;
++        setLabelsInstant(true);
++        showFinal(true);
++        window.clearTimeout(timer);
++        timer = window.setTimeout(done, 350);
++      };
++    });
++
+   const celebrateGoldens = async (count: number) => {
+     if (count < 3) return;
+     setGoldCelebrate(true);
+@@ -925,6 +992,9 @@
+       busyRef.current = true;
+       audio.unlock();
+       setBusy(true);
++      setResultReady(false);
++      setRevealWin(null);
++      setWinLabels(null);
+       setWinIdx([]);
+       setWinLines([]);
+       setWinHands([]);
+@@ -944,6 +1014,9 @@
+           modeOpts: { bought?: PaidKind | null; ante?: AnteKind | null },
+           cost: number,
+         ): Promise<Booked | undefined> => {
++          // Visual travel has no target/result and no wallet capability.
++          // All affordability guards have passed before takeStake is called.
++          slotRef.current?.beginTravel();
+           if (rgs) {
+             const resp = await settleRgs(rgsModeName(modeOpts), bet);
+             if (!resp) return undefined;
+@@ -994,16 +1067,9 @@
+             if (lineN > 0) {
+               audio.playLineWin(spin.spinWinX);
+               const tier = bigWinTier(spin.spinWinX);
+-              if (tier) {
+-                // Ladder REPLACES the mid-win sting (never stacks with it)
+-                // and follows the on-grid reveal hold, like Godot's native path.
+-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+-                await showBigWin(tier, spin.spinWinX);
+-              } else {
+-                audio.playMidWin(spin.spinWinX);
+-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+-              }
+-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
++              const finalWin = { key: revealSeqRef.current, amount: antePay };
++              await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), finalWin);
++              if (tier) await showBigWin(tier, spin.spinWinX);
+             }
+           }
+           payOut(spin.spinWinX, booked);
+@@ -1067,16 +1133,9 @@
+             if (lineN > 0) {
+               audio.playLineWin(spin.spinWinX);
+               const tier = bigWinTier(spin.spinWinX);
+-              if (tier) {
+-                // Ladder REPLACES the mid-win sting (never stacks with it)
+-                // and follows the on-grid reveal hold, like Godot's native path.
+-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+-                await showBigWin(tier, spin.spinWinX);
+-              } else {
+-                audio.playMidWin(spin.spinWinX);
+-                await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
+-              }
+-              await sleep(beamRevealHoldMs(lineN, t, winGrade(spin.spinWinX)));
++              const finalWin = { key: revealSeqRef.current, amount: booked.pay };
++              await holdPresentation(presentationHoldMs(lineN, t, winGrade(spin.spinWinX)), finalWin);
++              if (tier) await showBigWin(tier, spin.spinWinX);
+             }
+           }
+           payOut(spin.spinWinX, booked);
+@@ -1108,16 +1167,9 @@
+           if (baseLines > 0) {
+             audio.playLineWin(round.base.spinWinX);
+             const tier = bigWinTier(round.base.spinWinX);
+-            if (tier) {
+-              // Ladder REPLACES the mid-win sting (never stacks with it)
+-              // and follows the on-grid reveal hold, like Godot's native path.
+-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+-              await showBigWin(tier, round.base.spinWinX);
+-            } else {
+-              audio.playMidWin(round.base.spinWinX);
+-              await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
+-            }
+-            await sleep(beamRevealHoldMs(baseLines, t, winGrade(round.base.spinWinX)));
++            const finalWin = { key: revealSeqRef.current, amount: basePay };
++              await holdPresentation(presentationHoldMs(baseLines, t, winGrade(round.base.spinWinX)), finalWin);
++              if (tier) await showBigWin(tier, round.base.spinWinX);
+           }
+         }
+ 
+@@ -1139,6 +1191,8 @@
+         credit(payout);
+         if (round.isMaxWin) setMaxWinFlash(true);
+       } finally {
++        // No-op after a real reveal; restores the previous board on an abort.
++        slotRef.current?.cancelTravel();
+         busyRef.current = false;
+         setBusy(false);
+       }
+@@ -1207,6 +1261,10 @@
+       e.preventDefault();
+       if (e.repeat) return;
+       if (bootOpen) return;
++      if (presentationSkipRef.current) {
++        presentationSkipRef.current();
++        return;
++      }
+       if (triggerKind || bonusSummary) {
+         audio.play("button_click");
+         continueResolver.current?.();
+@@ -1296,8 +1354,8 @@
+     ? { key: 1, mode: "total", label: copy.totalWin, amount: bonusTotal }
+     : maxWinFlash && resultReady
+       ? { key: dealKey, mode: "max", text: copy.maxWin }
+-      : lastWin > 0 && resultReady
+-        ? { key: dealKey, mode: "win", amount: lastWin }
++      : revealWin && revealWin.amount > 0 && resultReady
++        ? { key: revealWin.key, mode: "win", amount: revealWin.amount, instant: revealWin.instant }
+         : null;
+   const anteBet = anteKind ? guaranteedSpinPrice(anteKind, bet) : null;
+   const soft = winGrade(spinWinX) === "soft";
+@@ -1317,8 +1375,8 @@
+           Godot is only asked to paint the board: applySpinVisual() calls
+           slotRef.current.reveal({...}) with the board this engine already
+           resolved, and web_bridge.gd's godotSlot.reveal() just renders it and
+-          plays the win presentation. Godot's own RgsClient/spin()/buyBonus()
+-          paths are dormant (never called from here), so there is exactly one
++          plays the win presentation. The Web export excludes RgsClient and
++          disables native wallet entry points, so there is exactly one
+           real wallet client talking to the RGS session: this one. */}
+       <CosmicBackground bonus={inBonus} />
+ 
+@@ -1337,7 +1395,7 @@
+           and vibrant.css) wraps the board box; the box leaves --board-frame
+           of room for it, so the frame never pushes the board off-screen. */}
+       <div className="godot-board-slot relative z-10 flex h-full w-full flex-1 items-center justify-center overflow-visible">
+-        <div className="card-stage-wrap">
++        <div className="card-stage-wrap relative">
+           <div className={`playfield-board${boardHot ? " is-hot" : ""}`}>
+             <div
+               className="godot-board"
+@@ -1356,11 +1414,17 @@
+                 onAnticipation={onGodotAnticipation}
+                 onReelsSettled={onGodotReelsSettled}
+               />
++              {holdOpen ? (
++                <div aria-hidden className="absolute inset-0 cursor-pointer" onClick={() => presentationSkipRef.current?.()} />
++              ) : null}
+               {winLabels ? (
+-                <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} />
++                <WinLineLabels key={winLabels.key} lines={winLabels.lines} copy={copy} turbo={turbo} instant={labelsInstant} />
+               ) : null}
+             </div>
+           </div>
++          <div className="stage-win" aria-live="polite">
++            <HudWinFace win={portrait ? hudWin : null} money={copy.money} formatWin={copy.win} countMs={turbo ? 220 : 600} />
++          </div>
+         </div>
+       </div>
+ 
+@@ -1374,7 +1438,7 @@
+         busy={busy}
+         bonusActive={inBonus}
+         copy={copy}
+-        win={hudWin}
++        win={portrait ? null : hudWin}
+         onMenu={() => click(() => setMenuOpen(true))}
+         onBuyBonus={() => click(() => (anteKind ? askGuaranteed(anteKind) : setBuyOpen(true)))}
+         soundOn={!audioMuted}

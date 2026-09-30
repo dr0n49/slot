@@ -5,7 +5,7 @@ import { CountUpAmount } from "./CountUpAmount";
 import { AutoMark, HudBoltMark, InfoMark, MinusMark, PlusMark, SpeakerMark, SpinArrowMark } from "./marks";
 
 export type HudWin =
-  | { key: number; mode: "win"; amount: number }
+  | { key: number; mode: "win"; amount: number; instant?: boolean }
   | { key: number; mode: "total"; label: string; amount: number }
   | { key: number; mode: "max"; text: string };
 
@@ -47,9 +47,9 @@ export function HudWinFace({
     <div
       key={win.key}
       className="result-reveal win-plaque win-plaque-count"
-      style={{ ["--result-delay" as string]: "0s" }}
+      style={{ ["--result-delay" as string]: "0s", animation: "none" }}
     >
-      <WinLabelWithCount formatWin={formatWin} money={money} amount={win.amount} countMs={countMs} />
+      <WinLabelWithCount formatWin={formatWin} money={money} amount={win.amount} countMs={countMs} instant={win.instant} />
     </div>
   );
 }
@@ -60,11 +60,13 @@ function WinLabelWithCount({
   money,
   formatWin,
   countMs,
+  instant,
 }: {
   amount: number;
   money: (n: number) => string;
   formatWin: (amount: string) => string;
   countMs?: number;
+  instant?: boolean;
 }) {
   const final = money(amount);
   const template = formatWin("\u0000");
@@ -76,6 +78,7 @@ function WinLabelWithCount({
         value={amount}
         format={money}
         durationMs={countMs}
+        finishNow={instant}
         onTick={audio.playCountTick}
       />
       {right}

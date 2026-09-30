@@ -1,0 +1,89 @@
+{
+  "rows": [
+    {
+      "case": "desktop-one-hand",
+      "pressToSettledMs": 1427.3,
+      "pressToIdleMs": 2345.5,
+      "firstVisibleHudMs": 1544.9,
+      "firstHudValue": "0.00",
+      "finalHudValue": "0.25",
+      "lineCount": 1
+    },
+    {
+      "case": "desktop-four-hand",
+      "pressToSettledMs": 1428.9,
+      "pressToIdleMs": 2795.1,
+      "firstVisibleHudMs": 1542.9,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    },
+    {
+      "case": "desktop-skip-four-hand",
+      "pressToSettledMs": 1430.1,
+      "pressToIdleMs": 2417.8,
+      "firstVisibleHudMs": 1562.4,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    },
+    {
+      "case": "portrait-one-hand",
+      "pressToSettledMs": 1432.7,
+      "pressToIdleMs": 2358.3,
+      "firstVisibleHudMs": 1569.2,
+      "firstHudValue": "0.00",
+      "finalHudValue": "0.25",
+      "lineCount": 1
+    },
+    {
+      "case": "portrait-four-hand",
+      "pressToSettledMs": 1427,
+      "pressToIdleMs": 2796.2,
+      "firstVisibleHudMs": 1557.6,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    },
+    {
+      "case": "portrait-skip-four-hand",
+      "pressToSettledMs": 1430.6,
+      "pressToIdleMs": 2214.9,
+      "firstVisibleHudMs": 1545.4,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    },
+    {
+      "case": "mobile-lite-one-hand",
+      "pressToSettledMs": 1431.6,
+      "pressToIdleMs": 2347.3,
+      "firstVisibleHudMs": 1552.2,
+      "firstHudValue": "0.00",
+      "finalHudValue": "0.25",
+      "lineCount": 1
+    },
+    {
+      "case": "mobile-lite-four-hand",
+      "pressToSettledMs": 1424,
+      "pressToIdleMs": 2791.6,
+      "firstVisibleHudMs": 1539.9,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    },
+    {
+      "case": "mobile-lite-skip-four-hand",
+      "pressToSettledMs": 1431.1,
+      "pressToIdleMs": 2231.5,
+      "firstVisibleHudMs": 1562.4,
+      "firstHudValue": "0.00",
+      "finalHudValue": "1.00",
+      "lineCount": 4
+    }
+  ],
+  "walletStart": 49.17001724243164,
+  "noOutcomeWhileWaiting": true,
+  "noSecondWallet": true,
+  "failedAssets": []
+}

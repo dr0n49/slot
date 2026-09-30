@@ -1,0 +1,1260 @@
+{
+  "file": "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/frontend/public/godot-slot/index.pck",
+  "sha256": "de6ef8a12038fc6930fde9ec91b36926ff36ed01d695bc9752f1257a13d68c1e",
+  "bytes": 12231044,
+  "packVersion": 4,
+  "entries": [
+    {
+      "path": ".godot/exported/133200997/export-6e71dac6704bd1b2d4f8f64598aafc89-WinBurst.scn",
+      "offset": 12085264,
+      "size": 3549,
+      "md5": "2a668bcff7bf720987b41b5db62357c4",
+      "flags": 0
+    },
+    {
+      "path": ".godot/exported/133200997/export-8189bd88de773345531d3898f252c139-VerifyDriver.scn",
+      "offset": 12170960,
+      "size": 690,
+      "md5": "a37b60a55a68754f179fd8c71de79138",
+      "flags": 0
+    },
+    {
+      "path": ".godot/exported/133200997/export-9226b68ab348b77f6b30243eec346fb9-SlotGame.scn",
+      "offset": 12078112,
+      "size": 5776,
+      "md5": "dd411f24a301735f0156993bc8d0db15",
+      "flags": 0
+    },
+    {
+      "path": ".godot/exported/133200997/export-b610fe5ff19e465df920b7ea2d49e17e-Symbol.scn",
+      "offset": 12083888,
+      "size": 1372,
+      "md5": "932ab1e5b1779ea4da2bf61be4d0edd8",
+      "flags": 0
+    },
+    {
+      "path": ".godot/global_script_class_cache.cfg",
+      "offset": 12210416,
+      "size": 996,
+      "md5": "9933feff268b7768a8a40cac023fe73a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/2C.webp-b979e657fdf47bba09572ba165555732.ctex",
+      "offset": 167264,
+      "size": 183010,
+      "md5": "24a43af6c7beffaf0e94cb24824d3745",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/2D.webp-852784747cf998bd5503a8ee9706b6fc.ctex",
+      "offset": 350480,
+      "size": 182202,
+      "md5": "16bdd7bc71c157feba94a6bfba51e0f5",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/2H.webp-08625a952d2e4cac12a8cd3cac1bde70.ctex",
+      "offset": 532880,
+      "size": 179928,
+      "md5": "64b092f6be007b7344ae878750b62abb",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/2S.webp-d9f1d017daf22df00e3d350930cb31ac.ctex",
+      "offset": 713008,
+      "size": 178306,
+      "md5": "247b2e31137f450d71dab98391283bf0",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/3C.webp-f57d9d09032f969627d56f425a847e21.ctex",
+      "offset": 891520,
+      "size": 181628,
+      "md5": "a7aadf459875a6ef0ae3415e7ce9a781",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/3D.webp-dfa9e75ca92b87853450a55bf79d2a9a.ctex",
+      "offset": 1073344,
+      "size": 183754,
+      "md5": "7dc4a8456da0a4a952da9ee897f6a4db",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/3H.webp-627fd913f7cc272d0ea92784712716d5.ctex",
+      "offset": 1257296,
+      "size": 182982,
+      "md5": "63d5b2de4224a7d5ecc5417e958885da",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/3S.webp-f0e88814e8e34b16921ca46001510ee4.ctex",
+      "offset": 1440480,
+      "size": 179780,
+      "md5": "5008402dc5f8200ba2a12ec97f7e4e15",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/4C.webp-c01437ed3ead4480b46bd61f86f4922b.ctex",
+      "offset": 1620464,
+      "size": 189526,
+      "md5": "10e32b422b0448b907abe3f11e2bf581",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/4D.webp-9894c7bb64f6fd0b6338d4c2aca78d3b.ctex",
+      "offset": 1810192,
+      "size": 187946,
+      "md5": "39ff6c6931a9d6cda3ffbb9ca3cef6a7",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/4H.webp-8f57719dbd3e06a5649f83de9534d6c6.ctex",
+      "offset": 1998336,
+      "size": 190260,
+      "md5": "522a09a2a106d46e7f15af2a68652224",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/4S.webp-afbc26fa6d8f38d538d0154f00dbb10e.ctex",
+      "offset": 2188800,
+      "size": 184680,
+      "md5": "c0309e74563050508fabeaba32da472a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/5C.webp-25b7152e6738b2eacd45f06f9315508a.ctex",
+      "offset": 2373680,
+      "size": 188558,
+      "md5": "93d92db52b0c4bdf9944dfa990d427e2",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/5D.webp-8d7d93e52af5f29ef02fe07c1b9ff2ef.ctex",
+      "offset": 2562432,
+      "size": 196646,
+      "md5": "520ef79acb7e1ab08112c624eed4592a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/5H.webp-17c94912a004da2d1b2ebddbb389ca6b.ctex",
+      "offset": 2759280,
+      "size": 194854,
+      "md5": "2ab372344acb09e20b21d5bd93998439",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/5S.webp-f076d40a8c5ebc9e31ac519b6202c2a7.ctex",
+      "offset": 2954336,
+      "size": 187570,
+      "md5": "4b2ca8b449a8a2333f765e2e62156a19",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/6C.webp-532e1fe4106242da80d6a0fed2548a8f.ctex",
+      "offset": 3142112,
+      "size": 197602,
+      "md5": "31921aebf9d2cbb021011ddd5fec8bcc",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/6D.webp-9bc9d8143f7a6bad735b21166348d03c.ctex",
+      "offset": 3339920,
+      "size": 195262,
+      "md5": "4d986d3d52cf73ae55fbd82b83f265af",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/6H.webp-aa88ac1ba48f525283012f479b9c3a86.ctex",
+      "offset": 3535376,
+      "size": 196230,
+      "md5": "4fe89d82ac1e9b0ed7cc5433533d856f",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/6S.webp-f654630ce732cd02c0cd159e450a1e47.ctex",
+      "offset": 3731808,
+      "size": 195142,
+      "md5": "6f57708869348444dcd9fe56e267f24d",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/7C.webp-f036e127ab5946f96be22aadb8801322.ctex",
+      "offset": 3927152,
+      "size": 199128,
+      "md5": "8802010589e7f3faca24d636eaf545b2",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/7D.webp-e448afe822c77a00174cef81773b913e.ctex",
+      "offset": 4126480,
+      "size": 204332,
+      "md5": "a140a931b1da44847c34023378b6ea93",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/7H.webp-65084dc45d97af5e249bd45070db6fc9.ctex",
+      "offset": 4331008,
+      "size": 199618,
+      "md5": "b1056da7b65709d63d48f87bc7ab3961",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/7S.webp-b044740292bfd0b14145e8cc59268216.ctex",
+      "offset": 4530832,
+      "size": 193430,
+      "md5": "9facd902c9d8f4e50aee0efac9470b35",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/8C.webp-f9b10ada304e2208459fa25606ec7441.ctex",
+      "offset": 4724464,
+      "size": 206802,
+      "md5": "9cb30eed4bd42d652915f62f303513e0",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/8D.webp-fceeb5f6551e87d94ce7ea49e293e1a7.ctex",
+      "offset": 4931472,
+      "size": 209020,
+      "md5": "d0d286067a410ab387245fb3f693927c",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/8H.webp-f78a1a085b58bf8908cde9385a35f1a2.ctex",
+      "offset": 5140688,
+      "size": 203840,
+      "md5": "1ff1cf15131c99b72fafc0fe3a9e65cb",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/8S.webp-a810c7417a73ece2111d5f408e9e8ba5.ctex",
+      "offset": 5344720,
+      "size": 201576,
+      "md5": "9568a20aad5f95eda086dee3de31115e",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/9C.webp-0d60bc3f042387631bf3a8c2ad54c3ff.ctex",
+      "offset": 5546496,
+      "size": 200982,
+      "md5": "7220aed2e0e44a12f9814cff3718da72",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/9D.webp-eb462503a4a07f94ca406cb815b85989.ctex",
+      "offset": 5747680,
+      "size": 210442,
+      "md5": "1103529e208f47a0e13259e0b9cfb6ca",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/9H.webp-11576b6fe3097f5a7212a4450511b354.ctex",
+      "offset": 5958320,
+      "size": 208472,
+      "md5": "655d381d2d19a10f2ca9a174f7774ed5",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/9S.webp-d49aa7620f2b255bb155adbd579c2b0e.ctex",
+      "offset": 6166992,
+      "size": 203132,
+      "md5": "e9fe539e4c1358f8e8c30ad6a19f52ef",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/AC.webp-f6d632ddbef3031b449dd83dde49c977.ctex",
+      "offset": 6370320,
+      "size": 209868,
+      "md5": "12af30a0866ff9f9262571055a464285",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/AD.webp-1593701042240adeed029dcafb6c7f38.ctex",
+      "offset": 6580384,
+      "size": 218574,
+      "md5": "4f4ef010f3bfa939abbb5716837848b6",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/AH.webp-f1d7852064da26bb6162bec22b41f161.ctex",
+      "offset": 6799152,
+      "size": 220756,
+      "md5": "e6a59b8b614aa91d200b17367ac4188f",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/AS.webp-21b821d6660ea43ada0ef70822a48bab.ctex",
+      "offset": 7020112,
+      "size": 214782,
+      "md5": "536de834aa0397e4643edb030d5dfb6a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JC.webp-f8d7250ed600c5664e708106e462a2f7.ctex",
+      "offset": 7460128,
+      "size": 233616,
+      "md5": "8f7cfd229986bc8f74db7669ed26bb4e",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JD.webp-4f2217137567b5cb87587e945fffd1bd.ctex",
+      "offset": 7693936,
+      "size": 291256,
+      "md5": "58c1d31323ab3a778cf01c0d0096a066",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JH.webp-4afbbceb9fc8830169621a10c83da531.ctex",
+      "offset": 7985392,
+      "size": 303556,
+      "md5": "fdb71077340eb8a12a88f51e51ad03d0",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JOKER.webp-fa9bfdb7daa7cc3b2f3bdc2d69731172.ctex",
+      "offset": 8289152,
+      "size": 232628,
+      "md5": "9ec483c62e244fefee0d94ffeffbda5a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JOKER_gold.webp-a5ca4ee79d408743126a84cb46d72387.ctex",
+      "offset": 8522000,
+      "size": 232628,
+      "md5": "9ec483c62e244fefee0d94ffeffbda5a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/JS.webp-a4af57bad499090f983396ac2da25c21.ctex",
+      "offset": 8754848,
+      "size": 233252,
+      "md5": "37ee7765e099c2ae851b7f0dca249d64",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/KC.webp-3ad02b00071fbab49ee7325973495de2.ctex",
+      "offset": 8988304,
+      "size": 249160,
+      "md5": "ebf794ec0d6e72e853989bf3a9f51489",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/KD.webp-21f7730d9c0a62bd1e5c3cd8ef3dbdcf.ctex",
+      "offset": 9237664,
+      "size": 327726,
+      "md5": "3a3750229ce11e6bc1f4aba1caf8c172",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/KH.webp-7221583ef689f2df771a17bd8e1d4dc3.ctex",
+      "offset": 9565584,
+      "size": 306650,
+      "md5": "7083c6fc812cd752afcc7857de52830e",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/KS.webp-7151b470e6020343eb01d56cc2a2284d.ctex",
+      "offset": 9872432,
+      "size": 250036,
+      "md5": "daad1d5b3b273e50801764052808f63e",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/QC.webp-ef69685b933df35b521f2a647d408005.ctex",
+      "offset": 10122672,
+      "size": 245506,
+      "md5": "6a759bef37802cabf6738a4e1d6bca44",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/QD.webp-4358d5128bd1ee19e7a6dcf99669259f.ctex",
+      "offset": 10368384,
+      "size": 298208,
+      "md5": "3a6c1e838634e7ddf7ea022f72154249",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/QH.webp-c4028cf08f1a0dfef9d871368bd488e6.ctex",
+      "offset": 10666784,
+      "size": 297942,
+      "md5": "92769bb00462eb1c99e622fdd15328f7",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/QS.webp-57746d5dd3b31b8574556f5474c4c9c4.ctex",
+      "offset": 10964928,
+      "size": 259550,
+      "md5": "48d0a42a7aff40bb6ba8404e39120781",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/TC.webp-19f18ee368751554a4808823bf5e3c09.ctex",
+      "offset": 11224672,
+      "size": 212478,
+      "md5": "901c4cdf0f87a7168694e3adca322c69",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/TD.webp-1db22a7b9821c36af252c6c814ee27b6.ctex",
+      "offset": 11437344,
+      "size": 212124,
+      "md5": "dbce84969ec237225f8f0567159ab8a0",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/TH.webp-4f3b8b74403a0a5966c675baedafe074.ctex",
+      "offset": 11649664,
+      "size": 208046,
+      "md5": "19969a9d832b35aa829bd17da60f9024",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/TS.webp-a2f541eaa17bca168c83b78b9507bb59.ctex",
+      "offset": 11857904,
+      "size": 206236,
+      "md5": "e8fb7c6164069a1a5450696282b5ad31",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/bonus_trigger.mp3-2e77c6bed923f8061d79af69cd727175.mp3str",
+      "offset": 112,
+      "size": 44127,
+      "md5": "a1a805a55faad5d463e3c7d9faee77c6",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/card_back.png-2577f00fd56181f44075a936080e7577.ctex",
+      "offset": 7235088,
+      "size": 224832,
+      "md5": "ff9f48c26e9caf678db0ede36465c858",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.apple-touch-icon.png-8085a11cc297d91deb55511843765958.ctex",
+      "offset": 12197664,
+      "size": 5700,
+      "md5": "a677d8c4b47545fb01b25ec9bd44ba73",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.apple-touch-icon.png-99d8b8cdbad89199042ff71bce18c58d.ctex",
+      "offset": 12173136,
+      "size": 5700,
+      "md5": "a677d8c4b47545fb01b25ec9bd44ba73",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.icon.png-5416eafd21206b4be49300215b2d408c.ctex",
+      "offset": 12179072,
+      "size": 6650,
+      "md5": "c378a375e22d00418603082c1c01baa3",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.icon.png-5665fad188e88d1e882500a4376bfe02.ctex",
+      "offset": 12203600,
+      "size": 5700,
+      "md5": "a677d8c4b47545fb01b25ec9bd44ba73",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.png-5122033cac747157decad52589e2295c.ctex",
+      "offset": 12125424,
+      "size": 11520,
+      "md5": "93285428175ca710e60b75fd910231e3",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/index.png-91e555f59b9aee209cce512798c0151e.ctex",
+      "offset": 12185936,
+      "size": 11520,
+      "md5": "93285428175ca710e60b75fd910231e3",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/joker_land.mp3-46e1d6b088bb7e7fdf4ddbe42ed525db.mp3str",
+      "offset": 44400,
+      "size": 24987,
+      "md5": "33e3382bfaae10190a4abb5cd29592b1",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/mult_land.mp3-e0ff2a71ef6560543f27b91467c2341e.mp3str",
+      "offset": 69552,
+      "size": 10615,
+      "md5": "11d4ff1445064d1418f479dbb9265e3a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/oswald-latin-700-normal.woff2-e1fedcab6388c474dee32ec5f2adfb0b.fontdata",
+      "offset": 12064336,
+      "size": 13572,
+      "md5": "074930b57871dfe0d9d58c276374ea50",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/reel_stop_0.mp3-5e3455fe8516b0662149fdfc1d1ea56c.mp3str",
+      "offset": 80336,
+      "size": 3299,
+      "md5": "21da897743c9d0f24b5edc63068778d8",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/reel_stop_1.mp3-f52a5c075bff700f42b83363b04e4524.mp3str",
+      "offset": 83808,
+      "size": 3323,
+      "md5": "7e322392f9ae864e0ab465f81325738a",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/reel_stop_2.mp3-bbfd078196a125690190a91ad893d0ea.mp3str",
+      "offset": 87296,
+      "size": 3403,
+      "md5": "13968e4dc5996ef92798a2551e63cb34",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/reel_stop_3.mp3-a68bbcf959b4c1276349b9104daa4f0b.mp3str",
+      "offset": 90864,
+      "size": 3403,
+      "md5": "2975da2a1f1c8998fb499ad691be9eda",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/reel_stop_4.mp3-3ae2f677b65b85860dc1e88acffc540b.mp3str",
+      "offset": 94432,
+      "size": 3403,
+      "md5": "5d861ef8289d31aa82836b8e05823355",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/spin_loop.wav-16e238042c28f34d0f08199e5e2f9ebe.sample",
+      "offset": 98000,
+      "size": 14708,
+      "md5": "03ac7ff7b957b4c60862facaaf6cc397",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/win_line.mp3-d8d0e4b8ef472510a34826e2fce91d84.mp3str",
+      "offset": 112880,
+      "size": 17947,
+      "md5": "1dc23c3abc5c17d56871369c8094a8e4",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/win_multi.mp3-1f4438061334775bc7d39bec436ff2b6.mp3str",
+      "offset": 130992,
+      "size": 25659,
+      "md5": "c6256499d3f4a5523dcf88be5b03e967",
+      "flags": 0
+    },
+    {
+      "path": ".godot/imported/win_soft.mp3-3ec3f5093dfbf137ccba7a28b7583780.mp3str",
+      "offset": 156816,
+      "size": 10287,
+      "md5": "0af460e4c7c526e80c01174652d8818e",
+      "flags": 0
+    },
+    {
+      "path": ".godot/uid_cache.bin",
+      "offset": 12211424,
+      "size": 3355,
+      "md5": "05808f490feba9cad66bfe50632622f2",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/bonus_trigger.mp3.import",
+      "offset": 44240,
+      "size": 159,
+      "md5": "620b63d389eae398c0cde37992a54fb6",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/joker_land.mp3.import",
+      "offset": 69392,
+      "size": 157,
+      "md5": "ce4019f3951048644ee5bec2e5a96d84",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/mult_land.mp3.import",
+      "offset": 80176,
+      "size": 155,
+      "md5": "cd5a4da49c642048a3b4de1e7101b855",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/reel_stop_0.mp3.import",
+      "offset": 83648,
+      "size": 158,
+      "md5": "23ef6dc248fde5e08e192856e307cdfb",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/reel_stop_1.mp3.import",
+      "offset": 87136,
+      "size": 158,
+      "md5": "e3da8eeb4516a631e8694b5e6eddb9a7",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/reel_stop_2.mp3.import",
+      "offset": 90704,
+      "size": 157,
+      "md5": "3c66f68b1d942e49d9d409c90589d868",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/reel_stop_3.mp3.import",
+      "offset": 94272,
+      "size": 157,
+      "md5": "1ce0e33a4eb8c03bbe0b3b7fad25d5a4",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/reel_stop_4.mp3.import",
+      "offset": 97840,
+      "size": 158,
+      "md5": "60db512d451261f682b7a614f5d159af",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/spin_loop.wav.import",
+      "offset": 112720,
+      "size": 156,
+      "md5": "2b88a78f211ab44c552684e022bf2bf6",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/win_line.mp3.import",
+      "offset": 130832,
+      "size": 155,
+      "md5": "9a4e60eba89d45e123c5d674dd01b9b5",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/win_multi.mp3.import",
+      "offset": 156656,
+      "size": 156,
+      "md5": "a0ffe102d75e6ed6d1d87b78ef1f2659",
+      "flags": 0
+    },
+    {
+      "path": "assets/audio/win_soft.mp3.import",
+      "offset": 167104,
+      "size": 154,
+      "md5": "30eb33d7240cb56bbae43fbb6c5ae502",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/2C.webp.import",
+      "offset": 350288,
+      "size": 192,
+      "md5": "d951dae2360d607240a9749e09acbc37",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/2D.webp.import",
+      "offset": 532688,
+      "size": 192,
+      "md5": "c96ae1eceb3c031dc538f7ae7cb2098f",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/2H.webp.import",
+      "offset": 712816,
+      "size": 192,
+      "md5": "ca8f39d12ccc728a8e1b2540aa7a4495",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/2S.webp.import",
+      "offset": 891328,
+      "size": 192,
+      "md5": "d2ab24d685471eed2a0e0c4f00f9bcb3",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/3C.webp.import",
+      "offset": 1073152,
+      "size": 192,
+      "md5": "3bab334c8ef4bd0468c3b8fc0446f40e",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/3D.webp.import",
+      "offset": 1257104,
+      "size": 192,
+      "md5": "fe48e1ab0c2f146b129fb28096152b40",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/3H.webp.import",
+      "offset": 1440288,
+      "size": 192,
+      "md5": "aa3c4558999dd46b50969c96c2d114cb",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/3S.webp.import",
+      "offset": 1620272,
+      "size": 191,
+      "md5": "dd496a7ea498e3e12cbaaff57b3f7f01",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/4C.webp.import",
+      "offset": 1810000,
+      "size": 192,
+      "md5": "4c56692ac55ff93d09b9f061be2ae82a",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/4D.webp.import",
+      "offset": 1998144,
+      "size": 192,
+      "md5": "682a8f1ee1a176050ac8cae6ba482e38",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/4H.webp.import",
+      "offset": 2188608,
+      "size": 192,
+      "md5": "57491fbe5eed8fdae509ba1aabc227a3",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/4S.webp.import",
+      "offset": 2373488,
+      "size": 192,
+      "md5": "1f202a92497bd702454a917a71de0376",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/5C.webp.import",
+      "offset": 2562240,
+      "size": 192,
+      "md5": "dcac45b8b5ad849c7c13b840c1c970df",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/5D.webp.import",
+      "offset": 2759088,
+      "size": 192,
+      "md5": "1b011474f4fc6abef64b81af5cc873bb",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/5H.webp.import",
+      "offset": 2954144,
+      "size": 191,
+      "md5": "968bce2e717884c72086a8aa3e98cc59",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/5S.webp.import",
+      "offset": 3141920,
+      "size": 192,
+      "md5": "e206c95468dc05ab6d3bff3ef36409e5",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/6C.webp.import",
+      "offset": 3339728,
+      "size": 192,
+      "md5": "a30fd7db2f6c46827121ded9c731eea3",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/6D.webp.import",
+      "offset": 3535184,
+      "size": 192,
+      "md5": "12a8a6386406e74c328dbd9d4920a964",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/6H.webp.import",
+      "offset": 3731616,
+      "size": 192,
+      "md5": "d1e285ea7ec0c956f6c0188c6587f84b",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/6S.webp.import",
+      "offset": 3926960,
+      "size": 192,
+      "md5": "639ead248598b59492e7d32936d2400e",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/7C.webp.import",
+      "offset": 4126288,
+      "size": 192,
+      "md5": "ea096c2c80bba717e76bcc328a63664a",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/7D.webp.import",
+      "offset": 4330816,
+      "size": 192,
+      "md5": "3d664aefccae69dd089da3744320796f",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/7H.webp.import",
+      "offset": 4530640,
+      "size": 192,
+      "md5": "6af7439fd99b9c565d896743d756e720",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/7S.webp.import",
+      "offset": 4724272,
+      "size": 192,
+      "md5": "ce21cfce293089ff19fd8684ef125599",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/8C.webp.import",
+      "offset": 4931280,
+      "size": 192,
+      "md5": "8b52d32730ddd20bde3381c092a976b2",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/8D.webp.import",
+      "offset": 5140496,
+      "size": 192,
+      "md5": "7ebd3a866842a508d9f185d7f537ca06",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/8H.webp.import",
+      "offset": 5344528,
+      "size": 192,
+      "md5": "1b825eae3f6c672b8c92ea217a5f9fca",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/8S.webp.import",
+      "offset": 5546304,
+      "size": 192,
+      "md5": "113b99a9e4033ea486dd4933d19dcb36",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/9C.webp.import",
+      "offset": 5747488,
+      "size": 192,
+      "md5": "e33ead7b37e36c04199c14d5086e8d05",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/9D.webp.import",
+      "offset": 5958128,
+      "size": 191,
+      "md5": "4e2fb4d7e206fcfd650fa1a9d23a93f4",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/9H.webp.import",
+      "offset": 6166800,
+      "size": 192,
+      "md5": "79c80bdb6c941c9d480c342e8221654a",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/9S.webp.import",
+      "offset": 6370128,
+      "size": 191,
+      "md5": "70ae711eb9159a546a11f4dda77ff8e9",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/AC.webp.import",
+      "offset": 6580192,
+      "size": 192,
+      "md5": "2857373e944409311091cbd67d1b731d",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/AD.webp.import",
+      "offset": 6798960,
+      "size": 192,
+      "md5": "1b24ff656eef603e78fa290104e2a7be",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/AH.webp.import",
+      "offset": 7019920,
+      "size": 192,
+      "md5": "932210b4bb1a3fb9993ad65310a4f55e",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/AS.webp.import",
+      "offset": 7234896,
+      "size": 192,
+      "md5": "f2894c17b110e6ddb634d2789203e3cd",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JC.webp.import",
+      "offset": 7693744,
+      "size": 192,
+      "md5": "b971db5f44e13db1a3f6b78f4b79d8d2",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JD.webp.import",
+      "offset": 7985200,
+      "size": 191,
+      "md5": "176f23eca272537873ae96cbd06806d9",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JH.webp.import",
+      "offset": 8288960,
+      "size": 192,
+      "md5": "11b1c8aae531bdbb6eb3f5975fca7f8e",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JOKER.webp.import",
+      "offset": 8521792,
+      "size": 195,
+      "md5": "cb5f74c33726d548e513d6a1d836f809",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JOKER_gold.webp.import",
+      "offset": 8754640,
+      "size": 200,
+      "md5": "0021105e206bfdefff443a6c8bb1e422",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/JS.webp.import",
+      "offset": 8988112,
+      "size": 192,
+      "md5": "d5606e8e9dc06f55b77c7d4abb510469",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/KC.webp.import",
+      "offset": 9237472,
+      "size": 192,
+      "md5": "f790811de8d10743762fa4811e2bfef0",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/KD.webp.import",
+      "offset": 9565392,
+      "size": 192,
+      "md5": "8c53fc6d637f31ede707d675653a5bd4",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/KH.webp.import",
+      "offset": 9872240,
+      "size": 192,
+      "md5": "e6f16c85c9deea2867afd86a58e87cab",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/KS.webp.import",
+      "offset": 10122480,
+      "size": 191,
+      "md5": "4b411b5c69ebb6406b13aba1fffd20d4",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/QC.webp.import",
+      "offset": 10368192,
+      "size": 192,
+      "md5": "552e1cd44ed6d416d1738ba5ca4d71d3",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/QD.webp.import",
+      "offset": 10666592,
+      "size": 191,
+      "md5": "e6e92466369cb0e1bea2bc11341f8bfc",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/QH.webp.import",
+      "offset": 10964736,
+      "size": 192,
+      "md5": "d66349b7a9f7adc67ba142de0e3a94f6",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/QS.webp.import",
+      "offset": 11224480,
+      "size": 192,
+      "md5": "89a5e236ab89d15443812aac45afd1ef",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/TC.webp.import",
+      "offset": 11437152,
+      "size": 192,
+      "md5": "6ffa9120f4f4ec5701bb39195c5794cd",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/TD.webp.import",
+      "offset": 11649472,
+      "size": 192,
+      "md5": "b77f81e7f20dc135cb5cfeb65df4a838",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/TH.webp.import",
+      "offset": 11857712,
+      "size": 192,
+      "md5": "7cc64b9478049d43487433808b8c99ee",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/TS.webp.import",
+      "offset": 12064144,
+      "size": 192,
+      "md5": "fc0137cd628e750030d5d057cd495e72",
+      "flags": 0
+    },
+    {
+      "path": "assets/cards/card_back.png.import",
+      "offset": 7459920,
+      "size": 198,
+      "md5": "852ecd7e6e2c4ed11b4b48abadfc5fd1",
+      "flags": 0
+    },
+    {
+      "path": "assets/fonts/oswald-latin-700-normal.woff2.import",
+      "offset": 12077920,
+      "size": 182,
+      "md5": "32a96e8c7e8c17ab9f172b7cea0a4cbd",
+      "flags": 0
+    },
+    {
+      "path": "index.apple-touch-icon.png.import",
+      "offset": 12203376,
+      "size": 211,
+      "md5": "b568bf40fd9af6c58d68a376add90231",
+      "flags": 0
+    },
+    {
+      "path": "index.icon.png.import",
+      "offset": 12209312,
+      "size": 199,
+      "md5": "2ea5f082337cb7d71d941d52389c6e19",
+      "flags": 0
+    },
+    {
+      "path": "index.png.import",
+      "offset": 12136944,
+      "size": 194,
+      "md5": "115fda88b20ba96a9739231707676122",
+      "flags": 0
+    },
+    {
+      "path": "project.binary",
+      "offset": 12214784,
+      "size": 983,
+      "md5": "3e82ad1f395b18e49db68edbd4614c1f",
+      "flags": 0
+    },
+    {
+      "path": "scenes/SlotGame.tscn.remap",
+      "offset": 12209520,
+      "size": 101,
+      "md5": "f40fcb09f7eb71fb1d46b3be0b2cb53b",
+      "flags": 0
+    },
+    {
+      "path": "scenes/Symbol.tscn.remap",
+      "offset": 12209632,
+      "size": 99,
+      "md5": "ce72cf561b64fd3e57956f53b7a81d93",
+      "flags": 0
+    },
+    {
+      "path": "scenes/WinBurst.tscn.remap",
+      "offset": 12209744,
+      "size": 101,
+      "md5": "743d2fc36591210081b5c2aae2d8acda",
+      "flags": 0
+    },
+    {
+      "path": "scripts/board_math.gd.remap",
+      "offset": 12209856,
+      "size": 45,
+      "md5": "34dc9f46764cd03422b1fece13caf37f",
+      "flags": 0
+    },
+    {
+      "path": "scripts/board_math.gdc",
+      "offset": 12088816,
+      "size": 15461,
+      "md5": "4e1f44849a22562b4b445da08d9632ef",
+      "flags": 0
+    },
+    {
+      "path": "scripts/fx_manager.gd.remap",
+      "offset": 12209904,
+      "size": 45,
+      "md5": "e555629f7e25510e2d7d0c26892b88fd",
+      "flags": 0
+    },
+    {
+      "path": "scripts/fx_manager.gdc",
+      "offset": 12104288,
+      "size": 6203,
+      "md5": "fef4778e4b87459b9d629ee62362448f",
+      "flags": 0
+    },
+    {
+      "path": "scripts/reel_controller.gd.remap",
+      "offset": 12209952,
+      "size": 50,
+      "md5": "83ab0b2948e014b77c4ae289c4aad45a",
+      "flags": 0
+    },
+    {
+      "path": "scripts/reel_controller.gdc",
+      "offset": 12110496,
+      "size": 14920,
+      "md5": "ff18c126958699385ce07338dd5462f2",
+      "flags": 0
+    },
+    {
+      "path": "scripts/sfx_manager.gd.remap",
+      "offset": 12210016,
+      "size": 46,
+      "md5": "544a96c251e55c1bb7ecb919f8abdb8d",
+      "flags": 0
+    },
+    {
+      "path": "scripts/sfx_manager.gdc",
+      "offset": 12137152,
+      "size": 2125,
+      "md5": "3b163acc49740f93c819a41c5b7c2e1e",
+      "flags": 0
+    },
+    {
+      "path": "scripts/slot_logic.gd.remap",
+      "offset": 12210064,
+      "size": 45,
+      "md5": "bc340ddb3d9e2b89d7ff26d006551d01",
+      "flags": 0
+    },
+    {
+      "path": "scripts/slot_logic.gdc",
+      "offset": 12139280,
+      "size": 13594,
+      "md5": "e9984a04ee86c68bdd044d43df857352",
+      "flags": 0
+    },
+    {
+      "path": "scripts/symbol_atlas.gd.remap",
+      "offset": 12210112,
+      "size": 47,
+      "md5": "157dda1ba82d4838fb65735954542202",
+      "flags": 0
+    },
+    {
+      "path": "scripts/symbol_atlas.gdc",
+      "offset": 12152880,
+      "size": 1353,
+      "md5": "af00b60fc6bfeb2bbbbed77fc1c4786f",
+      "flags": 0
+    },
+    {
+      "path": "scripts/symbol_visual.gd.remap",
+      "offset": 12210160,
+      "size": 48,
+      "md5": "daa3648a90bf3f1514fe0ad29574d525",
+      "flags": 0
+    },
+    {
+      "path": "scripts/symbol_visual.gdc",
+      "offset": 12154240,
+      "size": 6579,
+      "md5": "e8e14cfdc9e7615b6b659e5a325cc744",
+      "flags": 0
+    },
+    {
+      "path": "scripts/web_bridge.gd.remap",
+      "offset": 12210208,
+      "size": 45,
+      "md5": "92e6d1ecd25e253d4f00bd84881eb0ec",
+      "flags": 0
+    },
+    {
+      "path": "scripts/web_bridge.gdc",
+      "offset": 12160832,
+      "size": 6345,
+      "md5": "c9520cc457ca675908896d6f38dfd631",
+      "flags": 0
+    },
+    {
+      "path": "shaders/symbol_fx.gdshader",
+      "offset": 12167184,
+      "size": 3768,
+      "md5": "0e6ef37226f7bdffe37cf0c0ad627eee",
+      "flags": 0
+    },
+    {
+      "path": "tests/VerifyDriver.tscn.remap",
+      "offset": 12210256,
+      "size": 105,
+      "md5": "bcbf94066de5a177aee69d889cf14c27",
+      "flags": 0
+    },
+    {
+      "path": "tests/verify_driver.gd.remap",
+      "offset": 12210368,
+      "size": 46,
+      "md5": "548bf771f205792d9cc89f4a114ff42c",
+      "flags": 0
+    },
+    {
+      "path": "tests/verify_driver.gdc",
+      "offset": 12171664,
+      "size": 1464,
+      "md5": "4b11014c6f5cc16db5c98e27e6ce5cd0",
+      "flags": 0
+    },
+    {
+      "path": "web-build/index.apple-touch-icon.png.import",
+      "offset": 12178848,
+      "size": 211,
+      "md5": "9ece477e742483c5b98d8806f800f5e7",
+      "flags": 0
+    },
+    {
+      "path": "web-build/index.icon.png.import",
+      "offset": 12185728,
+      "size": 199,
+      "md5": "3b4d0bb78cb62fd3ea6ed2ef73e3bb3a",
+      "flags": 0
+    },
+    {
+      "path": "web-build/index.png.import",
+      "offset": 12197456,
+      "size": 194,
+      "md5": "5c84a1c2d48e062ac0829e93f5d0f34d",
+      "flags": 0
+    }
+  ],
+  "walletScriptsPresent": [],
+  "rgsClientAutoloadPresent": false,
+  "remainingAutoloads": [
+    "SymbolAtlas",
+    "WebBridge"
+  ]
+}

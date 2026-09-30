@@ -6,6 +6,8 @@ type Props = {
   /** ms — turbo callers can pass a shorter duration */
   durationMs?: number;
   className?: string;
+  /** Skip/interruption shows the exact value in this render and cancels ticks. */
+  finishNow?: boolean;
   /** C3: quiet tick every ~85 ms while the count is VISIBLE (pass audio.playCountTick). */
   onTick?: () => void;
   /** C3: fires exactly once when the count reaches its final value. */
@@ -15,11 +17,15 @@ type Props = {
 const TICK_EVERY_MS = 85;
 
 /** Ease-out count-up from 0 → value (cash). */
-export function CountUpAmount({ value, format, durationMs = 720, className, onTick, onCountEnd }: Props) {
+export function CountUpAmount({ value, format, durationMs = 720, className, finishNow, onTick, onCountEnd }: Props) {
   const [shown, setShown] = useState(() => format(0));
 
   useEffect(() => {
     const target = Number(value) || 0;
+    if (finishNow) {
+      setShown(format(target));
+      return;
+    }
     if (target <= 0) {
       setShown(format(0));
       return;
@@ -49,7 +55,7 @@ export function CountUpAmount({ value, format, durationMs = 720, className, onTi
     raf = requestAnimationFrame(tick);
     // Unmount (skip, next spin) stops the ticks with the count itself.
     return () => cancelAnimationFrame(raf);
-  }, [value, format, durationMs, onTick, onCountEnd]);
+  }, [value, format, durationMs, finishNow, onTick, onCountEnd]);
 
-  return <span className={className}>{shown}</span>;
+  return <span className={className}>{finishNow ? format(Number(value) || 0) : shown}</span>;
 }

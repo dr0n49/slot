@@ -93,6 +93,10 @@ const BIG_WIN_REVEAL_TURBO := 1.5
 @onready var fx: FXManager = $"../FXManager"
 
 var _busy: bool = false
+## React is the only wallet owner on Web. The optional native test wallet is
+## instantiated only off Web and its entire script is excluded from Web PCKs.
+var _native_wallet: Node
+var _awaiting_external_result: bool = false
 ## Bumped by every reveal_external: a coroutine whose captured generation no
 ## longer matches is stale (superseded by a newer reveal) and must not touch
 ## the board, emit events, or reset _busy after one of its await points.
@@ -102,7 +106,35 @@ var _continue_requested: bool = false
 var _last_bonus_package: Dictionary = {}
 
 func _ready() -> void:
+	if not OS.has_feature("web"):
+		var native_script: Script = load("res://scripts/rgs_client.gd")
+		_native_wallet = native_script.new()
+		_native_wallet.name = "NativeDemoWallet"
+		add_child(_native_wallet)
 	_warm_up.call_deferred()
+
+## Accepted parent-page press: purely reversible travel, without a target,
+## wallet request, result, win event, or reels_settled event.
+func begin_external_travel() -> void:
+	if _busy or _awaiting_external_result or reel_controller.is_spinning():
+		return
+	_awaiting_external_result = true
+	reel_controller.return_to_idle(_all_cells())
+	fx.clear_line_wins()
+	# Eight local pixels ensure feedback in the first drawn frame; no target.
+	reel_controller.start_spin(8.0)
+
+## Refused funds/session request: restore the actual prior displayed board.
+## A real result already accepted by reveal_external cannot be cancelled here.
+func cancel_external_travel() -> void:
+	if not _awaiting_external_result:
+		return
+	_awaiting_external_result = false
+	reel_controller.cancel_pending_travel()
+
+func set_native_demo_balance(dollars: float) -> void:
+	if not OS.has_feature("web") and _native_wallet != null:
+		_native_wallet.set_offline_balance(dollars)
 
 ## Pre-compile shaders / pre-rasterize glyphs used by the win presentation
 ## (see FXManager.warm_up) so the first win of the session doesn't hitch.
@@ -144,6 +176,7 @@ func request_ante(kind: String, bet: float) -> void:
 ##   rev: int (optional)        reveal id echoed back on win_lines, so React
 ##                              can drop label events from a superseded board
 func reveal_external(payload: Dictionary) -> void:
+	_awaiting_external_result = false
 	# Generation token: this reveal supersedes any still-running one. A stalled
 	# presentation (tab throttling, long network wait) must never wake up after
 	# a newer board landed and paint/emits over it.
@@ -159,7 +192,8 @@ func reveal_external(payload: Dictionary) -> void:
 		await get_tree().process_frame
 		waited += get_process_delta_time()
 	_busy = true
-	reel_controller.return_to_idle(_all_cells())
+	if not reel_controller.is_spinning():
+		reel_controller.return_to_idle(_all_cells())
 	fx.clear_line_wins()
 
 	var bet: float = float(payload.get("bet", 1.0))
@@ -192,10 +226,13 @@ func reveal_external(payload: Dictionary) -> void:
 	var paying := shown_x > 0.0 and not win_indices.is_empty()
 
 	# Cells to light up: the paying ones, plus the jokers (golden cells) when
-	# 3+ of them landed -- that board triggers / retriggers the bonus, and it
-	# usually pays nothing itself, so without this the jokers would just sit
-	# there. Same pulse + bursts as the native bonus path (_play_bonus); React's
-	# celebrateGoldens() holds the flow for this beat and plays the scatter SFX.
+	# 2+ of them landed. 3+ triggers / retriggers the bonus (React's
+	# celebrateGoldens() holds the flow and plays the scatter SFX); exactly 2
+	# is the anticipation tease -- ReelController charges them up during the
+	# build-up (_shade_landed_reel) and _end_hot() wipes that the moment the
+	# reels stop, so a 2-joker board that pays nothing would otherwise go
+	# completely dark right after the tease. Same pulse + bursts as the native
+	# bonus path (_play_bonus).
 	var lit: Array = _cells_for_indices(win_indices) if paying else []
 	var golden_cells: Array = []
 	var cards: Array = spin["cards"]
@@ -203,7 +240,7 @@ func reveal_external(payload: Dictionary) -> void:
 		var card = cards[i]
 		if card is Dictionary and card.get("golden", false):
 			golden_cells.append(_cell_at(i / COLS, i % COLS))
-	if golden_cells.size() >= 3:
+	if golden_cells.size() >= 2:
 		for c in golden_cells:
 			if not (c in lit):
 				lit.append(c)
@@ -257,6 +294,9 @@ func _wait(seconds: float, skippable: bool = false) -> void:
 		await get_tree().process_frame
 
 func _run_round(bet: float, mode: String) -> void:
+	if OS.has_feature("web") or _native_wallet == null:
+		push_warning("SlotLogic: native wallet rounds are disabled on Web; React supplies reveal().")
+		return
 	if _busy:
 		return
 	_busy = true
@@ -265,7 +305,7 @@ func _run_round(bet: float, mode: String) -> void:
 	# Reels start moving on the click, not after the network round-trip.
 	reel_controller.start_spin()
 
-	var outcome: Dictionary = await RgsClient.play(bet, mode)
+	var outcome: Dictionary = await _native_wallet.play(bet, mode)
 	if outcome.get("error", false):
 		# Stake refused / network error: land a plain losing board, report 0x
 		# and hand control back so the button unlocks.
