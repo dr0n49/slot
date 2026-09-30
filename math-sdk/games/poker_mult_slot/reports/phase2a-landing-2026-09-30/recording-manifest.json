@@ -1,0 +1,14 @@
+[
+  {
+    "file": "desktop.mp4",
+    "seconds": 4.864041805267334,
+    "sourceFrames": 100,
+    "note": "Silent CDP screencast; original intervals preserved. Approximately 20 captured frames/s resampled to 30 for MP4 and 20 for GIF; separate rAF benchmark in verification.json."
+  },
+  {
+    "file": "portrait.mp4",
+    "seconds": 4.862765073776245,
+    "sourceFrames": 100,
+    "note": "Silent CDP screencast; original intervals preserved. Approximately 20 captured frames/s resampled to 30 for MP4 and 20 for GIF; separate rAF benchmark in verification.json."
+  }
+]

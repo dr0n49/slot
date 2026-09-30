@@ -6,13 +6,15 @@ import queenUrl from "./assets/queen-proof.webp";
 import reaperUrl from "./assets/reaper-proof.webp";
 import cornerUrl from "./assets/corner-proof.webp";
 import { isLiteFx } from "../game/fxMode";
+import { audio } from "../game/audio";
+import { LANDING, LandingMotion } from "./landingMotion";
 import type { RevealPayload, SlotGameHandle, SlotGameProps, GodotWinLine } from "../components/SlotGame";
 
-const W = 800, H = 1146, CW = 134, CH = 188, DX = 146, DY = 204, X = 40, Y = 72;
+const W = 800, H = 1146, CW = 134, CH = 188, DX = 146, DY = LANDING.cell, X = 40, Y = 72;
 type Card = RevealPayload["cards"][number];
-type Reel = { node: Container; cards: Container[]; stopped: boolean };
+type Reel = { node: Container; cards: Container[] };
 type Scene = { begin: () => void; cancel: () => void; reveal: (p: RevealPayload) => void;
-  snap: () => void; skip: () => void; turbo: (v: boolean) => void };
+  snap: () => void; skip: () => void; turbo: (v: boolean) => void; sound: (v: boolean) => void };
 
 function pip(suit: string, size: number, color: number) {
   const g = new Graphics();
@@ -49,14 +51,17 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
   const call = (fn: (s: Scene) => void) => scene.current ? fn(scene.current) : pending.current.push(fn);
   useImperativeHandle(ref, () => ({beginTravel:()=>call(s=>s.begin()),cancelTravel:()=>call(s=>s.cancel()),
     reveal:p=>call(s=>s.reveal(p)),snapRound:()=>call(s=>s.snap()),continueRound:()=>call(s=>s.skip()),
-    setTurbo:v=>call(s=>s.turbo(v)),setBet:()=>{},spin:()=>{},setVolume:()=>{},resumeAudio:()=>{}}), []);
+    setTurbo:v=>call(s=>s.turbo(v)),setBet:()=>{},spin:()=>{},setVolume:v=>call(s=>s.sound(v>0)),resumeAudio:audio.unlock}), []);
   useEffect(() => {
     let disposed = false, mounted = false;
     const app = new Application();
     const init = async () => {
       const lite = isLiteFx(), reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       await document.fonts.ready;
-      await app.init({width:W,height:H,resolution:2,autoDensity:true,backgroundAlpha:0,
+      const displayScale=(host.current?.getBoundingClientRect().height??H)/H;
+      // Rasterize for the displayed size and actual screen density. A fixed
+      // 2× design-space buffer wastes ~4× the pixels on a portrait board.
+      await app.init({width:W,height:H,resolution:Math.min(2,Math.max(.5,displayScale*devicePixelRatio)),autoDensity:true,backgroundAlpha:0,
         antialias:true,preference:"webgl",powerPreference:"high-performance"});
       if (disposed) { app.destroy(true, {children:true}); return; }
       const textures = await Assets.load<Texture>([
@@ -66,8 +71,10 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
       const tex = (name: string) => textures[urls[name]];
       app.canvas.style.width="100%";app.canvas.style.height="100%";
       host.current!.appendChild(app.canvas);mounted = true;
+      const paintedCards = new WeakMap<Container, Card>();
       function face(card: Card, multiplier = 0) {
         const node = new Container();
+        paintedCards.set(node,card);node.pivot.set(CW/2,CH/2);
         const paper = new Sprite(tex("paper"));paper.width=CW;paper.height=CH;node.addChild(paper);
         node.addChild(new Graphics().roundRect(1,1,CW-2,CH-2,5).stroke({color:0x1b1511,width:2})
           .roundRect(5,5,CW-10,CH-10,3).stroke({color:0xa07737,width:1}));
@@ -104,7 +111,10 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
       const mask=new Graphics().rect(X-2,Y-2,5*DX-10,5*DY-14).fill(0xffffff);app.stage.addChild(mask,field);field.mask=mask;
       const reels: Reel[]=[];
       let current: RevealPayload | null=null, target: RevealPayload | null=null, travel=false,
-        start=0, settledAt=-1, settled=false, fast=false, skipped=false, skippedAt=0, notified=false;
+        settledAt=-1, settled=false, fast=false, skipped=false, skippedAt=0, notified=false,
+        soundEnabled=true,shakeStrength=0,lastFrameAt=performance.now(),feedbackPending=false;
+      const emit=(event:string,extra:Record<string,unknown>={})=>host.current?.dispatchEvent(
+        new CustomEvent("pixi-landing",{bubbles:true,detail:{event,t:performance.now(),rev:target?.rev,...extra}}));
       const win = new Container(), nice = new Container();app.stage.addChild(win,nice);
       nice.visible=false;
       const corners=new Container();app.stage.addChild(corners);
@@ -116,11 +126,35 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
         for(let r=-1;r<6;r++) {
           const index=((r+5)%5)*5+c;
           const node=face(p?.cards[index]??{rank:"A",suit:"S"},p?.multipliers[index]??0);
-          node.position.set(0,r*DY);reel.node.addChild(node);reel.cards.push(node);
+          node.position.set(CW/2,r*DY+CH/2);reel.node.addChild(node);reel.cards.push(node);
         }
         reel.node.y=Y;
       }
-      for(let c=0;c<5;c++){const node=new Container();node.x=X+c*DX;field.addChild(node);reels.push({node,cards:[],stopped:true});paintColumn(c,null)}
+      for(let c=0;c<5;c++){const node=new Container();node.x=X+c*DX;field.addChild(node);reels.push({node,cards:[]});paintColumn(c,null)}
+      function wrapColumn(c:number) {
+        const reel=reels[c];reel.cards.unshift(reel.cards.pop()!);
+        reel.cards.forEach((node,i)=>node.position.set(CW/2,(i-1)*DY+CH/2));
+      }
+      function prepareColumn(c:number) {
+        if(!target)return;
+        const reel=reels[c];
+        // Entry holds target row 0; visible rows 0..3 hold target rows 1..4.
+        // The next continuous wrap installs all five rows at collision.
+        for(let row=0;row<5;row++){
+          const i=row*5+c,old=reel.cards[row],node=face(target.cards[i],target.multipliers[i]);
+          node.position.copyFrom(old.position);reel.node.removeChild(old);old.destroy({children:true});
+          reel.node.addChild(node);reel.cards[row]=node;
+        }
+        emit("landing_prepare",{column:c,offset:motion.reels[c].offset});
+      }
+      const motion=new LandingMotion({wrap:wrapColumn,prepare:prepareColumn,
+        collision:(column,joker)=>{
+          const strength=reduced?0:joker?LANDING.shakeJoker:column===4?LANDING.shakeLast:LANDING.shakeSmall;
+          shakeStrength=Math.max(shakeStrength,strength);
+          if(soundEnabled){audio.playReelStop(column);if(joker)audio.playJokerLand()}
+          if(column===4)audio.stopReelSpinLoop(0);
+          emit("landing_collision",{column,joker,offset:motion.reels[column].offset,shake:strength,soundEnabled});
+        },settled:()=>finalise()},reduced);
       const points=(id:number)=>LINES[id].map(i=>[X+(i%5)*DX+CW/2,Y+Math.floor(i/5)*DY+CH/2]);
       function paintWins(time:number) {
         win.removeChildren().forEach(n=>n.destroy({children:true}));if(!target)return;
@@ -132,11 +166,13 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
           const pts=points(line.id);g.moveTo(pts[0][0],pts[0][1]);pts.slice(1).forEach(([x,y])=>g.lineTo(x,y));g.stroke({color:0xc2a15c,width:1.5,alpha:.72});win.addChild(g);
         }
       }
-      function finalise() {
+      function finalise(snap=false) {
         if(!target||settled)return;
-        for(let c=0;c<5;c++){paintColumn(c,target);reels[c].stopped=true}
+        if(snap){for(let c=0;c<5;c++)paintColumn(c,target);audio.stopReelSpinLoop(0);shakeStrength=0;app.stage.position.set(0)}
         current=target;settled=true;travel=false;settledAt=performance.now();
-        host.current!.dataset.settledRev=String(target.rev);host.current!.dataset.cards=JSON.stringify(target.cards);
+        const visible=Array.from({length:25},(_,i)=>paintedCards.get(reels[i%5].cards[Math.floor(i/5)+1]));
+        host.current!.dataset.settledRev=String(target.rev);host.current!.dataset.cards=JSON.stringify(visible);
+        emit("landing_settled",{snap});
         callbacks.current.onReelsSettled?.(target.rev);
       }
       const word=label("NICE",126,0xf1dfb9,"Pirata One");word.anchor.set(.5);word.position.set(W/2,480);
@@ -161,29 +197,40 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
         const g=new Graphics().poly([-3,0,0,-7,3,0,0,7]).fill(0xcba75a);g.position.set(130+i*77,410+(i%3)*85);flecks.addChild(g);
       }
       const api:Scene={
-        begin:()=>{if(travel)return;target=null;travel=true;settled=false;settledAt=-1;notified=false;skipped=false;start=performance.now();nice.visible=false;delete host.current!.dataset.beat;
-          win.removeChildren().forEach(n=>n.destroy({children:true}));for(const r of reels){r.stopped=false;r.node.y=Y+8}callbacks.current.onPhase?.("SPIN_START")},
-        cancel:()=>{if(target||!travel)return;travel=false;for(let c=0;c<5;c++){paintColumn(c,current);reels[c].stopped=true}},
-        reveal:p=>{if(!travel)api.begin();target=p;start=performance.now();layoutNice();},
-        snap:()=>finalise(),skip:()=>{if(settled){skipped=true;skippedAt=performance.now()}},turbo:v=>{fast=v},
+        begin:()=>{if(travel)return;target=null;travel=true;settled=false;settledAt=-1;notified=false;skipped=false;nice.visible=false;delete host.current!.dataset.beat;
+          win.removeChildren().forEach(n=>n.destroy({children:true}));motion.begin(performance.now(),fast);
+          feedbackPending=true;host.current!.style.transform="translate3d(0,4px,0)";
+          for(let c=0;c<5;c++)reels[c].node.y=Y+motion.reels[c].offset;
+          // First composite the existing real board's reversible CSS nudge.
+          // A new WebGL submission can otherwise delay that first visible frame.
+          app.ticker.stop();requestAnimationFrame(()=>requestAnimationFrame(()=>{if(!disposed&&feedbackPending)app.ticker.start()}));
+          if(soundEnabled)audio.startReelSpinLoop();emit("travel_begin");callbacks.current.onPhase?.("SPIN_START")},
+        cancel:()=>{if(!motion.cancel())return;travel=false;shakeStrength=0;app.stage.position.set(0);
+          feedbackPending=false;host.current!.style.transform="translate3d(0,0,0)";
+          for(let c=0;c<5;c++)paintColumn(c,current);app.render();audio.stopReelSpinLoop(0);emit("travel_rollback")},
+        reveal:p=>{if(target&&!settled)return;if(!travel)api.begin();
+          if(feedbackPending){motion.carryFeedback(4*H/host.current!.getBoundingClientRect().height);
+            feedbackPending=false;host.current!.style.transform="translate3d(0,0,0)";
+            for(let c=0;c<5;c++)reels[c].node.y=Y+motion.reels[c].offset;app.render()}
+          target=p;
+          app.ticker.start();
+          motion.reveal(performance.now(),Array.from({length:5},(_,c)=>p.cards.filter((card,i)=>i%5===c&&card.golden).length));layoutNice();emit("target_received")},
+        snap:()=>{if(motion.snap())finalise(true)},skip:()=>{if(settled){skipped=true;skippedAt=performance.now()}},turbo:v=>{fast=v},
+        sound:v=>{soundEnabled=v;if(!v)audio.stopReelSpinLoop(0)},
       };
       scene.current=api;pending.current.splice(0).forEach(fn=>fn(api));
       app.ticker.add(()=>{
         const now=performance.now();
-        if(travel){
-          const elapsed=now-start;
-          for(let c=0;c<5;c++){
-            const reel=reels[c];if(reel.stopped)continue;
-            const stopAt=reduced?120:(fast?240:620)+c*(fast?25:85),brake=fast?60:125;
-            if(target&&elapsed>=stopAt){paintColumn(c,target);reel.stopped=true;}
-            else {
-              // Repeat only previously displayed faces until a real target exists.
-              const speed=target&&elapsed>stopAt-brake?Math.max(.1,(stopAt-elapsed)/brake):1;
-              reel.node.y=reduced?Y+3:Y+((elapsed*(fast?2.8:1.9)*speed+c*14)%DY);
-            }
-          }
-          if(target&&reels.every(r=>r.stopped))finalise();
+        motion.tick(now);
+        for(let c=0;c<5;c++){
+          reels[c].node.y=Y+motion.reels[c].offset;
+          for(let row=0;row<5;row++)reels[c].cards[row+1].scale.set(...motion.squash(c,row,now));
         }
+        const delta=Math.max(0,(now-lastFrameAt)/1000);lastFrameAt=now;
+        if(shakeStrength>.01){const angle=Math.random()*Math.PI*2;app.stage.position.set(-Math.cos(angle)*shakeStrength,-Math.sin(angle)*shakeStrength);
+          shakeStrength*=Math.max(0,1-LANDING.shakeDecay*delta)}else{shakeStrength=0;app.stage.position.set(0)}
+        host.current!.dataset.landing=JSON.stringify({hasTarget:!!target,reels:motion.reels,
+          scales:reels.map(r=>r.cards.slice(1,6).map(n=>[n.scale.x,n.scale.y])),shake:shakeStrength});
         if(settled&&target){const t=now-settledAt;
           if(!notified&&t>=100){notified=true;
             const totalCents=Math.round(target.shownX*target.bet*100),sum=target.lines.reduce((v,l)=>v+l.win_x,0);
@@ -208,7 +255,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps>(function PixiS
       callbacks.current.onLoaderDone?.();callbacks.current.onReady?.();
     };
     init().catch(e=>{console.error("Pixi slice initialization",e);host.current?.setAttribute("data-error",String(e))});
-    return()=>{disposed=true;scene.current=null;if(mounted)app.destroy(true,{children:true})};
+    return()=>{disposed=true;scene.current=null;audio.stopReelSpinLoop(0);if(mounted)app.destroy(true,{children:true})};
   }, []);
-  return <div ref={host} data-renderer="pixi" style={{width:"100%",height:"100%"}} />;
+  return <div ref={host} data-renderer="pixi" style={{width:"100%",height:"100%",willChange:"transform",transform:"translate3d(0,0,0)"}} />;
 });

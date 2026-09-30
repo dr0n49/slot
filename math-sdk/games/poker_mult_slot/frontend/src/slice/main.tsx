@@ -58,12 +58,17 @@ function Single() {
   const clear=()=>{timers.current.forEach(clearTimeout);timers.current=[]};
   const run=useCallback((next:FixtureName)=>{
     if(!slot.current||busyRef.current)return;
+    if(navigator.userActivation.isActive)slot.current.resumeAudio();
     clear();rev.current++;active.current=next;landed.current=false;busyRef.current=true;
     winLines.current=null;skipPending.current=false;
     setName(next);setBusy(true);setLines([]);setWin(null);setNice(false);
     window.__sliceTrace=[];window.__sliceFrames=[];
     const p=payload(fixture(next),rev.current);window.__slicePayload=p;trace("accepted",{fixture:next,payload:p});
-    slot.current.beginTravel();slot.current.reveal(p);
+    slot.current.beginTravel();
+    const auditionParams=new URLSearchParams(location.search);
+    const delay=Math.max(0,Math.min(5000,Number(auditionParams.get("walletDelayMs"))||0));
+    if(delay)later(()=>{if(auditionParams.has("rejectWallet")){slot.current?.cancelTravel();trace("wallet_rejected");finish()}else slot.current?.reveal(p)},delay);
+    else slot.current.reveal(p);
   },[]);
   const finish=()=>{busyRef.current=false;setBusy(false);trace("presentation_end")};
   const skip=()=>{
@@ -84,6 +89,8 @@ function Single() {
   });
   useEffect(()=>{if(ready)run("art")},[ready,run]);
   useEffect(()=>{let id=0,last=0;function frame(t:number){if(last&&busyRef.current)window.__sliceFrames.push(t-last);last=t;id=requestAnimationFrame(frame)}id=requestAnimationFrame(frame);return()=>{cancelAnimationFrame(id);clear()}},[]);
+  useEffect(()=>{const event=(e:Event)=>{const detail=(e as CustomEvent).detail;window.__sliceTrace.push(detail)};
+    document.addEventListener("pixi-landing",event);return()=>document.removeEventListener("pixi-landing",event)},[]);
   const settled=(r?:number)=>{
     if(r!==rev.current||landed.current)return;landed.current=true;trace("reels_settled");
     const isNice=active.current==="nice";
