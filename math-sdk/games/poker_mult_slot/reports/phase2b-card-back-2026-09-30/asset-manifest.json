@@ -1,0 +1,50 @@
+{
+  "state": "Card back pending native-size approval; no runtime installation",
+  "generation": "Built-in image generator with approved Queen A reference; one targeted interior revision",
+  "source": {
+    "width": 1058,
+    "height": 1487
+  },
+  "displaySizes": [
+    [
+      86,
+      121
+    ],
+    [
+      60,
+      85
+    ]
+  ],
+  "files": [
+    {
+      "path": "sources/card-back.png",
+      "bytes": 2317259,
+      "sha256": "94801c9efa5a6c3bdbf80cd6eed3bcafb28cd3efefac9e75ca5b3bf8f7a67f81"
+    },
+    {
+      "path": "previews/card-back-512x720.png",
+      "bytes": 653509,
+      "sha256": "98bf67189d7166598ef72c0247b48fde98f956a6cc56fbf61c8c3e12218e2852"
+    },
+    {
+      "path": "previews/card-back-desktop-86x121.png",
+      "bytes": 21720,
+      "sha256": "e554e022a4cbd36f6597d8993f53fa58d71cc0e3d3ca6af3e4ef8a1ccd70d286"
+    },
+    {
+      "path": "previews/card-back-portrait-60x85.png",
+      "bytes": 11017,
+      "sha256": "413785f2a5bcdb15392e9a8c9a01abee796d0b559b5d4b0051856761d43a8c57"
+    },
+    {
+      "path": "card-back-desktop-native.png",
+      "bytes": 55166,
+      "sha256": "d03849d5cb5ced1668b9e2d70ee5ef1ef65bce1111f39a9074037625669e59f1"
+    },
+    {
+      "path": "card-back-portrait-native.png",
+      "bytes": 30069,
+      "sha256": "c4d94419b50c6c21d142a051fb25bf84a86f8b48f6d257e7809517ff92215a32"
+    }
+  ]
+}

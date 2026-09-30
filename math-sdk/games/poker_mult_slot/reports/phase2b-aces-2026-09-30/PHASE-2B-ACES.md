@@ -6,4 +6,4 @@ Review `aces-desktop-native.png` at 86×121 and `aces-portrait-native.png` at 60
 
 The user's first revision removed the oval enclosure around the central suit on all four aces, including its surrounding radial ticks. The earlier native-size proofs are retained in `revisions/with-oval/`. The current vector sources and every exported proof were reread after rebuilding.
 
-Four-ace approval is pending after this revision. The next art group is the card back, only after approval. No new deck asset has been installed in the game; the completed deck will be installed as one set.
+The user accepted continuation after seeing the four revised aces without the oval enclosure. The next approved task is the card back; it has its own native-size approval gate. No new deck asset has been installed in the game; the completed deck will be installed as one set.
