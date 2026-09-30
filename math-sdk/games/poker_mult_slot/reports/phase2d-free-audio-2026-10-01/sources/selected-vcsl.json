@@ -1,0 +1,53 @@
+{
+  "commit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+  "files": [
+    {
+      "path": "Idiophones/Struck Idiophones/Bell Tree/Individual/BellTree_Hit_D5_rr1_Mid.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4154141eb9f3bf4023072c5c0fcd88d1bf796e75",
+      "size": 825220,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/4154141eb9f3bf4023072c5c0fcd88d1bf796e75"
+    },
+    {
+      "path": "Idiophones/Struck Idiophones/Cowbells/Cowbell1_Muted_v2_rr1_Mid.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cafa850c4ad1896542632270955f91102b4a5897",
+      "size": 186792,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/cafa850c4ad1896542632270955f91102b4a5897"
+    },
+    {
+      "path": "Idiophones/Struck Idiophones/Woodblock/wood_click_pp_rr1.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74858894be5bbdd0da1c4a8c46ad234ed8e9b95f",
+      "size": 107200,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/74858894be5bbdd0da1c4a8c46ad234ed8e9b95f"
+    },
+    {
+      "path": "Membranophones/Struck Membranophones/Frame Drum/HDrumL_HitMuted_v2_rr1_Sum.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "401c1638c3e7bf730a275575c64cc1e0658a3e17",
+      "size": 305388,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/401c1638c3e7bf730a275575c64cc1e0658a3e17"
+    },
+    {
+      "path": "Membranophones/Struck Membranophones/Frame Drum/HDrumL_Hand_rr1_Sum.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74752d50a1f86b25cc9a7f5c06c7d2420b27cfe7",
+      "size": 205484,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/74752d50a1f86b25cc9a7f5c06c7d2420b27cfe7"
+    },
+    {
+      "path": "Idiophones/Struck Idiophones/Shaker, Small/Mid_ShakerLowFaster_Down_rr1.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a36588b7cd3ae89c74c0fde1a3f875b04c8e2b5",
+      "size": 29920,
+      "url": "https://api.github.com/repos/sgossner/VCSL/git/blobs/8a36588b7cd3ae89c74c0fde1a3f875b04c8e2b5"
+    }
+  ]
+}

@@ -1,19 +1,34 @@
 {
-  "version": 1,
-  "date": "2026-09-30",
-  "status": "Preparation only. No licensed source files supplied; no cues mastered, verified, or integrated.",
+  "version": 2,
+  "date": "2026-10-01",
+  "status": "Free CC0 source material downloaded; six auditions awaiting listening review. Complete bank and runtime integration pending.",
   "recommendedSourcePacks": [
     {
-      "name": "Epic Stock Media — Board Game Sound Effects Kit",
-      "role": "tactile card/wood contacts",
-      "url": "https://epicstockmedia.com/product/board-game-sound-effects-kit-for-tabletop-card-and-dice-games/",
-      "license": "https://epicstockmedia.com/licensing-agreement/"
+      "name": "Kenney — Casino Audio",
+      "role": "card and tactile contacts",
+      "url": "https://kenney.nl/assets/casino-audio",
+      "license": "CC0 1.0",
+      "licenseEvidence": "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+      "price": 0
     },
     {
-      "name": "Image Sounds — Nylon Guitar: Latin & Spanish Styles",
-      "role": "nylon guitar source material for composed music and motif",
-      "url": "https://www.imagesounds.com/produkt/nylon-guitar-latin-spanish-styles",
-      "license": "https://www.imagesounds.com/license-terms"
+      "name": "FreePats — Spanish Classical Guitar",
+      "role": "recorded nylon guitar for original D-minor score",
+      "url": "https://freepats.zenvoid.org/Guitar/acoustic-guitar.html",
+      "license": "CC0 1.0",
+      "licenseEvidence": "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+      "price": 0
+    },
+    {
+      "name": "Versilian — VCSL + VSCO 2 CE",
+      "role": "recorded bell, woodblock, frame drum, shaker and soft low brass",
+      "url": "https://versilian-studios.com/vsco-community/",
+      "license": "CC0 1.0",
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "price": 0
     }
   ],
   "identity": {
@@ -63,7 +78,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One soft wood-and-bone fingertip contact, precise, tactile, almost no resonant pitch. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.07 s. Post-production target sample peak−18 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_close",
@@ -79,7 +94,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. A slightly lower, softer version of the same fingertip contact. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.08 s. Post-production target sample peak−20 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_bet_up",
@@ -95,7 +110,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Dry ascending tiny brass pin tick; no monetary celebration. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.08 s. Post-production target sample peak−19 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_bet_down",
@@ -111,7 +126,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Dry descending tiny brass pin tick. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.08 s. Post-production target sample peak−19 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_toggle",
@@ -127,7 +142,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Very small bone latch click; two matched pitch variants, trim separately. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.06 s. Post-production target sample peak−20 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_auto_on",
@@ -143,7 +158,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Two tactile latch clicks and a short nylon A harmonic. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.14 s. Post-production target sample peak−18 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "ui_auto_off",
@@ -159,7 +174,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One damped latch release; no victory tone. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.1 s. Post-production target sample peak−19 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "spin_press",
@@ -173,9 +188,18 @@
       "loop": false,
       "target": "sample peak−16 dBFS",
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. A distinct tight paper grip and low wood contact; recognizable even before reel travel. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.1 s. Post-production target sample peak−16 dBFS; do not assume the generator meters it.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/Audio/card-shove-1.ogg",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/wood_click_pp_rr1.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/spin_press.wav"
     },
     {
       "id": "reel_start",
@@ -191,7 +215,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Short accelerating dry card shuffle, low soft drum body, no synthetic whoosh. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.22 s. Post-production target sample peak−13 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "reel_loop",
@@ -207,7 +231,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Continuous finely textured rolling cardstock and cloth; even cadence, no sharp clicks, no melody. Deliver isolated 1.2-second seamless loop; constant level and exact wrap, no intro or outro. Final edited runtime length 1.2 s. Post-production target −27 LUFS-I; TP≤−6 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "reel_stop_0",
@@ -221,9 +245,19 @@
       "loop": false,
       "target": "sample peak−12 dBFS; all five within 1 dB perceived level",
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped D3 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/Audio/card-place-2.ogg",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/wood_click_pp_rr1.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/reel_stop_0.wav"
     },
     {
       "id": "reel_stop_1",
@@ -239,7 +273,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped A3 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "reel_stop_2",
@@ -255,7 +289,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped C4 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "reel_stop_3",
@@ -271,7 +305,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped D4 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "reel_stop_4",
@@ -287,7 +321,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One crisp cardstock contact on wood, tiny damped A4 brass overtone; same body and volume as other four stops. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.13 s. Post-production target sample peak−12 dBFS; all five within 1 dB perceived level; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "joker_land",
@@ -303,7 +337,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Single heavy paper/bone contact with a dark D2 nylon harmonic and a very short muted bell. Body 150 ms, restrained 220 ms tail. Deliver isolated 0.55-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.55 s. Post-production target −20 LUFS-I; TP≤−6 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "tease_loop",
@@ -319,7 +353,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Even restrained rubbed-bone tremolo over D/A, subtle muted low brass tension. No success cadence; constant loop volume. Deliver isolated 1.2-second seamless loop; constant level and exact wrap, no intro or outro. Final edited runtime length 1.2 s. Post-production target −25 LUFS-I; TP≤−8 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "tease_hit",
@@ -335,7 +369,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Decisive D-A-C-D brass/nylon fragment and bone strike; resolved warm anticipation, not full bonus fanfare. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.4 s. Post-production target −19 LUFS-I; TP≤−5 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "tease_miss",
@@ -351,7 +385,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Quiet falling paper brush, stop tension immediately; no positive interval or sad comic horn. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.18 s. Post-production target sample peak−19 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "loss_close",
@@ -367,7 +401,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Almost inaudible paper settle, dry and neutral; provide optional cue which may be omitted. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.09 s. Post-production target sample peak−24 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "win_small",
@@ -383,7 +417,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One plucked nylon D4 harmonic with quiet gold pin tick; modest resolved reward. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.35 s. Post-production target sample peak−12 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "win_normal",
@@ -397,9 +431,22 @@
       "loop": false,
       "target": "−20 LUFS-I; TP≤−5 dBTP",
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Compact D-A-C-D motif on muted nylon and damped bell; tiny brushed drum contact, no flourish. Deliver isolated 0.65-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.65 s. Post-production target −20 LUFS-I; TP≤−5 dBTP; do not assume the generator meters it.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/HDrumL_Hand_rr1_Sum.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/win_normal.wav"
     },
     {
       "id": "win_medium",
@@ -415,7 +462,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Same D-A-C-D motif with a warm muted brass body and two dry frame taps; heavier, not a different genre. Deliver isolated 0.9-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.9 s. Post-production target −18 LUFS-I; TP≤−4 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "hand_focus",
@@ -431,7 +478,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Tiny dry foil scrape and nylon pin; supportive detail, no second victory chord. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.12 s. Post-production target sample peak−20 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "count_tick",
@@ -447,7 +494,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Three separately isolated soft tiny bone/bead contacts pitched D5,A5,C6; clean no reverb; each event is discrete and quiet. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.06 s. Post-production target sample peak−23 dBFS per tick; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "count_lock",
@@ -463,7 +510,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Dry small wooden seal locks with a single warm D4 bell decay; unmistakable closure, separate from UI click. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.2 s. Post-production target sample peak−15 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "tier_transfer",
@@ -479,7 +526,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Paper/foil draw followed by small brass pin; short transition synchronized to next title, no EDM rise. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.18 s. Post-production target sample peak−15 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "big_nice",
@@ -493,9 +540,24 @@
       "loop": false,
       "target": "−18 LUFS-I; TP≤−4 dBTP",
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. D-A-C-D nylon/bell motif, light frame drum and short gold contact; clear attack and clean release. Deliver isolated 1.2-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.2 s. Post-production target −18 LUFS-I; TP≤−4 dBTP; do not assume the generator meters it.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/Trombone_Sustain_D3_v1_1.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/HDrumL_HitMuted_v2_rr1_Sum.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/Cowbell1_Muted_v2_rr1_Mid.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/big_nice.wav"
     },
     {
       "id": "big_super",
@@ -511,7 +573,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Same exact motif and tempo, add muted brass duet and fuller bone strike; increase breadth rather than treble. Deliver isolated 1.65-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.65 s. Post-production target −17 LUFS-I; TP≤−3 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "big_sensational",
@@ -527,7 +589,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Same motif, fuller low brass, brushed drum double contact and warm ringing bell; dark prestigious weight, no crowd. Deliver isolated 2.1-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 2.1 s. Post-production target −16 LUFS-I; TP≤−2 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "big_max",
@@ -543,7 +605,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Same motif in strong low brass and nylon octave, decisive heavy bone/wood contact, broad warm bell tail; no explosion or theatrical voice. Deliver isolated 2.8-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 2.8 s. Post-production target −15 LUFS-I; TP≤−1.5 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "bonus_trigger",
@@ -557,9 +619,24 @@
       "loop": false,
       "target": "−17 LUFS-I; TP≤−3 dBTP",
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Distinct recognition cadence: three bone contacts then D-A-C-D gold bell phrase and muted brass resolution; leave space for player continuation. Deliver isolated 1.25-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.25 s. Post-production target −17 LUFS-I; TP≤−3 dBTP; do not assume the generator meters it.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/Trombone_Sustain_D2_v1_1.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/HDrumL_HitMuted_v2_rr1_Sum.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/wood_click_pp_rr1.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/bonus_trigger.wav"
     },
     {
       "id": "fs_intro",
@@ -575,7 +652,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Short lighter continuation of trigger motif, nylon D/A and three restrained brass pin locks; invite a new chapter. Deliver isolated 0.85-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.85 s. Post-production target −20 LUFS-I; TP≤−5 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "fs_step",
@@ -591,7 +668,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Soft wooden bead advance, distinct from monetary counter. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.07 s. Post-production target sample peak−22 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "card_mult",
@@ -607,7 +684,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. One small gold-leaf pin, gentle metallic glint without long tail. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.1 s. Post-production target sample peak−20 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "bank_add",
@@ -623,7 +700,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Collected paper thread sweeps into one dry gold seal with a warm A-to-D harmonic; one cue per increment group. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.3 s. Post-production target sample peak−14 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "total_win",
@@ -639,7 +716,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Full warm D-A-C-D resolution using nylon, damped bell and brushed drum; composed final cadence separate from ordinary win and MAX. Deliver isolated 1.6-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 1.6 s. Post-production target −17 LUFS-I; TP≤−3 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "return_base",
@@ -655,7 +732,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Warm paper fold and low D harmonic, quiet reset into the same room; no reward flourish. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.45 s. Post-production target −24 LUFS-I; TP≤−8 dBTP; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "error_funds",
@@ -671,7 +748,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Quiet muted wooden double knock, neutral and informative, no alarm. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.18 s. Post-production target sample peak−19 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "error_session",
@@ -687,7 +764,7 @@
       "brief": "Muerta Poker sonic palette: D minor, 100 BPM, 4/4; dry bone/wood contact, nylon-guitar harmonics, damped brass bell, brushed frame drum and muted low brass. Warm, restrained gothic Día de los Muertos noir. No voices, applause, slot coin rain, EDM risers or horror screams. Clean transient; no loudness swell; use silence around the event. Soft single low brass/wood contact, clearly distinct but not frightening. Deliver isolated 0.5-second one-shot; event begins within 20 ms; tail fully decays before end. Final edited runtime length 0.22 s. Post-production target sample peak−18 dBFS; do not assume the generator meters it.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     },
     {
       "id": "music_base",
@@ -701,9 +778,34 @@
       "loop": true,
       "target": "−24 LUFS-I; TP≤−3 dBTP",
       "brief": "Instrumental score for Muerta Poker: D minor,100 BPM,4/4, exactly 16 bars /38.4 seconds. Nylon guitar sparse D-A-C-D signature, brushed frame drum, dry shakers, occasional damped brass bell, muted low-brass warmth. Gothic Día de los Muertos altar at night, intimate and premium, room for card sounds. No vocals, mariachi parody, EDM, horror drone, casino coins or triumphant continuous melody. Start and end on the same D/A accompaniment and exact downbeat; equal energy across wrap; no intro, ending, fade or silence. Separate melody/percussion/ambient stems if the music tool permits. Deliver source at highest actual quality; edit to exact 38.4 s, seamless loop. Post-master−24 LUFS-I, true peak≤−3 dBTP; verify these outside the generator.",
-      "sourceFiles": [],
-      "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "sourceFiles": [
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A2.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A2.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D2.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D4.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D5.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/E3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/F3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/G3.flac",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/Trombone_Sustain_D2_v1_1.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/HDrumL_HitMuted_v2_rr1_Sum.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/HDrumL_Hand_rr1_Sum.wav",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/Mid_ShakerLowFaster_Down_rr1.wav"
+      ],
+      "licenseEvidence": [
+        "reports/phase2d-free-audio-2026-10-01/sources/kenney/License.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+        "reports/phase2d-free-audio-2026-10-01/sources/vcsl/LICENSE",
+        "reports/phase2d-free-audio-2026-10-01/sources/vsco/LICENSE"
+      ],
+      "status": "CC0 audition edited and metered; listening approval pending; not installed",
+      "audition": "reports/phase2d-free-audio-2026-10-01/auditions/music_base.wav"
     },
     {
       "id": "music_fs",
@@ -719,7 +821,7 @@
       "brief": "Companion instrumental score to Muerta Poker base cue: identical D minor,100 BPM,4/4, same dry room and D-A-C-D motif; exactly 32 bars /76.8 seconds. Stronger brushed frame-drum/shaker syncopation, warmer nylon octave, muted low brass and short gold bell answers. Tension and forward motion without loud constant victory. Preserve signature timbres so base and bonus are one score. No voice, crowds, EDM or stereotyped mariachi. Loop on matching D/A downbeat, same boundary energy, no intro/ending/fade. Separate stems if possible. Deliver highest real source quality; edit exact 76.8 s and verify seamless looping. Post-master−22 LUFS-I, true peak≤−3 dBTP; generator loudness requests require measured correction.",
       "sourceFiles": [],
       "licenseEvidence": null,
-      "status": "awaiting licensed source / edit"
+      "status": "CC0 source palette available; edit pending audition review"
     }
   ]
 }

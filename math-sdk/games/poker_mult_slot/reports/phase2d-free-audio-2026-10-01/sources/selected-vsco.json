@@ -1,0 +1,21 @@
+{
+  "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e",
+  "files": [
+    {
+      "path": "Brass/OldTrombone/Sustain/Trombone_Sustain_D2_v1_1.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c64d01b8010f781a66bb2777e355ab4bb0a304f",
+      "size": 2021762,
+      "url": "https://api.github.com/repos/sgossner/VSCO-2-CE/git/blobs/3c64d01b8010f781a66bb2777e355ab4bb0a304f"
+    },
+    {
+      "path": "Brass/OldTrombone/Sustain/Trombone_Sustain_D3_v1_1.wav",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8d20c3af95a48c48cc9cc7349b394fbb7df2896",
+      "size": 1998296,
+      "url": "https://api.github.com/repos/sgossner/VSCO-2-CE/git/blobs/a8d20c3af95a48c48cc9cc7349b394fbb7df2896"
+    }
+  ]
+}

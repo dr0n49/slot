@@ -1,0 +1,332 @@
+{
+  "status": "six CC0 auditions; listening review pending; no runtime installation",
+  "sourceFiles": {
+    "D2": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D2.flac",
+      "sha256": "5d98684b41724026109468f8b5ab9489f5bfee1311d3db1aae7d18631e0c0e7c"
+    },
+    "D3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D3.flac",
+      "sha256": "c4c08268b1147446afcd7c872355aa71d03822c12fb1b56c7f275617ab2b01a1"
+    },
+    "D4": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D4.flac",
+      "sha256": "1fe411c50d107374e59bc6a89e6513d32f4608783c8be8c36f0b81fdab5dd321"
+    },
+    "D5": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/D5.flac",
+      "sha256": "611132fb0b34979c9681a7a4d826a12f36dd678447e83e5689837e4c2e11221d"
+    },
+    "A2": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A2.flac",
+      "sha256": "692be630714f59824b612502034b53e9c376374386cb255b81a0bd3c4cdcdd92"
+    },
+    "A3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A3.flac",
+      "sha256": "08d2e90e80839bdb77342d7dcc8a73e0ec8849607d1a750ce433f9e7f0789e06"
+    },
+    "A4": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A4.flac",
+      "sha256": "bac918520eb26172cd734e79df9c53fc206e5aab60884583dd7d9ab5b17d16d1"
+    },
+    "C3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C3.flac",
+      "sha256": "eac0fe1fc03225d81f813667babee072662c101800bc5ad7fb12d9ef3324b986"
+    },
+    "C4": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C4.flac",
+      "sha256": "e8fcd63c262ebef3e84d1f24242918cc578f8b0db54049ad109815b01d1226f0"
+    },
+    "C5": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/C5.flac",
+      "sha256": "84b8a00c7caff015d8b7165330f0c868fd73d300adb3199cb15452841d1c5444"
+    },
+    "F3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/F3.flac",
+      "sha256": "ea752040ff5373601d41eaf55127b294b5e9f3524f23ddbbd21f1b5edbd0e5ea"
+    },
+    "F4": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/F4.flac",
+      "sha256": "8d66344aa2f261aec62d984370a39e479f33398be887df30543430fb5812f1e1"
+    },
+    "E3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/E3.flac",
+      "sha256": "f8cc3192a328f10cdb774ff3bf5efb06d1015e64c5ae141c1c31143bb329c915"
+    },
+    "G3": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/G3.flac",
+      "sha256": "d4f3277f48067a3b7e1818b34d08eeec66d727101c744554632397aeb7dd844d"
+    },
+    "A#2": {
+      "path": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/samples/A2.flac",
+      "sha256": "692be630714f59824b612502034b53e9c376374386cb255b81a0bd3c4cdcdd92",
+      "transposeSemitones": 1
+    },
+    "paper": {
+      "path": "sources/kenney/Audio/card-shove-1.ogg",
+      "sha256": "1ea667aa6795d5f14239192116ebcbd8f3f47eb1c7faaf2ec56844b9067b8b06"
+    },
+    "place": {
+      "path": "sources/kenney/Audio/card-place-2.ogg",
+      "sha256": "903d5050718595e87864dd755643b476ab1a5533080dcc2dddc72570d33ba9f8"
+    },
+    "wood": {
+      "path": "sources/vcsl/wood_click_pp_rr1.wav",
+      "sha256": "2c21a5de6f3ddd51ce851325ba6caa4a187422c51299da7b2fdc4f51ae5e9ee1"
+    },
+    "bell": {
+      "path": "sources/vcsl/BellTree_Hit_D5_rr1_Mid.wav",
+      "sha256": "4a60cc9839e7dd63384690a199116014ac25b7a54b5d6533061ac6d24b6991b9"
+    },
+    "metal": {
+      "path": "sources/vcsl/Cowbell1_Muted_v2_rr1_Mid.wav",
+      "sha256": "efc17778d7cd4468f73b16842beef740fd64e046ce4dccf927c7c1fb230e6ef6"
+    },
+    "drum": {
+      "path": "sources/vcsl/HDrumL_HitMuted_v2_rr1_Sum.wav",
+      "sha256": "fb08d2a29537fb6da0852ad8318709b8cbc312633237ca969e6e8f95ab5ca075"
+    },
+    "hand": {
+      "path": "sources/vcsl/HDrumL_Hand_rr1_Sum.wav",
+      "sha256": "b3dc4f4b2a0051d5ede32efe973fce7bb346220b223bd8e8078d61fdae586ab9"
+    },
+    "shaker": {
+      "path": "sources/vcsl/Mid_ShakerLowFaster_Down_rr1.wav",
+      "sha256": "4f8c887b138696c2dc47003d6b35a2be29da33e548afc4e43e07a4a60723ef65"
+    },
+    "brass": {
+      "path": "sources/vsco/Trombone_Sustain_D3_v1_1.wav",
+      "sha256": "c202f365eabefa69e894d2ed8bc24e73678e6a37af8b830c1763c5094a53bade"
+    },
+    "bass": {
+      "path": "sources/vsco/Trombone_Sustain_D2_v1_1.wav",
+      "sha256": "3d0a6b8e729c7efc96d6c106c80f53e5003a7571108c063cc54ded07a1cbd858"
+    }
+  },
+  "cues": [
+    {
+      "id": "spin_press",
+      "file": "auditions/spin_press.wav",
+      "frames": 4800,
+      "expectedFrames": 4800,
+      "channels": 1,
+      "target": "sample peak−16 dBFS",
+      "sourceKeys": [
+        "paper",
+        "wood"
+      ],
+      "gainDb": -5.279703275299875,
+      "samplePeakDbfs": -15.999999046325684,
+      "lufsIntegrated": "-inf",
+      "truePeakDbtp": "-15.98",
+      "loop": false,
+      "seamSampleDelta": null,
+      "sha256": "4a3c122e6742e2b257c8e99ef85a4471cd85f6894a707ba1fcb4f09d73a59658",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "time_base": "1/48000",
+        "duration_ts": 4800,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    },
+    {
+      "id": "reel_stop_0",
+      "file": "auditions/reel_stop_0.wav",
+      "frames": 6240,
+      "expectedFrames": 6240,
+      "channels": 1,
+      "target": "sample peak−12 dBFS; all five within 1 dB perceived level",
+      "sourceKeys": [
+        "bell",
+        "place",
+        "wood"
+      ],
+      "gainDb": -5.713107137448804,
+      "samplePeakDbfs": -11.999995708465576,
+      "lufsIntegrated": "-inf",
+      "truePeakDbtp": "-11.98",
+      "loop": false,
+      "seamSampleDelta": null,
+      "sha256": "fad56a15c650c6bbe1c926c409d96fad87cedf23dd8fbfaca2a714166aceb47c",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "time_base": "1/48000",
+        "duration_ts": 6240,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    },
+    {
+      "id": "win_normal",
+      "file": "auditions/win_normal.wav",
+      "frames": 31200,
+      "expectedFrames": 31200,
+      "channels": 1,
+      "target": "−20 LUFS-I; TP≤−5 dBTP",
+      "sourceKeys": [
+        "A4",
+        "C5",
+        "D4",
+        "D5",
+        "bell",
+        "hand"
+      ],
+      "gainDb": -3.16,
+      "samplePeakDbfs": -9.188398718833923,
+      "lufsIntegrated": "-20.01",
+      "truePeakDbtp": "-9.19",
+      "loop": false,
+      "seamSampleDelta": null,
+      "sha256": "caab3b7957ed619806555481d4e41d58c23831b2722910237fdceb4f567de8fa",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "time_base": "1/48000",
+        "duration_ts": 31200,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    },
+    {
+      "id": "big_nice",
+      "file": "auditions/big_nice.wav",
+      "frames": 57600,
+      "expectedFrames": 57600,
+      "channels": 1,
+      "target": "−18 LUFS-I; TP≤−4 dBTP",
+      "sourceKeys": [
+        "A4",
+        "C5",
+        "D4",
+        "D5",
+        "bell",
+        "brass",
+        "drum",
+        "metal"
+      ],
+      "gainDb": 0.0799999999999983,
+      "samplePeakDbfs": -6.481159925460815,
+      "lufsIntegrated": "-17.98",
+      "truePeakDbtp": "-6.44",
+      "loop": false,
+      "seamSampleDelta": null,
+      "sha256": "2e0217bfd0f2e83d28c51599f7744f0490ef014fbe2a0ecc7b3d1e59ddc5f19c",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "time_base": "1/48000",
+        "duration_ts": 57600,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    },
+    {
+      "id": "bonus_trigger",
+      "file": "auditions/bonus_trigger.wav",
+      "frames": 60000,
+      "expectedFrames": 60000,
+      "channels": 1,
+      "target": "−17 LUFS-I; TP≤−3 dBTP",
+      "sourceKeys": [
+        "A4",
+        "C5",
+        "D4",
+        "D5",
+        "bass",
+        "bell",
+        "drum",
+        "wood"
+      ],
+      "gainDb": 1.7100000000000009,
+      "samplePeakDbfs": -5.272758603096008,
+      "lufsIntegrated": "-17.01",
+      "truePeakDbtp": "-5.21",
+      "loop": false,
+      "seamSampleDelta": null,
+      "sha256": "3b4538cacd51fd37029ac03a96ffacd8589acfdd54a87020d8ac6439e111b5b0",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "time_base": "1/48000",
+        "duration_ts": 60000,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    },
+    {
+      "id": "music_base",
+      "file": "auditions/music_base.wav",
+      "frames": 1843200,
+      "expectedFrames": 1843200,
+      "channels": 2,
+      "target": "−24 LUFS-I; TP≤−3 dBTP",
+      "sourceKeys": [
+        "A#2",
+        "A2",
+        "A3",
+        "A4",
+        "C3",
+        "C5",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "E3",
+        "F3",
+        "G3",
+        "bass",
+        "bell",
+        "drum",
+        "hand",
+        "shaker"
+      ],
+      "gainDb": 6.93,
+      "samplePeakDbfs": -9.66127634048462,
+      "lufsIntegrated": "-24.02",
+      "truePeakDbtp": "-9.66",
+      "loop": true,
+      "seamSampleDelta": 0.0000737905502319336,
+      "sha256": "080f9603baa1929a880a609c3e2fe93d427bcc09af6a96820b0088414d9fb782",
+      "pcmProbe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "time_base": "1/48000",
+        "duration_ts": 1843200,
+        "bits_per_raw_sample": "24"
+      },
+      "masterTargetPassed": true
+    }
+  ],
+  "loopTest": {
+    "seconds": 600,
+    "frames": 28800000,
+    "expectedFrames": 28800000,
+    "wraps": 15,
+    "maxSeamDelta": 0.0000737905502319336,
+    "lufsIntegrated": "-23.98",
+    "truePeakDbtp": "-9.66",
+    "numericalPassed": true,
+    "headphoneAndPhoneListening": "pending user review; no claim of audible acceptance"
+  },
+  "listeningReel": {
+    "file": "auditions/six-sample-reel.mp3",
+    "seconds": 37.8,
+    "offsets": {
+      "spin_press": 0,
+      "reel_stop_0": 1,
+      "win_normal": 2,
+      "big_nice": 3.5,
+      "bonus_trigger": 5.4,
+      "music_base": 7.8
+    }
+  }
+}

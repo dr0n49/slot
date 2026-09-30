@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-01",
+  "commercialUse": true,
+  "attributionRequired": false,
+  "sourceCost": 0,
+  "license": "CC0 1.0 Universal",
+  "uploadsToModels": false,
+  "sources": [
+    {
+      "name": "Kenney Casino Audio 1.1",
+      "author": "Kenney Vleugels",
+      "assetUrl": "https://kenney.nl/assets/casino-audio",
+      "downloadUrl": "https://kenney.nl/media/pages/assets/casino-audio/2472606a04-1721639069/kenney_casino-audio.zip",
+      "archive": "sources/kenney_casino-audio.zip",
+      "licenseFile": "sources/kenney/License.txt",
+      "licenseSha256": "3d9c53acb6e236d760da14030f54bc53e1d8c2599f78470c36b96fddcde09221",
+      "archiveSha256": "f36250766ac5bc378c13708ddf12a23a8e54a3251f8d482c7536e51b5dbafa18"
+    },
+    {
+      "name": "FreePats Spanish Classical Guitar 2019-06-18",
+      "author": "Roberto / FreePats",
+      "assetUrl": "https://freepats.zenvoid.org/Guitar/acoustic-guitar.html",
+      "downloadUrl": "https://freepats.zenvoid.org/Guitar/SpanishClassicalGuitar/SpanishClassicalGuitar-SFZ%2BFLAC-20190618.7z",
+      "archive": "sources/SpanishClassicalGuitar-SFZ-FLAC-20190618.7z",
+      "licenseFile": "sources/SpanishClassicalGuitar-SFZ+FLAC-20190618/cc0.txt",
+      "licenseSha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "archiveSha256": "903916921a21662d2237ade7f0e98e55de93cb7b86da219e4e10f4ad385b8f5e"
+    },
+    {
+      "name": "Versilian Community Sample Library",
+      "author": "Versilian Studios / Sam Gossner and contributors",
+      "assetUrl": "https://github.com/sgossner/VCSL",
+      "commit": "c1ea7bcc3c7309650ab0da9d15c9cd1fbc4a4c7e",
+      "selectedFiles": "sources/selected-vcsl.json",
+      "licenseFile": "sources/vcsl/LICENSE",
+      "licenseSha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "name": "VSCO 2 Community Edition",
+      "author": "Sam Gossner and Simon Dalzell; sample cutting Elan Hickler/Soundemote",
+      "assetUrl": "https://versilian-studios.com/vsco-community/",
+      "repository": "https://github.com/sgossner/VSCO-2-CE",
+      "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e",
+      "selectedFiles": "sources/selected-vsco.json",
+      "licenseFile": "sources/vsco/LICENSE",
+      "licenseSha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673"
+    }
+  ]
+}
