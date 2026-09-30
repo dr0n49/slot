@@ -269,11 +269,14 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
           hotFrames[c].visible=hot.active&&c>hot.column&&motion.reels[c].phase==="travel";
           // Godot's hot-frame opacity breathes 0.7→1→0.7 every 420 ms.
           hotFrames[c].alpha=.85-.15*Math.cos((now-hot.startedAt)*Math.PI*2/420);
+          // Include entry/exit cards: a wrap can move a shaded face out of
+          // the five visible rows. Clear it too before the next wallet wait.
+          for(const node of reels[c].cards){
+            const body=cardBodies.get(node)!,shaded=shade&&!paintedCards.get(node)?.golden;
+            if(!!body.filters!==shaded)body.filters=shaded?shadeFilters:null;
+          }
           for(let row=0;row<5;row++){
             const node=reels[c].cards[row+1],joker=!!paintedCards.get(node)?.golden;
-            const body=cardBodies.get(node)!;
-            const shaded=shade&&!joker;
-            if(!!body.filters!==shaded)body.filters=shaded?shadeFilters:null;
             const [sx,sy]=motion.squash(c,row,now);
             let pulse=1;
             if(shade&&joker&&pulseElapsed>=0){

@@ -1,0 +1,11 @@
+# Pixi anticipation colour parity
+
+The ordinary card faces now use Godot's exact anticipation colour formula: `mix(rgb, dot(rgb, [.299,.587,.114])*.55, .58)`. A shared colour matrix changes RGB only. Joker faces and the separate multiplier plates retain their colour; opacity is unchanged.
+
+The browser lifecycle audit exposed an entry/exit-card defect: a shaded face could wrap out of the visible five rows and miss restoration. The update covers all seven physical cards in each strip. The actual live scene recorded 33 filter assignments and 33 removals. No Joker or multiplier parent was filtered. Six rendered WebGL colour patches match the Godot formula within the two-channel-level tolerance (all measured patches matched rounded expected RGB exactly), with alpha 255 preserved. See `colour-audit.json` and `filter-trace.json`.
+
+Four browser runs use the real engine's seed 86: two Jokers in columns 0 and 2, 0.25× win, no bonus. Desktop 1440×900, portrait 390×844 and turbo each measured about 60 FPS, p95 16.7–16.8 ms. Reduced motion measured 59.1 FPS / p95 16.7 ms and emits no anticipation. One actual settle, five visible collisions, exact 25-card payload and no HUD result before settle were checked in every run. The separate colour audit's travel-to-settle interval measured 60.0 FPS, p95/max 16.8 ms, including the first filter use. These are local desktop Chrome measurements, not real-phone acceptance.
+
+Desktop and portrait GIF/MP4 recordings were regenerated after the entry/exit restoration fix. Their original capture intervals are preserved; video resampling is not an FPS benchmark. `verification.json` contains full traces and `recording-manifest.json` records capture lengths. No browser errors or failed assets were observed. TypeScript, all 39 tests and the production build passed. Pixi's main lazy chunk is 340.52 kB (108.34 kB gzip); the shared app chunk is 635.26 kB (187.73 kB gzip). Existing Vite >500 kB shared-chunk warning remains.
+
+No math, wallet, payload or timing change. React remains the wallet owner and Godot remains the default/fallback. Strict ≤50 ms wallet-wait raster feedback and the remaining FS presentation beats are still open; full renderer parity is not being claimed.

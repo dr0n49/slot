@@ -1,6 +1,6 @@
 # Muerta Poker — checkpoint, 30 September 2026
 
-**Paused at the user's explicit request: “сделай чекпоинт, продолжим как скажу”. Do not resume implementation, generation, purchases or submission until the user says to continue.** No background agents are working; no generation or browser audit is running.
+**Historical pause snapshot:** saved at the user's explicit request: “сделай чекпоинт, продолжим как скажу”. The user subsequently said “продолжай”, authorizing continuation. The sections below preserve the state at the checkpoint; later phase reports record subsequent work.
 
 ## Current checkout
 
@@ -51,4 +51,4 @@ Evidence folders: `reports/phase2c-live-pixi-2026-09-30`, `phase2e-anticipation-
 
 ## Resume hygiene
 
-Read this checkpoint and current files before continuing; inspect git state and preserve unrelated changes. Existing local previews may remain open, but they are not background work. No deployment, submission, purchase, wallet ownership transfer, new deck installation or Godot removal has occurred. Await the user's explicit continuation.
+Read this checkpoint and current files before continuing; inspect git state and preserve unrelated changes. Existing local previews may remain open, but they are not background work. No deployment, submission, purchase, wallet ownership transfer, new deck installation or Godot removal had occurred at this checkpoint. Continuation has since been authorized by the user.
