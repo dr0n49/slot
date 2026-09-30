@@ -1,6 +1,6 @@
 # Muerta Poker — second checkpoint, 30 September 2026, 22:39 CEST
 
-**PAUSED at the user's explicit request: “сделай новий чекпоинт, продолжим как я скажу”. Resume only after the user explicitly says to continue.** The browser audit was interrupted and its partial evidence saved. No browser audit, generation or agent is working. Local preview servers may remain open; they are not background implementation. No active goal or automation exists.
+**Historical pause snapshot:** saved at the user's explicit request: “сделай новий чекпоинт, продолжим как я скажу”. The user subsequently said “продолжай” on 1 October 2026, authorizing continuation. The sections below preserve the stopped state; later phase reports record resumed work. No active goal or automation existed at this checkpoint.
 
 ## Checkout and changes since the first checkpoint
 
