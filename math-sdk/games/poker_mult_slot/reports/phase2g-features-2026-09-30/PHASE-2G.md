@@ -1,0 +1,11 @@
+# Phase 2G — full feature flow evidence
+
+All three buy modes were exercised through the real React controls with a locally mocked 1200 ms RGS response. BONUS (25×) and JOB (35×) complete 10 free spins; Flush (190×) completes 15 including a real engine retrigger. Every painted board equals its engine payload. The feature opens with bank ×3; no paying line crosses a Joker and no Joker carries a multiplier. The final totals equal the locally booked 100/120/500 payouts. Both Ante modes select their unchanged 5×/15× stakes and correct `ante_job`/`ante_flush` wallet mode. Only React sends wallet requests.
+
+The audit exposed a pre-existing cumulative HUD counter defect: each increment animated from zero again. The bonus counter now continues from the number already visible, respects normal/turbo durations and resets only for a new total. Ordinary win counts retain their zero-to-result handoff. All three full features verify monotonic visible totals and zero increases before their actual settled revision.
+
+Thirty real engine base rounds in mobile lite social mode cover all 52 ordinary identities plus the Joker. Autoplay separately completes exactly 10 actual rounds. Stopping during the third round of a subsequent batch lets that accepted round settle and sends no fourth play. Thirteen painted boards and thirteen React plays verify this path.
+
+Full-feature Chrome measurements are 59.6–59.9 FPS / p95 16.7 ms. No console or failed-asset errors. TypeScript, 39 tests and the production build pass. `metrics.json` is the compact result; `verification.json` and each raw feature trace retain evidence. `desktop.mp4` / `portrait.mp4` contain full features; GIFs are explicitly edited previews of the opening/first spins and closing total. These are desktop browser emulation, not real-phone acceptance.
+
+Godot remains the production default and fallback. This is feature-flow evidence, not final renderer parity: the strict 50 ms raster-feedback gate, exact anticipation colour treatment and remaining summary skip/interruption review are still pending. Full new art approval/integration, owned licensed audio sources/full event bank and real-phone play are required before resubmission. No math or wallet code is changed.

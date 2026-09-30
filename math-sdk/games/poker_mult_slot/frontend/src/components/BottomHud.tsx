@@ -31,6 +31,8 @@ export function HudWinFace({
         <CountUpAmount
           value={win.amount}
           format={money}
+          durationMs={countMs}
+          continueFromCurrent
           className="hud-win-amount tabular-nums"
         />
       </div>

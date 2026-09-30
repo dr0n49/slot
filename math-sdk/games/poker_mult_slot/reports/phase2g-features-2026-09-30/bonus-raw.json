@@ -1,0 +1,9675 @@
+{
+  "events": [
+    {
+      "event": "travel_begin",
+      "t": 3577.5
+    },
+    {
+      "event": "target_received",
+      "t": 4823.4000000059605,
+      "rev": 1,
+      "cards": [
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": true
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": true
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0.5,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 2,
+          "hand_index": 2,
+          "win_x": 0.5,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 4826,
+      "rev": 1,
+      "column": 0,
+      "offset": 89.32855653826245
+    },
+    {
+      "event": "landing_collision",
+      "t": 4886,
+      "rev": 1,
+      "column": 0,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 4986.800000011921,
+      "rev": 1,
+      "column": 1,
+      "offset": 100.00855656925684
+    },
+    {
+      "event": "landing_collision",
+      "t": 5051.600000008941,
+      "rev": 1,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 5153,
+      "rev": 1,
+      "column": 2,
+      "offset": 122.90855656925683
+    },
+    {
+      "event": "anticipation",
+      "t": 5153.20000000298,
+      "rev": 1,
+      "active": true,
+      "ms": 1430.699999988079,
+      "column": 2
+    },
+    {
+      "event": "landing_collision",
+      "t": 5219.5,
+      "rev": 1,
+      "column": 2,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 5869.70000000298,
+      "rev": 1,
+      "column": 3,
+      "offset": 198.70923155722724
+    },
+    {
+      "event": "landing_collision",
+      "t": 5919.20000000298,
+      "rev": 1,
+      "column": 3,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 6586.300000011921,
+      "rev": 1,
+      "column": 4,
+      "offset": 198.5902315614892
+    },
+    {
+      "event": "landing_collision",
+      "t": 6652.600000008941,
+      "rev": 1,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "anticipation",
+      "t": 6769.20000000298,
+      "rev": 1,
+      "active": false,
+      "ms": 0,
+      "column": -1
+    },
+    {
+      "event": "landing_settled",
+      "t": 6769.300000011921,
+      "rev": 1,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 10107.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 10108.90000000596,
+      "rev": 2,
+      "cards": [
+        {
+          "rank": "3",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0.9,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 6,
+          "hand_index": 1,
+          "win_x": 0.9,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 10669.5,
+      "rev": 2,
+      "column": 0,
+      "offset": 149.34116767749833
+    },
+    {
+      "event": "landing_collision",
+      "t": 10719.10000000894,
+      "rev": 2,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 10819.40000000596,
+      "rev": 2,
+      "column": 1,
+      "offset": 129.3411676774983
+    },
+    {
+      "event": "landing_collision",
+      "t": 10869.5,
+      "rev": 2,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 10986.5,
+      "rev": 2,
+      "column": 2,
+      "offset": 154.3211676697497
+    },
+    {
+      "event": "landing_collision",
+      "t": 11051.90000000596,
+      "rev": 2,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 11152.90000000596,
+      "rev": 2,
+      "column": 3,
+      "offset": 176.9611676852469
+    },
+    {
+      "event": "landing_collision",
+      "t": 11202.5,
+      "rev": 2,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 11386.5,
+      "rev": 2,
+      "column": 4,
+      "offset": 169.58116765425248
+    },
+    {
+      "event": "landing_collision",
+      "t": 11436.20000000298,
+      "rev": 2,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 11552.70000000298,
+      "rev": 2,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 12504.800000011921
+    },
+    {
+      "event": "target_received",
+      "t": 12505.70000000298,
+      "rev": 3,
+      "cards": [
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 1.81,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 1,
+          "hand_index": 2,
+          "win_x": 1.81,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 13069.90000000596,
+      "rev": 3,
+      "column": 0,
+      "offset": 158.74095586615914
+    },
+    {
+      "event": "landing_collision",
+      "t": 13136.40000000596,
+      "rev": 3,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 13222,
+      "rev": 3,
+      "column": 1,
+      "offset": 138.74095586615914
+    },
+    {
+      "event": "landing_collision",
+      "t": 13286.5,
+      "rev": 3,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 13386.10000000894,
+      "rev": 3,
+      "column": 2,
+      "offset": 161.64095586615912
+    },
+    {
+      "event": "landing_collision",
+      "t": 13435.800000011921,
+      "rev": 3,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 13536.40000000596,
+      "rev": 3,
+      "column": 3,
+      "offset": 142.1609558739077
+    },
+    {
+      "event": "landing_collision",
+      "t": 13602.20000000298,
+      "rev": 3,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 13786.40000000596,
+      "rev": 3,
+      "column": 4,
+      "offset": 176.90095588940488
+    },
+    {
+      "event": "landing_collision",
+      "t": 13835.90000000596,
+      "rev": 3,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 13952.5,
+      "rev": 3,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 15004.300000011921
+    },
+    {
+      "event": "target_received",
+      "t": 15005.800000011921,
+      "rev": 4,
+      "cards": [
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0.9,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 5,
+          "hand_index": 1,
+          "win_x": 0.9,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 15569.70000000298,
+      "rev": 4,
+      "column": 0,
+      "offset": 159.76779402346216
+    },
+    {
+      "event": "landing_collision",
+      "t": 15619.40000000596,
+      "rev": 4,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 15720.20000000298,
+      "rev": 4,
+      "column": 1,
+      "offset": 139.50779400021634
+    },
+    {
+      "event": "landing_collision",
+      "t": 15785.800000011921,
+      "rev": 4,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 15885.800000011921,
+      "rev": 4,
+      "column": 2,
+      "offset": 162.14779401571354
+    },
+    {
+      "event": "landing_collision",
+      "t": 15935.800000011921,
+      "rev": 4,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 16036.300000011921,
+      "rev": 4,
+      "column": 3,
+      "offset": 142.92779400796493
+    },
+    {
+      "event": "landing_collision",
+      "t": 16102.60000000894,
+      "rev": 4,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 16286.300000011921,
+      "rev": 4,
+      "column": 4,
+      "offset": 178.44779401571353
+    },
+    {
+      "event": "landing_collision",
+      "t": 16352.5,
+      "rev": 4,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 16452.60000000894,
+      "rev": 4,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 17403.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 17404.70000000298,
+      "rev": 5,
+      "cards": [
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 27.11,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 3,
+          "hand_index": 1,
+          "win_x": 21.08,
+          "mult_factor": 7
+        },
+        {
+          "id": 6,
+          "hand_index": 2,
+          "win_x": 6.02,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 17969.40000000596,
+      "rev": 5,
+      "column": 0,
+      "offset": 160.9159458376927
+    },
+    {
+      "event": "landing_collision",
+      "t": 18019.10000000894,
+      "rev": 5,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 18119.40000000596,
+      "rev": 5,
+      "column": 1,
+      "offset": 141.1759458221955
+    },
+    {
+      "event": "landing_collision",
+      "t": 18185.90000000596,
+      "rev": 5,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 18285.30000001192,
+      "rev": 5,
+      "column": 2,
+      "offset": 162.51594583769273
+    },
+    {
+      "event": "landing_collision",
+      "t": 18335.70000000298,
+      "rev": 5,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 18436.20000000298,
+      "rev": 5,
+      "column": 3,
+      "offset": 144.85594585318992
+    },
+    {
+      "event": "landing_collision",
+      "t": 18502.40000000596,
+      "rev": 5,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 18686,
+      "rev": 5,
+      "column": 4,
+      "offset": 179.33594584544136
+    },
+    {
+      "event": "landing_collision",
+      "t": 18752.30000001192,
+      "rev": 5,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 18852.30000001192,
+      "rev": 5,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 20486.60000000894
+    },
+    {
+      "event": "target_received",
+      "t": 20487.70000000298,
+      "rev": 6,
+      "cards": [
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 3.01,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 6,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 21052.10000000894,
+      "rev": 6,
+      "column": 0,
+      "offset": 160.34630364537992
+    },
+    {
+      "event": "landing_collision",
+      "t": 21102.30000001192,
+      "rev": 6,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 21202.60000000894,
+      "rev": 6,
+      "column": 1,
+      "offset": 141.90630362988267
+    },
+    {
+      "event": "landing_collision",
+      "t": 21268.90000000596,
+      "rev": 6,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 21368.70000000298,
+      "rev": 6,
+      "column": 2,
+      "offset": 162.9863036221341
+    },
+    {
+      "event": "landing_collision",
+      "t": 21419,
+      "rev": 6,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 21518.60000000894,
+      "rev": 6,
+      "column": 3,
+      "offset": 143.50630362988272
+    },
+    {
+      "event": "landing_collision",
+      "t": 21569,
+      "rev": 6,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 21769.30000001192,
+      "rev": 6,
+      "column": 4,
+      "offset": 180.32630363763133
+    },
+    {
+      "event": "landing_collision",
+      "t": 21836.10000000894,
+      "rev": 6,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 21952.20000000298,
+      "rev": 6,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 23004.10000000894
+    },
+    {
+      "event": "target_received",
+      "t": 23004.90000000596,
+      "rev": 7,
+      "cards": [
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 3.01,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 0,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 23569.20000000298,
+      "rev": 7,
+      "column": 0,
+      "offset": 159.72836646847995
+    },
+    {
+      "event": "landing_collision",
+      "t": 23619,
+      "rev": 7,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 23719.40000000596,
+      "rev": 7,
+      "column": 1,
+      "offset": 139.98836645298272
+    },
+    {
+      "event": "landing_collision",
+      "t": 23785.60000000894,
+      "rev": 7,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 23886.10000000894,
+      "rev": 7,
+      "column": 2,
+      "offset": 163.14836643748552
+    },
+    {
+      "event": "landing_collision",
+      "t": 23952.5,
+      "rev": 7,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 24036,
+      "rev": 7,
+      "column": 3,
+      "offset": 143.40836646073134
+    },
+    {
+      "event": "landing_collision",
+      "t": 24085.60000000894,
+      "rev": 7,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 24285.80000001192,
+      "rev": 7,
+      "column": 4,
+      "offset": 177.62836646847995
+    },
+    {
+      "event": "landing_collision",
+      "t": 24351.40000000596,
+      "rev": 7,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 24452.10000000894,
+      "rev": 7,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 25503.5
+    },
+    {
+      "event": "target_received",
+      "t": 25504.40000000596,
+      "rev": 8,
+      "cards": [
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 33.13,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 1,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        },
+        {
+          "id": 2,
+          "hand_index": 4,
+          "win_x": 12.05,
+          "mult_factor": 1
+        },
+        {
+          "id": 5,
+          "hand_index": 5,
+          "win_x": 18.07,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26069.20000000298,
+      "rev": 8,
+      "column": 0,
+      "offset": 160.41139207672813
+    },
+    {
+      "event": "landing_collision",
+      "t": 26134.60000000894,
+      "rev": 8,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26219.30000001192,
+      "rev": 8,
+      "column": 1,
+      "offset": 140.67139209997393
+    },
+    {
+      "event": "landing_collision",
+      "t": 26268.90000000596,
+      "rev": 8,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26385.80000001192,
+      "rev": 8,
+      "column": 2,
+      "offset": 163.83139208447668
+    },
+    {
+      "event": "landing_collision",
+      "t": 26451.60000000894,
+      "rev": 8,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26536,
+      "rev": 8,
+      "column": 3,
+      "offset": 144.0913920689795
+    },
+    {
+      "event": "landing_collision",
+      "t": 26585.60000000894,
+      "rev": 8,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26785.5,
+      "rev": 8,
+      "column": 4,
+      "offset": 178.05139209222526
+    },
+    {
+      "event": "landing_collision",
+      "t": 26835.5,
+      "rev": 8,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 26935.60000000894,
+      "rev": 8,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 28793.60000000894
+    },
+    {
+      "event": "target_received",
+      "t": 28794.60000000894,
+      "rev": 9,
+      "cards": [
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0,
+      "bet": 1,
+      "lines": []
+    },
+    {
+      "event": "landing_prepare",
+      "t": 29352.30000001192,
+      "rev": 9,
+      "column": 0,
+      "offset": 142.0223331672564
+    },
+    {
+      "event": "landing_collision",
+      "t": 29401.90000000596,
+      "rev": 9,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 29519,
+      "rev": 9,
+      "column": 1,
+      "offset": 165.96233314401059
+    },
+    {
+      "event": "landing_collision",
+      "t": 29585.30000001192,
+      "rev": 9,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 29669,
+      "rev": 9,
+      "column": 2,
+      "offset": 145.44233313626202
+    },
+    {
+      "event": "landing_collision",
+      "t": 29718.60000000894,
+      "rev": 9,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 29835.5,
+      "rev": 9,
+      "column": 3,
+      "offset": 168.60233315950782
+    },
+    {
+      "event": "landing_collision",
+      "t": 29885.20000000298,
+      "rev": 9,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 30069.20000000298,
+      "rev": 9,
+      "column": 4,
+      "offset": 161.48233315175924
+    },
+    {
+      "event": "landing_collision",
+      "t": 30134.90000000596,
+      "rev": 9,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 30235.40000000596,
+      "rev": 9,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 31136.20000000298
+    },
+    {
+      "event": "target_received",
+      "t": 31136.80000001192,
+      "rev": 10,
+      "cards": [
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 18.07,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 2,
+          "hand_index": 2,
+          "win_x": 6.02,
+          "mult_factor": 1
+        },
+        {
+          "id": 3,
+          "hand_index": 2,
+          "win_x": 6.02,
+          "mult_factor": 1
+        },
+        {
+          "id": 5,
+          "hand_index": 2,
+          "win_x": 6.02,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 31702.40000000596,
+      "rev": 10,
+      "column": 0,
+      "offset": 162.19084183749547
+    },
+    {
+      "event": "landing_collision",
+      "t": 31752.10000000894,
+      "rev": 10,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 31852.30000001192,
+      "rev": 10,
+      "column": 1,
+      "offset": 141.67084186848987
+    },
+    {
+      "event": "landing_collision",
+      "t": 31901.90000000596,
+      "rev": 10,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 32018.30000001192,
+      "rev": 10,
+      "column": 2,
+      "offset": 163.5308418529926
+    },
+    {
+      "event": "landing_collision",
+      "t": 32085.20000000298,
+      "rev": 10,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 32168.70000000298,
+      "rev": 10,
+      "column": 3,
+      "offset": 144.83084185299262
+    },
+    {
+      "event": "landing_collision",
+      "t": 32235.40000000596,
+      "rev": 10,
+      "column": 3,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 32418.20000000298,
+      "rev": 10,
+      "column": 4,
+      "offset": 178.01084184524404
+    },
+    {
+      "event": "landing_collision",
+      "t": 32468.5,
+      "rev": 10,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 32568.70000000298,
+      "rev": 10,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 34061.5
+    },
+    {
+      "event": "target_received",
+      "t": 34062.70000000298,
+      "rev": 11,
+      "cards": [
+        {
+          "rank": "J",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 12.06,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 0,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        },
+        {
+          "id": 1,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        },
+        {
+          "id": 5,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        },
+        {
+          "id": 6,
+          "hand_index": 1,
+          "win_x": 3.01,
+          "mult_factor": 1
+        }
+      ]
+    },
+    {
+      "event": "landing_prepare",
+      "t": 34619,
+      "rev": 11,
+      "column": 0,
+      "offset": 138.31982274677253
+    },
+    {
+      "event": "landing_collision",
+      "t": 34668.70000000298,
+      "rev": 11,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 34785.40000000596,
+      "rev": 11,
+      "column": 1,
+      "offset": 161.47982273127533
+    },
+    {
+      "event": "landing_collision",
+      "t": 34835.20000000298,
+      "rev": 11,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 34934.90000000596,
+      "rev": 11,
+      "column": 2,
+      "offset": 140.17982273127535
+    },
+    {
+      "event": "landing_collision",
+      "t": 34985.20000000298,
+      "rev": 11,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 35102.20000000298,
+      "rev": 11,
+      "column": 3,
+      "offset": 165.15982272352676
+    },
+    {
+      "event": "landing_collision",
+      "t": 35151.80000001192,
+      "rev": 11,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 35335.40000000596,
+      "rev": 11,
+      "column": 4,
+      "offset": 156.73982271577813
+    },
+    {
+      "event": "landing_collision",
+      "t": 35401.90000000596,
+      "rev": 11,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 35501.90000000596,
+      "rev": 11,
+      "snap": false
+    }
+  ],
+  "painted": [
+    {
+      "t": 6769.4000000059605,
+      "rev": 1,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 4823.4000000059605,
+        "rev": 1,
+        "cards": [
+          {
+            "rank": "6",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "D",
+            "golden": true
+          },
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": true
+          },
+          {
+            "rank": "2",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "S",
+            "golden": true
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 0.5,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 2,
+            "hand_index": 2,
+            "win_x": 0.5,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 11552.70000000298,
+      "rev": 2,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 10108.90000000596,
+        "rev": 2,
+        "cards": [
+          {
+            "rank": "3",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "H",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 0.9,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 6,
+            "hand_index": 1,
+            "win_x": 0.9,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 13952.60000000894,
+      "rev": 3,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 12505.70000000298,
+        "rev": 3,
+        "cards": [
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "S",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 1.81,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 1,
+            "hand_index": 2,
+            "win_x": 1.81,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 16452.70000000298,
+      "rev": 4,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 15005.800000011921,
+        "rev": 4,
+        "cards": [
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 0.9,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 5,
+            "hand_index": 1,
+            "win_x": 0.9,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 18852.40000000596,
+      "rev": 5,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 17404.70000000298,
+        "rev": 5,
+        "cards": [
+          {
+            "rank": "4",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "H",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 27.11,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 3,
+            "hand_index": 1,
+            "win_x": 21.08,
+            "mult_factor": 7
+          },
+          {
+            "id": 6,
+            "hand_index": 2,
+            "win_x": 6.02,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 21952.30000001192,
+      "rev": 6,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 20487.70000000298,
+        "rev": 6,
+        "cards": [
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 3.01,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 6,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 24452.20000000298,
+      "rev": 7,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 23004.90000000596,
+        "rev": 7,
+        "cards": [
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "D",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 3.01,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 0,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 26935.60000000894,
+      "rev": 8,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 25504.40000000596,
+        "rev": 8,
+        "cards": [
+          {
+            "rank": "Q",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "C",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 33.13,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 1,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          },
+          {
+            "id": 2,
+            "hand_index": 4,
+            "win_x": 12.05,
+            "mult_factor": 1
+          },
+          {
+            "id": 5,
+            "hand_index": 5,
+            "win_x": 18.07,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 30235.5,
+      "rev": 9,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 28794.60000000894,
+        "rev": 9,
+        "cards": [
+          {
+            "rank": "5",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "3",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 0,
+        "bet": 1,
+        "lines": []
+      }
+    },
+    {
+      "t": 32568.90000000596,
+      "rev": 10,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 31136.80000001192,
+        "rev": 10,
+        "cards": [
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "S",
+            "golden": true
+          },
+          {
+            "rank": "6",
+            "suit": "C",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 18.07,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 2,
+            "hand_index": 2,
+            "win_x": 6.02,
+            "mult_factor": 1
+          },
+          {
+            "id": 3,
+            "hand_index": 2,
+            "win_x": 6.02,
+            "mult_factor": 1
+          },
+          {
+            "id": 5,
+            "hand_index": 2,
+            "win_x": 6.02,
+            "mult_factor": 1
+          }
+        ]
+      }
+    },
+    {
+      "t": 35502,
+      "rev": 11,
+      "equal": true,
+      "jokerMultiplier": false,
+      "jokerLine": false,
+      "target": {
+        "event": "target_received",
+        "t": 34062.70000000298,
+        "rev": 11,
+        "cards": [
+          {
+            "rank": "J",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "2",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "J",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "5",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "7",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "Q",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "T",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "H",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "9",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "A",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "K",
+            "suit": "S",
+            "golden": false
+          },
+          {
+            "rank": "8",
+            "suit": "C",
+            "golden": false
+          },
+          {
+            "rank": "4",
+            "suit": "D",
+            "golden": false
+          },
+          {
+            "rank": "6",
+            "suit": "H",
+            "golden": false
+          }
+        ],
+        "multipliers": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "shownX": 12.06,
+        "bet": 1,
+        "lines": [
+          {
+            "id": 0,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          },
+          {
+            "id": 1,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          },
+          {
+            "id": 5,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          },
+          {
+            "id": 6,
+            "hand_index": 1,
+            "win_x": 3.01,
+            "mult_factor": 1
+          }
+        ]
+      }
+    }
+  ],
+  "bonus": [
+    {
+      "t": 2985.6000000089407
+    },
+    {
+      "t": 8767.20000000298,
+      "bank": "×3",
+      "total": "0.00",
+      "spins": "10"
+    },
+    {
+      "t": 10121.60000000894,
+      "bank": "×3",
+      "total": "0.00",
+      "spins": "9"
+    },
+    {
+      "t": 11585.20000000298,
+      "bank": "×3",
+      "total": "0.04",
+      "spins": "9"
+    },
+    {
+      "t": 11602.5,
+      "bank": "×3",
+      "total": "0.11",
+      "spins": "9"
+    },
+    {
+      "t": 11619.10000000894,
+      "bank": "×3",
+      "total": "0.18",
+      "spins": "9"
+    },
+    {
+      "t": 11635.800000011921,
+      "bank": "×3",
+      "total": "0.24",
+      "spins": "9"
+    },
+    {
+      "t": 11652.5,
+      "bank": "×3",
+      "total": "0.30",
+      "spins": "9"
+    },
+    {
+      "t": 11668.300000011921,
+      "bank": "×3",
+      "total": "0.36",
+      "spins": "9"
+    },
+    {
+      "t": 11685.70000000298,
+      "bank": "×3",
+      "total": "0.41",
+      "spins": "9"
+    },
+    {
+      "t": 11702.60000000894,
+      "bank": "×3",
+      "total": "0.46",
+      "spins": "9"
+    },
+    {
+      "t": 11719.40000000596,
+      "bank": "×3",
+      "total": "0.50",
+      "spins": "9"
+    },
+    {
+      "t": 11736,
+      "bank": "×3",
+      "total": "0.54",
+      "spins": "9"
+    },
+    {
+      "t": 11752.300000011921,
+      "bank": "×3",
+      "total": "0.58",
+      "spins": "9"
+    },
+    {
+      "t": 11769.20000000298,
+      "bank": "×3",
+      "total": "0.62",
+      "spins": "9"
+    },
+    {
+      "t": 11785.90000000596,
+      "bank": "×3",
+      "total": "0.65",
+      "spins": "9"
+    },
+    {
+      "t": 11802.5,
+      "bank": "×3",
+      "total": "0.68",
+      "spins": "9"
+    },
+    {
+      "t": 11819.20000000298,
+      "bank": "×3",
+      "total": "0.71",
+      "spins": "9"
+    },
+    {
+      "t": 11835.5,
+      "bank": "×3",
+      "total": "0.74",
+      "spins": "9"
+    },
+    {
+      "t": 11852.60000000894,
+      "bank": "×3",
+      "total": "0.76",
+      "spins": "9"
+    },
+    {
+      "t": 11869.10000000894,
+      "bank": "×3",
+      "total": "0.78",
+      "spins": "9"
+    },
+    {
+      "t": 11885.800000011921,
+      "bank": "×3",
+      "total": "0.80",
+      "spins": "9"
+    },
+    {
+      "t": 11902.40000000596,
+      "bank": "×3",
+      "total": "0.81",
+      "spins": "9"
+    },
+    {
+      "t": 11918.60000000894,
+      "bank": "×3",
+      "total": "0.83",
+      "spins": "9"
+    },
+    {
+      "t": 11936,
+      "bank": "×3",
+      "total": "0.84",
+      "spins": "9"
+    },
+    {
+      "t": 11952.300000011921,
+      "bank": "×3",
+      "total": "0.85",
+      "spins": "9"
+    },
+    {
+      "t": 11969,
+      "bank": "×3",
+      "total": "0.86",
+      "spins": "9"
+    },
+    {
+      "t": 11985.60000000894,
+      "bank": "×3",
+      "total": "0.87",
+      "spins": "9"
+    },
+    {
+      "t": 12002.5,
+      "bank": "×3",
+      "total": "0.88",
+      "spins": "9"
+    },
+    {
+      "t": 12035.90000000596,
+      "bank": "×3",
+      "total": "0.89",
+      "spins": "9"
+    },
+    {
+      "t": 12085.60000000894,
+      "bank": "×3",
+      "total": "0.90",
+      "spins": "9"
+    },
+    {
+      "t": 12522.800000011921,
+      "bank": "×3",
+      "total": "0.90",
+      "spins": "8"
+    },
+    {
+      "t": 13985.5,
+      "bank": "×3",
+      "total": "0.95",
+      "spins": "8"
+    },
+    {
+      "t": 14002.90000000596,
+      "bank": "×3",
+      "total": "1.10",
+      "spins": "8"
+    },
+    {
+      "t": 14018.20000000298,
+      "bank": "×3",
+      "total": "1.23",
+      "spins": "8"
+    },
+    {
+      "t": 14035.90000000596,
+      "bank": "×3",
+      "total": "1.36",
+      "spins": "8"
+    },
+    {
+      "t": 14052.300000011921,
+      "bank": "×3",
+      "total": "1.48",
+      "spins": "8"
+    },
+    {
+      "t": 14069.20000000298,
+      "bank": "×3",
+      "total": "1.59",
+      "spins": "8"
+    },
+    {
+      "t": 14085.90000000596,
+      "bank": "×3",
+      "total": "1.70",
+      "spins": "8"
+    },
+    {
+      "t": 14102.90000000596,
+      "bank": "×3",
+      "total": "1.80",
+      "spins": "8"
+    },
+    {
+      "t": 14120.300000011921,
+      "bank": "×3",
+      "total": "1.89",
+      "spins": "8"
+    },
+    {
+      "t": 14137.10000000894,
+      "bank": "×3",
+      "total": "1.98",
+      "spins": "8"
+    },
+    {
+      "t": 14152.300000011921,
+      "bank": "×3",
+      "total": "2.06",
+      "spins": "8"
+    },
+    {
+      "t": 14169.5,
+      "bank": "×3",
+      "total": "2.13",
+      "spins": "8"
+    },
+    {
+      "t": 14186.40000000596,
+      "bank": "×3",
+      "total": "2.20",
+      "spins": "8"
+    },
+    {
+      "t": 14203,
+      "bank": "×3",
+      "total": "2.26",
+      "spins": "8"
+    },
+    {
+      "t": 14220,
+      "bank": "×3",
+      "total": "2.32",
+      "spins": "8"
+    },
+    {
+      "t": 14236.5,
+      "bank": "×3",
+      "total": "2.37",
+      "spins": "8"
+    },
+    {
+      "t": 14252.40000000596,
+      "bank": "×3",
+      "total": "2.42",
+      "spins": "8"
+    },
+    {
+      "t": 14269.70000000298,
+      "bank": "×3",
+      "total": "2.46",
+      "spins": "8"
+    },
+    {
+      "t": 14285.800000011921,
+      "bank": "×3",
+      "total": "2.50",
+      "spins": "8"
+    },
+    {
+      "t": 14302.20000000298,
+      "bank": "×3",
+      "total": "2.53",
+      "spins": "8"
+    },
+    {
+      "t": 14319.60000000894,
+      "bank": "×3",
+      "total": "2.56",
+      "spins": "8"
+    },
+    {
+      "t": 14335.5,
+      "bank": "×3",
+      "total": "2.59",
+      "spins": "8"
+    },
+    {
+      "t": 14353,
+      "bank": "×3",
+      "total": "2.61",
+      "spins": "8"
+    },
+    {
+      "t": 14369.800000011921,
+      "bank": "×3",
+      "total": "2.63",
+      "spins": "8"
+    },
+    {
+      "t": 14386.5,
+      "bank": "×3",
+      "total": "2.65",
+      "spins": "8"
+    },
+    {
+      "t": 14402.90000000596,
+      "bank": "×3",
+      "total": "2.66",
+      "spins": "8"
+    },
+    {
+      "t": 14419.40000000596,
+      "bank": "×3",
+      "total": "2.68",
+      "spins": "8"
+    },
+    {
+      "t": 14454.5,
+      "bank": "×3",
+      "total": "2.69",
+      "spins": "8"
+    },
+    {
+      "t": 14469.20000000298,
+      "bank": "×3",
+      "total": "2.70",
+      "spins": "8"
+    },
+    {
+      "t": 14502.90000000596,
+      "bank": "×3",
+      "total": "2.71",
+      "spins": "8"
+    },
+    {
+      "t": 15024.5,
+      "bank": "×3",
+      "total": "2.71",
+      "spins": "7"
+    },
+    {
+      "t": 16485.20000000298,
+      "bank": "×3",
+      "total": "2.75",
+      "spins": "7"
+    },
+    {
+      "t": 16502.70000000298,
+      "bank": "×3",
+      "total": "2.82",
+      "spins": "7"
+    },
+    {
+      "t": 16518.90000000596,
+      "bank": "×3",
+      "total": "2.89",
+      "spins": "7"
+    },
+    {
+      "t": 16535.60000000894,
+      "bank": "×3",
+      "total": "2.95",
+      "spins": "7"
+    },
+    {
+      "t": 16551.80000001192,
+      "bank": "×3",
+      "total": "3.01",
+      "spins": "7"
+    },
+    {
+      "t": 16568.90000000596,
+      "bank": "×3",
+      "total": "3.07",
+      "spins": "7"
+    },
+    {
+      "t": 16586.30000001192,
+      "bank": "×3",
+      "total": "3.12",
+      "spins": "7"
+    },
+    {
+      "t": 16602.60000000894,
+      "bank": "×3",
+      "total": "3.17",
+      "spins": "7"
+    },
+    {
+      "t": 16618.20000000298,
+      "bank": "×3",
+      "total": "3.21",
+      "spins": "7"
+    },
+    {
+      "t": 16635.90000000596,
+      "bank": "×3",
+      "total": "3.25",
+      "spins": "7"
+    },
+    {
+      "t": 16651.90000000596,
+      "bank": "×3",
+      "total": "3.29",
+      "spins": "7"
+    },
+    {
+      "t": 16668.90000000596,
+      "bank": "×3",
+      "total": "3.33",
+      "spins": "7"
+    },
+    {
+      "t": 16684.60000000894,
+      "bank": "×3",
+      "total": "3.36",
+      "spins": "7"
+    },
+    {
+      "t": 16702.30000001192,
+      "bank": "×3",
+      "total": "3.39",
+      "spins": "7"
+    },
+    {
+      "t": 16719,
+      "bank": "×3",
+      "total": "3.42",
+      "spins": "7"
+    },
+    {
+      "t": 16735.80000001192,
+      "bank": "×3",
+      "total": "3.45",
+      "spins": "7"
+    },
+    {
+      "t": 16752.30000001192,
+      "bank": "×3",
+      "total": "3.47",
+      "spins": "7"
+    },
+    {
+      "t": 16769.10000000894,
+      "bank": "×3",
+      "total": "3.49",
+      "spins": "7"
+    },
+    {
+      "t": 16785.60000000894,
+      "bank": "×3",
+      "total": "3.51",
+      "spins": "7"
+    },
+    {
+      "t": 16802.20000000298,
+      "bank": "×3",
+      "total": "3.52",
+      "spins": "7"
+    },
+    {
+      "t": 16819,
+      "bank": "×3",
+      "total": "3.54",
+      "spins": "7"
+    },
+    {
+      "t": 16835.60000000894,
+      "bank": "×3",
+      "total": "3.55",
+      "spins": "7"
+    },
+    {
+      "t": 16852.40000000596,
+      "bank": "×3",
+      "total": "3.56",
+      "spins": "7"
+    },
+    {
+      "t": 16868.70000000298,
+      "bank": "×3",
+      "total": "3.57",
+      "spins": "7"
+    },
+    {
+      "t": 16885.70000000298,
+      "bank": "×3",
+      "total": "3.58",
+      "spins": "7"
+    },
+    {
+      "t": 16902.40000000596,
+      "bank": "×3",
+      "total": "3.59",
+      "spins": "7"
+    },
+    {
+      "t": 16935.60000000894,
+      "bank": "×3",
+      "total": "3.60",
+      "spins": "7"
+    },
+    {
+      "t": 16985.60000000894,
+      "bank": "×3",
+      "total": "3.61",
+      "spins": "7"
+    },
+    {
+      "t": 17423.5,
+      "bank": "×3",
+      "total": "3.61",
+      "spins": "6"
+    },
+    {
+      "t": 18873.40000000596,
+      "bank": "×10",
+      "total": "3.61",
+      "spins": "6"
+    },
+    {
+      "t": 18885.5,
+      "bank": "×10",
+      "total": "4.88",
+      "spins": "6"
+    },
+    {
+      "t": 18902.30000001192,
+      "bank": "×10",
+      "total": "7.01",
+      "spins": "6"
+    },
+    {
+      "t": 18919.10000000894,
+      "bank": "×10",
+      "total": "9.02",
+      "spins": "6"
+    },
+    {
+      "t": 18935.70000000298,
+      "bank": "×10",
+      "total": "10.90",
+      "spins": "6"
+    },
+    {
+      "t": 18951.80000001192,
+      "bank": "×10",
+      "total": "12.68",
+      "spins": "6"
+    },
+    {
+      "t": 18968.60000000894,
+      "bank": "×10",
+      "total": "14.35",
+      "spins": "6"
+    },
+    {
+      "t": 18986.10000000894,
+      "bank": "×10",
+      "total": "15.92",
+      "spins": "6"
+    },
+    {
+      "t": 19002.30000001192,
+      "bank": "×10",
+      "total": "17.37",
+      "spins": "6"
+    },
+    {
+      "t": 19019.20000000298,
+      "bank": "×10",
+      "total": "18.73",
+      "spins": "6"
+    },
+    {
+      "t": 19036.10000000894,
+      "bank": "×10",
+      "total": "19.99",
+      "spins": "6"
+    },
+    {
+      "t": 19052.60000000894,
+      "bank": "×10",
+      "total": "21.17",
+      "spins": "6"
+    },
+    {
+      "t": 19068.90000000596,
+      "bank": "×10",
+      "total": "22.25",
+      "spins": "6"
+    },
+    {
+      "t": 19086.20000000298,
+      "bank": "×10",
+      "total": "23.25",
+      "spins": "6"
+    },
+    {
+      "t": 19101.90000000596,
+      "bank": "×10",
+      "total": "24.16",
+      "spins": "6"
+    },
+    {
+      "t": 19119.5,
+      "bank": "×10",
+      "total": "25.00",
+      "spins": "6"
+    },
+    {
+      "t": 19135.20000000298,
+      "bank": "×10",
+      "total": "25.77",
+      "spins": "6"
+    },
+    {
+      "t": 19152.40000000596,
+      "bank": "×10",
+      "total": "26.46",
+      "spins": "6"
+    },
+    {
+      "t": 19169.70000000298,
+      "bank": "×10",
+      "total": "27.08",
+      "spins": "6"
+    },
+    {
+      "t": 19185.10000000894,
+      "bank": "×10",
+      "total": "27.64",
+      "spins": "6"
+    },
+    {
+      "t": 19202.5,
+      "bank": "×10",
+      "total": "28.14",
+      "spins": "6"
+    },
+    {
+      "t": 19219.5,
+      "bank": "×10",
+      "total": "28.58",
+      "spins": "6"
+    },
+    {
+      "t": 19236.10000000894,
+      "bank": "×10",
+      "total": "28.97",
+      "spins": "6"
+    },
+    {
+      "t": 19252.80000001192,
+      "bank": "×10",
+      "total": "29.31",
+      "spins": "6"
+    },
+    {
+      "t": 19269.40000000596,
+      "bank": "×10",
+      "total": "29.61",
+      "spins": "6"
+    },
+    {
+      "t": 19285.70000000298,
+      "bank": "×10",
+      "total": "29.85",
+      "spins": "6"
+    },
+    {
+      "t": 19303.20000000298,
+      "bank": "×10",
+      "total": "30.06",
+      "spins": "6"
+    },
+    {
+      "t": 19320.10000000894,
+      "bank": "×10",
+      "total": "30.23",
+      "spins": "6"
+    },
+    {
+      "t": 19336.5,
+      "bank": "×10",
+      "total": "30.37",
+      "spins": "6"
+    },
+    {
+      "t": 19352.90000000596,
+      "bank": "×10",
+      "total": "30.48",
+      "spins": "6"
+    },
+    {
+      "t": 19370.30000001192,
+      "bank": "×10",
+      "total": "30.57",
+      "spins": "6"
+    },
+    {
+      "t": 19386.10000000894,
+      "bank": "×10",
+      "total": "30.63",
+      "spins": "6"
+    },
+    {
+      "t": 19402.80000001192,
+      "bank": "×10",
+      "total": "30.67",
+      "spins": "6"
+    },
+    {
+      "t": 19418.90000000596,
+      "bank": "×10",
+      "total": "30.70",
+      "spins": "6"
+    },
+    {
+      "t": 19436.20000000298,
+      "bank": "×10",
+      "total": "30.71",
+      "spins": "6"
+    },
+    {
+      "t": 19452.40000000596,
+      "bank": "×10",
+      "total": "30.72",
+      "spins": "6"
+    },
+    {
+      "t": 20503.20000000298,
+      "bank": "×10",
+      "total": "30.72",
+      "spins": "5"
+    },
+    {
+      "t": 21985.30000001192,
+      "bank": "×10",
+      "total": "30.86",
+      "spins": "5"
+    },
+    {
+      "t": 22002.10000000894,
+      "bank": "×10",
+      "total": "31.10",
+      "spins": "5"
+    },
+    {
+      "t": 22018.90000000596,
+      "bank": "×10",
+      "total": "31.32",
+      "spins": "5"
+    },
+    {
+      "t": 22034.90000000596,
+      "bank": "×10",
+      "total": "31.53",
+      "spins": "5"
+    },
+    {
+      "t": 22051.90000000596,
+      "bank": "×10",
+      "total": "31.73",
+      "spins": "5"
+    },
+    {
+      "t": 22068.90000000596,
+      "bank": "×10",
+      "total": "31.91",
+      "spins": "5"
+    },
+    {
+      "t": 22085.70000000298,
+      "bank": "×10",
+      "total": "32.08",
+      "spins": "5"
+    },
+    {
+      "t": 22102,
+      "bank": "×10",
+      "total": "32.25",
+      "spins": "5"
+    },
+    {
+      "t": 22119.60000000894,
+      "bank": "×10",
+      "total": "32.40",
+      "spins": "5"
+    },
+    {
+      "t": 22135.5,
+      "bank": "×10",
+      "total": "32.54",
+      "spins": "5"
+    },
+    {
+      "t": 22152.5,
+      "bank": "×10",
+      "total": "32.67",
+      "spins": "5"
+    },
+    {
+      "t": 22169.60000000894,
+      "bank": "×10",
+      "total": "32.79",
+      "spins": "5"
+    },
+    {
+      "t": 22186,
+      "bank": "×10",
+      "total": "32.90",
+      "spins": "5"
+    },
+    {
+      "t": 22202.70000000298,
+      "bank": "×10",
+      "total": "33.00",
+      "spins": "5"
+    },
+    {
+      "t": 22219.30000001192,
+      "bank": "×10",
+      "total": "33.09",
+      "spins": "5"
+    },
+    {
+      "t": 22236.10000000894,
+      "bank": "×10",
+      "total": "33.18",
+      "spins": "5"
+    },
+    {
+      "t": 22252.60000000894,
+      "bank": "×10",
+      "total": "33.26",
+      "spins": "5"
+    },
+    {
+      "t": 22269.40000000596,
+      "bank": "×10",
+      "total": "33.33",
+      "spins": "5"
+    },
+    {
+      "t": 22286.10000000894,
+      "bank": "×10",
+      "total": "33.39",
+      "spins": "5"
+    },
+    {
+      "t": 22302.40000000596,
+      "bank": "×10",
+      "total": "33.44",
+      "spins": "5"
+    },
+    {
+      "t": 22319.30000001192,
+      "bank": "×10",
+      "total": "33.49",
+      "spins": "5"
+    },
+    {
+      "t": 22336.10000000894,
+      "bank": "×10",
+      "total": "33.54",
+      "spins": "5"
+    },
+    {
+      "t": 22352.70000000298,
+      "bank": "×10",
+      "total": "33.57",
+      "spins": "5"
+    },
+    {
+      "t": 22369.5,
+      "bank": "×10",
+      "total": "33.61",
+      "spins": "5"
+    },
+    {
+      "t": 22385.80000001192,
+      "bank": "×10",
+      "total": "33.63",
+      "spins": "5"
+    },
+    {
+      "t": 22402.40000000596,
+      "bank": "×10",
+      "total": "33.66",
+      "spins": "5"
+    },
+    {
+      "t": 22419.40000000596,
+      "bank": "×10",
+      "total": "33.68",
+      "spins": "5"
+    },
+    {
+      "t": 22436,
+      "bank": "×10",
+      "total": "33.69",
+      "spins": "5"
+    },
+    {
+      "t": 22452.90000000596,
+      "bank": "×10",
+      "total": "33.70",
+      "spins": "5"
+    },
+    {
+      "t": 22468.70000000298,
+      "bank": "×10",
+      "total": "33.71",
+      "spins": "5"
+    },
+    {
+      "t": 22486,
+      "bank": "×10",
+      "total": "33.72",
+      "spins": "5"
+    },
+    {
+      "t": 22519.40000000596,
+      "bank": "×10",
+      "total": "33.73",
+      "spins": "5"
+    },
+    {
+      "t": 23023.5,
+      "bank": "×10",
+      "total": "33.73",
+      "spins": "4"
+    },
+    {
+      "t": 24485.40000000596,
+      "bank": "×10",
+      "total": "33.87",
+      "spins": "4"
+    },
+    {
+      "t": 24502.10000000894,
+      "bank": "×10",
+      "total": "34.11",
+      "spins": "4"
+    },
+    {
+      "t": 24518.70000000298,
+      "bank": "×10",
+      "total": "34.33",
+      "spins": "4"
+    },
+    {
+      "t": 24535.30000001192,
+      "bank": "×10",
+      "total": "34.54",
+      "spins": "4"
+    },
+    {
+      "t": 24551.60000000894,
+      "bank": "×10",
+      "total": "34.74",
+      "spins": "4"
+    },
+    {
+      "t": 24568.60000000894,
+      "bank": "×10",
+      "total": "34.92",
+      "spins": "4"
+    },
+    {
+      "t": 24586.60000000894,
+      "bank": "×10",
+      "total": "35.10",
+      "spins": "4"
+    },
+    {
+      "t": 24602.30000001192,
+      "bank": "×10",
+      "total": "35.26",
+      "spins": "4"
+    },
+    {
+      "t": 24619.10000000894,
+      "bank": "×10",
+      "total": "35.41",
+      "spins": "4"
+    },
+    {
+      "t": 24636,
+      "bank": "×10",
+      "total": "35.55",
+      "spins": "4"
+    },
+    {
+      "t": 24652.60000000894,
+      "bank": "×10",
+      "total": "35.68",
+      "spins": "4"
+    },
+    {
+      "t": 24669.20000000298,
+      "bank": "×10",
+      "total": "35.80",
+      "spins": "4"
+    },
+    {
+      "t": 24684.90000000596,
+      "bank": "×10",
+      "total": "35.91",
+      "spins": "4"
+    },
+    {
+      "t": 24702.5,
+      "bank": "×10",
+      "total": "36.01",
+      "spins": "4"
+    },
+    {
+      "t": 24719.20000000298,
+      "bank": "×10",
+      "total": "36.11",
+      "spins": "4"
+    },
+    {
+      "t": 24735.20000000298,
+      "bank": "×10",
+      "total": "36.19",
+      "spins": "4"
+    },
+    {
+      "t": 24752.30000001192,
+      "bank": "×10",
+      "total": "36.27",
+      "spins": "4"
+    },
+    {
+      "t": 24769.70000000298,
+      "bank": "×10",
+      "total": "36.34",
+      "spins": "4"
+    },
+    {
+      "t": 24786,
+      "bank": "×10",
+      "total": "36.40",
+      "spins": "4"
+    },
+    {
+      "t": 24802.40000000596,
+      "bank": "×10",
+      "total": "36.45",
+      "spins": "4"
+    },
+    {
+      "t": 24819.10000000894,
+      "bank": "×10",
+      "total": "36.50",
+      "spins": "4"
+    },
+    {
+      "t": 24835.90000000596,
+      "bank": "×10",
+      "total": "36.55",
+      "spins": "4"
+    },
+    {
+      "t": 24852.70000000298,
+      "bank": "×10",
+      "total": "36.58",
+      "spins": "4"
+    },
+    {
+      "t": 24868.70000000298,
+      "bank": "×10",
+      "total": "36.62",
+      "spins": "4"
+    },
+    {
+      "t": 24885.80000001192,
+      "bank": "×10",
+      "total": "36.64",
+      "spins": "4"
+    },
+    {
+      "t": 24902.60000000894,
+      "bank": "×10",
+      "total": "36.67",
+      "spins": "4"
+    },
+    {
+      "t": 24918.30000001192,
+      "bank": "×10",
+      "total": "36.69",
+      "spins": "4"
+    },
+    {
+      "t": 24936,
+      "bank": "×10",
+      "total": "36.70",
+      "spins": "4"
+    },
+    {
+      "t": 24952.60000000894,
+      "bank": "×10",
+      "total": "36.71",
+      "spins": "4"
+    },
+    {
+      "t": 24968.90000000596,
+      "bank": "×10",
+      "total": "36.72",
+      "spins": "4"
+    },
+    {
+      "t": 24985.80000001192,
+      "bank": "×10",
+      "total": "36.73",
+      "spins": "4"
+    },
+    {
+      "t": 25019.30000001192,
+      "bank": "×10",
+      "total": "36.74",
+      "spins": "4"
+    },
+    {
+      "t": 25523,
+      "bank": "×10",
+      "total": "36.74",
+      "spins": "3"
+    },
+    {
+      "t": 26969,
+      "bank": "×10",
+      "total": "38.26",
+      "spins": "3"
+    },
+    {
+      "t": 26985.40000000596,
+      "bank": "×10",
+      "total": "40.85",
+      "spins": "3"
+    },
+    {
+      "t": 27001.90000000596,
+      "bank": "×10",
+      "total": "43.31",
+      "spins": "3"
+    },
+    {
+      "t": 27018.60000000894,
+      "bank": "×10",
+      "total": "45.61",
+      "spins": "3"
+    },
+    {
+      "t": 27035.10000000894,
+      "bank": "×10",
+      "total": "47.79",
+      "spins": "3"
+    },
+    {
+      "t": 27051.60000000894,
+      "bank": "×10",
+      "total": "49.83",
+      "spins": "3"
+    },
+    {
+      "t": 27069.20000000298,
+      "bank": "×10",
+      "total": "51.75",
+      "spins": "3"
+    },
+    {
+      "t": 27085.30000001192,
+      "bank": "×10",
+      "total": "53.54",
+      "spins": "3"
+    },
+    {
+      "t": 27102,
+      "bank": "×10",
+      "total": "55.19",
+      "spins": "3"
+    },
+    {
+      "t": 27119.40000000596,
+      "bank": "×10",
+      "total": "56.73",
+      "spins": "3"
+    },
+    {
+      "t": 27134.90000000596,
+      "bank": "×10",
+      "total": "58.17",
+      "spins": "3"
+    },
+    {
+      "t": 27152.5,
+      "bank": "×10",
+      "total": "59.50",
+      "spins": "3"
+    },
+    {
+      "t": 27169.20000000298,
+      "bank": "×10",
+      "total": "60.72",
+      "spins": "3"
+    },
+    {
+      "t": 27186.10000000894,
+      "bank": "×10",
+      "total": "61.84",
+      "spins": "3"
+    },
+    {
+      "t": 27202.90000000596,
+      "bank": "×10",
+      "total": "62.87",
+      "spins": "3"
+    },
+    {
+      "t": 27219.30000001192,
+      "bank": "×10",
+      "total": "63.80",
+      "spins": "3"
+    },
+    {
+      "t": 27235.90000000596,
+      "bank": "×10",
+      "total": "64.65",
+      "spins": "3"
+    },
+    {
+      "t": 27252.5,
+      "bank": "×10",
+      "total": "65.41",
+      "spins": "3"
+    },
+    {
+      "t": 27269.20000000298,
+      "bank": "×10",
+      "total": "66.10",
+      "spins": "3"
+    },
+    {
+      "t": 27285.90000000596,
+      "bank": "×10",
+      "total": "66.71",
+      "spins": "3"
+    },
+    {
+      "t": 27302.20000000298,
+      "bank": "×10",
+      "total": "67.25",
+      "spins": "3"
+    },
+    {
+      "t": 27319.20000000298,
+      "bank": "×10",
+      "total": "67.73",
+      "spins": "3"
+    },
+    {
+      "t": 27336.20000000298,
+      "bank": "×10",
+      "total": "68.14",
+      "spins": "3"
+    },
+    {
+      "t": 27352.60000000894,
+      "bank": "×10",
+      "total": "68.50",
+      "spins": "3"
+    },
+    {
+      "t": 27369.30000001192,
+      "bank": "×10",
+      "total": "68.80",
+      "spins": "3"
+    },
+    {
+      "t": 27385.80000001192,
+      "bank": "×10",
+      "total": "69.06",
+      "spins": "3"
+    },
+    {
+      "t": 27402.40000000596,
+      "bank": "×10",
+      "total": "69.27",
+      "spins": "3"
+    },
+    {
+      "t": 27419.60000000894,
+      "bank": "×10",
+      "total": "69.44",
+      "spins": "3"
+    },
+    {
+      "t": 27436.20000000298,
+      "bank": "×10",
+      "total": "69.58",
+      "spins": "3"
+    },
+    {
+      "t": 27452.60000000894,
+      "bank": "×10",
+      "total": "69.68",
+      "spins": "3"
+    },
+    {
+      "t": 27469.40000000596,
+      "bank": "×10",
+      "total": "69.76",
+      "spins": "3"
+    },
+    {
+      "t": 27486,
+      "bank": "×10",
+      "total": "69.81",
+      "spins": "3"
+    },
+    {
+      "t": 27501.90000000596,
+      "bank": "×10",
+      "total": "69.84",
+      "spins": "3"
+    },
+    {
+      "t": 27519.20000000298,
+      "bank": "×10",
+      "total": "69.86",
+      "spins": "3"
+    },
+    {
+      "t": 27535.80000001192,
+      "bank": "×10",
+      "total": "69.87",
+      "spins": "3"
+    },
+    {
+      "t": 28804,
+      "bank": "×10",
+      "total": "69.87",
+      "spins": "2"
+    },
+    {
+      "t": 31154.60000000894,
+      "bank": "×10",
+      "total": "69.87",
+      "spins": "1"
+    },
+    {
+      "t": 32601.70000000298,
+      "bank": "×10",
+      "total": "70.25",
+      "spins": "1"
+    },
+    {
+      "t": 32618.70000000298,
+      "bank": "×10",
+      "total": "71.69",
+      "spins": "1"
+    },
+    {
+      "t": 32634.90000000596,
+      "bank": "×10",
+      "total": "73.06",
+      "spins": "1"
+    },
+    {
+      "t": 32651.80000001192,
+      "bank": "×10",
+      "total": "74.34",
+      "spins": "1"
+    },
+    {
+      "t": 32667.70000000298,
+      "bank": "×10",
+      "total": "75.55",
+      "spins": "1"
+    },
+    {
+      "t": 32684.60000000894,
+      "bank": "×10",
+      "total": "76.69",
+      "spins": "1"
+    },
+    {
+      "t": 32702,
+      "bank": "×10",
+      "total": "77.74",
+      "spins": "1"
+    },
+    {
+      "t": 32717.5,
+      "bank": "×10",
+      "total": "78.74",
+      "spins": "1"
+    },
+    {
+      "t": 32735.30000001192,
+      "bank": "×10",
+      "total": "79.67",
+      "spins": "1"
+    },
+    {
+      "t": 32760.20000000298,
+      "bank": "×10",
+      "total": "80.53",
+      "spins": "1"
+    },
+    {
+      "t": 32768.80000001192,
+      "bank": "×10",
+      "total": "81.33",
+      "spins": "1"
+    },
+    {
+      "t": 32785.60000000894,
+      "bank": "×10",
+      "total": "82.07",
+      "spins": "1"
+    },
+    {
+      "t": 32802.30000001192,
+      "bank": "×10",
+      "total": "82.75",
+      "spins": "1"
+    },
+    {
+      "t": 32818.30000001192,
+      "bank": "×10",
+      "total": "83.38",
+      "spins": "1"
+    },
+    {
+      "t": 32835.5,
+      "bank": "×10",
+      "total": "83.96",
+      "spins": "1"
+    },
+    {
+      "t": 32852,
+      "bank": "×10",
+      "total": "84.48",
+      "spins": "1"
+    },
+    {
+      "t": 32868.10000000894,
+      "bank": "×10",
+      "total": "84.96",
+      "spins": "1"
+    },
+    {
+      "t": 32885.90000000596,
+      "bank": "×10",
+      "total": "85.39",
+      "spins": "1"
+    },
+    {
+      "t": 32902.30000001192,
+      "bank": "×10",
+      "total": "85.78",
+      "spins": "1"
+    },
+    {
+      "t": 32918.70000000298,
+      "bank": "×10",
+      "total": "86.12",
+      "spins": "1"
+    },
+    {
+      "t": 32934.60000000894,
+      "bank": "×10",
+      "total": "86.43",
+      "spins": "1"
+    },
+    {
+      "t": 32952.30000001192,
+      "bank": "×10",
+      "total": "86.70",
+      "spins": "1"
+    },
+    {
+      "t": 32968.10000000894,
+      "bank": "×10",
+      "total": "86.93",
+      "spins": "1"
+    },
+    {
+      "t": 32985.60000000894,
+      "bank": "×10",
+      "total": "87.14",
+      "spins": "1"
+    },
+    {
+      "t": 33001.5,
+      "bank": "×10",
+      "total": "87.31",
+      "spins": "1"
+    },
+    {
+      "t": 33019.10000000894,
+      "bank": "×10",
+      "total": "87.46",
+      "spins": "1"
+    },
+    {
+      "t": 33037,
+      "bank": "×10",
+      "total": "87.58",
+      "spins": "1"
+    },
+    {
+      "t": 33052.70000000298,
+      "bank": "×10",
+      "total": "87.68",
+      "spins": "1"
+    },
+    {
+      "t": 33068.90000000596,
+      "bank": "×10",
+      "total": "87.76",
+      "spins": "1"
+    },
+    {
+      "t": 33085.70000000298,
+      "bank": "×10",
+      "total": "87.82",
+      "spins": "1"
+    },
+    {
+      "t": 33101.60000000894,
+      "bank": "×10",
+      "total": "87.87",
+      "spins": "1"
+    },
+    {
+      "t": 33118.70000000298,
+      "bank": "×10",
+      "total": "87.90",
+      "spins": "1"
+    },
+    {
+      "t": 33135.70000000298,
+      "bank": "×10",
+      "total": "87.92",
+      "spins": "1"
+    },
+    {
+      "t": 33152.20000000298,
+      "bank": "×10",
+      "total": "87.93",
+      "spins": "1"
+    },
+    {
+      "t": 33168.70000000298,
+      "bank": "×10",
+      "total": "87.94",
+      "spins": "1"
+    },
+    {
+      "t": 34073.20000000298,
+      "bank": "×10",
+      "total": "87.94",
+      "spins": "0"
+    },
+    {
+      "t": 35534.90000000596,
+      "bank": "×10",
+      "total": "88.42",
+      "spins": "0"
+    },
+    {
+      "t": 35551.70000000298,
+      "bank": "×10",
+      "total": "89.36",
+      "spins": "0"
+    },
+    {
+      "t": 35568.30000001192,
+      "bank": "×10",
+      "total": "90.26",
+      "spins": "0"
+    },
+    {
+      "t": 35585.10000000894,
+      "bank": "×10",
+      "total": "91.11",
+      "spins": "0"
+    },
+    {
+      "t": 35601.70000000298,
+      "bank": "×10",
+      "total": "91.90",
+      "spins": "0"
+    },
+    {
+      "t": 35618.5,
+      "bank": "×10",
+      "total": "92.65",
+      "spins": "0"
+    },
+    {
+      "t": 35636.5,
+      "bank": "×10",
+      "total": "93.35",
+      "spins": "0"
+    },
+    {
+      "t": 35650.90000000596,
+      "bank": "×10",
+      "total": "94.00",
+      "spins": "0"
+    },
+    {
+      "t": 35669.10000000894,
+      "bank": "×10",
+      "total": "94.61",
+      "spins": "0"
+    },
+    {
+      "t": 35685.40000000596,
+      "bank": "×10",
+      "total": "95.18",
+      "spins": "0"
+    },
+    {
+      "t": 35702.30000001192,
+      "bank": "×10",
+      "total": "95.70",
+      "spins": "0"
+    },
+    {
+      "t": 35718.80000001192,
+      "bank": "×10",
+      "total": "96.19",
+      "spins": "0"
+    },
+    {
+      "t": 35735.70000000298,
+      "bank": "×10",
+      "total": "96.64",
+      "spins": "0"
+    },
+    {
+      "t": 35752.30000001192,
+      "bank": "×10",
+      "total": "97.05",
+      "spins": "0"
+    },
+    {
+      "t": 35769.5,
+      "bank": "×10",
+      "total": "97.42",
+      "spins": "0"
+    },
+    {
+      "t": 35785,
+      "bank": "×10",
+      "total": "97.76",
+      "spins": "0"
+    },
+    {
+      "t": 35802,
+      "bank": "×10",
+      "total": "98.08",
+      "spins": "0"
+    },
+    {
+      "t": 35818.30000001192,
+      "bank": "×10",
+      "total": "98.36",
+      "spins": "0"
+    },
+    {
+      "t": 35835.60000000894,
+      "bank": "×10",
+      "total": "98.61",
+      "spins": "0"
+    },
+    {
+      "t": 35851.40000000596,
+      "bank": "×10",
+      "total": "98.84",
+      "spins": "0"
+    },
+    {
+      "t": 35868.80000001192,
+      "bank": "×10",
+      "total": "99.03",
+      "spins": "0"
+    },
+    {
+      "t": 35885,
+      "bank": "×10",
+      "total": "99.21",
+      "spins": "0"
+    },
+    {
+      "t": 35902,
+      "bank": "×10",
+      "total": "99.36",
+      "spins": "0"
+    },
+    {
+      "t": 35918.30000001192,
+      "bank": "×10",
+      "total": "99.49",
+      "spins": "0"
+    },
+    {
+      "t": 35934.60000000894,
+      "bank": "×10",
+      "total": "99.60",
+      "spins": "0"
+    },
+    {
+      "t": 35951.90000000596,
+      "bank": "×10",
+      "total": "99.70",
+      "spins": "0"
+    },
+    {
+      "t": 35968.90000000596,
+      "bank": "×10",
+      "total": "99.78",
+      "spins": "0"
+    },
+    {
+      "t": 35985.80000001192,
+      "bank": "×10",
+      "total": "99.84",
+      "spins": "0"
+    },
+    {
+      "t": 36001.80000001192,
+      "bank": "×10",
+      "total": "99.89",
+      "spins": "0"
+    },
+    {
+      "t": 36019.10000000894,
+      "bank": "×10",
+      "total": "99.93",
+      "spins": "0"
+    },
+    {
+      "t": 36035.90000000596,
+      "bank": "×10",
+      "total": "99.96",
+      "spins": "0"
+    },
+    {
+      "t": 36052.10000000894,
+      "bank": "×10",
+      "total": "99.98",
+      "spins": "0"
+    },
+    {
+      "t": 36068.20000000298,
+      "bank": "×10",
+      "total": "99.99",
+      "spins": "0"
+    },
+    {
+      "t": 36085,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0"
+    },
+    {
+      "t": 37220.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "0.00"
+    },
+    {
+      "t": 37251.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "1.82"
+    },
+    {
+      "t": 37267.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "4.55"
+    },
+    {
+      "t": 37284.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "7.20"
+    },
+    {
+      "t": 37301.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "9.81"
+    },
+    {
+      "t": 37318,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "12.40"
+    },
+    {
+      "t": 37334.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "14.91"
+    },
+    {
+      "t": 37350.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "17.38"
+    },
+    {
+      "t": 37367.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "19.79"
+    },
+    {
+      "t": 37383.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "22.17"
+    },
+    {
+      "t": 37400.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "24.49"
+    },
+    {
+      "t": 37418.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "26.78"
+    },
+    {
+      "t": 37434.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "29.01"
+    },
+    {
+      "t": 37451.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "31.21"
+    },
+    {
+      "t": 37468.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "33.34"
+    },
+    {
+      "t": 37484.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "35.44"
+    },
+    {
+      "t": 37500.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "37.50"
+    },
+    {
+      "t": 37518.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "39.51"
+    },
+    {
+      "t": 37534.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "41.47"
+    },
+    {
+      "t": 37550.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "43.38"
+    },
+    {
+      "t": 37567.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "45.27"
+    },
+    {
+      "t": 37584.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "47.11"
+    },
+    {
+      "t": 37601,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "48.91"
+    },
+    {
+      "t": 37618.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "50.65"
+    },
+    {
+      "t": 37634.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "52.37"
+    },
+    {
+      "t": 37651.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "54.05"
+    },
+    {
+      "t": 37667.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "55.68"
+    },
+    {
+      "t": 37684.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "57.28"
+    },
+    {
+      "t": 37701.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "58.83"
+    },
+    {
+      "t": 37718,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "60.35"
+    },
+    {
+      "t": 37734.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "61.83"
+    },
+    {
+      "t": 37751.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "63.28"
+    },
+    {
+      "t": 37768.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "64.68"
+    },
+    {
+      "t": 37783.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "66.05"
+    },
+    {
+      "t": 37801.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "67.38"
+    },
+    {
+      "t": 37818,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "68.68"
+    },
+    {
+      "t": 37834.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "69.95"
+    },
+    {
+      "t": 37850.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "71.17"
+    },
+    {
+      "t": 37868,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "72.37"
+    },
+    {
+      "t": 37884.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "73.53"
+    },
+    {
+      "t": 37901.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "74.66"
+    },
+    {
+      "t": 37918,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "75.76"
+    },
+    {
+      "t": 37934.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "76.82"
+    },
+    {
+      "t": 37951.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "77.85"
+    },
+    {
+      "t": 37968,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "78.85"
+    },
+    {
+      "t": 37984.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "79.82"
+    },
+    {
+      "t": 38001.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "80.77"
+    },
+    {
+      "t": 38018.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "81.67"
+    },
+    {
+      "t": 38034.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "82.56"
+    },
+    {
+      "t": 38051.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "83.41"
+    },
+    {
+      "t": 38067.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "84.23"
+    },
+    {
+      "t": 38084.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "85.03"
+    },
+    {
+      "t": 38101.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "85.80"
+    },
+    {
+      "t": 38118,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "86.54"
+    },
+    {
+      "t": 38133.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "87.26"
+    },
+    {
+      "t": 38151.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "87.95"
+    },
+    {
+      "t": 38168.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "88.62"
+    },
+    {
+      "t": 38184.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "89.25"
+    },
+    {
+      "t": 38201.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "89.87"
+    },
+    {
+      "t": 38217.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "90.46"
+    },
+    {
+      "t": 38234.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "91.03"
+    },
+    {
+      "t": 38251.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "91.57"
+    },
+    {
+      "t": 38267.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "92.10"
+    },
+    {
+      "t": 38284.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "92.60"
+    },
+    {
+      "t": 38300.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "93.08"
+    },
+    {
+      "t": 38317.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "93.54"
+    },
+    {
+      "t": 38334.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "93.97"
+    },
+    {
+      "t": 38350.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "94.39"
+    },
+    {
+      "t": 38367.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "94.79"
+    },
+    {
+      "t": 38384.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "95.17"
+    },
+    {
+      "t": 38400.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "95.52"
+    },
+    {
+      "t": 38418,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "95.87"
+    },
+    {
+      "t": 38434.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "96.19"
+    },
+    {
+      "t": 38451.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "96.49"
+    },
+    {
+      "t": 38468,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "96.78"
+    },
+    {
+      "t": 38484.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "97.06"
+    },
+    {
+      "t": 38501.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "97.31"
+    },
+    {
+      "t": 38517.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "97.56"
+    },
+    {
+      "t": 38533.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "97.78"
+    },
+    {
+      "t": 38550.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "97.99"
+    },
+    {
+      "t": 38567.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.19"
+    },
+    {
+      "t": 38584.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.38"
+    },
+    {
+      "t": 38601.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.55"
+    },
+    {
+      "t": 38618.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.71"
+    },
+    {
+      "t": 38634.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.85"
+    },
+    {
+      "t": 38651.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "98.99"
+    },
+    {
+      "t": 38667.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.11"
+    },
+    {
+      "t": 38685.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.23"
+    },
+    {
+      "t": 38701.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.33"
+    },
+    {
+      "t": 38717.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.43"
+    },
+    {
+      "t": 38734.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.51"
+    },
+    {
+      "t": 38751.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.59"
+    },
+    {
+      "t": 38767.80000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.65"
+    },
+    {
+      "t": 38784.10000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.71"
+    },
+    {
+      "t": 38801.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.77"
+    },
+    {
+      "t": 38818,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.81"
+    },
+    {
+      "t": 38833.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.85"
+    },
+    {
+      "t": 38851.30000001192,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.88"
+    },
+    {
+      "t": 38867.90000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.91"
+    },
+    {
+      "t": 38884.70000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.94"
+    },
+    {
+      "t": 38901.20000000298,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.95"
+    },
+    {
+      "t": 38917.5,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.97"
+    },
+    {
+      "t": 38934.40000000596,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.98"
+    },
+    {
+      "t": 38950.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "99.99"
+    },
+    {
+      "t": 38984.60000000894,
+      "bank": "×10",
+      "total": "100.00",
+      "spins": "0",
+      "summary": "100.00"
+    }
+  ],
+  "frames": [
+    16.699999999999818,
+    16.59999999999991,
+    16.700000000000273,
+    16.699999999999818,
+    16.59999999999991,
+    16.700000000000273,
+    16.699999999999818,
+    16.59999999999991,
+    16.700000000000273,
+    16.59999999999991,
+    16.699999999999818,
+    16.700000000000273,
+    16.59999999999991,
+    16.699999999999818,
+    16.600000000000364,
+    16.799999999999727,
+    16.59999999999991,
+    16.600000000000364,
+    16.799999999999727,
+    16.59999999999991,
+    16.700000000000273,
+    16.699999999999818,
+    16.59999999999991,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000273,
+    16.59999999999991,
+    16.699999999999818,
+    16.600000000000364,
+    16.799999999999727,
+    16.59999999999991,
+    16.700000000000273,
+    16.699999999999818,
+    16.59999999999991,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000273,
+    16.59999999999991,
+    16.59999999999991,
+    16.800000000000182,
+    16.59999999999991,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000273,
+    16.699999999999818,
+    16.59999999999991,
+    16.700000000000273,
+    16.59999999999991,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000273,
+    16.59999999999991,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.800000000000182,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.800000000000182,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.799999999999272,
+    33.20000000000073,
+    16.799999999999272,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.800000000000182,
+    16.600000000000364,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.599999999999454,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.800000000000182,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.599999999999454,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.800000000000182,
+    16.600000000000364,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.800000000000182,
+    16.599999999999454,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.800000000000182,
+    16.599999999999454,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.700000000000728,
+    16.599999999999454,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.600000000000364,
+    16.699999999999818,
+    16.699999999999818,
+    16.699999999999818,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    33.30000000000109,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.80000000000109,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000109,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.599999999998545,
+    16.80000000000109,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.5,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000000364,
+    16.80000000000109,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.80000000000109,
+    16.599999999998545,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.80000000000109,
+    16.5,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.600000000000364,
+    16.799999999999272,
+    16.600000000000364,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.599999999998545,
+    16.80000000000109,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000109,
+    16.600000000000364,
+    16.69999999999891,
+    16.700000000000728,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.69999999999891,
+    16.600000000000364,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000000364,
+    16.799999999999272,
+    16.700000000000728,
+    16.5,
+    16.69999999999891,
+    16.80000000000109,
+    16.600000000000364,
+    16.69999999999891,
+    16.600000000000364,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.5,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.5,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.5,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.5,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.5,
+    16.700000000000728,
+    16.799999999999272,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.5,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.80000000000291,
+    16.5,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.799999999999272,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.599999999998545,
+    16.799999999999272,
+    16.600000000002183,
+    16.700000000000728,
+    16.69999999999709,
+    16.600000000002183,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.700000000000728,
+    16.700000000000728,
+    16.599999999998545,
+    16.700000000000728,
+    16.600000000002183,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.700000000004366,
+    16.5,
+    16.799999999995634,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.799999999995634,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.799999999995634,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.69999999999709,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.799999999995634,
+    16.60000000000582,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.599999999998545,
+    16.80000000000291,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.599999999998545,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545,
+    16.700000000004366,
+    16.69999999999709,
+    16.599999999998545
+  ],
+  "summary": "100.00",
+  "balance": "1075.00"
+}

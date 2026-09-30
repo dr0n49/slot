@@ -1,0 +1,14 @@
+[
+  {
+    "file": "desktop.mp4",
+    "seconds": 36.40287494659424,
+    "sourceFrames": 655,
+    "note": "Full silent feature; actual CDP intervals resampled to 30 fps. GIF is an edited preview: first 18 s plus final 4 s. This recording is not an FPS measurement."
+  },
+  {
+    "file": "portrait.mp4",
+    "seconds": 19.030420064926147,
+    "sourceFrames": 366,
+    "note": "Full silent feature; actual CDP intervals resampled to 30 fps. GIF is an edited preview: first 18 s plus final 4 s. This recording is not an FPS measurement."
+  }
+]

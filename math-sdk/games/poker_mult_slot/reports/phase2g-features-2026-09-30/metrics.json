@@ -1,0 +1,64 @@
+{
+  "browser": "154.0.8037.92",
+  "runs": [
+    {
+      "label": "buy-bonus",
+      "mode": "bonus",
+      "freeSpins": 10,
+      "summary": "100.00",
+      "paintedBoards": 11,
+      "earlyIncreases": 0,
+      "fps": 59.94755619568028,
+      "p95Ms": 16.700000000004366
+    },
+    {
+      "label": "buy-job",
+      "mode": "bonus_job",
+      "freeSpins": 10,
+      "summary": "120.00",
+      "paintedBoards": 11,
+      "earlyIncreases": 0,
+      "fps": 59.949444042787384,
+      "p95Ms": 16.700000000000728
+    },
+    {
+      "label": "buy-flush",
+      "mode": "bonus_flush",
+      "freeSpins": 15,
+      "summary": "500.00",
+      "paintedBoards": 16,
+      "earlyIncreases": 0,
+      "fps": 59.61521091138983,
+      "p95Ms": 16.700000000004366
+    },
+    {
+      "label": "ante-job",
+      "paintedBoards": 1,
+      "earlyIncreases": 0,
+      "fps": null,
+      "p95Ms": null
+    },
+    {
+      "label": "ante-flush",
+      "paintedBoards": 1,
+      "earlyIncreases": 0,
+      "fps": null,
+      "p95Ms": null
+    }
+  ],
+  "ordinaryCards": 52,
+  "joker": true,
+  "coverageRounds": 30,
+  "autoplay": {
+    "complete": 10,
+    "stoppedDuring": 3,
+    "totalPlays": 13
+  },
+  "errors": [],
+  "failedAssets": [],
+  "notes": [
+    "Real engine boards and existing React orchestration; locally mocked RGS payouts, no real wallet traffic.",
+    "Desktop Chrome portrait emulation, not real-phone acceptance.",
+    "Known strict 50 ms feedback and anticipation colour parity gates remain open."
+  ]
+}

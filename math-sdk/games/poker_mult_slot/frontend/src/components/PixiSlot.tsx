@@ -241,7 +241,7 @@ export const PixiSlot = forwardRef<SlotGameHandle, SlotGameProps & { audition?: 
             for(let c=0;c<5;c++)reels[c].node.y=Y+motion.reels[c].offset;app.render()}
           target=p;
           app.ticker.start();
-          motion.reveal(performance.now(),Array.from({length:5},(_,c)=>p.cards.filter((card,i)=>i%5===c&&card.golden).length));layoutNice();emit("target_received",{cards:p.cards,multipliers:p.multipliers})},
+          motion.reveal(performance.now(),Array.from({length:5},(_,c)=>p.cards.filter((card,i)=>i%5===c&&card.golden).length));layoutNice();emit("target_received",{cards:p.cards,multipliers:p.multipliers,shownX:p.shownX,bet:p.bet,lines:p.lines})},
         snap:()=>{if(motion.snap())finalise(true)},skip:()=>{if(settled){skipped=true;skippedAt=performance.now()}},turbo:v=>{fast=v},
         sound:v=>{soundEnabled=v;if(!v)audio.stopReelSpinLoop(0)},
       };
