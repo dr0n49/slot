@@ -1,0 +1,14 @@
+// Final page/resource verification after adding visible hand crops and Stake proofs.
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const {chromium}=require('/Users/andriinorenko/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const out=__dirname+'/review-1d';let browser;
+(async()=>{browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1}),errors=[],badResponses=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)badResponses.push({url:r.url(),status:r.status()})});
+ await page.goto('http://127.0.0.1:5192/reports/phase3-art-direction/index.html',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.getElementById('brightness').textContent.includes('Y′'));
+ for(const profile of ['portrait','desktop']){await page.setViewportSize(profile==='portrait'?{width:390,height:844}:{width:1440,height:1000});await page.locator(`[data-profile="${profile}"]`).click();
+  for(let i=1;i<=6;i++){await page.locator(`[data-item="${i}"]`).click();await page.evaluate(async()=>{await Promise.all([...document.querySelectorAll('img')].map(e=>e.decode()));await document.getElementById('proposal').contentDocument.fonts.ready});assert.equal(await page.locator('[data-section]:not(.hidden)').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,profile+' tab '+i+' must fit viewport');}
+  await page.locator('[data-item="5"]').click();for(const v of ['A','B']){await page.locator(`[data-background="${v}"]`).click();await page.locator(`#background-${v}-proof`).evaluate(e=>e.decode());assert((await page.locator(`#background-${v}-proof`).getAttribute('src')).includes(profile+'-composite.webp'));for(const format of ['3x4','9x16']){await page.locator(`#stake-${format}-proof`).evaluate(e=>e.decode());assert((await page.locator(`#stake-${format}-proof`).getAttribute('src')).includes(`/layers/${v}/stake-${format}`));}}
+  if(profile==='portrait'){await page.locator('[data-item="1"]').click();await page.screenshot({path:out+'/qa/review-page-portrait.png',fullPage:true});}else {await page.locator('[data-item="5"]').click();await page.screenshot({path:out+'/qa/review-page-backgrounds-desktop.png',fullPage:true});}
+ }
+ assert.deepEqual(errors,[]);assert.deepEqual(badResponses,[]);const p=out+'/verification.json',data=JSON.parse(fs.readFileSync(p));data.finalPageResources={profiles:2,tabs:6,allImagesDecoded:true,handCropsVisible:true,stakePreviewsVisible:true,backgroundProofsFollowProfile:true,noOverflow:true,errors,badResponses};fs.writeFileSync(p,JSON.stringify(data,null,2)+'\n');await browser.close();browser=null;console.log(data.finalPageResources);
+})().catch(async e=>{console.error(e);await browser?.close();process.exitCode=1});

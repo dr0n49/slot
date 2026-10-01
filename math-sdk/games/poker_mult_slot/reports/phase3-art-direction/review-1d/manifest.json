@@ -1,0 +1,300 @@
+{
+  "scope": "Stage 1d art review, no Phase 2 integration",
+  "screens": [
+    {
+      "file": "base-A-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-idle.json"
+    },
+    {
+      "file": "base-A-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-win.json"
+    },
+    {
+      "file": "base-B-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-idle.json"
+    },
+    {
+      "file": "base-B-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-win.json"
+    },
+    {
+      "file": "fs-A-A-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "fs-A-B-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "A",
+      "joker": "B",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "fs-B-A-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "fs-B-B-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "B",
+      "joker": "B",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "base-A-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-idle.json"
+    },
+    {
+      "file": "base-A-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-win.json"
+    },
+    {
+      "file": "base-B-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-idle.json"
+    },
+    {
+      "file": "base-B-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-win.json"
+    },
+    {
+      "file": "fs-A-A-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    },
+    {
+      "file": "fs-A-B-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "A",
+      "joker": "B",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    },
+    {
+      "file": "fs-B-A-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    },
+    {
+      "file": "fs-B-B-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "B",
+      "joker": "B",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    }
+  ],
+  "native": [
+    {
+      "file": "native-A-86x121.svg",
+      "id": "A",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "native-B-86x121.svg",
+      "id": "B",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "native-QH-86x121.svg",
+      "id": "QH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "native-A-60x85.svg",
+      "id": "A",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "native-B-60x85.svg",
+      "id": "B",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "native-QH-60x85.svg",
+      "id": "QH",
+      "w": 60,
+      "h": 85
+    }
+  ],
+  "backgrounds": [
+    {
+      "file": "background-A-desktop.svg",
+      "profile": "desktop",
+      "variant": "A"
+    },
+    {
+      "file": "background-B-desktop.svg",
+      "profile": "desktop",
+      "variant": "B"
+    },
+    {
+      "file": "background-A-portrait.svg",
+      "profile": "portrait",
+      "variant": "A"
+    },
+    {
+      "file": "background-B-portrait.svg",
+      "profile": "portrait",
+      "variant": "B"
+    }
+  ],
+  "ui": [
+    {
+      "file": "frame-desktop-base.svg",
+      "profile": "desktop",
+      "state": "base"
+    },
+    {
+      "file": "frame-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs"
+    },
+    {
+      "file": "bank-A-desktop-actual.svg",
+      "profile": "desktop",
+      "layout": "A",
+      "stage": "actual",
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-A-desktop-max10.svg",
+      "profile": "desktop",
+      "layout": "A",
+      "stage": "max10",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-A-desktop-plus5.svg",
+      "profile": "desktop",
+      "layout": "A",
+      "stage": "plus5",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-B-desktop-actual.svg",
+      "profile": "desktop",
+      "layout": "B",
+      "stage": "actual",
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-B-desktop-max10.svg",
+      "profile": "desktop",
+      "layout": "B",
+      "stage": "max10",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-B-desktop-plus5.svg",
+      "profile": "desktop",
+      "layout": "B",
+      "stage": "plus5",
+      "presentationOnly": true
+    },
+    {
+      "file": "frame-portrait-base.svg",
+      "profile": "portrait",
+      "state": "base"
+    },
+    {
+      "file": "frame-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs"
+    },
+    {
+      "file": "bank-A-portrait-actual.svg",
+      "profile": "portrait",
+      "layout": "A",
+      "stage": "actual",
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-A-portrait-max10.svg",
+      "profile": "portrait",
+      "layout": "A",
+      "stage": "max10",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-A-portrait-plus5.svg",
+      "profile": "portrait",
+      "layout": "A",
+      "stage": "plus5",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-B-portrait-actual.svg",
+      "profile": "portrait",
+      "layout": "B",
+      "stage": "actual",
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-B-portrait-max10.svg",
+      "profile": "portrait",
+      "layout": "B",
+      "stage": "max10",
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-B-portrait-plus5.svg",
+      "profile": "portrait",
+      "layout": "B",
+      "stage": "plus5",
+      "presentationOnly": true
+    }
+  ],
+  "fixtureRoot": "../review-1b"
+}

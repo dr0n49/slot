@@ -1,0 +1,45 @@
+{
+  "stage": "1d",
+  "baseCommit": "2509908",
+  "branch": "codex/phase-3-visual-overhaul",
+  "status": "awaiting_user_review",
+  "approvedFromEarlier": {
+    "queenAnchor": "Queen A",
+    "logo": "B with requested U correction",
+    "winnerPresentation": "B, separated lines",
+    "loserBrightness": 0.62,
+    "flags": "A flat",
+    "baseMultiplier": "C top-right tag"
+  },
+  "reviewChoices": {
+    "joker": [
+      "A teal",
+      "B plum"
+    ],
+    "desktopFS": [
+      "A single tombstone",
+      "B adjacent tombstones"
+    ],
+    "baseBackground": [
+      "A stone",
+      "B wood and paper"
+    ]
+  },
+  "requestedEditsDelivered": [
+    "new Joker candidates and marked hand crops",
+    "separate FS illustration and reserved UI space",
+    "Oswald HAND PAYS",
+    "original frame corners converted to vector, long rails without diagonal motifs",
+    "raster layered ofrenda A/B and independent phone crops",
+    "rounded U in approved logo B"
+  ],
+  "queuedPhase2": [
+    "JH/KC corrections",
+    "full deck installation as a set",
+    "top-right multiplier tag",
+    "bank and FS HUD integration"
+  ],
+  "phase2Started": false,
+  "liveAssetsInstalled": false,
+  "resubmitted": false
+}

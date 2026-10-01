@@ -1,0 +1,810 @@
+{
+  "scope": "Stage 1d review only; no Stage 2/live changes",
+  "backgrounds": [
+    {
+      "profile": "desktop",
+      "variant": "A",
+      "mean": 98.58087106458258,
+      "linear": 0.16472719514228526,
+      "p95": 167,
+      "rms": 43.31553913276229,
+      "pixels": 2073600,
+      "approved1b": 60.111036833270596,
+      "delta": 38.469834231311985,
+      "board": {
+        "mean": 120.49469257116425,
+        "linear": 0.28296480877432834,
+        "p95": 219,
+        "rms": 73.0976007057202,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "stakeThreshold": null
+    },
+    {
+      "profile": "desktop",
+      "variant": "B",
+      "mean": 67.32985494585314,
+      "linear": 0.0894703336564971,
+      "p95": 148,
+      "rms": 41.34568384072526,
+      "pixels": 2073600,
+      "approved1b": 60.111036833270596,
+      "delta": 7.218818112582547,
+      "board": {
+        "mean": 120.49469257116425,
+        "linear": 0.28296480877432834,
+        "p95": 219,
+        "rms": 73.0976007057202,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "stakeThreshold": null
+    },
+    {
+      "profile": "portrait",
+      "variant": "A",
+      "mean": 107.43223297788374,
+      "linear": 0.1698549070153851,
+      "p95": 146,
+      "rms": 25.68204624189333,
+      "pixels": 329160,
+      "approved1b": 59.381088845383786,
+      "delta": 48.05114413249996,
+      "board": {
+        "mean": 124.38888627766252,
+        "linear": 0.29022293204569843,
+        "p95": 219,
+        "rms": 70.1881361282556,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "stakeThreshold": null
+    },
+    {
+      "profile": "portrait",
+      "variant": "B",
+      "mean": 74.14516986146164,
+      "linear": 0.09079898949497732,
+      "p95": 126,
+      "rms": 31.9168369785041,
+      "pixels": 329160,
+      "approved1b": 59.381088845383786,
+      "delta": 14.764081016077853,
+      "board": {
+        "mean": 124.38888627766252,
+        "linear": 0.29022293204569843,
+        "p95": 219,
+        "rms": 70.1881361282556,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "stakeThreshold": null
+    }
+  ],
+  "clearance": [
+    {
+      "profile": "desktop",
+      "layout": "A",
+      "gap": 50,
+      "principal": {
+        "x": 103,
+        "y": 665,
+        "w": 380,
+        "h": 285
+      },
+      "bankRects": [
+        {
+          "x": 75,
+          "y": 170,
+          "w": 430,
+          "h": 445
+        }
+      ],
+      "nonOverlap": true
+    },
+    {
+      "profile": "desktop",
+      "layout": "B",
+      "gap": 119,
+      "principal": {
+        "x": 103,
+        "y": 665,
+        "w": 380,
+        "h": 285
+      },
+      "bankRects": [
+        {
+          "x": 40,
+          "y": 226,
+          "w": 250,
+          "h": 320
+        },
+        {
+          "x": 320,
+          "y": 226,
+          "w": 250,
+          "h": 320
+        }
+      ],
+      "nonOverlap": true
+    },
+    {
+      "profile": "portrait",
+      "layout": "A",
+      "gap": null,
+      "principalOutsideCrop": true,
+      "bankRects": [
+        {
+          "x": 2,
+          "y": 2,
+          "w": 140,
+          "h": 79
+        },
+        {
+          "x": 248,
+          "y": 2,
+          "w": 140,
+          "h": 79
+        }
+      ],
+      "nonOverlap": true
+    },
+    {
+      "profile": "portrait",
+      "layout": "B",
+      "gap": null,
+      "principalOutsideCrop": true,
+      "bankRects": [
+        {
+          "x": 2,
+          "y": 2,
+          "w": 140,
+          "h": 79
+        },
+        {
+          "x": 248,
+          "y": 2,
+          "w": 140,
+          "h": 79
+        }
+      ],
+      "nonOverlap": true
+    }
+  ],
+  "stake": [
+    {
+      "variant": "A",
+      "format": "3x4",
+      "size": [
+        1200,
+        1600
+      ],
+      "mean": 85.06975305657006,
+      "linear": 0.14245889939888196,
+      "p95": 177,
+      "rms": 52.25858456226248,
+      "pixels": 1920000,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "A",
+      "format": "9x16",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 83.46257237538119,
+      "linear": 0.14085609958254044,
+      "p95": 178,
+      "rms": 53.00465476652483,
+      "pixels": 2073600,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "B",
+      "format": "3x4",
+      "size": [
+        1200,
+        1600
+      ],
+      "mean": 57.77493930187916,
+      "linear": 0.07871615620457305,
+      "p95": 151,
+      "rms": 46.25877421244956,
+      "pixels": 1920000,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "B",
+      "format": "9x16",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 55.546589331274696,
+      "linear": 0.07760734410977121,
+      "p95": 153,
+      "rms": 47.53847010839554,
+      "pixels": 2073600,
+      "stakeThreshold": null
+    }
+  ],
+  "checks": [
+    {
+      "file": "base-A-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "base-A-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "base-B-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "base-B-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "fs-A-A-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.5
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "fs-A-B-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "A",
+      "joker": "B",
+      "fixture": "../review-1b/current-desktop-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.5
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "fs-B-A-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-desktop-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.5
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "fs-B-B-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "layout": "B",
+      "joker": "B",
+      "fixture": "../review-1b/current-desktop-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.5
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.5
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [
+        {
+          "text": "HAND PAYS",
+          "font": "Oswald",
+          "size": "34px",
+          "tracking": "2.3px"
+        }
+      ],
+      "flags": 12,
+      "petals": 8
+    },
+    {
+      "file": "base-A-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "base-A-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "background": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "base-B-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "base-B-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "background": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "fs-A-A-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "A",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.75
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "fs-A-B-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "A",
+      "joker": "B",
+      "fixture": "../review-1b/current-portrait-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.75
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "fs-B-A-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "B",
+      "joker": "A",
+      "fixture": "../review-1b/current-portrait-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.75
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    },
+    {
+      "file": "fs-B-B-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "layout": "B",
+      "joker": "B",
+      "fixture": "../review-1b/current-portrait-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.75
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.75
+        }
+      ],
+      "frame": {
+        "count": 1,
+        "corners": 4,
+        "images": 0
+      },
+      "header": [],
+      "flags": 4,
+      "petals": 4
+    }
+  ],
+  "alpha": [
+    {
+      "id": "joker-A",
+      "transparent": 0.3032830556233724,
+      "semi": 0.6967169443766276
+    },
+    {
+      "id": "joker-B",
+      "transparent": 0.30481402079264325,
+      "semi": 0.6951859792073568
+    },
+    {
+      "id": "base-A-ofrenda",
+      "transparent": 0.30975914001464844,
+      "semi": 0.6902408599853516
+    },
+    {
+      "id": "base-B-ofrenda",
+      "transparent": 0.3519585927327474,
+      "semi": 0.6480414072672526
+    },
+    {
+      "id": "base-A-front",
+      "transparent": 0.4418293346763937,
+      "semi": 0.557906759052939
+    },
+    {
+      "id": "base-B-front",
+      "transparent": 0.44434884466286134,
+      "semi": 0.5555239715922388
+    },
+    {
+      "id": "fs-graves",
+      "transparent": 0.3958753544388903,
+      "semi": 0.6038888825340903
+    }
+  ],
+  "fixtureFinalWins": {
+    "base": "1.00",
+    "fsCumulative": "3.00"
+  },
+  "nativeSizeProofs": 6,
+  "staticCandles": true,
+  "frameCandidates": 1,
+  "generatedAt": "2026-10-01T10:44:01.703Z",
+  "mobilePageFits": true,
+  "reviewTabs": 6,
+  "nativeDisplayedAtExactSize": true,
+  "osReducedMotion": true,
+  "litePetals": 2,
+  "parallaxDisabledInLite": true,
+  "reviewErrors": [],
+  "finalPageResources": {
+    "profiles": 2,
+    "tabs": 6,
+    "allImagesDecoded": true,
+    "handCropsVisible": true,
+    "stakePreviewsVisible": true,
+    "backgroundProofsFollowProfile": true,
+    "noOverflow": true,
+    "errors": [],
+    "badResponses": []
+  }
+}

@@ -13,7 +13,7 @@ async function hash(file) {
 }
 (async()=>{
   const before=process.argv.includes('--before'), data={capturedAt:new Date().toISOString(),math:[],protectedFiles:[]};
-  const suffix=process.argv.includes('--1c')?'-1c':process.argv.includes('--1b')?'-1b':'';
+  const suffix=process.argv.includes('--1d')?'-1d':process.argv.includes('--1c')?'-1c':process.argv.includes('--1b')?'-1b':'';
   for(const p of math)data.math.push(await hash(p));
   for(const p of protectedFiles)data.protectedFiles.push(await hash(p));
   if(!before){const initial=JSON.parse(fs.readFileSync(path.join(__dirname,'hashes-before'+suffix+'.json')));data.match={math:JSON.stringify(initial.math)===JSON.stringify(data.math),protectedFiles:JSON.stringify(initial.protectedFiles)===JSON.stringify(data.protectedFiles)};if(!data.match.math||!data.match.protectedFiles)process.exitCode=1;}

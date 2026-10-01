@@ -1,0 +1,25 @@
+// UI only: native vectors. The generated frame is a carving reference, never embedded as raster UI.
+const {P,rect,text,line,g,payboard}=require('./build-direction.cjs');
+const {lettering}=require('./build-review-1c.cjs');
+const oldU='M0 12L13 2 28 11 22 20V69L36 84 52 71V20L46 12 58 2 72 11 65 21V72L37 96 7 78V22Z';
+const newU='M0 12L13 2 28 11 22 20V65Q22 82 36 83Q52 82 52 65V20L46 12 58 2 72 11 65 21V65Q65 96 36 96Q7 95 7 65V22Z';
+function logo(x,y,w){return lettering(x,y,w,'B').replaceAll(oldU,newU);}
+function defs(){return `<defs><linearGradient id="frameWood" x2=".1" y2="1"><stop stop-color="#252422"/><stop offset=".4" stop-color="#111312"/><stop offset="1" stop-color="#080b0b"/></linearGradient><linearGradient id="frameBone" x2=".7" y2="1"><stop stop-color="#f0dfb5"/><stop offset=".43" stop-color="#c9ac78"/><stop offset="1" stop-color="#8c653a"/></linearGradient><linearGradient id="moonStone" x2=".7" y2="1"><stop stop-color="#a2aaa0"/><stop offset=".14" stop-color="#707e7c"/><stop offset=".8" stop-color="#26373a"/><stop offset="1" stop-color="#19272e"/></linearGradient><linearGradient id="jokerTeal" x2=".45" y2="1"><stop stop-color="#245153"/><stop offset="1" stop-color="#0b242b"/></linearGradient><linearGradient id="jokerPlum" x2=".2" y2="1"><stop stop-color="#543149"/><stop offset="1" stop-color="#281c30"/></linearGradient></defs>`;}
+function carving(x=0,y=0,s=1){const trace=require('./review-1d/frame-corner-paths.json');return g(x,y,s,trace.paths.map(p=>'<path d="'+p.d+'" fill="'+p.color+'" fill-rule="evenodd"/>').join(''),'data-carved-corner="true" data-corner-source="phase2b-frame"');}
+function frame(x,y,w,h,fsMode=false){const m=w<500,r=m?13:20,k=m?.22:.34;let b=rect(x,y,w,h,'url(#frameWood)',m?5:8,'stroke="#100f0f" stroke-width="2"')+rect(x+3,y+3,w-6,h-6,'none',m?4:7,`stroke="${P.gold}" stroke-width="${m?.9:1.4}"`)+rect(x+6,y+6,w-12,h-12,'none',m?4:7,'stroke="#856236" stroke-width=".6"')+rect(x+r,y+r,w-2*r,h-2*r,fsMode?'url(#enamel)':P.black,m?6:12,`stroke="${fsMode?P.teal:'#c2a26b'}" stroke-width="${m?1:1.4}"`);
+ // Long rails have only uninterrupted longitudinal seams. No diagonal motifs, hatch or repeated rhombi.
+ b+=line(x+8,y+50*k,x+8,y+h-50*k,'#695638',.6)+line(x+w-8,y+50*k,x+w-8,y+h-50*k,'#695638',.6);
+ b+=carving(x+5,y+5,k)+`<g transform="translate(${x+w-5} ${y+5}) scale(-1 1)">${carving(0,0,k)}</g><g transform="translate(${x+5} ${y+h-5}) scale(1 -1)">${carving(0,0,k)}</g><g transform="translate(${x+w-5} ${y+h-5}) scale(-1 -1)">${carving(0,0,k)}</g>`;
+ for(const [xx,yy]of [[x+w/2-14,y+7],[x+w/2+14,y+7],[x+w/2-14,y+h-7],[x+w/2+14,y+h-7]])b+=`<circle cx="${xx}" cy="${yy}" r="${m?1.4:2.3}" fill="url(#metal)" stroke="#392b1d" stroke-width=".5"/>`;
+ return `<g data-frame="restored-vector" data-no-diagonal="true">${b}</g>`;
+}
+function handPays(target,state){return payboard(target,state).replace(text(1629.5,232,'Hand pays',39,P.bone,'Barrio','text-anchor="middle"'),text(1629.5,232,'HAND PAYS',34,P.highlight,'Oswald','text-anchor="middle" letter-spacing="2.3" data-hand-pays-header="true"'));}
+function stone(x,y,w,h,body){return g(x,y,1,`<path d="M0 45Q0 0 ${w/2} 0Q${w} 0 ${w} 45V${h}H0Z" fill="url(#moonStone)" stroke="${P.gold}" stroke-width="2"/>${rect(7,51,w-14,h-58,'url(#enamel)',5,`stroke="${P.gold}" stroke-width="1"`)}${line(9,45,w-9,45,P.highlight,.7)}${body}`,'data-bank-panel="true"');}
+function bank(m,layout='A',stage='actual'){const val=stage==='actual'?3:10,left=stage==='plus5'?14:9;let s='';
+ if(m){for(const [xx,txt,n,color]of [[2,'BANK','×'+val,P.bone],[248,'FS LEFT',String(left),P.orange]])s+=`<g data-bank-panel="true"><path d="M${xx} 27Q${xx} 2 ${xx+70} 2Q${xx+140} 2 ${xx+140} 27V81H${xx}Z" fill="url(#moonStone)" stroke="${P.gold}" stroke-width="1.4"/>${rect(xx+6,25,128,52,'url(#enamel)',5)}${text(xx+70,23,txt,12,P.highlight,'Oswald','text-anchor="middle"')}${text(xx+70,73,n,50,color,'Oswald','text-anchor="middle" data-bank-number="true"')}</g>`;
+ }else if(layout==='A')s+=stone(75,170,430,445,`${text(215,40,'BONUS BANK',22,P.teal,'Oswald','text-anchor="middle" letter-spacing="1.5"')}${text(215,180,'×'+val,104,P.bone,'Oswald','text-anchor="middle" data-bank-number="true"')}${line(47,210,383,210,P.gold,1)}${text(215,260,'FREE SPINS LEFT',22,P.highlight,'Oswald','text-anchor="middle" letter-spacing="1"')}${text(215,386,String(left),88,P.orange,'Oswald','text-anchor="middle" data-bank-number="true"')}`);
+ else {s+=stone(40,226,250,320,`${text(125,38,'BONUS BANK',19,P.teal,'Oswald','text-anchor="middle" letter-spacing="1"')}${text(125,216,'×'+val,100,P.bone,'Oswald','text-anchor="middle" data-bank-number="true"')}`);s+=stone(320,226,250,320,`${text(125,38,'FS LEFT',19,P.highlight,'Oswald','text-anchor="middle" letter-spacing="1"')}${text(125,216,String(left),96,P.orange,'Oswald','text-anchor="middle" data-bank-number="true"')}`);}
+ if(stage==='plus5')s+=g(m?195:290,m?100:642,1,rect(-70,-18,140,36,'url(#enamel)',6,`stroke="${P.teal}" stroke-width="1"`)+text(0,6,'+5 FREE SPINS',18,P.bone,'Oswald','text-anchor="middle"'));
+ return s;
+}
+module.exports={logo,defs,frame,handPays,bank,oldU,newU};

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "joker-A",
+    "file": "sources/joker-A.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "sha256": "036d47a7f4f4197b3b726701d26d0cf1e6e3dad5104ba1a13b1f1310558bbda1",
+    "selected": true
+  },
+  {
+    "id": "joker-B",
+    "file": "sources/joker-B.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "sha256": "11ae4c06bc78f29cbce5d5e64a18d614126b731cb4b8a2f0453a82c59eccbb09",
+    "selected": true
+  },
+  {
+    "id": "base-A-far",
+    "file": "sources/base-A-far.png",
+    "size": [
+      1672,
+      941
+    ],
+    "alpha": false,
+    "sha256": "186050cfeb628f460b41acd54280e6306fb8193165573192782e16ee9fab8177",
+    "selected": true
+  },
+  {
+    "id": "base-B-far",
+    "file": "sources/base-B-far.png",
+    "size": [
+      1672,
+      941
+    ],
+    "alpha": false,
+    "sha256": "0b79e460831114bae9aa60e44e108d9bdb52394b9b02794716b689e25c2abdaf",
+    "selected": true
+  },
+  {
+    "id": "fs-night",
+    "file": "sources/fs-night.png",
+    "size": [
+      1672,
+      941
+    ],
+    "alpha": false,
+    "sha256": "ef270eb0bddaa36a1f957aa2c0761566e67d9b343dd9959a6e1287295a3632da",
+    "selected": false
+  },
+  {
+    "id": "base-A-ofrenda",
+    "file": "sources/base-A-ofrenda.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "sha256": "75daeac4faec434ac5e9f277744e4eb8488af67a0aa63a1d61cca95baa068b99",
+    "selected": true
+  },
+  {
+    "id": "base-B-ofrenda",
+    "file": "sources/base-B-ofrenda.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha": true,
+    "sha256": "43a6cd9ff1964963a28988f23be160335611ebcd2fa699056c62a33869b04996",
+    "selected": true
+  },
+  {
+    "id": "fs-far",
+    "file": "sources/fs-far.png",
+    "size": [
+      1672,
+      941
+    ],
+    "alpha": false,
+    "sha256": "848b12f5d73da175eeed4b63c1b5c585a219713a1346323ff34572399478bd9a",
+    "selected": true
+  },
+  {
+    "id": "base-A-front",
+    "file": "sources/base-A-front.png",
+    "size": [
+      2172,
+      724
+    ],
+    "alpha": true,
+    "sha256": "572ad5d6e2001ed36a2f3a572f4cc968721e2ec11a538feb7ca76e89315c0766",
+    "selected": true
+  },
+  {
+    "id": "base-B-front",
+    "file": "sources/base-B-front.png",
+    "size": [
+      2172,
+      724
+    ],
+    "alpha": true,
+    "sha256": "46766478cd46ed783674db926090f94860dc51710c06c43af641f0f69b024958",
+    "selected": true
+  },
+  {
+    "id": "fs-graves",
+    "file": "sources/fs-graves.png",
+    "size": [
+      1449,
+      1086
+    ],
+    "alpha": true,
+    "sha256": "17c7c674673a02b25ea0b31dead698076029f8beb905c369a0dcf46c6515b44f",
+    "selected": true
+  }
+]
