@@ -1,0 +1,406 @@
+{
+  "viewport": {
+    "w": 1920,
+    "h": 1080
+  },
+  "cards": [
+    {
+      "rank": "K",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "3",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "C",
+      "golden": false
+    }
+  ],
+  "events": [],
+  "landing": {
+    "hasTarget": false,
+    "reels": [
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      }
+    ],
+    "anticipation": {
+      "active": false,
+      "column": -1,
+      "startedAt": 0,
+      "shadedAt": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "scales": [
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "badges": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "shake": 0
+  },
+  "capturedAt": 16076.29999999702,
+  "body": "Hand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×\nBONUS\nBALANCE\n1000000.00\nBET\n1.00",
+  "labels": [],
+  "boxes": {
+    ".godot-board": [
+      {
+        "x": 646.7000122070312,
+        "y": 27.200000762939453,
+        "w": 626.5750122070312,
+        "h": 897.5999755859375,
+        "text": ""
+      }
+    ],
+    ".hud-win": [
+      {
+        "x": 947.2000122070312,
+        "y": 1016.3250122070312,
+        "w": 25.5999755859375,
+        "h": 0,
+        "text": ""
+      }
+    ],
+    ".stage-win": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "text": ""
+      }
+    ],
+    ".hud-win-total": [],
+    ".bonus-banner": [],
+    ".bank-cloud": [],
+    ".fs-cloud": [],
+    ".game-title": [],
+    ".side-panel": [
+      {
+        "x": 1431.050048828125,
+        "y": 170.4239959716797,
+        "w": 396.7999267578125,
+        "h": 684.4000244140625,
+        "text": "Hand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×"
+      }
+    ],
+    ".bottom-hud": []
+  },
+  "amount": null,
+  "seed": null,
+  "method": "natural final frame; count complete, no timer changes"
+}

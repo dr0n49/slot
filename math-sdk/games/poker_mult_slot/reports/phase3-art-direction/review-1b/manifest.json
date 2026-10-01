@@ -1,0 +1,1283 @@
+{
+  "scope": "Stage 1b review only",
+  "sizes": {
+    "desktop": [
+      1920,
+      1080
+    ],
+    "portrait": [
+      390,
+      844
+    ]
+  },
+  "screens": [
+    {
+      "file": "background-A-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "bg": "A"
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-B-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "bg": "B"
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-C-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "bg": "C"
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-A-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "bg": "A"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "background-B-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "bg": "B"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "background-C-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "bg": "C"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "background-A-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bg": "A"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "background-B-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bg": "B"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "background-C-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bg": "C"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "courts-queen-a-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "courts": "queen-a"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "courts-earlier-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "courts": "earlier"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "hand-current-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "winStyle": "current"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "hand-improved-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "winStyle": "improved"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "flags-A-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "flags": "A"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-A-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "badge": "A",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-A-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "badge": "A",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-A-start-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-A-max-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-A-retrigger-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "flags-B-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "flags": "B"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-B-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "badge": "B",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-B-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "badge": "B",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-B-start-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-B-max-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-B-retrigger-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "flags-C-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "flags": "C"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-C-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "options": {
+        "badge": "C",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-C-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "badge": "C",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-C-start-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-C-max-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-C-retrigger-desktop-fs.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-desktop-fs.json"
+    },
+    {
+      "file": "dim-soft-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "dim": "soft"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "dim-deep-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "options": {
+        "dim": "deep"
+      },
+      "amount": "1.00",
+      "source": "current-desktop-win.json"
+    },
+    {
+      "file": "background-A-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "bg": "A"
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-B-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "bg": "B"
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-C-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "bg": "C"
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-A-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "bg": "A"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "background-B-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "bg": "B"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "background-C-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "bg": "C"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "background-A-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bg": "A"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "background-B-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bg": "B"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "background-C-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bg": "C"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "courts-queen-a-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "courts": "queen-a"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "courts-earlier-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "courts": "earlier"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "hand-current-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "winStyle": "current"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "hand-improved-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "winStyle": "improved"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "flags-A-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "flags": "A"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-A-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "badge": "A",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-A-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "badge": "A",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-A-start-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-A-max-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-A-retrigger-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "A",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "flags-B-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "flags": "B"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-B-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "badge": "B",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-B-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "badge": "B",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-B-start-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-B-max-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-B-retrigger-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "B",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "flags-C-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "flags": "C"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-C-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "options": {
+        "badge": "C",
+        "badgeDemo": true
+      },
+      "amount": null,
+      "source": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-C-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "badge": "C",
+        "badgeDemo": true
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-C-start-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "start"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-C-max-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "max"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-C-retrigger-portrait-fs.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "options": {
+        "bank": "C",
+        "bankStage": "retrigger"
+      },
+      "amount": "3.00",
+      "source": "current-portrait-fs.json"
+    },
+    {
+      "file": "dim-soft-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "dim": "soft"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    },
+    {
+      "file": "dim-deep-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "options": {
+        "dim": "deep"
+      },
+      "amount": "1.00",
+      "source": "current-portrait-win.json"
+    }
+  ],
+  "native": [
+    {
+      "file": "court-queen-a-JS-86.svg",
+      "set": "queen-a",
+      "id": "JS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-JS-60.svg",
+      "set": "queen-a",
+      "id": "JS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-JH-86.svg",
+      "set": "queen-a",
+      "id": "JH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-JH-60.svg",
+      "set": "queen-a",
+      "id": "JH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-JD-86.svg",
+      "set": "queen-a",
+      "id": "JD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-JD-60.svg",
+      "set": "queen-a",
+      "id": "JD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-JC-86.svg",
+      "set": "queen-a",
+      "id": "JC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-JC-60.svg",
+      "set": "queen-a",
+      "id": "JC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-QS-86.svg",
+      "set": "queen-a",
+      "id": "QS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-QS-60.svg",
+      "set": "queen-a",
+      "id": "QS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-QH-86.svg",
+      "set": "queen-a",
+      "id": "QH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-QH-60.svg",
+      "set": "queen-a",
+      "id": "QH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-QD-86.svg",
+      "set": "queen-a",
+      "id": "QD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-QD-60.svg",
+      "set": "queen-a",
+      "id": "QD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-QC-86.svg",
+      "set": "queen-a",
+      "id": "QC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-QC-60.svg",
+      "set": "queen-a",
+      "id": "QC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-KS-86.svg",
+      "set": "queen-a",
+      "id": "KS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-KS-60.svg",
+      "set": "queen-a",
+      "id": "KS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-KH-86.svg",
+      "set": "queen-a",
+      "id": "KH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-KH-60.svg",
+      "set": "queen-a",
+      "id": "KH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-KD-86.svg",
+      "set": "queen-a",
+      "id": "KD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-KD-60.svg",
+      "set": "queen-a",
+      "id": "KD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-queen-a-KC-86.svg",
+      "set": "queen-a",
+      "id": "KC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-queen-a-KC-60.svg",
+      "set": "queen-a",
+      "id": "KC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-JS-86.svg",
+      "set": "earlier",
+      "id": "JS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-JS-60.svg",
+      "set": "earlier",
+      "id": "JS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-JH-86.svg",
+      "set": "earlier",
+      "id": "JH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-JH-60.svg",
+      "set": "earlier",
+      "id": "JH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-JD-86.svg",
+      "set": "earlier",
+      "id": "JD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-JD-60.svg",
+      "set": "earlier",
+      "id": "JD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-JC-86.svg",
+      "set": "earlier",
+      "id": "JC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-JC-60.svg",
+      "set": "earlier",
+      "id": "JC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-QS-86.svg",
+      "set": "earlier",
+      "id": "QS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-QS-60.svg",
+      "set": "earlier",
+      "id": "QS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-QH-86.svg",
+      "set": "earlier",
+      "id": "QH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-QH-60.svg",
+      "set": "earlier",
+      "id": "QH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-QD-86.svg",
+      "set": "earlier",
+      "id": "QD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-QD-60.svg",
+      "set": "earlier",
+      "id": "QD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-QC-86.svg",
+      "set": "earlier",
+      "id": "QC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-QC-60.svg",
+      "set": "earlier",
+      "id": "QC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-KS-86.svg",
+      "set": "earlier",
+      "id": "KS",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-KS-60.svg",
+      "set": "earlier",
+      "id": "KS",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-KH-86.svg",
+      "set": "earlier",
+      "id": "KH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-KH-60.svg",
+      "set": "earlier",
+      "id": "KH",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-KD-86.svg",
+      "set": "earlier",
+      "id": "KD",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-KD-60.svg",
+      "set": "earlier",
+      "id": "KD",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "court-earlier-KC-86.svg",
+      "set": "earlier",
+      "id": "KC",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "court-earlier-KC-60.svg",
+      "set": "earlier",
+      "id": "KC",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-A-idle-86.svg",
+      "badge": "A",
+      "win": false,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-A-idle-60.svg",
+      "badge": "A",
+      "win": false,
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-A-win-86.svg",
+      "badge": "A",
+      "win": true,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-A-win-60.svg",
+      "badge": "A",
+      "win": true,
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-B-idle-86.svg",
+      "badge": "B",
+      "win": false,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-B-idle-60.svg",
+      "badge": "B",
+      "win": false,
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-B-win-86.svg",
+      "badge": "B",
+      "win": true,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-B-win-60.svg",
+      "badge": "B",
+      "win": true,
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-C-idle-86.svg",
+      "badge": "C",
+      "win": false,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-C-idle-60.svg",
+      "badge": "C",
+      "win": false,
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "badge-C-win-86.svg",
+      "badge": "C",
+      "win": true,
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "badge-C-win-60.svg",
+      "badge": "C",
+      "win": true,
+      "w": 60,
+      "h": 85
+    }
+  ],
+  "backgrounds": [
+    {
+      "file": "stake-A-3x4.svg",
+      "variant": "A",
+      "format": "3x4",
+      "W": 1200,
+      "H": 1600
+    },
+    {
+      "file": "stake-A-9x16.svg",
+      "variant": "A",
+      "format": "9x16",
+      "W": 1080,
+      "H": 1920
+    },
+    {
+      "file": "stake-B-3x4.svg",
+      "variant": "B",
+      "format": "3x4",
+      "W": 1200,
+      "H": 1600
+    },
+    {
+      "file": "stake-B-9x16.svg",
+      "variant": "B",
+      "format": "9x16",
+      "W": 1080,
+      "H": 1920
+    },
+    {
+      "file": "stake-C-3x4.svg",
+      "variant": "C",
+      "format": "3x4",
+      "W": 1200,
+      "H": 1600
+    },
+    {
+      "file": "stake-C-9x16.svg",
+      "variant": "C",
+      "format": "9x16",
+      "W": 1080,
+      "H": 1920
+    }
+  ],
+  "motion": [
+    {
+      "file": "motion-1-full-desktop.svg",
+      "profile": "desktop",
+      "motion": 1,
+      "mode": "full"
+    },
+    {
+      "file": "motion-1-reduced-desktop.svg",
+      "profile": "desktop",
+      "motion": 1,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-1-lite-desktop.svg",
+      "profile": "desktop",
+      "motion": 1,
+      "mode": "lite"
+    },
+    {
+      "file": "motion-2-full-desktop.svg",
+      "profile": "desktop",
+      "motion": 2,
+      "mode": "full"
+    },
+    {
+      "file": "motion-2-reduced-desktop.svg",
+      "profile": "desktop",
+      "motion": 2,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-2-lite-desktop.svg",
+      "profile": "desktop",
+      "motion": 2,
+      "mode": "lite"
+    },
+    {
+      "file": "motion-3-full-desktop.svg",
+      "profile": "desktop",
+      "motion": 3,
+      "mode": "full"
+    },
+    {
+      "file": "motion-3-reduced-desktop.svg",
+      "profile": "desktop",
+      "motion": 3,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-3-lite-desktop.svg",
+      "profile": "desktop",
+      "motion": 3,
+      "mode": "lite"
+    },
+    {
+      "file": "motion-1-full-portrait.svg",
+      "profile": "portrait",
+      "motion": 1,
+      "mode": "full"
+    },
+    {
+      "file": "motion-1-reduced-portrait.svg",
+      "profile": "portrait",
+      "motion": 1,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-1-lite-portrait.svg",
+      "profile": "portrait",
+      "motion": 1,
+      "mode": "lite"
+    },
+    {
+      "file": "motion-2-full-portrait.svg",
+      "profile": "portrait",
+      "motion": 2,
+      "mode": "full"
+    },
+    {
+      "file": "motion-2-reduced-portrait.svg",
+      "profile": "portrait",
+      "motion": 2,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-2-lite-portrait.svg",
+      "profile": "portrait",
+      "motion": 2,
+      "mode": "lite"
+    },
+    {
+      "file": "motion-3-full-portrait.svg",
+      "profile": "portrait",
+      "motion": 3,
+      "mode": "full"
+    },
+    {
+      "file": "motion-3-reduced-portrait.svg",
+      "profile": "portrait",
+      "motion": 3,
+      "mode": "reduced"
+    },
+    {
+      "file": "motion-3-lite-portrait.svg",
+      "profile": "portrait",
+      "motion": 3,
+      "mode": "lite"
+    }
+  ],
+  "approvedShell": "build-direction.cjs card, no frame/index/pip edits",
+  "approvedHud": "build-direction.cjs hud; only real captured amounts replaced"
+}

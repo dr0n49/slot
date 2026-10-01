@@ -1,0 +1,570 @@
+{
+  "date": "2026-10-01T01:08:09.814Z",
+  "exception": "Raster illustration only; approved card frame/indices/pips stay SVG",
+  "sets": {
+    "queen-a": [
+      {
+        "id": "JS",
+        "source": "reports/phase2b-courts-2026-09-30/sources/JS.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "f2db01faeaf9e419e7edfe120e33b99d139079454a0ae2c8595b8f7d9d66333f",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/JS.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "JH",
+        "source": "reports/phase2b-courts-2026-09-30/sources/JH.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "6646f3995906a2fd066e09af78265a32a68ecd714c89e9f2210ac20c713c660b",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/JH.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Watch: right orbit is denser than left; drawing has a slight head turn.",
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "JD",
+        "source": "reports/phase2b-courts-2026-09-30/sources/JD.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "cb6f11158a35f443816bb72e536eba9d1341afe526bd72e5f579dfe54004288e",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/JD.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "JC",
+        "source": "reports/phase2b-courts-2026-09-30/sources/JC.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "41218538950555e3686908a025adc9130f24309c67e28c429e216cf3d7ee61ff",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/JC.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "QS",
+        "source": "reports/phase2b-courts-2026-09-30/sources/QS.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "e19e2947c00029c3d890bf03c268be02eb0355c26a2e3b02e556915e4e273979",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/QS.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "QH",
+        "source": "reports/phase2b-courts-2026-09-30/sources/QH.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "9d8a6899d2368280953656c39837bbb44f953e28c9b4b146c0f8f4bca0966baa",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/QH.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "QD",
+        "source": "reports/phase2b-courts-2026-09-30/sources/QD.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "96a72f9c044f99eb51a8e3bc0c325106a5eb5649c725b71c0bf769db20250815",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/QD.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "QC",
+        "source": "reports/phase2b-courts-2026-09-30/sources/QC.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "c38d81ba62c5ec855c61bc5273a5a9fbd20cb785e6fdc3d488183497bd0f977a",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/QC.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "KS",
+        "source": "reports/phase2b-courts-2026-09-30/sources/KS.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "5fb7acaf110225d0dc7889ae8b83c6474ce3316e951c23db2fd2bd9fd5230c53",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/KS.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "KH",
+        "source": "reports/phase2b-courts-2026-09-30/sources/KH.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "d9a65c18955f364004ee26eaadd9e71b6ec70cc976f4a343060d112c468fca13",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/KH.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Use corrected neck source, not rejected v1.",
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "KD",
+        "source": "reports/phase2b-courts-2026-09-30/sources/KD.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "778d6b7bce78854922f799da503daefe60970a16618b0e0e3fe57b9ef8670299",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/KD.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Use corrected neck source, not rejected v1.",
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": false
+      },
+      {
+        "id": "KC",
+        "source": "reports/phase2b-courts-2026-09-30/sources/KC.png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536,
+        "sourceSha256": "1577f7d03eae45ee33c04732aceea65aaadf58fb82096f2be7c7495014675d8c",
+        "extraction": {
+          "left": 0,
+          "top": 0,
+          "width": 1024,
+          "height": 1080
+        },
+        "preview": "review-1b/illustrations/queen-a/KC.webp",
+        "width": 1024,
+        "height": 1080,
+        "review": [
+          "Watch: moustache overlaps lower mouth detail; inspect full-size face.",
+          "Visible eyes and teeth inspected in source head sheet; no obvious pseudo-text found.",
+          "Fine crown/robe engraving becomes dense at 60×85.",
+          "Original alpha/halo is preserved; not silently cleaned."
+        ],
+        "flagged": true
+      }
+    ],
+    "earlier": [
+      {
+        "id": "JS",
+        "source": "frontend/public/assets/cards_v2/JS.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "7fb3f3ba64e31a07014a2bd903116d3f8d71c132258c4964fddbacb47b494a54",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/JS.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "JH",
+        "source": "frontend/public/assets/cards_v2/JH.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "6d1bcd3f3451ee202984ee386d372eed25c14d1c48d89ae04080b5361d7aeac3",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/JH.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "JD",
+        "source": "frontend/public/assets/cards_v2/JD.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "b724ebbfc65b886c7936746d532d30312f36feb89a8fd9e231965ecfdc7261da",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/JD.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "JC",
+        "source": "frontend/public/assets/cards_v2/JC.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "066839e64ea35856650034ce1b6b81de349d7c8cc6b1857da3e02c4f58208740",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/JC.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Watch: dense teeth / mouth details break up at final portrait size.",
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "QS",
+        "source": "frontend/public/assets/cards_v2/QS.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "e8bf0124734f8523f4a801403068f4080d184b411b6ad32c9a8ee47ad94a573c",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/QS.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "QH",
+        "source": "frontend/public/assets/cards_v2/QH.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "6531251255f5dbc7c0ddd8131b7d40aba680cb2be07e653a3d5d12a254652019",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/QH.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "QD",
+        "source": "frontend/public/assets/cards_v2/QD.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "7a4e7e22c9c5d3e5bcb55adb0cd21263b92118ff84ea4845ac644c9b58446cd1",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/QD.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Watch: hand near shoulder has merged fine finger contours.",
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "QC",
+        "source": "frontend/public/assets/cards_v2/QC.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "6226fb47ac3a07891ae2b11a033a5234cacd9faf47ded2dc802565f7ed5b9cc5",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/QC.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "KS",
+        "source": "frontend/public/assets/cards_v2/KS.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "26174c726c13ca0223045c8a7acab4f2bd7e561c053498433622cdd5d3619b2c",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/KS.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Watch: collar ornament has glyph-like shapes resembling pseudo-text; inspect original.",
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "KH",
+        "source": "frontend/public/assets/cards_v2/KH.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "c61b22b293a602b35533c5c05bf0e3de855bfecb363eb37146424e959945edeb",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/KH.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Watch: dense teeth / mouth details break up at final portrait size.",
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "KD",
+        "source": "frontend/public/assets/cards_v2/KD.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "456cd143db6e438b3c0b61d9c1513e5e818ff804dff1fd2f7c79b5ac7193bda2",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/KD.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      },
+      {
+        "id": "KC",
+        "source": "frontend/public/assets/cards_v2/KC.webp",
+        "sourceWidth": 444,
+        "sourceHeight": 624,
+        "sourceSha256": "be69ee47f5eeeb2350ac2328e451d660ba48a7ad0531f45cdb4a17f547a4d6dd",
+        "extraction": {
+          "left": 67,
+          "top": 19,
+          "width": 311,
+          "height": 586
+        },
+        "preview": "review-1b/illustrations/earlier/KC.webp",
+        "width": 311,
+        "height": 586,
+        "review": [
+          "Limited source resolution (444×624 full card).",
+          "Different clothing and rendering between suits; not one Queen A engraver.",
+          "Original centre/paper remains inside figure crop; no retouch or concealment.",
+          "Human Calavera makeup, unlike the fully skeletal Queen A style."
+        ],
+        "flagged": true
+      }
+    ]
+  },
+  "rejectedHistory": [
+    {
+      "id": "KH/KD v1",
+      "path": "reports/phase2b-courts-2026-09-30/revisions/v1",
+      "issue": "Previously rejected by user: excess neck bones. Current sources are corrected."
+    },
+    {
+      "id": "KH alpha-edit",
+      "path": "reports/phase2b-courts-2026-09-30/revisions/neck-edit-alpha-defect",
+      "issue": "Rejected intermediate alpha defect; never used."
+    }
+  ]
+}

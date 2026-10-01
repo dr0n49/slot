@@ -1,0 +1,309 @@
+{
+  "formula": "Yprime .2126R+.7152G+.0722B /255-coded; linear sRGB EOTF then weighted sum",
+  "officialStakeThreshold": null,
+  "officialStakeStatus": "unverified; user reports no threshold",
+  "backgrounds": [
+    {
+      "profile": "desktop",
+      "variant": "A",
+      "mean": 60.111036833270596,
+      "linear": 0.05539307802767784,
+      "p95": 86.39280000000001,
+      "rms": 20.967698223112205,
+      "pixels": 2073600,
+      "current": 20.142477542158616,
+      "currentLinear": 0.032049698366422213,
+      "delta": 39.96855929111198,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 121.0463805975738,
+        "linear": 0.2848371422188591,
+        "p95": 219.4414,
+        "rms": 73.04532951824952,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "surround": {
+        "mean": 74.49450116363157,
+        "linear": 0.0724928662416565,
+        "p95": 82.62259999999999,
+        "rms": 5.357320147835046,
+        "pixels": 49500
+      },
+      "surroundRegion": {
+        "left": 480,
+        "top": 270,
+        "width": 110,
+        "height": 450
+      },
+      "boardContrast": 2.733523612373355,
+      "boardP95AboveScene": true
+    },
+    {
+      "profile": "desktop",
+      "variant": "B",
+      "mean": 55.90362280642463,
+      "linear": 0.047406773536919786,
+      "p95": 84.844,
+      "rms": 20.92190373332326,
+      "pixels": 2073600,
+      "current": 20.142477542158616,
+      "currentLinear": 0.032049698366422213,
+      "delta": 35.76114526426601,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 121.0463805975738,
+        "linear": 0.2848371422188591,
+        "p95": 219.4414,
+        "rms": 73.04532951824952,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "surround": {
+        "mean": 70.09212387071317,
+        "linear": 0.06270057249338173,
+        "p95": 80.9254,
+        "rms": 8.271525797122564,
+        "pixels": 49500
+      },
+      "surroundRegion": {
+        "left": 480,
+        "top": 270,
+        "width": 110,
+        "height": 450
+      },
+      "boardContrast": 2.9710331971784982,
+      "boardP95AboveScene": true
+    },
+    {
+      "profile": "desktop",
+      "variant": "C",
+      "mean": 60.80118397114822,
+      "linear": 0.05516677620753666,
+      "p95": 86.915,
+      "rms": 20.895335257161378,
+      "pixels": 2073600,
+      "current": 20.142477542158616,
+      "currentLinear": 0.032049698366422213,
+      "delta": 40.6587064289896,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 121.0463805975738,
+        "linear": 0.2848371422188591,
+        "p95": 219.4414,
+        "rms": 73.04532951824952,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "surround": {
+        "mean": 74.23252258584974,
+        "linear": 0.07025643781707219,
+        "p95": 83.3494,
+        "rms": 6.196646552478853,
+        "pixels": 49500
+      },
+      "surroundRegion": {
+        "left": 480,
+        "top": 270,
+        "width": 110,
+        "height": 450
+      },
+      "boardContrast": 2.784359393117862,
+      "boardP95AboveScene": true
+    },
+    {
+      "profile": "portrait",
+      "variant": "A",
+      "mean": 59.381088845383786,
+      "linear": 0.052566813496234925,
+      "p95": 85.0474,
+      "rms": 18.91349002809358,
+      "pixels": 329160,
+      "current": 15.51362626625505,
+      "currentLinear": 0.016163054107141906,
+      "delta": 43.867462579128734,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 124.98978716137253,
+        "linear": 0.2924104388559971,
+        "p95": 218.65400000000002,
+        "rms": 70.1572309961034,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "surround": {
+        "mean": 61.81733190283419,
+        "linear": 0.05847577393471108,
+        "p95": 96.1982,
+        "rms": 16.51331877129944,
+        "pixels": 14820
+      },
+      "surroundRegion": {
+        "left": 0,
+        "top": 42,
+        "width": 390,
+        "height": 38
+      },
+      "boardContrast": 3.1565613817338196,
+      "boardP95AboveScene": true
+    },
+    {
+      "profile": "portrait",
+      "variant": "B",
+      "mean": 55.073483883176685,
+      "linear": 0.04444303009226672,
+      "p95": 83.3254,
+      "rms": 18.78376657139818,
+      "pixels": 329160,
+      "current": 15.51362626625505,
+      "currentLinear": 0.016163054107141906,
+      "delta": 39.55985761692163,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 124.98978716137253,
+        "linear": 0.2924104388559971,
+        "p95": 218.65400000000002,
+        "rms": 70.1572309961034,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "surround": {
+        "mean": 52.61214743589505,
+        "linear": 0.04218477700732076,
+        "p95": 94.2046,
+        "rms": 18.267069511618217,
+        "pixels": 14820
+      },
+      "surroundRegion": {
+        "left": 0,
+        "top": 42,
+        "width": 390,
+        "height": 38
+      },
+      "boardContrast": 3.714392440617445,
+      "boardP95AboveScene": true
+    },
+    {
+      "profile": "portrait",
+      "variant": "C",
+      "mean": 60.10983977076328,
+      "linear": 0.052375941965185205,
+      "p95": 85.4926,
+      "rms": 18.846446891112357,
+      "pixels": 329160,
+      "current": 15.51362626625505,
+      "currentLinear": 0.016163054107141906,
+      "delta": 44.59621350450823,
+      "notDarkerThanCurrent": true,
+      "board": {
+        "mean": 124.98978716137253,
+        "linear": 0.2924104388559971,
+        "p95": 218.65400000000002,
+        "rms": 70.1572309961034,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "surround": {
+        "mean": 64.59054564102524,
+        "linear": 0.06163717700288128,
+        "p95": 96.9856,
+        "rms": 15.983878968286492,
+        "pixels": 14820
+      },
+      "surroundRegion": {
+        "left": 0,
+        "top": 42,
+        "width": 390,
+        "height": 38
+      },
+      "boardContrast": 3.0671721378905854,
+      "boardP95AboveScene": true
+    }
+  ],
+  "stake": [
+    {
+      "variant": "A",
+      "format": "3x4",
+      "mean": 67.60141760090484,
+      "linear": 0.06651112728743941,
+      "p95": 98.706,
+      "rms": 21.27112948635026,
+      "pixels": 1920000
+    },
+    {
+      "variant": "A",
+      "format": "9x16",
+      "mean": 67.3260930682091,
+      "linear": 0.06563657264953242,
+      "p95": 97.94239999999999,
+      "rms": 20.813015492674452,
+      "pixels": 2073600
+    },
+    {
+      "variant": "B",
+      "format": "3x4",
+      "mean": 63.860370470020555,
+      "linear": 0.057935578289158914,
+      "p95": 97.3454,
+      "rms": 20.351288968619556,
+      "pixels": 1920000
+    },
+    {
+      "variant": "B",
+      "format": "9x16",
+      "mean": 63.545294378365284,
+      "linear": 0.057000697398213854,
+      "p95": 96.6692,
+      "rms": 19.845942185917963,
+      "pixels": 2073600
+    },
+    {
+      "variant": "C",
+      "format": "3x4",
+      "mean": 68.25634498488053,
+      "linear": 0.06645650181774468,
+      "p95": 99.0984,
+      "rms": 21.16020844196004,
+      "pixels": 1920000
+    },
+    {
+      "variant": "C",
+      "format": "9x16",
+      "mean": 67.98923524399677,
+      "linear": 0.06558681985483458,
+      "p95": 98.3832,
+      "rms": 20.704571583223025,
+      "pixels": 2073600
+    }
+  ]
+}

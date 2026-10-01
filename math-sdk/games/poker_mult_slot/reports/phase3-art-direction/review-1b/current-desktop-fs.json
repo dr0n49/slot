@@ -1,0 +1,1182 @@
+{
+  "viewport": {
+    "w": 1920,
+    "h": 1080
+  },
+  "cards": [
+    {
+      "rank": "8",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "H",
+      "golden": true
+    },
+    {
+      "rank": "6",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "3",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "S",
+      "golden": true
+    },
+    {
+      "rank": "Q",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "3",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "D",
+      "golden": true
+    }
+  ],
+  "target": {
+    "event": "target_received",
+    "t": 29556,
+    "rev": 3,
+    "cards": [
+      {
+        "rank": "8",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "9",
+        "suit": "H",
+        "golden": true
+      },
+      {
+        "rank": "6",
+        "suit": "H",
+        "golden": false
+      },
+      {
+        "rank": "5",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "2",
+        "suit": "D",
+        "golden": false
+      },
+      {
+        "rank": "3",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "K",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "T",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "7",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "4",
+        "suit": "D",
+        "golden": false
+      },
+      {
+        "rank": "8",
+        "suit": "S",
+        "golden": false
+      },
+      {
+        "rank": "J",
+        "suit": "S",
+        "golden": false
+      },
+      {
+        "rank": "A",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "J",
+        "suit": "H",
+        "golden": false
+      },
+      {
+        "rank": "J",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "2",
+        "suit": "H",
+        "golden": false
+      },
+      {
+        "rank": "9",
+        "suit": "S",
+        "golden": false
+      },
+      {
+        "rank": "5",
+        "suit": "D",
+        "golden": false
+      },
+      {
+        "rank": "5",
+        "suit": "S",
+        "golden": true
+      },
+      {
+        "rank": "Q",
+        "suit": "D",
+        "golden": false
+      },
+      {
+        "rank": "A",
+        "suit": "S",
+        "golden": false
+      },
+      {
+        "rank": "3",
+        "suit": "H",
+        "golden": false
+      },
+      {
+        "rank": "J",
+        "suit": "D",
+        "golden": false
+      },
+      {
+        "rank": "2",
+        "suit": "C",
+        "golden": false
+      },
+      {
+        "rank": "K",
+        "suit": "D",
+        "golden": true
+      }
+    ],
+    "multipliers": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "shownX": 3,
+    "bet": 1,
+    "lines": [
+      {
+        "id": 2,
+        "hand_index": 3,
+        "win_x": 2.25,
+        "mult_factor": 1
+      },
+      {
+        "id": 6,
+        "hand_index": 1,
+        "win_x": 0.75,
+        "mult_factor": 1
+      }
+    ],
+    "freeSpin": true,
+    "bankAdd": 0
+  },
+  "events": [
+    {
+      "event": "travel_begin",
+      "t": 23649.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 23665.60000000894,
+      "rev": 2,
+      "cards": [
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "9",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "H",
+          "golden": true
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": true
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0,
+      "bet": 1,
+      "lines": [],
+      "freeSpin": false,
+      "bankAdd": 0
+    },
+    {
+      "event": "landing_prepare",
+      "t": 24205.60000000894,
+      "rev": 2,
+      "column": 0,
+      "offset": 133.96511958406612
+    },
+    {
+      "event": "landing_collision",
+      "t": 24255.60000000894,
+      "rev": 2,
+      "column": 0,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 24372.29999999702,
+      "rev": 2,
+      "column": 1,
+      "offset": 156.86511958406612
+    },
+    {
+      "event": "anticipation",
+      "t": 24372.90000000596,
+      "rev": 2,
+      "active": true,
+      "ms": 2148.6000000089407,
+      "column": 1
+    },
+    {
+      "event": "landing_collision",
+      "t": 24581.20000000298,
+      "rev": 2,
+      "column": 1,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 25089.60000000894,
+      "rev": 2,
+      "column": 2,
+      "offset": 15.193474607141553
+    },
+    {
+      "event": "landing_collision",
+      "t": 25165.5,
+      "rev": 2,
+      "column": 2,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 25822,
+      "rev": 2,
+      "column": 3,
+      "offset": 201.62747460287994
+    },
+    {
+      "event": "landing_collision",
+      "t": 25888.29999999702,
+      "rev": 2,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 26541.5,
+      "rev": 2,
+      "column": 4,
+      "offset": 150.88647459861838
+    },
+    {
+      "event": "landing_collision",
+      "t": 26591,
+      "rev": 2,
+      "column": 4,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "anticipation",
+      "t": 26711.20000000298,
+      "rev": 2,
+      "active": false,
+      "ms": 0,
+      "column": -1
+    },
+    {
+      "event": "landing_settled",
+      "t": 26711.29999999702,
+      "rev": 2,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 29553.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 29556,
+      "rev": 3,
+      "cards": [
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "H",
+          "golden": true
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": true
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 3,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 2,
+          "hand_index": 3,
+          "win_x": 2.25,
+          "mult_factor": 1
+        },
+        {
+          "id": 6,
+          "hand_index": 1,
+          "win_x": 0.75,
+          "mult_factor": 1
+        }
+      ],
+      "freeSpin": true,
+      "bankAdd": 0
+    },
+    {
+      "event": "landing_prepare",
+      "t": 30121.79999999702,
+      "rev": 3,
+      "column": 0,
+      "offset": 163.56623274712487
+    },
+    {
+      "event": "landing_collision",
+      "t": 30170.90000000596,
+      "rev": 3,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 30270.70000000298,
+      "rev": 3,
+      "column": 1,
+      "offset": 142.0062327626221
+    },
+    {
+      "event": "landing_collision",
+      "t": 30320.79999999702,
+      "rev": 3,
+      "column": 1,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 30437.90000000596,
+      "rev": 3,
+      "column": 2,
+      "offset": 165.9462327781193
+    },
+    {
+      "event": "landing_collision",
+      "t": 30488.20000000298,
+      "rev": 3,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 30588.20000000298,
+      "rev": 3,
+      "column": 3,
+      "offset": 146.7262327703707
+    },
+    {
+      "event": "anticipation",
+      "t": 30588.5,
+      "rev": 3,
+      "active": true,
+      "ms": 716.5999999940395,
+      "column": 3
+    },
+    {
+      "event": "landing_collision",
+      "t": 30637.90000000596,
+      "rev": 3,
+      "column": 3,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 31317.40000000596,
+      "rev": 3,
+      "column": 4,
+      "offset": 34.56873776333322
+    },
+    {
+      "event": "landing_collision",
+      "t": 31398.5,
+      "rev": 3,
+      "column": 4,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "anticipation",
+      "t": 31524.40000000596,
+      "rev": 3,
+      "active": false,
+      "ms": 0,
+      "column": -1
+    },
+    {
+      "event": "landing_settled",
+      "t": 31524.5,
+      "rev": 3,
+      "snap": false
+    }
+  ],
+  "landing": {
+    "hasTarget": true,
+    "reels": [
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 30103.5,
+        "approachAt": 30120.29999999702,
+        "approachMs": 50,
+        "approachFrom": 163.56623274712487,
+        "squashAt": 30120.29999999702,
+        "collisionAt": 30170.70000000298,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 30263.5,
+        "approachAt": 30269.70000000298,
+        "approachMs": 50,
+        "approachFrom": 142.0062327626221,
+        "squashAt": 30269.70000000298,
+        "collisionAt": 30320.5,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 30423.5,
+        "approachAt": 30436.60000000894,
+        "approachMs": 50,
+        "approachFrom": 165.9462327781193,
+        "squashAt": 30436.60000000894,
+        "collisionAt": 30488.20000000298,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 30583.5,
+        "approachAt": 30586.90000000596,
+        "approachMs": 50,
+        "approachFrom": 146.7262327703707,
+        "squashAt": 30586.90000000596,
+        "collisionAt": 30637.79999999702,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 31303.5,
+        "approachAt": 31316.40000000596,
+        "approachMs": 65.55048547564107,
+        "approachFrom": 34.56873776333322,
+        "squashAt": 31316.40000000596,
+        "collisionAt": 31398.20000000298,
+        "speedK": 1
+      }
+    ],
+    "anticipation": {
+      "active": false,
+      "column": -1,
+      "startedAt": 0,
+      "shadedAt": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "scales": [
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "badges": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "shake": 0
+  },
+  "capturedAt": 32403.5,
+  "body": "×3\nFREE SPINS LEFT\n9\nHand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×\nTHREE OF A KIND\n2.25\nJACKS OR BETTER\n0.75\nBONUS\nBALANCE\n999965.00\nTOTAL WIN\n3.00\nBET\n1.00",
+  "labels": [
+    {
+      "x": 858.7250366210938,
+      "y": 433.2509765625,
+      "w": 200.95001220703125,
+      "h": 72.70001220703125,
+      "text": "THREE OF A KIND\n2.25",
+      "nx": 0.49875,
+      "ny": 0.502618
+    },
+    {
+      "x": 1024.3125,
+      "y": 192.42601013183594,
+      "w": 212.8250732421875,
+      "h": 72.69999694824219,
+      "text": "JACKS OR BETTER\n0.75",
+      "nx": 0.7725,
+      "ny": 0.234293
+    }
+  ],
+  "boxes": {
+    ".godot-board": [
+      {
+        "x": 646.7000122070312,
+        "y": 27.200000762939453,
+        "w": 626.5750122070312,
+        "h": 897.5999755859375,
+        "text": "THREE OF A KIND\n2.25\nJACKS OR BETTER\n0.75"
+      }
+    ],
+    ".hud-win": [
+      {
+        "x": 885.0750122070312,
+        "y": 984.4000244140625,
+        "w": 149.85003662109375,
+        "h": 63.824951171875,
+        "text": "TOTAL WIN\n3.00"
+      }
+    ],
+    ".stage-win": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "text": ""
+      }
+    ],
+    ".hud-win-total": [
+      {
+        "x": 897.875,
+        "y": 984.4000244140625,
+        "w": 124.25,
+        "h": 63.824951171875,
+        "text": "TOTAL WIN\n3.00"
+      }
+    ],
+    ".bonus-banner": [],
+    ".bank-cloud": [
+      {
+        "x": 40.95000076293945,
+        "y": 128,
+        "w": 225.27500915527344,
+        "h": 135.14999389648438,
+        "text": "×3"
+      }
+    ],
+    ".fs-cloud": [],
+    ".game-title": [],
+    ".side-panel": [
+      {
+        "x": 1431.050048828125,
+        "y": 170.4239959716797,
+        "w": 396.7999267578125,
+        "h": 684.4000244140625,
+        "text": "Hand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×"
+      }
+    ],
+    ".bottom-hud": []
+  },
+  "amount": "3.00",
+  "seed": 38,
+  "method": "natural final frame; count complete, no timer changes"
+}

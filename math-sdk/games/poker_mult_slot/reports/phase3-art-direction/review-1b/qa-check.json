@@ -1,0 +1,61 @@
+{
+  "imagesInspected": 620,
+  "pageErrors": [],
+  "motion": [
+    {
+      "mode": "full",
+      "topic": 1,
+      "animated": 2,
+      "visible": 2
+    },
+    {
+      "mode": "full",
+      "topic": 2,
+      "animated": 4,
+      "visible": 4
+    },
+    {
+      "mode": "full",
+      "topic": 3,
+      "animated": 14,
+      "visible": 14
+    },
+    {
+      "mode": "reduced",
+      "topic": 1,
+      "animated": 0,
+      "visible": 2
+    },
+    {
+      "mode": "reduced",
+      "topic": 2,
+      "animated": 0,
+      "visible": 4
+    },
+    {
+      "mode": "reduced",
+      "topic": 3,
+      "animated": 0,
+      "visible": 14
+    },
+    {
+      "mode": "lite",
+      "topic": 1,
+      "animated": 0,
+      "visible": 2
+    },
+    {
+      "mode": "lite",
+      "topic": 2,
+      "animated": 4,
+      "visible": 4
+    },
+    {
+      "mode": "lite",
+      "topic": 3,
+      "animated": 4,
+      "visible": 4
+    }
+  ],
+  "systemReducedMotion": true
+}

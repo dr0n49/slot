@@ -1,0 +1,666 @@
+{
+  "checked": 66,
+  "allMatch": true,
+  "checks": [
+    {
+      "file": "background-A-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-B-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-C-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "background-A-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "background-B-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "background-C-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "background-A-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "background-B-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "background-C-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "courts-queen-a-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "courts-earlier-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "hand-current-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "hand-improved-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "flags-A-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-A-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-A-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-A-start-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-A-max-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-A-retrigger-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "flags-B-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-B-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-B-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-B-start-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-B-max-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-B-retrigger-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "flags-C-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "badge-C-desktop-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-idle.json"
+    },
+    {
+      "file": "badge-C-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "bank-C-start-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-C-max-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "bank-C-retrigger-desktop-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-fs.json"
+    },
+    {
+      "file": "dim-soft-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "dim-deep-desktop-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-desktop-win.json"
+    },
+    {
+      "file": "background-A-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-B-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-C-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "background-A-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "background-B-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "background-C-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "background-A-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "background-B-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "background-C-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "courts-queen-a-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "courts-earlier-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "hand-current-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "hand-improved-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "flags-A-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-A-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-A-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-A-start-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-A-max-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-A-retrigger-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "flags-B-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-B-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-B-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-B-start-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-B-max-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-B-retrigger-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "flags-C-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "badge-C-portrait-idle.svg",
+      "amount": null,
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 0,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-idle.json"
+    },
+    {
+      "file": "badge-C-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "bank-C-start-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-C-max-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "bank-C-retrigger-portrait-fs.svg",
+      "amount": "3.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-fs.json"
+    },
+    {
+      "file": "dim-soft-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    },
+    {
+      "file": "dim-deep-portrait-win.svg",
+      "amount": "1.00",
+      "cards": 25,
+      "cardsMatchFixture": true,
+      "lines": 2,
+      "amountMatchesFixture": true,
+      "hudFinalPresent": true,
+      "fixture": "current-portrait-win.json"
+    }
+  ]
+}

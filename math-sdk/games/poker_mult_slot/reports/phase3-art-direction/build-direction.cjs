@@ -76,7 +76,7 @@ function court(rank,suit){
 }
 function reaper(){return `<path d="M-43 50Q-45-36 0-44Q42-32 44 50L38 104 51 138Q27 130 15 140L0 134-19 140-46 136-39 101Z" fill="${P.night}" stroke="${P.gold}" stroke-width="3"/><path d="M-20 27Q-29-14 0-29Q29-14 20 27" fill="${P.black}"/>${skull(0,2,.78)}<path d="M-12 37L-24 105M12 37L26 100M-34 49L-8 65 7 57 33 45M-5 41L0 84 8 116M-35 112L-23 124M25 113L38 124" fill="none" stroke="${P.gold}" stroke-width="2"/><path d="M29 122L35-58" stroke="${P.metalDark}" stroke-width="6"/><path d="M35-58L32 122" stroke="${P.highlight}" stroke-width="2"/><path d="M35-58Q-31-69-54-9Q-42-40 35-46Z" fill="url(#metal)" stroke="${P.black}" stroke-width="2"/><path d="M12 69L33 55 37 64 17 79Z" fill="${P.bone}" stroke="${P.black}" stroke-width="2"/>${flower(-22,127,.25)}`}
 const positions={2:[[0,-1],[0,1]],3:[[0,-1],[0,0],[0,1]],4:[[-1,-1],[1,-1],[-1,1],[1,1]],5:[[-1,-1],[1,-1],[0,0],[-1,1],[1,1]],6:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1]],7:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1],[0,-.5]],8:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1],[0,-.5],[0,.5]],9:[[-1,-1],[1,-1],[-1,-.33],[1,-.33],[-1,.33],[1,.33],[-1,1],[1,1],[0,0]],10:[[-1,-1],[1,-1],[-1,-.33],[1,-.33],[-1,.33],[1,.33],[-1,1],[1,1],[0,-.66],[0,.66]]};
-function card(c,x,y,w,h,win=false,dim=false){
+function card(c,x,y,w,h,win=false,dim=false,illustration=''){
  const cw=120,ch=170,ink=c.suit==='H'||c.suit==='D'?'color-mix(in srgb, '+P.pink+' 75%, '+P.black+')':P.black;
  let s=rect(0,0,cw,ch,'url(#paper)',4,`stroke="${win?P.orange:P.metalDark}" stroke-width="${win?3:2}"`)+rect(3,3,cw-6,ch-6,'none',3,`stroke="${win?P.highlight:P.gold}" stroke-width="1"`)+`<path d="M7 163V7H112" stroke="${P.bone}" fill="none" stroke-width="1"/>`;
  if(c.golden){s=rect(0,0,cw,ch,'url(#enamel)',4,`stroke="${P.gold}" stroke-width="3"`)+g(60,55,.73,reaper());}
@@ -85,7 +85,8 @@ function card(c,x,y,w,h,win=false,dim=false){
   const rankColor=ink;
   const indices=text(16,29,rank,29,rankColor,'Barrio','text-anchor="middle"')+pip(c.suit,16,44,16,rankColor);
   s+=indices+`<g transform="translate(120 170) rotate(180)">${indices}</g>`;
-  if(['J','Q','K'].includes(c.rank)){const half=court(c.rank,c.suit);s+=g(60,18,.88,half)+`<g transform="translate(60 152) rotate(180) scale(.88)">${half}</g>`;}
+  if(illustration)s+=illustration;
+  else if(['J','Q','K'].includes(c.rank)){const half=court(c.rank,c.suit);s+=g(60,18,.88,half)+`<g transform="translate(60 152) rotate(180) scale(.88)">${half}</g>`;}
   else if(c.rank==='A'){s+=pip(c.suit,60,89,63,ink);s+=`<path d="M36 126Q60 135 84 126M41 136H79" stroke="${P.gold}" fill="none" stroke-width="1"/>`;}
   else for(const [px,py]of positions[Number(rank)]||[])s+=pip(c.suit,60+px*24,85+py*44,21,rankColor);
  }
@@ -143,6 +144,7 @@ function board(mobile,state,cards,target){let x=mobile?0:610,y=mobile?84:0,w=mob
  return s;
 }
 function screen(label,state){const mobile=label==='portrait',W=mobile?390:1920,H=mobile?844:1080,data=JSON.parse(fs.readFileSync(root+`/screenshots/current-${label}-${state}.json`)),target=data.events.filter(e=>e.event==='target_received').at(-1);return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Muerta Poker ${label} ${state} — Stage 1 proposal"><title>Muerta Poker — ${label}, ${state}. Art direction only.</title>${defs(state)}${scenery(W,H,mobile,state)}${state==='fs'?bonus(mobile):''}${!mobile?payboard(target,state):''}${board(mobile,state,data.cards,target)}${hud(mobile,state,target)}</svg>`}
+if(require.main===module){
 for(const label of ['desktop','portrait'])for(const state of ['idle','win','fs'])fs.writeFileSync(root+`/mockups/proposed-${label}-${state}.svg`,screen(label,state));
 // Material studies contain the same manually drawn shapes and directional light as the screens.
 const samples={
@@ -155,3 +157,5 @@ for(const [id,body]of Object.entries(samples))fs.writeFileSync(root+`/mockups/ma
 for(const [id,c]of Object.entries({ace:{rank:'A',suit:'S'},queen:{rank:'Q',suit:'H'},reaper:{golden:true}}))for(const [w,h]of [[86,121],[60,85]])fs.writeFileSync(root+`/mockups/study-${id}-${w}x${h}.svg`,`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${defs()}${card(c,0,0,w,h)}</svg>`);
 fs.writeFileSync(root+'/tokens.json',JSON.stringify({palette:P,fonts:{display:'Barrio',ui:'Oswald'},light:'upper left',strokes:[1,2,3],radii:[4,8],screenSizes:{desktop:[1920,1080],portrait:[390,844]},scope:'Stage 1 proposals only; no production assets integrated'},null,2)+'\n');
 console.log('six screens, four material studies, six native-size studies, tokens');
+}
+module.exports={P,fonts,defs,rect,text,line,g,pip,flower,skull,ornament,card,hud,payboard,names,arrow,bolt,flag,bonus};

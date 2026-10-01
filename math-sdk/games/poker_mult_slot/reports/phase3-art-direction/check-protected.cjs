@@ -13,9 +13,10 @@ async function hash(file) {
 }
 (async()=>{
   const before=process.argv.includes('--before'), data={capturedAt:new Date().toISOString(),math:[],protectedFiles:[]};
+  const suffix=process.argv.includes('--1b')?'-1b':'';
   for(const p of math)data.math.push(await hash(p));
   for(const p of protectedFiles)data.protectedFiles.push(await hash(p));
-  if(!before){const initial=JSON.parse(fs.readFileSync(path.join(__dirname,'hashes-before.json')));data.match={math:JSON.stringify(initial.math)===JSON.stringify(data.math),protectedFiles:JSON.stringify(initial.protectedFiles)===JSON.stringify(data.protectedFiles)};if(!data.match.math||!data.match.protectedFiles)process.exitCode=1;}
-  fs.writeFileSync(path.join(__dirname,before?'hashes-before.json':'hashes-after.json'),JSON.stringify(data,null,2)+'\n');
+  if(!before){const initial=JSON.parse(fs.readFileSync(path.join(__dirname,'hashes-before'+suffix+'.json')));data.match={math:JSON.stringify(initial.math)===JSON.stringify(data.math),protectedFiles:JSON.stringify(initial.protectedFiles)===JSON.stringify(data.protectedFiles)};if(!data.match.math||!data.match.protectedFiles)process.exitCode=1;}
+  fs.writeFileSync(path.join(__dirname,(before?'hashes-before':'hashes-after')+suffix+'.json'),JSON.stringify(data,null,2)+'\n');
   console.log(JSON.stringify({mathFiles:data.math.length,protectedFiles:data.protectedFiles.length,match:data.match}));
 })().catch(e=>{console.error(e);process.exitCode=1});
