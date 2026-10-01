@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-01",
+  "gate": "stop after showing revisions of items 8 and 9; Phase 2 queue starts with cards, multiplier, bank",
+  "approved": {
+    "1": "Queen A; repair JH orbit and KC mouth before deck integration",
+    "2": "B; separate name and amount, verify 390×844",
+    "3": "A purple dusk",
+    "4": "B skull flags + subtle petals from C; no musicians",
+    "5": "C top-right tag",
+    "6": "B gravestone; bank and FS numerals at least 2×; upper corners on phone",
+    "7": "A flat flags; B rejected shifted-copy defect",
+    "10": "B brightness 62%"
+  },
+  "pendingReview": {
+    "8": "tiered ofrenda, static candles, framed remembrance portraits, sugar skulls, marigolds; spread through left scene",
+    "9": "two tattoo letterings: integrated stroke contrast and spurs, no accents/white scratches/shaky swashes; banner below POKER"
+  },
+  "phase2Order": [
+    "Queen A JH/KC repair and complete deck",
+    "top-right multiplier tag",
+    "large gravestone bank and FS counter"
+  ],
+  "productionIntegrated": false
+}

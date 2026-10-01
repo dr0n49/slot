@@ -1,0 +1,93 @@
+{
+  "scope": "only revisions 8 / 9 shown; accepted selections are fixed, production untouched",
+  "screens": [
+    {
+      "file": "context-A-desktop-idle.svg",
+      "profile": "desktop",
+      "logo": "A",
+      "state": "idle",
+      "fixture": "../review-1b/current-desktop-idle.json"
+    },
+    {
+      "file": "context-A-desktop-win.svg",
+      "profile": "desktop",
+      "logo": "A",
+      "state": "win",
+      "fixture": "../review-1b/current-desktop-win.json"
+    },
+    {
+      "file": "context-A-desktop-fs.svg",
+      "profile": "desktop",
+      "logo": "A",
+      "state": "fs",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "context-B-desktop-idle.svg",
+      "profile": "desktop",
+      "logo": "B",
+      "state": "idle",
+      "fixture": "../review-1b/current-desktop-idle.json"
+    },
+    {
+      "file": "context-B-desktop-win.svg",
+      "profile": "desktop",
+      "logo": "B",
+      "state": "win",
+      "fixture": "../review-1b/current-desktop-win.json"
+    },
+    {
+      "file": "context-B-desktop-fs.svg",
+      "profile": "desktop",
+      "logo": "B",
+      "state": "fs",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "context-A-portrait-idle.svg",
+      "profile": "portrait",
+      "logo": "A",
+      "state": "idle",
+      "fixture": "../review-1b/current-portrait-idle.json"
+    },
+    {
+      "file": "context-A-portrait-win.svg",
+      "profile": "portrait",
+      "logo": "A",
+      "state": "win",
+      "fixture": "../review-1b/current-portrait-win.json"
+    },
+    {
+      "file": "context-A-portrait-fs.svg",
+      "profile": "portrait",
+      "logo": "A",
+      "state": "fs",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    },
+    {
+      "file": "context-B-portrait-idle.svg",
+      "profile": "portrait",
+      "logo": "B",
+      "state": "idle",
+      "fixture": "../review-1b/current-portrait-idle.json"
+    },
+    {
+      "file": "context-B-portrait-win.svg",
+      "profile": "portrait",
+      "logo": "B",
+      "state": "win",
+      "fixture": "../review-1b/current-portrait-win.json"
+    },
+    {
+      "file": "context-B-portrait-fs.svg",
+      "profile": "portrait",
+      "logo": "B",
+      "state": "fs",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    }
+  ],
+  "logos": [
+    "logo-A.svg",
+    "logo-B.svg"
+  ]
+}

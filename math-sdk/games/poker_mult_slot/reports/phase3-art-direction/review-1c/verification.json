@@ -1,0 +1,222 @@
+{
+  "scope": "8 / 9 only; renderer and wallet unchanged",
+  "backgrounds": [
+    {
+      "profile": "desktop",
+      "mean": 60.91098390024919,
+      "linear": 0.06200330160910254,
+      "p95": 125,
+      "current": 20.142477542146327,
+      "contrast": 2.4026792131168455,
+      "boardP95": 219,
+      "boardP95AboveScene": true,
+      "boardRegion": {
+        "left": 652,
+        "top": 53,
+        "width": 616,
+        "height": 849
+      },
+      "surroundingRegion": {
+        "left": 480,
+        "top": 270,
+        "width": 110,
+        "height": 450
+      },
+      "stakeThreshold": null
+    },
+    {
+      "profile": "portrait",
+      "mean": 75.70449909343678,
+      "linear": 0.09621018168977269,
+      "p95": 161,
+      "current": 15.513626266246687,
+      "contrast": 3.050011283264893,
+      "boardP95": 219,
+      "boardP95AboveScene": true,
+      "boardRegion": {
+        "left": 21,
+        "top": 123,
+        "width": 348,
+        "height": 478
+      },
+      "surroundingRegion": {
+        "left": 0,
+        "top": 42,
+        "width": 390,
+        "height": 38
+      },
+      "stakeThreshold": null
+    }
+  ],
+  "stake": [
+    {
+      "format": "3x4",
+      "mean": 71.78130960852206,
+      "linear": 0.09011266994107033,
+      "p95": 158,
+      "stakeThreshold": null
+    },
+    {
+      "format": "9x16",
+      "mean": 71.4713554077611,
+      "linear": 0.09056311971310699,
+      "p95": 160,
+      "stakeThreshold": null
+    }
+  ],
+  "checks": [
+    {
+      "name": "context-A-desktop-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.5
+    },
+    {
+      "name": "context-A-desktop-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.5
+    },
+    {
+      "name": "context-A-desktop-win",
+      "staticCandles": true,
+      "flags": 12,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-A-desktop-fs",
+      "title": "THREE OF A KIND",
+      "amount": "2.25",
+      "gap": 2.5
+    },
+    {
+      "name": "context-A-desktop-fs",
+      "title": "JACKS OR BETTER",
+      "amount": "0.75",
+      "gap": 2.5
+    },
+    {
+      "name": "context-A-desktop-fs",
+      "staticCandles": true,
+      "flags": 12,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-B-desktop-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.5
+    },
+    {
+      "name": "context-B-desktop-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.5
+    },
+    {
+      "name": "context-B-desktop-win",
+      "staticCandles": true,
+      "flags": 12,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-B-desktop-fs",
+      "title": "THREE OF A KIND",
+      "amount": "2.25",
+      "gap": 2.5
+    },
+    {
+      "name": "context-B-desktop-fs",
+      "title": "JACKS OR BETTER",
+      "amount": "0.75",
+      "gap": 2.5
+    },
+    {
+      "name": "context-B-desktop-fs",
+      "staticCandles": true,
+      "flags": 12,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-A-portrait-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.75
+    },
+    {
+      "name": "context-A-portrait-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.75
+    },
+    {
+      "name": "context-A-portrait-win",
+      "staticCandles": true,
+      "flags": 4,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-A-portrait-fs",
+      "title": "THREE OF A KIND",
+      "amount": "2.25",
+      "gap": 2.75
+    },
+    {
+      "name": "context-A-portrait-fs",
+      "title": "JACKS OR BETTER",
+      "amount": "0.75",
+      "gap": 2.75
+    },
+    {
+      "name": "context-A-portrait-fs",
+      "staticCandles": true,
+      "flags": 4,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-B-portrait-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.75
+    },
+    {
+      "name": "context-B-portrait-win",
+      "title": "TWO PAIR",
+      "amount": "0.50",
+      "gap": 2.75
+    },
+    {
+      "name": "context-B-portrait-win",
+      "staticCandles": true,
+      "flags": 4,
+      "ofrenda": 1
+    },
+    {
+      "name": "context-B-portrait-fs",
+      "title": "THREE OF A KIND",
+      "amount": "2.25",
+      "gap": 2.75
+    },
+    {
+      "name": "context-B-portrait-fs",
+      "title": "JACKS OR BETTER",
+      "amount": "0.75",
+      "gap": 2.75
+    },
+    {
+      "name": "context-B-portrait-fs",
+      "staticCandles": true,
+      "flags": 4,
+      "ofrenda": 1
+    }
+  ],
+  "reviewOnlyTwoItems": true,
+  "mobilePageFits": true,
+  "osReducedMotion": true,
+  "litePetals": 2,
+  "fixtureFinalWins": {
+    "base": 1,
+    "fsCumulative": 3
+  },
+  "generatedAt": "2026-10-01T09:22:05.132Z"
+}
