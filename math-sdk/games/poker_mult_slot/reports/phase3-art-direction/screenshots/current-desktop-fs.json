@@ -1,0 +1,1007 @@
+{
+  "viewport": {
+    "w": 1920,
+    "h": 1080
+  },
+  "cards": [
+    {
+      "rank": "3",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "3",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "H",
+      "golden": false
+    }
+  ],
+  "landing": {
+    "hasTarget": true,
+    "reels": [
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 14542.5,
+        "approachAt": 14548.90000000596,
+        "approachMs": 50,
+        "approachFrom": 135.85696492640147,
+        "squashAt": 14548.90000000596,
+        "collisionAt": 14615.59999999404,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 14702.5,
+        "approachAt": 14714.59999999404,
+        "approachMs": 50,
+        "approachFrom": 156.67696489540705,
+        "squashAt": 14714.59999999404,
+        "collisionAt": 14765.59999999404,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 14862.5,
+        "approachAt": 14865.5,
+        "approachMs": 50,
+        "approachFrom": 139.01696491090422,
+        "squashAt": 14865.5,
+        "collisionAt": 14932.29999999702,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 15022.5,
+        "approachAt": 15032.40000000596,
+        "approachMs": 50,
+        "approachFrom": 162.95696492640144,
+        "squashAt": 15032.40000000596,
+        "collisionAt": 15098.90000000596,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": 15262.5,
+        "approachAt": 15265.59999999404,
+        "approachMs": 50,
+        "approachFrom": 154.27696489540705,
+        "squashAt": 15265.59999999404,
+        "collisionAt": 15316.59999999404,
+        "speedK": 1
+      }
+    ],
+    "anticipation": {
+      "active": false,
+      "column": -1,
+      "startedAt": 0,
+      "shadedAt": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "scales": [
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "badges": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "shake": 0
+  },
+  "events": [
+    {
+      "event": "travel_begin",
+      "t": 8070.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 8078.5,
+      "rev": 2,
+      "cards": [
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "D",
+          "golden": true
+        },
+        {
+          "rank": "6",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "S",
+          "golden": true
+        },
+        {
+          "rank": "9",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "C",
+          "golden": true
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": true
+        },
+        {
+          "rank": "6",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 0.75,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 4,
+          "hand_index": 1,
+          "win_x": 0.25,
+          "mult_factor": 1
+        },
+        {
+          "id": 6,
+          "hand_index": 2,
+          "win_x": 0.5,
+          "mult_factor": 1
+        }
+      ],
+      "freeSpin": false,
+      "bankAdd": 0
+    },
+    {
+      "event": "landing_prepare",
+      "t": 8633.29999999702,
+      "rev": 2,
+      "column": 0,
+      "offset": 150.47142262177582
+    },
+    {
+      "event": "landing_collision",
+      "t": 8682.59999999404,
+      "rev": 2,
+      "column": 0,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 8782.90000000596,
+      "rev": 2,
+      "column": 1,
+      "offset": 130.21142263727302
+    },
+    {
+      "event": "anticipation",
+      "t": 8783.40000000596,
+      "rev": 2,
+      "active": true,
+      "ms": 2158.2999999970198,
+      "column": 1
+    },
+    {
+      "event": "landing_collision",
+      "t": 8832.70000000298,
+      "rev": 2,
+      "column": 1,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 9515.59999999404,
+      "rev": 2,
+      "column": 2,
+      "offset": 23.984722625533994
+    },
+    {
+      "event": "landing_collision",
+      "t": 9599.29999999702,
+      "rev": 2,
+      "column": 2,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 10232.70000000298,
+      "rev": 2,
+      "column": 3,
+      "offset": 24.4377226170107
+    },
+    {
+      "event": "landing_collision",
+      "t": 10315.79999999702,
+      "rev": 2,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 10949.29999999702,
+      "rev": 2,
+      "column": 4,
+      "offset": 24.318722621272627
+    },
+    {
+      "event": "landing_collision",
+      "t": 11032.70000000298,
+      "rev": 2,
+      "column": 4,
+      "joker": true,
+      "offset": 0,
+      "shake": 5,
+      "soundEnabled": true
+    },
+    {
+      "event": "anticipation",
+      "t": 11149.20000000298,
+      "rev": 2,
+      "active": false,
+      "ms": 0,
+      "column": -1
+    },
+    {
+      "event": "landing_settled",
+      "t": 11149.29999999702,
+      "rev": 2,
+      "snap": false
+    },
+    {
+      "event": "travel_begin",
+      "t": 13992.70000000298
+    },
+    {
+      "event": "target_received",
+      "t": 13993.90000000596,
+      "rev": 3,
+      "cards": [
+        {
+          "rank": "3",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "4",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "Q",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "9",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "T",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "3",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "A",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "D",
+          "golden": false
+        },
+        {
+          "rank": "6",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "2",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "5",
+          "suit": "C",
+          "golden": false
+        },
+        {
+          "rank": "7",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "K",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "S",
+          "golden": false
+        },
+        {
+          "rank": "J",
+          "suit": "H",
+          "golden": false
+        },
+        {
+          "rank": "8",
+          "suit": "H",
+          "golden": false
+        }
+      ],
+      "multipliers": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shownX": 2.25,
+      "bet": 1,
+      "lines": [
+        {
+          "id": 2,
+          "hand_index": 1,
+          "win_x": 0.75,
+          "mult_factor": 1
+        },
+        {
+          "id": 4,
+          "hand_index": 2,
+          "win_x": 1.5,
+          "mult_factor": 1
+        }
+      ],
+      "freeSpin": true,
+      "bankAdd": 0
+    },
+    {
+      "event": "landing_prepare",
+      "t": 14549.70000000298,
+      "rev": 3,
+      "column": 0,
+      "offset": 135.85696492640147
+    },
+    {
+      "event": "landing_collision",
+      "t": 14615.70000000298,
+      "rev": 3,
+      "column": 0,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 14715.20000000298,
+      "rev": 3,
+      "column": 1,
+      "offset": 156.67696489540705
+    },
+    {
+      "event": "landing_collision",
+      "t": 14765.70000000298,
+      "rev": 3,
+      "column": 1,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 14865.90000000596,
+      "rev": 3,
+      "column": 2,
+      "offset": 139.01696491090422
+    },
+    {
+      "event": "landing_collision",
+      "t": 14932.29999999702,
+      "rev": 3,
+      "column": 2,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 15033,
+      "rev": 3,
+      "column": 3,
+      "offset": 162.95696492640144
+    },
+    {
+      "event": "landing_collision",
+      "t": 15099,
+      "rev": 3,
+      "column": 3,
+      "joker": false,
+      "offset": 0,
+      "shake": 0.8,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_prepare",
+      "t": 15266.5,
+      "rev": 3,
+      "column": 4,
+      "offset": 154.27696489540705
+    },
+    {
+      "event": "landing_collision",
+      "t": 15316.70000000298,
+      "rev": 3,
+      "column": 4,
+      "joker": false,
+      "offset": 0,
+      "shake": 2.2,
+      "soundEnabled": true
+    },
+    {
+      "event": "landing_settled",
+      "t": 15432.29999999702,
+      "rev": 3,
+      "snap": false
+    }
+  ],
+  "body": "×3\nFREE SPINS LEFT\n9\nHand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×\nTWO PAIR\n1.50\nJACKS OR BETTER\n0.75\nBONUS\nBALANCE\n999965.00\nTOTAL WIN\n1.62\nBET\n1.00",
+  "boxes": {
+    ".reel-frame": [],
+    ".slot-game": [],
+    ".game-title": [],
+    ".side-panel-right": [
+      {
+        "x": 1431.050048828125,
+        "y": 170.4239959716797,
+        "w": 396.7999267578125,
+        "h": 684.4000244140625,
+        "text": "Hand pays\nROYAL FLUSH\n200×\nSTRAIGHT FLUSH\n20×\nFOUR OF A KIND\n8×\nFULL HOUSE\n2×\nFLUSH\n1.5×\nSTRAIGHT\n1×\nTHREE OF A KIND\n0.75×\nTWO PAIR\n0.5×\nJACKS OR BETTER\n0.25×",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".bottom-hud": [],
+    ".hud-inner": [
+      {
+        "x": 0,
+        "y": 955.2000122070312,
+        "w": 1920,
+        "h": 124.79998779296875,
+        "text": "BONUS\nBALANCE\n999965.00\nTOTAL WIN\n1.62\nBET\n1.00",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-stat": [],
+    ".hud-win": [
+      {
+        "x": 885.0750122070312,
+        "y": 984.4000244140625,
+        "w": 149.85003662109375,
+        "h": 63.824951171875,
+        "text": "TOTAL WIN\n1.62",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-bet": [],
+    ".hud-spin": [
+      {
+        "x": 1650.343994140625,
+        "y": 972.8690795898438,
+        "w": 86.912109375,
+        "h": 86.91192626953125,
+        "text": "",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-spin-btn": [],
+    ".hud-tools": [
+      {
+        "x": 38.400001525878906,
+        "y": 989.2000122070312,
+        "w": 220.05001831054688,
+        "h": 54.25006103515625,
+        "text": "BONUS",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-bonus-btn": [
+      {
+        "x": 151,
+        "y": 989.2000122070312,
+        "w": 107.45001220703125,
+        "h": 54.25006103515625,
+        "text": "BONUS",
+        "font": "\"Chakra Petch\", Oswald, system-ui, sans-serif",
+        "fontSize": "12.48px"
+      }
+    ],
+    ".hud-turbo": [],
+    ".hud-autoplay": [],
+    ".bank-cloud": [
+      {
+        "x": 40.95000076293945,
+        "y": 128,
+        "w": 225.27500915527344,
+        "h": 135.14999389648438,
+        "text": "×3",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".bonus-banner": []
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-01T00:37:56.919Z",
+  "branch": "codex/phase-3-visual-overhaul",
+  "stage0Commit": "dc45858",
+  "scope": "Stages 0 and 1 only; awaiting user ok",
+  "checks": {
+    "typescript": {
+      "exitCode": 0
+    },
+    "tests": {
+      "passed": 39,
+      "files": 5
+    },
+    "build": {
+      "exitCode": 0,
+      "warning": "Existing JS chunk exceeds 500 kB"
+    },
+    "hashes": {
+      "mathMatch": true,
+      "protectedMatch": true,
+      "mathFileCount": 37,
+      "protectedFileCount": 276
+    },
+    "browser": {
+      "errors": [],
+      "consoleErrors": [],
+      "missing": [],
+      "screens": [
+        {
+          "profile": "desktop",
+          "state": "idle",
+          "width": 1920,
+          "height": 1080,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        },
+        {
+          "profile": "desktop",
+          "state": "win",
+          "width": 1920,
+          "height": 1080,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        },
+        {
+          "profile": "desktop",
+          "state": "fs",
+          "width": 1920,
+          "height": 1080,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        },
+        {
+          "profile": "portrait",
+          "state": "idle",
+          "width": 390,
+          "height": 844,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        },
+        {
+          "profile": "portrait",
+          "state": "win",
+          "width": 390,
+          "height": 844,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        },
+        {
+          "profile": "portrait",
+          "state": "fs",
+          "width": 390,
+          "height": 844,
+          "rasterInsert": false,
+          "emptyPaths": [],
+          "fontReady": true
+        }
+      ],
+      "ui": [
+        {
+          "allPairs": 6,
+          "images": 12,
+          "swatches": 10,
+          "materials": 4
+        },
+        {
+          "portraitVisible": 3
+        },
+        {
+          "nativeDialog": true
+        },
+        {
+          "pageWidth": 390,
+          "viewport": 390
+        }
+      ],
+      "studies": [
+        {
+          "id": "ace",
+          "w": 86,
+          "h": 121
+        },
+        {
+          "id": "queen",
+          "w": 86,
+          "h": 121
+        },
+        {
+          "id": "reaper",
+          "w": 86,
+          "h": 121
+        },
+        {
+          "id": "ace",
+          "w": 60,
+          "h": 85
+        },
+        {
+          "id": "queen",
+          "w": 60,
+          "h": 85
+        },
+        {
+          "id": "reaper",
+          "w": 60,
+          "h": 85
+        }
+      ]
+    }
+  },
+  "productionIntegration": false,
+  "audioChanged": false
+}

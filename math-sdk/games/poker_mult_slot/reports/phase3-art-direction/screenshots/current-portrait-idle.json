@@ -1,0 +1,436 @@
+{
+  "viewport": {
+    "w": 390,
+    "h": 844
+  },
+  "cards": [
+    {
+      "rank": "9",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "A",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "Q",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "K",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "6",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "9",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "5",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "8",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "2",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "J",
+      "suit": "D",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "T",
+      "suit": "H",
+      "golden": false
+    },
+    {
+      "rank": "4",
+      "suit": "C",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "S",
+      "golden": false
+    },
+    {
+      "rank": "7",
+      "suit": "D",
+      "golden": false
+    }
+  ],
+  "landing": {
+    "hasTarget": false,
+    "reels": [
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      },
+      {
+        "phase": "rest",
+        "offset": 0,
+        "stopAt": null,
+        "approachAt": 0,
+        "approachMs": 0,
+        "approachFrom": 0,
+        "squashAt": null,
+        "collisionAt": null,
+        "speedK": 1
+      }
+    ],
+    "anticipation": {
+      "active": false,
+      "column": -1,
+      "startedAt": 0,
+      "shadedAt": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "scales": [
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "badges": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "shake": 0
+  },
+  "events": [],
+  "body": "BONUS\nBALANCE\n1000000.00\nBET\n1.00",
+  "boxes": {
+    ".reel-frame": [],
+    ".slot-game": [],
+    ".game-title": [],
+    ".side-panel-right": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "text": "Hand paysROYAL FLUSH200×STRAIGHT FLUSH20×FOUR OF A KIND8×FULL HOUSE2×FLUSH1.5×STRAIGHT1×THREE OF A KIND0.75×TWO PAIR0.5×JACKS OR BETTER0.25×",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".bottom-hud": [],
+    ".hud-inner": [
+      {
+        "x": 0,
+        "y": 722.6646118164062,
+        "w": 390.0000305175781,
+        "h": 121.33331298828125,
+        "text": "BONUS\nBALANCE\n1000000.00\nBET\n1.00",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-stat": [],
+    ".hud-win": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "text": "",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-bet": [],
+    ".hud-spin": [
+      {
+        "x": 171.88890075683594,
+        "y": 736.5313110351562,
+        "w": 46.22221374511719,
+        "h": 46.22216796875,
+        "text": "",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-spin-btn": [],
+    ".hud-tools": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "text": "BONUS",
+        "font": "\"Chakra Petch\", Rajdhani, system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    ],
+    ".hud-bonus-btn": [
+      {
+        "x": 33.511112213134766,
+        "y": 743.464599609375,
+        "w": 40.4444465637207,
+        "h": 40.4444580078125,
+        "text": "BONUS",
+        "font": "\"Chakra Petch\", Oswald, system-ui, sans-serif",
+        "fontSize": "10px"
+      }
+    ],
+    ".hud-turbo": [],
+    ".hud-autoplay": [],
+    ".bank-cloud": [],
+    ".bonus-banner": []
+  }
+}
