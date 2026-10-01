@@ -1,0 +1,511 @@
+{
+  "scope": "Stage 1e art review only; Stage 2 not started",
+  "checks": [
+    {
+      "file": "base-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "fixture": "../review-1b/current-desktop-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": null,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 0
+      }
+    },
+    {
+      "file": "base-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "fixture": "../review-1b/current-desktop-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.5
+        }
+      ],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": null,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 0
+      }
+    },
+    {
+      "file": "fs-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "fixture": "../review-1b/current-desktop-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.5
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.5
+        }
+      ],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": 1,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 1
+      }
+    },
+    {
+      "file": "base-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "fixture": "../review-1b/current-portrait-idle.json",
+      "finalWin": null,
+      "exact25Cards": true,
+      "labelGaps": [],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": null,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 0
+      }
+    },
+    {
+      "file": "base-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "fixture": "../review-1b/current-portrait-win.json",
+      "finalWin": "1.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        },
+        {
+          "hand": "TWO PAIR",
+          "amount": "0.50",
+          "gap": 2.75
+        }
+      ],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": null,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 0
+      }
+    },
+    {
+      "file": "fs-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "fixture": "../review-1b/current-portrait-fs.json",
+      "finalWin": "3.00",
+      "exact25Cards": true,
+      "labelGaps": [
+        {
+          "hand": "THREE OF A KIND",
+          "amount": "2.25",
+          "gap": 2.75
+        },
+        {
+          "hand": "JACKS OR BETTER",
+          "amount": "0.75",
+          "gap": 2.75
+        }
+      ],
+      "unchangedLabelCoordinates": true,
+      "dimBrightness": 0.62,
+      "fsJokerBrightness": 1,
+      "frame": {
+        "count": 1,
+        "images": 1,
+        "corners": "4",
+        "rosettes": "2",
+        "fsRim": 1
+      }
+    }
+  ],
+  "backgrounds": [
+    {
+      "file": "background-base-desktop.svg",
+      "profile": "desktop",
+      "variant": "B",
+      "mean": 67.17724517138278,
+      "linear": 0.08870849582144359,
+      "p95": 145,
+      "rms": 39.63834349483105,
+      "pixels": 2073600,
+      "approved1b": 60.111036833270596,
+      "delta": 7.066208338112183,
+      "approved1dBaseB": 67.32985494585314,
+      "delta1d": -0.1526097744703634,
+      "board": {
+        "mean": 117.35235734255564,
+        "linear": 0.2717693573996116,
+        "p95": 219,
+        "rms": 73.08747070505224,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "stakeThreshold": null
+    },
+    {
+      "file": "background-fs-desktop.svg",
+      "profile": "desktop",
+      "variant": "FS",
+      "mean": 56.177563856995775,
+      "linear": 0.07408293432799155,
+      "p95": 126,
+      "rms": 40.78005447546589,
+      "pixels": 2073600,
+      "approved1b": 60.111036833270596,
+      "delta": -3.933472976274821,
+      "approved1dBaseB": 67.32985494585314,
+      "delta1d": -11.152291088857368,
+      "board": {
+        "mean": 110.20958752970563,
+        "linear": 0.2403745270375369,
+        "p95": 219,
+        "rms": 69.20927186978697,
+        "pixels": 522984
+      },
+      "boardRegion": {
+        "left": 652,
+        "top": 52,
+        "width": 616,
+        "height": 849
+      },
+      "stakeThreshold": null
+    },
+    {
+      "file": "background-base-portrait.svg",
+      "profile": "portrait",
+      "variant": "B",
+      "mean": 71.34075449446658,
+      "linear": 0.08154307862872485,
+      "p95": 116,
+      "rms": 27.62093790470176,
+      "pixels": 329160,
+      "approved1b": 59.381088845383786,
+      "delta": 11.959665649082794,
+      "approved1dBaseB": 74.14516986146164,
+      "delta1d": -2.804415366995059,
+      "board": {
+        "mean": 120.44294548389794,
+        "linear": 0.2759693118158623,
+        "p95": 219,
+        "rms": 70.29398682701024,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "stakeThreshold": null
+    },
+    {
+      "file": "background-fs-portrait.svg",
+      "profile": "portrait",
+      "variant": "FS",
+      "mean": 60.66983802343761,
+      "linear": 0.0801477553360729,
+      "p95": 121,
+      "rms": 39.80461299177656,
+      "pixels": 329160,
+      "approved1b": 59.381088845383786,
+      "delta": 1.288749178053827,
+      "approved1dBaseB": 74.14516986146164,
+      "delta1d": -13.475331838024026,
+      "board": {
+        "mean": 111.63218768694826,
+        "linear": 0.24105404639846742,
+        "p95": 219,
+        "rms": 67.58950204984137,
+        "pixels": 166344
+      },
+      "boardRegion": {
+        "left": 21,
+        "top": 122,
+        "width": 348,
+        "height": 478
+      },
+      "stakeThreshold": null
+    }
+  ],
+  "clearance": [
+    {
+      "profile": "desktop",
+      "gap": 83.69998168945312,
+      "principal": {
+        "x": 75,
+        "y": 545,
+        "w": 490,
+        "h": 367
+      },
+      "bankRects": [
+        {
+          "x": 40.95000076293945,
+          "y": 128,
+          "w": 225.27500915527344,
+          "h": 135.14999389648438
+        },
+        {
+          "x": 25.600000381469727,
+          "y": 295.1499938964844,
+          "w": 256,
+          "h": 166.1500244140625
+        }
+      ]
+    },
+    {
+      "profile": "portrait",
+      "gap": null,
+      "bankRects": [
+        {
+          "x": 3.692361354827881,
+          "y": 14.327083587646484,
+          "w": 80.8888931274414,
+          "h": 48.5333366394043
+        },
+        {
+          "x": 316.97430419921875,
+          "y": 14.327083587646484,
+          "w": 69.33334350585938,
+          "h": 45.870140075683594
+        }
+      ],
+      "flagsBetween": true
+    }
+  ],
+  "stake": [
+    {
+      "variant": "B",
+      "format": "3x4",
+      "size": [
+        1200,
+        1600
+      ],
+      "mean": 62.67439060575583,
+      "linear": 0.0930275177997757,
+      "p95": 158,
+      "rms": 48.68775226337558,
+      "pixels": 1920000,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "B",
+      "format": "9x16",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 61.22894318035135,
+      "linear": 0.09407125700447068,
+      "p95": 160,
+      "rms": 50.505707938704,
+      "pixels": 2073600,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "FS",
+      "format": "3x4",
+      "size": [
+        1200,
+        1600
+      ],
+      "mean": 70.56298406762538,
+      "linear": 0.10423634350841433,
+      "p95": 136,
+      "rms": 43.117918642642,
+      "pixels": 1920000,
+      "stakeThreshold": null
+    },
+    {
+      "variant": "FS",
+      "format": "9x16",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 67.71577187042023,
+      "linear": 0.09595481163512912,
+      "p95": 128,
+      "rms": 41.2495072041616,
+      "pixels": 2073600,
+      "stakeThreshold": null
+    }
+  ],
+  "mobile": [
+    {
+      "variant": "B",
+      "visibleAlphaPixels": 8412,
+      "uiOverlap": false
+    },
+    {
+      "variant": "FS",
+      "visibleAlphaPixels": 8053,
+      "uiOverlap": false
+    }
+  ],
+  "alpha": [
+    {
+      "id": "flag-pink",
+      "transparent": 0.2891579743584854,
+      "semi": 0.7095885534855043
+    },
+    {
+      "id": "flag-pink-connected",
+      "transparent": 0.28128881346020607,
+      "semi": 0.7173884301723207
+    },
+    {
+      "id": "base-B-ofrenda-soft",
+      "transparent": 0.33559735616048175,
+      "semi": 0.6644026438395182
+    },
+    {
+      "id": "mobile-base-objects",
+      "transparent": 0.625885834783228,
+      "semi": 0.3739475545109531
+    },
+    {
+      "id": "flag-orange",
+      "transparent": 0.27878886113282864,
+      "semi": 0.7197294737578104
+    },
+    {
+      "id": "flag-teal",
+      "transparent": 0.28019297877614846,
+      "semi": 0.7181149609402312
+    },
+    {
+      "id": "mobile-FS-objects",
+      "transparent": 0.5874006694952332,
+      "semi": 0.4125255639327249
+    }
+  ],
+  "fixtureFinalWins": {
+    "base": "1.00",
+    "fsCumulative": "3.00"
+  },
+  "nativeSizeProofs": 4,
+  "unchangedFrameSource": true,
+  "frame9Slice": true,
+  "wholeCorners": 4,
+  "wholeRosettes": 2,
+  "jokerOutsideRoiChangedPixels": 0,
+  "staticCandles": true,
+  "generatedAt": "2026-10-01T13:05:14.037Z",
+  "reviewTabs": 7,
+  "visited": [
+    {
+      "profile": "portrait",
+      "item": 1
+    },
+    {
+      "profile": "portrait",
+      "item": 2
+    },
+    {
+      "profile": "portrait",
+      "item": 3
+    },
+    {
+      "profile": "portrait",
+      "item": 4
+    },
+    {
+      "profile": "portrait",
+      "item": 5
+    },
+    {
+      "profile": "portrait",
+      "item": 6
+    },
+    {
+      "profile": "portrait",
+      "item": 7
+    },
+    {
+      "profile": "desktop",
+      "item": 1
+    },
+    {
+      "profile": "desktop",
+      "item": 2
+    },
+    {
+      "profile": "desktop",
+      "item": 3
+    },
+    {
+      "profile": "desktop",
+      "item": 4
+    },
+    {
+      "profile": "desktop",
+      "item": 5
+    },
+    {
+      "profile": "desktop",
+      "item": 6
+    },
+    {
+      "profile": "desktop",
+      "item": 7
+    }
+  ],
+  "mobilePageFits": true,
+  "nativeDisplayedAtExactSize": true,
+  "osReducedMotion": true,
+  "litePetals": 2,
+  "parallaxDisabledInLite": true,
+  "zoomNative": {
+    "w": 390,
+    "h": 844
+  },
+  "reviewErrors": [],
+  "badResponses": []
+}

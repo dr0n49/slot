@@ -1,0 +1,200 @@
+{
+  "scope": "Stage 1e review only; Stage 2 paused",
+  "screens": [
+    {
+      "file": "base-desktop-idle.svg",
+      "profile": "desktop",
+      "state": "idle",
+      "fixture": "../review-1b/current-desktop-idle.json"
+    },
+    {
+      "file": "base-desktop-win.svg",
+      "profile": "desktop",
+      "state": "win",
+      "fixture": "../review-1b/current-desktop-win.json"
+    },
+    {
+      "file": "fs-desktop.svg",
+      "profile": "desktop",
+      "state": "fs",
+      "fixture": "../review-1b/current-desktop-fs.json"
+    },
+    {
+      "file": "base-portrait-idle.svg",
+      "profile": "portrait",
+      "state": "idle",
+      "fixture": "../review-1b/current-portrait-idle.json"
+    },
+    {
+      "file": "base-portrait-win.svg",
+      "profile": "portrait",
+      "state": "win",
+      "fixture": "../review-1b/current-portrait-win.json"
+    },
+    {
+      "file": "fs-portrait.svg",
+      "profile": "portrait",
+      "state": "fs",
+      "fixture": "../review-1b/current-portrait-fs.json"
+    }
+  ],
+  "native": [
+    {
+      "file": "native-B-86x121.svg",
+      "id": "B",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "native-QH-86x121.svg",
+      "id": "QH",
+      "w": 86,
+      "h": 121
+    },
+    {
+      "file": "native-B-60x85.svg",
+      "id": "B",
+      "w": 60,
+      "h": 85
+    },
+    {
+      "file": "native-QH-60x85.svg",
+      "id": "QH",
+      "w": 60,
+      "h": 85
+    }
+  ],
+  "backgrounds": [
+    {
+      "file": "background-base-desktop.svg",
+      "profile": "desktop",
+      "variant": "B"
+    },
+    {
+      "file": "background-fs-desktop.svg",
+      "profile": "desktop",
+      "variant": "FS"
+    },
+    {
+      "file": "background-base-portrait.svg",
+      "profile": "portrait",
+      "variant": "B"
+    },
+    {
+      "file": "background-fs-portrait.svg",
+      "profile": "portrait",
+      "variant": "FS"
+    }
+  ],
+  "ui": [
+    {
+      "file": "frame-desktop-base.svg",
+      "profile": "desktop",
+      "w": 700,
+      "h": 954
+    },
+    {
+      "file": "frame-desktop-fs.svg",
+      "profile": "desktop",
+      "w": 700,
+      "h": 954
+    },
+    {
+      "file": "bank-current-desktop-actual.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-new-desktop-actual.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-current-desktop-max10.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-new-desktop-max10.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-current-desktop-plus5.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-new-desktop-plus5.svg",
+      "profile": "desktop",
+      "w": 610,
+      "h": 520,
+      "presentationOnly": true
+    },
+    {
+      "file": "frame-portrait-base.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 555
+    },
+    {
+      "file": "frame-portrait-fs.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 555
+    },
+    {
+      "file": "bank-current-portrait-actual.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-new-portrait-actual.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": false
+    },
+    {
+      "file": "bank-current-portrait-max10.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-new-portrait-max10.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-current-portrait-plus5.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": true
+    },
+    {
+      "file": "bank-new-portrait-plus5.svg",
+      "profile": "portrait",
+      "w": 390,
+      "h": 84,
+      "presentationOnly": true
+    }
+  ],
+  "fixtureRoot": "../review-1b"
+}

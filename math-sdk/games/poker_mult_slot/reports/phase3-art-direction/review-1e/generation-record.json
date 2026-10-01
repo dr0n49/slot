@@ -1,0 +1,98 @@
+[
+  {
+    "id": "joker-B-hand",
+    "transparent_background": false,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/joker-B-lower-hand-detail.png",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/joker-B.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, a crop of the LOWER bone hand on the wooden scythe shaft of approved Reaper B. Image 2 is only full-figure CONTEXT and style reference, do not output a whole figure. Correct ONLY the fingers and thumb inside image 1: a physically convincing closed skeletal grip around the shaft. Four segmented fingers curl around the near side, fingertips turn behind the cylinder; one distinct thumb opposes them on the far side. The wood must visibly occlude the parts wrapped behind it; no finger ends hovering to the right and no fused short blobs. Wrist and metacarpals remain attached anatomically; no extra fingers. Keep the exact crop framing, shaft angle and diameter, robe pattern, oxblood/ink/bone/gold palette, engraved line weight, margins and background texture from image 1. Same woodcut engraver as Queen A. The output is ONLY this same landscape hand crop with matching boundaries, no zoom, no frame, no letters, no labels or pseudo-text. Preserve all cloth and shaft outside the hand. Clean regular bone joints, no photorealistic skin or smooth vector look.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-6d357077-13e9-4cd6-8fbe-2f65c58e29bc.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "base-B-far-lit",
+    "transparent_background": false,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/layers/B/desktop-far.webp",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/layers/B/desktop-composite.webp"
+    ],
+    "prompt": "Use case: lighting-weather. Image 1 is the EDIT TARGET, the approved B purple-dusk stone niche FAR LAYER without the altar. Image 2 is a POSITION/LIGHTING REFERENCE of that same scene with the altar at x70 y310 width420 height630 on a 1920x1080 canvas. Output ONLY the far scene from image 1, still without an altar, portraits, skulls or foreground flower cutouts. Keep the exact landscape composition, architecture, sky, purple dusk palette and detailed wood-engraved tactile stone, ivy, ground and atmospheric depth. Add physically consistent soft amber candle bounce on the niche stone directly around the future altar: left wall and stone pillar at x30..590,y400..880, warm grazing light on carved textures, and a broad gentle reflection on the floor x45..570,y850..990. Add a soft contact-shadow pool on the floor behind the altar footprint x80..490,y910..949. The effect should feel like those six actual candles illuminating the niche, strongest close to the candles and smoothly fading outward, no rectangle, no hard spotlight border, no opaque dark patch. Preserve the rest of image 1. Shadows remain readable; no global darkening or desaturation. No text, UI, boards, new figures, no extra objects. Same aspect ratio and resolution as image 1.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-474eea27-597e-4119-acc1-02b870ddecc7.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "flag-pink",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sprites/flag-pink.png",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/layers/B/desktop-composite.webp"
+    ],
+    "prompt": "Use case: style-transfer. Asset type: ONE isolated papel-picado PAPER pennant sprite for Muerta Poker. Image 1 is the exact approved silhouette, cutout geometry and fuchsia COLOR reference (#CF3C78). Image 2 is only the material/wood-engraver style reference for the painted game environment. Make one upright rectangular fuchsia tissue-paper pennant with the same zigzag bottom, same simple skull silhouette cutout, circular two eye cutouts and rows of tiny cut holes as image 1. Preserve the simple skull design rather than replacing it with an ornate new character. Replace flat fill with tactile thin paper fibres, restrained short engraved ink lines, subtle folds, warmly lit edge and softly transmitted candle/light through the paper. Natural depth and very small paper curling, not smooth vector, not grunge noise or random scratch marks. The whole pennant is inside the canvas with 8% clean margin, frontal and hanging straight; no rope, no other flag, no shifted duplicate, no double contour. All skull/edge holes are genuine transparent cutouts, outside is TRUE transparent alpha; no halo, background, cast shadow block, white outline, words or pseudo-text. Keep fuchsia saturated but material shading gentle, readable at displayed 32x38 and 80x96.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-fbcb9bd3-c5b1-4e3e-ba3b-470c6b24643c.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "flag-pink-connected",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1e/sources/flag-pink.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Image 1 is EDIT TARGET the approved material study of ONE pink paper papel-picado pennant. Change ONLY physical paper connections within the skull cutout. Its eye rings and triangular nose currently float inside the skull opening. Add four very narrow, elegant pink-paper support bridges connecting each eye ring and nose to the surrounding sheet, so every paper island is physically connected; retain clear skull silhouette and transparent negative space. These should be logical delicate cut-paper webs, not a second shifted outline. Keep exact fuchsia color #CF3C78, warm edge lighting, soft real paper fibres, existing engraved strokes, folds, zigzag edge, canvas, all margins and holes. True transparent outside and through holes, no opaque background, no extra flags, rope, letters or labels. Preserve everything else. One whole front-facing pennant.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-247aaeb7-6cee-4f3a-820a-c5a7ef8e03d2.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "base-B-ofrenda-soft",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/base-B-ofrenda.png",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/layers/B/desktop-composite.webp"
+    ],
+    "prompt": "Use case: lighting-weather. Image 1 is the EDIT TARGET: approved wooden and paper-lace B ofrenda cutout, 1024x1536. Image 2 is only the scene/lighting context. Preserve exactly the three portrait identities/windows, three tiers, candles at their sides, sugar skulls, marigolds, carved wood, burgundy cloth, cream lace, anatomy, composition and boundaries of image 1. Improve ONLY the light integration and outer transition: warm candle reflections on adjacent stone/wood edges, soft natural amber light falling outward without any rectangular haze; soft contact shadows immediately below the carved base; very subtle physically natural feathered light around the six flames, no hard alpha rectangles or opaque dark background. Background must be TRUE transparent alpha, preserve full silhouette and high-resolution engraving detail, no floor rectangle or architecture. Candle flames static. All portrait faces remain fully visible, no candle moves in front of them. Same Queen A engraver and palette; no new objects, text, words, dates, hands or extra skulls. Shadow/light outside the object fades fully into alpha over a narrow area, not a colored backdrop. Output same portrait framing.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-b199525f-553e-4295-98d5-7c0939e2aba3.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "mobile-base-objects",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/base-B-ofrenda.png",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/layers/B/desktop-composite.webp"
+    ],
+    "prompt": "Use case: stylized-concept. Asset type: two small mobile OFRENDA detail cutouts on one transparent wide canvas, for Muerta Poker. Images 1 and 2 are approved STYLE/MATERIAL references, not edit targets. Same detailed Queen A wood-engraver: tactile ivory skull, warm antique brass, marigold petals, soft candle light, short ink engraving and fine stipple. Wide 3:1 canvas with TWO clearly separated groups and generous transparent center. LEFT THIRD: two short lit ivory candles on a low antique-brass holder and a compact patch of orange marigolds, burgundy cloth/lace detail, candle reflections on small stone base. RIGHT THIRD: one beautiful sugar skull with coherent sockets and regular jaw, compact orange marigolds, one small static ivory candle off to the side, small piece of carved altar stone. Keep each group compact, low and visibly volumetric, all parts inside canvas, no tall flames, no extra portrait or whole altar, no random inscriptions or pseudoscript. Each is readable when proportionally fitted in 88x72 pixels below a phone slot board. The groups are physically independent, center 35% of canvas COMPLETELY transparent for UI text, no background or scenery. Clean TRUE alpha around each silhouette, soft narrow glow and contact shadow, no rectangular shadow/glow card or opaque haze. All skull, flowers and flame forms coherent. Palette matched exactly to approved B scene.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-d789b351-d599-48a2-acc8-fd6074f4fc55.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "flag-orange",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1e/sources/flag-pink-connected.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Image 1 is EDIT TARGET: one physically connected fuchsia paper papel-picado flag sprite, all cutout eye and nose rings connected by thin paper support webs. Change ONLY the paper dye from pink to warm orange #F59A22. Preserve the exact canvas/framing, one pennant silhouette, fibre texture, delicate engraving, folds, scalloped zigzag edge, every skull hole and supporting bridge, lighting/shading and clean alpha. Amber orange, retain gentle warm edge lighting without becoming red. All holes and exterior remain genuinely transparent. Do not add another flag or offset outline, rope, background, new pattern, letters, numbers, pseudo-text or white grunge scratches. It is the same paper asset and carving, just a dye-color variant.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-f6738a9d-eb27-44c2-8c59-c2db6d95ae19.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "flag-teal",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1e/sources/flag-pink-connected.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Image 1 is EDIT TARGET: one physically connected fuchsia paper papel-picado flag sprite, all cutout eye and nose rings connected by thin paper support webs. Change ONLY the paper dye from pink to turquoise #2CADA6. Preserve the exact canvas/framing, one pennant silhouette, fibre texture, delicate engraving, folds, scalloped zigzag edge, every skull hole and supporting bridge, lighting/shading and clean alpha. Turquoise blue-green, retain restrained warm side-light but most paper reads teal. All holes and exterior remain genuinely transparent. Do not add another flag or offset outline, rope, background, new pattern, letters, numbers, pseudo-text or white grunge scratches. It is the same paper asset and carving, just a dye-color variant.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-93f91d58-6f2c-4158-a9ce-6b7d8420afaf.png",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "mobile-FS-objects",
+    "transparent_background": true,
+    "refs": [
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/fs-graves.png",
+      "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/reports/phase3-art-direction/review-1d/sources/fs-far.png"
+    ],
+    "prompt": "Use case: stylized-concept. Asset type: TWO small NIGHT CEMETERY detail cutouts for a phone slot, on one transparent wide 3:1 canvas. Image 1 is the approved engraved grave/candle material reference. Image 2 is only teal moonlight/atmosphere reference. Same Queen A engraver, weathered carved stone, tactile bone/gold detail, turquoise moon edge-light and warm static candle reflections. LEFT THIRD: one LOW compact gravestone with a complete arched top and delicate carved botanical rosette, two SHORT lit ivory candles at its sides and restrained marigolds on a small stone base. RIGHT THIRD: one low compact engraved gravestone, one short static ivory candle and a few marigolds, a small sugar skull at the foot. TWO independent groups with the middle 35% of canvas COMPLETELY transparent for UI text. Each whole group inside the canvas with clean margins. They must read when proportionally fitted in 88x72 pixels below a phone slot board; no tall thin tombs, no extra architecture, full cemetery or figures. No names, letters, dates, inscriptions or pseudo-writing on stones; only botanical relief, coherent cut forms. True clean transparent alpha outside, soft narrow warm glow/contact shadow, no black or colored rectangle or opaque mist. Preserve detailed print/engraved style, not a stock vector or CGI.",
+    "source": "/Users/andriinorenko/.codex/generated_images/01a0f025-0998-7610-aa52-3922265b1e13/exec-7a48b3fb-9d6a-4865-8668-0b130f85373f.png",
+    "tool": "built-in image_gen"
+  }
+]

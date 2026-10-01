@@ -1,0 +1,694 @@
+{
+  "scope": "Stage 1e review only",
+  "sources": [
+    {
+      "id": "joker-B-hand",
+      "file": "sources/joker-B-hand.png",
+      "size": [
+        1381,
+        1139
+      ],
+      "alpha": false,
+      "sha256": "82d31ab5533dd097c55383688e9b7ae489c138d372c850edd143ee8579f30c32",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "base-B-far-lit",
+      "file": "sources/base-B-far-lit.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "sha256": "269b4cd3f9e59dcff270dc6ebdaeb67293b5cac1d5d47cdfbc949dbad527aa1e",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "flag-pink",
+      "file": "sources/flag-pink.png",
+      "size": [
+        1145,
+        1374
+      ],
+      "alpha": true,
+      "sha256": "6bf285ca586d86da9116090cbc3ccdf49c7e741a3033d835bc5c1a8b40f781dc",
+      "selected": false,
+      "note": "Rejected draft: unsupported eye/nose islands. Corrected in flag-pink-connected."
+    },
+    {
+      "id": "flag-pink-connected",
+      "file": "sources/flag-pink-connected.png",
+      "size": [
+        1145,
+        1374
+      ],
+      "alpha": true,
+      "sha256": "b7610b226a6f0ba58e86dc159b455d09f9554369582131cb4a4353dad5e3a59a",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "base-B-ofrenda-soft",
+      "file": "sources/base-B-ofrenda-soft.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "sha256": "b6d3625c728f9567803ec459b368eb89c590ffd1bd4d59984b4412c3d1711471",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "mobile-base-objects",
+      "file": "sources/mobile-base-objects.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true,
+      "sha256": "960c1d2512c99a609114faca065ee95390e281fba0a59a524f932e1ed7754f0a",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "flag-orange",
+      "file": "sources/flag-orange.png",
+      "size": [
+        1145,
+        1374
+      ],
+      "alpha": true,
+      "sha256": "c1f402cfc95f6f855a8d4df396ba3d8812c1cba1a17502a7950fb6d6110ad00b",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "flag-teal",
+      "file": "sources/flag-teal.png",
+      "size": [
+        1145,
+        1374
+      ],
+      "alpha": true,
+      "sha256": "e4dfcd12b7fa73de717f56e97810002d963b6e115a6ded9953e4015d7d41354b",
+      "selected": true,
+      "note": null
+    },
+    {
+      "id": "mobile-FS-objects",
+      "file": "sources/mobile-FS-objects.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true,
+      "sha256": "6c54c5133d9848f48593e3d63ef2c71d08d54168e63bad69dd66032ca88dcfd7",
+      "selected": true,
+      "note": null
+    }
+  ],
+  "variants": {
+    "B": {
+      "world": [
+        1920,
+        1080
+      ],
+      "principal": {
+        "left": 70,
+        "top": 310,
+        "width": 420,
+        "height": 630
+      },
+      "portraitNativeCrop": {
+        "left": 700,
+        "top": 0,
+        "width": 434,
+        "height": 941
+      },
+      "mobileObjects": [
+        {
+          "left": 3,
+          "top": 647,
+          "width": 88,
+          "height": 74
+        },
+        {
+          "left": 299,
+          "top": 647,
+          "width": 88,
+          "height": 74
+        }
+      ],
+      "middleVisibleOnPortrait": true,
+      "uiExclusion": [
+        {
+          "left": 0,
+          "top": 84,
+          "width": 390,
+          "height": 555
+        },
+        {
+          "left": 110,
+          "top": 642,
+          "width": 170,
+          "height": 48
+        },
+        {
+          "left": 0,
+          "top": 723,
+          "width": 390,
+          "height": 121
+        }
+      ],
+      "layers": [
+        {
+          "name": "far",
+          "desktop": "layers/B/desktop-far.webp",
+          "portrait": "layers/B/portrait-far.webp"
+        },
+        {
+          "name": "middle",
+          "desktop": "layers/B/desktop-middle.webp",
+          "portrait": "layers/B/portrait-middle.webp"
+        },
+        {
+          "name": "front",
+          "desktop": "layers/B/desktop-front.webp",
+          "portrait": "layers/B/portrait-front.webp"
+        }
+      ],
+      "parallax": {
+        "far": 2,
+        "middle": 4,
+        "front": 6
+      }
+    },
+    "FS": {
+      "world": [
+        1920,
+        1080
+      ],
+      "principal": {
+        "left": 75,
+        "top": 545,
+        "width": 490,
+        "height": 367
+      },
+      "portraitNativeCrop": {
+        "left": 610,
+        "top": 0,
+        "width": 434,
+        "height": 941
+      },
+      "mobileObjects": [
+        {
+          "left": 3,
+          "top": 647,
+          "width": 88,
+          "height": 74
+        },
+        {
+          "left": 299,
+          "top": 647,
+          "width": 88,
+          "height": 74
+        }
+      ],
+      "middleVisibleOnPortrait": true,
+      "uiExclusion": [
+        {
+          "left": 0,
+          "top": 84,
+          "width": 390,
+          "height": 555
+        },
+        {
+          "left": 110,
+          "top": 642,
+          "width": 170,
+          "height": 48
+        },
+        {
+          "left": 0,
+          "top": 723,
+          "width": 390,
+          "height": 121
+        }
+      ],
+      "layers": [
+        {
+          "name": "far",
+          "desktop": "layers/FS/desktop-far.webp",
+          "portrait": "layers/FS/portrait-far.webp"
+        },
+        {
+          "name": "middle",
+          "desktop": "layers/FS/desktop-middle.webp",
+          "portrait": "layers/FS/portrait-middle.webp"
+        },
+        {
+          "name": "front",
+          "desktop": "layers/FS/desktop-front.webp",
+          "portrait": "layers/FS/portrait-front.webp"
+        }
+      ],
+      "parallax": {
+        "far": 2,
+        "middle": 4,
+        "front": 6
+      }
+    }
+  },
+  "primaryBounds": {
+    "base": {
+      "left": 70,
+      "top": 310,
+      "width": 420,
+      "height": 630
+    },
+    "fs": {
+      "left": 75,
+      "top": 545,
+      "width": 490,
+      "height": 367
+    }
+  },
+  "joker": {
+    "original": "../review-1d/sources/joker-B.png",
+    "originalSha256": "11ae4c06bc78f29cbce5d5e64a18d614126b731cb4b8a2f0453a82c59eccbb09",
+    "editedCrop": "sources/joker-B-hand.png",
+    "roi": {
+      "left": 465,
+      "top": 930,
+      "width": 285,
+      "height": 235
+    },
+    "feather": 7,
+    "outsideRoiChangedPixels": 0
+  },
+  "frame": {
+    "source": "../phase2b-frame-2026-09-30/sources/frame.png",
+    "sha256": "601b1ca20bfb3c70a8b44fe4f500c3286e4c4279abb9bb6f182ef15d365a494c",
+    "sourceBounds": {
+      "left": 17,
+      "top": 22,
+      "width": 1003,
+      "height": 1449
+    },
+    "sliceCorner": 240,
+    "sliceRailTopBottom": 70,
+    "sliceRailSides": 100,
+    "method": "Raster 9-slice with separately aspect-preserved top/bottom centre ornaments (12 segments). Full-width rails including the inner gold seam; whole corners. No paint, tracing, erasure or ornament removal.",
+    "diagonalHatchRemoved": false,
+    "candidates": 1,
+    "variants": {
+      "desktop": {
+        "size": [
+          700,
+          954
+        ],
+        "corner": 120,
+        "railTopBottom": 35,
+        "railSides": 50,
+        "rosetteAspectError": 0,
+        "segments": [
+          {
+            "name": "nw",
+            "source": {
+              "left": 0,
+              "top": 0,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              0,
+              0,
+              120,
+              120
+            ]
+          },
+          {
+            "name": "ne",
+            "source": {
+              "left": 763,
+              "top": 0,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              580,
+              0,
+              120,
+              120
+            ]
+          },
+          {
+            "name": "sw",
+            "source": {
+              "left": 0,
+              "top": 1209,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              0,
+              834,
+              120,
+              120
+            ]
+          },
+          {
+            "name": "se",
+            "source": {
+              "left": 763,
+              "top": 1209,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              580,
+              834,
+              120,
+              120
+            ]
+          },
+          {
+            "name": "w",
+            "source": {
+              "left": 0,
+              "top": 240,
+              "width": 100,
+              "height": 969
+            },
+            "destination": [
+              0,
+              120,
+              50,
+              714
+            ]
+          },
+          {
+            "name": "e",
+            "source": {
+              "left": 903,
+              "top": 240,
+              "width": 100,
+              "height": 969
+            },
+            "destination": [
+              650,
+              120,
+              50,
+              714
+            ]
+          },
+          {
+            "name": "n-left",
+            "source": {
+              "left": 240,
+              "top": 0,
+              "width": 190,
+              "height": 70
+            },
+            "destination": [
+              120,
+              0,
+              197,
+              35
+            ]
+          },
+          {
+            "name": "n-rosette",
+            "source": {
+              "left": 430,
+              "top": 0,
+              "width": 130,
+              "height": 70
+            },
+            "destination": [
+              317,
+              0,
+              65,
+              35
+            ]
+          },
+          {
+            "name": "n-right",
+            "source": {
+              "left": 560,
+              "top": 0,
+              "width": 203,
+              "height": 70
+            },
+            "destination": [
+              382,
+              0,
+              198,
+              35
+            ]
+          },
+          {
+            "name": "s-left",
+            "source": {
+              "left": 240,
+              "top": 1379,
+              "width": 190,
+              "height": 70
+            },
+            "destination": [
+              120,
+              919,
+              197,
+              35
+            ]
+          },
+          {
+            "name": "s-rosette",
+            "source": {
+              "left": 430,
+              "top": 1379,
+              "width": 130,
+              "height": 70
+            },
+            "destination": [
+              317,
+              919,
+              65,
+              35
+            ]
+          },
+          {
+            "name": "s-right",
+            "source": {
+              "left": 560,
+              "top": 1379,
+              "width": 203,
+              "height": 70
+            },
+            "destination": [
+              382,
+              919,
+              198,
+              35
+            ]
+          }
+        ]
+      },
+      "portrait": {
+        "size": [
+          390,
+          555
+        ],
+        "corner": 60,
+        "railTopBottom": 18,
+        "railSides": 25,
+        "rosetteAspectError": 0.023809523809523947,
+        "segments": [
+          {
+            "name": "nw",
+            "source": {
+              "left": 0,
+              "top": 0,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              0,
+              0,
+              60,
+              60
+            ]
+          },
+          {
+            "name": "ne",
+            "source": {
+              "left": 763,
+              "top": 0,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              330,
+              0,
+              60,
+              60
+            ]
+          },
+          {
+            "name": "sw",
+            "source": {
+              "left": 0,
+              "top": 1209,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              0,
+              495,
+              60,
+              60
+            ]
+          },
+          {
+            "name": "se",
+            "source": {
+              "left": 763,
+              "top": 1209,
+              "width": 240,
+              "height": 240
+            },
+            "destination": [
+              330,
+              495,
+              60,
+              60
+            ]
+          },
+          {
+            "name": "w",
+            "source": {
+              "left": 0,
+              "top": 240,
+              "width": 100,
+              "height": 969
+            },
+            "destination": [
+              0,
+              60,
+              25,
+              435
+            ]
+          },
+          {
+            "name": "e",
+            "source": {
+              "left": 903,
+              "top": 240,
+              "width": 100,
+              "height": 969
+            },
+            "destination": [
+              365,
+              60,
+              25,
+              435
+            ]
+          },
+          {
+            "name": "n-left",
+            "source": {
+              "left": 240,
+              "top": 0,
+              "width": 190,
+              "height": 70
+            },
+            "destination": [
+              60,
+              0,
+              118,
+              18
+            ]
+          },
+          {
+            "name": "n-rosette",
+            "source": {
+              "left": 430,
+              "top": 0,
+              "width": 130,
+              "height": 70
+            },
+            "destination": [
+              178,
+              0,
+              33,
+              18
+            ]
+          },
+          {
+            "name": "n-right",
+            "source": {
+              "left": 560,
+              "top": 0,
+              "width": 203,
+              "height": 70
+            },
+            "destination": [
+              211,
+              0,
+              119,
+              18
+            ]
+          },
+          {
+            "name": "s-left",
+            "source": {
+              "left": 240,
+              "top": 1379,
+              "width": 190,
+              "height": 70
+            },
+            "destination": [
+              60,
+              537,
+              118,
+              18
+            ]
+          },
+          {
+            "name": "s-rosette",
+            "source": {
+              "left": 430,
+              "top": 1379,
+              "width": 130,
+              "height": 70
+            },
+            "destination": [
+              178,
+              537,
+              33,
+              18
+            ]
+          },
+          {
+            "name": "s-right",
+            "source": {
+              "left": 560,
+              "top": 1379,
+              "width": 203,
+              "height": 70
+            },
+            "destination": [
+              211,
+              537,
+              119,
+              18
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
