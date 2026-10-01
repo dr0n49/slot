@@ -1,0 +1,2136 @@
+{
+  "baseCommit": "e900fb3",
+  "capturedAt": "2026-10-01T00:09:22.528Z",
+  "groups": [
+    {
+      "id": "anchor",
+      "dir": "reports/phase1-art-anchor-2026-09-30",
+      "status": "Queen A approved; Queen B reference only. Reaper remains standalone.",
+      "count": 22,
+      "bytes": 19742403
+    },
+    {
+      "id": "courts",
+      "dir": "reports/phase2b-courts-2026-09-30",
+      "status": "12 courts approved after KH/KD neck correction. Not installed.",
+      "count": 75,
+      "bytes": 68829770
+    },
+    {
+      "id": "aces",
+      "dir": "reports/phase2b-aces-2026-09-30",
+      "status": "Four aces without oval approved by continuation. Not installed.",
+      "count": 22,
+      "bytes": 6212934
+    },
+    {
+      "id": "back",
+      "dir": "reports/phase2b-card-back-2026-09-30",
+      "status": "Revised two-scythe card back approved. Not installed.",
+      "count": 6,
+      "bytes": 3088740
+    },
+    {
+      "id": "frame",
+      "dir": "reports/phase2b-frame-2026-09-30",
+      "status": "Nine-slice frame pending previous approval. Not installed.",
+      "count": 13,
+      "bytes": 2739592
+    },
+    {
+      "id": "live-deck",
+      "dir": "frontend/public/assets/cards_v2",
+      "status": "Existing live raster deck. Pixi draws indices separately.",
+      "count": 55,
+      "bytes": 2980521
+    },
+    {
+      "id": "live-scene",
+      "dir": "frontend/public/assets/bg",
+      "status": "Existing background SVGs.",
+      "count": 4,
+      "bytes": 204372
+    },
+    {
+      "id": "live-ui",
+      "dir": "frontend/public/assets/ui",
+      "status": "Existing mixed UI sources.",
+      "count": 8,
+      "bytes": 390218
+    },
+    {
+      "id": "slice-proofs",
+      "dir": "frontend/src/slice/assets",
+      "status": "Only four proof textures, not a complete deck.",
+      "count": 4,
+      "bytes": 282096
+    },
+    {
+      "id": "stake",
+      "dir": "design/thumbnail",
+      "status": "Existing raster promotional assets.",
+      "count": 7,
+      "bytes": 13940880
+    }
+  ],
+  "files": [
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/native-size-proof.png",
+      "bytes": 165455,
+      "format": "png",
+      "width": 760,
+      "height": 454,
+      "alpha": false
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/current-queen-desktop-86x121.png",
+      "bytes": 25645,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/current-queen-portrait-60x85.png",
+      "bytes": 13139,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/material-desktop-86x121.png",
+      "bytes": 15973,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": false
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/material-portrait-60x85.png",
+      "bytes": 7846,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": false
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-a-card-512x720.png",
+      "bytes": 854640,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-a-desktop-86x121.png",
+      "bytes": 25709,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-a-portrait-60x85.png",
+      "bytes": 13192,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-b-card-512x720.png",
+      "bytes": 846277,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-b-desktop-86x121.png",
+      "bytes": 25614,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/queen-b-portrait-60x85.png",
+      "bytes": 13158,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/reaper-card-512x720.png",
+      "bytes": 858316,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/reaper-desktop-86x121.png",
+      "bytes": 27484,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/previews/reaper-portrait-60x85.png",
+      "bytes": 14224,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/sources/card-material.png",
+      "bytes": 2837520,
+      "format": "png",
+      "width": 1058,
+      "height": 1487,
+      "alpha": false
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/sources/queen-a-illustration.png",
+      "bytes": 3077218,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/sources/queen-b-illustration.png",
+      "bytes": 3088035,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/sources/reaper-illustration.png",
+      "bytes": 3415622,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/vectors/queen-a-card-master.svg",
+      "bytes": 1442161,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/vectors/queen-b-card-master.svg",
+      "bytes": 1426321,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/vectors/queen-indices.svg",
+      "bytes": 769,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "anchor",
+      "path": "reports/phase1-art-anchor-2026-09-30/vectors/reaper-card-master.svg",
+      "bytes": 1548085,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/courts-desktop-native.png",
+      "bytes": 243897,
+      "format": "png",
+      "width": 496,
+      "height": 517,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/courts-portrait-native.png",
+      "bytes": 131823,
+      "format": "png",
+      "width": 392,
+      "height": 409,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JC-card-512x720.png",
+      "bytes": 855194,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JC-desktop-86x121.png",
+      "bytes": 25639,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JC-portrait-60x85.png",
+      "bytes": 13142,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JD-card-512x720.png",
+      "bytes": 870396,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JD-desktop-86x121.png",
+      "bytes": 26364,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JD-portrait-60x85.png",
+      "bytes": 13425,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JH-card-512x720.png",
+      "bytes": 879623,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JH-desktop-86x121.png",
+      "bytes": 26511,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JH-portrait-60x85.png",
+      "bytes": 13507,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JS-card-512x720.png",
+      "bytes": 853079,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JS-desktop-86x121.png",
+      "bytes": 25564,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/JS-portrait-60x85.png",
+      "bytes": 13090,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KC-card-512x720.png",
+      "bytes": 862628,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KC-desktop-86x121.png",
+      "bytes": 25738,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KC-portrait-60x85.png",
+      "bytes": 13167,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KD-card-512x720.png",
+      "bytes": 877010,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KD-desktop-86x121.png",
+      "bytes": 26073,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KD-portrait-60x85.png",
+      "bytes": 13254,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KH-card-512x720.png",
+      "bytes": 866690,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KH-desktop-86x121.png",
+      "bytes": 25752,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KH-portrait-60x85.png",
+      "bytes": 13095,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KS-card-512x720.png",
+      "bytes": 861052,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KS-desktop-86x121.png",
+      "bytes": 25477,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/KS-portrait-60x85.png",
+      "bytes": 12984,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QC-card-512x720.png",
+      "bytes": 856689,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QC-desktop-86x121.png",
+      "bytes": 25904,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QC-portrait-60x85.png",
+      "bytes": 13246,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QD-card-512x720.png",
+      "bytes": 863884,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QD-desktop-86x121.png",
+      "bytes": 25907,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QD-portrait-60x85.png",
+      "bytes": 13283,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QH-card-512x720.png",
+      "bytes": 854640,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QH-desktop-86x121.png",
+      "bytes": 25709,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QH-portrait-60x85.png",
+      "bytes": 13192,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QS-card-512x720.png",
+      "bytes": 853104,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QS-desktop-86x121.png",
+      "bytes": 25669,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/previews/QS-portrait-60x85.png",
+      "bytes": 13132,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/JC.png",
+      "bytes": 3100139,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/JD.png",
+      "bytes": 3092070,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/JH.png",
+      "bytes": 3315135,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/JS.png",
+      "bytes": 3074465,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/KC.png",
+      "bytes": 3149854,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/KD.png",
+      "bytes": 3123769,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/KH.png",
+      "bytes": 3053444,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/KS.png",
+      "bytes": 3150540,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/QC.png",
+      "bytes": 3066279,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/QD.png",
+      "bytes": 3158375,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/QH.png",
+      "bytes": 3077218,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/QS.png",
+      "bytes": 3090995,
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/sources/card-material.png",
+      "bytes": 2837520,
+      "format": "png",
+      "width": 1058,
+      "height": 1487,
+      "alpha": false
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JC-card-master.svg",
+      "bytes": 1428741,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JC-indices.svg",
+      "bytes": 773,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JD-card-master.svg",
+      "bytes": 1458103,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JD-indices.svg",
+      "bytes": 591,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JH-card-master.svg",
+      "bytes": 1489791,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JH-indices.svg",
+      "bytes": 719,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JS-card-master.svg",
+      "bytes": 1410631,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/JS-indices.svg",
+      "bytes": 791,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KC-card-master.svg",
+      "bytes": 1448789,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KC-indices.svg",
+      "bytes": 765,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KD-card-master.svg",
+      "bytes": 1461871,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KD-indices.svg",
+      "bytes": 583,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KH-card-master.svg",
+      "bytes": 1438591,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KH-indices.svg",
+      "bytes": 711,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KS-card-master.svg",
+      "bytes": 1431751,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/KS-indices.svg",
+      "bytes": 783,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QC-card-master.svg",
+      "bytes": 1437033,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QC-indices.svg",
+      "bytes": 801,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QD-card-master.svg",
+      "bytes": 1449139,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QD-indices.svg",
+      "bytes": 619,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QH-card-master.svg",
+      "bytes": 1442161,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QH-indices.svg",
+      "bytes": 747,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QS-card-master.svg",
+      "bytes": 1436131,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "courts",
+      "path": "reports/phase2b-courts-2026-09-30/vectors/QS-indices.svg",
+      "bytes": 819,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/aces-desktop-native.png",
+      "bytes": 45608,
+      "format": "png",
+      "width": 480,
+      "height": 216,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/aces-portrait-native.png",
+      "bytes": 27806,
+      "format": "png",
+      "width": 376,
+      "height": 180,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AC-card-512x720.png",
+      "bytes": 594822,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AC-desktop-86x121.png",
+      "bytes": 20519,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AC-portrait-60x85.png",
+      "bytes": 10867,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AD-card-512x720.png",
+      "bytes": 623894,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AD-desktop-86x121.png",
+      "bytes": 19860,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AD-portrait-60x85.png",
+      "bytes": 10400,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AH-card-512x720.png",
+      "bytes": 605525,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AH-desktop-86x121.png",
+      "bytes": 20047,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AH-portrait-60x85.png",
+      "bytes": 10511,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AS-card-512x720.png",
+      "bytes": 606954,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AS-desktop-86x121.png",
+      "bytes": 20695,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/previews/AS-portrait-60x85.png",
+      "bytes": 10909,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": true
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AC-card-master.svg",
+      "bytes": 895964,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AC-suit.svg",
+      "bytes": 184,
+      "format": "svg",
+      "viewBox": "30 140 70 74",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AD-card-master.svg",
+      "bytes": 895740,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AD-suit.svg",
+      "bytes": 128,
+      "format": "svg",
+      "viewBox": "30 140 70 74",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AH-card-master.svg",
+      "bytes": 895996,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AH-suit.svg",
+      "bytes": 192,
+      "format": "svg",
+      "viewBox": "30 140 70 74",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AS-card-master.svg",
+      "bytes": 896096,
+      "format": "svg",
+      "viewBox": "0 0 512 720",
+      "embeddedRaster": true,
+      "patterns": 0
+    },
+    {
+      "group": "aces",
+      "path": "reports/phase2b-aces-2026-09-30/vectors/AS-suit.svg",
+      "bytes": 217,
+      "format": "svg",
+      "viewBox": "30 140 70 74",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/card-back-desktop-native.png",
+      "bytes": 55166,
+      "format": "png",
+      "width": 256,
+      "height": 220,
+      "alpha": true
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/card-back-portrait-native.png",
+      "bytes": 30069,
+      "format": "png",
+      "width": 204,
+      "height": 184,
+      "alpha": true
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/previews/card-back-512x720.png",
+      "bytes": 653509,
+      "format": "png",
+      "width": 512,
+      "height": 720,
+      "alpha": false
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/previews/card-back-desktop-86x121.png",
+      "bytes": 21720,
+      "format": "png",
+      "width": 86,
+      "height": 121,
+      "alpha": false
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/previews/card-back-portrait-60x85.png",
+      "bytes": 11017,
+      "format": "png",
+      "width": 60,
+      "height": 85,
+      "alpha": false
+    },
+    {
+      "group": "back",
+      "path": "reports/phase2b-card-back-2026-09-30/sources/card-back.png",
+      "bytes": 2317259,
+      "format": "png",
+      "width": 1058,
+      "height": 1487,
+      "alpha": false
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/frame-desktop-native.png",
+      "bytes": 478925,
+      "format": "png",
+      "width": 564,
+      "height": 834,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/frame-portrait-native.png",
+      "bytes": 253310,
+      "format": "png",
+      "width": 389,
+      "height": 589,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/previews/frame-desktop-554x784.png",
+      "bytes": 98880,
+      "format": "png",
+      "width": 554,
+      "height": 784,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/previews/frame-portrait-379x539.png",
+      "bytes": 50010,
+      "format": "png",
+      "width": 379,
+      "height": 539,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/e.png",
+      "bytes": 208118,
+      "format": "png",
+      "width": 70,
+      "height": 1038,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/n.png",
+      "bytes": 103760,
+      "format": "png",
+      "width": 589,
+      "height": 70,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/ne.png",
+      "bytes": 83686,
+      "format": "png",
+      "width": 200,
+      "height": 200,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/nw.png",
+      "bytes": 85063,
+      "format": "png",
+      "width": 200,
+      "height": 200,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/s.png",
+      "bytes": 107582,
+      "format": "png",
+      "width": 589,
+      "height": 70,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/se.png",
+      "bytes": 83529,
+      "format": "png",
+      "width": 200,
+      "height": 200,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/sw.png",
+      "bytes": 83532,
+      "format": "png",
+      "width": 200,
+      "height": 200,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/slices/w.png",
+      "bytes": 204469,
+      "format": "png",
+      "width": 70,
+      "height": 1038,
+      "alpha": true
+    },
+    {
+      "group": "frame",
+      "path": "reports/phase2b-frame-2026-09-30/sources/frame.png",
+      "bytes": 898728,
+      "format": "png",
+      "width": 1048,
+      "height": 1501,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/2C.webp",
+      "bytes": 35036,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/2D.webp",
+      "bytes": 34730,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/2H.webp",
+      "bytes": 34528,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/2S.webp",
+      "bytes": 34120,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/3C.webp",
+      "bytes": 35978,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/3D.webp",
+      "bytes": 35772,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/3H.webp",
+      "bytes": 35794,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/3S.webp",
+      "bytes": 34694,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/4C.webp",
+      "bytes": 37368,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/4D.webp",
+      "bytes": 36202,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/4H.webp",
+      "bytes": 37068,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/4S.webp",
+      "bytes": 35824,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/5C.webp",
+      "bytes": 37862,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/5D.webp",
+      "bytes": 37054,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/5H.webp",
+      "bytes": 37622,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/5S.webp",
+      "bytes": 36674,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/6C.webp",
+      "bytes": 40324,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/6D.webp",
+      "bytes": 37392,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/6H.webp",
+      "bytes": 38060,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/6S.webp",
+      "bytes": 38346,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/7C.webp",
+      "bytes": 40182,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/7D.webp",
+      "bytes": 38298,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/7H.webp",
+      "bytes": 38894,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/7S.webp",
+      "bytes": 38320,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/8C.webp",
+      "bytes": 42378,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/8D.webp",
+      "bytes": 40430,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/8H.webp",
+      "bytes": 40218,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/8S.webp",
+      "bytes": 40244,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/9C.webp",
+      "bytes": 42946,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/9D.webp",
+      "bytes": 40814,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/9H.webp",
+      "bytes": 40940,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/9S.webp",
+      "bytes": 40956,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/AC.webp",
+      "bytes": 45562,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/AD.webp",
+      "bytes": 44042,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/AH.webp",
+      "bytes": 45052,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/AS.webp",
+      "bytes": 44078,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JC.webp",
+      "bytes": 55234,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JD.webp",
+      "bytes": 66276,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JH.webp",
+      "bytes": 68350,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JOKER.webp",
+      "bytes": 58582,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JOKER_gold.webp",
+      "bytes": 61636,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/JS.webp",
+      "bytes": 55440,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/KC.webp",
+      "bytes": 56624,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/KD.webp",
+      "bytes": 76546,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/KH.webp",
+      "bytes": 72036,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/KS.webp",
+      "bytes": 63122,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/QC.webp",
+      "bytes": 62682,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/QD.webp",
+      "bytes": 68948,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/QH.webp",
+      "bytes": 66776,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/QS.webp",
+      "bytes": 63808,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/TC.webp",
+      "bytes": 44434,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/TD.webp",
+      "bytes": 40998,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/TH.webp",
+      "bytes": 41228,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/TS.webp",
+      "bytes": 41736,
+      "format": "webp",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-deck",
+      "path": "frontend/public/assets/cards_v2/card_back.png",
+      "bytes": 522263,
+      "format": "png",
+      "width": 444,
+      "height": 624,
+      "alpha": true
+    },
+    {
+      "group": "live-scene",
+      "path": "frontend/public/assets/bg/muerta-bg-bonus.svg",
+      "bytes": 52019,
+      "format": "svg",
+      "viewBox": "0 0 1600 900",
+      "embeddedRaster": false,
+      "patterns": 2
+    },
+    {
+      "group": "live-scene",
+      "path": "frontend/public/assets/bg/muerta-bg-portrait-bonus.svg",
+      "bytes": 50167,
+      "format": "svg",
+      "viewBox": "0 0 900 1600",
+      "embeddedRaster": false,
+      "patterns": 2
+    },
+    {
+      "group": "live-scene",
+      "path": "frontend/public/assets/bg/muerta-bg-portrait.svg",
+      "bytes": 50167,
+      "format": "svg",
+      "viewBox": "0 0 900 1600",
+      "embeddedRaster": false,
+      "patterns": 2
+    },
+    {
+      "group": "live-scene",
+      "path": "frontend/public/assets/bg/muerta-bg.svg",
+      "bytes": 52019,
+      "format": "svg",
+      "viewBox": "0 0 1600 900",
+      "embeddedRaster": false,
+      "patterns": 2
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/bank-plate.svg",
+      "bytes": 8685,
+      "format": "svg",
+      "viewBox": "0 0 200 120",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/calavera.svg",
+      "bytes": 9444,
+      "format": "svg",
+      "viewBox": "0 0 100 120",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/catrina.png",
+      "bytes": 259684,
+      "format": "png",
+      "width": 358,
+      "height": 542,
+      "alpha": true
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/fs-cloud.png",
+      "bytes": 93167,
+      "format": "png",
+      "width": 1598,
+      "height": 798,
+      "alpha": true
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/fs-cloud.svg",
+      "bytes": 637,
+      "format": "svg",
+      "viewBox": "0 0 200 120",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/ink-plate.svg",
+      "bytes": 9691,
+      "format": "svg",
+      "viewBox": "0 0 200 120",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/star-ink.svg",
+      "bytes": 8227,
+      "format": "svg",
+      "viewBox": "0 0 100 100",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "live-ui",
+      "path": "frontend/public/assets/ui/star.svg",
+      "bytes": 683,
+      "format": "svg",
+      "viewBox": "0 0 100 100",
+      "embeddedRaster": false,
+      "patterns": 0
+    },
+    {
+      "group": "slice-proofs",
+      "path": "frontend/src/slice/assets/corner-proof.webp",
+      "bytes": 2984,
+      "format": "webp",
+      "width": 80,
+      "height": 80,
+      "alpha": false
+    },
+    {
+      "group": "slice-proofs",
+      "path": "frontend/src/slice/assets/paper.webp",
+      "bytes": 94710,
+      "format": "webp",
+      "width": 512,
+      "height": 720,
+      "alpha": false
+    },
+    {
+      "group": "slice-proofs",
+      "path": "frontend/src/slice/assets/queen-proof.webp",
+      "bytes": 88630,
+      "format": "webp",
+      "width": 246,
+      "height": 602,
+      "alpha": false
+    },
+    {
+      "group": "slice-proofs",
+      "path": "frontend/src/slice/assets/reaper-proof.webp",
+      "bytes": 95772,
+      "format": "webp",
+      "width": 355,
+      "height": 494,
+      "alpha": false
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/1_tile_3x4_background.png",
+      "bytes": 1137671,
+      "format": "png",
+      "width": 1200,
+      "height": 1600,
+      "alpha": false
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/2_tile_3x4_foreground.png",
+      "bytes": 2146858,
+      "format": "png",
+      "width": 1200,
+      "height": 1600,
+      "alpha": true
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/3_tall_9x16_background.png",
+      "bytes": 1567851,
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "alpha": false
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/4_tall_9x16_foreground.png",
+      "bytes": 2308751,
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "alpha": true
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/fan_KQJ_transparent.png",
+      "bytes": 1916916,
+      "format": "png",
+      "width": 1904,
+      "height": 1229,
+      "alpha": true
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/preview_tall_9x16.png",
+      "bytes": 2330305,
+      "format": "png",
+      "width": 1080,
+      "height": 1920,
+      "alpha": false
+    },
+    {
+      "group": "stake",
+      "path": "design/thumbnail/preview_tile_3x4.png",
+      "bytes": 2532528,
+      "format": "png",
+      "width": 1200,
+      "height": 1600,
+      "alpha": false
+    }
+  ],
+  "branches": [
+    {
+      "branch": "codex/phase-0-5-restore-protect",
+      "artFileCount": 0,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-1-renderer-slice",
+      "artFileCount": 28,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2a-landing-parity",
+      "artFileCount": 28,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2b-aces",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2b-card-back",
+      "artFileCount": 153,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2b-court-set",
+      "artFileCount": 113,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2b-frame",
+      "artFileCount": 171,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2c-live-pixi",
+      "artFileCount": 113,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2d-audio-handoff",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2d-free-audio",
+      "artFileCount": 171,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2e-pixi-anticipation",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2f-presentation",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2g-feature-parity",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2h-reward-closure",
+      "artFileCount": 141,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2i-anticipation-colour",
+      "artFileCount": 153,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2j-wallet-feedback",
+      "artFileCount": 171,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-2k-bonus-beats",
+      "artFileCount": 171,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "codex/phase-3-visual-overhaul",
+      "artFileCount": 171,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "fix/review-anim-audio",
+      "artFileCount": 0,
+      "productionArtSrc": []
+    },
+    {
+      "branch": "main",
+      "artFileCount": 0,
+      "productionArtSrc": []
+    }
+  ],
+  "untrackedMuertaHudReferences": [
+    "Claude outputs/w6/muerta-hud/muerta-hud-bar.png",
+    "Claude outputs/w6/muerta-hud/muerta-hud-computed.json",
+    "Claude outputs/w6/muerta-hud/muerta-landscape.png",
+    "Claude outputs/w6/muerta-hud/muerta-portrait.png",
+    "Claude outputs/w6/muerta-hud/nitro-current-symbols.png"
+  ],
+  "missingDirectories": [
+    "art",
+    "art/src",
+    "frontend/src/assets"
+  ]
+}
