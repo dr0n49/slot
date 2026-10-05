@@ -1,0 +1,458 @@
+{
+  "result": "PASS_WITH_LIMITATIONS",
+  "source": "Corrected source parsed by official unmodified Spine 3.8 runtime; native export compared as raw data",
+  "nativeVersion": "3.8.75",
+  "nativeProjectBytes": 63522,
+  "nativeProjectSha256": "c214c423556815b6ea3ceab18024820761e85071a4cbf83cf6b36586e9fa9815",
+  "checkedAttachments": 134,
+  "preservedGeometryMaxWorld": 0.0002453020158172344,
+  "nativeMaxNumericDifference": 0.005005199999999377,
+  "nativeRuntimeError": "Unsupported skeleton data, please export with a newer version of Spine.",
+  "exportPrecisionNote": "Native JSON export rounds coordinate fields; authoritative corrected setup and native project are also retained.",
+  "pivots": [
+    {
+      "side": "left",
+      "correctedLocal": [
+        -191.225,
+        -253.891
+      ],
+      "nativeExportLocal": [
+        -191.23,
+        -253.89
+      ],
+      "correctedArtworkPx": [
+        190.9998482631571,
+        857.0002090445043
+      ],
+      "targetArtworkPx": [
+        191,
+        857
+      ],
+      "distancePx": 0.0002583092609423234
+    },
+    {
+      "side": "right",
+      "correctedLocal": [
+        328.374,
+        -10.508
+      ],
+      "nativeExportLocal": [
+        328.37,
+        -10.51
+      ],
+      "correctedArtworkPx": [
+        730.999868515805,
+        1182.000181079073
+      ],
+      "targetArtworkPx": [
+        731,
+        1182
+      ],
+      "distancePx": 0.00022378052683009894
+    }
+  ],
+  "poseTests": [
+    {
+      "skin": "default",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 0,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "default",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 617.0695668230148,
+      "sleeveMovementWorld": 375.67487778578845
+    },
+    {
+      "skin": "default",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 2,
+      "maxMovementWorld": 617.0695692516144,
+      "sleeveMovementWorld": 375.67488763163936
+    },
+    {
+      "skin": "default",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 511.64114598517716,
+      "sleeveMovementWorld": 497.9820066113064
+    },
+    {
+      "skin": "default",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 511.64120458542993,
+      "sleeveMovementWorld": 497.9819133676618
+    },
+    {
+      "skin": "default",
+      "pose": "left-wrist-45",
+      "bone": "left_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 550.3252672380286,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "default",
+      "pose": "right-wrist-45",
+      "bone": "right_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 392.43359496692403,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "default",
+      "pose": "chest-15",
+      "bone": "chest",
+      "degrees": 15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 357.82171115946284,
+      "sleeveMovementWorld": 357.82171115946284
+    },
+    {
+      "skin": "default",
+      "pose": "chest-minus15",
+      "bone": "chest",
+      "degrees": -15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 357.82192397524767,
+      "sleeveMovementWorld": 357.82192397524767
+    },
+    {
+      "skin": "fs",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 0,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 617.0695668230148,
+      "sleeveMovementWorld": 375.67487778578845
+    },
+    {
+      "skin": "fs",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 2,
+      "maxMovementWorld": 617.0695692516144,
+      "sleeveMovementWorld": 375.67488763163936
+    },
+    {
+      "skin": "fs",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 511.64114598517716,
+      "sleeveMovementWorld": 497.9820066113064
+    },
+    {
+      "skin": "fs",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 511.64120458542993,
+      "sleeveMovementWorld": 497.9819133676618
+    },
+    {
+      "skin": "fs",
+      "pose": "left-wrist-45",
+      "bone": "left_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 550.3252672380286,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs",
+      "pose": "right-wrist-45",
+      "bone": "right_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 392.43359496692403,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs",
+      "pose": "chest-15",
+      "bone": "chest",
+      "degrees": 15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 357.82171115946284,
+      "sleeveMovementWorld": 357.82171115946284
+    },
+    {
+      "skin": "fs",
+      "pose": "chest-minus15",
+      "bone": "chest",
+      "degrees": -15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 357.82192397524767,
+      "sleeveMovementWorld": 357.82192397524767
+    },
+    {
+      "skin": "idle",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 0,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "idle",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 459.5647198085437,
+      "sleeveMovementWorld": 375.67487778578845
+    },
+    {
+      "skin": "idle",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 2,
+      "maxMovementWorld": 459.56462982353446,
+      "sleeveMovementWorld": 375.67488763163936
+    },
+    {
+      "skin": "idle",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 589.7995882184277,
+      "sleeveMovementWorld": 497.9820066113064
+    },
+    {
+      "skin": "idle",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 589.7996180614183,
+      "sleeveMovementWorld": 497.9819133676618
+    },
+    {
+      "skin": "idle",
+      "pose": "left-wrist-45",
+      "bone": "left_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 367.9579320783116,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "idle",
+      "pose": "right-wrist-45",
+      "bone": "right_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 373.77116125118374,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "idle",
+      "pose": "chest-15",
+      "bone": "chest",
+      "degrees": 15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 377.56787427213897,
+      "sleeveMovementWorld": 357.82171115946284
+    },
+    {
+      "skin": "idle",
+      "pose": "chest-minus15",
+      "bone": "chest",
+      "degrees": -15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 377.56782026991164,
+      "sleeveMovementWorld": 357.82192397524767
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 0,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 459.5647198085437,
+      "sleeveMovementWorld": 375.67487778578845
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 2,
+      "maxMovementWorld": 459.56462982353446,
+      "sleeveMovementWorld": 375.67488763163936
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 589.7995882184277,
+      "sleeveMovementWorld": 497.9820066113064
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 589.7996180614183,
+      "sleeveMovementWorld": 497.9819133676618
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "left-wrist-45",
+      "bone": "left_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 367.9579320783116,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "right-wrist-45",
+      "bone": "right_wrist",
+      "degrees": 45,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 373.77116125118374,
+      "sleeveMovementWorld": 0
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "chest-15",
+      "bone": "chest",
+      "degrees": 15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 377.56787427213897,
+      "sleeveMovementWorld": 357.82171115946284
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "chest-minus15",
+      "bone": "chest",
+      "degrees": -15,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "foldedTriangles": 0,
+      "maxMovementWorld": 377.56782026991164,
+      "sleeveMovementWorld": 357.82192397524767
+    }
+  ],
+  "animations": 0,
+  "missingTextureFiles": [],
+  "clippingCertified": false,
+  "editorWindowVerified": false,
+  "autoWeightPerformed": false,
+  "remaining": "Native Editor screenshots, Auto Weight/paint refinement and visual clipping certification remain pending. Native 3.8.75 export must be re-exported with a compatible newer 3.8 patch for this runtime."
+}

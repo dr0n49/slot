@@ -1,4 +1,8 @@
-# Reaper Dealer — P2 rebuild from the original
+# Reaper Dealer — P3 import fix, P2 artwork history
+
+P3-0 (2026-10-05): wrist pivots corrected and a real `character-a-p3.spine` created by Spine Professional 3.8.75 CLI. See `qa/p3-0-fixed/README.md` for checks and remaining deformation failures. **P3-0 is not complete: Auto Weight/painting and native Editor verification remain pending. No animations were started.** Current setup is `character-a-p3-setup.json` (also `character-a-setup.json`); the original P2 source is `character-a-setup-backup.json`. Current review: `previews/p3-0.html`. The P2 material below describes the original delivery before wrist correction.
+
+## P2 rebuild from the original
 
 2026-10-05 · branch `codex/character-a-p2-rebuild` · target **Spine Professional 3.8.75**.
 The original card-holding pose and visible silhouette are restored. This is an art slicing and

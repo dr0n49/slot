@@ -1,0 +1,19 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P3-0 · проверка pivots</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#15171b;color:#e7e4dd;font:15px/1.45 system-ui,sans-serif}main{max-width:1600px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 4px}p{margin:0 0 14px;color:#b7bbc1}a{color:#f0c77e}.toolbar{display:flex;gap:20px;align-items:center;flex-wrap:wrap;padding:12px;background:#23262c;margin:16px 0}label{display:flex;gap:8px;align-items:center}select{color:#eee;background:#16191e;border:1px solid #58606a;padding:6px;font:inherit}.review{display:grid;grid-template-columns:300px 1fr;gap:18px}.tree{background:#202329;padding:14px;font:12px/16px ui-monospace,monospace}.row{white-space:nowrap;color:#a9b3c2}.row.wrist{color:#ffd38a;font-weight:700}.row.active{color:#8ee1d7}.canvas-wrap{position:relative;background:#22252b;height:810px;overflow:hidden}canvas{position:absolute;inset:0;width:100%;height:100%}#overlay{pointer-events:none}.status{padding:10px 12px;background:#202329;color:#c7e9dc;margin:12px 0}.notice{border-left:3px solid #dca75e;background:#262322;padding:10px 14px;color:#e5caa2}table{font-size:13px;border-collapse:collapse;width:100%;margin-top:12px}td,th{text-align:left;padding:8px 12px;border-bottom:1px solid #454951}th{color:#aab5c2;font-weight:500}@media(max-width:850px){.review{grid-template-columns:1fr}.tree{display:none}.canvas-wrap{height:700px}.toolbar{gap:10px}main{padding:16px}}
+</style><main>
+<h1>P3-0 · запястья на artwork</h1>
+<p>Spine 3.8 runtime · проверка исправленного JSON · 0 анимаций</p>
+<div class="notice">Это просмотр через runtime, а не окно Spine Editor. Проект .spine создан и повторно прочитан CLI Spine 3.8.75. Auto Weight и проверка clipping в редакторе ещё не выполнены. Runtime отклоняет нативный экспорт с версией 3.8.75; здесь отображается исправленный JSON без подмены версии.</div>
+<div class="toolbar">
+<label>Данные <select id="source"><option value="fixed">Исправленный JSON</option><option value="before">P2 до коррекции</option></select></label>
+<label>Skin <select id="skin"><option>default</option><option>fs</option><option>idle</option><option>fs_idle</option></select></label>
+<label>Поза <select id="pose"><option value="setup">Setup</option><option value="left-45">left_elbow +45°</option><option value="left-minus45">left_elbow −45°</option><option value="right-45">right_elbow +45°</option><option value="right-minus45">right_elbow −45°</option><option value="left-wrist-45">left_wrist +45°</option><option value="right-wrist-45">right_wrist +45°</option><option value="chest-15">chest +15°</option><option value="chest-minus15">chest −15°</option></select></label>
+<label><input id="bones" type="checkbox" checked>Кости</label><label><input id="meshes" type="checkbox">Сетки</label>
+</div>
+<div class="review"><div class="tree"><strong>Skeleton tree · 45 bones</strong><div id="tree"></div></div><div class="canvas-wrap"><canvas id="rig" width="1180" height="900"></canvas><canvas id="overlay" width="1180" height="900"></canvas></div></div>
+<div id="status" class="status">Загрузка…</div>
+<table><thead><tr><th>Кость</th><th>Local X</th><th>Local Y</th><th>Artwork X / Y</th></tr></thead><tbody id="pivots"></tbody></table>
+<p style="margin-top:14px"><a href="../character-a-p3.spine">Нативный .spine</a> · <a href="../character-a-p3-setup.json">Исправленный JSON</a> · <a href="../qa/p3-0-fixed/README.md">Результаты и ограничения</a></p>
+</main><script src="../tools/vendor/spine-core-3.8.js"></script><script src="p3-review.js"></script></html>

@@ -1,6 +1,6 @@
 /* Static review of saved PNG/Spine data. No animation state or keys. */
 (async()=>{
- const [json,reg,qa]=await Promise.all(['../character-a-setup.json','../source/layer-registration.json','../qa/rebuild/pixel-verification.json'].map(p=>fetch(p,{cache:'no-store'}).then(r=>r.json())));
+ const [json,reg,qa]=await Promise.all(['../character-a-setup-backup.json','../source/layer-registration.json','../qa/rebuild/pixel-verification.json'].map(p=>fetch(p,{cache:'no-store'}).then(r=>r.json())));
  document.getElementById('pixel-status').textContent=qa.result==='PASS'?'BASE и FS: 0 изменённых видимых RGBA-пикселей · все существующие кости и IK сохранены':'Проверка не пройдена — см. отчёт';
  const canvas=document.getElementById('rig'),overlay=document.getElementById('bones'),cx=overlay.getContext('2d'),gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false,preserveDrawingBuffer:true});if(!gl)throw Error('WebGL unavailable');
  const vs='attribute vec2 p;attribute vec2 uv;varying vec2 t;uniform vec2 viewport;uniform vec4 camera;void main(){vec2 q=vec2((p.x-camera.x)*camera.z+85.,(camera.y-p.y)*camera.z+40.);gl_Position=vec4(q.x/viewport.x*2.-1.,1.-q.y/viewport.y*2.,0,1);t=uv;}';

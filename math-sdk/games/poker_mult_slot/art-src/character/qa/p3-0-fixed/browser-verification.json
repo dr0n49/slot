@@ -1,0 +1,749 @@
+{
+  "method": "Headless Chromium capture of our local runtime viewer; NOT native Editor UI",
+  "result": "PASS",
+  "states": [
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            87.42269372638214,
+            961.1957088888817
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            337.91731000198126,
+            856.5629828309645
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            882.6020313406891,
+            1190.8628484690305
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            630.0677918243215,
+            1068.534409825476
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "left-wrist-45",
+      "bone": "left_wrist",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "right-wrist-45",
+      "bone": "right_wrist",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "chest-15",
+      "bone": "chest",
+      "degrees": 15,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            249.17885827506163,
+            920.4435305726379
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            854.8949941548349,
+            1094.6071129720017
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "default",
+      "pose": "chest-minus15",
+      "bone": "chest",
+      "degrees": -15,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            151.22357873834164,
+            780.6608318289352
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            588.7073732948073,
+            1234.348981841759
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            87.42269372638214,
+            961.1957088888817
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs",
+      "pose": "left-minus45",
+      "bone": "left_elbow",
+      "degrees": -45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            337.91731000198126,
+            856.5629828309645
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            882.6020313406891,
+            1190.8628484690305
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs",
+      "pose": "right-minus45",
+      "bone": "right_elbow",
+      "degrees": -45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            630.0677918243215,
+            1068.534409825476
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "idle",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "fixed",
+      "skin": "fs_idle",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            -191.225,
+            -253.891
+          ],
+          "artwork": [
+            190.9998482631571,
+            857.0002090445043
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            328.374,
+            -10.508
+          ],
+          "artwork": [
+            730.999868515805,
+            1182.000181079073
+          ]
+        }
+      ]
+    },
+    {
+      "source": "before",
+      "skin": "default",
+      "pose": "setup",
+      "bone": null,
+      "degrees": 0,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            545.23828,
+            0
+          ],
+          "artwork": [
+            98.63848238203349,
+            1318.3043497797878
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            378.71998,
+            0
+          ],
+          "artwork": [
+            724.4235117424037,
+            1212.3565825618234
+          ]
+        }
+      ]
+    },
+    {
+      "source": "before",
+      "skin": "default",
+      "pose": "left-45",
+      "bone": "left_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            545.23828,
+            0
+          ],
+          "artwork": [
+            348.3046453665358,
+            1352.696377795901
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            378.71998,
+            0
+          ],
+          "artwork": [
+            724.4235117424037,
+            1212.3565825618234
+          ]
+        }
+      ]
+    },
+    {
+      "source": "before",
+      "skin": "default",
+      "pose": "right-45",
+      "bone": "right_elbow",
+      "degrees": 45,
+      "bones": 45,
+      "animations": 0,
+      "textureCount": 74,
+      "activeAttachments": 19,
+      "nonfinite": 0,
+      "glError": 0,
+      "wrists": [
+        {
+          "bone": "left_wrist",
+          "local": [
+            545.23828,
+            0
+          ],
+          "artwork": [
+            98.63848238203349,
+            1318.3043497797878
+          ]
+        },
+        {
+          "bone": "right_wrist",
+          "local": [
+            378.71998,
+            0
+          ],
+          "artwork": [
+            899.4170628198162,
+            1216.9782546957322
+          ]
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "nativeEditorScreenshot": false,
+  "autoWeightPerformed": false
+}
