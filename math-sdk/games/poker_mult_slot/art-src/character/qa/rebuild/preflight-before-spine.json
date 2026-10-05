@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "composites": [
+    {
+      "skin": "BASE",
+      "compositor": "libvips linear scRGB; native PNGs at integer offsets, 100% opacity",
+      "changedVisibleRgbaPixels": 0,
+      "maxDelta": 0
+    },
+    {
+      "skin": "FS",
+      "compositor": "libvips linear scRGB; native PNGs at integer offsets, 100% opacity",
+      "changedVisibleRgbaPixels": 0,
+      "maxDelta": 0
+    }
+  ]
+}

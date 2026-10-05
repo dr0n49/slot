@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-04",
+  "tool": "image_gen.imagegen",
+  "transparentBackground": true,
+  "identityReferences": [
+    "docs/overhaul/c2/assets/A-reaper.png",
+    "docs/overhaul/cards-approved/assets/reaper-closeup.png",
+    "docs/overhaul/c2/assets/courts/K-top.png"
+  ],
+  "note": "Original own concept / joker / court used for identity, not the absent reference recording. Native output dimensions are recorded by qa/artwork-check.json. These are creative source paintings; registration, tight trimming, compositing and colour treatments are mechanical downstream steps.",
+  "jobs": [
+    {
+      "id": "identity-master-v1",
+      "file": "identity-master-v1.png",
+      "prompt": "Use case: identity-preserve. Asset type: production character master for Muerta Poker, Spine Professional rigging, concept A Reaper Dealer. Input 1 is the APPROVED character identity and costume reference, input 2 is the game's own gold Reaper skull identity, input 3 is the game's own graphic court-card line/shade reference. Create a new definitive production master of A, genuine transparent background, no scene/no UI. Target a 1600x2800 portrait PNG (2400-3000 px tall master), crisp high-resolution printed edges. Waist-up, narrow tall silhouette, 3/4 view facing RIGHT toward the field, both complete hands visible. Strong oversized sugar-skull head 1.6x normal proportions, recognizably the same ivory skull with oxblood fleur/marigold face markings, symmetrical facial ornament projected naturally in 3/4 view. Black hood with deep oxblood lining, hood front flows as one continuous crown-to-shoulders panel with broad deformation-friendly folds. Long front cloak is a continuous broad panel, no tiny segmented fabric strips. Ornate black/oxblood dealer waistcoat, high upright collar, restrained marigold-gold embroidery and gold trim, one marigold boutonniere with two narrow ribbon tails. Skull neck and shoulders have clear anatomy. Both arms separated from the torso by clean contours; generous cloth at elbows. Near arm (viewer RIGHT) bent at elbow with a complete ivory skeletal hand naturally supporting a compact blank-backed oxblood/gold deck at waist; far arm (viewer LEFT) relaxed at the side, bent gently with a complete relaxed skeletal hand visible beside waist. All hands anatomically coherent with exactly five digits and carefully inked knuckles, no crossed/intertwined fingers. Natural relaxed setup pose, readable shoulder/elbow/wrist pivots. No separate loose card in default master: holding-card swap comes later. Key light warm overhead from TOP LEFT, flat warm ivory value planes, crisp cel shadow bottom right, a subtle edge highlight. Funeral-print/tattoo card illustration, bold ink outlines consistent with card example, clean flat colour and cel shading, NOT photorealism, NOT airbrushed/3D. Keep headwear and all fingers complete; waist-up ends in a deliberate smooth cloak/waistcoat silhouette, not a random rectangular crop. No text, letters, titles, ranks, suit marks, logos, watermark, background, floor, glow fog or shadow outside the silhouette. Preserve the approved character's identity, palette and costume language; refine anatomy and broad continuous panels for production. Output one complete unlabelled master on true alpha."
+    },
+    {
+      "id": "identity-master-v2",
+      "file": "identity-master-v2.png",
+      "prompt": "Use case: precise-object-edit. Asset: final production Reaper Dealer character master on transparent, for layered Spine rigging. Input image is our own identity master, not another studio's art. Preserve exactly the skull face identity, 3/4 direction toward viewer right, oversized head, red-lined black hood, ivory/oxblood/gold funeral-print details, marigold, deck and both hand poses, bold ink and flat cel shading under top-left warm light. Target portrait 1600 x 2800 px, complete silhouette with generous transparent margin around all sides.\nChange only the bottom termination: the lower coat/cape now has a designed, complete curved tapered hem around the waist/upper hip that ends visibly within the canvas. No artwork is clipped by any image edge. Keep both hands completely visible. Do not show legs or feet; this is a waist-up bust. Keep all complete crowns/hood tips/fingers. No background, text or ground shadow. Do not crop the original body to a horizontal rectangle: paint the bottom as a deliberately finished curved silhouette."
+    },
+    {
+      "id": "torso-underpaint",
+      "prompt": "Use case: precise-object-edit. Input: our Reaper Dealer production master. Deliver ONE isolated torso + front cloak underpainting on real transparency for Spine meshes. Remove the head, hood, both arms including hands, deck, marigold flower and its hanging ribbons. Keep exactly the same waistcoat, high gold-rimmed collar, red/gold embroidered chest, both lapels and finished pointed lower cape hem, same 3/4 right-facing perspective and top-left warm cel light. Fill in all hidden chest, shoulders and torso behind those removed objects: continuous complete fabric, no cutouts at shoulders or neck. Full front cape is a single large continuous shape. The upper collar and shoulders must be finished, never clipped. No new designs. Preserve matching ink weight and colours. No background, no text, no shadows outside fabric. Show only this ONE costume piece, large and centred with transparent margin. This is production underpaint, not a diagram.",
+      "file": "torso-underpaint.png"
+    },
+    {
+      "id": "hood-underpaint",
+      "prompt": "Use case: precise-object-edit. Input: own Reaper Dealer master. Isolate ONLY the large red-lined black hood, complete from crown to both shoulder tails as ONE continuous cloth piece for Spine mesh. Remove skull, hair, neck, collar, torso, arms, flower and deck. Keep exact hood silhouette, fold design, 3/4 right-facing angle, bold ink and flat cel shading. Paint hidden inside folds, underside behind face and shoulder overlaps; face opening remains transparent (no black face drawn), but its inner cloth edge is a complete unbroken finished rim with generous extra red/black lining behind the rim. No other parts. The hood has a complete pointed crown and two complete tails, not clipped by canvas. Transparent background and transparent face opening. Warm top-left light, no photorealism, no text, no diagram.",
+      "file": "hood-underpaint.png"
+    },
+    {
+      "id": "face-neck-underpaint",
+      "prompt": "Use case: precise-object-edit. Input: own Reaper Dealer master. Isolate ONLY the same ivory sugar-skull face AND neck as ONE complete anatomical piece. Remove all hood, hair, costume, hands, flower and cards. Complete the skull hidden behind the hood: cranial dome, side cheek and jaw edges; extend the neck down to both clavicles and a small upper-chest overlap underneath the high collar. Keep the same 3/4 right-facing skull, larger head, oxblood floral markings, gold forehead droplet, natural teeth/jaw, black eye sockets and nose, subtle top-left warm flat cel planes. Identity must not change. All skull and neck edges complete and transparent around the silhouette. No new face paint, no text, no background or annotations. Large one isolated part, no other views.",
+      "file": "face-neck-underpaint.png"
+    },
+    {
+      "id": "left-sleeve-underpaint-v1",
+      "prompt": "Use case: precise-object-edit. Input image is our Reaper Dealer. Deliver ONLY the complete far arm sleeve (the sleeve on the LEFT side of the image), isolated on transparent, exactly its relaxed downwards elbow bend. From a rounded complete shoulder cap at top through full elbow to black cuff with two gold bands and flared ivory/red cuff at bottom. No skeleton hand. Complete generous hidden shoulder and underside fabric behind torso and inside the elbow. Black/oxblood fabric with same gold floral embroidery, bold black outline, warm top-left flat cel shading. The shoulder seam, elbow and wrist are all readable and complete, full sleeve is one continuous shape for weighted mesh. Preserve its shape and costume from master; no other arm, no torso, no head, no text. Leave transparent margin all around.",
+      "file": "left-sleeve-underpaint-v1.png"
+    },
+    {
+      "id": "right-sleeve-underpaint",
+      "prompt": "Use case: precise-object-edit. Input our Reaper Dealer. Deliver ONLY the complete near arm sleeve (RIGHT side of input image), isolated on transparent, in the same bent arm pose supporting the deck at waist. Full rounded shoulder cap, complete upper arm, elbow, wrist cuff with two gold bands and flared ivory/red cuff. Hand and cards removed. Paint hidden shoulder fabric and complete under-sleeve; there must be material behind joint areas, no gaps or cropped ends. Oxblood/black and gold matching funeral-print embroidery, bold black outline and warm top-left flat cel planes. ONE continuous mesh-ready sleeve. No other arm, no torso, no head, no text. Complete silhouette, transparent margin.",
+      "file": "right-sleeve-underpaint.png"
+    },
+    {
+      "id": "hands-right-poses",
+      "prompt": "Use case: identity-preserve. Asset: ONE production hand-pose illustration sheet for Spine attachment swaps. Input own Reaper Dealer. Match his IVORY SKELETAL near hand from RIGHT side of master, same ink contour, top-left warm cel light, 3/4 view. 4 separated drawings arranged exactly in a 2x2 grid, each fills own equal cell with generous transparent gap. In every cell show ONE complete same-sized RIGHT skeletal hand, all five digits, complete wrist with a short unbroken forearm stub as overlap, NO SLEEVE. Top-left: relaxed idle hand, fingers gently curved. Top-right: pinching a single blank ivory playing card along its bottom edge, show entire hand and card. Bottom-left: pointing toward the RIGHT, index finger straight, other fingers folded, thumb visible. Bottom-right: open offering palm facing upward/forward, five fingers fanned naturally. Keep anatomical side consistent, don't mirror different cells. No props except single card in top-right, no deck, no text/labels/frames, no body. Real transparency all around. High resolution 2048 square, each hand independently complete with visible wrist. No extra fingers, no fused fingers.",
+      "file": "hands-right-poses.png"
+    },
+    {
+      "id": "left-sleeve-underpaint",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/left-sleeve-underpaint-v1.png"
+      ],
+      "prompt": "Use case: background-extraction. Edit target is this isolated sleeve. Remove ALL red glow, grey haze, vignette and black background pixels outside the fabric silhouette. Deliver real transparent alpha right up to the bold black ink contour of the sleeve. Keep the actual sleeve and cuff pixels, pose, colours, embroidery, folds, complete shoulder cap and every outline unchanged. No glow, no shadow outside the cloth, no background. ONE sleeve on clean transparency.",
+      "file": "left-sleeve-underpaint.png"
+    },
+    {
+      "id": "hands-left-poses",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/identity-master-v2.png"
+      ],
+      "prompt": "Use case: identity-preserve. Asset: ONE production hand-pose sheet for Spine swaps, real transparent background. Match the Reaper Dealer's FAR hand on LEFT of master, ivory SKELETAL hand, bold black contours, warm top-left cel shading. Exactly 4 complete drawings in an equal 2x2 grid, generous transparent gaps. Every drawing has five complete digits, same hand size and a full wrist/short forearm overlap stub; no sleeve. Top-left: relaxed hanging idle hand, natural fingers curved downward. Top-right: holding ONE blank ivory playing card, fingertips grip the bottom corner, full card and hand. Bottom-left: pointing toward right, index extended, thumb visible, other three fingers folded. Bottom-right: offering open palm upward, five fanned fingers. Keep the same far-hand anatomy and 3/4 perspective in all cells. No labels, text, panels, other body parts or deck. Not a mirror of the near hand; anatomical thumb placement correct. Transparent 2048 square sheet. No cropped joints or fingertips.",
+      "file": "hands-left-poses.png"
+    },
+    {
+      "id": "lighting-fs-guide",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/identity-master-v2.png"
+      ],
+      "prompt": "Use case: lighting-weather. Input is own production Reaper Dealer on transparent. Change ONLY lighting and colour treatment for FREE SPINS: cool cyan moonlight/rim from upper LEFT, deep teal shadows, icy ivory face, muted violet/blue costume planes while GOLD embroidery and marigold remain visible. Add a clearly painted narrow cyan rim along left hood/shoulder/sleeve edges, no bloom outside silhouette. SAME exact contours, form, pose, anatomy, ornament, face paint, deck, hands and image framing as input; no redraw of anatomy or ornaments. Keep flat cel shading and bold dark ink, no photorealism. No background, no text, real transparency. This is a colour treatment of the same rig, not another character.",
+      "file": "lighting-fs-guide.png"
+    },
+    {
+      "id": "right-sleeve-final",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/identity-master-v2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production Spine cloth asset. Input: own Reaper Dealer identity master. Redraw ONLY his right-image near sleeve as ONE coherent complete separate garment on real transparent background. This is a BENT supporting arm: rounded shoulder cap is at UPPER CENTRE, upper arm slopes down to an elbow on the far RIGHT at middle/lower height; forearm then comes BACK LEFT toward waist. The single cuff opening is at LOWER LEFT, pointing diagonally UP LEFT to the held deck (not bottom right). Complete upper shoulder, inner armpit overlap, elbow, forearm and ONE ivory flared cuff with red decoration + two gold bands. Match original oxblood/black gold floral funeral-print pattern and bold contours with flat top-left cel shading. No hand, no cards, no torso, no hood, no lapel, no cropped seams. No second cuff, no patch collage. Shoulder and elbow must be visibly connected by continuous fabric and deliberate fold planes. Generous underpaint at shoulder and under cuff. Isolated sleeve only, fully inside canvas, no glow/background/text.",
+      "file": "right-sleeve-final.png"
+    },
+    {
+      "id": "hood-front-final",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/hood-underpaint.png",
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/face-neck-underpaint.png",
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/identity-master-v2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production single continuous hood-front mesh on transparent. Image1 is our own isolated hood; Image2 is our own skull identity/3/4 perspective; Image3 full character is style guide. Refine image1 into ONE complete hood from crown to both shoulder tails, keeping its black/oxblood cel folds and bold ink. The face opening must be WIDER and calm, generous enough to surround the complete visible skull face from image2 without covering either cheek, chin, teeth or eye. Keep 3/4 right-facing angle. The right inner hood rim sweeps outside the skull's right cheek/jaw; the left inner rim lies outside its cheek, with subtle black lining inside. Opening fully transparent, no skull or flesh or neck drawn. A broad rounded arch with wide lower opening, not a narrow vertical slit. Hood ends in simple complete tapered shoulder tails, no sleeves/lapels/collar/gold embroidery/flower. Paint full inner lining behind the edge and hidden shoulder overlap, no abrupt rectangular cuts or disconnected scraps. Top-left warm light. Transparent margin all sides, no background, no labels.",
+      "file": "hood-front-final.png"
+    },
+    {
+      "id": "cape-final",
+      "prompt": "Use case: precise-object-edit. Input own Reaper Dealer master is identity/costume guide. Deliver ONLY the COMPLETE FRONT CLOAK as one continuous broad cloth panel on real transparent background, painted for Spine mesh. Waist-up cloak, from both rounded shoulder caps and high back neck opening down to a finished tapered pointed hem at the upper hips. ALL fabric behind the hidden chest/waistcoat and arms painted fully in. Main centre is unbroken dark black/oxblood cloth planes, without the waistcoat/buttons or flower, so chest will be a separate foreground layer. Side edges have own bold gold embroidered trim and a few large oxblood floral shapes in this funeral-print style. No arms, sleeves, cuffs, hands, head, hood, cards or marigold. One continuous cloth silhouette, no holes except optional neck opening, no scraps or rectangular cuts. 3/4 toward right, broad near shoulder on right. Top-left warm light, bold ink contours, flat planes plus restrained cel shadows. Complete silhouette inside image with transparent padding, no shadows/glow outside cloth, no text/background.",
+      "file": "cape-final.png"
+    },
+    {
+      "id": "chest-final",
+      "prompt": "Use case: precise-object-edit. Input own Reaper Dealer master is costume guide. Deliver ONLY the COMPLETE sleeveless DEALER WAISTCOAT with high collar as a clean separate production chest piece for Spine. Preserve its black/oxblood silk planes, bold gold floral embroidery down chest, three gold buttons, high red/gold raised collar framing the neck, elegant gold lip around both lapels, red sash at waist and two short finished lower pointed tails. 3/4 toward right, warm key from top-left, bold ink/flat cel planes. Shoulders and small complete armhole seams, no sleeves, arms, hands or skeleton, no cloak/hood/head, no flower/card/deck. Fill hidden fabric under collar/lapels/armhole edges, a complete actual garment with no cutout rectangle at top or waist. One sleeveless waistcoat only on true transparent, full silhouette including collar and hem tips inside canvas. No text, no background, no glow/shadow outside garment.",
+      "file": "chest-final.png"
+    },
+    {
+      "id": "hand-deck-final",
+      "prompt": "Use case: precise-object-edit. Reference own Reaper Dealer master. Deliver ONE isolated near/right skeletal hand on real transparency, in the exact cupped supporting-deck gesture from reference, but REMOVE the deck and paint the hidden palm fully. Wrist is on image RIGHT, fingers curl from right toward LEFT and UP to support a stack resting on the upturned palm. Thumb comes from right and curls up along the far rim. Five complete digits and a short forearm/wrist overlap stub, no sleeve/cuff. Ivory sugar-skull-style bones, natural finger joint count, bold dark ink contours and top-left warm flat cel planes matching character. Entire anatomy complete, including palm hidden under former cards. This is a hand-only Spine swap, no deck/card/flower/other body/background/text. Complete all finger tips and stub within canvas with transparent margin.",
+      "file": "hand-deck-final.png"
+    },
+    {
+      "id": "deck-final",
+      "prompt": "Use case: precise-object-edit. Reference own Reaper Dealer master. Isolate/redraw ONLY his small playing-card DECK on transparent, same perspective seen from upper left, back face a blank oxblood rectangle with a gold double lip, visible clean ivory layered card edges. The deck is complete behind where fingers held it, a rigid whole stack with all four corners and underside painted. No fingers, hands, text, card ranks or suit symbols. Bold ink contours, flat cel shading, warm upper-left light, own funeral-print style. One complete small stack, centred on transparent with margin. No background/shadow outside deck.",
+      "file": "deck-final.png"
+    },
+    {
+      "id": "hood-front-fs",
+      "file": "hood-front-fs.png",
+      "prompt": "Use case: lighting-weather. Input1 is our isolated production hood-front character layer, EDIT TARGET. Input2 is our own FS lighting guide, COLOUR/LIGHT REFERENCE only. Change only colours/light on input1: cool cyan moonlit rim from top LEFT, deep navy/teal dark planes and muted violet instead of red cloth, gold trim remains warm but quieter. Narrow painted cyan light along LEFT-facing outer edges and raised folds; no glow outside alpha silhouette. Keep the exact input1 silhouette, all folds, details, framing, transparency and every contour pixel position. No reshaping, no anatomy or new ornament, no background, no other parts, no text. Flat graphic cel shading and bold ink stay. Export one isolated matching-size FS colour-treatment PNG on genuine transparency."
+    },
+    {
+      "id": "cape-fs",
+      "file": "cape-fs.png",
+      "prompt": "Use case: lighting-weather. Input1 is our isolated production cape character layer, EDIT TARGET. Input2 is our own FS lighting guide, COLOUR/LIGHT REFERENCE only. Change only colours/light on input1: cool cyan moonlit rim from top LEFT, deep navy/teal dark planes and muted violet instead of red cloth, gold trim remains warm but quieter. Narrow painted cyan light along LEFT-facing outer edges and raised folds; no glow outside alpha silhouette. Keep the exact input1 silhouette, all folds, details, framing, transparency and every contour pixel position. No reshaping, no anatomy or new ornament, no background, no other parts, no text. Flat graphic cel shading and bold ink stay. Export one isolated matching-size FS colour-treatment PNG on genuine transparency."
+    },
+    {
+      "id": "chest-fs",
+      "file": "chest-fs.png",
+      "prompt": "Use case: lighting-weather. Input1 is our isolated production chest character layer, EDIT TARGET. Input2 is our own FS lighting guide, COLOUR/LIGHT REFERENCE only. Change only colours/light on input1: cool cyan moonlit rim from top LEFT, deep navy/teal dark planes and muted violet instead of red cloth, gold trim remains warm but quieter. Narrow painted cyan light along LEFT-facing outer edges and raised folds; no glow outside alpha silhouette. Keep the exact input1 silhouette, all folds, details, framing, transparency and every contour pixel position. No reshaping, no anatomy or new ornament, no background, no other parts, no text. Flat graphic cel shading and bold ink stay. Export one isolated matching-size FS colour-treatment PNG on genuine transparency."
+    },
+    {
+      "id": "face-neck-fs",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/face-neck-underpaint.png",
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/lighting-fs-guide.png"
+      ],
+      "prompt": "Use case: lighting-weather. Input1 is our complete skull-and-neck piece, edit target; input2 is own FS lighting reference only. Change only its lighting: cold icy ivory planes, deep teal/cyan-tinted shadows, narrow painted cool rim on LEFT edge of skull and clavicles. Preserve exact face identity, pose, contour, teeth, cranial form, natural neck, face paint and all proportions/pixel positions. Oxblood face decoration remains recognisable, forehead gold stays. No added glow around background, no new eyes, no cloth/hair/props. Same framing and genuine transparent alpha, same one complete skull/neck mesh.",
+      "file": "face-neck-fs.png"
+    },
+    {
+      "id": "marigold-final",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/identity-master-v2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Isolate/redraw only our Reaper Dealer's MARIGOLD BOUTONNIERE as ONE complete small wearable prop, on transparent. One round orange marigold flower with clearly separated scalloped petals and compact gold centre, two large GOLD leaf shapes beneath it, and TWO short narrow ribbon tails, each oxblood edged gold, pointing downward. Funeral-print bold black contour, flat colour/cel planes, warm upper-left light. All petals and leaf tips/ribbon ends complete. Flower front, leaves and tails visibly behind; fill the leaf/tail overlap beneath the flower as continuous material so it can be split into flower/leaves/ribbons for Spine. No lapel or garment, no skull/hand/deck or other flowers, no background/glow, no text. One centred coherent lapel prop, generous transparency all round.",
+      "file": "marigold-final.png"
+    },
+    {
+      "id": "eye-glow-final",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/face-neck-underpaint.png"
+      ],
+      "prompt": "Use case: stylized-concept. One tiny production eye-glow attachment for our own Reaper sugar-skull face. A compact almond/flame-shaped GOLD EMBER pupil to float inside his black eye socket: ivory centre, marigold yellow middle, oxblood/orange shaded outer plane, dark ink silhouette. Top-left highlight, funeral-print flat cel shapes, very restrained. Horizontal, 3/4 facing right. ONLY one floating complete eye ember on real transparent, no socket, face or eyelid, no background or external bloom/glow haze, no text. Intended size about 25x15 px when rendered on the character, silhouette must remain readable. No ornament or miniature figures in it.",
+      "file": "eye-glow-final.png"
+    },
+    {
+      "id": "left-sleeve-fs",
+      "file": "left-sleeve-fs.png",
+      "prompt": "Use case: lighting-weather. Input1 is our one complete left-sleeve production sleeve, EDIT TARGET. Input2 own FS lighting is reference only. Change only lighting and colours: cyan/cool narrow painted rim from TOP LEFT along outer contour and raised folds, deep teal/navy dark planes, muted violet for red cloth, keep gold trim/embroidery and ivory/red cuff detail recognisable but cool ivory. Preserve EXACT same cloth silhouette, elbow pose, one cuff, whole shoulder, every fold and ornament position/framing as input1, genuine transparency. Same flat funeral-print cel style and bold ink. No new part, no reshaping, no skin/hand/cards or other objects, no background, no text. No glow beyond silhouette. Return matching FS sleeve only."
+    },
+    {
+      "id": "right-sleeve-fs",
+      "file": "right-sleeve-fs.png",
+      "prompt": "Use case: lighting-weather. Input1 is our one complete right-sleeve production sleeve, EDIT TARGET. Input2 own FS lighting is reference only. Change only lighting and colours: cyan/cool narrow painted rim from TOP LEFT along outer contour and raised folds, deep teal/navy dark planes, muted violet for red cloth, keep gold trim/embroidery and ivory/red cuff detail recognisable but cool ivory. Preserve EXACT same cloth silhouette, elbow pose, one cuff, whole shoulder, every fold and ornament position/framing as input1, genuine transparency. Same flat funeral-print cel style and bold ink. No new part, no reshaping, no skin/hand/cards or other objects, no background, no text. No glow beyond silhouette. Return matching FS sleeve only."
+    },
+    {
+      "id": "cape-final-v2",
+      "file": "cape-final-v2.png",
+      "prompt": "Use case: precise-object-edit. Edit target our isolated complete front cloak. Remove ONLY its high standing collar at the top. Replace that collar with a LOW simple rounded back-neck opening at shoulder level, continuous black/oxblood cloth, no gold rim at the neck. The high collar belongs to the separate waistcoat layer, so this cloak must have no duplicate collar or lapels in the upper centre. Preserve exactly all lower cloak pixels, broad shoulder drape, side embroidery, light direction, outer silhouette and pointed hem. No arms/cuffs/hands/head/hood. Paint complete smooth fabric behind where the collar was, not a rectangular cutout. Keep original canvas size/framing with empty transparent space where standing collar used to be. Actual transparent background, no new background or glow. One continuous cloak panel only."
+    },
+    {
+      "id": "deck-fs",
+      "file": "deck-fs.png",
+      "prompt": "Use case: precise-object-edit. Edit the first image, our own isolated Reaper Dealer deck. Keep EXACT same perspective, silhouette, four card corners, gold lip and ivory stacked card edges. Change only the lighting to match the second own character FS reference: cool cyan left-edge rim and pale cool ivory edges, gold stays marigold gold. Back face is one clean flat deep violet ink plane, no noise, no speckles, no motif, no words or symbols. Flat funeral-print cel planes and bold black contour. Preserve transparent background and margin; no cast shadow/background/hand. Whole complete single stack. This image is a recolour for a rig attachment; DO NOT rotate, redraw or change the deck proportions."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reaper Dealer — сравнение с исходником</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#17171b;color:#eee6d8;font:16px/1.55 system-ui,sans-serif}main{max-width:1550px;margin:auto;padding:28px}h1{font-size:26px;margin:0 0 8px}h2{font-size:19px;margin:0 0 8px}p{margin:0 0 16px;color:#c8c0b4}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}figure{margin:0;background:#202025;padding:18px;border:1px solid #48423a}figure img{display:block;width:100%;height:900px;max-height:76vh;object-fit:contain}figcaption{margin-top:10px;font-size:14px;color:#bdb5a9}.findings{display:grid;grid-template-columns:1fr 1fr;gap:18px 38px}section{padding-top:18px;border-top:1px solid #48423a}a{color:#edcc85}.verdict{font-size:19px;color:#f1dcc0;margin-top:25px}@media(max-width:700px){main{padding:20px}.pair,.findings{grid-template-columns:1fr}figure img{height:760px;max-height:none}}
+</style><main>
+<h1>Исходник и текущая сборка</h1>
+<p>Оценка по двум изображениям: видимые части после подготовки слоёв изменились. Исправление воротника не восстановило исходную позу и силуэт.</p>
+<div class="pair">
+<figure><h2>Эталон Andrii</h2><img src="../source/user-wearability-reference.png" alt="Исходный Reaper Dealer с поднятой картой и колодой"><figcaption>Исходник пользователя, 930×1691. Нижняя часть рисунка обрезана самим исходным кадром.</figcaption></figure>
+<figure><h2>Сборка P2-fix</h2><img src="../qa/reference-current-2026-10-04.png" alt="Текущая сборка с опущенными руками и изменённым капюшоном"><figcaption>Снимок мастера из коммита 3d05194, 1634×2800. Одинаковая высота показа; пропорции изображений сохранены.</figcaption></figure>
+</div>
+<div class="findings">
+<section><h2>1. Поза и действие потеряны</h2><p>В исходнике поднятая карта находится рядом с лицом, вторая ладонь поддерживает крупную колоду. Лицо, карта и колода образуют ясную композицию дилера. В сборке обе руки опущены, карты в поднятой руке нет, колода стала маленькой и ушла вниз. Это другое setup-положение.</p></section>
+<section><h2>2. Капюшон разросся в отдельную массу</h2><p>Исходные крупные складки облегают голову и сходят на плечи. В сборке появились многочисленные красные завитки и острые отвороты вокруг плеч. Они конкурируют с лицом и делают верх похожим на отдельный декоративный воротник.</p></section>
+<section><h2>3. Костюм не сохранил исходную конструкцию</h2><p>В оригинале воротник, лацканы, рукава и плащ следуют одному телу и одной перспективе. Новые детали имеют собственные складки, орнаменты и границы. Нижняя часть стала почти симметричным щитом с острым концом. Открытый V исправил одну проблему шеи, но костюм целиком остался другим.</p></section>
+<section><h2>4. Масштаб деталей и графический язык разошлись</h2><p>В исходнике крупные кисти и простой цветок читаются вместе с лицом. В сборке кисти и колода уменьшены, цветок получил больше мелких лепестков, ткань — больше бликов и линий. Вместо нескольких крупных выразительных форм появилась равномерная детализация.</p></section>
+</div>
+<p class="verdict">Эту сборку нельзя считать качественной нарезкой исходника. Эталоном остаётся изображение Andrii.</p>
+<section><h2>Как исправлять</h2><p>Сохранять все видимые пиксели, позу и силуэт исходника. Отделять детали в одной системе координат, без независимого растягивания и перерисовки их видимых частей. Дорисовывать только скрытые области за перекрытиями. Setup должен визуально воспроизводить исходник; затем отдельно проверяются повороты и смены кистей.</p><p>Технические PASS в предыдущем пакете проверяют загрузку, координаты и совпадение BASE/FS alpha. Они не подтверждают сохранение исходной иллюстрации или художественное качество.</p></section>
+<p><a href="../source/user-wearability-reference.png">Оригинал</a> · <a href="../qa/reference-current-2026-10-04.png">Снимок текущей сборки</a> · <a href="index.html">Галерея слоёв</a></p>
+</main></html>

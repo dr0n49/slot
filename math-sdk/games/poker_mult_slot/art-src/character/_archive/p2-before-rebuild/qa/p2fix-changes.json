@@ -1,0 +1,216 @@
+{
+  "source": "runtime 3.8; native editor waived by user",
+  "overlaps": [
+    {
+      "name": "left_sleeve",
+      "before": [
+        767,
+        1319
+      ],
+      "after": [
+        767,
+        1380
+      ],
+      "direction": "down"
+    },
+    {
+      "name": "hood_front",
+      "before": [
+        1411,
+        1215
+      ],
+      "after": [
+        1411,
+        1235
+      ],
+      "direction": "down"
+    },
+    {
+      "name": "cape",
+      "before": [
+        1281,
+        1831
+      ],
+      "after": [
+        1281,
+        1861
+      ],
+      "direction": "up"
+    }
+  ],
+  "hands": [
+    {
+      "name": "left_hand_idle",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        174,
+        170
+      ],
+      "anchorPx": [
+        139.7,
+        139.5
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "left_hand_card",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        151,
+        180
+      ],
+      "anchorPx": [
+        103.05000000000001,
+        164
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "left_hand_point",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        153,
+        174
+      ],
+      "anchorPx": [
+        182.3,
+        96.15
+      ],
+      "storedRotation": 90
+    },
+    {
+      "name": "left_hand_open",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        160,
+        171
+      ],
+      "anchorPx": [
+        97,
+        159.05
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "right_hand_idle",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        183,
+        173
+      ],
+      "anchorPx": [
+        135.65,
+        136.15
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "right_hand_card",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        157,
+        198
+      ],
+      "anchorPx": [
+        89.35000000000001,
+        177.9
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "right_hand_point",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        167,
+        157
+      ],
+      "anchorPx": [
+        179.64999999999998,
+        115.85000000000001
+      ],
+      "storedRotation": 90
+    },
+    {
+      "name": "right_hand_open",
+      "canvas": [
+        330,
+        400
+      ],
+      "sourceScale": 0.55,
+      "sourceWrist": [
+        157,
+        175
+      ],
+      "anchorPx": [
+        91.35000000000001,
+        154.25
+      ],
+      "storedRotation": 0
+    },
+    {
+      "name": "right_hand_deck",
+      "canvas": [
+        330,
+        400
+      ],
+      "anchorPx": [
+        261.5068414707655,
+        230.7426763110308
+      ],
+      "sourceScale": 0.65
+    }
+  ],
+  "marigoldShiftPx": -25,
+  "neckline": "Fitted open V collar, transparent neck opening, after user wearability correction",
+  "drawOrder": [
+    "cape",
+    "left_sleeve",
+    "hood_back",
+    "face_neck",
+    "chest",
+    "right_sleeve",
+    "hood_front",
+    "left_eye",
+    "right_eye",
+    "left_wrist",
+    "right_wrist",
+    "right_hand",
+    "left_hand",
+    "deck",
+    "ribbon_left",
+    "ribbon_right",
+    "marigold_leaves",
+    "marigold",
+    "left_eye_glow",
+    "right_eye_glow"
+  ],
+  "wristBonePositionChanges": 0
+}

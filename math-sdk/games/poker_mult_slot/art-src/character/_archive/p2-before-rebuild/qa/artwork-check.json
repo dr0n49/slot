@@ -1,0 +1,1330 @@
+{
+  "result": "PASS",
+  "errors": [],
+  "sleeves": [
+    {
+      "file": "left-sleeve-underpaint.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        28.573,
+        581.984,
+        441.573,
+        1383.328
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 612193
+    },
+    {
+      "file": "left-sleeve-fs.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        29.076,
+        581.762,
+        442.549,
+        1383.328
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 612105
+    },
+    {
+      "file": "right-sleeve-final.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        698.13,
+        611.115,
+        855.522,
+        1305.36
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 668191
+    },
+    {
+      "file": "right-sleeve-fs.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        698.168,
+        610.056,
+        855.822,
+        1305.421
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 669425
+    }
+  ],
+  "exports": [
+    {
+      "file": "character-a-master.png",
+      "size": [
+        1634,
+        2800
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        87,
+        40,
+        60,
+        45
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "character-a-fs.png",
+      "size": [
+        1634,
+        2800
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        87,
+        40,
+        60,
+        45
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/cape.png",
+      "size": [
+        1281,
+        1861
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/chest.png",
+      "size": [
+        799,
+        1399
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/deck.png",
+      "size": [
+        222,
+        150
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/face_neck.png",
+      "size": [
+        754,
+        938
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/hood_back.png",
+      "size": [
+        1321,
+        1156
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/hood_front.png",
+      "size": [
+        1411,
+        1235
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/left_eye.png",
+      "size": [
+        142,
+        104
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/left_eye_glow.png",
+      "size": [
+        51,
+        33
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/left_hand_card.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        20,
+        65,
+        20,
+        65
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/left_hand_idle.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        44,
+        46,
+        45,
+        47
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/left_hand_open.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        9,
+        65,
+        9,
+        65
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/left_hand_point.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        51,
+        12,
+        52,
+        12
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/left_sleeve.png",
+      "size": [
+        767,
+        1380
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/left_wrist.png",
+      "size": [
+        324,
+        194
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/marigold.png",
+      "size": [
+        253,
+        214
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/marigold_leaves.png",
+      "size": [
+        253,
+        134
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/ribbon_left.png",
+      "size": [
+        111,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/ribbon_right.png",
+      "size": [
+        117,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/right_eye.png",
+      "size": [
+        73,
+        84
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/right_eye_glow.png",
+      "size": [
+        35,
+        25
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/right_hand_card.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        3,
+        69,
+        4,
+        69
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/right_hand_deck.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        16,
+        105,
+        16,
+        105
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/right_hand_idle.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        35,
+        41,
+        36,
+        42
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/right_hand_open.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        5,
+        58,
+        5,
+        58
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/right_hand_point.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        63,
+        24,
+        64,
+        25
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/right_sleeve.png",
+      "size": [
+        259,
+        1142
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/right_wrist.png",
+      "size": [
+        232,
+        282
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/cape.png",
+      "size": [
+        1281,
+        1861
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/chest.png",
+      "size": [
+        799,
+        1399
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/deck.png",
+      "size": [
+        222,
+        150
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/face_neck.png",
+      "size": [
+        754,
+        938
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/hood_back.png",
+      "size": [
+        1321,
+        1156
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/hood_front.png",
+      "size": [
+        1411,
+        1235
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/left_eye.png",
+      "size": [
+        142,
+        104
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/left_eye_glow.png",
+      "size": [
+        51,
+        33
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/left_hand_card.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        20,
+        65,
+        20,
+        65
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/left_hand_idle.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        44,
+        46,
+        45,
+        47
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/left_hand_open.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        9,
+        65,
+        9,
+        65
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/left_hand_point.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        51,
+        12,
+        52,
+        12
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/left_sleeve.png",
+      "size": [
+        767,
+        1380
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/left_wrist.png",
+      "size": [
+        324,
+        194
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/marigold.png",
+      "size": [
+        253,
+        214
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/marigold_leaves.png",
+      "size": [
+        253,
+        134
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/ribbon_left.png",
+      "size": [
+        111,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/ribbon_right.png",
+      "size": [
+        117,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/right_eye.png",
+      "size": [
+        73,
+        84
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/right_eye_glow.png",
+      "size": [
+        35,
+        25
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/right_hand_card.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        3,
+        69,
+        4,
+        69
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/right_hand_deck.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        16,
+        105,
+        16,
+        105
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/right_hand_idle.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        35,
+        41,
+        36,
+        42
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/right_hand_open.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        5,
+        58,
+        5,
+        58
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/right_hand_point.png",
+      "size": [
+        330,
+        400
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        63,
+        24,
+        64,
+        25
+      ],
+      "registrationCanvas": "shared hand registration canvas"
+    },
+    {
+      "file": "layers/fs/right_sleeve.png",
+      "size": [
+        259,
+        1142
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    },
+    {
+      "file": "layers/fs/right_wrist.png",
+      "size": [
+        232,
+        282
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "registrationCanvas": null
+    }
+  ],
+  "sources": [
+    {
+      "file": "cape-final-v2.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "cape-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "cape-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "chest-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "chest-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "deck-final.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true
+    },
+    {
+      "file": "deck-fs.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true
+    },
+    {
+      "file": "eye-glow-final.png",
+      "size": [
+        1619,
+        971
+      ],
+      "alpha": true
+    },
+    {
+      "file": "face-neck-fs.png",
+      "size": [
+        1153,
+        1364
+      ],
+      "alpha": true
+    },
+    {
+      "file": "face-neck-underpaint.png",
+      "size": [
+        1153,
+        1364
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hand-deck-final.png",
+      "size": [
+        1537,
+        1023
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hands-left-poses.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hands-right-poses.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-front-final.png",
+      "size": [
+        1176,
+        1338
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-front-fs.png",
+      "size": [
+        1176,
+        1337
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-underpaint.png",
+      "size": [
+        1173,
+        1341
+      ],
+      "alpha": true
+    },
+    {
+      "file": "identity-master-v1.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "identity-master-v2.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-underpaint-v1.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-underpaint.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "lighting-fs-guide.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "marigold-final.png",
+      "size": [
+        1172,
+        1342
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-cape-shoulder-overlap-fs.png",
+      "size": [
+        1038,
+        1515
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-cape-shoulder-overlap.png",
+      "size": [
+        1039,
+        1514
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-chest-worn-fs.png",
+      "size": [
+        947,
+        1660
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-chest-worn.png",
+      "size": [
+        947,
+        1661
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-hands-left-matched.png",
+      "size": [
+        1316,
+        1195
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-hands-right-matched.png",
+      "size": [
+        1315,
+        1196
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-hood-front-overlap-fs.png",
+      "size": [
+        1353,
+        1163
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-hood-front-overlap.png",
+      "size": [
+        1352,
+        1163
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-left-sleeve-overlap-fs.png",
+      "size": [
+        936,
+        1681
+      ],
+      "alpha": true
+    },
+    {
+      "file": "p2fix-left-sleeve-overlap.png",
+      "size": [
+        936,
+        1681
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-underpaint.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "torso-underpaint.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "user-wearability-reference.png",
+      "size": [
+        930,
+        1691
+      ],
+      "alpha": true
+    }
+  ]
+}

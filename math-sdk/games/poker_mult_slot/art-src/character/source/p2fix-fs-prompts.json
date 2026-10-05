@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-04",
+  "tool": "image_gen.imagegen",
+  "jobs": [
+    {
+      "id": "left-sleeve-overlap-fs",
+      "prompt": "Use case: lighting-weather. Image1 is the edited own Reaper Dealer left-sleeve-overlap and is the edit target, including the new painted hidden overlap. Image2 is the original own Free Spins lighting reference for the same piece. Change ONLY colour/light to FS: cool cyan left rim, deep blue black fabric, violet former red planes, cool ivory, gold stays gold. Preserve exactly all contours, proportion, folds, transparency, opening and newly added underpainting of image1. Bold ink and flat cel planes, clean even colour, no noise, no speckles, no glow beyond the silhouette, no added objects/text/background. One complete same part, same canvas framing and same scale. True transparent background.",
+      "refs": [
+        "source/p2fix-left-sleeve-overlap.png",
+        "layers/fs/left_sleeve.png"
+      ]
+    },
+    {
+      "id": "hood-front-overlap-fs",
+      "prompt": "Use case: lighting-weather. Image1 is the edited own Reaper Dealer hood-front-overlap and is the edit target, including the new painted hidden overlap. Image2 is the original own Free Spins lighting reference for the same piece. Change ONLY colour/light to FS: cool cyan left rim, deep blue black fabric, violet former red planes, cool ivory, gold stays gold. Preserve exactly all contours, proportion, folds, transparency, opening and newly added underpainting of image1. Bold ink and flat cel planes, clean even colour, no noise, no speckles, no glow beyond the silhouette, no added objects/text/background. One complete same part, same canvas framing and same scale. True transparent background.",
+      "refs": [
+        "source/p2fix-hood-front-overlap.png",
+        "layers/fs/hood_front.png"
+      ]
+    },
+    {
+      "id": "cape-shoulder-overlap-fs",
+      "prompt": "Use case: lighting-weather. Image1 is the edited own Reaper Dealer cape-shoulder-overlap and is the edit target, including the new painted hidden overlap. Image2 is the original own Free Spins lighting reference for the same piece. Change ONLY colour/light to FS: cool cyan left rim, deep blue black fabric, violet former red planes, cool ivory, gold stays gold. Preserve exactly all contours, proportion, folds, transparency, opening and newly added underpainting of image1. Bold ink and flat cel planes, clean even colour, no noise, no speckles, no glow beyond the silhouette, no added objects/text/background. One complete same part, same canvas framing and same scale. True transparent background.",
+      "refs": [
+        "source/p2fix-cape-shoulder-overlap.png",
+        "layers/fs/cape.png"
+      ]
+    }
+  ],
+  "copies": [
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-f5367de9-76c7-4b18-95cf-8bb8f0041276.png",
+      "to": "art-src/character/source/p2fix-left-sleeve-overlap-fs.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-3ea67ab3-3a6b-4ff0-8a58-16d010866208.png",
+      "to": "art-src/character/source/p2fix-hood-front-overlap-fs.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-c49e6834-c28a-40ac-9403-aab3daf7f34d.png",
+      "to": "art-src/character/source/p2fix-cape-shoulder-overlap-fs.png"
+    }
+  ]
+}

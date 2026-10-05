@@ -1,0 +1,1419 @@
+{
+  "errors": [],
+  "states": [
+    {
+      "pose": "deck",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1468,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "idle",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "point",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "open",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "deck",
+      "test": "rest",
+      "skin": "default",
+      "triangles": 1472,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_elbow_plus45",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -193.22708041023049,
+            2062.9805002315056
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_elbow_minus45",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -858.6832299792682,
+            2452.5158035175796
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_shoulder_plus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -43.94493134431786,
+            2092.3373520848772
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_shoulder_minus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -1080.1354453471668,
+            2425.1644102867745
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_wrist_plus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_wrist_minus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_elbow_plus45",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            719.3186137761592,
+            2287.705955394411
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_elbow_minus45",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            230.08083089108914,
+            2505.6602353218345
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_shoulder_plus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            850.7183087514305,
+            2395.9068784785486
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_shoulder_minus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            14.551920336266278,
+            2418.8605036889253
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_wrist_plus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_wrist_minus30",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "pointGesture",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            1190.307350641777,
+            3057.7456329830925
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "overlap",
+      "skin": "default",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -730.4295607851911,
+            2168.212703328262
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            517.0888544442005,
+            2297.539933274052
+          ]
+        }
+      }
+    },
+    {
+      "pose": "deck",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1468,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "idle",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "point",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "open",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "deck",
+      "test": "rest",
+      "skin": "fs",
+      "triangles": 1472,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_elbow_plus45",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -193.22708041023049,
+            2062.9805002315056
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_elbow_minus45",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -858.6832299792682,
+            2452.5158035175796
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_shoulder_plus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -43.94493134431786,
+            2092.3373520848772
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_shoulder_minus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -1080.1354453471668,
+            2425.1644102867745
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_wrist_plus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "left_wrist_minus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_elbow_plus45",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            719.3186137761592,
+            2287.705955394411
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_elbow_minus45",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            230.08083089108914,
+            2505.6602353218345
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_shoulder_plus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            850.7183087514305,
+            2395.9068784785486
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_shoulder_minus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            14.551920336266278,
+            2418.8605036889253
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_wrist_plus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "right_wrist_minus30",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            429.5599248247962,
+            2295.358635450558
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "pointGesture",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -606.630543660737,
+            2119.9276784959156
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            1190.307350641777,
+            3057.7456329830925
+          ]
+        }
+      }
+    },
+    {
+      "pose": "card",
+      "test": "overlap",
+      "skin": "fs",
+      "triangles": 1466,
+      "verticesOutsideViewport": 0,
+      "error": 0,
+      "wrists": {
+        "left": {
+          "local": [
+            545.23828,
+            0
+          ],
+          "world": [
+            -730.4295607851911,
+            2168.212703328262
+          ]
+        },
+        "right": {
+          "local": [
+            378.71998,
+            0
+          ],
+          "world": [
+            517.0888544442005,
+            2297.539933274052
+          ]
+        }
+      }
+    }
+  ],
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false
+    }
+  ],
+  "nativeEditorWorkflowWaivedByUser": true,
+  "source": "Official Spine 3.8 geometry in WebGL review, not Spine Editor",
+  "collisions": [
+    {
+      "skin": "default",
+      "test": "left_elbow_plus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "left_elbow_minus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "left_shoulder_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "left_shoulder_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "left_wrist_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "left_wrist_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_elbow_plus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_elbow_minus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_shoulder_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_shoulder_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_wrist_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "right_wrist_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "pointGesture",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "default",
+      "test": "overlap",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_elbow_plus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_elbow_minus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_shoulder_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_shoulder_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_wrist_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "left_wrist_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_elbow_plus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_elbow_minus45",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_shoulder_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_shoulder_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_wrist_plus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "right_wrist_minus30",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "pointGesture",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    },
+    {
+      "skin": "fs",
+      "test": "overlap",
+      "pixels": 0,
+      "scale": 0.32,
+      "source": "PNG alpha rendered by official Spine 3.8 geometry"
+    }
+  ],
+  "handSwapWristDriftPx": 0,
+  "result": "PASS"
+}

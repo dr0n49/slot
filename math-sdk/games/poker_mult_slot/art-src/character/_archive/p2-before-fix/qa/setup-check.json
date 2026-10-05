@@ -1,0 +1,36 @@
+{
+  "targetEditor": "Spine Professional 3.8.75",
+  "authoredImport": true,
+  "editorImportVerified": false,
+  "exportVersionStamp": null,
+  "runtimeSource": "https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/3.8/spine-ts/build/spine-core.js",
+  "runtimeSha256": "f1e0a31b9906e4d4daf2733857d21381ddbbe75adec7f4d83e1cc9b2b070dfc1",
+  "bones": 45,
+  "slots": 20,
+  "skins": [
+    "default",
+    "fs"
+  ],
+  "animations": 0,
+  "pngs": 54,
+  "weightedMeshes": 8,
+  "meshVertices": 874,
+  "maxMeshRegistrationErrorPx": 0.000461,
+  "maxRegionRegistrationErrorPx": 0.000234,
+  "baseFsAlphaDifferences": 0,
+  "missingFiles": [],
+  "trimErrors": [],
+  "ik": [
+    {
+      "side": "left",
+      "restTargetErrorPx": 0.000005256961486272366
+    },
+    {
+      "side": "right",
+      "restTargetErrorPx": 0.000005529659435407011
+    }
+  ],
+  "version375Guard": "Unsupported skeleton data, please export with a newer version of Spine.",
+  "errors": [],
+  "result": "PASS"
+}

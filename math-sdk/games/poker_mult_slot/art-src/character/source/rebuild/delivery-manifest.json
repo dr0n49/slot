@@ -1,0 +1,461 @@
+{
+  "revision": "P2-rebuild",
+  "nativeSize": [
+    930,
+    1691
+  ],
+  "originalVisiblePixelsUnchanged": true,
+  "setupBonesUnchanged": true,
+  "files": [
+    {
+      "path": "character-a-master-sliced.png",
+      "sha256": "c3e642dfd110a915ba30fecd8c2ac22f4d33934e8f2c10de30ce621bb6aac604",
+      "bytes": 2103551
+    },
+    {
+      "path": "character-a-master.png",
+      "sha256": "c3e642dfd110a915ba30fecd8c2ac22f4d33934e8f2c10de30ce621bb6aac604",
+      "bytes": 2103551
+    },
+    {
+      "path": "character-a-fs.png",
+      "sha256": "992b221b32d57f85de6c32c975172d6eb4892ef500cee7608f12e270cd857351",
+      "bytes": 1711496
+    },
+    {
+      "path": "character-a-setup.json",
+      "sha256": "a0fcffc6c2b3f00c705ab4cf351a830f6f1816d5f85bd853fc28c69027ed4896",
+      "bytes": 850032
+    },
+    {
+      "path": "character-a-sliced-base.ora",
+      "sha256": "23d1f8b41a09754c1b3873d687f3db3efbcfce16ea87728dc4b03c6044f34d3e",
+      "bytes": 4898471
+    },
+    {
+      "path": "character-a-sliced-fs.ora",
+      "sha256": "4e742993500a00845e87b0006eec4726156d02ed606a1e9014ef53d54ff4fe64",
+      "bytes": 4013423
+    },
+    {
+      "path": "NOTES.md",
+      "sha256": "0e45a91ec12d69fdba9c6ac822f148f21bfb811c1ca2fe347e41cd5988507f79",
+      "bytes": 12839
+    },
+    {
+      "path": "source/layer-registration.json",
+      "sha256": "5ae616907aea1f0f6033dd735f68b695fabc3e8ff93127c0463c8190981e7946",
+      "bytes": 124358
+    },
+    {
+      "path": "source/user-wearability-reference.png",
+      "sha256": "538201d78c1322289bc3f490fed1c012be78a24301053b3fd21b500000c6d68b",
+      "bytes": 1720888
+    },
+    {
+      "path": "source/rebuild/fs-original.png",
+      "sha256": "992b221b32d57f85de6c32c975172d6eb4892ef500cee7608f12e270cd857351",
+      "bytes": 1711496
+    },
+    {
+      "path": "source/rebuild/fs-treatment.json",
+      "sha256": "91008a2cde7595270e98c4ac95f7f828809828c91f90d594aa3f6bf80d23cf25",
+      "bytes": 671
+    },
+    {
+      "path": "qa/rebuild/pixel-verification.json",
+      "sha256": "16c302b9abae621be060a38d8fd17d82600962bc4adaf88e7eb0ee9b569f1b50",
+      "bytes": 5382
+    },
+    {
+      "path": "qa/rebuild/browser-check.json",
+      "sha256": "b61bd29607e7295a2a513db923244ae642d760c1fd099735f2ed663537266c28",
+      "bytes": 4046
+    },
+    {
+      "path": "qa/rebuild/before-after.png",
+      "sha256": "4002a1aee6182e607ea39d3cd17a27b5a34cb6baf3d3a1b9e3ba825860372311",
+      "bytes": 458761
+    },
+    {
+      "path": "qa/rebuild/rig-bones-meshes.png",
+      "sha256": "37beeef4c1b4b75fef44b3ff57176e397aff0bc2e1f149c8a0a5973dbb527142",
+      "bytes": 1229835
+    },
+    {
+      "path": "qa/rebuild/ownership.png",
+      "sha256": "3ca8aacb1cbdffab8b1d2caac7506326fa9c70159768dae6a8297a1a15758f30",
+      "bytes": 106448
+    },
+    {
+      "path": "layers/cape.png",
+      "sha256": "f39b019039f10f6fe6fad2dbadd2d9bcd91fbc3107a971276086701bc3b95f79",
+      "bytes": 643792
+    },
+    {
+      "path": "layers/chest.png",
+      "sha256": "0628acaad9cffefe49a6f42b3993da1fdd4052b23bbd370866ff3e89c719900b",
+      "bytes": 257297
+    },
+    {
+      "path": "layers/deck.png",
+      "sha256": "e74c311a2385edb342eb6fab439f0686a60b081a4569ae2a9eb8383da8599354",
+      "bytes": 65637
+    },
+    {
+      "path": "layers/face_neck.png",
+      "sha256": "0e3cba976e04aca92733f3d7c59a55353db73d649a7705ba66ab076f7ff31606",
+      "bytes": 176836
+    },
+    {
+      "path": "layers/fs/cape.png",
+      "sha256": "4575e5fcb862dfcd66ddc89b981e2704d9097eec6edbdd81f56f23d27d1ad40e",
+      "bytes": 505717
+    },
+    {
+      "path": "layers/fs/chest.png",
+      "sha256": "196d04d12a455a4a3e20aaa5498d981b6cc8962a0c559c581862a73d549ed839",
+      "bytes": 218925
+    },
+    {
+      "path": "layers/fs/deck.png",
+      "sha256": "f8d8d14c3861ae06e57b50a8072b9c47c110d9e5b143202404282fc008f2fbe6",
+      "bytes": 57091
+    },
+    {
+      "path": "layers/fs/face_neck.png",
+      "sha256": "d5d035e198ece389df6643b59211c48d3f9a95a51563770564cf9599d3e86376",
+      "bytes": 163275
+    },
+    {
+      "path": "layers/fs/hood_back.png",
+      "sha256": "bd871f44c2fdca28cf5c8bcfdcfc56b681255c18f62f653e1b6940deaf76b8b1",
+      "bytes": 53569
+    },
+    {
+      "path": "layers/fs/hood_front.png",
+      "sha256": "1050a449fb9894684c7c790f8be3d90079c0596152397faae09d4ef1d46afc7f",
+      "bytes": 202189
+    },
+    {
+      "path": "layers/fs/left_card.png",
+      "sha256": "8f38d8b0ef6b6488d3be1881981402ed06e20537e7730c9e20a9376fa1509a09",
+      "bytes": 28635
+    },
+    {
+      "path": "layers/fs/left_eye.png",
+      "sha256": "3cb2414010c5504a988a7f4bca620b87678115a408081fd199648704fd29f90d",
+      "bytes": 7799
+    },
+    {
+      "path": "layers/fs/left_hand_card.png",
+      "sha256": "da92aa35b91b54f3e4f4bd99b1f4426c4f98117f38953158b182102e86c4296d",
+      "bytes": 90190
+    },
+    {
+      "path": "layers/fs/left_hand_idle.png",
+      "sha256": "caec0da0cea5ff1f32af535cff7d758f62cf39f7d22bb154f7de9b2b7765a1d1",
+      "bytes": 91897
+    },
+    {
+      "path": "layers/fs/left_hand_open.png",
+      "sha256": "705e032a3db3428725b1a9de4626e05599c914f6c63592e79a29d005b2018bc1",
+      "bytes": 102471
+    },
+    {
+      "path": "layers/fs/left_hand_point.png",
+      "sha256": "e044d52c30fdbec1846d932fa7e8b6f63a9d43feec62cf57a6eec7a205f85b5a",
+      "bytes": 94167
+    },
+    {
+      "path": "layers/fs/left_sleeve.png",
+      "sha256": "221b25cd2fc0230c84b58f066d1a2b9de8d3bec249f66d69c3b5323849234385",
+      "bytes": 85774
+    },
+    {
+      "path": "layers/fs/left_wrist.png",
+      "sha256": "a0d3a13e61654428fe6b07a7cea2c88dd01fef7a9196ecef66a7a33e6e6d31c1",
+      "bytes": 37500
+    },
+    {
+      "path": "layers/fs/marigold.png",
+      "sha256": "718faf3f6b93060a943e1a7618fbcff9cb10f9e9bf1030f41ee842395225a193",
+      "bytes": 25047
+    },
+    {
+      "path": "layers/fs/marigold_leaves.png",
+      "sha256": "5792ecc7ca3bbc43cf5f65a791b5df63546ea00e1d53309b73b7ad0f625185c4",
+      "bytes": 7404
+    },
+    {
+      "path": "layers/fs/ribbon_left.png",
+      "sha256": "eb9e23cde1011e33811cb518ee86fb3bdf38d81bb064eec06c7ba58d6867a842",
+      "bytes": 7979
+    },
+    {
+      "path": "layers/fs/ribbon_right.png",
+      "sha256": "8001fbcb0b5d3b6dce5dc6a014bd427219c10cce19d5d3cd994372ff090863bc",
+      "bytes": 8347
+    },
+    {
+      "path": "layers/fs/right_eye.png",
+      "sha256": "137bef77516b06432e21b80d1accdc2bba0daeac74409c824692df7479267de7",
+      "bytes": 2738
+    },
+    {
+      "path": "layers/fs/right_hand_card.png",
+      "sha256": "7be7e04b9c33ee605655d8f80788f2c9d1b487de345c4954f1d3b2dd9cd8640d",
+      "bytes": 101107
+    },
+    {
+      "path": "layers/fs/right_hand_deck.png",
+      "sha256": "74f2705ef9112e08a2461e696edd8ad494d41d005228fb7b9db42eb284ea132e",
+      "bytes": 47447
+    },
+    {
+      "path": "layers/fs/right_hand_idle.png",
+      "sha256": "d4ace383bb4a391f10a9cd9fcaac1d073e60a713d5201355860c3ae963686a5a",
+      "bytes": 97636
+    },
+    {
+      "path": "layers/fs/right_hand_open.png",
+      "sha256": "b675520f7bb7342414b58e2f1a6a17f48d25380431c7aebb1adf695eaed473ca",
+      "bytes": 108071
+    },
+    {
+      "path": "layers/fs/right_hand_point.png",
+      "sha256": "d7821225f40d1ffcd7654394d461d9c0c6c9a4b07cd1b6ecfa023744ee5f3178",
+      "bytes": 87650
+    },
+    {
+      "path": "layers/fs/right_sleeve.png",
+      "sha256": "87d0d646e7425378e857ef24a7fb7b6ac73f3801d082d498cf2bcfd905eb0bb3",
+      "bytes": 135199
+    },
+    {
+      "path": "layers/fs/right_wrist.png",
+      "sha256": "e1a92ee047798b9a20c5ac4fc48071225183947c8171404d1f8d2e2fa32dfac8",
+      "bytes": 48450
+    },
+    {
+      "path": "layers/fs/underpaint/cape_underpaint.png",
+      "sha256": "c99b02a1e41324c558a1e01c15b5ba478c64475ba18552fa8cae532a2d17947f",
+      "bytes": 132721
+    },
+    {
+      "path": "layers/fs/underpaint/chest_underpaint.png",
+      "sha256": "fae8ca9b6fed7ae4f159b146bab6a5bff03a463f2f307c279341892265e15187",
+      "bytes": 88021
+    },
+    {
+      "path": "layers/fs/underpaint/face_neck_underpaint.png",
+      "sha256": "d24c7b117b7989307bcdc741845356c8a16a111c326278e93cb121081d738068",
+      "bytes": 28366
+    },
+    {
+      "path": "layers/fs/underpaint/hood_back_underpaint.png",
+      "sha256": "2e8bb70f76d53603a51799caea7a38a09c2abd4c374fc0e82e86987104642cc3",
+      "bytes": 102711
+    },
+    {
+      "path": "layers/fs/underpaint/hood_front_underpaint.png",
+      "sha256": "9fad83634f8bbdec8a34a41b475ce9142ada164d74e67a858de9220cbe91be46",
+      "bytes": 4855
+    },
+    {
+      "path": "layers/fs/underpaint/left_gesture_underpaint.png",
+      "sha256": "5eefb670758f0b4d90577f036f85459127310a3bdc98236a61001721fbd89659",
+      "bytes": 90211
+    },
+    {
+      "path": "layers/fs/underpaint/left_sleeve_underpaint.png",
+      "sha256": "ff58bf0b1342c0e9d2ffa63a0df9e97c55e0d8799cab7dd651ec66910087c460",
+      "bytes": 43244
+    },
+    {
+      "path": "layers/fs/underpaint/ribbon_left_underpaint.png",
+      "sha256": "1067b678f13eff484b53401ef6d5eeb31a60a12fcfcd3c676282920749c8a946",
+      "bytes": 8547
+    },
+    {
+      "path": "layers/fs/underpaint/ribbon_right_underpaint.png",
+      "sha256": "839a98edd775353fe60d6cb7a84e4b98556fc60dcbd95bb22376f8896491b4b5",
+      "bytes": 3886
+    },
+    {
+      "path": "layers/fs/underpaint/right_gesture_underpaint.png",
+      "sha256": "f4942fc3a50faafe937795d39f58e0a7a7737ae8dadce14892412294e4913764",
+      "bytes": 52525
+    },
+    {
+      "path": "layers/fs/underpaint/right_sleeve_underpaint.png",
+      "sha256": "5e6660e22b6c4e1c630f760db33d7d39075a1ce3867aa9afb00f04d28ecc51c2",
+      "bytes": 20369
+    },
+    {
+      "path": "layers/hood_back.png",
+      "sha256": "2d4167bb872b4a722f774cd5e5c68d28a6743cb7ecac00890b3a7a74637c30aa",
+      "bytes": 63900
+    },
+    {
+      "path": "layers/hood_front.png",
+      "sha256": "5b173a7ba70d6258440655711031d15081dea73bd927974d2db1890c27a4ebc9",
+      "bytes": 269857
+    },
+    {
+      "path": "layers/left_card.png",
+      "sha256": "e8f91e3762603941826269866841ba6e914a7d797d4f13b50a6ea14889553fd2",
+      "bytes": 40482
+    },
+    {
+      "path": "layers/left_eye.png",
+      "sha256": "544e730179295c2cee6b3a6b4a127e2f7b47d2f6bb6c486a2eec8c1bce743696",
+      "bytes": 8221
+    },
+    {
+      "path": "layers/left_hand_card.png",
+      "sha256": "19ec950d7f1f28fdf87e0036a8c0800fa5a45c072c51f5776cd900d7f0045be5",
+      "bytes": 94873
+    },
+    {
+      "path": "layers/left_hand_idle.png",
+      "sha256": "68950cc24fd7f9ab1b2b188899709711695fee2f7233db6b67b9eed9ef1ba183",
+      "bytes": 96294
+    },
+    {
+      "path": "layers/left_hand_open.png",
+      "sha256": "ad0944e0b849dfa57fd322d1c5f034f58827a35efd8d9caafca3562878c4116f",
+      "bytes": 107654
+    },
+    {
+      "path": "layers/left_hand_point.png",
+      "sha256": "bb87d8d1da07f6eccc0df8896a77d4946b7d4cb69f29ac7099f4e54a0597955d",
+      "bytes": 98689
+    },
+    {
+      "path": "layers/left_sleeve.png",
+      "sha256": "9edf14b84a65cdb76dea46c206834fa15b43d4ea26a430af82e64ec831b68535",
+      "bytes": 109207
+    },
+    {
+      "path": "layers/left_wrist.png",
+      "sha256": "38168678303804c7ece42ec28a84c5f1cc37ad7b4ffe7811837709913b2ae003",
+      "bytes": 41188
+    },
+    {
+      "path": "layers/marigold.png",
+      "sha256": "d29383bb23ce730ca668a6a46d73232e4355f2b41e2be5f0b0ab5b4483e6b054",
+      "bytes": 26213
+    },
+    {
+      "path": "layers/marigold_leaves.png",
+      "sha256": "5b67279554074e1555fcf3f812cea2158ca5ede76024fcbe00d650321263cccb",
+      "bytes": 7846
+    },
+    {
+      "path": "layers/ribbon_left.png",
+      "sha256": "5cf6e1944c75d1d9ccee234249cf24fac4a60d66cdf5b2cfd0f870759b3e4cbe",
+      "bytes": 9529
+    },
+    {
+      "path": "layers/ribbon_right.png",
+      "sha256": "ffe12c650a27d90c24d0b1c9697ffdfede01acf251d237ecbc81779520c4836d",
+      "bytes": 8679
+    },
+    {
+      "path": "layers/right_eye.png",
+      "sha256": "61e531e2d49fedd0517b4ececb5aede853caa740902987c88b92bf12f39ca773",
+      "bytes": 2888
+    },
+    {
+      "path": "layers/right_hand_card.png",
+      "sha256": "aa4eded010c39c9429b9782fda381ff0a491a9d0f3d9bd1b87e1c7394f27dfcf",
+      "bytes": 106808
+    },
+    {
+      "path": "layers/right_hand_deck.png",
+      "sha256": "e5003c89172c28f3acc9f81ee8c575532ace960d903be08d5b1c122aa070f95b",
+      "bytes": 50084
+    },
+    {
+      "path": "layers/right_hand_idle.png",
+      "sha256": "0e048fef9f33a6c55894772b25504c6d1187be4c74661933c4b0325164f8dc9d",
+      "bytes": 101780
+    },
+    {
+      "path": "layers/right_hand_open.png",
+      "sha256": "616a82b8bb663b837f280362e38fc144c5a6f683aeaa2fce8fadacd478154d7b",
+      "bytes": 113344
+    },
+    {
+      "path": "layers/right_hand_point.png",
+      "sha256": "11bced1cd4d7ba5c0d78d1c30f53546ee1725dfc88e8594313d3ca547f443645",
+      "bytes": 91561
+    },
+    {
+      "path": "layers/right_sleeve.png",
+      "sha256": "94ed903a209d0b9e6169c4f51fefe6c7c9263706674be0f9c2408bf82933eae8",
+      "bytes": 182207
+    },
+    {
+      "path": "layers/right_wrist.png",
+      "sha256": "357cbe58fdea462ecc6748a88317da04745c037a490178245a31c0a8369cf768",
+      "bytes": 52666
+    },
+    {
+      "path": "layers/underpaint/cape_underpaint.png",
+      "sha256": "422b1d06a2d300b69b05aabe00cf58730718d37337b764cc27a2a7d6afc463b3",
+      "bytes": 174767
+    },
+    {
+      "path": "layers/underpaint/chest_underpaint.png",
+      "sha256": "a1aa12b3cdce4ea6caa2cb62eb22ff19fe8679425787fb3180789b8bf85abcf7",
+      "bytes": 95503
+    },
+    {
+      "path": "layers/underpaint/face_neck_underpaint.png",
+      "sha256": "6bcd9673f263ae15d128317697653b7e45f5804d50e3bc636a2d84bc8cdf1525",
+      "bytes": 29687
+    },
+    {
+      "path": "layers/underpaint/hood_back_underpaint.png",
+      "sha256": "6474fdcc8034814bb1963d3d2e5daa18a0db5c2501a99ab2af9679f95c60fa7a",
+      "bytes": 121363
+    },
+    {
+      "path": "layers/underpaint/hood_front_underpaint.png",
+      "sha256": "1720cfc1437d327fcf3c5c78bf7b459940ae017f74e55d26a45a3981d0d4d4cf",
+      "bytes": 5423
+    },
+    {
+      "path": "layers/underpaint/left_gesture_underpaint.png",
+      "sha256": "2fc8f8cf631d8714067401c3f69e8ec1cdf4a9c2ae8bcb5a86ed7834ec8ab393",
+      "bytes": 106302
+    },
+    {
+      "path": "layers/underpaint/left_sleeve_underpaint.png",
+      "sha256": "fe8eb96a5412ad2d95f677cf79ff7097e4ea6c1d6417b9bd0799e3efd748516f",
+      "bytes": 53542
+    },
+    {
+      "path": "layers/underpaint/ribbon_left_underpaint.png",
+      "sha256": "f9de439470483e92b83fe52681b30f73d0af746dd5ffdb5f52bbe05cd2e744ff",
+      "bytes": 9369
+    },
+    {
+      "path": "layers/underpaint/ribbon_right_underpaint.png",
+      "sha256": "7c372a034efa92e905fbca8759a227c268df4f95a78b82c4ed2d53634f359dd0",
+      "bytes": 4422
+    },
+    {
+      "path": "layers/underpaint/right_gesture_underpaint.png",
+      "sha256": "16dc6822e0bb140349fcca75f8f700680bbf5b72e5639f3d6d7432dd817cf268",
+      "bytes": 61755
+    },
+    {
+      "path": "layers/underpaint/right_sleeve_underpaint.png",
+      "sha256": "1c6b861ffd8b13728e133c6c06c3b80a53e7f3540a3988546ece60859f35efd3",
+      "bytes": 28478
+    }
+  ]
+}

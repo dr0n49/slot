@@ -1,0 +1,13 @@
+{
+  "method": "RGB-only deterministic continuous hue-weighted treatment; no displacement/resampling of original",
+  "geometry": "original RGBA coverage retained",
+  "reference": "BASE original plus approved cyan FS identity",
+  "palette": {
+    "oxblood": "smooth hue weight toward deep teal/cyan, RGB proportional to original red channel",
+    "bone": "cool ivory, continuous shadow-to-light treatment",
+    "gold": "warm retained by smooth gold hue weight",
+    "hardHueThresholds": false
+  },
+  "baseRgbaSha256": "c3410deb7fe04d2918cefc02766eee5a757f360841e0f1ac01efd9621dd0d567",
+  "fsRgbaSha256": "18d3ab9f56327f8cd25fdcaacadd3b21f21bfb1c003f5ec9230be0002fa0852d"
+}

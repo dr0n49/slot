@@ -1,0 +1,181 @@
+{
+  "targetEditor": "Spine Professional 3.8.75",
+  "authoredImport": true,
+  "editorImportVerified": false,
+  "nativeEditorWorkflowWaivedByUser": true,
+  "exportVersionStamp": null,
+  "runtimeSource": "https://raw.githubusercontent.com/EsotericSoftware/spine-runtimes/3.8/spine-ts/build/spine-core.js",
+  "runtimeSha256": "f1e0a31b9906e4d4daf2733857d21381ddbbe75adec7f4d83e1cc9b2b070dfc1",
+  "bones": 45,
+  "slots": 20,
+  "skins": [
+    "default",
+    "fs"
+  ],
+  "animations": 0,
+  "pngs": 54,
+  "weightedMeshes": 8,
+  "meshVertices": 882,
+  "maxMeshRegistrationErrorPx": 0.000439,
+  "maxRegionRegistrationErrorPx": 0.000234,
+  "baseFsAlphaDifferences": 0,
+  "missingFiles": [],
+  "trimErrors": [],
+  "ik": [
+    {
+      "side": "left",
+      "restTargetErrorPx": 0.000005256961486272366
+    },
+    {
+      "side": "right",
+      "restTargetErrorPx": 0.000005529659435407011
+    }
+  ],
+  "handSwapWristDriftPx": 0,
+  "maxHandAnchorErrorPx": 0.000105,
+  "overlapZones": [
+    {
+      "part": "cape",
+      "size": [
+        1281,
+        1861
+      ],
+      "addedPx": 30,
+      "direction": "up",
+      "paintedPixels": 2594
+    },
+    {
+      "part": "left_sleeve",
+      "size": [
+        767,
+        1380
+      ],
+      "addedPx": 61,
+      "direction": "down",
+      "paintedPixels": 7303
+    },
+    {
+      "part": "hood_front",
+      "size": [
+        1411,
+        1235
+      ],
+      "addedPx": 20,
+      "direction": "down",
+      "paintedPixels": 1882
+    }
+  ],
+  "pivots": [
+    {
+      "marker": 1,
+      "name": "left_shoulder",
+      "world": [
+        -273.804,
+        3156.118
+      ],
+      "masterPixel": [
+        543.339,
+        1146.691
+      ]
+    },
+    {
+      "marker": 2,
+      "name": "left_elbow",
+      "world": [
+        -331.188,
+        2590.476
+      ],
+      "masterPixel": [
+        485.955,
+        1712.333
+      ]
+    },
+    {
+      "marker": 3,
+      "name": "left_wrist",
+      "world": [
+        -606.631,
+        2119.928
+      ],
+      "masterPixel": [
+        210.512,
+        2182.881
+      ]
+    },
+    {
+      "marker": 4,
+      "name": "right_shoulder",
+      "world": [
+        452.513,
+        3131.525
+      ],
+      "masterPixel": [
+        1269.656,
+        1171.284
+      ]
+    },
+    {
+      "marker": 5,
+      "name": "right_elbow",
+      "world": [
+        583.677,
+        2641.302
+      ],
+      "masterPixel": [
+        1400.82,
+        1661.507
+      ]
+    },
+    {
+      "marker": 6,
+      "name": "right_wrist",
+      "world": [
+        429.56,
+        2295.359
+      ],
+      "masterPixel": [
+        1246.703,
+        2007.45
+      ]
+    },
+    {
+      "marker": 7,
+      "name": "marigold",
+      "world": [
+        199.617,
+        3129.885
+      ],
+      "masterPixel": [
+        1016.76,
+        1172.923
+      ]
+    },
+    {
+      "marker": 8,
+      "name": "ribbon_left",
+      "world": [
+        173.384,
+        3023.315
+      ],
+      "masterPixel": [
+        990.527,
+        1279.494
+      ]
+    },
+    {
+      "marker": 9,
+      "name": "ribbon_right",
+      "world": [
+        214.373,
+        3021.676
+      ],
+      "masterPixel": [
+        1031.516,
+        1281.133
+      ]
+    }
+  ],
+  "version375Guard": "Unsupported skeleton data, please export with a newer version of Spine.",
+  "errors": [],
+  "result": "PASS"
+}

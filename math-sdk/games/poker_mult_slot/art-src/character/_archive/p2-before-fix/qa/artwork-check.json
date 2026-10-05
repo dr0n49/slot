@@ -1,0 +1,1186 @@
+{
+  "result": "PASS",
+  "errors": [],
+  "sleeves": [
+    {
+      "file": "left-sleeve-underpaint.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        28.573,
+        581.984,
+        441.573,
+        1383.328
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 612193
+    },
+    {
+      "file": "left-sleeve-fs.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        29.076,
+        581.762,
+        442.549,
+        1383.328
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 612105
+    },
+    {
+      "file": "right-sleeve-final.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        698.13,
+        611.115,
+        855.522,
+        1305.36
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 668191
+    },
+    {
+      "file": "right-sleeve-fs.png",
+      "source": [
+        1024,
+        1536
+      ],
+      "registeredBounds": [
+        698.168,
+        610.056,
+        855.822,
+        1305.421
+      ],
+      "alphaThreshold": 32,
+      "outside": 0,
+      "total": 669425
+    }
+  ],
+  "exports": [
+    {
+      "file": "character-a-master.png",
+      "size": [
+        1634,
+        2800
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        87,
+        40,
+        60,
+        45
+      ]
+    },
+    {
+      "file": "character-a-fs.png",
+      "size": [
+        1634,
+        2800
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        87,
+        40,
+        60,
+        45
+      ]
+    },
+    {
+      "file": "layers/cape.png",
+      "size": [
+        1281,
+        1831
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/chest.png",
+      "size": [
+        799,
+        1399
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/deck.png",
+      "size": [
+        341,
+        230
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/face_neck.png",
+      "size": [
+        754,
+        938
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/hood_back.png",
+      "size": [
+        1321,
+        1156
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/hood_front.png",
+      "size": [
+        1411,
+        1215
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_eye.png",
+      "size": [
+        142,
+        104
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_eye_glow.png",
+      "size": [
+        51,
+        33
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_hand_card.png",
+      "size": [
+        384,
+        382
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_hand_idle.png",
+      "size": [
+        325,
+        434
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_hand_open.png",
+      "size": [
+        442,
+        392
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_hand_point.png",
+      "size": [
+        496,
+        288
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_sleeve.png",
+      "size": [
+        767,
+        1319
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/left_wrist.png",
+      "size": [
+        324,
+        194
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/marigold.png",
+      "size": [
+        253,
+        214
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/marigold_leaves.png",
+      "size": [
+        253,
+        134
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/ribbon_left.png",
+      "size": [
+        111,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/ribbon_right.png",
+      "size": [
+        117,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_eye.png",
+      "size": [
+        73,
+        84
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_eye_glow.png",
+      "size": [
+        35,
+        25
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_hand_card.png",
+      "size": [
+        367,
+        307
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_hand_deck.png",
+      "size": [
+        459,
+        293
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_hand_idle.png",
+      "size": [
+        304,
+        350
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_hand_open.png",
+      "size": [
+        375,
+        331
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_hand_point.png",
+      "size": [
+        410,
+        239
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_sleeve.png",
+      "size": [
+        259,
+        1142
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/right_wrist.png",
+      "size": [
+        232,
+        282
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/cape.png",
+      "size": [
+        1281,
+        1831
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/chest.png",
+      "size": [
+        799,
+        1399
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/deck.png",
+      "size": [
+        341,
+        230
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/face_neck.png",
+      "size": [
+        754,
+        938
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/hood_back.png",
+      "size": [
+        1321,
+        1156
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/hood_front.png",
+      "size": [
+        1411,
+        1215
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_eye.png",
+      "size": [
+        142,
+        104
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_eye_glow.png",
+      "size": [
+        51,
+        33
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_hand_card.png",
+      "size": [
+        384,
+        382
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_hand_idle.png",
+      "size": [
+        325,
+        434
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_hand_open.png",
+      "size": [
+        442,
+        392
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_hand_point.png",
+      "size": [
+        496,
+        288
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_sleeve.png",
+      "size": [
+        767,
+        1319
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/left_wrist.png",
+      "size": [
+        324,
+        194
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/marigold.png",
+      "size": [
+        253,
+        214
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/marigold_leaves.png",
+      "size": [
+        253,
+        134
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/ribbon_left.png",
+      "size": [
+        111,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/ribbon_right.png",
+      "size": [
+        117,
+        172
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_eye.png",
+      "size": [
+        73,
+        84
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_eye_glow.png",
+      "size": [
+        35,
+        25
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_hand_card.png",
+      "size": [
+        367,
+        307
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_hand_deck.png",
+      "size": [
+        459,
+        293
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_hand_idle.png",
+      "size": [
+        304,
+        350
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_hand_open.png",
+      "size": [
+        375,
+        331
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_hand_point.png",
+      "size": [
+        410,
+        239
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_sleeve.png",
+      "size": [
+        259,
+        1142
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "layers/fs/right_wrist.png",
+      "size": [
+        232,
+        282
+      ],
+      "space": "srgb",
+      "icc": true,
+      "alpha": true,
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "cape-final-v2.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "cape-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "cape-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "chest-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "chest-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "deck-final.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true
+    },
+    {
+      "file": "deck-fs.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true
+    },
+    {
+      "file": "eye-glow-final.png",
+      "size": [
+        1619,
+        971
+      ],
+      "alpha": true
+    },
+    {
+      "file": "face-neck-fs.png",
+      "size": [
+        1153,
+        1364
+      ],
+      "alpha": true
+    },
+    {
+      "file": "face-neck-underpaint.png",
+      "size": [
+        1153,
+        1364
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hand-deck-final.png",
+      "size": [
+        1537,
+        1023
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hands-left-poses.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hands-right-poses.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-front-final.png",
+      "size": [
+        1176,
+        1338
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-front-fs.png",
+      "size": [
+        1176,
+        1337
+      ],
+      "alpha": true
+    },
+    {
+      "file": "hood-underpaint.png",
+      "size": [
+        1173,
+        1341
+      ],
+      "alpha": true
+    },
+    {
+      "file": "identity-master-v1.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "identity-master-v2.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-underpaint-v1.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "left-sleeve-underpaint.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "lighting-fs-guide.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "marigold-final.png",
+      "size": [
+        1172,
+        1342
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-final.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-fs.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true
+    },
+    {
+      "file": "right-sleeve-underpaint.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    },
+    {
+      "file": "torso-underpaint.png",
+      "size": [
+        948,
+        1659
+      ],
+      "alpha": true
+    }
+  ]
+}

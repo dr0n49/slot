@@ -1,0 +1,211 @@
+{
+  "pageErrors": [],
+  "states": [
+    {
+      "skin": "default",
+      "pose": "setup",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 790,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "idle",
+      "pose": "idle",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "default",
+      "pose": "point",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "default",
+      "pose": "open",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "default",
+      "pose": "setup",
+      "hidden": true,
+      "attachments": 28,
+      "vertices": 1425,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "fs",
+      "pose": "setup",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 790,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "fs_idle",
+      "pose": "idle",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "fs",
+      "pose": "point",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "fs",
+      "pose": "open",
+      "hidden": false,
+      "attachments": 19,
+      "vertices": 854,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    },
+    {
+      "skin": "fs",
+      "pose": "setup",
+      "hidden": true,
+      "attachments": 28,
+      "vertices": 1425,
+      "outside": 0,
+      "glError": 0,
+      "wrists": {
+        "left": [
+          -606.630543660737,
+          2119.9276784959156
+        ],
+        "right": [
+          429.5599248247962,
+          2295.358635450558
+        ]
+      }
+    }
+  ],
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    }
+  ],
+  "wristsChangedOnSwap": false,
+  "source": "Official Spine 3.8 static runtime, not native Editor",
+  "missingImages": [],
+  "result": "PASS"
+}

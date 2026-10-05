@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-04",
+  "tool": "image_gen.imagegen",
+  "targetEditor": "3.8.75",
+  "nativeEditorWorkflowWaivedByUser": true,
+  "jobs": [
+    {
+      "id": "left-sleeve-overlap",
+      "refs": [
+        "layers/left_sleeve.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target is our own isolated LEFT sleeve, 767x1319 production layer. Preserve the visible shoulder, embroidery, elbow folds, gold bands, cuff, silhouette and top-left light EXACTLY. Extend the canvas DOWN by 61 pixels equivalent, same width and same original scale: output composition 767x1380. Paint a continuous dark sleeve-interior overlap projecting below the bottom cuff edge by this amount, concentrated underneath the wrist exit at the lower left, with matching ivory/red cuff inside and oxblood/black fabric shadows. No new cuff, no ornament beyond the original cuff, no hand. A tucked, rounded underlap tab, never a horizontal rectangular strip. Its top overlaps inside the existing cuff so rotating a forearm never exposes a transparent hole. Bold ink, flat cel planes, funeral-print style. Preserve all original artwork above the extension, no other changes. True transparent background, no haze/glow/background or text. Whole original sleeve complete."
+    },
+    {
+      "id": "hood-front-overlap",
+      "refs": [
+        "layers/hood_front.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Edit target is our own isolated hood front, 1411x1215. Preserve the crown, face opening, both shoulder tails, fold pattern and top-left warm cel shading. Extend the composition DOWN by 20 pixels equivalent to 1411x1235, keep width and original scale. Paint a small continuous dark/oxblood inner-lining overlap along the existing lower neck-facing cloth edges, tucked inside the hood tails so it meets the neck smoothly. This is extra cloth behind a seam, not a new collar. Face opening stays transparent. Do not fill the face opening with a black oval, do not draw face/neck/body. No changes to upper hood, no second hood. Bold ink, broad flat cel folds, matching warm light. Real transparency, no outside glow/text/background. Entire existing piece plus deliberate painted 20px lower overlap."
+    },
+    {
+      "id": "cape-shoulder-overlap",
+      "refs": [
+        "layers/cape.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Our own isolated cloak front is the edit target, 1281x1831. Preserve exactly its front silhouette, embroidery, curved sides, pointed hem, flat cel shading and colour. Add a 30px equivalent painted overlap UPWARD at shoulder caps: output composition 1281x1861, same width, original image shifted down30px without changing its scale. Complete warm-lit oxblood/black shoulder fabric with broad folded shadow planes into the new upper area, tuck beneath shoulder pieces. Keep the shallow neck opening, do NOT add a high standing collar. No sleeves, body, head, hands, flower or cards. Our funeral-print bold dark contours and top-left cel light; no photoreal fabric. No clipping or rectangular painted strip. True transparency, no text/background/glow."
+    },
+    {
+      "id": "hands-left-matched",
+      "refs": [
+        "source/hands-left-poses.png",
+        "layers/right_hand_idle.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Repaint our own FAR/LEFT skeletal hand-pose sheet for consistent anatomy and registration, matching the smaller hand's palm scale from image2. Exactly FOUR separate complete hand drawings on true transparency in a perfectly equal 2x2 grid. Each cell has portrait proportion330:400, with generous gaps, arranged top-left idle; top-right holding a SINGLE blank ivory card; bottom-left pointing right; bottom-right open offering palm. SAME skeletal hand, SAME size wrist width, SAME palm length and knuckle widths in all4 cells, EXACT same wrist-base landmark location near 30% across and35% down each cell. Short complete wrist/forearm stub extends upper-left to hide inside cuff. Long relaxed fingers go down in idle; pointing finger goes right; card fits fully in cell; open palm toward viewer/up. The hand and optional single card fit within330x400 design envelope, no shrinking one hand to accommodate the card. No sleeve. Warm ivory, clean bold dark contours, natural five-digit skeletal anatomy and matching flat top-left cel shading, same funeral-print line weight in all four poses. No overly pointed claw tips, no flesh/cartoon mittens. Preserve correct far-hand thumb side, all fingertips complete, no cell-to-cell overlap, no lettering, labels, boxes, other props, glow or background."
+    },
+    {
+      "id": "hands-right-matched",
+      "refs": [
+        "source/hands-right-poses.png",
+        "layers/left_hand_idle.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Repaint our own NEAR/RIGHT skeletal hand-pose sheet for consistent anatomy and registration. Exactly FOUR separate complete hand drawings on true transparency in a perfectly equal2x2 grid. Each cell portrait330:400, generous gaps, top-left idle; top-right holding a SINGLE blank ivory card; bottom-left pointing right; bottom-right open offering palm. Same palm and wrist scale as far-hand system: all4 cells have identical wrist-base landmark near30% across and35% down each cell, same wrist width, same palm length and knuckle scale. A short complete wrist/forearm overlap stub upper-left; idle long relaxed fingers downward; point right; whole card visible; open palm forward/up. Everything fits330x400 design envelope with no fingertip/card clipping, do not shrink anatomy in card pose. FIVE skeletal digits, correct near-hand thumb side, crisp dark ink, warm ivory/red-shadow flat cel planes, top-left warm light matching reference. No claws, no sleeve, no other body/deck, no labels/text/frame, no outside glow/background. Match line weight, proportions and cel planes uniformly, natural wrist and metacarpal joints."
+    }
+  ],
+  "copies": [
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-b4694688-a79a-40df-83c7-7eadf900cab1.png",
+      "to": "art-src/character/source/p2fix-left-sleeve-overlap.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-515d25fe-3770-4ac1-81e0-fc3725612bf9.png",
+      "to": "art-src/character/source/p2fix-hood-front-overlap.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-f1a692bf-3d4c-4f62-8629-5337d82fc59a.png",
+      "to": "art-src/character/source/p2fix-cape-shoulder-overlap.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-6449c415-0533-47e6-9beb-a5cacd9665c9.png",
+      "to": "art-src/character/source/p2fix-hands-left-matched.png"
+    },
+    {
+      "from": "/Users/andriinorenko/.codex/generated_images/01a10265-456f-7622-9330-217a5a7d1aac/exec-94084730-2fe4-45d2-8df1-cd9c9407fe87.png",
+      "to": "art-src/character/source/p2fix-hands-right-matched.png"
+    }
+  ]
+}

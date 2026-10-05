@@ -1,0 +1,21 @@
+{
+  "tool": "image_gen.imagegen",
+  "reason": "User rejected empty detached collar; fitted garment correction",
+  "jobs": [
+    {
+      "prompt": "Use case: precise-object-edit. Input 1 is the EDIT TARGET: our isolated Reaper Dealer waistcoat/chest production layer. Input 2 is its currently incorrect assembled character, for anatomical registration. Input 3 is the user's approved-looking OWN character illustration: exact reference for how clothing is WORN by the figure, especially the neckline. Redraw ONLY the top collar/neckline and shoulder tailoring of input 1; preserve every lower gold/red ornament, button, waist shape, coat-tail silhouette, pose, scale, and flat funeral-print style. The current hollow oval stand collar reads like a detached clothing display in FRONT of the character. Replace that with a fitted, OPEN V high collar with two clear gold-edged collar points that sit against the sides of the neck, as in input 3: one coherent wearer, natural neck emerging from inside garment. The top centre between collar points must be genuinely TRANSPARENT so the existing separate neck artwork shows through. No elliptical top ring, no closed red tube, no fake separate mannequin neck or head. Collar falls into the existing V lapels without a white cravat bridging the neck. Keep the two sides centred on the real neck in input2; high back collar is understated and behind the neck, NOT a red empty hole above it. Make shoulder seams fit the body and sleeves, no visible sleeve-opening cavity that looks like an empty garment. Same 3/4 view, bold ink, flat warm black/oxblood/gold cel planes, light top-left. No skull/face/bones/arms/hands/flower/card in this layer; clothing only. No text, background, haze, glow. True transparent background and neckline opening. Entire waistcoat complete, same outline and positioning below the upper quarter.",
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/layers/chest.png",
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/character-a-master.png",
+        "/Users/andriinorenko/Desktop/Зображення ChatGPT 4 жовт. 2026 р., 20_35_46.png"
+      ]
+    },
+    {
+      "refs": [
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/source/p2fix-chest-worn.png",
+        "/Users/andriinorenko/slot/math-sdk/games/poker_mult_slot/art-src/character/_archive/p2fix-before-neckline/layers/fs/chest.png"
+      ],
+      "prompt": "Use case: lighting-weather. Image 1 is the EDIT TARGET: our corrected Reaper Dealer waistcoat with fitted open V collar and a transparent neckline. Image 2 is ONLY our own FS colour/light reference, NOT a geometry reference. Preserve image1 EXACTLY in shape, crop, every gold contour, button, pattern, open V collar points and transparent neck gap; change ONLY the lighting and cloth colour to match image2. Black becomes deep ink navy, oxblood becomes dark violet, highlights on left edges get clear cyan moonlight rim, gold stays warm restrained gold. Broad flat cel-shadow planes, bold clean dark contours, no soft photorealism. The same fitted clothing, same entire silhouette and all hidden areas, true transparent background including neckline. Do NOT close the collar into the old oval tube, do not add a cravat bridging the opening, no head/neck/arms/flower/cards, no text or background."
+    }
+  ]
+}

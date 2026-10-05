@@ -1,0 +1,213 @@
+{
+  "revision": "P2-rebuild",
+  "nativeSize": [
+    930,
+    1691
+  ],
+  "noUpscale": true,
+  "bonesByteIdentical": true,
+  "ikByteIdentical": true,
+  "animations": 0,
+  "hiddenBuffersDefaultDisabled": true,
+  "skins": [
+    "default",
+    "fs",
+    "idle",
+    "fs_idle"
+  ],
+  "defaultHands": [
+    "left_hand_card",
+    "right_hand_deck"
+  ],
+  "composites": [
+    {
+      "skin": "default",
+      "compositor": "libvips linear scRGB working precision; saved PNGs 100% opacity; native integer offsets",
+      "photoshopKritaVerified": false,
+      "drawOrder": [
+        "cape",
+        "left_sleeve",
+        "right_sleeve",
+        "hood_back",
+        "face_neck",
+        "chest",
+        "hood_front",
+        "left_wrist",
+        "right_wrist",
+        "left_card",
+        "deck",
+        "left_hand_card",
+        "right_hand_deck",
+        "marigold_leaves",
+        "ribbon_left",
+        "ribbon_right",
+        "marigold",
+        "left_eye",
+        "right_eye"
+      ],
+      "visibleRgbaChangedPixels": 0,
+      "maxVisibleChannelDelta": 0,
+      "missingVisiblePixels": 0,
+      "overlappingVisiblePixels": 0,
+      "visibleLayerChannelDrift": 0,
+      "transparentRgbPayloadPixels": 281,
+      "decodedFullRgbaEqualAfterTransparentPayloadRestore": true,
+      "originalRgbaSha256": "c3410deb7fe04d2918cefc02766eee5a757f360841e0f1ac01efd9621dd0d567",
+      "compositeRgbaSha256": "c3410deb7fe04d2918cefc02766eee5a757f360841e0f1ac01efd9621dd0d567",
+      "result": "PASS",
+      "referenceMasterFullRgbaEqual": true,
+      "slicedMasterFullRgbaEqual": true
+    },
+    {
+      "skin": "fs",
+      "compositor": "libvips linear scRGB working precision; saved PNGs 100% opacity; native integer offsets",
+      "photoshopKritaVerified": false,
+      "drawOrder": [
+        "cape",
+        "left_sleeve",
+        "right_sleeve",
+        "hood_back",
+        "face_neck",
+        "chest",
+        "hood_front",
+        "left_wrist",
+        "right_wrist",
+        "left_card",
+        "deck",
+        "left_hand_card",
+        "right_hand_deck",
+        "marigold_leaves",
+        "ribbon_left",
+        "ribbon_right",
+        "marigold",
+        "left_eye",
+        "right_eye"
+      ],
+      "visibleRgbaChangedPixels": 0,
+      "maxVisibleChannelDelta": 0,
+      "missingVisiblePixels": 0,
+      "overlappingVisiblePixels": 0,
+      "visibleLayerChannelDrift": 0,
+      "transparentRgbPayloadPixels": 281,
+      "decodedFullRgbaEqualAfterTransparentPayloadRestore": true,
+      "originalRgbaSha256": "18d3ab9f56327f8cd25fdcaacadd3b21f21bfb1c003f5ec9230be0002fa0852d",
+      "compositeRgbaSha256": "18d3ab9f56327f8cd25fdcaacadd3b21f21bfb1c003f5ec9230be0002fa0852d",
+      "result": "PASS",
+      "referenceMasterFullRgbaEqual": true
+    }
+  ],
+  "errors": [],
+  "hidden": [
+    {
+      "name": "cape_underpaint",
+      "paintedPixels": 120733,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "left_sleeve_underpaint",
+      "paintedPixels": 41415,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "right_sleeve_underpaint",
+      "paintedPixels": 19426,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "hood_back_underpaint",
+      "paintedPixels": 84733,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "face_neck_underpaint",
+      "paintedPixels": 20078,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "chest_underpaint",
+      "paintedPixels": 50398,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "hood_front_underpaint",
+      "paintedPixels": 5951,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "left_gesture_underpaint",
+      "paintedPixels": 54311,
+      "expectedOccludedPixels": 54311,
+      "outsideOcclusion": 0,
+      "fullPropOcclusion": true,
+      "setupVisible": false
+    },
+    {
+      "name": "right_gesture_underpaint",
+      "paintedPixels": 42829,
+      "expectedOccludedPixels": 42829,
+      "outsideOcclusion": 0,
+      "fullPropOcclusion": true,
+      "setupVisible": false
+    },
+    {
+      "name": "ribbon_left_underpaint",
+      "paintedPixels": 3663,
+      "bufferPx": 32,
+      "setupVisible": false
+    },
+    {
+      "name": "ribbon_right_underpaint",
+      "paintedPixels": 1621,
+      "bufferPx": 32,
+      "setupVisible": false
+    }
+  ],
+  "baseFsAlphaDifferences": 0,
+  "hiddenPaintOverVisiblePixels": 0,
+  "hiddenPaintOutsideApprovedOcclusion": 0,
+  "spine": {
+    "parser": "official unmodified 3.8",
+    "targetEditor": "3.8.75",
+    "editorImportVerified": false,
+    "nativeEditorWaivedByUser": true,
+    "bones": 45,
+    "slots": 30,
+    "meshes": 20,
+    "maxSetupRegistrationErrorWorldPx": 0.00025746628851596343,
+    "animations": 0
+  },
+  "preservedPivotLimit": {
+    "left": {
+      "bonePixel": [
+        98.63848238203349,
+        1318.3043497797878
+      ],
+      "originalWristPixel": [
+        191,
+        857
+      ],
+      "distancePx": 470.45972522889434,
+      "needsPivotCorrectionBeforeAnimation": true
+    },
+    "right": {
+      "bonePixel": [
+        724.4235117424037,
+        1212.3565825618234
+      ],
+      "originalWristPixel": [
+        731,
+        1182
+      ],
+      "distancePx": 31.060783999041366,
+      "needsPivotCorrectionBeforeAnimation": true
+    }
+  },
+  "result": "PASS"
+}
