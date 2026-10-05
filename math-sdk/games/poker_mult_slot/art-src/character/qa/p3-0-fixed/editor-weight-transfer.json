@@ -1,0 +1,107 @@
+{
+  "nativeVersion": "3.8.75",
+  "nativeSource": "character-a.json",
+  "editorBaseSkin": "BASE",
+  "runtimeBaseSkin": "default",
+  "meshes": [
+    {
+      "skin": "default",
+      "mesh": "cape",
+      "vertices": 255,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "chest",
+      "vertices": 84,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "hood_back",
+      "vertices": 70,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "hood_front",
+      "vertices": 143,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "face_neck",
+      "vertices": 54,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "left_sleeve",
+      "vertices": 54,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "default",
+      "mesh": "right_sleeve",
+      "vertices": 72,
+      "method": "Editor Smooth (Auto failed)",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "cape",
+      "vertices": 255,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "chest",
+      "vertices": 84,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "hood_back",
+      "vertices": 70,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "hood_front",
+      "vertices": 143,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "face_neck",
+      "vertices": 54,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "left_sleeve",
+      "vertices": 54,
+      "method": "Editor Update Bindings + Auto",
+      "changed": true
+    },
+    {
+      "skin": "idle",
+      "mesh": "right_sleeve",
+      "vertices": 72,
+      "method": "Editor Smooth (Auto failed)",
+      "changed": true
+    }
+  ],
+  "animations": 0
+}
