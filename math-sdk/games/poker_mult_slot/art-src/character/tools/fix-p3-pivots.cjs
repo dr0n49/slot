@@ -7,6 +7,9 @@ const assert = require('assert/strict');
 const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
 const QA = path.join(ROOT, 'qa', 'p3-0-fixed');
+if (fs.existsSync(path.join(QA, 'editor-weight-transfer.json'))) {
+  throw new Error('Editor weights already exist. This P2-to-P3 initialization would overwrite them. Use the saved P3 source/editor JSON; see qa/p3-0-fixed/README.md for rebuilding in a separate directory.');
+}
 const backupPath = path.join(ROOT, 'character-a-setup-backup.json');
 const sourcePath = path.join(ROOT, 'character-a-setup.json');
 const outputPath = path.join(ROOT, 'character-a-p3-setup.json');

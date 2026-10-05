@@ -13,8 +13,18 @@ const loader={newRegionAttachment(s,n,p){const a=new sp.RegionAttachment(n);a.se
 function make(json){const data=new sp.SkeletonJson(loader).readSkeletonData(json),s=new sp.Skeleton(data);s.setToSetupPose();s.updateWorldTransform();return s;}
 function verts(s,slot,a){const v=new Float32Array(a instanceof sp.MeshAttachment?a.worldVerticesLength:8);if(a instanceof sp.MeshAttachment)a.computeWorldVertices(slot,0,v.length,v,0,2);else a.computeWorldVertices(slot.bone,v,0,2);return v;}
 const before=make(original),fixed=make(corrected);
+const pngHashes=read('qa/p3-0-fixed/json-verification.json').textureFileSha256;
+for(const [p,hash]of Object.entries(pngHashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,'layers',p+'.png'))).digest('hex'),hash,'Original PNG '+p);
+const meshValidation=[];
+for(const skin of corrected.skins)for(const [slotName,atts]of Object.entries(skin.attachments))for(const [name,a]of Object.entries(atts))if(a.type==='mesh'){
+ let offset=0,maxWeightSumError=0;
+ for(let i=0;i<a.uvs.length/2;i++){const n=a.vertices[offset++];assert(Number.isInteger(n)&&n>0);let sum=0;for(let j=0;j<n;j++){const [bone,x,y,w]=a.vertices.slice(offset,offset+4);offset+=4;assert(Number.isInteger(bone)&&bone>=0&&bone<corrected.bones.length);assert([x,y,w].every(Number.isFinite)&&w>=0);sum+=w;}maxWeightSumError=Math.max(maxWeightSumError,Math.abs(sum-1));assert(Math.abs(sum-1)<1e-6);}
+ assert.equal(offset,a.vertices.length);meshValidation.push({skin:skin.name,slot:slotName,mesh:name,vertices:a.uvs.length/2,maxWeightSumError});
+}
+const nativeScreenshots=['skeleton-tree.png','canvas-default.png','canvas-fs.png','rotate-left-45.png','rotate-left-minus45.png','rotate-right-45.png','rotate-right-minus45.png','rotate-chest-15.png','left-wrist-coordinates.png','right-wrist-coordinates.png','weights-left-sleeve.png','skins-base.png'];
+for(const file of nativeScreenshots){const png=fs.readFileSync(path.join(QA,file));assert.equal(png.subarray(1,4).toString(),'PNG');assert.equal(png.readUInt32BE(16),1920);assert.equal(png.readUInt32BE(20),1080);}
 assert.equal(native.skeleton.spine,'3.8.75');assert.equal(native.bones.length,45);assert.equal(Object.keys(native.animations||{}).length,0);
-assert.deepEqual(native.skins.map(s=>s.name).sort(),['default','fs','fs_idle','idle']);
+assert.deepEqual(native.skins.map(s=>s.name==='BASE'?'default':s.name).sort(),['default','fs','fs_idle','idle']);
 // The bundled official parser explicitly rejects exports stamped 3.8.75.
 // Keep that stamp and the runtime unchanged; check native serialization as raw data.
 let nativeRuntimeError=null;try{make(native);}catch(e){nativeRuntimeError=e.message;}
@@ -28,7 +38,7 @@ for(const skin of corrected.skins)for(const [slotName,atts]of Object.entries(ski
  const arrays=[before,fixed].map(s=>{const slot=s.findSlot(slotName),a=s.data.findSkin(skin.name).getAttachment(slot.data.index,name);assert(a,skin.name+'/'+slotName+'/'+name);return verts(s,slot,a);});
  assert.equal(arrays[0].length,arrays[1].length);
  for(let i=0;i<arrays[0].length;i+=2)preservedGeometryMaxWorld=Math.max(preservedGeometryMaxWorld,Math.hypot(arrays[0][i]-arrays[1][i],arrays[0][i+1]-arrays[1][i+1]));
- const a=atts[name],n=native.skins.find(s=>s.name===skin.name).attachments[slotName][name];assert(n,skin.name+'/'+slotName+'/'+name);assert.equal(n.type||'region',a.type||'region');assert.equal(n.path||name,a.path||name);
+ const a=atts[name],n=native.skins.find(s=>s.name===(skin.name==='default'?'BASE':skin.name)).attachments[slotName][name];assert(n,skin.name+'/'+slotName+'/'+name);assert.equal(n.type||'region',a.type||'region');assert.equal(n.path||name,a.path||name);
  if(a.type==='mesh'){compareNumbers(a.vertices,n.vertices,name+'/vertices');compareNumbers(a.uvs,n.uvs,name+'/uvs');assert.deepEqual(unorderedTopology(n.triangles,3),unorderedTopology(a.triangles,3),name+'/triangles');assert.deepEqual(unorderedTopology(n.edges,2),unorderedTopology(a.edges,2),name+'/edges');}
  else if(!a.type||a.type==='region')for(const k of['x','y','rotation','scaleX','scaleY','width','height'])compareNumbers([a[k]??(k.startsWith('scale')?1:0)],[n[k]??(k.startsWith('scale')?1:0)],name+'/'+k);
  count++;
@@ -47,7 +57,7 @@ for(const skin of ['default','fs','idle','fs_idle']){
    for(let i=0;i<v.length;i+=2){if(!Number.isFinite(v[i])||!Number.isFinite(v[i+1]))nonfinite++;const move=Math.hypot(v[i]-old[i],v[i+1]-old[i+1]);maxMovementWorld=Math.max(maxMovementWorld,move);if(slot.data.name===(bone?.startsWith('left')?'left_sleeve':'right_sleeve'))sleeveMovementWorld=Math.max(sleeveMovementWorld,move);}
    if(a instanceof sp.MeshAttachment)for(let i=0;i<a.triangles.length;i+=3){const t=Array.from(a.triangles).slice(i,i+3);if(area(old,t)*area(v,t)<0)foldedTriangles++;}
   }
-  assert.equal(nonfinite,0);if(bone?.endsWith('elbow'))assert(sleeveMovementWorld>1,'Sleeve must deform with forearm');
+  assert.equal(nonfinite,0);assert.equal(foldedTriangles,0,skin+'/'+name);if(bone?.endsWith('elbow'))assert(sleeveMovementWorld>1,'Sleeve must deform with forearm');
   tests.push({skin,pose:name,bone,degrees,activeAttachments,nonfinite,foldedTriangles,maxMovementWorld,sleeveMovementWorld});
  }
 }
@@ -59,8 +69,11 @@ const report={result:'PASS_WITH_LIMITATIONS',source:'Corrected source parsed by 
  nativeProjectSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,'character-a-p3.spine'))).digest('hex'),
  checkedAttachments:count,preservedGeometryMaxWorld,nativeMaxNumericDifference,nativeRuntimeError,
  exportPrecisionNote:'Native JSON export rounds coordinate fields; authoritative corrected setup and native project are also retained.',
- pivots,poseTests:tests,animations:0,missingTextureFiles:[],
- clippingCertified:false,editorWindowVerified:false,autoWeightPerformed:false,
- remaining:'Native Editor screenshots, Auto Weight/paint refinement and visual clipping certification remain pending. Native 3.8.75 export must be re-exported with a compatible newer 3.8 patch for this runtime.'};
+ pivots,poseTests:tests,meshValidation,animations:0,missingTextureFiles:[],nativeScreenshots,
+ sourceSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,'character-a-p3-setup.json'))).digest('hex'),
+ clippingCertified:false,editorWindowVerified:true,autoWeightPerformed:true,
+ weights:'Six meshes: Editor Update Bindings + Auto. Right sleeve: Editor Update Bindings + Smooth after Auto failed. Transferred to identical idle geometry; FS linked meshes inherit weights.',
+ nativeSkinAlias:{BASE:'default'},
+ remaining:'Native Editor screenshots confirm exposed artwork cutouts at forearm ±45° and chest +15°. Existing hidden buffers reduce but do not fully repair them; P2-approved setup keeps buffers disabled. Clipping acceptance has not passed. Native 3.8.75 export requires a compatible newer 3.8 patch for this runtime.'};
 fs.writeFileSync(path.join(QA,'roundtrip-verification.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({result:report.result,nativeVersion:report.nativeVersion,nativeRuntimeError,checkedAttachments:count,preservedGeometryMaxWorld,nativeMaxNumericDifference,pivots,poseTests:tests.length,foldedTrianglesTotal:tests.reduce((n,t)=>n+t.foldedTriangles,0),animations:0},null,2));

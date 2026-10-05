@@ -2,10 +2,10 @@
   "result": "PASS_WITH_LIMITATIONS",
   "source": "Corrected source parsed by official unmodified Spine 3.8 runtime; native export compared as raw data",
   "nativeVersion": "3.8.75",
-  "nativeProjectBytes": 63522,
-  "nativeProjectSha256": "c214c423556815b6ea3ceab18024820761e85071a4cbf83cf6b36586e9fa9815",
+  "nativeProjectBytes": 75489,
+  "nativeProjectSha256": "a132d583434342bb6d3f8431d04c6645a4f7b765e92ebf958ab157921fb6f995",
   "checkedAttachments": 134,
-  "preservedGeometryMaxWorld": 0.0002453020158172344,
+  "preservedGeometryMaxWorld": 0.0002729575167846423,
   "nativeMaxNumericDifference": 0.005005199999999377,
   "nativeRuntimeError": "Unsupported skeleton data, please export with a newer version of Spine.",
   "exportPrecisionNote": "Native JSON export rounds coordinate fields; authoritative corrected setup and native project are also retained.",
@@ -72,7 +72,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 617.0695668230148,
-      "sleeveMovementWorld": 375.67487778578845
+      "sleeveMovementWorld": 352.8262656963536
     },
     {
       "skin": "default",
@@ -81,9 +81,9 @@
       "degrees": -45,
       "activeAttachments": 19,
       "nonfinite": 0,
-      "foldedTriangles": 2,
+      "foldedTriangles": 0,
       "maxMovementWorld": 617.0695692516144,
-      "sleeveMovementWorld": 375.67488763163936
+      "sleeveMovementWorld": 352.82647258769464
     },
     {
       "skin": "default",
@@ -94,7 +94,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 511.64114598517716,
-      "sleeveMovementWorld": 497.9820066113064
+      "sleeveMovementWorld": 497.98194575229024
     },
     {
       "skin": "default",
@@ -105,7 +105,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 511.64120458542993,
-      "sleeveMovementWorld": 497.9819133676618
+      "sleeveMovementWorld": 497.98188106479444
     },
     {
       "skin": "default",
@@ -137,8 +137,8 @@
       "activeAttachments": 19,
       "nonfinite": 0,
       "foldedTriangles": 0,
-      "maxMovementWorld": 357.82171115946284,
-      "sleeveMovementWorld": 357.82171115946284
+      "maxMovementWorld": 357.82187294831635,
+      "sleeveMovementWorld": 357.82187294831635
     },
     {
       "skin": "default",
@@ -148,8 +148,8 @@
       "activeAttachments": 19,
       "nonfinite": 0,
       "foldedTriangles": 0,
-      "maxMovementWorld": 357.82192397524767,
-      "sleeveMovementWorld": 357.82192397524767
+      "maxMovementWorld": 357.8218421879392,
+      "sleeveMovementWorld": 357.8218421879392
     },
     {
       "skin": "fs",
@@ -171,7 +171,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 617.0695668230148,
-      "sleeveMovementWorld": 375.67487778578845
+      "sleeveMovementWorld": 352.8262656963536
     },
     {
       "skin": "fs",
@@ -180,9 +180,9 @@
       "degrees": -45,
       "activeAttachments": 19,
       "nonfinite": 0,
-      "foldedTriangles": 2,
+      "foldedTriangles": 0,
       "maxMovementWorld": 617.0695692516144,
-      "sleeveMovementWorld": 375.67488763163936
+      "sleeveMovementWorld": 352.82647258769464
     },
     {
       "skin": "fs",
@@ -193,7 +193,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 511.64114598517716,
-      "sleeveMovementWorld": 497.9820066113064
+      "sleeveMovementWorld": 497.98194575229024
     },
     {
       "skin": "fs",
@@ -204,7 +204,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 511.64120458542993,
-      "sleeveMovementWorld": 497.9819133676618
+      "sleeveMovementWorld": 497.98188106479444
     },
     {
       "skin": "fs",
@@ -236,8 +236,8 @@
       "activeAttachments": 19,
       "nonfinite": 0,
       "foldedTriangles": 0,
-      "maxMovementWorld": 357.82171115946284,
-      "sleeveMovementWorld": 357.82171115946284
+      "maxMovementWorld": 357.82187294831635,
+      "sleeveMovementWorld": 357.82187294831635
     },
     {
       "skin": "fs",
@@ -247,8 +247,8 @@
       "activeAttachments": 19,
       "nonfinite": 0,
       "foldedTriangles": 0,
-      "maxMovementWorld": 357.82192397524767,
-      "sleeveMovementWorld": 357.82192397524767
+      "maxMovementWorld": 357.8218421879392,
+      "sleeveMovementWorld": 357.8218421879392
     },
     {
       "skin": "idle",
@@ -270,7 +270,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 459.5647198085437,
-      "sleeveMovementWorld": 375.67487778578845
+      "sleeveMovementWorld": 352.8262656963536
     },
     {
       "skin": "idle",
@@ -279,9 +279,9 @@
       "degrees": -45,
       "activeAttachments": 19,
       "nonfinite": 0,
-      "foldedTriangles": 2,
+      "foldedTriangles": 0,
       "maxMovementWorld": 459.56462982353446,
-      "sleeveMovementWorld": 375.67488763163936
+      "sleeveMovementWorld": 352.82647258769464
     },
     {
       "skin": "idle",
@@ -292,7 +292,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 589.7995882184277,
-      "sleeveMovementWorld": 497.9820066113064
+      "sleeveMovementWorld": 497.98194575229024
     },
     {
       "skin": "idle",
@@ -303,7 +303,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 589.7996180614183,
-      "sleeveMovementWorld": 497.9819133676618
+      "sleeveMovementWorld": 497.98188106479444
     },
     {
       "skin": "idle",
@@ -336,7 +336,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 377.56787427213897,
-      "sleeveMovementWorld": 357.82171115946284
+      "sleeveMovementWorld": 357.82187294831635
     },
     {
       "skin": "idle",
@@ -347,7 +347,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 377.56782026991164,
-      "sleeveMovementWorld": 357.82192397524767
+      "sleeveMovementWorld": 357.8218421879392
     },
     {
       "skin": "fs_idle",
@@ -369,7 +369,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 459.5647198085437,
-      "sleeveMovementWorld": 375.67487778578845
+      "sleeveMovementWorld": 352.8262656963536
     },
     {
       "skin": "fs_idle",
@@ -378,9 +378,9 @@
       "degrees": -45,
       "activeAttachments": 19,
       "nonfinite": 0,
-      "foldedTriangles": 2,
+      "foldedTriangles": 0,
       "maxMovementWorld": 459.56462982353446,
-      "sleeveMovementWorld": 375.67488763163936
+      "sleeveMovementWorld": 352.82647258769464
     },
     {
       "skin": "fs_idle",
@@ -391,7 +391,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 589.7995882184277,
-      "sleeveMovementWorld": 497.9820066113064
+      "sleeveMovementWorld": 497.98194575229024
     },
     {
       "skin": "fs_idle",
@@ -402,7 +402,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 589.7996180614183,
-      "sleeveMovementWorld": 497.9819133676618
+      "sleeveMovementWorld": 497.98188106479444
     },
     {
       "skin": "fs_idle",
@@ -435,7 +435,7 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 377.56787427213897,
-      "sleeveMovementWorld": 357.82171115946284
+      "sleeveMovementWorld": 357.82187294831635
     },
     {
       "skin": "fs_idle",
@@ -446,13 +446,314 @@
       "nonfinite": 0,
       "foldedTriangles": 0,
       "maxMovementWorld": 377.56782026991164,
-      "sleeveMovementWorld": 357.82192397524767
+      "sleeveMovementWorld": 357.8218421879392
+    }
+  ],
+  "meshValidation": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "mesh": "cape_underpaint",
+      "vertices": 195,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "cape",
+      "mesh": "cape",
+      "vertices": 255,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "mesh": "left_sleeve_underpaint",
+      "vertices": 45,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve",
+      "mesh": "left_sleeve",
+      "vertices": 54,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "mesh": "right_sleeve_underpaint",
+      "vertices": 60,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve",
+      "mesh": "right_sleeve",
+      "vertices": 72,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "mesh": "hood_back_underpaint",
+      "vertices": 88,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back",
+      "mesh": "hood_back",
+      "vertices": 70,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "mesh": "face_neck_underpaint",
+      "vertices": 70,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck",
+      "mesh": "face_neck",
+      "vertices": 54,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "mesh": "chest_underpaint",
+      "vertices": 96,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest",
+      "mesh": "chest",
+      "vertices": 84,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "mesh": "hood_front_underpaint",
+      "vertices": 63,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front",
+      "mesh": "hood_front",
+      "vertices": 143,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "mesh": "left_gesture_underpaint",
+      "vertices": 48,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "mesh": "right_gesture_underpaint",
+      "vertices": 24,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "mesh": "ribbon_left_underpaint",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left",
+      "mesh": "ribbon_left",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "mesh": "ribbon_right_underpaint",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right",
+      "mesh": "ribbon_right",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "mesh": "cape_underpaint",
+      "vertices": 195,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "cape",
+      "mesh": "cape",
+      "vertices": 255,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "mesh": "left_sleeve_underpaint",
+      "vertices": 45,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve",
+      "mesh": "left_sleeve",
+      "vertices": 54,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "mesh": "right_sleeve_underpaint",
+      "vertices": 60,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve",
+      "mesh": "right_sleeve",
+      "vertices": 72,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "mesh": "hood_back_underpaint",
+      "vertices": 88,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back",
+      "mesh": "hood_back",
+      "vertices": 70,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "mesh": "face_neck_underpaint",
+      "vertices": 70,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck",
+      "mesh": "face_neck",
+      "vertices": 54,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "mesh": "chest_underpaint",
+      "vertices": 96,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest",
+      "mesh": "chest",
+      "vertices": 84,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "mesh": "hood_front_underpaint",
+      "vertices": 63,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front",
+      "mesh": "hood_front",
+      "vertices": 143,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "mesh": "left_gesture_underpaint",
+      "vertices": 48,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "mesh": "right_gesture_underpaint",
+      "vertices": 24,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "mesh": "ribbon_left_underpaint",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left",
+      "mesh": "ribbon_left",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "mesh": "ribbon_right_underpaint",
+      "vertices": 9,
+      "maxWeightSumError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right",
+      "mesh": "ribbon_right",
+      "vertices": 9,
+      "maxWeightSumError": 0
     }
   ],
   "animations": 0,
   "missingTextureFiles": [],
+  "nativeScreenshots": [
+    "skeleton-tree.png",
+    "canvas-default.png",
+    "canvas-fs.png",
+    "rotate-left-45.png",
+    "rotate-left-minus45.png",
+    "rotate-right-45.png",
+    "rotate-right-minus45.png",
+    "rotate-chest-15.png",
+    "left-wrist-coordinates.png",
+    "right-wrist-coordinates.png",
+    "weights-left-sleeve.png",
+    "skins-base.png"
+  ],
+  "sourceSha256": "b7f047c0e51ba1ba9c86c037d5370e1b8b0bd767c8a2986800aafe13ea5e7178",
   "clippingCertified": false,
-  "editorWindowVerified": false,
-  "autoWeightPerformed": false,
-  "remaining": "Native Editor screenshots, Auto Weight/paint refinement and visual clipping certification remain pending. Native 3.8.75 export must be re-exported with a compatible newer 3.8 patch for this runtime."
+  "editorWindowVerified": true,
+  "autoWeightPerformed": true,
+  "weights": "Six meshes: Editor Update Bindings + Auto. Right sleeve: Editor Update Bindings + Smooth after Auto failed. Transferred to identical idle geometry; FS linked meshes inherit weights.",
+  "nativeSkinAlias": {
+    "BASE": "default"
+  },
+  "remaining": "Native Editor screenshots confirm exposed artwork cutouts at forearm ±45° and chest +15°. Existing hidden buffers reduce but do not fully repair them; P2-approved setup keeps buffers disabled. Clipping acceptance has not passed. Native 3.8.75 export requires a compatible newer 3.8 patch for this runtime."
 }

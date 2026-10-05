@@ -18,6 +18,8 @@
  function geometry(sk){return sk.drawOrder.flatMap(slot=>{const a=slot.getAttachment();if(!a||!a.color.a)return[];let v,tri;if(a instanceof spine.MeshAttachment){v=new Float32Array(a.worldVerticesLength);a.computeWorldVertices(slot,0,v.length,v,0,2);tri=a.triangles;}else if(a instanceof spine.RegionAttachment){v=new Float32Array(8);a.computeWorldVertices(slot.bone,v,0,2);tri=[0,1,2,2,3,0];}else return[];return[{slot,a,v,tri}];});}
  function draw(){
   const source=document.getElementById('source').value,skin=document.getElementById('skin').value,pose=document.getElementById('pose').value,sk=skeletons[source];sk.setSkinByName(skin);sk.setToSetupPose();const[bone,degrees]=scenarios[pose];if(bone)sk.findBone(bone).rotation+=degrees;sk.updateWorldTransform();
+  const buffered=document.getElementById('buffers').checked;
+  for(const slot of sk.slots)if(slot.data.name.endsWith('_underpaint')){if(buffered)sk.setAttachment(slot.data.name,slot.data.name);const a=slot.getAttachment();if(a&&slot.data.name.includes('_gesture_'))a.color.a=buffered||skin.includes('idle')?1:0;}
   const shapes=geometry(sk);let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;for(const {v}of shapes)for(let i=0;i<v.length;i+=2){minX=Math.min(minX,v[i]);maxX=Math.max(maxX,v[i]);minY=Math.min(minY,v[i+1]);maxY=Math.max(maxY,v[i+1]);}
   const k=Math.min((canvas.width-100)/(maxX-minX),(canvas.height-70)/(maxY-minY)),left=(canvas.width-(maxX-minX)*k)/2;
   const pixel=(x,y)=>[(x-minX)*k+left,(maxY-y)*k+35];gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);gl.uniform2f(loc.viewport,canvas.width,canvas.height);gl.uniform4f(loc.camera,minX,maxY,k,left);cx.clearRect(0,0,overlay.width,overlay.height);
@@ -31,6 +33,6 @@
   const state={source,skin,pose,bone,degrees,bones:sk.bones.length,animations:sk.data.animations.length,textureCount:paths.size,activeAttachments:shapes.length,nonfinite,glError:gl.getError(),wrists};document.getElementById('status').textContent=`${source==='native'?'Нативный экспорт 3.8.75':source==='before'?'Исходный P2':'Исправленный P3'} · ${skin} · ${pose} · 45 bones · ${shapes.length} attachments · 0 animation keys`;
   window.p3State=state;return state;
  }
- for(const id of['source','skin','pose','bones','meshes'])document.getElementById(id).addEventListener('change',draw);
+ for(const id of['source','skin','pose','bones','meshes','buffers'])document.getElementById(id).addEventListener('change',draw);
  window.p3Review={draw,capture:()=>canvas.toDataURL('image/png')};draw();document.documentElement.dataset.ready='true';
 })().catch(e=>{document.getElementById('status').textContent='Ошибка: '+e.message;document.documentElement.dataset.error=e.message;throw e;});

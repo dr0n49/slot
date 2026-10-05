@@ -1,0 +1,110 @@
+{
+  "method": "Native @oai/sky screenshots; JPEG capture decoded to requested PNG without pixel edits.",
+  "captures": [
+    {
+      "file": "qa/p3-0-fixed/canvas-default.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "c01f81d161f34f43d0ac8ac2d416c5890c4ae215560834c96a92129a81dcb930"
+    },
+    {
+      "file": "qa/p3-0-fixed/canvas-fs.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "873b09f9d5d54248462a8da382289d88b0a4e987ea2a02f4088f57981b0e44ca"
+    },
+    {
+      "file": "qa/p3-0-fixed/left-wrist-coordinates.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "bf6519ea0713f91c5d7a2e6264553b62aa0698b23d4e2b9bbe2adcf4960b87f2"
+    },
+    {
+      "file": "qa/p3-0-fixed/right-wrist-coordinates.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "5546eb6f95a6272f99c4b579847de95c86a20f046a714e4bc4e1f3a1cd521f07"
+    },
+    {
+      "file": "qa/p3-0-fixed/rotate-chest-15.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "ed9f5f038fb8749c6f407c8939bf23cafcfbe8a49189883293d9cb927738fc04"
+    },
+    {
+      "file": "qa/p3-0-fixed/rotate-left-45.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "68bd79fc82e814ee79582e2d091019b32dd8bfad319ded0b0a728de898f9c7b2"
+    },
+    {
+      "file": "qa/p3-0-fixed/rotate-left-minus45.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "a2137fdb3219da8a84e86489d1e841b16cb15eb66a2ba7b9bf14b64a4fce1f25"
+    },
+    {
+      "file": "qa/p3-0-fixed/rotate-right-45.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "1cf77e6c3ca7281c9a3ebbf77f511f9f88b23e8868a19ce1877d077f9f7ae1cd"
+    },
+    {
+      "file": "qa/p3-0-fixed/rotate-right-minus45.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "730e274233792a73dd0558871c5b5de066e40500fb1d896a1220190fc655c684"
+    },
+    {
+      "file": "qa/p3-0-fixed/skeleton-tree.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "bf6519ea0713f91c5d7a2e6264553b62aa0698b23d4e2b9bbe2adcf4960b87f2"
+    },
+    {
+      "file": "qa/p3-0-fixed/skins-base.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "6d5f53455504f7c3fcd6a17c1acd12441e27a53f9ac498d93c93d6878844c78c"
+    },
+    {
+      "file": "qa/p3-0-fixed/weights-left-sleeve.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "82407b0f9b558b4f3c45b72bb6b44725e80b45b7fb28672b8c4b238613458577"
+    },
+    {
+      "file": "qa/p3-0-final-check.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "c01f81d161f34f43d0ac8ac2d416c5890c4ae215560834c96a92129a81dcb930"
+    },
+    {
+      "file": "qa/p3-0-before-after-left.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "68bd79fc82e814ee79582e2d091019b32dd8bfad319ded0b0a728de898f9c7b2"
+    },
+    {
+      "file": "qa/p3-0-before-after-right.png",
+      "captureFormat": "jpeg",
+      "savedFormat": "png",
+      "decodedPixelsUnchanged": true,
+      "pixelSha256": "1cf77e6c3ca7281c9a3ebbf77f511f9f88b23e8868a19ce1877d077f9f7ae1cd"
+    }
+  ]
+}

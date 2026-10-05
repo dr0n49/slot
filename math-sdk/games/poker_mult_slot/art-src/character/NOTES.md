@@ -1,6 +1,6 @@
 # Reaper Dealer — P3 import fix, P2 artwork history
 
-P3-0 (2026-10-05): wrist pivots corrected and a real `character-a-p3.spine` created by Spine Professional 3.8.75 CLI. See `qa/p3-0-fixed/README.md` for checks and remaining deformation failures. **P3-0 is not complete: Auto Weight/painting and native Editor verification remain pending. No animations were started.** Current setup is `character-a-p3-setup.json` (also `character-a-setup.json`); the original P2 source is `character-a-setup-backup.json`. Current review: `previews/p3-0.html`. The P2 material below describes the original delivery before wrist correction.
+P3-0 (2026-10-05): wrist pivots corrected; six cloth meshes processed with Update Bindings + Auto in Spine Professional 3.8.75, right sleeve manually smoothed after Auto failed. The genuine `character-a-p3.spine` was opened/saved in the Editor. Native screenshots show BASE/FS, pivots, weights and temporary rotations. All 36 pose/skin checks have zero flipped triangles. **P3-0 acceptance is not complete: large rotations expose missing cloth under the original hands/card/deck. No animations were started.** See `qa/p3-0-fixed/README.md`. Current source is `character-a-p3-setup.json` (also `character-a-setup.json`); native import uses `character-a-p3-editor.json` with BASE corresponding to runtime default. The original P2 source is `character-a-setup-backup.json`. Current review: `previews/p3-0.html`. The P2 material below describes the original delivery before wrist correction.
 
 ## P2 rebuild from the original
 

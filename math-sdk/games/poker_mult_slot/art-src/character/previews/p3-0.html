@@ -5,12 +5,13 @@
 </style><main>
 <h1>P3-0 · запястья на artwork</h1>
 <p>Spine 3.8 runtime · проверка исправленного JSON · 0 анимаций</p>
-<div class="notice">Это просмотр через runtime, а не окно Spine Editor. Проект .spine создан и повторно прочитан CLI Spine 3.8.75. Auto Weight и проверка clipping в редакторе ещё не выполнены. Runtime отклоняет нативный экспорт с версией 3.8.75; здесь отображается исправленный JSON без подмены версии.</div>
+<div class="notice">Это просмотр через runtime; снимки окна Spine Editor находятся в qa/p3-0-fixed. Шесть сеток обработаны Auto в редакторе 3.8.75, правый рукав сглажен вручную. В 36 проверках нет перевёрнутых треугольников. Крупные повороты раскрывают вырезы под руками в исходном artwork; подрисовки закрывают их частично. Проверка без разрывов не пройдена. Runtime отклоняет нативный экспорт 3.8.75; здесь отображается исходный JSON с перенесёнными весами без подмены версии.</div>
 <div class="toolbar">
 <label>Данные <select id="source"><option value="fixed">Исправленный JSON</option><option value="before">P2 до коррекции</option></select></label>
 <label>Skin <select id="skin"><option>default</option><option>fs</option><option>idle</option><option>fs_idle</option></select></label>
 <label>Поза <select id="pose"><option value="setup">Setup</option><option value="left-45">left_elbow +45°</option><option value="left-minus45">left_elbow −45°</option><option value="right-45">right_elbow +45°</option><option value="right-minus45">right_elbow −45°</option><option value="left-wrist-45">left_wrist +45°</option><option value="right-wrist-45">right_wrist +45°</option><option value="chest-15">chest +15°</option><option value="chest-minus15">chest −15°</option></select></label>
 <label><input id="bones" type="checkbox" checked>Кости</label><label><input id="meshes" type="checkbox">Сетки</label>
+<label><input id="buffers" type="checkbox">Проверка скрытых подрисовок</label>
 </div>
 <div class="review"><div class="tree"><strong>Skeleton tree · 45 bones</strong><div id="tree"></div></div><div class="canvas-wrap"><canvas id="rig" width="1180" height="900"></canvas><canvas id="overlay" width="1180" height="900"></canvas></div></div>
 <div id="status" class="status">Загрузка…</div>

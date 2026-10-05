@@ -417,5 +417,6 @@
   "editorWindowVerified": false,
   "cliImportVerified": false,
   "nativeScreenshots": false,
-  "result": "PASS"
+  "result": "PASS",
+  "stage": "Historical pivot-only validation before Editor weights; current checks and source/project hashes are in roundtrip-verification.json."
 }
