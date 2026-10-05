@@ -1,0 +1,21 @@
+{
+  "editor": "3.8.75 PRO",
+  "launcher": "3.8.75",
+  "launcherChoices": [
+    "Latest",
+    "3.8.75",
+    "3.7.94",
+    "3.6.53",
+    "3.5.51",
+    "3.4.02",
+    "3.3.07",
+    "3.2.01",
+    "3.1.08",
+    "3.0.16",
+    "2.1.27"
+  ],
+  "otherVersionEntry": "Other… (not opened)",
+  "cliHelp": "Spine Launcher 3.8.75; --update accepts a version, --version chooses launcher version; no version enumeration command in help",
+  "versionsInstalledOrSelected": false,
+  "method": "Read-only Application settings version list; canceled without switching. Existing 3.8.75 used throughout."
+}

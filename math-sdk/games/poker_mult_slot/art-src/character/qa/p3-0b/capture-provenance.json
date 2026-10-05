@@ -1,0 +1,10 @@
+{
+  "capture": "Native Spine window through @oai/sky",
+  "sourceEncoding": "JPEG returned by capture API",
+  "pngEncoding": "Lossless conversion of returned capture; 0 changed decoded RGBA pixels",
+  "versionsLauncher": {
+    "jpegSha256": "cb9c740b0afd3f5aaa2a276477ee0864001720c9722ad056c3613b0404879e46",
+    "pngSha256": "b1f4934c5bc7459af78885b97b7c21128d0202af16723d28f49e184f629e27a4",
+    "decodedRgbaSha256": "42062de401556087e6f9d3a8db2a2c35279c835401c2f6c942f34c661c0cc7c0"
+  }
+}

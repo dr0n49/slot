@@ -1,0 +1,11 @@
+/* Exact squared Euclidean distance transform and 4-connected components. */
+function edt(binary,w,h,target){
+ const big=1e10,tmp=new Float64Array(w*h),out=new Float64Array(w*h),n=Math.max(w,h),f=new Float64Array(n),d=new Float64Array(n),v=new Int32Array(n),z=new Float64Array(n+1);
+ function line(length){let k=0;v[0]=0;z[0]=-Infinity;z[1]=Infinity;for(let q=1;q<length;q++){let s;do{s=((f[q]+q*q)-(f[v[k]]+v[k]*v[k]))/(2*q-2*v[k]);if(s<=z[k])k--;else break;}while(k>=0);if(k<0){k=0;v[0]=q;z[0]=-Infinity;z[1]=Infinity;}else{k++;v[k]=q;z[k]=s;z[k+1]=Infinity;}}k=0;for(let q=0;q<length;q++){while(z[k+1]<q)k++;d[q]=(q-v[k])**2+f[v[k]];}}
+ for(let x=0;x<w;x++){for(let y=0;y<h;y++)f[y]=binary[y*w+x]===target?0:big;line(h);for(let y=0;y<h;y++)tmp[y*w+x]=d[y];}
+ for(let y=0;y<h;y++){for(let x=0;x<w;x++)f[x]=tmp[y*w+x];line(w);for(let x=0;x<w;x++)out[y*w+x]=d[x];}return out;
+}
+function closingResidual(mask,w,h,r=12){const pad=r+1,pw=w+2*pad,ph=h+2*pad,b=new Uint8Array(pw*ph);for(let y=0;y<h;y++)b.set(mask.subarray(y*w,(y+1)*w),(y+pad)*pw+pad);const distance=edt(b,pw,ph,1),dilated=new Uint8Array(pw*ph);for(let p=0;p<dilated.length;p++)dilated[p]=distance[p]<=r*r?1:0;const inside=edt(dilated,pw,ph,0),out=new Uint8Array(w*h);for(let y=0;y<h;y++)for(let x=0;x<w;x++)out[y*w+x]=inside[(y+pad)*pw+x+pad]>r*r&&!mask[y*w+x]?1:0;return out;}
+function components(mask,w,h,min=4){const seen=new Uint8Array(w*h),queue=new Int32Array(w*h),result=[];for(let start=0;start<mask.length;start++)if(mask[start]&&!seen[start]){let head=0,tail=1,minX=w,minY=h,maxX=0,maxY=0,edge=false;queue[0]=start;seen[start]=1;while(head<tail){const p=queue[head++],x=p%w,y=(p/w)|0;minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);if(x===0||y===0||x===w-1||y===h-1)edge=true;for(const q of[x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1])if(q>=0&&mask[q]&&!seen[q]){seen[q]=1;queue[tail++]=q;}}if(tail>=min)result.push({area:tail,edge,bounds:{x:minX,y:minY,w:maxX-minX+1,h:maxY-minY+1},pixels:Array.from(queue.subarray(0,tail))});}return result;}
+function internalHoles(mask,w,h,min=4){return components(Uint8Array.from(mask,v=>v?0:1),w,h,min).filter(c=>!c.edge);}
+module.exports={edt,closingResidual,components,internalHoles};
