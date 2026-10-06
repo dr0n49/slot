@@ -1,0 +1,437 @@
+{
+  "result": "FAIL",
+  "animations": 0,
+  "bones": 45,
+  "slots": 30,
+  "visibleAttachmentsUnchanged": 90,
+  "visiblePngFilesByteIdentical": 52,
+  "weights": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "vertices": 255,
+      "maxWeightError": 1.1102230246251565e-16
+    },
+    {
+      "skin": "default",
+      "slot": "cape",
+      "vertices": 255,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "vertices": 63,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve",
+      "vertices": 54,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "vertices": 105,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve",
+      "vertices": 72,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "vertices": 99,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back",
+      "vertices": 70,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "vertices": 70,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck",
+      "vertices": 54,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "vertices": 96,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest",
+      "vertices": 84,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "vertices": 63,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front",
+      "vertices": 143,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "vertices": 48,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "vertices": 24,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "vertices": 255,
+      "maxWeightError": 1.1102230246251565e-16
+    },
+    {
+      "skin": "idle",
+      "slot": "cape",
+      "vertices": 255,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "vertices": 63,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve",
+      "vertices": 54,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "vertices": 105,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve",
+      "vertices": 72,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "vertices": 99,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back",
+      "vertices": 70,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "vertices": 70,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck",
+      "vertices": 54,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "vertices": 96,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest",
+      "vertices": 84,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "vertices": 63,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front",
+      "vertices": 143,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "vertices": 48,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "vertices": 24,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "vertices": 9,
+      "maxWeightError": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right",
+      "vertices": 9,
+      "maxWeightError": 0
+    }
+  ],
+  "maxWeightError": 1.1102230246251565e-16,
+  "workingFlips": 0,
+  "stressFlips": 16,
+  "baseFsAlpha": [
+    {
+      "file": "cape_idle_underpaint.png",
+      "pixels": 1532454,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "cape_underpaint.png",
+      "pixels": 1532454,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "chest_idle_underpaint.png",
+      "pixels": 336740,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "chest_underpaint.png",
+      "pixels": 336740,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "face_neck_idle_underpaint.png",
+      "pixels": 211548,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "face_neck_underpaint.png",
+      "pixels": 211548,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "hood_back_idle_underpaint.png",
+      "pixels": 400056,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "hood_back_underpaint.png",
+      "pixels": 400056,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "hood_front_idle_underpaint.png",
+      "pixels": 202095,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "hood_front_underpaint.png",
+      "pixels": 202095,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "left_gesture_idle_underpaint.png",
+      "pixels": 130092,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "left_gesture_underpaint.png",
+      "pixels": 130092,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "left_sleeve_idle_underpaint.png",
+      "pixels": 261783,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "left_sleeve_underpaint.png",
+      "pixels": 261783,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "ribbon_left_idle_underpaint.png",
+      "pixels": 10540,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "ribbon_left_underpaint.png",
+      "pixels": 10540,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "ribbon_right_idle_underpaint.png",
+      "pixels": 2760,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "ribbon_right_underpaint.png",
+      "pixels": 2760,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "right_gesture_idle_underpaint.png",
+      "pixels": 59946,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "right_gesture_underpaint.png",
+      "pixels": 59946,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "right_sleeve_idle_underpaint.png",
+      "pixels": 915082,
+      "changedAlphaPixels": 0
+    },
+    {
+      "file": "right_sleeve_underpaint.png",
+      "pixels": 915082,
+      "changedAlphaPixels": 0
+    }
+  ],
+  "rawNativeVersion": "3.8.75",
+  "nativeRuntimeRejection": "Unsupported skeleton data, please export with a newer version of Spine.",
+  "rawRoundtripAttachments": 134,
+  "maxNativeNumericDelta": 0.005007777324749441,
+  "nativeProjectSha256": "de7cffa9263f1567959ee4e7104efbd23041ad0adc13933417becb04e2233a9f",
+  "setupDifferences": [
+    {
+      "skin": "default",
+      "changedPixels": 0,
+      "maxChannelDelta": 0,
+      "rgbaSha256": "92beda1b93193be4cb9318b4a502f7ed9fc14f316c2547ce4161004d1bd5b41b"
+    },
+    {
+      "skin": "fs",
+      "changedPixels": 0,
+      "maxChannelDelta": 0,
+      "rgbaSha256": "deaa7f7ff41d520d2f3dd095ce43689de2469cad275c18239ffbaf553c1bcd2e"
+    },
+    {
+      "skin": "idle",
+      "changedPixels": 0,
+      "maxChannelDelta": 0,
+      "rgbaSha256": "2ec9931e9a073054d2ed7f46320bd90b52e2ae826f48d2e2212a3774be81f0a1"
+    },
+    {
+      "skin": "fs_idle",
+      "changedPixels": 0,
+      "maxChannelDelta": 0,
+      "rgbaSha256": "8d825d1cf2ab8b8a817b392623a8fe4a7129eaea09392e23b8c360894cd604e3"
+    }
+  ],
+  "setupOnOffDelta": [
+    {
+      "skin": "default",
+      "changedPixels": 557968,
+      "maxChannelDelta": 3,
+      "over3Pixels": 0,
+      "offSha256": "92beda1b93193be4cb9318b4a502f7ed9fc14f316c2547ce4161004d1bd5b41b",
+      "onSha256": "fed952fa682108beb52aaf3800dcb16efedab922b979f0018bd949f178038cd3"
+    },
+    {
+      "skin": "fs",
+      "changedPixels": 557987,
+      "maxChannelDelta": 3,
+      "over3Pixels": 0,
+      "offSha256": "deaa7f7ff41d520d2f3dd095ce43689de2469cad275c18239ffbaf553c1bcd2e",
+      "onSha256": "c83e30c32f2662a65cfdef921109375ab48a709b1f053fada7da16e996ccb0da"
+    },
+    {
+      "skin": "idle",
+      "changedPixels": 526832,
+      "maxChannelDelta": 255,
+      "over3Pixels": 39453,
+      "offSha256": "2ec9931e9a073054d2ed7f46320bd90b52e2ae826f48d2e2212a3774be81f0a1",
+      "onSha256": "0e054b2a89b21bca34e2e322357832a0170700767b78f23e0bcc2651736a612f"
+    },
+    {
+      "skin": "fs_idle",
+      "changedPixels": 526721,
+      "maxChannelDelta": 255,
+      "over3Pixels": 39457,
+      "offSha256": "8d825d1cf2ab8b8a817b392623a8fe4a7129eaea09392e23b8c360894cd604e3",
+      "onSha256": "dfa909b9d3d320ad054a8d6e96bc2a63e07261faf416a141bcbc1d0f23bc8137"
+    }
+  ],
+  "coverage": {
+    "poses": 588,
+    "workingInternalHoles": 479,
+    "workingEdgeDefects": 5995,
+    "unreviewed": 0,
+    "workingFoldedTriangles": 0
+  }
+}

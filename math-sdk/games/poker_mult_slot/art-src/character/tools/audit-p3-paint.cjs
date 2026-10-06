@@ -1,0 +1,33 @@
+/* B3 provenance: source texels, working UV masks, B6 trim and preserved vertices. */
+module.paths.push(require('path').resolve(require('path').dirname(process.execPath),'../node_modules'));
+const fs=require('fs'),path=require('path'),sharp=require('sharp'),assert=require('assert/strict');
+const {indexMesh}=require('./p3-underpaint-mapping.cjs'),{weightedRows}=require('./p3-raw-roundtrip.cjs');
+const ROOT=path.resolve(__dirname,'..'),SRC=path.join(ROOT,'source/p3-0b'),QA=path.join(ROOT,'qa/p3-0b');
+const json=p=>JSON.parse(fs.readFileSync(p)),raw=async p=>(await sharp(p).ensureAlpha().raw().toBuffer({resolveWithObject:true}));
+async function main(){
+ const reg=json(path.join(ROOT,'source/layer-registration.json')),oldReg=json(path.join(SRC,'before/layer-registration.json')),before=json(path.join(SRC,'before/character-a-p3-setup.json')),after=json(path.join(ROOT,'character-a-p3-setup.json')),oldGeom=json(path.join(QA,'before/default__setup.geometry.json'));
+ const oldTrims={},oldMaps=oldGeom.filter(g=>g.slot.endsWith('_underpaint')).map(g=>{const p=oldReg.parts.find(p=>p.name===g.slot);return {g,p,inverse:indexMesh(g),mask:oldTrims[g.slot]=new Uint8Array(p.w*p.h)};});
+ let legacySetupOutlierPixels=0;const legacyBad=new Set();
+ for(const skin of ['default','fs']){const on=(await raw(path.join(QA,'before',skin+'-setup-on.png'))).data,off=(await raw(path.join(QA,'before',skin+'-setup-off.png'))).data;for(let i=0;i<930*1691;i++){let d=0;for(let k=0;k<4;k++)d=Math.max(d,Math.abs(on[i*4+k]-off[i*4+k]));if(d>3)legacyBad.add(i);}}
+ legacySetupOutlierPixels=legacyBad.size;
+ for(const i of legacyBad)for(const m of oldMaps){const uv=m.inverse(i%930+.5,Math.floor(i/930)+.5);if(!uv)continue;const tx=Math.floor(uv[0]),ty=Math.floor(uv[1]);for(let y=ty-1;y<=ty+1;y++)for(let x=tx-1;x<=tx+1;x++)if(x>=0&&y>=0&&x<m.p.w&&y<m.p.h)m.mask[y*m.p.w+x]=1;}
+ const rows=[],preserved=[];let outsideAuthorizationPixels=0;
+ for(const p of reg.parts.filter(p=>p.name.endsWith('_underpaint'))){
+  const op=oldReg.parts.find(x=>x.name===p.name),union=new Uint8Array(p.w*p.h),trim=new Uint8Array(p.w*p.h);
+  for(const skin of ['default','idle']){const a=after.skins.find(s=>s.name===skin).attachments[p.name][p.name],leaf=path.basename(a.path||p.name),m=path.join(SRC,'masks',leaf+'.mask.png');if(fs.existsSync(m)){const q=await raw(m);assert.equal(q.info.width,p.w);for(let i=0;i<union.length;i++)if(q.data[i*4+3])union[i]=1;}}
+  const tf=path.join(SRC,'trim-masks',p.name+'.png');if(fs.existsSync(tf)){const q=await raw(tf);assert.equal(q.info.width,p.w);for(let i=0;i<trim.length;i++)if(q.data[i*4+3])trim[i]=1;}
+  for(let y=0;y<p.h;y++)for(let x=0;x<p.w;x++){const ox=x+p.x-op.x,oy=y+p.y-op.y;if(ox>=0&&oy>=0&&ox<op.w&&oy<op.h&&oldTrims[p.name][oy*op.w+ox])trim[y*p.w+x]=1;}
+  const encode=async(a,file)=>{const b=Buffer.alloc(a.length*4);for(let i=0;i<a.length;i++)if(a[i])b.fill(255,i*4,i*4+4);await sharp(b,{raw:{width:p.w,height:p.h,channels:4}}).png().toFile(file);};
+  await encode(union,path.join(SRC,'masks',p.name+'.working-union.mask.png'));await encode(trim,path.join(SRC,'trim-masks',p.name+'.cumulative.png'));
+  for(const skin of ['default','idle']){
+   const a=after.skins.find(s=>s.name===skin).attachments[p.name][p.name],ba=before.skins.find(s=>s.name===skin).attachments[p.name][p.name],leaf=path.basename(a.path||p.name),current=await raw(path.join(ROOT,'layers',a.path+'.png')),original=await raw(path.join(SRC,'before/underpaint',p.name+'.png'));assert.equal(current.info.width,p.w);assert.equal(original.info.width,op.w);
+   const restore=process.argv.includes('--restore'),currentFs=restore?await raw(path.join(ROOT,'layers/fs',a.path+'.png')):null,originalFs=restore?await raw(path.join(SRC,'before/fs/underpaint',p.name+'.png')):null;let changed=0,added=0,removed=0,b2=0,b6=0,outside=0;const examples=[];
+   for(let y=0;y<p.h;y++)for(let x=0;x<p.w;x++){const i=y*p.w+x,ox=x+p.x-op.x,oy=y+p.y-op.y,old=ox>=0&&oy>=0&&ox<op.w&&oy<op.h?original.data.subarray((oy*op.w+ox)*4,(oy*op.w+ox)*4+4):[0,0,0,0],now=Buffer.from(current.data.subarray(i*4,i*4+4));if(now.every((v,k)=>v===old[k]))continue;changed++;if(now[3]>old[3])added++;if(now[3]<old[3])removed++;if(union[i])b2++;else if(trim[i]&&now[3]<=old[3]&&[0,1,2].every(k=>now[k]===old[k]))b6++;else{outside++;if(restore){for(let k=0;k<4;k++){current.data[i*4+k]=old[k];currentFs.data[i*4+k]=ox>=0&&oy>=0&&ox<op.w&&oy<op.h?originalFs.data[(oy*op.w+ox)*4+k]:0;}}if(examples.length<12)examples.push({x,y,world:[x+p.x,y+p.y],before:[...old],after:[...now],trim:trim[i]});}}
+   if(restore&&outside){await sharp(current.data,{raw:{width:p.w,height:p.h,channels:4}}).png().toFile(path.join(ROOT,'layers',a.path+'.png'));await sharp(currentFs.data,{raw:{width:p.w,height:p.h,channels:4}}).png().toFile(path.join(ROOT,'layers/fs',a.path+'.png'));}outsideAuthorizationPixels+=outside;rows.push({skin,slot:p.name,path:a.path,textureSize:[p.w,p.h],originalSize:[op.w,op.h],changedPixels:changed,alphaIncreasedPixels:added,alphaDecreasedPixels:removed,inB2MaskPixels:b2,inB6TrimPixels:b6,outsideAuthorizationPixels:outside,examples});
+   if(a.type==='mesh'&&ba.type==='mesh'){const oldRows=weightedRows(ba),newRows=weightedRows(a),key=(x,y)=>x.toFixed(4)+','+y.toFixed(4),map=new Map();for(let i=0;i<newRows.length;i++)map.set(key(a.uvs[i*2]*p.w+p.x,a.uvs[i*2+1]*p.h+p.y),i);for(let i=0;i<oldRows.length;i++){const j=newRows.findIndex((_,j)=>Math.abs(a.uvs[j*2]*p.w+p.x-ba.uvs[i*2]*op.w-op.x)<1e-4&&Math.abs(a.uvs[j*2+1]*p.h+p.y-ba.uvs[i*2+1]*op.h-op.y)<1e-4);assert(j>=0,skin+'/'+p.name+'/missing vertex '+i);assert.deepEqual(newRows[j],oldRows[i],skin+'/'+p.name+'/changed accepted vertex '+i);}preserved.push({skin,slot:p.name,preservedVertices:oldRows.length,addedVertices:newRows.length-oldRows.length});}
+  }
+ }
+ const result={result:process.argv.includes('--restore')&&outsideAuthorizationPixels?'RESTORED_RECHECK_REQUIRED':outsideAuthorizationPixels?'FAIL':'PASS',method:'B2 masks union across default and idle for each registered underpaint; separate B6 footprint from original setup outliers (initial 3x3 texture neighborhood) plus accumulated exact-texel trims. World registration aligns all source pixels. Every accepted weighted vertex is preserved.',legacySetupOutlierPixels,outsideAuthorizationPixels,rows,preserved};
+ fs.writeFileSync(process.argv.includes('--restore')?path.join(SRC,'paint-restoration-'+Date.now()+'.json'):path.join(QA,'paint-verification.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));if(outsideAuthorizationPixels&&!process.argv.includes('--restore'))process.exitCode=1;
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});

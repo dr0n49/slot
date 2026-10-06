@@ -1,0 +1,158 @@
+{
+  "method": "Pixel-center inverse barycentric mapping, union of working poses, Euclidean 16px margin. Nearest existing underpaint or original parent material; no image generation.",
+  "applied": true,
+  "changed": [
+    {
+      "underpaint": "cape_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "seedPixels": 71732,
+      "maskPixels": 262471,
+      "addedPixels": 184092,
+      "changedPixels": 184092,
+      "meshExpanded": true,
+      "expansion": [
+        {
+          "skin": "default",
+          "slot": "cape_underpaint",
+          "preservedVertices": 195,
+          "addedVertices": 60,
+          "weightSource": "cape"
+        },
+        {
+          "skin": "idle",
+          "slot": "cape_underpaint",
+          "preservedVertices": 195,
+          "addedVertices": 60,
+          "weightSource": "cape"
+        }
+      ]
+    },
+    {
+      "underpaint": "left_sleeve_underpaint",
+      "textureSize": [
+        435,
+        493
+      ],
+      "seedPixels": 27194,
+      "maskPixels": 83743,
+      "addedPixels": 50741,
+      "changedPixels": 50741,
+      "meshExpanded": true,
+      "expansion": [
+        {
+          "skin": "default",
+          "slot": "left_sleeve_underpaint",
+          "preservedVertices": 45,
+          "addedVertices": 9,
+          "weightSource": "left_sleeve"
+        },
+        {
+          "skin": "idle",
+          "slot": "left_sleeve_underpaint",
+          "preservedVertices": 45,
+          "addedVertices": 9,
+          "weightSource": "left_sleeve"
+        }
+      ]
+    },
+    {
+      "underpaint": "right_sleeve_underpaint",
+      "textureSize": [
+        418,
+        1109
+      ],
+      "seedPixels": 11152,
+      "maskPixels": 49982,
+      "addedPixels": 41125,
+      "changedPixels": 41125,
+      "meshExpanded": true,
+      "expansion": [
+        {
+          "skin": "default",
+          "slot": "right_sleeve_underpaint",
+          "preservedVertices": 60,
+          "addedVertices": 24,
+          "weightSource": "right_sleeve"
+        },
+        {
+          "skin": "idle",
+          "slot": "right_sleeve_underpaint",
+          "preservedVertices": 60,
+          "addedVertices": 24,
+          "weightSource": "right_sleeve"
+        }
+      ]
+    },
+    {
+      "underpaint": "hood_back_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "seedPixels": 4858,
+      "maskPixels": 35160,
+      "addedPixels": 14860,
+      "changedPixels": 14860,
+      "meshExpanded": true,
+      "expansion": [
+        {
+          "skin": "default",
+          "slot": "hood_back_underpaint",
+          "preservedVertices": 88,
+          "addedVertices": 11,
+          "weightSource": "hood_back"
+        },
+        {
+          "skin": "idle",
+          "slot": "hood_back_underpaint",
+          "preservedVertices": 88,
+          "addedVertices": 11,
+          "weightSource": "hood_back"
+        }
+      ]
+    },
+    {
+      "underpaint": "face_neck_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "seedPixels": 0,
+      "maskPixels": 0,
+      "addedPixels": 0,
+      "changedPixels": 0,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "chest_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "seedPixels": 7565,
+      "maskPixels": 43651,
+      "addedPixels": 24755,
+      "changedPixels": 24755,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "hood_front_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "seedPixels": 3066,
+      "maskPixels": 15085,
+      "addedPixels": 13180,
+      "changedPixels": 13180,
+      "meshExpanded": false,
+      "expansion": []
+    }
+  ],
+  "outsideWorkingMeshPixels": 0
+}

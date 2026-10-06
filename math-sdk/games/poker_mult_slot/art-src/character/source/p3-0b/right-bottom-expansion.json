@@ -1,0 +1,35 @@
+{
+  "reason": "40 inverse-mapped working-range pixels beyond right idle sleeve, UV y 1109..1115, plus 16px B2 margin.",
+  "oldBounds": {
+    "x": 250,
+    "y": 393,
+    "w": 802,
+    "h": 1109
+  },
+  "newBounds": {
+    "x": 250,
+    "y": 393,
+    "w": 802,
+    "h": 1141,
+    "left": 0,
+    "top": 0
+  },
+  "meshes": [
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 98,
+      "addedVertices": 7,
+      "weightSource": "right_sleeve"
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 98,
+      "addedVertices": 7,
+      "weightSource": "right_sleeve"
+    }
+  ],
+  "workingFoldedTriangles": 0,
+  "failures": []
+}

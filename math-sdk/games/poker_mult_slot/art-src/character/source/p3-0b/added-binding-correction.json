@@ -1,0 +1,63 @@
+{
+  "method": "Parent triangle interpolation of weighted local coordinates and weights. Outside-parent points use clamped barycentric support plus a setup-space residual transformed into each influencing bone. Only P3-0b added vertices are corrected.",
+  "changes": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "acceptedVerticesPreserved": 195,
+      "correctedAddedVertices": 60,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "acceptedVerticesPreserved": 45,
+      "correctedAddedVertices": 18,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "acceptedVerticesPreserved": 60,
+      "correctedAddedVertices": 38,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "acceptedVerticesPreserved": 88,
+      "correctedAddedVertices": 11,
+      "maxSetupError": 1.1368683772161603e-13
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "acceptedVerticesPreserved": 195,
+      "correctedAddedVertices": 60,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "acceptedVerticesPreserved": 45,
+      "correctedAddedVertices": 18,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "acceptedVerticesPreserved": 60,
+      "correctedAddedVertices": 38,
+      "maxSetupError": 4.547473508864641e-13
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "acceptedVerticesPreserved": 88,
+      "correctedAddedVertices": 11,
+      "maxSetupError": 1.1368683772161603e-13
+    }
+  ],
+  "workingFoldedTriangles": 0,
+  "failures": []
+}

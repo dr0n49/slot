@@ -1,0 +1,132 @@
+{
+  "stage": "after",
+  "method": "Unmodified official vendored spine-canvas-3.8.js SkeletonRenderer; isolated attachment surfaces with additive triangle coverage, normal source-over slot composition; native 1x raster",
+  "runtimeSha256": "7f6881a3a86b96121b79dd9797b223fef0ed60cac91a39ee07e3630ace46562d",
+  "sourceSha256": "3d5be267702acf58d280dc05d48c5e82c30ca1525b00cf1bab37fb0b2d820869",
+  "render": {
+    "width": 930,
+    "height": 1691,
+    "scale": 1.6558249556475457,
+    "internalSampling": 1,
+    "alphaThreshold": 200,
+    "minComponentPixels": 4,
+    "connectivity": 4,
+    "closingDiskRadiusPx": 12,
+    "background": [
+      48,
+      61,
+      72
+    ],
+    "allElevenUnderpaintsEnabled": true
+  },
+  "grid": {
+    "armStep": 10,
+    "elbowStep": 10,
+    "handStep": 10,
+    "chestStep": 4,
+    "headStep": 5,
+    "description": "arm -10/0/10 × elbow at 10° steps × hand at 10° steps; 8 arm corners × chest ±8; singles chest/head; FS corner poses only",
+    "workingPoseCount": 1,
+    "partial": true
+  },
+  "setupDelta": [
+    {
+      "skin": "default",
+      "changedPixels": 537800,
+      "maxChannelDelta": 3,
+      "over3Pixels": 0,
+      "offSha256": "92beda1b93193be4cb9318b4a502f7ed9fc14f316c2547ce4161004d1bd5b41b",
+      "onSha256": "71a7006d39bad73f1a8d86fcec944f7e6ddd53468cabe30f4b4577d6fb10902a"
+    },
+    {
+      "skin": "fs",
+      "changedPixels": 537812,
+      "maxChannelDelta": 3,
+      "over3Pixels": 0,
+      "offSha256": "deaa7f7ff41d520d2f3dd095ce43689de2469cad275c18239ffbaf553c1bcd2e",
+      "onSha256": "5ffeb8e4b311e5ddec56f1af3852ecf19f59bc342f6caa67e0a17916e353eafe"
+    },
+    {
+      "skin": "idle",
+      "changedPixels": 497875,
+      "maxChannelDelta": 255,
+      "over3Pixels": 36223,
+      "offSha256": "cdd845d99deba8a9a545967ccc2b1e996ebcce2fffd866f9c856dd41bc21bf5f",
+      "onSha256": "ad2ed3f6a27fad298a5e95827a94fb66f177dc86f77da70750fb80a9e218adb1"
+    },
+    {
+      "skin": "fs_idle",
+      "changedPixels": 497759,
+      "maxChannelDelta": 255,
+      "over3Pixels": 36225,
+      "offSha256": "399392bc0a145e5c5618fac098d2892315f4e1fe0093214b33c877d045cfc486",
+      "onSha256": "c5942702fef1e03e287318a4704393aca028d90659a2bd58252127dcb4544bdf"
+    }
+  ],
+  "records": [
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "default",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "after-composite/default__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "idle",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "after-composite/idle__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "fs",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "after-composite/default__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "fs_idle",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "after-composite/idle__setup.geometry.json"
+    }
+  ],
+  "pageErrors": [],
+  "summary": {
+    "poses": 4,
+    "workingInternalHoles": 0,
+    "workingEdgeDefects": 0,
+    "unreviewed": 0
+  },
+  "result": "REVIEW_REQUIRED"
+}

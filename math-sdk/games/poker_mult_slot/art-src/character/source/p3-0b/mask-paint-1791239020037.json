@@ -1,0 +1,267 @@
+{
+  "method": "Pixel-center inverse barycentric mapping, union of working poses, Euclidean 16px margin. Nearest existing underpaint or original parent material; no image generation.",
+  "applied": true,
+  "changed": [
+    {
+      "underpaint": "cape_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "seedPixels": 0,
+      "maskPixels": 382816,
+      "addedPixels": 65038,
+      "changedPixels": 65038,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "cape_idle_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "seedPixels": 0,
+      "maskPixels": 242650,
+      "addedPixels": 57838,
+      "changedPixels": 57838,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "left_sleeve_underpaint",
+      "textureSize": [
+        435,
+        493
+      ],
+      "seedPixels": 0,
+      "maskPixels": 112633,
+      "addedPixels": 5372,
+      "changedPixels": 5372,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "left_sleeve_idle_underpaint",
+      "textureSize": [
+        435,
+        493
+      ],
+      "seedPixels": 0,
+      "maskPixels": 75825,
+      "addedPixels": 16227,
+      "changedPixels": 16227,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "right_sleeve_underpaint",
+      "textureSize": [
+        418,
+        1109
+      ],
+      "seedPixels": 0,
+      "maskPixels": 99879,
+      "addedPixels": 15746,
+      "changedPixels": 15746,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "right_sleeve_idle_underpaint",
+      "textureSize": [
+        418,
+        1109
+      ],
+      "seedPixels": 0,
+      "maskPixels": 86984,
+      "addedPixels": 36841,
+      "changedPixels": 36841,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "hood_back_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "seedPixels": 0,
+      "maskPixels": 49240,
+      "addedPixels": 9432,
+      "changedPixels": 9432,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "hood_back_idle_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "seedPixels": 0,
+      "maskPixels": 33860,
+      "addedPixels": 9529,
+      "changedPixels": 9529,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "face_neck_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "seedPixels": 0,
+      "maskPixels": 7632,
+      "addedPixels": 3968,
+      "changedPixels": 3968,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "face_neck_idle_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "seedPixels": 0,
+      "maskPixels": 12078,
+      "addedPixels": 10278,
+      "changedPixels": 10278,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "chest_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "seedPixels": 0,
+      "maskPixels": 76401,
+      "addedPixels": 8273,
+      "changedPixels": 8273,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "chest_idle_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "seedPixels": 0,
+      "maskPixels": 43150,
+      "addedPixels": 17142,
+      "changedPixels": 17142,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "hood_front_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "seedPixels": 0,
+      "maskPixels": 21224,
+      "addedPixels": 1493,
+      "changedPixels": 1493,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "hood_front_idle_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "seedPixels": 0,
+      "maskPixels": 17269,
+      "addedPixels": 6063,
+      "changedPixels": 6063,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "left_gesture_underpaint",
+      "textureSize": [
+        444,
+        293
+      ],
+      "seedPixels": 0,
+      "maskPixels": 4832,
+      "addedPixels": 1542,
+      "changedPixels": 3722,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "right_gesture_underpaint",
+      "textureSize": [
+        309,
+        194
+      ],
+      "seedPixels": 0,
+      "maskPixels": 9829,
+      "addedPixels": 1593,
+      "changedPixels": 6704,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "ribbon_left_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "seedPixels": 0,
+      "maskPixels": 0,
+      "addedPixels": 0,
+      "changedPixels": 0,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "ribbon_left_idle_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "seedPixels": 0,
+      "maskPixels": 775,
+      "addedPixels": 775,
+      "changedPixels": 775,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "ribbon_right_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "seedPixels": 0,
+      "maskPixels": 0,
+      "addedPixels": 0,
+      "changedPixels": 0,
+      "meshExpanded": false,
+      "expansion": []
+    },
+    {
+      "underpaint": "ribbon_right_idle_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "seedPixels": 0,
+      "maskPixels": 0,
+      "addedPixels": 0,
+      "changedPixels": 0,
+      "meshExpanded": false,
+      "expansion": []
+    }
+  ],
+  "outsideWorkingMeshPixels": 0
+}

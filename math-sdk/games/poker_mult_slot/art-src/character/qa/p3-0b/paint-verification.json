@@ -1,0 +1,582 @@
+{
+  "result": "PASS",
+  "method": "B2 masks union across default and idle for each registered underpaint; separate B6 footprint from original setup outliers (initial 3x3 texture neighborhood) plus accumulated exact-texel trims. World registration aligns all source pixels. Every accepted weighted vertex is preserved.",
+  "legacySetupOutlierPixels": 10169,
+  "outsideAuthorizationPixels": 0,
+  "rows": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "path": "underpaint/cape_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "originalSize": [
+        918,
+        793
+      ],
+      "changedPixels": 273233,
+      "alphaIncreasedPixels": 243129,
+      "alphaDecreasedPixels": 4007,
+      "inB2MaskPixels": 270243,
+      "inB6TrimPixels": 2990,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "path": "underpaint/cape_idle_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "originalSize": [
+        918,
+        793
+      ],
+      "changedPixels": 240716,
+      "alphaIncreasedPixels": 220388,
+      "alphaDecreasedPixels": 5157,
+      "inB2MaskPixels": 237726,
+      "inB6TrimPixels": 2990,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "path": "underpaint/left_sleeve_underpaint",
+      "textureSize": [
+        531,
+        493
+      ],
+      "originalSize": [
+        243,
+        493
+      ],
+      "changedPixels": 71048,
+      "alphaIncreasedPixels": 65221,
+      "alphaDecreasedPixels": 100,
+      "inB2MaskPixels": 71031,
+      "inB6TrimPixels": 17,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "path": "underpaint/left_sleeve_idle_underpaint",
+      "textureSize": [
+        531,
+        493
+      ],
+      "originalSize": [
+        243,
+        493
+      ],
+      "changedPixels": 68379,
+      "alphaIncreasedPixels": 63365,
+      "alphaDecreasedPixels": 263,
+      "inB2MaskPixels": 68362,
+      "inB6TrimPixels": 17,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "path": "underpaint/right_sleeve_underpaint",
+      "textureSize": [
+        802,
+        1141
+      ],
+      "originalSize": [
+        226,
+        725
+      ],
+      "changedPixels": 113058,
+      "alphaIncreasedPixels": 110497,
+      "alphaDecreasedPixels": 402,
+      "inB2MaskPixels": 112656,
+      "inB6TrimPixels": 402,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "path": "underpaint/right_sleeve_idle_underpaint",
+      "textureSize": [
+        802,
+        1141
+      ],
+      "originalSize": [
+        226,
+        725
+      ],
+      "changedPixels": 120713,
+      "alphaIncreasedPixels": 118867,
+      "alphaDecreasedPixels": 522,
+      "inB2MaskPixels": 120311,
+      "inB6TrimPixels": 402,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "path": "underpaint/hood_back_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "originalSize": [
+        441,
+        632
+      ],
+      "changedPixels": 39737,
+      "alphaIncreasedPixels": 29080,
+      "alphaDecreasedPixels": 7683,
+      "inB2MaskPixels": 32143,
+      "inB6TrimPixels": 7594,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "path": "underpaint/hood_back_idle_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "originalSize": [
+        441,
+        632
+      ],
+      "changedPixels": 33010,
+      "alphaIncreasedPixels": 22368,
+      "alphaDecreasedPixels": 8056,
+      "inB2MaskPixels": 25416,
+      "inB6TrimPixels": 7594,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "path": "underpaint/face_neck_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "originalSize": [
+        366,
+        578
+      ],
+      "changedPixels": 8173,
+      "alphaIncreasedPixels": 6397,
+      "alphaDecreasedPixels": 1674,
+      "inB2MaskPixels": 6689,
+      "inB6TrimPixels": 1484,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "path": "underpaint/face_neck_idle_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "originalSize": [
+        366,
+        578
+      ],
+      "changedPixels": 14852,
+      "alphaIncreasedPixels": 13144,
+      "alphaDecreasedPixels": 1484,
+      "inB2MaskPixels": 13368,
+      "inB6TrimPixels": 1484,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "path": "underpaint/chest_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "originalSize": [
+        452,
+        745
+      ],
+      "changedPixels": 54055,
+      "alphaIncreasedPixels": 51852,
+      "alphaDecreasedPixels": 833,
+      "inB2MaskPixels": 53267,
+      "inB6TrimPixels": 788,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "path": "underpaint/chest_idle_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "originalSize": [
+        452,
+        745
+      ],
+      "changedPixels": 39575,
+      "alphaIncreasedPixels": 36574,
+      "alphaDecreasedPixels": 1785,
+      "inB2MaskPixels": 38787,
+      "inB6TrimPixels": 788,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "path": "underpaint/hood_front_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "originalSize": [
+        499,
+        405
+      ],
+      "changedPixels": 20455,
+      "alphaIncreasedPixels": 19843,
+      "alphaDecreasedPixels": 50,
+      "inB2MaskPixels": 20405,
+      "inB6TrimPixels": 50,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "path": "underpaint/hood_front_idle_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "originalSize": [
+        499,
+        405
+      ],
+      "changedPixels": 20549,
+      "alphaIncreasedPixels": 20337,
+      "alphaDecreasedPixels": 50,
+      "inB2MaskPixels": 20499,
+      "inB6TrimPixels": 50,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "path": "underpaint/left_gesture_underpaint",
+      "textureSize": [
+        444,
+        293
+      ],
+      "originalSize": [
+        444,
+        293
+      ],
+      "changedPixels": 7315,
+      "alphaIncreasedPixels": 5948,
+      "alphaDecreasedPixels": 1367,
+      "inB2MaskPixels": 5975,
+      "inB6TrimPixels": 1340,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "path": "underpaint/left_gesture_idle_underpaint",
+      "textureSize": [
+        444,
+        293
+      ],
+      "originalSize": [
+        444,
+        293
+      ],
+      "changedPixels": 0,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 0,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 0,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "path": "underpaint/right_gesture_underpaint",
+      "textureSize": [
+        309,
+        194
+      ],
+      "originalSize": [
+        309,
+        194
+      ],
+      "changedPixels": 10140,
+      "alphaIncreasedPixels": 9829,
+      "alphaDecreasedPixels": 311,
+      "inB2MaskPixels": 9829,
+      "inB6TrimPixels": 311,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "path": "underpaint/right_gesture_idle_underpaint",
+      "textureSize": [
+        309,
+        194
+      ],
+      "originalSize": [
+        309,
+        194
+      ],
+      "changedPixels": 0,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 0,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 0,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "path": "underpaint/ribbon_left_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "originalSize": [
+        85,
+        124
+      ],
+      "changedPixels": 529,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 529,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 529,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "path": "underpaint/ribbon_left_idle_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "originalSize": [
+        85,
+        124
+      ],
+      "changedPixels": 1304,
+      "alphaIncreasedPixels": 775,
+      "alphaDecreasedPixels": 529,
+      "inB2MaskPixels": 775,
+      "inB6TrimPixels": 529,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "path": "underpaint/ribbon_right_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "originalSize": [
+        69,
+        40
+      ],
+      "changedPixels": 8,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 8,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 8,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "path": "underpaint/ribbon_right_idle_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "originalSize": [
+        69,
+        40
+      ],
+      "changedPixels": 8,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 8,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 8,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    }
+  ],
+  "preserved": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "preservedVertices": 195,
+      "addedVertices": 60
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "preservedVertices": 195,
+      "addedVertices": 60
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "preservedVertices": 45,
+      "addedVertices": 18
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "preservedVertices": 45,
+      "addedVertices": 18
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 60,
+      "addedVertices": 45
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 60,
+      "addedVertices": 45
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "preservedVertices": 88,
+      "addedVertices": 11
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "preservedVertices": 88,
+      "addedVertices": 11
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "preservedVertices": 70,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "preservedVertices": 70,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "preservedVertices": 96,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "preservedVertices": 96,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "preservedVertices": 63,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "preservedVertices": 63,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "preservedVertices": 48,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "preservedVertices": 48,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "preservedVertices": 24,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "preservedVertices": 24,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    }
+  ]
+}

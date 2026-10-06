@@ -1,0 +1,63 @@
+{
+  "stage": "after",
+  "setupOutlierPixels": 16717,
+  "criterion": "Conservative max delta >3 across straight RGBA, BASE or FS; 3x3 texture neighborhood at inverse barycentric map. Separate B6 trim authorization; no visible pixel edits.",
+  "applied": true,
+  "changed": [
+    {
+      "underpaint": "cape_underpaint",
+      "trimMaskPixels": 129758,
+      "removedPaintPixels": 13597
+    },
+    {
+      "underpaint": "left_sleeve_underpaint",
+      "trimMaskPixels": 43759,
+      "removedPaintPixels": 3665
+    },
+    {
+      "underpaint": "right_sleeve_underpaint",
+      "trimMaskPixels": 58793,
+      "removedPaintPixels": 9992
+    },
+    {
+      "underpaint": "hood_back_underpaint",
+      "trimMaskPixels": 23429,
+      "removedPaintPixels": 527
+    },
+    {
+      "underpaint": "face_neck_underpaint",
+      "trimMaskPixels": 17139,
+      "removedPaintPixels": 286
+    },
+    {
+      "underpaint": "chest_underpaint",
+      "trimMaskPixels": 37201,
+      "removedPaintPixels": 4560
+    },
+    {
+      "underpaint": "hood_front_underpaint",
+      "trimMaskPixels": 15180,
+      "removedPaintPixels": 1258
+    },
+    {
+      "underpaint": "left_gesture_underpaint",
+      "trimMaskPixels": 11097,
+      "removedPaintPixels": 38
+    },
+    {
+      "underpaint": "right_gesture_underpaint",
+      "trimMaskPixels": 2882,
+      "removedPaintPixels": 12
+    },
+    {
+      "underpaint": "ribbon_left_underpaint",
+      "trimMaskPixels": 1246,
+      "removedPaintPixels": 4
+    },
+    {
+      "underpaint": "ribbon_right_underpaint",
+      "trimMaskPixels": 33,
+      "removedPaintPixels": 0
+    }
+  ]
+}

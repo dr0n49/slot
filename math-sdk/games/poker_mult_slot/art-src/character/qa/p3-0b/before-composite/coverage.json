@@ -1,0 +1,194 @@
+{
+  "stage": "before",
+  "method": "Unmodified official vendored spine-canvas-3.8.js SkeletonRenderer; isolated attachment surfaces with additive triangle coverage, normal source-over slot composition; native 1x raster",
+  "runtimeSha256": "7f6881a3a86b96121b79dd9797b223fef0ed60cac91a39ee07e3630ace46562d",
+  "sourceSha256": "b7f047c0e51ba1ba9c86c037d5370e1b8b0bd767c8a2986800aafe13ea5e7178",
+  "render": {
+    "width": 930,
+    "height": 1691,
+    "scale": 1.6558249556475457,
+    "internalSampling": 1,
+    "alphaThreshold": 200,
+    "minComponentPixels": 4,
+    "connectivity": 4,
+    "closingDiskRadiusPx": 12,
+    "background": [
+      48,
+      61,
+      72
+    ],
+    "allElevenUnderpaintsEnabled": true
+  },
+  "grid": {
+    "armStep": 10,
+    "elbowStep": 10,
+    "handStep": 10,
+    "chestStep": 4,
+    "headStep": 5,
+    "description": "arm -10/0/10 × elbow at 10° steps × hand at 10° steps; 8 arm corners × chest ±8; singles chest/head; FS corner poses only",
+    "workingPoseCount": 1,
+    "partial": true
+  },
+  "setupDelta": [
+    {
+      "skin": "default",
+      "changedPixels": 320902,
+      "maxChannelDelta": 15,
+      "over3Pixels": 948,
+      "offSha256": "92beda1b93193be4cb9318b4a502f7ed9fc14f316c2547ce4161004d1bd5b41b",
+      "onSha256": "dbceb7dcc7953bf3729b24e97c5f0ae2ee6999c0fbeab531776d27c83dd402f0"
+    },
+    {
+      "skin": "fs",
+      "changedPixels": 320902,
+      "maxChannelDelta": 15,
+      "over3Pixels": 948,
+      "offSha256": "deaa7f7ff41d520d2f3dd095ce43689de2469cad275c18239ffbaf553c1bcd2e",
+      "onSha256": "daabd88b73dcb962444c42b035f83c11ae7969bf84d67d44c9f8233dfbf415fb"
+    },
+    {
+      "skin": "idle",
+      "changedPixels": 268700,
+      "maxChannelDelta": 15,
+      "over3Pixels": 894,
+      "offSha256": "cdd845d99deba8a9a545967ccc2b1e996ebcce2fffd866f9c856dd41bc21bf5f",
+      "onSha256": "0e4bf378df9fa716bec8f3eabe2986eee1b237e43c9091eb88424c8fa907341f"
+    },
+    {
+      "skin": "fs_idle",
+      "changedPixels": 268703,
+      "maxChannelDelta": 15,
+      "over3Pixels": 894,
+      "offSha256": "399392bc0a145e5c5618fac098d2892315f4e1fe0093214b33c877d045cfc486",
+      "onSha256": "bbd4a26ec544852d9b06a2f7185980917539dc45e2e24a6513bec4e35814b999"
+    }
+  ],
+  "records": [
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "default",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "before-composite/default__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "idle",
+      "internalHoles": 2,
+      "internalPixels": 74,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 2,
+      "candidates": [
+        {
+          "id": "idle__setup__internal__0",
+          "type": "internal",
+          "area": 19,
+          "bounds": {
+            "x": 840,
+            "y": 1312,
+            "w": 5,
+            "h": 7
+          },
+          "crop": "before-composite/idle__setup__internal__0.png",
+          "mask": "before-composite/idle__setup__internal__0.mask.png",
+          "verdict": "unreviewed",
+          "reason": "Requires visual assessment of crop and material ownership."
+        },
+        {
+          "id": "idle__setup__internal__1",
+          "type": "internal",
+          "area": 55,
+          "bounds": {
+            "x": 809,
+            "y": 1350,
+            "w": 8,
+            "h": 12
+          },
+          "crop": "before-composite/idle__setup__internal__1.png",
+          "mask": "before-composite/idle__setup__internal__1.mask.png",
+          "verdict": "unreviewed",
+          "reason": "Requires visual assessment of crop and material ownership."
+        }
+      ],
+      "geometry": "before-composite/idle__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "fs",
+      "internalHoles": 0,
+      "internalPixels": 0,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 0,
+      "candidates": [],
+      "geometry": "before-composite/default__setup.geometry.json"
+    },
+    {
+      "id": "setup",
+      "rotations": {},
+      "kind": "working",
+      "extreme": true,
+      "skin": "fs_idle",
+      "internalHoles": 2,
+      "internalPixels": 74,
+      "edgeCandidates": 0,
+      "edgeDefects": 0,
+      "unreviewed": 2,
+      "candidates": [
+        {
+          "id": "fs_idle__setup__internal__0",
+          "type": "internal",
+          "area": 19,
+          "bounds": {
+            "x": 840,
+            "y": 1312,
+            "w": 5,
+            "h": 7
+          },
+          "crop": "before-composite/fs_idle__setup__internal__0.png",
+          "mask": "before-composite/fs_idle__setup__internal__0.mask.png",
+          "verdict": "unreviewed",
+          "reason": "Requires visual assessment of crop and material ownership."
+        },
+        {
+          "id": "fs_idle__setup__internal__1",
+          "type": "internal",
+          "area": 55,
+          "bounds": {
+            "x": 809,
+            "y": 1350,
+            "w": 8,
+            "h": 12
+          },
+          "crop": "before-composite/fs_idle__setup__internal__1.png",
+          "mask": "before-composite/fs_idle__setup__internal__1.mask.png",
+          "verdict": "unreviewed",
+          "reason": "Requires visual assessment of crop and material ownership."
+        }
+      ],
+      "geometry": "before-composite/idle__setup.geometry.json"
+    }
+  ],
+  "pageErrors": [],
+  "summary": {
+    "poses": 4,
+    "workingInternalHoles": 4,
+    "workingEdgeDefects": 0,
+    "unreviewed": 4
+  },
+  "result": "REVIEW_REQUIRED"
+}

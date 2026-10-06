@@ -1,0 +1,122 @@
+{
+  "cape_underpaint": {
+    "x": -186,
+    "y": 369,
+    "w": 1302,
+    "h": 1177
+  },
+  "cape_idle_underpaint": {
+    "x": -186,
+    "y": 369,
+    "w": 1302,
+    "h": 1177
+  },
+  "left_sleeve_underpaint": {
+    "x": -110,
+    "y": 616,
+    "w": 531,
+    "h": 493
+  },
+  "left_sleeve_idle_underpaint": {
+    "x": -110,
+    "y": 616,
+    "w": 531,
+    "h": 493
+  },
+  "right_sleeve_underpaint": {
+    "x": 250,
+    "y": 393,
+    "w": 802,
+    "h": 1141
+  },
+  "right_sleeve_idle_underpaint": {
+    "x": 250,
+    "y": 393,
+    "w": 802,
+    "h": 1141
+  },
+  "hood_back_underpaint": {
+    "x": 371,
+    "y": 32,
+    "w": 633,
+    "h": 632
+  },
+  "hood_back_idle_underpaint": {
+    "x": 371,
+    "y": 32,
+    "w": 633,
+    "h": 632
+  },
+  "face_neck_underpaint": {
+    "x": 404,
+    "y": 99,
+    "w": 366,
+    "h": 578
+  },
+  "face_neck_idle_underpaint": {
+    "x": 404,
+    "y": 99,
+    "w": 366,
+    "h": 578
+  },
+  "chest_underpaint": {
+    "x": 227,
+    "y": 478,
+    "w": 452,
+    "h": 745
+  },
+  "chest_idle_underpaint": {
+    "x": 227,
+    "y": 478,
+    "w": 452,
+    "h": 745
+  },
+  "hood_front_underpaint": {
+    "x": 232,
+    "y": 284,
+    "w": 499,
+    "h": 405
+  },
+  "hood_front_idle_underpaint": {
+    "x": 232,
+    "y": 284,
+    "w": 499,
+    "h": 405
+  },
+  "left_gesture_underpaint": {
+    "x": 135,
+    "y": 611,
+    "w": 444,
+    "h": 293
+  },
+  "right_gesture_underpaint": {
+    "x": 459,
+    "y": 1034,
+    "w": 309,
+    "h": 194
+  },
+  "ribbon_left_underpaint": {
+    "x": 562,
+    "y": 701,
+    "w": 85,
+    "h": 124
+  },
+  "ribbon_left_idle_underpaint": {
+    "x": 562,
+    "y": 701,
+    "w": 85,
+    "h": 124
+  },
+  "ribbon_right_underpaint": {
+    "x": 594,
+    "y": 706,
+    "w": 69,
+    "h": 40
+  },
+  "ribbon_right_idle_underpaint": {
+    "x": 594,
+    "y": 706,
+    "w": 69,
+    "h": 40
+  }
+}

@@ -1,0 +1,3475 @@
+{
+  "result": "RESTORED_RECHECK_REQUIRED",
+  "method": "B2 masks union across default and idle for each registered underpaint; separate B6 footprint from original setup outliers (initial 3x3 texture neighborhood) plus accumulated exact-texel trims. World registration aligns all source pixels. Every accepted weighted vertex is preserved.",
+  "legacySetupOutlierPixels": 10169,
+  "outsideAuthorizationPixels": 652,
+  "rows": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "path": "underpaint/cape_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "originalSize": [
+        918,
+        793
+      ],
+      "changedPixels": 273233,
+      "alphaIncreasedPixels": 243129,
+      "alphaDecreasedPixels": 4007,
+      "inB2MaskPixels": 270243,
+      "inB6TrimPixels": 2990,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "path": "underpaint/cape_idle_underpaint",
+      "textureSize": [
+        1302,
+        1177
+      ],
+      "originalSize": [
+        918,
+        793
+      ],
+      "changedPixels": 240716,
+      "alphaIncreasedPixels": 220388,
+      "alphaDecreasedPixels": 5157,
+      "inB2MaskPixels": 237726,
+      "inB6TrimPixels": 2990,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "path": "underpaint/left_sleeve_underpaint",
+      "textureSize": [
+        531,
+        493
+      ],
+      "originalSize": [
+        243,
+        493
+      ],
+      "changedPixels": 71051,
+      "alphaIncreasedPixels": 65221,
+      "alphaDecreasedPixels": 103,
+      "inB2MaskPixels": 71031,
+      "inB6TrimPixels": 17,
+      "outsideAuthorizationPixels": 3,
+      "examples": [
+        {
+          "x": 387,
+          "y": 167,
+          "world": [
+            277,
+            783
+          ],
+          "before": [
+            98,
+            58,
+            8,
+            255
+          ],
+          "after": [
+            98,
+            58,
+            8,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 230,
+          "y": 297,
+          "world": [
+            120,
+            913
+          ],
+          "before": [
+            13,
+            13,
+            13,
+            255
+          ],
+          "after": [
+            13,
+            13,
+            13,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 233,
+          "y": 299,
+          "world": [
+            123,
+            915
+          ],
+          "before": [
+            13,
+            14,
+            14,
+            255
+          ],
+          "after": [
+            13,
+            14,
+            14,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "path": "underpaint/left_sleeve_idle_underpaint",
+      "textureSize": [
+        531,
+        493
+      ],
+      "originalSize": [
+        243,
+        493
+      ],
+      "changedPixels": 68381,
+      "alphaIncreasedPixels": 63365,
+      "alphaDecreasedPixels": 265,
+      "inB2MaskPixels": 68362,
+      "inB6TrimPixels": 17,
+      "outsideAuthorizationPixels": 2,
+      "examples": [
+        {
+          "x": 230,
+          "y": 297,
+          "world": [
+            120,
+            913
+          ],
+          "before": [
+            13,
+            13,
+            13,
+            255
+          ],
+          "after": [
+            13,
+            13,
+            13,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 233,
+          "y": 299,
+          "world": [
+            123,
+            915
+          ],
+          "before": [
+            13,
+            14,
+            14,
+            255
+          ],
+          "after": [
+            13,
+            14,
+            14,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "path": "underpaint/right_sleeve_underpaint",
+      "textureSize": [
+        802,
+        1109
+      ],
+      "originalSize": [
+        226,
+        725
+      ],
+      "changedPixels": 113097,
+      "alphaIncreasedPixels": 110497,
+      "alphaDecreasedPixels": 441,
+      "inB2MaskPixels": 112656,
+      "inB6TrimPixels": 402,
+      "outsideAuthorizationPixels": 39,
+      "examples": [
+        {
+          "x": 455,
+          "y": 213,
+          "world": [
+            705,
+            606
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 456,
+          "y": 213,
+          "world": [
+            706,
+            606
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 457,
+          "y": 213,
+          "world": [
+            707,
+            606
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 458,
+          "y": 213,
+          "world": [
+            708,
+            606
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 464,
+          "y": 214,
+          "world": [
+            714,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 465,
+          "y": 214,
+          "world": [
+            715,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 466,
+          "y": 214,
+          "world": [
+            716,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 467,
+          "y": 214,
+          "world": [
+            717,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 467,
+          "y": 215,
+          "world": [
+            717,
+            608
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 474,
+          "y": 216,
+          "world": [
+            724,
+            609
+          ],
+          "before": [
+            16,
+            15,
+            15,
+            255
+          ],
+          "after": [
+            16,
+            15,
+            15,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 475,
+          "y": 216,
+          "world": [
+            725,
+            609
+          ],
+          "before": [
+            17,
+            14,
+            15,
+            255
+          ],
+          "after": [
+            17,
+            14,
+            15,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 476,
+          "y": 216,
+          "world": [
+            726,
+            609
+          ],
+          "before": [
+            17,
+            15,
+            15,
+            255
+          ],
+          "after": [
+            17,
+            15,
+            15,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "path": "underpaint/right_sleeve_idle_underpaint",
+      "textureSize": [
+        802,
+        1109
+      ],
+      "originalSize": [
+        226,
+        725
+      ],
+      "changedPixels": 120071,
+      "alphaIncreasedPixels": 118195,
+      "alphaDecreasedPixels": 552,
+      "inB2MaskPixels": 119639,
+      "inB6TrimPixels": 402,
+      "outsideAuthorizationPixels": 30,
+      "examples": [
+        {
+          "x": 464,
+          "y": 214,
+          "world": [
+            714,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 465,
+          "y": 214,
+          "world": [
+            715,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 466,
+          "y": 214,
+          "world": [
+            716,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 467,
+          "y": 214,
+          "world": [
+            717,
+            607
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 467,
+          "y": 215,
+          "world": [
+            717,
+            608
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 479,
+          "y": 216,
+          "world": [
+            729,
+            609
+          ],
+          "before": [
+            16,
+            13,
+            14,
+            255
+          ],
+          "after": [
+            16,
+            13,
+            14,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 480,
+          "y": 216,
+          "world": [
+            730,
+            609
+          ],
+          "before": [
+            16,
+            13,
+            15,
+            255
+          ],
+          "after": [
+            16,
+            13,
+            15,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 481,
+          "y": 216,
+          "world": [
+            731,
+            609
+          ],
+          "before": [
+            16,
+            14,
+            14,
+            255
+          ],
+          "after": [
+            16,
+            14,
+            14,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 424,
+          "y": 324,
+          "world": [
+            674,
+            717
+          ],
+          "before": [
+            7,
+            4,
+            3,
+            255
+          ],
+          "after": [
+            7,
+            4,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 424,
+          "y": 325,
+          "world": [
+            674,
+            718
+          ],
+          "before": [
+            6,
+            3,
+            2,
+            255
+          ],
+          "after": [
+            6,
+            3,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 424,
+          "y": 326,
+          "world": [
+            674,
+            719
+          ],
+          "before": [
+            4,
+            2,
+            1,
+            255
+          ],
+          "after": [
+            4,
+            2,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 425,
+          "y": 326,
+          "world": [
+            675,
+            719
+          ],
+          "before": [
+            4,
+            2,
+            1,
+            255
+          ],
+          "after": [
+            4,
+            2,
+            1,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "path": "underpaint/hood_back_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "originalSize": [
+        441,
+        632
+      ],
+      "changedPixels": 39809,
+      "alphaIncreasedPixels": 29080,
+      "alphaDecreasedPixels": 7755,
+      "inB2MaskPixels": 32143,
+      "inB6TrimPixels": 7594,
+      "outsideAuthorizationPixels": 72,
+      "examples": [
+        {
+          "x": 118,
+          "y": 386,
+          "world": [
+            489,
+            418
+          ],
+          "before": [
+            4,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            4,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 119,
+          "y": 386,
+          "world": [
+            490,
+            418
+          ],
+          "before": [
+            49,
+            1,
+            8,
+            255
+          ],
+          "after": [
+            49,
+            1,
+            8,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 231,
+          "y": 576,
+          "world": [
+            602,
+            608
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 229,
+          "y": 577,
+          "world": [
+            600,
+            609
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 230,
+          "y": 577,
+          "world": [
+            601,
+            609
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 231,
+          "y": 577,
+          "world": [
+            602,
+            609
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 213,
+          "y": 578,
+          "world": [
+            584,
+            610
+          ],
+          "before": [
+            13,
+            12,
+            11,
+            255
+          ],
+          "after": [
+            13,
+            12,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 214,
+          "y": 578,
+          "world": [
+            585,
+            610
+          ],
+          "before": [
+            2,
+            2,
+            2,
+            255
+          ],
+          "after": [
+            2,
+            2,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 228,
+          "y": 578,
+          "world": [
+            599,
+            610
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 229,
+          "y": 578,
+          "world": [
+            600,
+            610
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 230,
+          "y": 578,
+          "world": [
+            601,
+            610
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 215,
+          "y": 579,
+          "world": [
+            586,
+            611
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "path": "underpaint/hood_back_idle_underpaint",
+      "textureSize": [
+        633,
+        632
+      ],
+      "originalSize": [
+        441,
+        632
+      ],
+      "changedPixels": 33012,
+      "alphaIncreasedPixels": 22368,
+      "alphaDecreasedPixels": 8058,
+      "inB2MaskPixels": 25416,
+      "inB6TrimPixels": 7594,
+      "outsideAuthorizationPixels": 2,
+      "examples": [
+        {
+          "x": 118,
+          "y": 386,
+          "world": [
+            489,
+            418
+          ],
+          "before": [
+            4,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            4,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 119,
+          "y": 386,
+          "world": [
+            490,
+            418
+          ],
+          "before": [
+            49,
+            1,
+            8,
+            255
+          ],
+          "after": [
+            49,
+            1,
+            8,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "path": "underpaint/face_neck_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "originalSize": [
+        366,
+        578
+      ],
+      "changedPixels": 8214,
+      "alphaIncreasedPixels": 6397,
+      "alphaDecreasedPixels": 1715,
+      "inB2MaskPixels": 6689,
+      "inB6TrimPixels": 1484,
+      "outsideAuthorizationPixels": 41,
+      "examples": [
+        {
+          "x": 265,
+          "y": 393,
+          "world": [
+            669,
+            492
+          ],
+          "before": [
+            25,
+            17,
+            13,
+            255
+          ],
+          "after": [
+            25,
+            17,
+            13,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 263,
+          "y": 394,
+          "world": [
+            667,
+            493
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 264,
+          "y": 394,
+          "world": [
+            668,
+            493
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 261,
+          "y": 395,
+          "world": [
+            665,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 262,
+          "y": 395,
+          "world": [
+            666,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 263,
+          "y": 395,
+          "world": [
+            667,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 250,
+          "y": 400,
+          "world": [
+            654,
+            499
+          ],
+          "before": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "after": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 251,
+          "y": 400,
+          "world": [
+            655,
+            499
+          ],
+          "before": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "after": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 49,
+          "y": 405,
+          "world": [
+            453,
+            504
+          ],
+          "before": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "after": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 40,
+          "y": 406,
+          "world": [
+            444,
+            505
+          ],
+          "before": [
+            2,
+            2,
+            1,
+            255
+          ],
+          "after": [
+            2,
+            2,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 49,
+          "y": 406,
+          "world": [
+            453,
+            505
+          ],
+          "before": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "after": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 38,
+          "y": 407,
+          "world": [
+            442,
+            506
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "path": "underpaint/face_neck_idle_underpaint",
+      "textureSize": [
+        366,
+        578
+      ],
+      "originalSize": [
+        366,
+        578
+      ],
+      "changedPixels": 14881,
+      "alphaIncreasedPixels": 13144,
+      "alphaDecreasedPixels": 1513,
+      "inB2MaskPixels": 13368,
+      "inB6TrimPixels": 1484,
+      "outsideAuthorizationPixels": 29,
+      "examples": [
+        {
+          "x": 265,
+          "y": 393,
+          "world": [
+            669,
+            492
+          ],
+          "before": [
+            25,
+            17,
+            13,
+            255
+          ],
+          "after": [
+            25,
+            17,
+            13,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 263,
+          "y": 394,
+          "world": [
+            667,
+            493
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 264,
+          "y": 394,
+          "world": [
+            668,
+            493
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 261,
+          "y": 395,
+          "world": [
+            665,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 262,
+          "y": 395,
+          "world": [
+            666,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 263,
+          "y": 395,
+          "world": [
+            667,
+            494
+          ],
+          "before": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "after": [
+            19,
+            14,
+            11,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 250,
+          "y": 400,
+          "world": [
+            654,
+            499
+          ],
+          "before": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "after": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 251,
+          "y": 400,
+          "world": [
+            655,
+            499
+          ],
+          "before": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "after": [
+            7,
+            5,
+            5,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 49,
+          "y": 405,
+          "world": [
+            453,
+            504
+          ],
+          "before": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "after": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 40,
+          "y": 406,
+          "world": [
+            444,
+            505
+          ],
+          "before": [
+            2,
+            2,
+            1,
+            255
+          ],
+          "after": [
+            2,
+            2,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 49,
+          "y": 406,
+          "world": [
+            453,
+            505
+          ],
+          "before": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "after": [
+            215,
+            190,
+            146,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 38,
+          "y": 407,
+          "world": [
+            442,
+            506
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "path": "underpaint/chest_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "originalSize": [
+        452,
+        745
+      ],
+      "changedPixels": 54103,
+      "alphaIncreasedPixels": 51852,
+      "alphaDecreasedPixels": 881,
+      "inB2MaskPixels": 53267,
+      "inB6TrimPixels": 788,
+      "outsideAuthorizationPixels": 48,
+      "examples": [
+        {
+          "x": 368,
+          "y": 104,
+          "world": [
+            595,
+            582
+          ],
+          "before": [
+            5,
+            2,
+            0,
+            255
+          ],
+          "after": [
+            5,
+            2,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 366,
+          "y": 118,
+          "world": [
+            593,
+            596
+          ],
+          "before": [
+            24,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            24,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 367,
+          "y": 118,
+          "world": [
+            594,
+            596
+          ],
+          "before": [
+            24,
+            15,
+            3,
+            255
+          ],
+          "after": [
+            24,
+            15,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 369,
+          "y": 120,
+          "world": [
+            596,
+            598
+          ],
+          "before": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 370,
+          "y": 120,
+          "world": [
+            597,
+            598
+          ],
+          "before": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 371,
+          "y": 120,
+          "world": [
+            598,
+            598
+          ],
+          "before": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "after": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 371,
+          "y": 121,
+          "world": [
+            598,
+            599
+          ],
+          "before": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "after": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 376,
+          "y": 124,
+          "world": [
+            603,
+            602
+          ],
+          "before": [
+            14,
+            7,
+            1,
+            255
+          ],
+          "after": [
+            14,
+            7,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 377,
+          "y": 124,
+          "world": [
+            604,
+            602
+          ],
+          "before": [
+            14,
+            7,
+            1,
+            255
+          ],
+          "after": [
+            14,
+            7,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 378,
+          "y": 125,
+          "world": [
+            605,
+            603
+          ],
+          "before": [
+            11,
+            6,
+            1,
+            255
+          ],
+          "after": [
+            11,
+            6,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 379,
+          "y": 125,
+          "world": [
+            606,
+            603
+          ],
+          "before": [
+            26,
+            17,
+            4,
+            255
+          ],
+          "after": [
+            26,
+            17,
+            4,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 379,
+          "y": 126,
+          "world": [
+            606,
+            604
+          ],
+          "before": [
+            26,
+            17,
+            4,
+            255
+          ],
+          "after": [
+            26,
+            17,
+            4,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "path": "underpaint/chest_idle_underpaint",
+      "textureSize": [
+        452,
+        745
+      ],
+      "originalSize": [
+        452,
+        745
+      ],
+      "changedPixels": 39595,
+      "alphaIncreasedPixels": 36574,
+      "alphaDecreasedPixels": 1805,
+      "inB2MaskPixels": 38787,
+      "inB6TrimPixels": 788,
+      "outsideAuthorizationPixels": 20,
+      "examples": [
+        {
+          "x": 366,
+          "y": 118,
+          "world": [
+            593,
+            596
+          ],
+          "before": [
+            24,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            24,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 367,
+          "y": 118,
+          "world": [
+            594,
+            596
+          ],
+          "before": [
+            24,
+            15,
+            3,
+            255
+          ],
+          "after": [
+            24,
+            15,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 369,
+          "y": 120,
+          "world": [
+            596,
+            598
+          ],
+          "before": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 370,
+          "y": 120,
+          "world": [
+            597,
+            598
+          ],
+          "before": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "after": [
+            20,
+            14,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 371,
+          "y": 120,
+          "world": [
+            598,
+            598
+          ],
+          "before": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "after": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 371,
+          "y": 121,
+          "world": [
+            598,
+            599
+          ],
+          "before": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "after": [
+            16,
+            9,
+            2,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 186,
+          "y": 142,
+          "world": [
+            413,
+            620
+          ],
+          "before": [
+            202,
+            142,
+            50,
+            255
+          ],
+          "after": [
+            202,
+            142,
+            50,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 186,
+          "y": 143,
+          "world": [
+            413,
+            621
+          ],
+          "before": [
+            54,
+            26,
+            6,
+            255
+          ],
+          "after": [
+            54,
+            26,
+            6,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 187,
+          "y": 143,
+          "world": [
+            414,
+            621
+          ],
+          "before": [
+            213,
+            143,
+            41,
+            255
+          ],
+          "after": [
+            213,
+            143,
+            41,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 434,
+          "y": 183,
+          "world": [
+            661,
+            661
+          ],
+          "before": [
+            17,
+            10,
+            1,
+            255
+          ],
+          "after": [
+            17,
+            10,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 434,
+          "y": 184,
+          "world": [
+            661,
+            662
+          ],
+          "before": [
+            17,
+            10,
+            1,
+            255
+          ],
+          "after": [
+            17,
+            10,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 435,
+          "y": 184,
+          "world": [
+            662,
+            662
+          ],
+          "before": [
+            20,
+            12,
+            3,
+            255
+          ],
+          "after": [
+            20,
+            12,
+            3,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "path": "underpaint/hood_front_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "originalSize": [
+        499,
+        405
+      ],
+      "changedPixels": 20461,
+      "alphaIncreasedPixels": 19843,
+      "alphaDecreasedPixels": 56,
+      "inB2MaskPixels": 20405,
+      "inB6TrimPixels": 50,
+      "outsideAuthorizationPixels": 6,
+      "examples": [
+        {
+          "x": 181,
+          "y": 336,
+          "world": [
+            413,
+            620
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 181,
+          "y": 337,
+          "world": [
+            413,
+            621
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 182,
+          "y": 337,
+          "world": [
+            414,
+            621
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 3,
+          "y": 401,
+          "world": [
+            235,
+            685
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 2,
+          "y": 402,
+          "world": [
+            234,
+            686
+          ],
+          "before": [
+            2,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            2,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 3,
+          "y": 402,
+          "world": [
+            235,
+            686
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "path": "underpaint/hood_front_idle_underpaint",
+      "textureSize": [
+        499,
+        405
+      ],
+      "originalSize": [
+        499,
+        405
+      ],
+      "changedPixels": 20555,
+      "alphaIncreasedPixels": 20337,
+      "alphaDecreasedPixels": 56,
+      "inB2MaskPixels": 20499,
+      "inB6TrimPixels": 50,
+      "outsideAuthorizationPixels": 6,
+      "examples": [
+        {
+          "x": 181,
+          "y": 336,
+          "world": [
+            413,
+            620
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 181,
+          "y": 337,
+          "world": [
+            413,
+            621
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 182,
+          "y": 337,
+          "world": [
+            414,
+            621
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 3,
+          "y": 401,
+          "world": [
+            235,
+            685
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 2,
+          "y": 402,
+          "world": [
+            234,
+            686
+          ],
+          "before": [
+            2,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            2,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 3,
+          "y": 402,
+          "world": [
+            235,
+            686
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "path": "underpaint/left_gesture_underpaint",
+      "textureSize": [
+        444,
+        293
+      ],
+      "originalSize": [
+        444,
+        293
+      ],
+      "changedPixels": 7611,
+      "alphaIncreasedPixels": 5948,
+      "alphaDecreasedPixels": 1663,
+      "inB2MaskPixels": 5975,
+      "inB6TrimPixels": 1340,
+      "outsideAuthorizationPixels": 296,
+      "examples": [
+        {
+          "x": 267,
+          "y": 0,
+          "world": [
+            402,
+            611
+          ],
+          "before": [
+            2,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            2,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 267,
+          "y": 1,
+          "world": [
+            402,
+            612
+          ],
+          "before": [
+            2,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            2,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 268,
+          "y": 1,
+          "world": [
+            403,
+            612
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 269,
+          "y": 1,
+          "world": [
+            404,
+            612
+          ],
+          "before": [
+            22,
+            0,
+            2,
+            253
+          ],
+          "after": [
+            22,
+            0,
+            2,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 269,
+          "y": 2,
+          "world": [
+            404,
+            613
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 270,
+          "y": 2,
+          "world": [
+            405,
+            613
+          ],
+          "before": [
+            79,
+            1,
+            8,
+            253
+          ],
+          "after": [
+            79,
+            1,
+            8,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 271,
+          "y": 2,
+          "world": [
+            406,
+            613
+          ],
+          "before": [
+            128,
+            4,
+            15,
+            253
+          ],
+          "after": [
+            128,
+            4,
+            15,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 184,
+          "y": 3,
+          "world": [
+            319,
+            614
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 271,
+          "y": 3,
+          "world": [
+            406,
+            614
+          ],
+          "before": [
+            121,
+            3,
+            14,
+            253
+          ],
+          "after": [
+            121,
+            3,
+            14,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 272,
+          "y": 3,
+          "world": [
+            407,
+            614
+          ],
+          "before": [
+            119,
+            5,
+            13,
+            253
+          ],
+          "after": [
+            119,
+            5,
+            13,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 184,
+          "y": 4,
+          "world": [
+            319,
+            615
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 185,
+          "y": 4,
+          "world": [
+            320,
+            615
+          ],
+          "before": [
+            3,
+            2,
+            2,
+            253
+          ],
+          "after": [
+            3,
+            2,
+            2,
+            253
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "path": "underpaint/left_gesture_idle_underpaint",
+      "textureSize": [
+        444,
+        293
+      ],
+      "originalSize": [
+        444,
+        293
+      ],
+      "changedPixels": 0,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 0,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 0,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "path": "underpaint/right_gesture_underpaint",
+      "textureSize": [
+        309,
+        194
+      ],
+      "originalSize": [
+        309,
+        194
+      ],
+      "changedPixels": 10188,
+      "alphaIncreasedPixels": 9829,
+      "alphaDecreasedPixels": 359,
+      "inB2MaskPixels": 9829,
+      "inB6TrimPixels": 311,
+      "outsideAuthorizationPixels": 48,
+      "examples": [
+        {
+          "x": 137,
+          "y": 7,
+          "world": [
+            596,
+            1041
+          ],
+          "before": [
+            91,
+            0,
+            8,
+            253
+          ],
+          "after": [
+            91,
+            0,
+            8,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 137,
+          "y": 8,
+          "world": [
+            596,
+            1042
+          ],
+          "before": [
+            94,
+            0,
+            8,
+            253
+          ],
+          "after": [
+            94,
+            0,
+            8,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 138,
+          "y": 8,
+          "world": [
+            597,
+            1042
+          ],
+          "before": [
+            90,
+            0,
+            8,
+            253
+          ],
+          "after": [
+            90,
+            0,
+            8,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 139,
+          "y": 8,
+          "world": [
+            598,
+            1042
+          ],
+          "before": [
+            87,
+            0,
+            9,
+            253
+          ],
+          "after": [
+            87,
+            0,
+            9,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 236,
+          "y": 12,
+          "world": [
+            695,
+            1046
+          ],
+          "before": [
+            13,
+            9,
+            4,
+            253
+          ],
+          "after": [
+            13,
+            9,
+            4,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 237,
+          "y": 12,
+          "world": [
+            696,
+            1046
+          ],
+          "before": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            1,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 238,
+          "y": 12,
+          "world": [
+            697,
+            1046
+          ],
+          "before": [
+            72,
+            61,
+            39,
+            253
+          ],
+          "after": [
+            72,
+            61,
+            39,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 71,
+          "y": 15,
+          "world": [
+            530,
+            1049
+          ],
+          "before": [
+            246,
+            176,
+            60,
+            253
+          ],
+          "after": [
+            246,
+            176,
+            60,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 161,
+          "y": 15,
+          "world": [
+            620,
+            1049
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 162,
+          "y": 15,
+          "world": [
+            621,
+            1049
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 163,
+          "y": 15,
+          "world": [
+            622,
+            1049
+          ],
+          "before": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "after": [
+            0,
+            0,
+            0,
+            253
+          ],
+          "trim": 0
+        },
+        {
+          "x": 69,
+          "y": 16,
+          "world": [
+            528,
+            1050
+          ],
+          "before": [
+            245,
+            176,
+            61,
+            253
+          ],
+          "after": [
+            245,
+            176,
+            61,
+            253
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "path": "underpaint/right_gesture_idle_underpaint",
+      "textureSize": [
+        309,
+        194
+      ],
+      "originalSize": [
+        309,
+        194
+      ],
+      "changedPixels": 0,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 0,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 0,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "path": "underpaint/ribbon_left_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "originalSize": [
+        85,
+        124
+      ],
+      "changedPixels": 536,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 536,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 529,
+      "outsideAuthorizationPixels": 7,
+      "examples": [
+        {
+          "x": 56,
+          "y": 96,
+          "world": [
+            618,
+            797
+          ],
+          "before": [
+            154,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            154,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 56,
+          "y": 97,
+          "world": [
+            618,
+            798
+          ],
+          "before": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 56,
+          "y": 98,
+          "world": [
+            618,
+            799
+          ],
+          "before": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 61,
+          "y": 120,
+          "world": [
+            623,
+            821
+          ],
+          "before": [
+            21,
+            0,
+            3,
+            255
+          ],
+          "after": [
+            21,
+            0,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 61,
+          "y": 121,
+          "world": [
+            623,
+            822
+          ],
+          "before": [
+            21,
+            0,
+            3,
+            255
+          ],
+          "after": [
+            21,
+            0,
+            3,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 61,
+          "y": 122,
+          "world": [
+            623,
+            823
+          ],
+          "before": [
+            10,
+            0,
+            1,
+            255
+          ],
+          "after": [
+            10,
+            0,
+            1,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 61,
+          "y": 123,
+          "world": [
+            623,
+            824
+          ],
+          "before": [
+            10,
+            0,
+            1,
+            255
+          ],
+          "after": [
+            10,
+            0,
+            1,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "path": "underpaint/ribbon_left_idle_underpaint",
+      "textureSize": [
+        85,
+        124
+      ],
+      "originalSize": [
+        85,
+        124
+      ],
+      "changedPixels": 1307,
+      "alphaIncreasedPixels": 775,
+      "alphaDecreasedPixels": 532,
+      "inB2MaskPixels": 775,
+      "inB6TrimPixels": 529,
+      "outsideAuthorizationPixels": 3,
+      "examples": [
+        {
+          "x": 56,
+          "y": 96,
+          "world": [
+            618,
+            797
+          ],
+          "before": [
+            154,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            154,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 56,
+          "y": 97,
+          "world": [
+            618,
+            798
+          ],
+          "before": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        },
+        {
+          "x": 56,
+          "y": 98,
+          "world": [
+            618,
+            799
+          ],
+          "before": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "after": [
+            153,
+            4,
+            25,
+            255
+          ],
+          "trim": 0
+        }
+      ]
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "path": "underpaint/ribbon_right_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "originalSize": [
+        69,
+        40
+      ],
+      "changedPixels": 8,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 8,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 8,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "path": "underpaint/ribbon_right_idle_underpaint",
+      "textureSize": [
+        69,
+        40
+      ],
+      "originalSize": [
+        69,
+        40
+      ],
+      "changedPixels": 8,
+      "alphaIncreasedPixels": 0,
+      "alphaDecreasedPixels": 8,
+      "inB2MaskPixels": 0,
+      "inB6TrimPixels": 8,
+      "outsideAuthorizationPixels": 0,
+      "examples": []
+    }
+  ],
+  "preserved": [
+    {
+      "skin": "default",
+      "slot": "cape_underpaint",
+      "preservedVertices": 195,
+      "addedVertices": 60
+    },
+    {
+      "skin": "idle",
+      "slot": "cape_underpaint",
+      "preservedVertices": 195,
+      "addedVertices": 60
+    },
+    {
+      "skin": "default",
+      "slot": "left_sleeve_underpaint",
+      "preservedVertices": 45,
+      "addedVertices": 18
+    },
+    {
+      "skin": "idle",
+      "slot": "left_sleeve_underpaint",
+      "preservedVertices": 45,
+      "addedVertices": 18
+    },
+    {
+      "skin": "default",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 60,
+      "addedVertices": 38
+    },
+    {
+      "skin": "idle",
+      "slot": "right_sleeve_underpaint",
+      "preservedVertices": 60,
+      "addedVertices": 38
+    },
+    {
+      "skin": "default",
+      "slot": "hood_back_underpaint",
+      "preservedVertices": 88,
+      "addedVertices": 11
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_back_underpaint",
+      "preservedVertices": 88,
+      "addedVertices": 11
+    },
+    {
+      "skin": "default",
+      "slot": "face_neck_underpaint",
+      "preservedVertices": 70,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "face_neck_underpaint",
+      "preservedVertices": 70,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "chest_underpaint",
+      "preservedVertices": 96,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "chest_underpaint",
+      "preservedVertices": 96,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "hood_front_underpaint",
+      "preservedVertices": 63,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "hood_front_underpaint",
+      "preservedVertices": 63,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "left_gesture_underpaint",
+      "preservedVertices": 48,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "left_gesture_underpaint",
+      "preservedVertices": 48,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "right_gesture_underpaint",
+      "preservedVertices": 24,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "right_gesture_underpaint",
+      "preservedVertices": 24,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_left_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_left_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "default",
+      "slot": "ribbon_right_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    },
+    {
+      "skin": "idle",
+      "slot": "ribbon_right_underpaint",
+      "preservedVertices": 9,
+      "addedVertices": 0
+    }
+  ]
+}

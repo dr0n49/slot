@@ -1,0 +1,64 @@
+{
+  "stage": "after",
+  "setupOutlierPixels": 114,
+  "criterion": "Conservative max delta >3 across straight RGBA, BASE or FS; Exact containing texture texel at inverse barycentric map. Separate B6 trim authorization; no visible pixel edits.",
+  "applied": true,
+  "soft": true,
+  "changed": [
+    {
+      "underpaint": "cape_underpaint",
+      "trimMaskPixels": 114,
+      "removedPaintPixels": 113
+    },
+    {
+      "underpaint": "left_sleeve_underpaint",
+      "trimMaskPixels": 53,
+      "removedPaintPixels": 53
+    },
+    {
+      "underpaint": "right_sleeve_underpaint",
+      "trimMaskPixels": 23,
+      "removedPaintPixels": 15
+    },
+    {
+      "underpaint": "hood_back_underpaint",
+      "trimMaskPixels": 25,
+      "removedPaintPixels": 20
+    },
+    {
+      "underpaint": "face_neck_underpaint",
+      "trimMaskPixels": 20,
+      "removedPaintPixels": 0
+    },
+    {
+      "underpaint": "chest_underpaint",
+      "trimMaskPixels": 67,
+      "removedPaintPixels": 50
+    },
+    {
+      "underpaint": "hood_front_underpaint",
+      "trimMaskPixels": 25,
+      "removedPaintPixels": 15
+    },
+    {
+      "underpaint": "left_gesture_underpaint",
+      "trimMaskPixels": 51,
+      "removedPaintPixels": 0
+    },
+    {
+      "underpaint": "right_gesture_underpaint",
+      "trimMaskPixels": 16,
+      "removedPaintPixels": 14
+    },
+    {
+      "underpaint": "ribbon_left_underpaint",
+      "trimMaskPixels": 0,
+      "removedPaintPixels": 0
+    },
+    {
+      "underpaint": "ribbon_right_underpaint",
+      "trimMaskPixels": 0,
+      "removedPaintPixels": 0
+    }
+  ]
+}

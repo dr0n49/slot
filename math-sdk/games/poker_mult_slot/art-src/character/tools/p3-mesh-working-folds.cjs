@@ -1,0 +1,10 @@
+/* Inspect all working poses with the unchanged official 3.8 runtime. */
+const fs=require('fs'),path=require('path'),vm=require('vm');
+function workingFolds(json,root,records){
+ const ctx={console};vm.createContext(ctx);vm.runInContext(fs.readFileSync(path.join(root,'tools/vendor/spine-core-3.8.js'),'utf8'),ctx);const sp=ctx.spine,loader={newRegionAttachment(s,n){const a=new sp.RegionAttachment(n);a.setRegion({u:0,v:0,u2:1,v2:1,rotate:false,width:1,height:1,originalWidth:1,originalHeight:1,offsetX:0,offsetY:0});return a;},newMeshAttachment(s,n){const a=new sp.MeshAttachment(n);a.region={u:0,v:0,u2:1,v2:1,rotate:false,width:1,height:1,originalWidth:1,originalHeight:1,offsetX:0,offsetY:0};return a;}};
+ const rig=new sp.Skeleton(new sp.SkeletonJson(loader).readSkeletonData(json)),failures=[],vertices=(s,a)=>{const v=new Float32Array(a.worldVerticesLength);a.computeWorldVertices(s,0,v.length,v,0,2);return v;},area=(v,t)=>{const[a,b,c]=t.map(i=>i*2);return(v[b]-v[a])*(v[c+1]-v[a+1])-(v[b+1]-v[a+1])*(v[c]-v[a]);};
+ function setup(skin){rig.setSkinByName(skin);rig.setToSetupPose();for(const s of rig.slots)if(s.data.name.endsWith('_underpaint'))rig.setAttachment(s.data.name,s.data.name);rig.updateWorldTransform();}
+ for(const skin of ['default','idle']){setup(skin);const base=new Map(rig.slots.filter(s=>s.getAttachment() instanceof sp.MeshAttachment).map(s=>[s.data.name,vertices(s,s.getAttachment())]));for(const pose of records.filter(p=>p.skin===skin&&p.kind==='working')){setup(skin);for(const[bone,d]of Object.entries(pose.rotations))rig.findBone(bone).rotation+=d;rig.updateWorldTransform();for(const s of rig.slots){const a=s.getAttachment();if(!(a instanceof sp.MeshAttachment))continue;const v=vertices(s,a),b=base.get(s.data.name);let flips=0;for(let i=0;i<a.triangles.length;i+=3){const t=Array.from(a.triangles).slice(i,i+3);if(area(v,t)*area(b,t)<-1e-6)flips++;}if(flips)failures.push({skin,pose:pose.id,slot:s.data.name,flips});}}}
+ return {workingFoldedTriangles:failures.reduce((s,f)=>s+f.flips,0),failures};
+}
+module.exports={workingFolds};

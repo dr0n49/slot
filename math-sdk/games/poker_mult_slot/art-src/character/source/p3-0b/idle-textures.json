@@ -1,0 +1,71 @@
+{
+  "reason": "Distinct optional hand silhouette; B6 BASE/FS trim must not remove cloth already visible in P2 idle setup.",
+  "entries": [
+    {
+      "slot": "cape_underpaint",
+      "idlePath": "underpaint/cape_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "left_sleeve_underpaint",
+      "idlePath": "underpaint/left_sleeve_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "right_sleeve_underpaint",
+      "idlePath": "underpaint/right_sleeve_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "hood_back_underpaint",
+      "idlePath": "underpaint/hood_back_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "face_neck_underpaint",
+      "idlePath": "underpaint/face_neck_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "chest_underpaint",
+      "idlePath": "underpaint/chest_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "hood_front_underpaint",
+      "idlePath": "underpaint/hood_front_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "left_gesture_underpaint",
+      "idlePath": "underpaint/left_gesture_idle_underpaint",
+      "source": "Unchanged P2/P3-0 gesture pixels from protected backup",
+      "gestureSetupPreserved": true
+    },
+    {
+      "slot": "right_gesture_underpaint",
+      "idlePath": "underpaint/right_gesture_idle_underpaint",
+      "source": "Unchanged P2/P3-0 gesture pixels from protected backup",
+      "gestureSetupPreserved": true
+    },
+    {
+      "slot": "ribbon_left_underpaint",
+      "idlePath": "underpaint/ribbon_left_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    },
+    {
+      "slot": "ribbon_right_underpaint",
+      "idlePath": "underpaint/ribbon_right_idle_underpaint",
+      "source": "BASE coverage texture after B6 trim",
+      "gestureSetupPreserved": false
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "inputSha256": "8da212ba882db91772e8c38984c7951a236a6e41700ead02aa911f195ce771fe",
+  "changes": [
+    {
+      "slot": "left_sleeve_underpaint",
+      "oldBounds": {
+        "x": -110,
+        "y": 616,
+        "w": 435,
+        "h": 493
+      },
+      "newBounds": {
+        "x": -110,
+        "y": 616,
+        "w": 531,
+        "h": 493,
+        "left": 0,
+        "top": 0
+      },
+      "meshes": [
+        {
+          "skin": "default",
+          "slot": "left_sleeve_underpaint",
+          "preservedVertices": 54,
+          "addedVertices": 9,
+          "weightSource": "left_sleeve"
+        },
+        {
+          "skin": "idle",
+          "slot": "left_sleeve_underpaint",
+          "preservedVertices": 54,
+          "addedVertices": 9,
+          "weightSource": "left_sleeve"
+        }
+      ],
+      "reason": "Additional mesh overlap toward raised card / held deck; paint still restricted to inverse mapped B2 masks and B6 limits."
+    },
+    {
+      "slot": "right_sleeve_underpaint",
+      "oldBounds": {
+        "x": 634,
+        "y": 393,
+        "w": 418,
+        "h": 1109
+      },
+      "newBounds": {
+        "x": 250,
+        "y": 393,
+        "w": 802,
+        "h": 1109,
+        "left": 384,
+        "top": 0
+      },
+      "meshes": [
+        {
+          "skin": "default",
+          "slot": "right_sleeve_underpaint",
+          "preservedVertices": 84,
+          "addedVertices": 14,
+          "weightSource": "right_sleeve"
+        },
+        {
+          "skin": "idle",
+          "slot": "right_sleeve_underpaint",
+          "preservedVertices": 84,
+          "addedVertices": 14,
+          "weightSource": "right_sleeve"
+        }
+      ],
+      "reason": "Additional mesh overlap toward raised card / held deck; paint still restricted to inverse mapped B2 masks and B6 limits."
+    }
+  ],
+  "animations": 0,
+  "bones": 45
+}
