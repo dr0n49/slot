@@ -1,0 +1,5 @@
+library/
+__pycache__/
+frontend/node_modules/
+frontend/dist/
+frontend/public/demo/
