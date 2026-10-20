@@ -10,6 +10,7 @@ const RIGS = {
   symbols: { data: "./spine/symbols/symbols.json", atlas: "./spine/symbols/symbols.atlas" },
   chest: { data: "./spine/chest/chest.json", atlas: "./spine/chest/chest.atlas" },
   frame: { data: "./spine/frame/frame.json", atlas: "./spine/frame/frame.atlas" },
+  screens: { data: "./spine/screens/screens.json", atlas: "./spine/screens/screens.atlas" },
 } as const;
 export type RigName = keyof typeof RIGS;
 

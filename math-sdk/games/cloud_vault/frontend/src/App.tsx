@@ -5,6 +5,7 @@ import { AutoplayPanel, BuyMenu, ConfirmCard, InfoPage, Logo, MenuPopover, Overl
 import { Splash } from "./components/Splash";
 import { characterBus } from "./spine/runtime";
 import { SpineCharacter } from "./spine/SpineCharacter";
+import { SpineScreens } from "./spine/SpineScreens";
 import { fromReveal, type Reel } from "./game/board";
 import { formatCurrency, formatPlain } from "./game/currency";
 import { demoRound } from "./game/demo";
@@ -69,6 +70,7 @@ export default function App() {
   const [plus, setPlus] = useState<Plus[]>([]);
   const [panel, setPanel] = useState<Panel>(null);
   const [anticipation, setAnticipation] = useState(false);
+  const [screensLive, setScreensLive] = useState(false);
   const [overlay, setOverlay] = useState<Overlay | null>(null);
   const [roundWin, setRoundWin] = useState(0);
 
@@ -176,6 +178,24 @@ export default function App() {
     setRoundWin(0);
     return playBook(events, view, cost);
   }
+
+  // QA: ?screen=intro|super|epic|total|big|mega|epicwin|max|cloud holds that screen (demo only).
+  useEffect(() => {
+    const q = urlParam("screen");
+    if (!started || !q || live) return;
+    const map: Record<string, Overlay> = {
+      intro: { kind: "intro", feature: "bonus", totalFs: 10, minChest: 2 },
+      super: { kind: "intro", feature: "super", totalFs: 10, minChest: 5 },
+      epic: { kind: "intro", feature: "epic", totalFs: 10, minChest: 5 },
+      total: { kind: "total", feature: "bonus", x: 136.8 },
+      big: { kind: "bigwin", x: 24.6 },
+      mega: { kind: "bigwin", x: 47.34 },
+      epicwin: { kind: "bigwin", x: 81.25 },
+      max: { kind: "maxwin", x: 25000 },
+      cloud: { kind: "cloud" },
+    };
+    if (map[q]) setOverlay(map[q]);
+  }, [started, live]);
 
   // ---- after the start screen: finish an unfinished round first
   useEffect(() => {
@@ -331,6 +351,10 @@ export default function App() {
   return (
     <div className={`viewport ${fsWorld ? "fs-world" : ""} ${feature && !feature.done ? feature.feature : ""}`}>
       <img className="sky" src="./art/bg.jpg" alt="" aria-hidden draggable={false} />
+      <picture className="fs-bg" aria-hidden>
+        <source media="(max-aspect-ratio: 3/4)" srcSet="./art/ui/bg_bonus_portrait.jpg" />
+        <img src="./art/ui/bg_bonus.jpg" alt="" draggable={false} />
+      </picture>
       <div className="fs-tint" aria-hidden />
       <div className={`stage ${anticipation ? "anticipating" : ""}`} onClick={() => menu === "pop" && setMenu(null)}>
         <Logo className="game-logo" />
@@ -492,7 +516,9 @@ export default function App() {
           {error}
         </div>
       )}
-      {overlay && <OverlayView o={overlay} fmtX={plainX} onTap={() => tapRef.current?.()} />}
+      {overlay && overlay.kind !== "keys" && <div className={`screen-dim ${overlay.kind}`} aria-hidden />}
+      <SpineScreens overlay={overlay} onLive={setScreensLive} />
+      {overlay && <OverlayView o={overlay} fmtX={plainX} onTap={() => tapRef.current?.()} spineArt={screensLive} />}
       {menu === "buy" && (
         <BuyMenu
           active={mode}

@@ -8,33 +8,28 @@ export function Splash({ ready, error, onStart }: { ready: boolean; error: strin
       <img className="sky" src="./art/bg.jpg" alt="" aria-hidden draggable={false} />
       <div className="splash-cards">
         <div className="s-card side" style={{ ["--i" as string]: 0 }}>
-          <div className="s-art portraits">
-            {[0, 1, 2].map((i) => (
-              <img key={i} src="./art/portrait.png" alt="" />
-            ))}
+          <div className="s-art">
+            <img src="./art/ui/card_epic_bonus.png" alt="" />
           </div>
           <h3>{t.intro.epic[0]}</h3>
           <p>{t.intro.epic[1]}</p>
-          <img className="s-frame" src="./art/frame.png" alt="" />
+          <img className="s-frame" src="./art/ui/card_frame.png" alt="" />
         </div>
         <div className="s-card mid" style={{ ["--i" as string]: 1 }}>
-          <div className="s-art s-chests">
-            {[0, 1, 2].map((i) => (
-              <img key={i} src="./art/chest_open.png" alt="" />
-            ))}
+          <div className="s-art">
+            <img src="./art/ui/card_chest_multis.png" alt="" />
           </div>
           <h3>{t.intro.chest[0]}</h3>
           <p>{t.intro.chest[1]}</p>
-          <img className="s-frame" src="./art/frame.png" alt="" />
+          <img className="s-frame" src="./art/ui/card_frame.png" alt="" />
         </div>
         <div className="s-card side" style={{ ["--i" as string]: 2 }}>
-          <div className="s-art max">
-            <b>MAX WIN</b>
-            <img src="./art/chest_open.png" alt="" />
+          <div className="s-art">
+            <img src="./art/ui/card_max_win.png" alt="" />
           </div>
           <h3>{t.intro.max[0]}</h3>
           <p>{t.intro.max[1]}</p>
-          <img className="s-frame" src="./art/frame.png" alt="" />
+          <img className="s-frame" src="./art/ui/card_frame.png" alt="" />
         </div>
         <Logo className="splash-logo" />
       </div>

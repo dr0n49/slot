@@ -1,63 +1,54 @@
 import type React from "react";
 import { useEffect, useState } from "react";
-import { CrestArt, KeyArt } from "../art/Symbols";
+import { KeyArt } from "../art/Symbols";
 import { FEATURE_TITLE, MAX_WIN, MODES, type ModeId, type ModeInfo } from "../game/modes";
 import type { Overlay } from "../game/player";
+import { bigWinTier, titleOf } from "../spine/SpineScreens";
 import { t } from "../i18n";
 
 /* ---------------------------------------------------------------- shared bits */
 
 export function Logo({ className = "" }: { className?: string }) {
-  return (
-    <svg className={`logo ${className}`} viewBox="0 0 320 210" aria-label="Sky Drop">
-      <defs>
-        <linearGradient id="logoGold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fffbe0" />
-          <stop offset=".45" stopColor="#ffd448" />
-          <stop offset=".75" stopColor="#e8930c" />
-          <stop offset="1" stopColor="#fff0a0" />
-        </linearGradient>
-        <linearGradient id="logoWing" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff6c8" />
-          <stop offset="1" stopColor="#d99a1c" />
-        </linearGradient>
-      </defs>
-      <g stroke="#3b2205" strokeWidth="4" strokeLinejoin="round">
-        <path d="M118 60 C80 20 40 26 18 52 C46 46 66 54 78 70 C52 66 36 76 30 92 C56 80 80 84 104 100Z" fill="url(#logoWing)" />
-        <path d="M202 60 C240 20 280 26 302 52 C274 46 254 54 242 70 C268 66 284 76 290 92 C264 80 240 84 216 100Z" fill="url(#logoWing)" />
-        <path d="M160 6 L170 26 L160 34 L150 26Z" fill="#7cd8ff" />
-      </g>
-      <g fontFamily="Georgia, 'Times New Roman', serif" fontWeight="900" textAnchor="middle" paintOrder="stroke" stroke="#3b2205" strokeLinejoin="round">
-        <text x="160" y="96" fontSize="70" strokeWidth="12" fill="url(#logoGold)" letterSpacing="4">
-          SKY
-        </text>
-        <text x="160" y="180" fontSize="100" strokeWidth="14" fill="url(#logoGold)" letterSpacing="2">
-          DROP
-        </text>
-      </g>
-      <g fontFamily="Georgia, serif" fontWeight="900" textAnchor="middle" fill="none" stroke="#fff" strokeOpacity=".55" strokeWidth="2">
-        <text x="160" y="96" fontSize="70" letterSpacing="4">SKY</text>
-        <text x="160" y="180" fontSize="100" letterSpacing="2">DROP</text>
-      </g>
-    </svg>
-  );
+  return <img className={`logo ${className}`} src="./art/ui/logo.png" alt="Sky Drop" draggable={false} />;
 }
 
 /** Animated count-up of an amount, formatted by `fmt`. */
-export function CountUp({ to, fmt, ms = 1800 }: { to: number; fmt: (v: number) => string; ms?: number }) {
+export function CountUp({ to, fmt, ms = 1800, digits = false }: { to: number; fmt: (v: number) => string; ms?: number; digits?: boolean }) {
   const [v, setV] = useState(0);
   useEffect(() => {
     let raf = 0;
     const start = performance.now();
     const step = (now: number) => {
       const k = Math.min(1, (now - start) / ms);
-      setV(to * (1 - Math.pow(1 - k, 3)));
+      // Round mid-count values to the final amount's precision so no extra decimals flash by.
+      const q = to >= 1 ? 0.01 : 0.0001;
+      setV(k >= 1 ? to : Math.round((to * (1 - Math.pow(1 - k, 3))) / q) * q);
       if (k < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [to, ms]);
-  return <>{fmt(v)}</>;
+  return digits ? <Digits text={fmt(v)} /> : <>{fmt(v)}</>;
+}
+
+const DIGIT_FILE: Record<string, string> = { ".": "dot", ",": "comma", x: "x", "×": "x" };
+/** A number drawn with the gold digit images (anything else falls back to text). */
+export function Digits({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <span className={`digits ${className}`} aria-label={text}>
+      {[...text].map((ch, i) =>
+        /[0-9]/.test(ch) || DIGIT_FILE[ch] ? (
+          <img key={i} className={`dg dg-${DIGIT_FILE[ch] ?? "n"}`} src={`./art/ui/digit_${DIGIT_FILE[ch] ?? ch}.png`} alt="" draggable={false} />
+        ) : ch === " " ? (
+          <i key={i} className="dg-space" />
+        ) : (
+          <b key={i} className="dg-text">
+            {ch}
+          </b>
+        ),
+      )}
+    </span>
+  );
 }
 
 function Pips({ n }: { n: number }) {
@@ -108,7 +99,7 @@ function ModeArt({ m }: { m: ModeInfo }) {
           {[0, 1, 2].map((i) => (
             <img key={i} src="./art/chest_open.png" alt="" />
           ))}
-          {m.art === "chests5" && <b className="ribbon">5x {t.minimum}</b>}
+          {m.art === "chests5" && <img className="ribbon-img" src="./art/ui/ribbon_5x_minimum.png" alt="5x minimum" />}
         </div>
       );
     case "mystery":
@@ -124,14 +115,19 @@ function ModeArt({ m }: { m: ModeInfo }) {
 
 /* ---------------------------------------------------------------- round screens */
 
-const tier = (x: number) => (x >= 75 ? "epic" : x >= 40 ? "mega" : "big");
-const tierTitle = (k: string) => (k === "epic" ? t.epicWin : k === "mega" ? t.megaWin : t.bigWin);
-
-export function OverlayView({ o, fmtX, onTap }: { o: Overlay; fmtX: (x: number) => string; onTap: () => void }) {
+/**
+ * Win / bonus screens. With Spine running, titles, chest, crest, banner and clouds are animated
+ * by SpineScreens on top of these placeholders (class `spine-art` hides the DOM art); the numbers
+ * and texts always stay DOM.
+ */
+export function OverlayView({ o, fmtX, onTap, spineArt }: { o: Overlay; fmtX: (x: number) => string; onTap: () => void; spineArt: boolean }) {
+  const art = spineArt ? "spine-art" : "";
+  const title = titleOf(o);
+  const titleImg = title ? <img className="title-img" src={`./art/ui/${title}.png`} alt={title.replace(/_/g, " ")} draggable={false} /> : null;
   switch (o.kind) {
     case "cloud":
       return (
-        <div className="overlay cloud-wipe" aria-hidden>
+        <div className={`overlay cloud-wipe ${art}`} aria-hidden>
           <img className="cw c1" src="./fx/cloud1.png" alt="" />
           <img className="cw c2" src="./fx/cloud2.png" alt="" />
           <img className="cw c3" src="./fx/cloud4.png" alt="" />
@@ -143,55 +139,56 @@ export function OverlayView({ o, fmtX, onTap }: { o: Overlay; fmtX: (x: number) 
       return null; // keys are drawn on the board itself
     case "intro":
       return (
-        <div className={`overlay fs-intro ${o.feature}`} onClick={onTap}>
-          <h1 className="cyan-title">{FEATURE_TITLE[o.feature]}</h1>
+        <div className={`overlay fs-intro ${o.feature} ${art}`} onClick={onTap}>
+          {titleImg}
           <div className="intro-banner">
+            <img className="plaque" src="./art/ui/banner_plaque.png" alt="" />
             {Array.from({ length: 5 }, (_, i) => (
-              <img key={i} src="./art/chest_open.png" alt="" style={{ ["--i" as string]: i }} />
+              <img key={i} className="bchest" src="./art/chest_open.png" alt="" style={{ ["--i" as string]: i }} />
             ))}
-            {o.minChest > 2 && <b className="ribbon">{o.minChest}x {t.minimum}</b>}
+            {o.minChest > 2 && <img className="ribbon-img" src="./art/ui/ribbon_5x_minimum.png" alt={`${o.minChest}x minimum`} />}
           </div>
-          <p className="cyan-title small">{t.freeSpinsN(o.totalFs)}</p>
+          <div className="fs-title">
+            <Digits text={String(o.totalFs)} />
+            <img className="free-spins-img" src="./art/ui/title_free_spins.png" alt="free spins" draggable={false} />
+          </div>
           <p className="intro-sub">{t.featureSub[o.feature]}</p>
           <small className="press">{t.tapToContinue}</small>
         </div>
       );
     case "total":
       return (
-        <div className="overlay total-win" onClick={onTap}>
+        <div className={`overlay total-win ${art}`} onClick={onTap}>
           <div className="crest">
-            <CrestArt />
+            <img src="./art/ui/crest.png" alt="" draggable={false} />
           </div>
-          <h1 className="gold-title">{t.totalWin}</h1>
+          {titleImg}
           <p className="big-number">
-            <CountUp to={o.x} fmt={fmtX} />
+            <CountUp to={o.x} fmt={fmtX} digits />
           </p>
           <small className="press">{t.tapToContinue}</small>
         </div>
       );
     case "bigwin": {
-      const k = tier(o.x);
+      const k = bigWinTier(o.x);
       return (
-        <div className={`overlay big-win ${k}`} onClick={onTap}>
-          <h1 className={`win-title ${k}`}>{tierTitle(k)}</h1>
-          <div className="bw-clouds">
-            <img src="./fx/cloud2.png" alt="" />
-            <img src="./fx/cloud1.png" alt="" />
-            <img src="./fx/cloud5.png" alt="" />
-          </div>
-          {k !== "big" && <img className="bw-chest" src="./art/chest_open.png" alt="" />}
+        <div className={`overlay big-win ${k} ${art}`} onClick={onTap}>
+          {titleImg}
+          {k === "epic" && <img className="bw-chest" src="./art/ui/chest_treasure.png" alt="" draggable={false} />}
           <p className="big-number">
-            <CountUp to={o.x} fmt={fmtX} ms={2600} />
+            <CountUp to={o.x} fmt={fmtX} ms={2600} digits />
           </p>
         </div>
       );
     }
     case "maxwin":
       return (
-        <div className="overlay big-win max" onClick={onTap}>
-          <h1 className="win-title max">{t.maxWin}</h1>
-          <img className="bw-chest" src="./art/chest_open.png" alt="" />
-          <p className="big-number">{MAX_WIN.toLocaleString("en-US")}x</p>
+        <div className={`overlay big-win max ${art}`} onClick={onTap}>
+          {titleImg}
+          <img className="bw-chest" src="./art/ui/chest_treasure.png" alt="" draggable={false} />
+          <p className="big-number">
+            <Digits text={`${MAX_WIN.toLocaleString("en-US")}x`} />
+          </p>
           <p className="max-amount">{fmtX(o.x)}</p>
         </div>
       );

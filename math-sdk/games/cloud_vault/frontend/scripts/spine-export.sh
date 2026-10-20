@@ -8,5 +8,10 @@ for proj in "$ROOT"/spine/*/*.spine; do
   name="$(basename "$proj" .spine)"
   out="$ROOT/frontend/public/spine/$name"
   rm -rf "$out" && mkdir -p "$out"
-  "$SPINE" -i "$proj" -o "$out" -e json+pack
+  settings="$ROOT/spine/tools/export_$name.json"
+  if [ -f "$settings" ]; then
+    "$SPINE" -i "$proj" -o "$out" -e "$settings"
+  else
+    "$SPINE" -i "$proj" -o "$out" -e json+pack
+  fi
 done
