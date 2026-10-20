@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "test": "vitest run",
     "demo-books": "node scripts/demo-books.mjs",
-    "release": "node scripts/release.mjs"
+    "release": "node scripts/release.mjs",
+    "spine": "sh scripts/spine-export.sh"
   },
   "dependencies": {
+    "@esotericsoftware/spine-pixi-v8": "4.3.13",
     "@fontsource/outfit": "^5.0.13",
+    "pixi.js": "8.22.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

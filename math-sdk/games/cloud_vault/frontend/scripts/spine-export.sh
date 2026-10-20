@@ -1,0 +1,12 @@
+#!/bin/sh
+# Export every Spine project in games/cloud_vault/spine/<name>/<name>.spine to
+# frontend/public/spine/<name>/ (JSON + packed atlas). Run after editing in the Spine editor.
+set -e
+SPINE="${SPINE:-/Applications/Spine.app/Contents/MacOS/Spine}"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+for proj in "$ROOT"/spine/*/*.spine; do
+  name="$(basename "$proj" .spine)"
+  out="$ROOT/frontend/public/spine/$name"
+  rm -rf "$out" && mkdir -p "$out"
+  "$SPINE" -i "$proj" -o "$out" -e json+pack
+done

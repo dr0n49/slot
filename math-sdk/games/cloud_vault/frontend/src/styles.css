@@ -47,7 +47,7 @@ button:disabled { cursor: default; opacity: .5; }
 
 .game-logo { position: absolute; z-index: 3; left: calc(var(--u) * 13.4); top: calc(var(--u) * 6.4); width: calc(var(--u) * 15.4); filter: drop-shadow(0 calc(var(--u) * .3) calc(var(--u) * .6) rgba(20, 20, 60, .45)); }
 .character {
-  position: absolute; left: calc(var(--u) * 69.5); top: calc(var(--u) * 13); height: calc(var(--u) * 38.5); width: auto;
+  position: absolute; left: calc(var(--u) * 69.5); top: calc(var(--u) * 13); height: calc(var(--u) * 38.5); width: calc(var(--u) * 29.9);
   pointer-events: none; transform-origin: 50% 90%; filter: drop-shadow(0 calc(var(--u) * .5) calc(var(--u) * 1) rgba(30, 30, 80, .3));
   animation: breathe 5s ease-in-out infinite;
 }
@@ -366,7 +366,7 @@ button:disabled { cursor: default; opacity: .5; }
 /* ---------------------------------------------------------------- portrait (phones), measured from the original at 425×812 / 375×667 / 320×568 */
 @media (max-aspect-ratio: 3/4) {
   .game-logo { left: calc(var(--u) * 4); top: calc(var(--u) * 11); width: calc(var(--u) * 34); }
-  .character { left: calc(var(--u) * 44); top: calc(var(--u) * 5); height: calc(var(--u) * 96); z-index: 1; }
+  .character { left: calc(var(--u) * 44); top: calc(var(--u) * 5); height: calc(var(--u) * 96); width: calc(var(--u) * 74.5); z-index: 1; }
   .frame-box { left: calc(var(--u) * -5.4); top: auto; bottom: calc(var(--u) * 37); width: calc(var(--u) * 111); height: calc(var(--u) * 109.6); }
   .hud-bar, .hud-bar.fs { display: none; }
 
@@ -428,3 +428,10 @@ button:disabled { cursor: default; opacity: .5; }
 /* Halo scatter card */
 .halo-card { display: block; width: 86%; height: 92%; border-radius: 8%; overflow: hidden; background: #fff4c8; border: calc(var(--b) * .5) solid #e4ad2e; box-shadow: 0 0 0 calc(var(--b) * .25) #3b2205, 0 0 calc(var(--b) * 1.6) rgba(255, 230, 140, .8); }
 .halo-card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; }
+
+/* ---------------------------------------------------------------- Spine layers */
+.character img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; display: block; }
+.character.spine-live { animation: none; }
+.spine-symbols { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.board.spine-on .sym, .board.spine-on .puff { visibility: hidden; }
+.board.spine-on .cell.is-win .sym { animation: none; }

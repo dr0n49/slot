@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { KeyArt, SymbolArt } from "../art/Symbols";
+import { SpineSymbols } from "../spine/SpineSymbols";
 import type { Reel } from "../game/board";
 import type { FeatureState, Panel, Plus, WinLabel } from "../game/player";
 
@@ -17,9 +19,11 @@ type Props = {
 export function Board({ reels, labels, halos, plus, panel, feature, keys, fmt }: Props) {
   const haloSet = new Set(halos.map((h) => `${h.reel}:${h.row}`));
   const live = feature && !feature.done;
+  const [spineOn, setSpineOn] = useState(false);
   return (
     <div className="frame-box">
-      <div className="board">
+      <div className={`board ${spineOn ? "spine-on" : ""}`}>
+        <SpineSymbols reels={reels} halos={halos} onLive={setSpineOn} />
         {reels.map((reel, r) => (
           <div className="reel" key={r}>
             {live &&

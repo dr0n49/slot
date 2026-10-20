@@ -3,6 +3,8 @@ import { SymbolArt } from "./art/Symbols";
 import { Board } from "./components/Board";
 import { AutoplayPanel, BuyMenu, ConfirmCard, InfoPage, Logo, MenuPopover, OverlayView } from "./components/Overlays";
 import { Splash } from "./components/Splash";
+import { characterBus } from "./spine/runtime";
+import { SpineCharacter } from "./spine/SpineCharacter";
 import { fromReveal, type Reel } from "./game/board";
 import { formatCurrency, formatPlain } from "./game/currency";
 import { demoRound } from "./game/demo";
@@ -13,6 +15,16 @@ import { setFxVolume, setMusicVolume, sound, startMusic, volumes } from "./game/
 import { setSocial, t } from "./i18n";
 
 const VERSION = "1.0.0";
+/** Game sounds that also drive the character rig. */
+const CUES: Record<string, Parameters<typeof characterBus.emit>[0]> = {
+  spin: "spin",
+  win: "win",
+  anticipation: "anticipation",
+  trigger: "trigger",
+  summary: "featureEnd",
+  bigwin: "bigwin",
+  maxwin: "bigwin",
+};
 const ANTES = ["extra_chance", "super_chance"];
 /** Buys (incl. raids and mystery) and antes that a jurisdiction may switch off. */
 const modeHidden = (j: rgs.Jurisdiction) => (m: { id: string; kind: string }) =>
@@ -148,7 +160,11 @@ export default function App() {
           }
           tapRef.current = done;
         }),
-      sound,
+      sound: (name) => {
+        sound(name);
+        const cue = CUES[name];
+        if (cue) characterBus.emit(cue);
+      },
     }),
     [],
   );
@@ -318,7 +334,7 @@ export default function App() {
       <div className="fs-tint" aria-hidden />
       <div className={`stage ${anticipation ? "anticipating" : ""}`} onClick={() => menu === "pop" && setMenu(null)}>
         <Logo className="game-logo" />
-        <img className={`character ${inFs ? "excited" : ""}`} src="./character/char.png" alt="" aria-hidden draggable={false} />
+        <SpineCharacter className={`character ${inFs ? "excited" : ""}`} />
         <Board
           reels={reels}
           labels={labels}
