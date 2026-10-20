@@ -8,8 +8,14 @@ import { demoRound } from "./game/demo";
 import { FEATURE_TITLE, modeById, type ModeId } from "./game/modes";
 import { playBook, type FeatureState, type Overlay, type Plus, type View, type WinLabel } from "./game/player";
 import * as rgs from "./game/rgs";
-import { sound } from "./game/sound";
+import { isMuted, setMuted, sound } from "./game/sound";
+import { t } from "./i18n";
+import { Splash } from "./components/Splash";
 
+const ANTES = ["extra_chance", "super_chance"];
+// Buys (incl. raids) and antes that a jurisdiction may switch off.
+const MODE_HIDDEN = (j: rgs.Jurisdiction) => (m: { id: string; kind: string }) =>
+  m.kind !== "spin" && (ANTES.includes(m.id) ? !!j.disabledAnte : !!j.disabledBuyFeature);
 const DEMO_LEVELS = [0.1, 0.2, 0.4, 0.6, 1, 2, 4, 6, 10, 20, 50, 100];
 const IDLE_BOARD = ["L1", "H2", "L3", "L4", "H4", "L2", "H1", "L3", "L1", "S", "L4", "H3", "L2", "L4", "L1", "H2", "L3", "L1", "H4", "L2", "L2", "L4", "H3", "L1", "L3"];
 const idleReels = (): Reel[] =>
@@ -19,8 +25,14 @@ const idleReels = (): Reel[] =>
   );
 
 export default function App() {
-  const live = rgs.isRgsSession();
-  const [ready, setReady] = useState(!live);
+  const replay = rgs.isReplay();
+  const live = !replay && rgs.isRgsSession();
+  const [ready, setReady] = useState(!live && !replay);
+  const [started, setStarted] = useState(false);
+  const [soundOn, setSoundOn] = useState(!isMuted());
+  const [juris, setJuris] = useState<rgs.Jurisdiction>({});
+  const [replayData, setReplayData] = useState<rgs.ReplayData | null>(null);
+  const [anticipation, setAnticipation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currency, setCurrency] = useState(live ? rgs.urlCurrency() : "USD");
   const [balance, setBalance] = useState(1000);
@@ -54,10 +66,24 @@ export default function App() {
   const fmtX = useCallback((x: number) => fmtCash(x * bet), [fmtCash, bet]);
 
   useEffect(() => {
+    if (!replay) return;
+    rgs
+      .fetchReplay()
+      .then((d) => {
+        setReplayData(d);
+        setLevels([d.amount]);
+        setBetIdx(0);
+        setReady(true);
+      })
+      .catch((e) => setError(String((e as Error).message ?? e)));
+  }, [replay]);
+
+  useEffect(() => {
     if (!live) return;
     rgs
       .authenticate()
       .then(async (a) => {
+        setJuris(rgs.jurisdictionOf(a));
         setCurrency(a.balance.currency);
         setBalance(rgs.fromApi(a.balance.amount));
         const lv = a.config?.betLevels?.map(rgs.fromApi).filter((v) => v > 0);
@@ -75,7 +101,7 @@ export default function App() {
         }
         setReady(true);
       })
-      .catch((e) => setError(e instanceof rgs.RgsError && e.kind === "session" ? "Session expired." : "Could not connect."));
+      .catch((e) => setError(e instanceof rgs.RgsError && e.kind === "session" ? t.sessionExpired : t.connectFail));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -97,6 +123,7 @@ export default function App() {
       setHalos,
       setPlus,
       setPanel,
+      setAnticipation,
       setOverlay,
       toast: (text) => setToast({ key: Date.now(), text }),
       sleep: (ms) => new Promise((res) => setTimeout(res, turboRef.current ? ms * 0.45 : ms)),
@@ -119,7 +146,10 @@ export default function App() {
     view.setFeature(null);
     setRoundWin(0);
     // Opened vault values stay on screen until the next round starts.
-    return playBook(events, view, cost);
+    const x = await playBook(events, view, cost);
+    const f = view.feature();
+    if (f) view.setFeature({ ...f, done: true });
+    return x;
   }
 
   const spin = useCallback(
@@ -128,13 +158,14 @@ export default function App() {
       const info = modeById(m);
       const cost = bet * info.cost;
       if (cost > balance + 1e-9) {
-        setError("Insufficient balance.");
+        setError(t.insufficient);
         setAuto(0);
         return;
       }
       setError(null);
       setBusy(true);
       sound("spin");
+      const t0 = Date.now();
       try {
         if (live) {
           const res = await rgs.play(m, bet);
@@ -151,24 +182,37 @@ export default function App() {
           const x = await runEvents(book.events, info.cost);
           setBalance((b) => b + x * bet);
         }
-        // Raids are single spins; drop back to normal play unless autoplay is running them.
+        // Some jurisdictions set a minimum round duration.
+        const min = juris.minimumRoundDuration ?? 0;
+        if (Date.now() - t0 < min) await new Promise((r) => setTimeout(r, min - (Date.now() - t0)));
       } catch (e) {
         setAuto(0);
         setError(
           e instanceof rgs.RgsError
             ? e.kind === "funds"
-              ? "Insufficient balance."
+              ? t.insufficient
               : e.kind === "session"
-                ? "Session expired."
-                : "Connection problem — please retry."
+                ? t.sessionExpired
+                : t.connection
             : String((e as Error).message ?? e),
         );
       } finally {
         setBusy(false);
       }
     },
-    [busy, ready, mode, bet, balance, live, view],
+    [busy, ready, mode, bet, balance, live, view, juris],
   );
+
+  const playReplay = useCallback(async () => {
+    if (!replayData || busy) return;
+    setBusy(true);
+    try {
+      await runEvents(replayData.events, modeById(replayData.mode as ModeId)?.cost ?? 1);
+    } finally {
+      setBusy(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [replayData, busy]);
 
   // Autoplay loop.
   useEffect(() => {
@@ -189,14 +233,26 @@ export default function App() {
         e.preventDefault();
         return;
       }
-      if ((e.code === "Space" || e.code === "Enter") && !menu) {
+      if ((e.code === "Space" || e.code === "Enter") && !menu && started) {
         e.preventDefault();
-        void spin();
+        void (replay ? playReplay() : spin());
       }
     };
     addEventListener("keydown", onKey);
     return () => removeEventListener("keydown", onKey);
-  }, [spin, menu]);
+  }, [spin, menu, started, replay, playReplay]);
+
+  // Jurisdiction restrictions also clear any state they forbid.
+  useEffect(() => {
+    if (juris.disabledTurbo) setTurbo(false);
+    if (juris.disabledAutoplay) setAuto(0);
+    if (MODE_HIDDEN(juris)(modeById(mode))) setMode("base");
+  }, [juris, mode]);
+  const canBuyMenu = !replay && !(juris.disabledBuyFeature && juris.disabledAnte);
+  const toggleSound = () => {
+    setMuted(soundOn);
+    setSoundOn(!soundOn);
+  };
 
   const activeInfo = modeById(mode);
   // Free-spins HUD (total win + spins left) replaces bet and spin while a bonus is playing.
@@ -204,7 +260,7 @@ export default function App() {
   const spinCost = bet * activeInfo.cost;
 
   return (
-    <div className={`game ${feature ? "in-feature" : ""} ${feature?.feature ?? ""}`}>
+    <div className={`game ${feature && !feature.done ? `in-feature ${feature.feature}` : ""} ${anticipation ? "anticipating" : ""}`}>
       <img className="sky" src="./art/bg.jpg" alt="" aria-hidden draggable={false} />
       <header className="logo">
         <span>Cloud</span>
@@ -215,36 +271,36 @@ export default function App() {
       </aside>
 
       <main className="stage">
-        {feature && (
+        {feature && !feature.done && (
           <div className="feature-bar">
             <b>{FEATURE_TITLE[feature.feature]}</b>
             {feature.freeSpins && (
               <span>
-                Spin {feature.fs} / {feature.totalFs}
+                {t.spinOf(feature.fs, feature.totalFs)}
               </span>
             )}
-            {feature.minChest > 2 && <span className="min5">Vaults ≥ 5×</span>}
+            {feature.minChest > 2 && <span className="min5">{t.vaultsMin(feature.minChest)}</span>}
           </div>
         )}
         <Board reels={reels} labels={labels} halos={halos} plus={plus} panel={panel} feature={feature} fmt={fmtX} />
         <div className="win-strip">
           {tumbleWin !== null && tumbleWin > 0 ? (
-            <span>Tumble win {fmtX(tumbleWin)}</span>
+            <span>{t.tumbleWin} {fmtX(tumbleWin)}</span>
           ) : roundWin > 0 ? (
             <span>
-              Win <b>{fmtX(roundWin)}</b>
+              {t.win} <b>{fmtX(roundWin)}</b>
             </span>
           ) : (
-            <span className="hint">{mode === "base" ? "Clusters of 5+ pay" : `${activeInfo.title} active`}</span>
+            <span className="hint">{mode === "base" ? t.clustersPay : t.modeActive(activeInfo.title)}</span>
           )}
         </div>
       </main>
 
       <footer className="hud">
-        {!inFreeSpins &&
+        {!inFreeSpins && canBuyMenu &&
           (mode !== "base" ? (
             <button className="hud-bonus disable" onClick={() => setMode("base")} disabled={busy} aria-label="Disable mode">
-              Disable
+              {t.disable}
             </button>
           ) : (
             <button className="hud-bonus" onClick={() => setMenu("buy")} disabled={busy} aria-label="Features">
@@ -261,30 +317,30 @@ export default function App() {
             <span />
           </button>
           <div className="hud-stat">
-            <small>Balance</small>
+            <small>{t.balance}</small>
             <b>{fmtCash(balance)}</b>
           </div>
           <div className="hud-stat win">
-            <small>Win</small>
+            <small>{t.win}</small>
             <b>{fmtX(roundWin)}</b>
           </div>
           <div className="hud-spacer" />
           {inFreeSpins ? null : (
           <>
           <div className="hud-bet">
-            <small>{mode === "base" ? "Bet" : activeInfo.title}</small>
+            <small>{mode === "base" ? t.bet : activeInfo.title}</small>
             <b>{fmtCash(spinCost)}</b>
             <i className="meter" style={{ ["--lv" as string]: (betIdx + 1) / levels.length }} />
           </div>
           <div className="hud-arrows">
             <button
               onClick={() => setBetIdx((i) => Math.min(levels.length - 1, i + 1))}
-              disabled={busy || betIdx === levels.length - 1}
+              disabled={busy || replay || betIdx === levels.length - 1}
               aria-label="Raise bet"
             >
               <i />
             </button>
-            <button onClick={() => setBetIdx((i) => Math.max(0, i - 1))} disabled={busy || betIdx === 0} aria-label="Lower bet">
+            <button onClick={() => setBetIdx((i) => Math.max(0, i - 1))} disabled={busy || replay || betIdx === 0} aria-label="Lower bet">
               <i className="down" />
             </button>
           </div>
@@ -294,17 +350,17 @@ export default function App() {
         {inFreeSpins && feature && (
           <div className="fs-panel" onClick={() => tapRef.current?.()}>
             <div className="fs-total">
-              <small>Total win</small>
+              <small>{t.totalWin}</small>
               <b>{fmtX(roundWin)}</b>
             </div>
             <div className="fs-count">
-              <small>Free spins</small>
+              <small>{t.freeSpins}</small>
               <b>{Math.max(0, feature.totalFs - feature.fs)}</b>
             </div>
           </div>
         )}
         {!inFreeSpins && (
-        <button className={`spin ${busy ? "spinning" : ""}`} onClick={() => (tapRef.current ? tapRef.current() : spin())} aria-label="Spin">
+        <button className={`spin ${busy ? "spinning" : ""}`} onClick={() => (tapRef.current ? tapRef.current() : replay ? playReplay() : spin())} aria-label="Spin">
           <svg viewBox="0 0 100 100" aria-hidden>
             <path d="M25 31A33 33 0 0 1 78 36" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" />
             <path d="M79 20v22H57" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
@@ -314,6 +370,7 @@ export default function App() {
         </button>
         )}
         <div className="hud-side">
+          {!juris.disabledAutoplay && !replay && (
           <button className={`round ${auto ? "on" : ""}`} onClick={() => setAuto((a) => (a ? 0 : 25))} aria-label="Autoplay">
             {auto ? <span className="count">{auto}</span> : (
               <svg viewBox="0 0 100 100" aria-hidden>
@@ -323,13 +380,16 @@ export default function App() {
               </svg>
             )}
           </button>
+          )}
+          {!juris.disabledTurbo && (
           <button className={`round ${turbo ? "on" : ""}`} onClick={() => setTurbo((t) => !t)} aria-label="Turbo">
             <span>ϟ</span>
           </button>
+          )}
         </div>
       </footer>
 
-      {!live && <div className="demo-badge">Demo</div>}
+      {!live && <div className="demo-badge">{replay ? t.replay : t.demo}</div>}
       {error && (
         <div className="error" onClick={() => setError(null)}>
           {error}
@@ -346,6 +406,7 @@ export default function App() {
           active={mode}
           bet={bet}
           canBuy={!busy}
+          hidden={MODE_HIDDEN(juris)}
           fmtCash={fmtCash}
           onClose={() => setMenu(null)}
           onToggle={(m) => {
@@ -358,7 +419,26 @@ export default function App() {
           }}
         />
       )}
-      {menu === "info" && <InfoModal onClose={() => setMenu(null)} Sym={SymbolArt} />}
+      {menu === "info" && (
+        <InfoModal
+          onClose={() => setMenu(null)}
+          Sym={SymbolArt}
+          soundOn={soundOn}
+          turbo={turbo}
+          onSound={toggleSound}
+          onTurbo={() => !juris.disabledTurbo && setTurbo((v) => !v)}
+        />
+      )}
+      {!started && (
+        <Splash
+          ready={ready}
+          replay={!!replayData}
+          onStart={() => {
+            setStarted(true);
+            sound("feature");
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 /**
  * Demo mode: plays real books sampled from the published lookup tables
  * (public/demo/books_<mode>.json, made by scripts/demo-books.mjs).
- * ?force=<criteria> (fs_bonus, fs_super, fs_epic, raid, …) picks a book of that criteria.
+ * ?force=<criteria> (fs_bonus, fs_super, fs_epic, raid, …) picks a book of that criteria;
+ * ?force=maxwin picks a capped book.
  */
 import type { BookEvent } from "./rgs";
 import type { ModeId } from "./modes";
@@ -28,7 +29,7 @@ export async function demoRound(mode: ModeId): Promise<{ payoutMultiplier: numbe
   const file = await load(mode);
   const force = new URLSearchParams(location.search).get("force");
   if (force) {
-    const pool = file.books.filter((b) => b.criteria === force);
+    const pool = file.books.filter((b) => (force === "maxwin" ? b.payoutMultiplier >= 2_500_000 : b.criteria === force));
     if (pool.length) return pool[Math.floor(Math.random() * pool.length)];
   }
   const pool = file.books.filter((b) => !b.forced);

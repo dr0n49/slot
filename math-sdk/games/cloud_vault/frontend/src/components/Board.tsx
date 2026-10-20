@@ -40,7 +40,7 @@ export function Board({ reels, labels, halos, plus, panel, feature, fmt }: Props
                     ["--out-delay" as string]: `${r * 45 + (4 - w) * 18}ms`,
                   }}
                 >
-                  {feature && required && <span className={`row-mark ${banked ? "on" : ""}`} />}
+                  {feature && !feature.done && required && <span className={`row-mark ${banked ? "on" : ""}`} />}
                   <div className="sym">
                     <SymbolArt sym={c.sym} />
                   </div>
@@ -85,7 +85,7 @@ function Vaults({ feature }: { feature: FeatureState | null }) {
               alt=""
               draggable={false}
             />
-            {feature?.keys && value === null && (
+            {feature?.keys && !feature.done && value === null && (
               <span className="vault-key" style={{ ["--i" as string]: r }}>
                 <KeyArt />
               </span>

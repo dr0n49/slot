@@ -46,8 +46,18 @@ mystery) and lands each lookup table on exactly 96%. Upload `library/publish_fil
 ## Frontend
 ```bash
 cd games/cloud_vault/frontend
-npm run demo-books   # sample real books into public/demo
-npm run dev          # http://127.0.0.1:5190  (?force=fs_epic etc. for QA, ?mute=1)
+npm run demo-books   # sample real books into public/demo (dev/demo only)
+npm run dev          # http://127.0.0.1:5190
 npm test             # replays books through the board model
+npm run release      # build, strip demo books, zip → ../release/cloud_vault_frontend_<ver>.zip
 ```
-Own art drops in without code changes: `public/symbols/<H1..L4,S>.png`, `public/character/char.png`.
+URL options: `lang=ru|en`, `mute=1`, QA `force=fs_bonus|fs_super|fs_epic|maxwin`.
+Stake: `sessionID` + `rgs_url` → live RGS play; `replay=true&game=&version=&mode=&event=&rgs_url=` → replay.
+Jurisdiction flags from authenticate (`disabledTurbo`, `disabledAutoplay`, `disabledBuyFeature`, `disabledAnte`,
+`minimumRoundDuration`) hide the matching controls.
+
+Art: background, character and chests are from V28. Symbols are this game's own vector set
+(`src/art/Symbols.tsx`); PNGs in `public/symbols/<H1..H4,L1..L4,S>.png` replace them without code changes.
+The V28 symbol sheet is NOT used: its shapes copy the reference game's symbols.
+
+Upload to Stake: `library/publish_files/` (math) + the release zip (frontend).

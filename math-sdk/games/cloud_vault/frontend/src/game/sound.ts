@@ -1,6 +1,20 @@
 /** Tiny synthesized sound set (WebAudio) until real audio is produced. Muted with ?mute=1. */
 let ctx: AudioContext | null = null;
-const muted = new URLSearchParams(location.search).has("mute");
+let muted = new URLSearchParams(location.search).has("mute");
+try {
+  if (localStorage.getItem("cv-sound") === "off") muted = true;
+} catch {
+  /* storage unavailable */
+}
+export const isMuted = () => muted;
+export function setMuted(m: boolean) {
+  muted = m;
+  try {
+    localStorage.setItem("cv-sound", m ? "off" : "on");
+  } catch {
+    /* storage unavailable */
+  }
+}
 
 const TONES: Record<string, [number, number, OscillatorType][]> = {
   spin: [[220, 0.06, "triangle"]],

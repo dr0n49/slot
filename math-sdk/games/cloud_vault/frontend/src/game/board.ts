@@ -22,11 +22,11 @@ const cell = (sym: string, drop: number, delay = 0): Cell => ({ id: nextId++, sy
 
 type SymJson = { name: string };
 
-export function fromReveal(board: SymJson[][], stagger = true): Reel[] {
+export function fromReveal(board: SymJson[][], stagger = true, extraDelay: number[] = []): Reel[] {
   return board.map((col, r) => ({
     top: col[0].name,
     bottom: col[col.length - 1].name,
-    cells: col.slice(1, -1).map((s) => cell(s.name, stagger ? 6 : 0, stagger ? r * 90 : 0)),
+    cells: col.slice(1, -1).map((s) => cell(s.name, stagger ? 6 : 0, stagger ? r * 90 + (extraDelay[r] ?? 0) : 0)),
   }));
 }
 

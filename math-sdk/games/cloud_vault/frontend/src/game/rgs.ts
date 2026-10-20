@@ -94,3 +94,48 @@ export const endRound = () => post<{ balance: RgsBalance }>("/wallet/end-round",
 export const roundEvents = (r: RgsRound): BookEvent[] => r.state ?? r.events ?? [];
 
 export const urlCurrency = () => param("currency") ?? "USD";
+
+/** Jurisdiction restrictions Stake may send with authenticate. Missing flags = allowed. */
+export type Jurisdiction = {
+  disabledTurbo?: boolean;
+  disabledAutoplay?: boolean;
+  disabledBuyFeature?: boolean;
+  disabledAnte?: boolean;
+  displayRTP?: boolean;
+  minimumRoundDuration?: number; // ms
+  socialCasino?: boolean;
+};
+export const jurisdictionOf = (a: AuthResponse): Jurisdiction =>
+  ((a.config as Record<string, unknown> | undefined)?.jurisdiction as Jurisdiction) ?? {};
+
+// ---- Replay (?replay=true&game=&version=&mode=&event=&rgs_url=) ----
+export const isReplay = () => param("replay") === "true";
+export type ReplayData = { mode: string; events: BookEvent[]; payoutMultiplier: number; costMultiplier: number; amount: number };
+
+export async function fetchReplay(): Promise<ReplayData> {
+  const need = ["game", "version", "mode", "event", "rgs_url"];
+  if (need.some((k) => !param(k)?.trim())) throw new Error("Replay link is incomplete.");
+  const host = new URL(base());
+  if (host.protocol !== "https:" && !(import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(host.hostname)))
+    throw new Error("Replay host must use HTTPS.");
+  const path = ["game", "version", "mode", "event"].map((k) => encodeURIComponent(param(k)!)).join("/");
+  let res: Response;
+  try {
+    res = await fetch(`${base()}/bet/replay/${path}`, { method: "GET", credentials: "omit", signal: AbortSignal.timeout(TIMEOUT_MS) });
+  } catch {
+    throw new Error("Replay unavailable.");
+  }
+  if (!res.ok) throw new Error(res.status === 404 ? "Replay not found." : `Replay unavailable (${res.status}).`);
+  const body = (await res.json()) as { state?: BookEvent[]; events?: BookEvent[]; payoutMultiplier?: number; costMultiplier?: number };
+  const events = body.state ?? body.events;
+  if (!Array.isArray(events) || !events.length || !events.every((e) => e && typeof e.type === "string"))
+    throw new Error("Replay data is invalid.");
+  const amount = Number(param("amount") ?? 1_000_000);
+  return {
+    mode: param("mode")!,
+    events,
+    payoutMultiplier: Number(body.payoutMultiplier ?? 0),
+    costMultiplier: Number(body.costMultiplier ?? 1),
+    amount: Number.isFinite(amount) && amount > 0 ? fromApi(amount) : 1,
+  };
+}

@@ -1,6 +1,7 @@
 /** Plays one book's events onto the view. Amounts in books are × bet × 100. */
 import { applyTumble, dropOut, fromReveal, markWins, popWins, settle, type Reel } from "./board";
 import type { BookEvent } from "./rgs";
+import { t } from "../i18n";
 
 export type FeatureState = {
   feature: string;
@@ -13,6 +14,7 @@ export type FeatureState = {
   totalFs: number;
   freeSpins: boolean;
   keys: boolean; // raid keys have landed on the vaults
+  done?: boolean; // round over: keep vault values, drop the feature look
 };
 
 export type WinLabel = { key: number; reel: number; row: number; x: number };
@@ -38,6 +40,7 @@ export type View = {
   setLabels: (l: WinLabel[]) => void;
   setHalos: (p: { reel: number; row: number }[]) => void;
   setPlus: (p: Plus[]) => void;
+  setAnticipation: (on: boolean) => void;
   setOverlay: (o: Overlay | null) => void;
   toast: (text: string) => void;
   sleep: (ms: number) => Promise<void>;
@@ -109,9 +112,24 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         view.setReels(dropOut(view.reels()));
         view.sound("spin");
         await view.sleep(300);
-        view.setReels(fromReveal(ev.board as { name: string }[][]));
+        // Anticipation: with 2+ halos already down in the base game, the later reels land slowly.
+        const board = ev.board as { name: string }[][];
+        const extra: number[] = [];
+        let seen = 0;
+        let slow = 0;
+        board.forEach((col, r) => {
+          if (!view.feature()?.freeSpins && seen >= 2) slow += 750;
+          extra[r] = slow;
+          seen += col.slice(1, -1).filter((s) => s.name === "S").length;
+        });
+        if (slow) {
+          view.setAnticipation(true);
+          view.sound("halo");
+        }
+        view.setReels(fromReveal(board, true, extra));
         view.sound("drop");
-        await view.sleep(820);
+        await view.sleep(820 + slow);
+        view.setAnticipation(false);
         view.setReels(settle(view.reels()));
         const halos: { reel: number; row: number }[] = [];
         (ev.board as { name: string }[][]).forEach((col, r) =>
@@ -153,7 +171,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
       case "chestsUnlocked": {
         const f = view.feature();
         if (f) view.setFeature({ ...f, unlocked: ev.unlocked as boolean[] });
-        view.toast((ev.reels as number[]).length > 1 ? "Vaults unlocked!" : "Vault unlocked!");
+        view.toast((ev.reels as number[]).length > 1 ? t.vaultsUnlocked : t.vaultUnlocked);
         view.sound("unlock");
         await view.sleep(700);
         break;
