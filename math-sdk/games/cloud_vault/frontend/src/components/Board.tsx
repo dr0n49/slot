@@ -1,16 +1,18 @@
-import { SymbolArt, VaultArt } from "../art/Symbols";
+import { KeyArt, SymbolArt } from "../art/Symbols";
 import type { Reel } from "../game/board";
-import type { FeatureState, WinLabel } from "../game/player";
+import type { FeatureState, Plus, WinLabel } from "../game/player";
 
 type Props = {
   reels: Reel[];
   labels: WinLabel[];
   halos: { reel: number; row: number }[];
+  plus: Plus[];
+  panel: number | null;
   feature: FeatureState | null;
   fmt: (x: number) => string;
 };
 
-export function Board({ reels, labels, halos, feature, fmt }: Props) {
+export function Board({ reels, labels, halos, plus, panel, feature, fmt }: Props) {
   const haloSet = new Set(halos.map((h) => `${h.reel}:${h.row}`));
   return (
     <div className="board-wrap">
@@ -26,10 +28,17 @@ export function Board({ reels, labels, halos, feature, fmt }: Props) {
                   className={[
                     "cell",
                     c.win ? "is-win" : "",
+                    c.dim ? "is-dim" : "",
                     c.pop ? "is-pop" : "",
+                    c.out ? "is-out" : "",
                     haloSet.has(`${r}:${w}`) ? "is-halo" : "",
                   ].join(" ")}
-                  style={{ top: `${w * 20}%`, ["--drop" as string]: c.drop }}
+                  style={{
+                    top: `${w * 20}%`,
+                    ["--drop" as string]: c.drop,
+                    ["--delay" as string]: `${c.delay ?? 0}ms`,
+                    ["--out-delay" as string]: `${r * 45 + (4 - w) * 18}ms`,
+                  }}
                 >
                   {feature && required && <span className={`row-mark ${banked ? "on" : ""}`} />}
                   <div className="sym">
@@ -45,6 +54,16 @@ export function Board({ reels, labels, halos, feature, fmt }: Props) {
             {fmt(l.x)}
           </div>
         ))}
+        {plus.map((p) => (
+          <div key={p.key} className="plus-one" style={{ left: `${p.reel * 20 + 10}%`, top: `${p.row * 20 + 10}%` }}>
+            +1
+          </div>
+        ))}
+        {panel !== null && panel > 0 && (
+          <div className="win-panel" key={Math.round(panel * 100)}>
+            {fmt(panel)}
+          </div>
+        )}
       </div>
       <Vaults feature={feature} />
     </div>
@@ -58,20 +77,31 @@ function Vaults({ feature }: { feature: FeatureState | null }) {
         const unlocked = !!feature?.unlocked[r];
         const value = feature?.values[r] ?? null;
         const need = feature?.rows ?? [];
-        const have = need.filter((w) => feature?.banked[r]?.[w]).length;
         return (
           <div key={r} className={`vault ${unlocked ? "unlocked" : ""} ${value ? "opened" : ""}`}>
-            <VaultArt open={value !== null} unlocked={unlocked} />
+            <img
+              className="vault-art"
+              src={value !== null ? "./art/chest_open.png" : "./art/chest_closed.png"}
+              alt=""
+              draggable={false}
+            />
+            {feature?.keys && value === null && (
+              <span className="vault-key" style={{ ["--i" as string]: r }}>
+                <KeyArt />
+              </span>
+            )}
             {value !== null ? (
-              <span className="vault-value">{value}×</span>
-            ) : feature ? (
+              <span className="vault-value">x{value}</span>
+            ) : feature && feature.minChest > 2 ? (
+              <span className="vault-min">x{feature.minChest}</span>
+            ) : null}
+            {feature && value === null && (
               <span className="vault-pips">
                 {need.map((w) => (
                   <i key={w} className={feature.banked[r]?.[w] ? "on" : ""} />
                 ))}
               </span>
-            ) : null}
-            {feature && !unlocked && value === null && <span className="sr-only">{`${have}/${need.length}`}</span>}
+            )}
           </div>
         );
       })}

@@ -1,8 +1,57 @@
 import type React from "react";
 import { FEATURE_TITLE, MAX_WIN, MODES, type ModeId, type ModeInfo } from "../game/modes";
 import type { Overlay } from "../game/player";
+import { KeyArt } from "../art/Symbols";
 
 export function OverlayView({ o, fmt, onTap }: { o: Overlay; fmt: (x: number) => string; onTap: () => void }) {
+  if (o.kind === "intro") {
+    return (
+      <div className={`overlay full ov-intro ${o.feature}`} onClick={onTap}>
+        <div className="full-inner">
+          <h1 className="full-title">{FEATURE_TITLE[o.feature]}</h1>
+          <div className="intro-chests">
+            {Array.from({ length: 5 }, (_, i) => (
+              <span key={i} style={{ ["--i" as string]: i }}>
+                <img src="./art/chest_closed.png" alt="" />
+                {o.minChest > 2 && <b>x{o.minChest}</b>}
+              </span>
+            ))}
+          </div>
+          <p className="full-big">{o.totalFs} free spins</p>
+          <p className="full-sub">{introText(o.feature)}</p>
+          <small className="full-hint">Tap to continue</small>
+        </div>
+      </div>
+    );
+  }
+  if (o.kind === "total") {
+    return (
+      <div className="overlay full ov-total" onClick={onTap}>
+        <div className="full-inner">
+          <div className="total-crest" aria-hidden>
+            <img src="./art/chest_open.png" alt="" />
+          </div>
+          <h1 className="full-title">Total win</h1>
+          <p className="full-big">{fmt(o.x)}</p>
+          <small className="full-hint">Tap to continue</small>
+        </div>
+      </div>
+    );
+  }
+  if (o.kind === "keys") {
+    return (
+      <div className="overlay ov-keys" aria-hidden>
+        <div className="keys-row">
+          {Array.from({ length: 5 }, (_, i) => (
+            <span key={i} style={{ ["--i" as string]: i }}>
+              <KeyArt />
+            </span>
+          ))}
+        </div>
+        <p className="keys-title">{FEATURE_TITLE[o.feature]}</p>
+      </div>
+    );
+  }
   return (
     <div className={`overlay ov-${o.kind}`} onClick={onTap}>
       <div className="ov-card">
@@ -12,28 +61,13 @@ export function OverlayView({ o, fmt, onTap }: { o: Overlay; fmt: (x: number) =>
             <p className="ov-big">{o.outcome === "none" ? "No feature" : FEATURE_TITLE[o.outcome]}</p>
           </>
         )}
-        {o.kind === "intro" && (
-          <>
-            <h2>{FEATURE_TITLE[o.feature]}</h2>
-            {o.freeSpins ? <p className="ov-big">{o.totalFs} free spins</p> : <p className="ov-big">Vaults live</p>}
-            <p>{introText(o.feature)}</p>
-            <small>Tap to start</small>
-          </>
-        )}
         {o.kind === "chests" && (
           <>
             <h2>Vaults open</h2>
-            <p className="ov-big">×{o.product.toLocaleString("en-US")}</p>
+            <p className="ov-big">x{o.product.toLocaleString("en-US")}</p>
             <p>
               {fmt(o.before)} {o.done ? <>→ <b>{fmt(o.after)}</b></> : null}
             </p>
-          </>
-        )}
-        {o.kind === "summary" && (
-          <>
-            <h2>{FEATURE_TITLE[o.feature]} complete</h2>
-            <p className="ov-big">{fmt(o.x)}</p>
-            <small>Tap to continue</small>
           </>
         )}
         {o.kind === "bigwin" && (

@@ -5,11 +5,20 @@
  * (rowsBanked, haloExtraSpins) use visible rows 0..4.
  */
 
-export type Cell = { id: number; sym: string; drop: number; win?: boolean; pop?: boolean };
+export type Cell = {
+  id: number;
+  sym: string;
+  drop: number; // rows to fall in from (0 = static)
+  delay?: number; // ms, per-reel stagger on a fresh reveal
+  win?: boolean;
+  dim?: boolean; // non-winning cell while a win is shown
+  pop?: boolean;
+  out?: boolean; // falling out of the board before a new reveal
+};
 export type Reel = { top: string; cells: Cell[]; bottom: string };
 
 let nextId = 1;
-const cell = (sym: string, drop: number): Cell => ({ id: nextId++, sym, drop });
+const cell = (sym: string, drop: number, delay = 0): Cell => ({ id: nextId++, sym, drop, delay });
 
 type SymJson = { name: string };
 
@@ -17,15 +26,22 @@ export function fromReveal(board: SymJson[][], stagger = true): Reel[] {
   return board.map((col, r) => ({
     top: col[0].name,
     bottom: col[col.length - 1].name,
-    cells: col.slice(1, -1).map((s) => cell(s.name, stagger ? 6 + r * 0.6 : 0)),
+    cells: col.slice(1, -1).map((s) => cell(s.name, stagger ? 6 : 0, stagger ? r * 90 : 0)),
   }));
 }
+
+/** Every cell drops out of the board (start of a new spin). */
+export const dropOut = (reels: Reel[]): Reel[] =>
+  reels.map((reel) => ({ ...reel, cells: reel.cells.map((c) => ({ ...c, out: true, win: false, dim: false })) }));
 
 export function markWins(reels: Reel[], positions: { reel: number; row: number }[]): Reel[] {
   const hit = new Set(positions.map((p) => `${p.reel}:${p.row - 1}`));
   return reels.map((reel, r) => ({
     ...reel,
-    cells: reel.cells.map((c, w) => (hit.has(`${r}:${w}`) ? { ...c, win: true } : { ...c, win: false })),
+    cells: reel.cells.map((c, w) => {
+      const win = hit.has(`${r}:${w}`);
+      return { ...c, win, dim: !win };
+    }),
   }));
 }
 
@@ -49,7 +65,8 @@ export function applyTumble(
 ): Reel[] {
   return reels.map((reel, r) => {
     const gone = new Set(exploding.filter((p) => p.reel === r).map((p) => p.row - 1));
-    if (!gone.size) return { ...reel, cells: reel.cells.map((c) => ({ ...c, win: false, drop: 0 })) };
+    const calm = (c: Cell) => ({ ...c, win: false, dim: false, pop: false, delay: 0 });
+    if (!gone.size) return { ...reel, cells: reel.cells.map((c) => ({ ...calm(c), drop: 0 })) };
     const fresh = newSymbols[r] ?? [];
     const k = gone.size;
     const survivors: Cell[] = [];
@@ -57,7 +74,7 @@ export function applyTumble(
       if (gone.has(w)) return;
       // Survivors fall by the number of gaps below them.
       const fall = [...gone].filter((g) => g > w).length;
-      survivors.push({ ...c, win: false, pop: false, drop: fall });
+      survivors.push({ ...calm(c), drop: fall });
     });
     const incoming = [...fresh.slice(1).map((s) => s.name), reel.top].map((sym) => cell(sym, k));
     return { top: fresh[0]?.name ?? reel.top, bottom: reel.bottom, cells: [...incoming, ...survivors] };
@@ -65,4 +82,7 @@ export function applyTumble(
 }
 
 export const settle = (reels: Reel[]): Reel[] =>
-  reels.map((reel) => ({ ...reel, cells: reel.cells.map((c) => ({ ...c, drop: 0, win: false, pop: false })) }));
+  reels.map((reel) => ({
+    ...reel,
+    cells: reel.cells.map((c) => ({ ...c, drop: 0, delay: 0, win: false, dim: false, pop: false })),
+  }));

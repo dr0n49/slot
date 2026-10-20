@@ -6,7 +6,7 @@ import { fromReveal, type Reel } from "./game/board";
 import { formatCurrency } from "./game/currency";
 import { demoRound } from "./game/demo";
 import { FEATURE_TITLE, modeById, type ModeId } from "./game/modes";
-import { playBook, type FeatureState, type Overlay, type View, type WinLabel } from "./game/player";
+import { playBook, type FeatureState, type Overlay, type Plus, type View, type WinLabel } from "./game/player";
 import * as rgs from "./game/rgs";
 import { sound } from "./game/sound";
 
@@ -37,6 +37,8 @@ export default function App() {
   const [feature, setFeatureState] = useState<FeatureState | null>(null);
   const [labels, setLabels] = useState<WinLabel[]>([]);
   const [halos, setHalos] = useState<{ reel: number; row: number }[]>([]);
+  const [plus, setPlus] = useState<Plus[]>([]);
+  const [panel, setPanel] = useState<number | null>(null);
   const [overlay, setOverlay] = useState<Overlay | null>(null);
   const [roundWin, setRoundWin] = useState(0);
   const [tumbleWin, setTumbleWin] = useState<number | null>(null);
@@ -93,6 +95,8 @@ export default function App() {
       setTumbleWin,
       setLabels,
       setHalos,
+      setPlus,
+      setPanel,
       setOverlay,
       toast: (text) => setToast({ key: Date.now(), text }),
       sleep: (ms) => new Promise((res) => setTimeout(res, turboRef.current ? ms * 0.45 : ms)),
@@ -195,11 +199,13 @@ export default function App() {
   }, [spin, menu]);
 
   const activeInfo = modeById(mode);
+  // Free-spins HUD (total win + spins left) replaces bet and spin while a bonus is playing.
+  const inFreeSpins = busy && !!feature?.freeSpins;
   const spinCost = bet * activeInfo.cost;
 
   return (
     <div className={`game ${feature ? "in-feature" : ""} ${feature?.feature ?? ""}`}>
-      <div className="sky" aria-hidden />
+      <img className="sky" src="./art/bg.jpg" alt="" aria-hidden draggable={false} />
       <header className="logo">
         <span>Cloud</span>
         <b>Vault</b>
@@ -220,7 +226,7 @@ export default function App() {
             {feature.minChest > 2 && <span className="min5">Vaults ≥ 5×</span>}
           </div>
         )}
-        <Board reels={reels} labels={labels} halos={halos} feature={feature} fmt={fmtX} />
+        <Board reels={reels} labels={labels} halos={halos} plus={plus} panel={panel} feature={feature} fmt={fmtX} />
         <div className="win-strip">
           {tumbleWin !== null && tumbleWin > 0 ? (
             <span>Tumble win {fmtX(tumbleWin)}</span>
@@ -235,41 +241,92 @@ export default function App() {
       </main>
 
       <footer className="hud">
-        <button className="hud-btn feature-btn" onClick={() => setMenu("buy")} disabled={busy}>
-          Features
-        </button>
-        <button className="hud-btn" onClick={() => setMenu("info")} aria-label="Rules">
-          i
-        </button>
-        <div className="readout">
-          <small>Balance</small>
-          <b>{fmtCash(balance)}</b>
-        </div>
-        <div className="bet">
-          <button onClick={() => setBetIdx((i) => Math.max(0, i - 1))} disabled={busy || betIdx === 0} aria-label="Lower bet">
-            −
+        {!inFreeSpins &&
+          (mode !== "base" ? (
+            <button className="hud-bonus disable" onClick={() => setMode("base")} disabled={busy} aria-label="Disable mode">
+              Disable
+            </button>
+          ) : (
+            <button className="hud-bonus" onClick={() => setMenu("buy")} disabled={busy} aria-label="Features">
+              <svg viewBox="0 0 100 100" aria-hidden>
+                <path d="M50 8 L60 40 L92 50 L60 60 L50 92 L40 60 L8 50 L40 40 Z" fill="currentColor" />
+                <circle cx="78" cy="22" r="7" fill="currentColor" />
+              </svg>
+            </button>
+          ))}
+        <div className="hud-bar">
+          <button className="hud-menu" onClick={() => setMenu("info")} aria-label="Menu">
+            <span />
+            <span />
+            <span />
           </button>
-          <div className="readout">
-            <small>{mode === "base" ? "Bet" : `Bet · ${activeInfo.title}`}</small>
-            <b>{fmtCash(spinCost)}</b>
+          <div className="hud-stat">
+            <small>Balance</small>
+            <b>{fmtCash(balance)}</b>
           </div>
-          <button
-            onClick={() => setBetIdx((i) => Math.min(levels.length - 1, i + 1))}
-            disabled={busy || betIdx === levels.length - 1}
-            aria-label="Raise bet"
-          >
-            +
+          <div className="hud-stat win">
+            <small>Win</small>
+            <b>{fmtX(roundWin)}</b>
+          </div>
+          <div className="hud-spacer" />
+          {inFreeSpins ? null : (
+          <>
+          <div className="hud-bet">
+            <small>{mode === "base" ? "Bet" : activeInfo.title}</small>
+            <b>{fmtCash(spinCost)}</b>
+            <i className="meter" style={{ ["--lv" as string]: (betIdx + 1) / levels.length }} />
+          </div>
+          <div className="hud-arrows">
+            <button
+              onClick={() => setBetIdx((i) => Math.min(levels.length - 1, i + 1))}
+              disabled={busy || betIdx === levels.length - 1}
+              aria-label="Raise bet"
+            >
+              <i />
+            </button>
+            <button onClick={() => setBetIdx((i) => Math.max(0, i - 1))} disabled={busy || betIdx === 0} aria-label="Lower bet">
+              <i className="down" />
+            </button>
+          </div>
+          </>
+          )}
+        </div>
+        {inFreeSpins && feature && (
+          <div className="fs-panel" onClick={() => tapRef.current?.()}>
+            <div className="fs-total">
+              <small>Total win</small>
+              <b>{fmtX(roundWin)}</b>
+            </div>
+            <div className="fs-count">
+              <small>Free spins</small>
+              <b>{Math.max(0, feature.totalFs - feature.fs)}</b>
+            </div>
+          </div>
+        )}
+        {!inFreeSpins && (
+        <button className={`spin ${busy ? "spinning" : ""}`} onClick={() => (tapRef.current ? tapRef.current() : spin())} aria-label="Spin">
+          <svg viewBox="0 0 100 100" aria-hidden>
+            <path d="M25 31A33 33 0 0 1 78 36" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" />
+            <path d="M79 20v22H57" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M75 69A33 33 0 0 1 22 64" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" />
+            <path d="M21 80V58h22" fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        )}
+        <div className="hud-side">
+          <button className={`round ${auto ? "on" : ""}`} onClick={() => setAuto((a) => (a ? 0 : 25))} aria-label="Autoplay">
+            {auto ? <span className="count">{auto}</span> : (
+              <svg viewBox="0 0 100 100" aria-hidden>
+                <path d="M26 39A28 28 0 0 1 75 36" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" />
+                <path d="M75 23v17H58" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M43 34l24 16-24 16Z" fill="currentColor" />
+              </svg>
+            )}
+          </button>
+          <button className={`round ${turbo ? "on" : ""}`} onClick={() => setTurbo((t) => !t)} aria-label="Turbo">
+            <span>ϟ</span>
           </button>
         </div>
-        <button className={`spin ${busy ? "spinning" : ""}`} onClick={() => (tapRef.current ? tapRef.current() : spin())} aria-label="Spin">
-          ⟳
-        </button>
-        <button className={`hud-btn ${turbo ? "on" : ""}`} onClick={() => setTurbo((t) => !t)} aria-label="Turbo">
-          ⚡
-        </button>
-        <button className={`hud-btn ${auto ? "on" : ""}`} onClick={() => setAuto((a) => (a ? 0 : 25))} aria-label="Autoplay">
-          {auto ? auto : "A"}
-        </button>
       </footer>
 
       {!live && <div className="demo-badge">Demo</div>}
