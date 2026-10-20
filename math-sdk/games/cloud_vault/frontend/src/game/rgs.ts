@@ -21,7 +21,7 @@ export type RgsRound = {
 export type AuthResponse = {
   balance: RgsBalance;
   round?: RgsRound;
-  config?: { betLevels?: number[]; defaultBetLevel?: number; minBet?: number; maxBet?: number };
+  config?: { betLevels?: number[]; defaultBetLevel?: number; minBet?: number; maxBet?: number; stepBet?: number };
 };
 
 export class RgsError extends Error {
@@ -32,9 +32,10 @@ export class RgsError extends Error {
   ) {
     super(`RGS ${endpoint} failed (${code || "no code"}, http ${httpStatus})`);
   }
-  get kind(): "funds" | "session" | "net" | "server" {
+  get kind(): "funds" | "session" | "limits" | "net" | "server" {
     if (this.code === "ERR_IPB") return "funds";
-    if (this.code === "ERR_IS" || this.code === "ERR_ATE") return "session";
+    if (this.code === "ERR_GLE") return "limits";
+    if (["ERR_VAL", "ERR_IS", "ERR_ATE"].includes(this.code)) return "session";
     if (this.httpStatus === 0) return "net";
     return "server";
   }
@@ -66,7 +67,7 @@ async function post<T>(endpoint: string, body: Record<string, unknown>): Promise
     let code = "";
     try {
       const j = JSON.parse(text);
-      code = String(j?.error?.status ?? j?.status ?? j?.code ?? "");
+      code = String((typeof j?.error === "string" ? j.error : j?.error?.status) ?? j?.status ?? j?.code ?? "");
     } catch {
       code = text.slice(0, 40);
     }
@@ -139,3 +140,28 @@ export async function fetchReplay(): Promise<ReplayData> {
     amount: Number.isFinite(amount) && amount > 0 ? fromApi(amount) : 1,
   };
 }
+
+/** Bet levels (in currency units) from authenticate: betLevels, else minBet..maxBet by stepBet. */
+export function betLevelsOf(a: AuthResponse): number[] {
+  const c = a.config ?? {};
+  let lv = (c.betLevels ?? []).filter((v) => v > 0);
+  if (!lv.length && c.minBet && c.maxBet && c.stepBet) {
+    for (let v = c.minBet; v <= c.maxBet + 1e-9 && lv.length < 500; v += c.stepBet) lv.push(Math.round(v));
+  }
+  if (c.minBet) lv = lv.filter((v) => v >= c.minBet!);
+  if (c.maxBet) lv = lv.filter((v) => v <= c.maxBet!);
+  return lv.map(fromApi);
+}
+
+/** The bet to open on: an unfinished round's amount, else defaultBetLevel, else the lowest level. */
+export function openingBetIndex(a: AuthResponse, levels: number[]): number {
+  const want = a.round?.active && a.round.amount ? fromApi(a.round.amount) : a.config?.defaultBetLevel ? fromApi(a.config.defaultBetLevel) : levels[0];
+  let best = 0;
+  levels.forEach((v, i) => {
+    if (Math.abs(v - want) < Math.abs(levels[best] - want)) best = i;
+  });
+  return best;
+}
+
+/** A round needs end-round only while it is still open (it paid more than 0x). */
+export const needsEndRound = (r: RgsRound) => r.active === true || (r.active === undefined && (r.payoutMultiplier ?? 0) > 0);

@@ -56,8 +56,10 @@ Stake: `sessionID` + `rgs_url` → live RGS play; `replay=true&game=&version=&mo
 Jurisdiction flags from authenticate (`disabledTurbo`, `disabledAutoplay`, `disabledBuyFeature`, `disabledAnte`,
 `minimumRoundDuration`) hide the matching controls.
 
-Art: background, character and chests are from V28. Symbols are this game's own vector set
-(`src/art/Symbols.tsx`); PNGs in `public/symbols/<H1..H4,L1..L4,S>.png` replace them without code changes.
-The V28 symbol sheet is NOT used: its shapes copy the reference game's symbols.
+Art: private 1:1 prototype of the reference video, built on the V28 assets (background, character, chests,
+board frame, symbols, cloud FX in `public/`). Extracted sources and video frames live in `art-src/` (git-ignored).
+The symbols, frame and character copy the reference game — replace them before any release
+(`public/symbols/<H1..H4,L1..L4,S>.png`, `public/art/frame.png`, `public/character/char.png`; no code changes).
+QA: `?force=maxwin` plays a capped book; `?social=true&currency=XSC` shows Stake.US wording.
 
 Upload to Stake: `library/publish_files/` (math) + the release zip (frontend).

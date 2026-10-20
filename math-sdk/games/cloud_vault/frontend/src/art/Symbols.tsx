@@ -233,18 +233,52 @@ export function SymbolArt({ sym }: { sym: string }) {
   );
 }
 
-/** Original winged key (raid). */
+/** Golden raid key: winged crescent bow, tilted shaft with two bits. */
 export function KeyArt() {
   return (
     <svg viewBox="0 0 100 100">
       <Defs />
+      <defs>
+        <radialGradient id="keyGlow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stopColor="#fff6b0" stopOpacity=".9" />
+          <stop offset="1" stopColor="#ffcc33" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="url(#keyGlow)" />
+      <g filter="url(#drop)" transform="rotate(-35 50 50)">
+        <path d="M50 6 C34 8 24 20 26 34 C32 26 40 24 46 26 L46 30 C38 30 32 36 34 44 C38 38 44 36 50 36 C56 36 62 38 66 44 C68 36 62 30 54 30 L54 26 C60 24 68 26 74 34 C76 20 66 8 50 6Z" fill="url(#gold)" stroke={OUT} strokeWidth="3.5" strokeLinejoin="round" />
+        <circle cx="50" cy="20" r="5" fill="#fff8d0" stroke={OUT} strokeWidth="2.5" />
+        <rect x="45" y="40" width="10" height="46" rx="4" fill="url(#gold)" stroke={OUT} strokeWidth="3.5" />
+        <path d="M55 66 h12 v8 h-12 Z M55 78 h9 v8 h-9 Z" fill="url(#gold)" stroke={OUT} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M48 44 v38" stroke="#fffbe0" strokeWidth="2.5" strokeLinecap="round" opacity=".85" />
+      </g>
+    </svg>
+  );
+}
+
+/** Winged arch crest for the Total Win screen. */
+export function CrestArt() {
+  return (
+    <svg viewBox="0 0 200 140">
+      <Defs />
+      <defs>
+        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#7de0ff" />
+          <stop offset=".5" stopColor="#c58bff" />
+          <stop offset="1" stopColor="#ffd36b" />
+        </linearGradient>
+        <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="1" stopColor="#bfe3ff" />
+        </linearGradient>
+      </defs>
       <g filter="url(#drop)">
-        <path d="M30 34 C14 28 6 36 8 46 C22 44 26 42 30 40Z M70 34 C86 28 94 36 92 46 C78 44 74 42 70 40Z" fill="#fff" stroke={OUT} strokeWidth="2.5" />
-        <circle cx="50" cy="34" r="17" fill="url(#gold)" stroke={OUT} strokeWidth="4" />
-        <circle cx="50" cy="34" r="7" fill="#7cc8ff" stroke={OUT} strokeWidth="3" />
-        <rect x="45" y="48" width="10" height="40" rx="3" fill="url(#gold)" stroke={OUT} strokeWidth="3.5" />
-        <rect x="55" y="66" width="12" height="7" rx="2" fill="url(#gold)" stroke={OUT} strokeWidth="3" />
-        <rect x="55" y="78" width="9" height="7" rx="2" fill="url(#gold)" stroke={OUT} strokeWidth="3" />
+        <path d="M60 70 C30 40 8 52 2 80 C20 70 34 74 44 86 C26 84 16 92 14 104 C30 94 46 96 60 104Z" fill="url(#wing)" stroke={OUT} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M140 70 C170 40 192 52 198 80 C180 70 166 74 156 86 C174 84 184 92 186 104 C170 94 154 96 140 104Z" fill="url(#wing)" stroke={OUT} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M62 132 V58 C62 30 80 12 100 8 C120 12 138 30 138 58 V132 Z" fill="url(#gold)" stroke={OUT} strokeWidth="4" strokeLinejoin="round" />
+        <path d="M74 126 V60 C74 38 86 24 100 20 C114 24 126 38 126 60 V126 Z" fill="url(#glass)" stroke={OUT} strokeWidth="3" />
+        <path d="M100 20 V126 M74 70 H126 M74 98 H126" stroke="#3a2a10" strokeWidth="2.5" opacity=".6" />
+        <path d="M100 0 L106 12 L100 18 L94 12Z" fill="#7cd8ff" stroke={OUT} strokeWidth="2.5" />
       </g>
     </svg>
   );

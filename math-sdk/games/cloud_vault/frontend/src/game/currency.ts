@@ -5,7 +5,14 @@ const META:Record<string,{symbol:string;digits:number;post?:boolean}>={
  RUB:{symbol:'₽',digits:2},CNY:{symbol:'CN¥',digits:2},PHP:{symbol:'₱',digits:2},INR:{symbol:'₹',digits:2},
  IDR:{symbol:'Rp',digits:0},KRW:{symbol:'₩',digits:0},BRL:{symbol:'R$',digits:2},MXN:{symbol:'MX$',digits:2},
  DKK:{symbol:'kr',digits:2,post:true},PLN:{symbol:'zł',digits:2,post:true},VND:{symbol:'₫',digits:0,post:true},
+ // Stake.US social coins.
+ XSC:{symbol:'SC',digits:2,post:true},XGC:{symbol:'GC',digits:2,post:true},XEC:{symbol:'SC',digits:2,post:true},
 };
+/** Plain number in the currency's precision (board win labels show no symbol). */
+export function formatPlain(amount:number,currency:string){
+ const s=formatCurrency(amount,currency);const m=META[currency.toUpperCase()]??{symbol:currency.toUpperCase(),post:true};
+ return (m.post?s.slice(0,-(m.symbol.length+1)):s.slice(m.symbol.length)).trim();
+}
 export function formatCurrency(amount:number,currency:string,locale='en-US',reference=amount){
  const code=currency.toUpperCase(),m=META[code]??{symbol:code,digits:2,post:true};
  const value=Number.isFinite(amount)?amount:0;

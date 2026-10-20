@@ -1,7 +1,6 @@
 /** Plays one book's events onto the view. Amounts in books are × bet × 100. */
 import { applyTumble, dropOut, fromReveal, markWins, popWins, settle, type Reel } from "./board";
 import type { BookEvent } from "./rgs";
-import { t } from "../i18n";
 
 export type FeatureState = {
   feature: string;
@@ -13,18 +12,20 @@ export type FeatureState = {
   fs: number;
   totalFs: number;
   freeSpins: boolean;
-  keys: boolean; // raid keys have landed on the vaults
-  done?: boolean; // round over: keep vault values, drop the feature look
+  keys: boolean; // raid keys have landed on the chests
+  done?: boolean; // round over: keep chest values, drop the feature look
 };
 
 export type WinLabel = { key: number; reel: number; row: number; x: number };
 export type Plus = { key: number; reel: number; row: number };
+/** Centre-of-board win panel; `mult` shows the chest product while chests open. */
+export type Panel = { x: number; mult?: number; final?: boolean } | null;
 
 export type Overlay =
   | { kind: "mystery"; outcome: string }
-  | { kind: "intro"; feature: string; totalFs: number; freeSpins: boolean; minChest: number }
+  | { kind: "cloud" } // cloud wipe between the base world and the bonus world
+  | { kind: "intro"; feature: string; totalFs: number; minChest: number }
   | { kind: "keys"; feature: string }
-  | { kind: "chests"; product: number; before: number; after: number; done: boolean }
   | { kind: "total"; feature: string; x: number }
   | { kind: "bigwin"; x: number }
   | { kind: "maxwin"; x: number };
@@ -35,24 +36,30 @@ export type View = {
   feature: () => FeatureState | null;
   setFeature: (f: FeatureState | null) => void;
   setRoundWin: (x: number) => void;
-  setTumbleWin: (x: number | null) => void;
-  setPanel: (x: number | null) => void; // win panel in the middle of the board
+  setPanel: (p: Panel) => void;
   setLabels: (l: WinLabel[]) => void;
   setHalos: (p: { reel: number; row: number }[]) => void;
   setPlus: (p: Plus[]) => void;
   setAnticipation: (on: boolean) => void;
   setOverlay: (o: Overlay | null) => void;
-  toast: (text: string) => void;
   sleep: (ms: number) => Promise<void>;
   tap: (ms: number) => Promise<void>; // waits for a tap or ms (auto-continue)
   sound: (name: string) => void;
 };
 
 const x100 = (v: unknown) => Number(v ?? 0) / 100;
-const BIG_WIN_X = 20;
+export const BIG_WIN_X = 20;
 let labelKey = 1;
 
 const isFreeSpins = (f: string) => f !== "raid" && f !== "storm";
+
+async function cloudWipe(view: View, during: () => void) {
+  view.setOverlay({ kind: "cloud" });
+  view.sound("transition");
+  await view.sleep(650);
+  during();
+  await view.sleep(650);
+}
 
 export async function playBook(events: BookEvent[], view: View, cost: number): Promise<number> {
   let roundWin = 0;
@@ -61,7 +68,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
       case "mysteryReveal": {
         view.setOverlay({ kind: "mystery", outcome: String(ev.outcome) });
         view.sound("mystery");
-        await view.tap(2200);
+        await view.tap(2400);
         view.setOverlay(null);
         break;
       }
@@ -69,7 +76,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         const feature = String(ev.feature);
         const freeSpins = isFreeSpins(feature);
         const minChest = Number(ev.minChest);
-        view.setFeature({
+        const state: FeatureState = {
           feature,
           rows: ev.rowsRequired as number[],
           minChest,
@@ -80,27 +87,36 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
           totalFs: freeSpins ? Number(ev.totalFs) : 0,
           freeSpins,
           keys: false,
-        });
+        };
         if (freeSpins) {
-          view.setOverlay({ kind: "intro", feature, totalFs: Number(ev.totalFs), freeSpins, minChest });
+          // Clouds sweep in, the bonus world appears behind them, then the intro card.
+          await cloudWipe(view, () => {
+            view.setFeature(state);
+            view.setHalos([]);
+            view.setLabels([]);
+            view.setPanel(null);
+          });
+          view.setOverlay({ kind: "intro", feature, totalFs: Number(ev.totalFs), minChest });
           view.sound("feature");
-          await view.tap(4000);
+          await view.tap(5000);
+          view.setOverlay(null);
         } else {
-          // Raid: keys fly onto every vault before the spin.
+          // Raid: the board empties and golden keys drop into every chest.
+          view.setFeature(state);
+          view.setReels(dropOut(view.reels()));
           view.setOverlay({ kind: "keys", feature });
           view.sound("feature");
-          await view.sleep(1300);
-          const f = view.feature();
-          if (f) view.setFeature({ ...f, keys: true });
-          await view.sleep(350);
+          await view.sleep(1500);
+          view.setFeature({ ...state, keys: true });
+          view.setOverlay(null);
+          await view.sleep(300);
         }
-        view.setOverlay(null);
         break;
       }
       case "updateFreeSpin": {
         const f = view.feature();
         if (f) view.setFeature({ ...f, fs: Number(ev.amount), totalFs: Number(ev.total) });
-        view.setTumbleWin(null);
+        view.setPanel(null);
         break;
       }
       case "reveal": {
@@ -108,33 +124,31 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         view.setPlus([]);
         view.setLabels([]);
         view.setPanel(null);
-        // Old symbols fall out, the board is empty for a beat, new ones drop in reel by reel.
+        // Old symbols fall out, the reels stand empty for a beat, new ones drop in reel by reel.
         view.setReels(dropOut(view.reels()));
         view.sound("spin");
-        await view.sleep(300);
-        // Anticipation: with 2+ halos already down in the base game, the later reels land slowly.
+        await view.sleep(380);
+        // Anticipation: with 2+ halos already down outside free spins, the later reels land slowly.
         const board = ev.board as { name: string }[][];
         const extra: number[] = [];
         let seen = 0;
         let slow = 0;
         board.forEach((col, r) => {
-          if (!view.feature()?.freeSpins && seen >= 2) slow += 750;
+          if (!view.feature()?.freeSpins && seen >= 2) slow += 800;
           extra[r] = slow;
           seen += col.slice(1, -1).filter((s) => s.name === "S").length;
         });
         if (slow) {
           view.setAnticipation(true);
-          view.sound("halo");
+          view.sound("anticipation");
         }
         view.setReels(fromReveal(board, true, extra));
         view.sound("drop");
-        await view.sleep(820 + slow);
+        await view.sleep(860 + slow);
         view.setAnticipation(false);
         view.setReels(settle(view.reels()));
         const halos: { reel: number; row: number }[] = [];
-        (ev.board as { name: string }[][]).forEach((col, r) =>
-          col.slice(1, -1).forEach((s, w) => s.name === "S" && halos.push({ reel: r, row: w })),
-        );
+        board.forEach((col, r) => col.slice(1, -1).forEach((s, w) => s.name === "S" && halos.push({ reel: r, row: w })));
         if (halos.length) {
           view.setHalos(halos);
           view.sound("halo");
@@ -152,38 +166,37 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
           wins.map((w) => ({ key: labelKey++, reel: w.meta.overlay.reel, row: w.meta.overlay.row - 1, x: x100(w.win) })),
         );
         view.sound("win");
-        await view.sleep(950);
+        await view.sleep(1000);
         break;
       }
       case "updateTumbleWin": {
-        const x = x100(ev.amount);
-        view.setTumbleWin(x);
-        view.setPanel(x);
+        view.setPanel({ x: x100(ev.amount) });
         break;
       }
       case "rowsBanked": {
         const f = view.feature();
         if (f) view.setFeature({ ...f, banked: ev.banked as boolean[][] });
         view.sound("bank");
-        await view.sleep(260);
+        await view.sleep(240);
         break;
       }
       case "chestsUnlocked": {
         const f = view.feature();
         if (f) view.setFeature({ ...f, unlocked: ev.unlocked as boolean[] });
-        view.toast((ev.reels as number[]).length > 1 ? t.vaultsUnlocked : t.vaultUnlocked);
         view.sound("unlock");
-        await view.sleep(700);
+        await view.sleep(800);
         break;
       }
       case "tumbleBoard": {
         const exploding = ev.explodingSymbols as { reel: number; row: number }[];
         view.setLabels([]);
+        // Winning symbols burst into cloud puffs, then the column falls.
         view.setReels(popWins(view.reels(), exploding));
-        await view.sleep(340);
+        view.sound("pop");
+        await view.sleep(420);
         view.setReels(applyTumble(view.reels(), exploding, ev.newSymbols as { name: string }[][]));
         view.sound("drop");
-        await view.sleep(480);
+        await view.sleep(500);
         view.setReels(settle(view.reels()));
         break;
       }
@@ -193,8 +206,8 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         const pos = ev.positions as { reel: number; row: number }[];
         view.setHalos(pos);
         view.setPlus(pos.slice(-Number(ev.count)).map((p) => ({ key: labelKey++, ...p })));
-        view.sound("halo");
-        await view.sleep(900);
+        view.sound("plusone");
+        await view.sleep(1300);
         view.setPlus([]);
         break;
       }
@@ -202,7 +215,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         const pos = (ev.positions as { reel: number; row: number }[]).map((p) => ({ reel: p.reel, row: p.row - 1 }));
         view.setHalos(pos);
         view.sound("trigger");
-        await view.sleep(1500);
+        await view.sleep(1600);
         break;
       }
       case "setWin":
@@ -213,11 +226,13 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         break;
       }
       case "chestsOpen": {
+        // Chests open one by one; the centre panel shows the win and the growing product.
         const chests = ev.chests as { reel: number; mult: number }[];
         const before = x100(ev.winBefore);
         const after = x100(ev.winAfter);
-        view.setPanel(null);
-        view.setOverlay({ kind: "chests", product: 1, before, after, done: false });
+        view.setLabels([]);
+        view.setPanel({ x: before, mult: 1 });
+        await view.sleep(500);
         let product = 1;
         for (const c of chests) {
           const f = view.feature()!;
@@ -225,13 +240,19 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
           values[c.reel] = c.mult;
           view.setFeature({ ...f, values });
           product *= c.mult;
-          view.setOverlay({ kind: "chests", product, before, after, done: false });
+          view.setPanel({ x: before, mult: product });
           view.sound("chest");
-          await view.sleep(900);
+          await view.sleep(950);
         }
-        view.setOverlay({ kind: "chests", product, before, after, done: true });
+        view.setPanel({ x: after, final: true });
         view.sound("multiply");
-        await view.tap(2400);
+        await view.sleep(1500);
+        break;
+      }
+      case "wincap": {
+        view.setOverlay({ kind: "maxwin", x: x100(ev.amount) });
+        view.sound("maxwin");
+        await view.tap(4500);
         view.setOverlay(null);
         break;
       }
@@ -239,27 +260,30 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         const f = view.feature();
         view.setOverlay({ kind: "total", feature: f?.feature ?? "bonus", x: x100(ev.amount) });
         view.sound("summary");
-        await view.tap(4000);
-        view.setOverlay(null);
-        break;
-      }
-      case "wincap": {
-        view.setOverlay({ kind: "maxwin", x: x100(ev.amount) });
-        view.sound("maxwin");
-        await view.tap(3500);
+        await view.tap(5000);
+        // Clouds carry the player back to the base world.
+        await cloudWipe(view, () => {
+          const g = view.feature();
+          if (g) view.setFeature({ ...g, done: true });
+          view.setPanel(null);
+        });
         view.setOverlay(null);
         break;
       }
       case "finalWin": {
         roundWin = x100(ev.amount);
         view.setRoundWin(roundWin);
-        view.setTumbleWin(null);
         const f = view.feature();
-        // Free spins already ended on the Total Win screen; big win celebrates base/raid wins.
-        if (!f?.freeSpins && roundWin >= BIG_WIN_X * Math.max(1, cost / 10) && roundWin < 25000) {
+        // Free spins end on the Total Win screen; big wins celebrate base and raid rounds.
+        if (!f?.freeSpins && roundWin >= BIG_WIN_X && roundWin < 25000 && cost < 100) {
           view.setOverlay({ kind: "bigwin", x: roundWin });
           view.sound("bigwin");
-          await view.tap(3200);
+          await view.tap(4200);
+          view.setOverlay(null);
+        } else if (!f?.freeSpins && cost >= 100 && roundWin >= cost * 0.5 && roundWin < 25000) {
+          view.setOverlay({ kind: "bigwin", x: roundWin });
+          view.sound("bigwin");
+          await view.tap(4200);
           view.setOverlay(null);
         }
         break;
