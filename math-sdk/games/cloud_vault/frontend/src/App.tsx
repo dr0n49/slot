@@ -343,6 +343,7 @@ export default function App() {
           panel={panel}
           feature={feature}
           keys={overlay?.kind === "keys"}
+          anticipation={anticipation}
           fmt={plainX}
         />
 

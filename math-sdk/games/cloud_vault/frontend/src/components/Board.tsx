@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { KeyArt, SymbolArt } from "../art/Symbols";
-import { SpineSymbols } from "../spine/SpineSymbols";
+import { SpineBoard } from "../spine/SpineBoard";
 import type { Reel } from "../game/board";
 import type { FeatureState, Panel, Plus, WinLabel } from "../game/player";
 
@@ -12,18 +12,26 @@ type Props = {
   panel: Panel;
   feature: FeatureState | null;
   keys: boolean; // raid keys hovering over the empty board
+  anticipation: boolean;
   fmt: (x: number) => string; // plain number, no currency symbol
 };
 
 /** The framed 5×5 board. Positioned by the stage; the frame art sits on top of the cells. */
-export function Board({ reels, labels, halos, plus, panel, feature, keys, fmt }: Props) {
+export function Board({ reels, labels, halos, plus, panel, feature, keys, anticipation, fmt }: Props) {
   const haloSet = new Set(halos.map((h) => `${h.reel}:${h.row}`));
   const live = feature && !feature.done;
   const [spineOn, setSpineOn] = useState(false);
   return (
-    <div className="frame-box">
-      <div className={`board ${spineOn ? "spine-on" : ""}`}>
-        <SpineSymbols reels={reels} halos={halos} onLive={setSpineOn} />
+    <div className={`frame-box ${spineOn ? "spine-on" : ""}`}>
+      <SpineBoard
+        reels={reels}
+        halos={halos}
+        feature={feature}
+        anticipation={anticipation}
+        winKey={labels[0]?.key ?? 0}
+        onLive={setSpineOn}
+      />
+      <div className="board">
         {reels.map((reel, r) => (
           <div className="reel" key={r}>
             {live &&

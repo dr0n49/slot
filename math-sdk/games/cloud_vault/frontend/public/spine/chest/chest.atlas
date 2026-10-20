@@ -1,0 +1,14 @@
+chest.png
+size:546,593
+filter:Linear,Linear
+pma:true
+chest_closed
+bounds:2,313,335,278
+offsets:11,35,360,352
+chest_open
+bounds:2,2,292,309
+offsets:33,27,360,352
+glow
+bounds:339,391,200,200
+ring
+bounds:296,63,248,248

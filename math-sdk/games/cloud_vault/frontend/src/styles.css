@@ -399,7 +399,7 @@ button:disabled { cursor: default; opacity: .5; }
   .hud-feature { left: calc(var(--u) * 76); top: auto; bottom: calc(var(--u) * 10); width: calc(var(--u) * 18); border-radius: calc(var(--u) * 3); border-width: calc(var(--u) * .7); }
   .hud-feature.disable { font-size: calc(var(--u) * 3); }
 
-  .chests { top: 85%; height: 13.5%; }
+  .chests { top: 88%; height: 12.5%; }
   .fs-total, .fs-count { left: calc(var(--u) * 21); width: calc(var(--u) * 52); top: auto; border-width: calc(var(--u) * .5); border-radius: calc(var(--u) * 1.2); }
   .fs-total { bottom: calc(var(--u) * 16.5); height: calc(var(--u) * 10); }
   .fs-total small { font-size: calc(var(--u) * 2.4); }
@@ -432,6 +432,7 @@ button:disabled { cursor: default; opacity: .5; }
 /* ---------------------------------------------------------------- Spine layers */
 .character img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; display: block; }
 .character.spine-live { animation: none; }
-.spine-symbols { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.board.spine-on .sym, .board.spine-on .puff { visibility: hidden; }
-.board.spine-on .cell.is-win .sym { animation: none; }
+.spine-board { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.spine-on .sym, .spine-on .puff, .spine-on .frame-art, .spine-on .chest-art { visibility: hidden; }
+.spine-on .cell.is-win .sym { animation: none; }
+.spine-on .anticipating .board, .anticipating .spine-on .board { box-shadow: none; animation: none; }

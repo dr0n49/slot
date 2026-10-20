@@ -8,6 +8,8 @@ import { Spine } from "@esotericsoftware/spine-pixi-v8";
 const RIGS = {
   character: { data: "./spine/character/character.json", atlas: "./spine/character/character.atlas" },
   symbols: { data: "./spine/symbols/symbols.json", atlas: "./spine/symbols/symbols.atlas" },
+  chest: { data: "./spine/chest/chest.json", atlas: "./spine/chest/chest.atlas" },
+  frame: { data: "./spine/frame/frame.json", atlas: "./spine/frame/frame.atlas" },
 } as const;
 export type RigName = keyof typeof RIGS;
 
