@@ -226,6 +226,13 @@ const ART: Record<string, () => React.ReactElement> = {
 
 export function SymbolArt({ sym }: { sym: string }) {
   const [png, setPng] = useState(true);
+  // Halo scatter: the character portrait in a gold card, as in the reference.
+  if (sym === "S")
+    return (
+      <span className="halo-card">
+        <img src="./art/portrait.png" alt="" draggable={false} />
+      </span>
+    );
   return png ? (
     <img className="sym-img" src={`./symbols/${sym}.png`} alt="" draggable={false} onError={() => setPng(false)} />
   ) : (
