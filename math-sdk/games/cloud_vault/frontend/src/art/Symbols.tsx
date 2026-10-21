@@ -242,25 +242,7 @@ export function SymbolArt({ sym }: { sym: string }) {
 
 /** Golden raid key: winged crescent bow, tilted shaft with two bits. */
 export function KeyArt() {
-  return (
-    <svg viewBox="0 0 100 100">
-      <Defs />
-      <defs>
-        <radialGradient id="keyGlow" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stopColor="#fff6b0" stopOpacity=".9" />
-          <stop offset="1" stopColor="#ffcc33" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <circle cx="50" cy="50" r="48" fill="url(#keyGlow)" />
-      <g filter="url(#drop)" transform="rotate(-35 50 50)">
-        <path d="M50 6 C34 8 24 20 26 34 C32 26 40 24 46 26 L46 30 C38 30 32 36 34 44 C38 38 44 36 50 36 C56 36 62 38 66 44 C68 36 62 30 54 30 L54 26 C60 24 68 26 74 34 C76 20 66 8 50 6Z" fill="url(#gold)" stroke={OUT} strokeWidth="3.5" strokeLinejoin="round" />
-        <circle cx="50" cy="20" r="5" fill="#fff8d0" stroke={OUT} strokeWidth="2.5" />
-        <rect x="45" y="40" width="10" height="46" rx="4" fill="url(#gold)" stroke={OUT} strokeWidth="3.5" />
-        <path d="M55 66 h12 v8 h-12 Z M55 78 h9 v8 h-9 Z" fill="url(#gold)" stroke={OUT} strokeWidth="3" strokeLinejoin="round" />
-        <path d="M48 44 v38" stroke="#fffbe0" strokeWidth="2.5" strokeLinecap="round" opacity=".85" />
-      </g>
-    </svg>
-  );
+  return <img className="key-art" src="./art/ui/key.png" alt="" draggable={false} />;
 }
 
 /** Winged arch crest for the Total Win screen. */

@@ -15,3 +15,5 @@ for proj in "$ROOT"/spine/*/*.spine; do
     "$SPINE" -i "$proj" -o "$out" -e json+pack
   fi
 done
+# The character has no .spine project (meshes + physics need Spine Professional): it is generated.
+"$ROOT/spine/tools/make_character.sh"

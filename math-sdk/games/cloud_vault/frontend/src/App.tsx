@@ -73,6 +73,8 @@ export default function App() {
   const [screensLive, setScreensLive] = useState(false);
   const [overlay, setOverlay] = useState<Overlay | null>(null);
   const [roundWin, setRoundWin] = useState(0);
+  // The stake the shown round was played at: the win stays in that stake when the bet changes.
+  const [roundBet, setRoundBet] = useState(bet);
 
   const reelsRef = useRef(reels);
   const featureRef = useRef(feature);
@@ -82,8 +84,8 @@ export default function App() {
   turboRef.current = turbo;
 
   const fmtCash = useCallback((v: number) => formatCurrency(v, currency), [currency]);
-  const fmtX = useCallback((x: number) => fmtCash(x * bet), [fmtCash, bet]);
-  const plainX = useCallback((x: number) => formatPlain(x * bet, currency), [currency, bet]);
+  const fmtX = useCallback((x: number) => fmtCash(x * roundBet), [fmtCash, roundBet]);
+  const plainX = useCallback((x: number) => formatPlain(x * roundBet, currency), [currency, roundBet]);
 
   // ---- launch: replay, live RGS, or demo
   useEffect(() => {
@@ -203,6 +205,7 @@ export default function App() {
     if (!started || !r) return;
     resumeRef.current = null;
     (async () => {
+      setRoundBet(bet);
       setBusy(true);
       try {
         await runEvents(rgs.roundEvents(r), modeById((r.mode as ModeId) ?? "base").cost);
@@ -229,6 +232,7 @@ export default function App() {
         return;
       }
       setError(null);
+      setRoundBet(bet);
       setBusy(true);
       const t0 = Date.now();
       try {
@@ -272,6 +276,7 @@ export default function App() {
     if (!replayData || busy) return;
     setBusy(true);
     setReplayDone(false);
+    setRoundBet(bet);
     try {
       await runEvents(replayData.events, replayData.costMultiplier || modeById(replayData.mode as ModeId).cost);
     } finally {
@@ -379,10 +384,7 @@ export default function App() {
             </button>
           ) : (
             <button className="hud-feature" disabled={busy} onClick={() => setMenu("buy")} aria-label="Features">
-              <svg viewBox="0 0 100 100" aria-hidden>
-                <path d="M50 8 L60 40 L92 50 L60 60 L50 92 L40 60 L8 50 L40 40 Z" />
-                <circle cx="80" cy="20" r="8" />
-              </svg>
+              <img src="./art/ui/bonus_buy_icon.png" alt="" draggable={false} />
             </button>
           )
         )}

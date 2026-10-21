@@ -143,6 +143,8 @@ button:disabled { cursor: default; opacity: .5; }
   color: #17181d;
 }
 .hud-feature svg { width: 55%; height: 55%; fill: currentColor; }
+.hud-feature img { width: 70%; height: 70%; object-fit: contain; filter: drop-shadow(0 calc(var(--u) * .15) calc(var(--u) * .2) rgba(60, 30, 0, .55)); }
+.key-art { width: 100%; height: 100%; object-fit: contain; transform: rotate(-28deg); filter: drop-shadow(0 0 calc(var(--u) * .8) rgba(255, 220, 110, .85)); }
 .hud-feature.disable { font: 900 calc(var(--u) * 1.6) / 1 var(--font); text-transform: uppercase; }
 .hud-feature:not(:disabled):active { transform: scale(.96); }
 .hud-bar { position: absolute; z-index: 4; left: calc(var(--u) * 20.7); top: calc(var(--u) * 46.8); width: calc(var(--u) * 69.3); height: calc(var(--u) * 7.5); border-radius: calc(var(--u) * 1); background: var(--hudbg); box-shadow: 0 calc(var(--u) * .4) calc(var(--u) * 1.2) rgba(0, 0, 0, .3); }
@@ -366,7 +368,8 @@ button:disabled { cursor: default; opacity: .5; }
 /* ---------------------------------------------------------------- portrait (phones), measured from the original at 425×812 / 375×667 / 320×568 */
 @media (max-aspect-ratio: 3/4) {
   .game-logo { left: calc(var(--u) * 4); top: calc(var(--u) * 11); width: calc(var(--u) * 34); }
-  .character { left: calc(var(--u) * 44); top: calc(var(--u) * 5); height: calc(var(--u) * 96); width: calc(var(--u) * 74.5); z-index: 1; }
+  /* Her open hand (and the wisp in it) stays on screen; the head sits where the original has it. */
+  .character { left: calc(var(--u) * 30); top: calc(var(--u) * 5); height: calc(var(--u) * 96); width: calc(var(--u) * 74.5); z-index: 1; }
   .frame-box { left: calc(var(--u) * -5.4); top: auto; bottom: calc(var(--u) * 37); width: calc(var(--u) * 111); height: calc(var(--u) * 109.6); }
   .hud-bar, .hud-bar.fs { display: none; }
 
@@ -431,6 +434,8 @@ button:disabled { cursor: default; opacity: .5; }
 
 /* ---------------------------------------------------------------- Spine layers */
 .character img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; display: block; }
+/* Canvas larger than the box: 20 % each side, 35 % on top (PAD_X / PAD_TOP in SpineCharacter.tsx). */
+.character .spine-overflow { position: absolute; left: -20%; right: -20%; top: -35%; bottom: 0; pointer-events: none; }
 .character.spine-live { animation: none; }
 .spine-board { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .spine-on .sym, .spine-on .puff, .spine-on .frame-art, .spine-on .chest-art { visibility: hidden; }

@@ -14,11 +14,12 @@ const RIGS = {
 } as const;
 export type RigName = keyof typeof RIGS;
 
-const loaded = new Map<RigName, Promise<void>>();
+const loaded = new Map<string, Promise<void>>();
 
-export function loadRig(name: RigName): Promise<void> {
+/** Loads a rig from RIGS, or any ./spine/<name>/<name>.json + .atlas (QA previews of candidate rigs). */
+export function loadRig(name: RigName | string): Promise<void> {
   if (!loaded.has(name)) {
-    const r = RIGS[name];
+    const r = RIGS[name as RigName] ?? { data: `./spine/${name}/${name}.json`, atlas: `./spine/${name}/${name}.atlas` };
     Assets.add({ alias: `${name}Data`, src: r.data });
     Assets.add({ alias: `${name}Atlas`, src: r.atlas });
     loaded.set(name, Assets.load([`${name}Data`, `${name}Atlas`]).then(() => undefined));
@@ -26,7 +27,16 @@ export function loadRig(name: RigName): Promise<void> {
   return loaded.get(name)!;
 }
 
-export const makeSpine = (name: RigName) => Spine.from({ skeleton: `${name}Data`, atlas: `${name}Atlas`, scale: 1 });
+export const makeSpine = (name: RigName | string) => Spine.from({ skeleton: `${name}Data`, atlas: `${name}Atlas`, scale: 1 });
+
+/** Scale and place a skeleton so its bounds (from the editor/generator) fit w×h, bottom-centred. */
+export function fitBottom(s: Spine, w: number, h: number) {
+  const d = s.skeleton.data;
+  const k = Math.min(w / d.width, h / d.height);
+  s.scale.set(k);
+  s.x = w / 2 - (d.x + d.width / 2) * k;
+  s.y = h + d.y * k;
+}
 
 /** A transparent Pixi canvas that fills `host` and follows its size. */
 export async function makeApp(host: HTMLElement): Promise<Application> {

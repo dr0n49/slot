@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import type { Application } from "pixi.js";
 import type { Spine } from "@esotericsoftware/spine-pixi-v8";
-import { characterBus, loadRig, makeApp, makeSpine, spineDisabled, type CharacterCue } from "./runtime";
+import { characterBus, fitBottom, loadRig, makeApp, makeSpine, spineDisabled, type CharacterCue } from "./runtime";
 
-/** Rig space: 1105 × 1424, origin at the bottom centre (see spine/character). */
-const RIG_W = 1105;
-const RIG_H = 1424;
+/** Extra canvas around the character's box, as fractions of the box (keep in sync with .spine-overflow). */
+const PAD_X = 0.2;
+const PAD_TOP = 0.35;
 
 const MIX: [string, string, number][] = [
   ["idle_01", "spin_ack", 0.13],
@@ -27,6 +27,7 @@ const MIX: [string, string, number][] = [
 export function SpineCharacter({ className }: { className: string }) {
   const host = useRef<HTMLDivElement>(null);
   const [live, setLive] = useState(false);
+  const overflow = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (spineDisabled()) return;
@@ -37,16 +38,18 @@ export function SpineCharacter({ className }: { className: string }) {
       try {
         await loadRig("character");
         if (cancelled || !host.current) return;
-        app = await makeApp(host.current);
+        // The canvas is larger than the character's box (see .spine-overflow) so the bird, sparks and
+        // hops are not cut at the box edges; the character itself still fits the box.
+        app = await makeApp(overflow.current!);
         if (cancelled) return app.destroy(true);
         const s: Spine = makeSpine("character");
         app.stage.addChild(s);
         const fit = () => {
-          const { width: w, height: h } = app!.screen;
-          const k = Math.min(w / RIG_W, h / RIG_H);
-          s.scale.set(k);
-          s.x = w / 2;
-          s.y = h;
+          const w = app!.screen.width / (1 + 2 * PAD_X);
+          const h = app!.screen.height / (1 + PAD_TOP);
+          fitBottom(s, w, h);
+          s.x += PAD_X * w;
+          s.y += PAD_TOP * h;
         };
         fit();
         app.renderer.on("resize", fit);
@@ -149,6 +152,7 @@ export function SpineCharacter({ className }: { className: string }) {
 
   return (
     <div ref={host} className={`${className} ${live ? "spine-live" : ""}`} aria-hidden>
+      <div ref={overflow} className="spine-overflow" />
       {!live && <img src="./character/char.png" alt="" draggable={false} />}
     </div>
   );
