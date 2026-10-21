@@ -43,7 +43,7 @@ export type View = {
   setAnticipation: (on: boolean) => void;
   setOverlay: (o: Overlay | null) => void;
   sleep: (ms: number) => Promise<void>;
-  tap: (ms: number) => Promise<void>; // waits for a tap or ms (auto-continue)
+  tap: (ms: number) => Promise<void>; // waits for a tap or ms (auto-continue); Infinity = only a tap
   sound: (name: string) => void;
 };
 
@@ -98,7 +98,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
           });
           view.setOverlay({ kind: "intro", feature, totalFs: Number(ev.totalFs), minChest });
           view.sound("feature");
-          await view.tap(5000);
+          await view.tap(Infinity); // the bonus intro waits for the player
           view.setOverlay(null);
         } else {
           // Raid: the board empties and golden keys drop into every chest.
@@ -260,7 +260,7 @@ export async function playBook(events: BookEvent[], view: View, cost: number): P
         const f = view.feature();
         view.setOverlay({ kind: "total", feature: f?.feature ?? "bonus", x: x100(ev.amount) });
         view.sound("summary");
-        await view.tap(5000);
+        await view.tap(Infinity); // Total Win waits for the player
         // Clouds carry the player back to the base world.
         await cloudWipe(view, () => {
           const g = view.feature();

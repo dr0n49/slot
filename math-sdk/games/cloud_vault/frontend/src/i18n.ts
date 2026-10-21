@@ -154,7 +154,7 @@ const en: Dict = {
       ["Autoplay", "Opens the autoplay panel: choose the number of spins and press Start. Press the spin button to stop."],
       ["Turbo ⚡", "Speeds up the animations."],
       ["Menu ☰", "Opens Info (these rules), the sound volume and the music volume."],
-      ["Press to continue", "Any click or key skips a win or feature screen."],
+      ["Press to continue", "The bonus start and Total Win screens wait for a click or key. Any click or key also skips a win screen."],
     ],
     generalTitle: "General",
     general: [
@@ -294,7 +294,7 @@ const socialEn: Partial<Dict> = {
       ["Autoplay", "Opens the autoplay panel: choose the number of spins and press Start. Press the spin button to stop."],
       ["Turbo ⚡", "Speeds up the animations."],
       ["Menu ☰", "Opens Info (these rules), the sound volume and the music volume."],
-      ["Press to continue", "Any click or key skips a win or feature screen."],
+      ["Press to continue", "The bonus start and Total Win screens wait for a click or key. Any click or key also skips a win screen."],
     ],
     general: [
       "All wins and winning combinations are shown according to the symbol wins table.",

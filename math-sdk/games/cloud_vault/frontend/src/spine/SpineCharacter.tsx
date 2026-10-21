@@ -72,6 +72,13 @@ export function SpineCharacter({ className }: { className: string }) {
             st.addAnimation(0, rest(), true, 0);
           } else st.setAnimation(0, rest(), true);
         };
+        // Win reactions play on track 1 over the running idle, so the idle cycle (bird on the finger,
+        // a short flutter now and then) keeps its own rhythm instead of restarting on every round.
+        const overlay = (name: string) => {
+          st.setEmptyAnimation(1, 0);
+          st.addAnimation(1, name, false, 0).mixDuration = 0.15;
+          st.addEmptyAnimation(1, 0.25, 0);
+        };
         st.addListener({
           complete: (e) => {
             if (e.animation?.name !== "idle_01" || inFeature) return;
@@ -88,12 +95,12 @@ export function SpineCharacter({ className }: { className: string }) {
         const react = (cue: CharacterCue) => {
           switch (cue) {
             case "spin":
+              // As in the reference, a spin alone does not interrupt her (base game or bonus).
               firstWin = true;
-              if (!holding) toRest("spin_ack");
               break;
             case "win":
               if (holding) break;
-              toRest(firstWin ? "small_win" : "cascade_continue");
+              overlay(firstWin ? "small_win" : "cascade_continue");
               firstWin = false;
               break;
             case "anticipation":
@@ -122,8 +129,11 @@ export function SpineCharacter({ className }: { className: string }) {
               toRest("big_win");
               break;
             case "settle":
-              holding = false;
-              toRest();
+              // Only releases a held pose (anticipation); otherwise the idle cycle just continues.
+              if (holding) {
+                holding = false;
+                toRest();
+              }
               break;
           }
         };

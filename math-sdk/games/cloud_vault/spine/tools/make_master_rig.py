@@ -39,23 +39,26 @@ HEAD_H = 360
 EYES = [("eyeL", (1052, 505), 30, 25, 15), ("eyeR", (1160, 522), 50, 34, 22)]  # bone, centre, half-width, half-height, lower lid
 EYE_ROT = -9.0  # eye line in S (falls slightly to her left side of the picture)
 
-HAND = [(640, 390), (725, 385), (780, 480), (775, 660), (645, 665), (640, 480)]
+HAND = [(630, 330), (735, 330), (785, 480), (775, 660), (645, 665), (630, 480)]  # well past the fingertip
+FINGER_TIP = (670, 392, 726, 470)  # drawn again over the bird so its toes wrap round her finger
 FORE = [(640, 660), (775, 655), (760, 790), (750, 940), (700, 985), (640, 965), (628, 800)]
 HALO = [(980, 160), (1400, 160), (1400, 350), (1330, 350), (1300, 290), (1180, 262), (1060, 290), (1000, 365), (975, 365)]
 WING_L = [(905, 265), (1000, 265), (1030, 380), (1010, 470), (940, 460), (905, 380)]
 WING_R = [(1360, 265), (1510, 265), (1520, 450), (1480, 630), (1400, 630), (1365, 520)]
-HEADP = [(940, 420), (1000, 335), (1100, 305), (1220, 312), (1320, 360), (1370, 440), (1380, 560), (1330, 620), (1250, 640),
-         (1180, 670), (1100, 690), (1040, 680), (990, 640), (950, 580), (930, 500)]
+# Head incl. the whole halo ring, both head wings and the earrings (they hang below the chin line, the rest of the bottom edge).
+HEADP = [(890, 300), (890, 120), (1540, 120), (1540, 560), (1460, 640), (1300, 625),
+         (1248, 622), (1252, 758), (1190, 758), (1186, 640), (1110, 655), (1062, 655), (1060, 702), (1003, 702), (994, 628),
+         (950, 580), (900, 500)]
 NECKP = [(1060, 640), (1220, 640), (1230, 760), (1070, 770)]
 REST_ARM = [(1270, 900), (1390, 930), (1470, 1100), (1590, 1380), (1790, 1450), (1790, 1600), (1560, 1610), (1490, 1480),
             (1400, 1250), (1300, 1060)]
-SLEEVE = [(560, 760), (900, 760), (920, 950), (860, 1250), (700, 1300), (570, 1200), (520, 1000)]
+SLEEVE = [(560, 760), (900, 760), (920, 950), (840, 1120), (700, 1160), (620, 1250), (560, 1200), (520, 1000)]  # stops above the knee
 TORSO = [(830, 740), (1300, 760), (1370, 1000), (1330, 1300), (1150, 1420), (900, 1350), (800, 1050)]
 LEGS = [(650, 1150), (900, 1100), (1150, 1300), (1200, 1500), (1310, 2000), (1300, 2370), (1000, 2380), (980, 2100), (900, 1700),
         (680, 1520)]
 DRESS_L = [(340, 1580), (700, 1380), (980, 1500), (990, 2320), (820, 2340), (560, 2330), (360, 2050)]
 DRESS_R = [(1300, 1400), (1700, 1560), (1940, 1900), (1900, 2230), (1760, 2200), (1500, 1900), (1300, 1700)]
-CLOUD = [(110, 1600), (700, 1560), (1300, 1580), (1950, 1500), (1950, 2340), (110, 2340)]
+CLOUD = [(110, 1440), (360, 1440), (480, 1500), (700, 1520), (1300, 1560), (1950, 1480), (1950, 2340), (110, 2340)]
 HAIR_L = [(990, 560), (860, 820), (660, 1080), (470, 1300), (340, 1560)]
 HAIR_R = [(1280, 560), (1440, 800), (1620, 1000), (1800, 1220), (1860, 1560)]
 SLEEVE_C = [(850, 790), (700, 1020), (600, 1250)]
@@ -134,29 +137,23 @@ def head(p):
     return w
 
 
+# The halo ring rides on the head too (bobbing on its own it dragged the hair under it); only its glow
+# and sparkles are separate. Hand and forearm move as one piece (a bending wrist pinched the thumb). The head wings ride on
+# the head (as their own bones they dragged hair and the ear). The neck, choker and amulet stay with
+# the chest. Dress trails and cloud barely move (as chains they bent the thigh and dragged the cloud).
 REGIONS = [
-    (HAND, 14, {"hand_up": 1}),
+    (HAND, 18, {"fore_up": 1}),
     (FORE, 16, {"fore_up": 1}),
-    (HALO, 16, {"halo": 1}),
-    (WING_L, 16, {"wing_L": 1}),
-    (WING_R, 16, {"wing_R": 1}),
-    (HEADP, 22, head),
-    (NECKP, 22, {"neck": 1}),
+    (HEADP, 14, head),
+    (NECKP, 22, {"chest": 1}),
     (REST_ARM, 24, rest_arm),
     (SLEEVE, 26, ("chain", SLEEVE_C, ["sleeve1", "sleeve2"])),
     (TORSO, 26, body),
     (LEGS, 26, body),
-    (DRESS_L, 28, ("chain", DRESS_L_C, ["dressL1", "dressL2"])),
-    (DRESS_R, 28, ("chain", DRESS_R_C, ["dressR1", "dressR2"])),
-    (CLOUD, 30, "cloud"),
+    (DRESS_L, 28, {"seat": 1}),
+    (DRESS_R, 28, {"seat": 1}),
+    (CLOUD, 30, {"seat": 1}),
 ]
-
-
-def cloud(p):
-    x = p[0]
-    l = 1 - smooth(450, 850, x)
-    r = smooth(1200, 1600, x)
-    return {"cloud_L": l, "cloud_R": r, "cloud_C": max(0.0, 1 - l - r)}
 
 
 def weights(p):
@@ -166,8 +163,6 @@ def weights(p):
     def give(spec, amount):
         if callable(spec):
             spec = spec(p)
-        elif spec == "cloud":
-            spec = cloud(p)
         elif isinstance(spec, tuple):
             spec = chain(spec[1], spec[2], p)[1]
         for b, v in spec.items():
@@ -185,9 +180,12 @@ def weights(p):
             m = 1 - smooth(220, 360, d)
             if m > 0:
                 hair.append((m, w))
-        if hair:
+        # Hair lying on her resting hand and on the cloud stays put; only the hair above it flows.
+        rest_y = 1400 - 150 * smooth(1400, 1650, p[0])
+        settle = 1 - smooth(rest_y, rest_y + 200, p[1])
+        if hair and settle > 0:
             tot = sum(m for m, _ in hair)
-            share = min(1.0, max(m for m, _ in hair))
+            share = min(1.0, max(m for m, _ in hair)) * settle
             for m, w in hair:
                 give(w, left * share * m / tot)
             left -= left * share
@@ -251,33 +249,26 @@ class Rig:
     def life(self, p, t, b=3.0, s=6.0, h=3.0, e=1.0):
         """Breathing, sway, float, hair and cloth waves, cloud morph. Periods divide the loop."""
         sb, ss = math.sin(TAU * t / b), math.sin(TAU * t / s)
-        p.add("hips", y=7 * e * math.sin(TAU * t / b + 0.6), r=0.6 * e * ss)
+        # She and her cloud float together (bobbing apart, the cloud bent where they meet).
+        float_y = 7 * e * math.sin(TAU * t / b + 0.6)
+        p.add("hips", y=float_y)
         p.add("chest", r=1.4 * e * math.sin(TAU * t / s - 0.7), sx=1 + 0.008 * sb, sy=1 + 0.016 * sb)
         p.add("neck", r=-0.6 * e * ss)
         p.add("head", r=2.2 * e * math.sin(TAU * t / s - 1.3))
         p.add("arm_up", r=0.5 * e * math.sin(TAU * t / b + 0.5))
-        p.add("fore_up", r=0.9 * math.sin(TAU * t / b + 1.0))
-        p.add("hand_up", r=1.4 * math.sin(TAU * t / b + 1.6))
-        for i in range(4):
-            p.add(f"hairL{i + 1}", r=(1.6 + 1.3 * i) * e * math.sin(TAU * t / h - 0.9 * i))
-            p.add(f"hairR{i + 1}", r=(1.4 + 1.4 * i) * e * math.sin(TAU * t / h - 0.9 * i + 1.7))
+        p.add("fore_up", r=1.2 * math.sin(TAU * t / b + 1.0))
+        # The long hair on her right hangs free in the air and flows. The hair on her left lies behind
+        # the sleeve, against her knee and on the cloud: it and the sleeve only stir, or they drag
+        # the fabric with them.
+        for i in range(4):  # the first link frames the face: it barely moves
+            p.add(f"hairL{i + 1}", r=(0.3 if i == 0 else 0.5) * e * math.sin(TAU * t / h - 0.9 * i))
+            p.add(f"hairR{i + 1}", r=(0.5 if i == 0 else 1.0 + 0.6 * i) * e * math.sin(TAU * t / h - 0.9 * i + 1.7))
         for i in range(2):
-            p.add(f"sleeve{i + 1}", r=1.6 * e * math.sin(TAU * t / h - 0.6 * i + 0.8))
-            p.add(f"dressL{i + 1}", r=1.4 * e * math.sin(TAU * t / h - 0.7 * i + 0.3))
-            p.add(f"dressR{i + 1}", r=1.8 * e * math.sin(TAU * t / h - 0.8 * i + 1.1))
-        p.add("wing_L", r=2.5 * e * math.sin(TAU * t / (b / 2)))
-        p.add("wing_R", r=-2.5 * e * math.sin(TAU * t / (b / 2) + 0.4))
-        p.add("halo", r=1.2 * ss, y=3 * math.sin(TAU * t / b + 1.2))
-        q = 1 + 0.02 * sb
-        p.add("cloud_L", x=4 * ss, sx=q, sy=q)
-        p.add("cloud_C", y=4 * math.sin(TAU * t / b + 1.5), sx=1 + 0.012 * math.sin(TAU * t / s + 1))
-        q = 1 + 0.02 * math.sin(TAU * t / b + 2.4)
-        p.add("cloud_R", x=-4 * math.sin(TAU * t / s + 0.5), sx=q, sy=q)
+            p.add(f"sleeve{i + 1}", r=0.3 * e * math.sin(TAU * t / h - 0.6 * i + 0.8))
+
 
     def flutter(self, p, t, env, amp=9, hz=6):
-        if env > 0:
-            p.add("wing_L", r=amp * env * math.sin(TAU * hz * t))
-            p.add("wing_R", r=-amp * env * math.sin(TAU * hz * t + 0.5))
+        """The head wings are part of the head now: nothing to flap."""
 
     def eyes(self, p, sy):
         p.add("eyeL", sy=sy)
@@ -298,13 +289,21 @@ class Rig:
         c = (HEAD_C[0], HEAD_C[1] - 0.25 * HEAD_H)
         return (c[0] + 1.1 * r * HEAD_H * math.cos(th), c[1] - 0.72 * r * HEAD_H * math.sin(th))
 
-    def bird(self, t, pose, pos, flying, swaps, vx=0.0):
+    def bird(self, t, pose, pos, flying, swaps, vx=0.0, tilt=0.0, squash=1.0, wing=None, face=None):
+        """tilt: lean back (flaring to land); squash < 1 crouches on the feet (the bone sits at its feet).
+        Facing flips instantly on bird_dir (stepped keys), so the bird never squeezes through zero width."""
         s, s0 = self.S(pos), self.sk.world["bird"]
         flip = 1.0
-        if flying and abs(vx) > 0.5:
+        if face is not None:
+            flip = 1.0 if face == self.faces else -1.0
+        elif flying and abs(vx) > 4:
             flip = 1.0 if ((vx > 0) == (self.faces == "right")) else -1.0
-        pose.add("bird", x=s[0] - s0[0], y=s[1] - s0[1], sx=flip)
-        if flying:
+        pose.add("bird", x=s[0] - s0[0], y=s[1] - s0[1], r=tilt * flip, sx=1 / math.sqrt(squash), sy=squash)
+        pose.add("bird_dir", sx=flip)
+        if wing:
+            swaps["bird_body"] = "bird_body"
+            swaps["bird_wing"] = wing
+        elif flying:
             swaps["bird_body"] = "bird_body"
             swaps["bird_wing"] = ["bird_wing_up", "bird_wing_mid", "bird_wing_down", "bird_wing_mid"][int(t * 14) % 4]
         else:
@@ -348,63 +347,72 @@ def bursts(slots, p, t, starts, dist=170, dur=0.45):
 
 
 def animations(R):
-    """name -> (duration, loop, frame(t) -> (pose, slots, swaps, bird P))."""
+    """name -> (duration, loop, frame(t) -> (pose, slots, swaps, bird P)).
+
+    Timing follows the reference recording: in the base game AND in the bonus she runs the same calm
+    ~8 s cycle — the bird sits on her finger glowing (most of the time), flutters up beside her face
+    and lands again. Spins do not send it around her head; only big moments (bonus trigger, big win)
+    make it fly a full loop."""
     hh = HEAD_H
-    IDLE, FEAT = (3.0, 6.0, 3.0), (1.5, 3.0, 1.5)
+    IDLE, FEAT = (4.0, 8.0, 4.0), (2.0, 4.0, 2.0)
 
     def landed(t, p, lift=0.0):
         x, y = R.perch(p)
-        return (x, y - lift - 0.025 * hh * max(0.0, math.sin(TAU * t / 0.75)))
+        return (x, y - lift - 0.02 * hh * max(0.0, math.sin(TAU * t / 1.0)))
+
+    # The short flutter beside her face (P): up off the finger, over toward her brow, back down.
+    def flutter_path(t0, p0, p1):
+        return [(t0, p0), (t0 + 0.35, (650, 290)), (t0 + 0.8, (760, 215)), (t0 + 1.3, (905, 265)),
+                (t0 + 1.75, (860, 360)), (t0 + 2.05, (720, 270)), (t0 + 2.3, (630, 320)), (t0 + 2.45, (p1[0] - 28, p1[1] - 34)),
+                (t0 + 2.6, p1)]
+
+    def cycle(dur, per, e, take_off, blinks, hop_at=()):
+        def body_(t):
+            p = Pose()
+            R.life(p, t, *per, e=e)
+            land = take_off + 2.6
+            p.add("fore_up", r=track(t, [(0, 0), (take_off - 0.15, 0), (take_off - 0.05, -1.2), (take_off + 0.1, 1.8),
+                                         (take_off + 0.5, 0), (land - 0.25, 0), (land, -1.6), (land + 0.35, 0.5), (dur, 0)]))
+            for th in hop_at:
+                p.add("fore_up", r=-0.8 * bump(t, th, th + 0.12, 0.05))
+            R.eyes(p, blink(t, blinks))
+            return p
+
+        land = take_off + 2.6
+        path = flutter_path(take_off, landed(take_off, body_(take_off)), landed(land, body_(land)))
+
+        def f(t):
+            p = body_(t)
+            flying = take_off <= t < land
+            hop = sum(0.18 * hh * bump(t, th, th + 0.3, 0.1) for th in hop_at)
+            pos = catmull(t, path) if flying else landed(t, p, lift=hop)
+            prev = catmull(max(take_off, t - 0.12), path) if flying else pos
+            R.look(p, pos)
+            slots, swaps = {}, {}
+            glow = (1 - bump(t, take_off - 0.1, land + 0.1, 0.2)) * (0.55 + 0.2 * math.sin(TAU * t / 1.0))
+            glow = max(glow, 0.95 * bump(t, land - 0.05, land + 0.45, 0.12))  # lights up as it lands
+            slots["bird_glow"] = (CYAN, glow)
+            twinkle(slots, p, "halo_spark1", t, [1.2, dur * 0.6])
+            twinkle(slots, p, "halo_spark2", t, [dur * 0.35, dur * 0.85])
+            # Take-off: a little crouch first. Landing: wings up and body leaning back to brake, then
+            # it settles onto the finger with a squash and a small bounce.
+            flare = smooth(land - 0.32, land - 0.08, t) if flying else 0.0
+            squash = track(t, [(0, 1), (take_off - 0.2, 1), (take_off - 0.08, 0.88), (take_off, 1.05), (take_off + 0.12, 1),
+                               (land, 1), (land + 0.001, 0.86), (land + 0.09, 1.05), (land + 0.18, 0.97), (land + 0.28, 1), (dur, 1)])
+            tilt = 14 * (flare if flying else (1 - smooth(land, land + 0.22, t)) * (t >= land))
+            R.bird(t, p, pos, flying or hop > 0.03 * hh, swaps, pos[0] - prev[0], tilt=tilt, squash=squash,
+                   wing="bird_wing_up" if flare > 0.5 else None, face="right" if t >= land - 0.45 or not flying else None)
+            return p, slots, swaps, pos
+        return (dur, True, f)
 
     A = {}
+    A["idle_01"] = cycle(8.0, IDLE, 1.0, take_off=4.8, blinks=[1.6, 3.9, 7.6], hop_at=(2.6,))
+    A["idle_02"] = cycle(8.0, IDLE, 1.0, take_off=5.0, blinks=[0.9, 3.0, 3.25], hop_at=(1.3, 2.1))
+    # Bonus: the same calm cycle, a touch livelier.
+    A["feature_idle"] = cycle(6.0, (2.0, 6.0, 2.0), 1.3, take_off=3.0, blinks=[1.0, 5.6], hop_at=(1.8,))
 
-    # idle_01 (6 s) — the reference's cycle: bird on her finger, flies around her head, lands again.
-    def idle_body(t):
-        p = Pose()
-        R.life(p, t, *IDLE)
-        p.add("fore_up", r=track(t, [(0, 0), (1.3, 0), (1.42, -2.5), (1.58, 3.5), (2.0, 0), (4.8, 0), (5.05, -3), (5.4, 1), (6, 0)]))
-        p.add("hand_up", r=track(t, [(0, 0), (1.3, 0), (1.42, -3), (1.58, 5), (2.0, 0), (4.8, 0), (5.05, -4), (5.4, 1), (6, 0)]))
-        R.flutter(p, t, bump(t, 2.0, 3.8))
-        R.eyes(p, blink(t, [0.8, 3.3]))
-        return p
-
-    go = [(1.5, landed(1.5, idle_body(1.5))), (1.9, R.around(2.4, 0.75)), (2.35, R.around(1.6)), (2.85, R.around(0.7)),
-          (3.35, R.around(-0.2, 1.05)), (3.85, R.around(0.9, 1.15)), (4.4, R.around(2.2, 1.0)), (4.8, (760, 330)),
-          (5.05, landed(5.05, idle_body(5.05)))]
-
-    def idle_01(t):
-        p = idle_body(t)
-        flying = 1.5 <= t < 5.05
-        pos = catmull(t, go) if flying else landed(t, p)
-        prev = catmull(max(1.5, t - 0.05), go) if flying else pos
-        R.look(p, pos)
-        slots, swaps = {}, {}
-        twinkle(slots, p, "halo_spark1", t, [1.0, 4.0])
-        twinkle(slots, p, "halo_spark2", t, [2.5, 5.2])
-        bursts(slots, p, t, [5.05], dist=120, dur=0.35)
-        R.bird(t, p, pos, flying, swaps, pos[0] - prev[0])
-        return p, slots, swaps, pos
-    A["idle_01"] = (6.0, True, idle_01)
-
-    # idle_02 (6 s): the bird hops and flutters on her finger; she giggles (squint, head bob).
-    def idle_02(t):
-        p = Pose()
-        R.life(p, t, *IDLE)
-        hop = 0.22 * hh * max(bump(t, 1.2, 1.55, 0.12), bump(t, 2.0, 2.35, 0.12))
-        flap = bump(t, 3.6, 4.6, 0.15)
-        p.add("head", r=track(t, [(0, 0), (1.3, 0), (1.6, 2.5), (2.6, 2.5), (3.2, 0), (6, 0)]))
-        p.add("hips", y=4 * bump(t, 1.4, 2.6, 0.2) * math.sin(TAU * 4 * t))
-        p.add("hand_up", r=-3 * bump(t, 1.2, 1.3, 0.05) - 3 * bump(t, 2.0, 2.1, 0.05))
-        R.eyes(p, blink(t, [0.5, 4.9, 5.15]) * (0.55 if 1.4 < t < 2.6 else 1.0))
-        pos = landed(t, p, lift=hop + 0.3 * hh * flap)
-        R.look(p, pos)
-        slots, swaps = {}, {}
-        twinkle(slots, p, "halo_spark1", t, [3.0])
-        R.bird(t, p, pos, flap > 0.2 or hop > 0.04 * hh, swaps)
-        return p, slots, swaps, pos
-    A["idle_02"] = (6.0, True, idle_02)
-
-    def reaction(dur, body_fn, lift=None, fly=None, extra=None, per=IDLE, e=1.0, bird_pos=None, eyes=None):
+    def reaction(dur, body_fn, lift=None, fly=None, extra=None, per=IDLE, e=1.0, bird_pos=None, eyes=None, wings=None):
+        """wings(t): flap on the finger without leaving it."""
         def f(t):
             p = Pose()
             R.life(p, t, *per, e=e)
@@ -412,75 +420,61 @@ def animations(R):
             if eyes:
                 R.eyes(p, eyes(t))
             pos = bird_pos(t, p) if bird_pos else landed(t, p, lift=(lift(t) if lift else 0.0) * hh)
-            prev = bird_pos(max(0.0, t - 0.05), p) if bird_pos else pos
+            prev = bird_pos(max(0.0, t - 0.12), p) if bird_pos else pos
             R.look(p, pos)
             slots, swaps = {}, {}
+            flying = fly(t) if fly else False
+            slots["bird_glow"] = (CYAN, 0.0 if flying else 0.6)
             if extra:
                 extra(t, p, slots)
-            R.bird(t, p, pos, fly(t) if fly else False, swaps, pos[0] - prev[0])
+            flap = ["bird_wing_up", "bird_wing_mid", "bird_wing_down", "bird_wing_mid"][int(t * 16) % 4] if (wings and wings(t)) else None
+            R.bird(t, p, pos, flying, swaps, pos[0] - prev[0], wing=flap)
             return p, slots, swaps, pos
         return (dur, False, f)
 
     A["spin_ack"] = reaction(0.5,
-        lambda t, p: (p.add("chest", r=track(t, [(0, 0), (0.15, 2), (0.5, 0)])), p.add("hips", y=track(t, [(0, 0), (0.12, -5), (0.35, 1), (0.5, 0)])),
-                      p.add("hand_up", r=track(t, [(0, 0), (0.1, -3), (0.25, 3), (0.5, 0)]))),
-        lift=lambda t: 0.3 * math.sin(math.pi * min(1, max(0, (t - 0.05) / 0.4))), fly=lambda t: 0.08 < t < 0.4)
+        lambda t, p: (p.add("chest", r=track(t, [(0, 0), (0.15, 1.5), (0.5, 0)])), p.add("hips", y=track(t, [(0, 0), (0.12, -4), (0.35, 1), (0.5, 0)]))),
+        lift=lambda t: 0.12 * math.sin(math.pi * min(1, max(0, (t - 0.05) / 0.35))), fly=lambda t: 0.08 < t < 0.35)
 
     A["cascade_continue"] = reaction(0.4,
-        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.12, 9), (0.4, 0)])), p.add("head", r=track(t, [(0, 0), (0.15, 1.5), (0.4, 0)]))),
-        lift=lambda t: 0.2 * math.sin(math.pi * min(1, t / 0.4)), fly=lambda t: 0.05 < t < 0.35,
+        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.12, 8), (0.4, 0)])), p.add("head", r=track(t, [(0, 0), (0.15, 1.5), (0.4, 0)]))),
+        lift=lambda t: 0.15 * math.sin(math.pi * min(1, t / 0.4)), fly=lambda t: 0.05 < t < 0.35,
         extra=lambda t, p, s: bursts(s, p, t, [0.08], dist=110, dur=0.3), eyes=lambda t: 0.6 if 0.05 < t < 0.3 else 1.0)
 
     A["small_win"] = reaction(0.8,
-        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.2, 18), (0.5, 0), (0.62, 4), (0.8, 0)])), R.flutter(p, t, bump(t, 0.1, 0.6, 0.1), 12, 7),
-                      p.add("halo", y=track(t, [(0, 0), (0.25, 8), (0.8, 0)]))),
-        lift=lambda t: 0.85 * math.sin(math.pi * min(1, t / 0.75)), fly=lambda t: 0.05 < t < 0.72,
+        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.2, 16), (0.5, 0), (0.62, 4), (0.8, 0)])),
+                      p.add("halo", y=track(t, [(0, 0), (0.25, 6), (0.8, 0)]))),
+        lift=lambda t: 0.6 * math.sin(math.pi * min(1, t / 0.75)), fly=lambda t: 0.05 < t < 0.72,
         extra=lambda t, p, s: bursts(s, p, t, [0.25]), eyes=lambda t: 0.5 if 0.1 < t < 0.6 else 1.0)
 
     A["medium_win"] = reaction(1.1,
-        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.25, 22), (0.6, 0), (0.75, 6), (1.1, 0)])), R.flutter(p, t, bump(t, 0.15, 0.9, 0.15), 14, 7),
-                      p.add("halo", y=track(t, [(0, 0), (0.3, 10), (1.1, 0)]), sx=track(t, [(0, 1), (0.35, 1.08), (1.1, 1)]), sy=track(t, [(0, 1), (0.35, 1.08), (1.1, 1)]))),
+        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.25, 20), (0.6, 0), (0.75, 6), (1.1, 0)])),
+                      p.add("halo", y=track(t, [(0, 0), (0.3, 8), (1.1, 0)]), sx=track(t, [(0, 1), (0.35, 1.06), (1.1, 1)]), sy=track(t, [(0, 1), (0.35, 1.06), (1.1, 1)]))),
         fly=lambda t: 0.05 < t < 0.98,
-        bird_pos=lambda t, p: landed(t, p) if t < 0.1 or t > 1.0 else catmull(t, [(0.1, landed(0.1, p)), (0.4, R.around(2.0, 1.2)),
-                                                                              (0.7, R.around(1.2, 1.25)), (1.0, landed(1.0, p))]),
+        bird_pos=lambda t, p: landed(t, p) if t < 0.1 or t > 1.0 else catmull(t, [(0.1, landed(0.1, p)), (0.4, (700, 210)),
+                                                                              (0.7, (860, 250)), (1.0, landed(1.0, p))]),
         extra=lambda t, p, s: (bursts(s, p, t, [0.45], dist=190), s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.0), (0.35, 0.8), (1.1, 0.0)])))),
         eyes=lambda t: 0.5 if 0.15 < t < 0.85 else 1.0)
 
     A["anticipation"] = reaction(1.5,
-        lambda t, p: (p.add("chest", r=track(t, [(0, 0), (0.5, 3)])), p.add("head", r=track(t, [(0, 0), (0.6, 2.5)])),
-                      p.add("hips", x=track(t, [(0, 0), (0.5, -10)])), p.add("fore_up", r=track(t, [(0, 0), (0.5, 4)])),
-                      R.flutter(p, t, track(t, [(0, 0), (0.4, 0.6)]), 6, 8)),
-        lift=lambda t: track(t, [(0, 0), (0.5, 0.4)]) + 0.04 * math.sin(TAU * 9 * t), fly=lambda t: t > 0.3,
-        extra=lambda t, p, s: s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.0), (0.6, 0.6)]))),
+        lambda t, p: (p.add("chest", r=track(t, [(0, 0), (0.5, 2.5)])), p.add("head", r=track(t, [(0, 0), (0.6, 2)])),
+                      p.add("hips", x=track(t, [(0, 0), (0.5, -8)])), p.add("fore_up", r=track(t, [(0, 0), (0.5, 2)]))),
+        lift=lambda t: 0.012 * max(0.0, math.sin(TAU * 7 * t)) if t > 0.3 else 0.0, wings=lambda t: t > 0.3,
+        extra=lambda t, p, s: (s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.0), (0.6, 0.6)]))),
+                               s.__setitem__("bird_glow", (CYAN, track(t, [(0, 0.6), (0.5, 0.95)]) * (0.85 + 0.15 * math.sin(TAU * 4 * t))))),
         eyes=lambda t: track(t, [(0, 1), (0.3, 1.06)]), e=1.2)
 
     top = R.around(math.pi / 2, 1.55)
-    A["feature_trigger"] = reaction(1.5,
-        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.22, -8), (0.55, 28), (0.9, 6), (1.5, 0)])),
-                      p.add("fore_up", r=track(t, [(0, 0), (0.22, -3), (0.55, 5), (1.5, 0)])),
-                      p.add("halo", sx=track(t, [(0, 1), (0.6, 1.15), (1.5, 1.03)]), sy=track(t, [(0, 1), (0.6, 1.15), (1.5, 1.03)])),
-                      R.flutter(p, t, bump(t, 0.3, 1.2, 0.15), 14, 7)),
-        fly=lambda t: t >= 0.3, per=FEAT, e=1.3,
-        bird_pos=lambda t, p: landed(t, p) if t < 0.3 else catmull(t, [(0.3, landed(0.3, p)), (0.55, R.around(2.3, 1.1)), (0.75, top),
-                                                                      (1.0, R.around(0.9, 1.35)), (1.5, R.around(0.0, 1.35))]),
-        extra=lambda t, p, s: (bursts(s, p, t, [0.75], dist=260, dur=0.55), s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.2), (0.6, 1.0), (1.5, 0.6)]))),
+    A["feature_trigger"] = reaction(2.0,
+        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.22, -8), (0.55, 26), (0.9, 6), (1.5, 0)])),
+                      p.add("fore_up", r=track(t, [(0, 0), (0.22, -1.5), (0.55, 2.5), (1.5, 0)])),
+                      p.add("halo", sx=track(t, [(0, 1), (0.6, 1.15), (1.6, 1.0)]), sy=track(t, [(0, 1), (0.6, 1.15), (1.6, 1.0)]))),
+        fly=lambda t: 0.3 <= t < 1.9, per=FEAT, e=1.3,
+        bird_pos=lambda t, p: landed(t, p) if (t < 0.3 or t >= 1.9) else catmull(t, [(0.3, landed(0.3, p)), (0.55, R.around(2.3, 1.1)), (0.8, top),
+                                                                                    (1.15, R.around(0.9, 1.3)), (1.5, (860, 300)), (1.9, landed(1.9, p))]),
+        extra=lambda t, p, s: (bursts(s, p, t, [0.8], dist=260, dur=0.55), s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.2), (0.6, 1.0), (2.0, 0.5)]))),
                                twinkle(s, p, "halo_spark1", t, [0.55]), twinkle(s, p, "halo_spark2", t, [0.7])),
-        eyes=lambda t: 0.45 if 0.45 < t < 1.1 else 1.0)
-
-    def feature_idle(t):
-        p = Pose()
-        R.life(p, t, *FEAT, e=1.6)
-        R.flutter(p, t, 1.0, 5, 3)
-        R.eyes(p, blink(t, [1.1]))
-        th = TAU * t / 3.0
-        pos, prev = R.around(th, 1.35), R.around(th - TAU * 0.05 / 3.0, 1.35)
-        R.look(p, pos)
-        slots, swaps = {"halo_glow": (HALO_GLOW, 0.6 + 0.2 * math.sin(TAU * t / 1.5))}, {}
-        twinkle(slots, p, "halo_spark1", t, [0.4, 1.9])
-        twinkle(slots, p, "halo_spark2", t, [1.2, 2.6])
-        R.bird(t, p, pos, True, swaps, pos[0] - prev[0])
-        return p, slots, swaps, pos
-    A["feature_idle"] = (3.0, True, feature_idle)
+        eyes=lambda t: 0.45 if 0.45 < t < 1.2 else 1.0)
 
     def big_bird(t, p):
         if t < 0.3 or t >= 2.1:
@@ -493,17 +487,15 @@ def animations(R):
         return catmull(t, [(1.7, R.around(th0 - 2 * TAU, 1.35)), (1.9, (760, 330)), (2.1, landed(2.1, p))])
 
     A["big_win"] = reaction(2.2,
-        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.25, 24), (0.5, 0), (0.75, 28), (1.05, 0), (1.2, 5), (1.45, 0)])),
-                      p.add("head", r=track(t, [(0, 0), (0.4, -3), (1.4, -3), (2.0, 0)])),
-                      p.add("halo", sx=track(t, [(0, 1), (0.4, 1.15), (1.6, 1.15), (2.2, 1)]), sy=track(t, [(0, 1), (0.4, 1.15), (1.6, 1.15), (2.2, 1)])),
-                      R.flutter(p, t, bump(t, 0.2, 1.6, 0.2), 14, 7)),
+        lambda t, p: (p.add("hips", y=track(t, [(0, 0), (0.25, 22), (0.5, 0), (0.75, 26), (1.05, 0), (1.2, 5), (1.45, 0)])),
+                      p.add("head", r=track(t, [(0, 0), (0.4, -2.5), (1.4, -2.5), (2.0, 0)])),
+                      p.add("halo", sx=track(t, [(0, 1), (0.4, 1.12), (1.6, 1.12), (2.2, 1)]), sy=track(t, [(0, 1), (0.4, 1.12), (1.6, 1.12), (2.2, 1)]))),
         fly=lambda t: 0.3 <= t < 2.1, e=1.3, bird_pos=big_bird,
         extra=lambda t, p, s: (bursts(s, p, t, [0.5, 1.0, 1.5], dist=200), s.__setitem__("halo_glow", (HALO_GLOW, track(t, [(0, 0.0), (0.4, 1.0), (1.6, 1.0), (2.2, 0.0)]))),
                                twinkle(s, p, "halo_spark1", t, [0.4, 1.2]), twinkle(s, p, "halo_spark2", t, [0.8, 1.6])),
         eyes=lambda t: 0.45 if 0.25 < t < 1.6 else 1.0)
 
-    A["settle_to_idle"] = reaction(0.7, lambda t, p: None, fly=lambda t: t < 0.6,
-        bird_pos=lambda t, p: catmull(t, [(0, R.around(0.0, 1.35)), (0.35, R.around(1.4, 1.0)), (0.6, landed(0.6, p))]) if t < 0.6 else landed(t, p))
+    A["settle_to_idle"] = reaction(0.7, lambda t, p: None)
     return A
 
 
@@ -527,11 +519,9 @@ def main():
     sk = Skeleton()
     sk.bone("root")
     sk.bone("char", "root")
-    sk.bone("cloud_root", "char", S((1030, 1900)))
-    for n, at in (("cloud_L", (500, 1950)), ("cloud_C", (1030, 1950)), ("cloud_R", (1600, 1950))):
-        sk.bone(n, "cloud_root", S(at))
     sk.bone("hips", "char", S(SEAT), S(WAIST))
     sk.bone("legs", "hips", S((1100, 1900)))
+    sk.bone("seat", "hips", S((1100, 1700)))  # cloud and dress trails: they move with her, never bend apart
     sk.bone("chest", "hips", S(WAIST), S(NECK))
     sk.bone("neck", "chest", S(NECK), S(HEAD))
     sk.bone("head", "neck", S(HEAD), S(HEAD_TOP))
@@ -541,8 +531,6 @@ def main():
     sk.bone("halo", "head", S((1180, 262)))
     sk.bone("halo_spark1", "halo", S((1010, 200)))
     sk.bone("halo_spark2", "halo", S((1370, 190)))
-    sk.bone("wing_L", "head", S((1000, 430)))
-    sk.bone("wing_R", "head", S((1370, 520)))
     sk.bone("arm_up", "chest", S(SHOULDER), S(ELBOW))
     sk.bone("fore_up", "arm_up", S(ELBOW), S(WRIST))
     sk.bone("hand_up", "fore_up", S(WRIST), S(PERCH))
@@ -561,9 +549,8 @@ def main():
     chain_bones("hairL", HAIR_L, 4, "head", "chest")   # lower hair rests on the body, not the head
     chain_bones("hairR", HAIR_R, 4, "head", "chest")
     chain_bones("sleeve", SLEEVE_C, 2, "chest")
-    chain_bones("dressL", DRESS_L_C, 2, "hips")
-    chain_bones("dressR", DRESS_R_C, 2, "hips")
     sk.bone("bird", "char", S(PERCH))
+    sk.bone("bird_dir", "bird", S(PERCH))
     for n in ("trail1", "trail2"):
         sk.bone(n, "char", S(PERCH))
     for kk in range(1, 5):
@@ -581,6 +568,8 @@ def main():
         im.crop(bx).save(os.path.join(IMG, n + ".png"))
         birds[n] = bx
 
+    master.crop(FINGER_TIP).save(os.path.join(IMG, "finger_tip.png"))
+
     def radial(name, profile):
         a = Image.new("L", (128, 128))
         a.putdata([int(255 * profile(min(1.0, math.hypot(x - 63.5, y - 63.5) / 64))) for y in range(128) for x in range(128)])
@@ -591,14 +580,19 @@ def main():
     mesh, nverts = build_mesh(sk, body_img, x0, y0, S, k, 40)
     # Bird: scale 0.40 of its 512 canvas in master pixels (the perch trial), feet on the fingertip.
     kb = cfg.get("bird_scale", 0.40)
-    sit = birds["bird_sit"]
-    feet = ((sit[0] + sit[2]) / 2, sit[3] - 6)
+    feet = tuple(cfg.get("bird_feet", (296, 386)))  # its feet in bird_sit.png (512 canvas), toes reaching below the tip
 
     def bird_att(n):
         b = birds[n]
         c = ((b[0] + b[2]) / 2, (b[1] + b[3]) / 2)
         return {"x": round((c[0] - feet[0]) * kb * k, 2), "y": round((feet[1] - c[1]) * kb * k, 2),
                 "width": round((b[2] - b[0]) * kb * k, 2), "height": round((b[3] - b[1]) * kb * k, 2)}
+
+    def finger_att():
+        fx0, fy0, fx1, fy1 = FINGER_TIP
+        lx, ly = sk.bind("fore_up", S(((fx0 + fx1) / 2, (fy0 + fy1) / 2)))
+        return {"x": round(lx, 2), "y": round(ly, 2), "rotation": round(-sk.world["fore_up"][2], 3),
+                "width": round((fx1 - fx0) * k, 2), "height": round((fy1 - fy0) * k, 2)}
 
     soft = lambda sc: {"width": 128, "height": 128, "scaleX": round(sc, 3), "scaleY": round(sc, 3)}
     slots = [
@@ -608,8 +602,10 @@ def main():
         {"name": "halo_spark2", "bone": "halo_spark2", "color": "ffffff00", "attachment": "fx_spark", "blend": "additive"},
         {"name": "trail2", "bone": "trail2", "color": "ffffff00", "attachment": "fx_soft", "blend": "additive"},
         {"name": "trail1", "bone": "trail1", "color": "ffffff00", "attachment": "fx_soft", "blend": "additive"},
-        {"name": "bird_body", "bone": "bird", "attachment": "bird_sit"},
-        {"name": "bird_wing", "bone": "bird"},
+        {"name": "bird_glow", "bone": "bird", "color": "8fe9ff00", "attachment": "fx_soft", "blend": "additive"},
+        {"name": "bird_body", "bone": "bird_dir", "attachment": "bird_sit"},
+        {"name": "bird_wing", "bone": "bird_dir"},
+        {"name": "finger_tip", "bone": "fore_up", "attachment": "finger_tip"},
     ] + [{"name": f"burst{kk}", "bone": f"burst{kk}", "color": "ffffff00", "attachment": "fx_spark", "blend": "additive"} for kk in range(1, 5)]
     skin = {
         "heroine": {"heroine": mesh},
@@ -618,21 +614,21 @@ def main():
         "halo_spark2": {"fx_spark": {"width": 128, "height": 128}},
         "trail1": {"fx_soft": soft(140 * k / 128)},
         "trail2": {"fx_soft": soft(140 * k / 128)},
+        "bird_glow": {"fx_soft": dict(soft(260 * kb * k / 128 * 2), y=round(150 * kb * k, 2))},
         "bird_body": {n: bird_att(n) for n in ("bird_sit", "bird_body")},
         "bird_wing": {n: bird_att(n) for n in ("bird_wing_up", "bird_wing_mid", "bird_wing_down")},
+        "finger_tip": {"finger_tip": finger_att()},
     }
     for kk in range(1, 5):
         skin[f"burst{kk}"] = {"fx_spark": {"width": 128, "height": 128}}
 
-    PHYS = [("hairL2", 70, 0.82), ("hairL3", 55, 0.8), ("hairL4", 45, 0.78), ("hairR2", 70, 0.82), ("hairR3", 55, 0.8),
-            ("hairR4", 45, 0.78), ("sleeve1", 85, 0.84), ("sleeve2", 65, 0.82), ("dressL1", 80, 0.85), ("dressL2", 60, 0.82),
-            ("dressR1", 75, 0.84), ("dressR2", 55, 0.8), ("wing_L", 140, 0.7), ("wing_R", 140, 0.7)]
+    PHYS = [("hairR2", 90, 0.85), ("hairR3", 80, 0.84), ("hairR4", 75, 0.84)]
     constraints = [{"type": "physics", "name": f"phys_{b}", "bone": b, "rotate": 1, "inertia": 0.6, "strength": s,
                     "damping": d, "mass": 1, "fps": 60} for b, s, d in PHYS]
 
     R = Rig(sk, S, P, cfg.get("bird_faces", "right"))
     setup_alpha = {s["name"]: 0.0 for s in slots if s.get("color", "ff").endswith("00")}
-    setup_att = {"heroine": "heroine", "bird_body": "bird_sit", "bird_wing": None}
+    setup_att = {"heroine": "heroine", "bird_body": "bird_sit", "bird_wing": None, "finger_tip": "finger_tip"}
     S0 = sk.world["bird"][:2]
     anims = {}
     for name, (dur, loop, f) in animations(R).items():
@@ -651,7 +647,7 @@ def main():
                 sl[f"trail{kk}"] = (GOLD, max(0.0, min(0.6, (speed - 300) / 1500)) * (1.0 - 0.3 * kk))
         if loop:
             frames[-1] = frames[0]
-        anims[name] = timelines(times, [(a, b, c) for a, b, c, _ in frames], setup_alpha, setup_att)
+        anims[name] = timelines(times, [(a, b, c) for a, b, c, _ in frames], setup_alpha, setup_att, stepped=("bird_dir",))
 
     skel = {
         "skeleton": {"hash": "sky-drop-heroine-master", "spine": "4.3.26", "x": round(S((x0, 0))[0], 1), "y": 0,

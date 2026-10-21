@@ -156,7 +156,7 @@ export default function App() {
       sleep: (ms) => new Promise((res) => setTimeout(res, turboRef.current ? ms * 0.45 : ms)),
       tap: (ms) =>
         new Promise<void>((res) => {
-          const timer = setTimeout(done, turboRef.current ? ms * 0.5 : ms);
+          const timer = Number.isFinite(ms) ? setTimeout(done, turboRef.current ? ms * 0.5 : ms) : undefined;
           function done() {
             clearTimeout(timer);
             tapRef.current = null;

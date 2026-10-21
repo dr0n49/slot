@@ -235,8 +235,9 @@ def keys_color(times, vals):
             for i in decimate(times, vals, 1.5 / 255)]
 
 
-def timelines(times, frames, setup_alpha, setup_attachment):
-    """frames: [(Pose, {slot: ((r,g,b) 0-255, alpha)}, {slot: attachment or None})] -> animation JSON."""
+def timelines(times, frames, setup_alpha, setup_attachment, stepped=()):
+    """frames: [(Pose, {slot: ((r,g,b) 0-255, alpha)}, {slot: attachment or None})] -> animation JSON.
+    Bones in `stepped` jump between keys (e.g. a flip, which must never pass through scale 0)."""
     bones, slots = {}, {}
     for b in sorted({b for f in frames for b in f[0]}):
         vals = [f[0].get(b, [0, 0, 0, 1, 1]) for f in frames]
@@ -247,6 +248,10 @@ def timelines(times, frames, setup_alpha, setup_attachment):
             tl["translate"] = keys2(times, [(v[1], v[2]) for v in vals], 0.3, 0.0)
         if any(abs(v[3] - 1) > 1e-4 or abs(v[4] - 1) > 1e-4 for v in vals):
             tl["scale"] = keys2(times, [(v[3], v[4]) for v in vals], 0.002, 1.0)
+        if tl and b in stepped:
+            for keys in tl.values():
+                for key in keys[:-1]:
+                    key["curve"] = "stepped"
         if tl:
             bones[b] = tl
     for sl in sorted({s for f in frames for s in f[1]}):
