@@ -1,0 +1,58 @@
+{
+ "band": 400,
+ "baseline": 0.9,
+ "glyphs": {
+  "0": {
+   "file": "0.webp",
+   "advance": 0.76
+  },
+  "1": {
+   "file": "1.webp",
+   "advance": 0.5425
+  },
+  "2": {
+   "file": "2.webp",
+   "advance": 0.665
+  },
+  "3": {
+   "file": "3.webp",
+   "advance": 0.68
+  },
+  "4": {
+   "file": "4.webp",
+   "advance": 0.775
+  },
+  "5": {
+   "file": "5.webp",
+   "advance": 0.645
+  },
+  "6": {
+   "file": "6.webp",
+   "advance": 0.725
+  },
+  "7": {
+   "file": "7.webp",
+   "advance": 0.71
+  },
+  "8": {
+   "file": "8.webp",
+   "advance": 0.7025
+  },
+  "9": {
+   "file": "9.webp",
+   "advance": 0.74
+  },
+  ".": {
+   "file": "decimal.webp",
+   "advance": 0.2
+  },
+  ",": {
+   "file": "comma.webp",
+   "advance": 0.2425
+  },
+  "\u00d7": {
+   "file": "multiply.webp",
+   "advance": 0.9525
+  }
+ }
+}

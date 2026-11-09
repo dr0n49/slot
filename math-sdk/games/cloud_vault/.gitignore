@@ -1,0 +1,12 @@
+library/
+__pycache__/
+frontend/node_modules/
+frontend/dist/
+frontend/public/demo/
+release/
+art-src/
+art-in/
+spine/character/layers_check.png
+spine/character/parts/
+spine/character/parts_hi/
+spine/character/edits/raw/

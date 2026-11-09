@@ -1,0 +1,290 @@
+{
+  "ar": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 309
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 374
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 416
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 440
+    }
+  },
+  "hi": {
+    "megaWin": {
+      "width": 1424,
+      "height": 411
+    },
+    "freeSpins": {
+      "width": 1424,
+      "height": 403
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 454
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 322
+    }
+  },
+  "ja": {
+    "totalWin": {
+      "width": 1424,
+      "height": 321
+    },
+    "freeSpins": {
+      "width": 1424,
+      "height": 311
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 355
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 285
+    }
+  },
+  "ru": {
+    "maxWin": {
+      "width": 1424,
+      "height": 172
+    },
+    "freeSpins": {
+      "width": 1424,
+      "height": 181
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 245
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 229
+    }
+  },
+  "de": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 265
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 225
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 274
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 218
+    }
+  },
+  "es": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 229
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 239
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 216
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 232
+    }
+  },
+  "fi": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 208
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 209
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 272
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 235
+    }
+  },
+  "fr": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 210
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 266
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 337
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 216
+    }
+  },
+  "id": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 213
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 226
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 207
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 185
+    }
+  },
+  "ko": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 357
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 386
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 487
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 328
+    }
+  },
+  "pl": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 208
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 238
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 252
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 170
+    }
+  },
+  "pt": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 245
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 256
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 256
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 257
+    }
+  },
+  "tr": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 245
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 261
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 289
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 228
+    }
+  },
+  "zh": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 403
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 449
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 371
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 382
+    }
+  },
+  "vi": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 250
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 253
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 335
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 294
+    }
+  },
+  "da": {
+    "freeSpins": {
+      "width": 1424,
+      "height": 249
+    },
+    "totalWin": {
+      "width": 1424,
+      "height": 213
+    },
+    "megaWin": {
+      "width": 1424,
+      "height": 254
+    },
+    "maxWin": {
+      "width": 1424,
+      "height": 204
+    }
+  }
+}

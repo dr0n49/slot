@@ -1,0 +1,120 @@
+/* ---------------------------------------------------------------- bonus buy menu (Overlays.tsx BuyMenu)
+   The layout Stake players already know from the 3-star releases (Paperclip, Titan, Uppercut, Massive): compact cards
+   over the dimmed board — art banner, 1–5 lightning pips for volatility, name, live price, one full-width button
+   (plum ACTIVATE for antes/raids, gold BUY for bonuses) — and a Balance | − Bet + strip pinned under them, so the bet
+   is changed without leaving the menu. Landscape: 4 cards over 3. Short landscape: one row of 7. Portrait: a list,
+   all seven visible on a phone without scrolling. Sizes are viewport clamps, independent of the stage unit. */
+
+.bm-screen { padding: 12px; background: rgba(42, 16, 38, .68); }
+.bm { display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 2vh, 22px); max-width: 100%; max-height: 100%;
+  font-family: var(--font); color: var(--plum-deep); animation: zoom .28s cubic-bezier(.3, 1.4, .5, 1) both; }
+.bm-cards { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.6vh, 18px); min-height: 0; }
+.bm-row { display: flex; justify-content: center; gap: clamp(8px, 1.2vw, 18px); }
+
+/* ---- card */
+.bm-card { --w: clamp(118px, min(14.5vw, 23vh), 228px);
+  position: relative; width: var(--w); display: flex; flex-direction: column; align-items: stretch; padding: 0; overflow: hidden;
+  border: 0; border-radius: calc(var(--w) * .075); cursor: pointer; text-align: center; color: inherit; font: inherit;
+  background: linear-gradient(180deg, #fffdf8 0%, var(--ivory) 70%, #f7ead6 100%);
+  box-shadow: 0 0 0 1.5px var(--gilt), 0 0 0 4px rgba(255, 248, 236, .28), 0 8px 22px rgba(42, 19, 39, .38);
+  transition: transform .12s, box-shadow .15s; }
+.bm-card:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .bm-card:hover { transform: translateY(-3px); box-shadow: 0 0 0 2px var(--gilt-hi), 0 0 0 4px rgba(255, 248, 236, .4), 0 12px 26px rgba(42, 19, 39, .45); } }
+.bm-card.on { box-shadow: 0 0 0 3px #ffd24a, 0 0 18px 4px rgba(255, 210, 74, .75), 0 8px 22px rgba(42, 19, 39, .38); }
+.bm-card:focus { outline: none; }
+.bm-card:focus-visible { outline: none; }
+
+/* The painting is 5:4; the banner is wider. The picture stays whole (contain) and a blurred copy of itself fills the
+   sides, so every card reads as one wide painting with no seam. */
+.bm-art { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #f3d3e6; border-bottom: 1.5px solid rgba(226, 180, 90, .75); }
+.bm-art::before { content: ""; position: absolute; inset: -12%; background: var(--art) center / cover no-repeat; opacity: .9; } /* --art is pre-blurred */
+.bm-art img { position: relative; display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.bm-body { display: flex; flex-direction: column; align-items: center; gap: calc(var(--w) * .02); padding: calc(var(--w) * .05) calc(var(--w) * .05) 0; }
+.bm-pips { display: flex; gap: calc(var(--w) * .018); height: calc(var(--w) * .11); }
+.bm-pips svg { height: 100%; width: auto; fill: rgba(59, 29, 54, .2); }
+.bm-pips svg.on { fill: #f0a20b; filter: drop-shadow(0 1px 0 rgba(122, 64, 0, .45)); }
+.bm-name { font-weight: 900; font-size: calc(var(--w) * .088); line-height: 1.05; letter-spacing: .01em; text-transform: uppercase; color: var(--plum-deep);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.bm-price { font-weight: 900; font-size: calc(var(--w) * .13); line-height: 1.1; color: #8f4f00; font-variant-numeric: tabular-nums; }
+
+.bm-btn { display: grid; place-items: center; margin: calc(var(--w) * .04) calc(var(--w) * .05) calc(var(--w) * .05); min-height: calc(var(--w) * .19);
+  border-radius: calc(var(--w) * .05); font-weight: 900; font-size: calc(var(--w) * .085); letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ivory); background: linear-gradient(180deg, #6a3560 0%, var(--plum) 100%); box-shadow: 0 2px 0 #1d0c1a, inset 0 1px 0 rgba(255, 255, 255, .18); }
+.bm-btn.buy { color: var(--plum-deep); background: linear-gradient(180deg, #ffe48f 0%, #f5b92e 100%); box-shadow: 0 2px 0 #b97a06, inset 0 1px 0 rgba(255, 255, 255, .6); }
+.bm-card.on .bm-btn { color: var(--plum-deep); background: linear-gradient(180deg, #fff 0%, #f1e3cc 100%); box-shadow: 0 0 0 1.5px var(--plum), 0 2px 0 #1d0c1a; }
+
+/* ---- bet strip: big gold − / + either side of the bet, the balance before them */
+.bm-bet { display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); padding: 8px clamp(14px, 2vw, 24px); border-radius: 10px; flex-shrink: 0;
+  background: var(--ivory); color: var(--plum-deep);
+  box-shadow: 0 0 0 1.5px var(--gilt), 0 8px 20px rgba(42, 19, 39, .45); }
+.bm-stat { display: flex; flex-direction: column; align-items: center; line-height: 1.1; min-width: 0; }
+.bm-stat small { font-weight: 800; font-size: clamp(10px, 1.3vh, 14px); letter-spacing: .06em; text-transform: uppercase; color: #8a5106; }
+.bm-stat b { font-weight: 900; font-size: clamp(15px, 2.2vh, 24px); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bm-stepper { display: flex; align-items: center; gap: clamp(8px, 1.2vw, 16px); }
+.bm-bet-value { min-width: 5.5em; }
+.bm-step { display: grid; place-items: center; width: clamp(40px, 5.6vh, 52px); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  /* Dark discs with white signs on the ivory strip (player's choice over the 1.0.37 ivory squares). */
+  color: #fff; background: radial-gradient(circle at 50% 35%, #3a3843 0%, #2a2931 70%);
+  box-shadow: 0 2px 0 #15141a, 0 3px 8px rgba(42, 19, 39, .3), inset 0 1px 0 rgba(255, 255, 255, .12); transition: transform .1s, opacity .15s; }
+.bm-step svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; }
+.bm-step:not(:disabled):active { transform: scale(.92); }
+.bm-step:disabled { opacity: .4; cursor: default; }
+.bm-step:focus { outline: none; }
+.bm-step:focus-visible { outline: 2px solid var(--gilt); outline-offset: 2px; }
+
+/* ---- short landscape (phones on their side): one row of seven, smaller strip */
+@media (min-aspect-ratio: 1/1) and (max-height: 540px) {
+  .bm-cards { flex-direction: row; }
+  .bm-row { display: contents; }
+  .bm-card { --w: clamp(88px, calc((100vw - 140px) / 7), 150px); }
+  .bm-bet { padding: 4px 14px; }
+  .bm-step { width: 36px; }
+}
+
+/* ---- portrait: a list — small painting, pips over name over price, the button on the right */
+@media (max-aspect-ratio: 3/4) {
+  .bm-screen { padding: 48px 10px calc(10px + env(safe-area-inset-bottom, 0px)); align-items: stretch; }
+  .bm { width: min(100%, 460px); margin: 0 auto; justify-content: center; gap: 10px; }
+  .bm-cards { width: 100%; gap: 7px; overflow-y: auto; overscroll-behavior: contain; padding: 4px; }
+  .bm-row { display: contents; }
+  .bm-card { --h: clamp(58px, 9.2dvh, 86px); width: 100%; flex-direction: row; align-items: center; flex-shrink: 0; height: var(--h);
+    border-radius: 12px; text-align: left; }
+  .bm-art { height: 100%; aspect-ratio: 5 / 4; flex-shrink: 0; border-bottom: 0; border-right: 1.5px solid rgba(226, 180, 90, .75); }
+  .bm-art::before { display: none; }
+  .bm-art img { object-fit: cover; }
+  .bm-body { flex: 1; min-width: 0; align-items: flex-start; gap: 2px; padding: 0 8px 0 12px; }
+  .bm-pips { height: clamp(10px, 1.6dvh, 14px); gap: 2px; }
+  .bm-name { font-size: clamp(13px, 2dvh, 17px); }
+  .bm-price { font-size: clamp(16px, 2.6dvh, 22px); }
+  .bm-btn { flex-shrink: 0; width: clamp(92px, 27vw, 120px); min-height: 0; height: clamp(36px, 5.4dvh, 46px); margin: 0 10px 0 0; border-radius: 9px;
+    font-size: clamp(12px, 1.8dvh, 15px); }
+  .bm-bet { width: 100%; justify-content: space-between; border-radius: 10px; padding: 8px 12px; }
+  .bm-step { width: 46px; }
+}
+@media (prefers-reduced-motion: reduce) { .bm { animation: none; } .bm-card, .bm-step { transition: none; } }
+
+/* ---- Popout S (400 × 225): all seven cards on screen at once — 4 over 3, compact (short painting band, small type) —
+   so no mode sits behind a scroll a mouse wheel cannot reach (Stake review 1.0.47). The close button keeps the right
+   gutter to itself, beside the cards rather than over them. */
+/* Up to 760px wide: the one-row layout above needs 7 × 88px, so narrower landscape frames take this one too. Sizes follow
+   the frame height (the tight side), from the 225px Popout S up. */
+@media (min-aspect-ratio: 1/1) and (max-width: 760px) {
+  .dim-screen.bm-screen { padding: 6px 40px 6px 8px; grid-template-columns: minmax(0, 1fr); }
+  .bm { width: 100%; min-width: 0; gap: clamp(6px, 2.6vh, 14px); }
+  .bm-cards { width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    gap: clamp(5px, 2.2vh, 12px); padding: 0; overflow: visible; }
+  .bm-card { --w: calc((100% - 15px) / 4); width: calc((100% - 3 * clamp(5px, 2.2vh, 12px)) / 4); min-width: 0; border-radius: 7px; }
+  .bm-art { aspect-ratio: auto; height: clamp(26px, 11.5vh, 64px); }
+  .bm-body { gap: 1px; padding: 3px 3px 0; }
+  .bm-pips { height: clamp(7px, 3.1vh, 12px); gap: 1px; }
+  .bm-name { font-size: clamp(9px, 4vh, 15px); letter-spacing: 0; }
+  .bm-price { font-size: clamp(12px, 5.3vh, 20px); }
+  .bm-btn { min-height: clamp(16px, 7.1vh, 30px); margin: 3px 4px 4px; border-radius: 4px; font-size: clamp(8.5px, 3.8vh, 13px); letter-spacing: .02em; }
+  .bm-bet { max-width: 100%; gap: clamp(10px, 4.4vh, 24px); padding: clamp(3px, 1.3vh, 8px) clamp(10px, 4.4vh, 20px); }
+  .bm-stat small { font-size: clamp(9px, 4vh, 13px); }
+  .bm-stat b { font-size: clamp(13px, 5.8vh, 21px); }
+  .bm-stepper { gap: clamp(8px, 3.5vh, 16px); }
+  .bm-bet-value { min-width: 4.5em; }
+  .bm-step { width: clamp(28px, 12.4vh, 46px); }
+}
